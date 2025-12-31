@@ -12,7 +12,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: DeFi Services' (Protocol in workflow.md) 27dd811
 
 ## Phase 2: User Services
-- [ ] Task: 28.1 實現 History 模組 (dart_web3_history)
+- [~] Task: 28.1 實現 History 模組 (dart_web3_history)
   - [ ] Subtask: 實現交易歷史查詢與多鏈聚合
   - [ ] Subtask: 實現分頁、過濾與交易解碼
 - [ ] Task: 28.2 實現 Price 模組 (dart_web3_price)
