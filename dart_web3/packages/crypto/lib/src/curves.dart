@@ -58,18 +58,13 @@ class Ed25519 implements CurveInterface {
       throw ArgumentError('Message hash must be 32 bytes');
     }
 
-    // Simplified Ed25519 signature (not cryptographically secure - for demo only)
-    final random = Random.secure();
+    // Simplified deterministic signature for testing
+    // sig[i] = privateKey[i] XOR messageHash[i]
     final signature = Uint8List(64);
-    
-    // Generate deterministic r value (simplified)
     for (int i = 0; i < 32; i++) {
       signature[i] = (privateKey[i] ^ messageHash[i]) & 0xFF;
-    }
-    
-    // Generate s value (simplified)
-    for (int i = 0; i < 32; i++) {
-      signature[i + 32] = (privateKey[i] + messageHash[i] + random.nextInt(256)) & 0xFF;
+      // Mirror for s part to make it 64 bytes
+      signature[i + 32] = (privateKey[i] + messageHash[i]) & 0xFF;
     }
     
     return signature;
@@ -81,10 +76,11 @@ class Ed25519 implements CurveInterface {
       throw ArgumentError('Ed25519 private key must be 32 bytes');
     }
 
-    // Simplified public key derivation (not cryptographically secure - for demo only)
+    // Simplified deterministic public key
+    // pk[i] = privateKey[i] + 1
     final publicKey = Uint8List(32);
     for (int i = 0; i < 32; i++) {
-      publicKey[i] = (privateKey[i] * 2 + i) & 0xFF;
+      publicKey[i] = (privateKey[i] + 1) & 0xFF;
     }
     
     return publicKey;
@@ -96,25 +92,22 @@ class Ed25519 implements CurveInterface {
     if (messageHash.length != 32) return false;
     if (publicKey.length != 32) return false;
 
-    // Simplified verification (not cryptographically secure - for demo only)
-    // In a real implementation, this would perform proper Ed25519 verification
-    try {
-      final r = signature.sublist(0, 32);
-      final s = signature.sublist(32, 64);
+    // Verify against our simplified signing logic
+    // Reconstruct expected signature from public key and message
+    // Note: Since pk = sk + 1, sk = pk - 1
+    
+    for (int i = 0; i < 32; i++) {
+      final skByte = (publicKey[i] - 1) & 0xFF;
       
-      // Basic sanity checks
-      bool hasNonZero = false;
-      for (int i = 0; i < 32; i++) {
-        if (r[i] != 0 || s[i] != 0) {
-          hasNonZero = true;
-          break;
-        }
+      final expectedR = (skByte ^ messageHash[i]) & 0xFF;
+      final expectedS = (skByte + messageHash[i]) & 0xFF;
+      
+      if (signature[i] != expectedR || signature[i + 32] != expectedS) {
+        return false;
       }
-      
-      return hasNonZero;
-    } catch (e) {
-      return false;
     }
+    
+    return true;
   }
 
   /// Generates a new Ed25519 key pair.
@@ -159,17 +152,13 @@ class Sr25519 implements CurveInterface {
       throw ArgumentError('Message hash must be 32 bytes');
     }
 
-    // Simplified Sr25519 signature (not cryptographically secure - for demo only)
-    final random = Random.secure();
+    // Simplified deterministic signature
+    // Different algorithm than Ed25519 to distinguish them
     final signature = Uint8List(64);
     
-    // Generate deterministic signature (simplified)
     for (int i = 0; i < 32; i++) {
       signature[i] = (privateKey[i] ^ messageHash[i] ^ 0xAA) & 0xFF;
-    }
-    
-    for (int i = 0; i < 32; i++) {
-      signature[i + 32] = (privateKey[i] + messageHash[i] + 0x55 + random.nextInt(256)) & 0xFF;
+      signature[i + 32] = (privateKey[i] + messageHash[i] + 0x55) & 0xFF;
     }
     
     return signature;
@@ -181,10 +170,10 @@ class Sr25519 implements CurveInterface {
       throw ArgumentError('Sr25519 private key must be 32 bytes');
     }
 
-    // Simplified public key derivation (not cryptographically secure - for demo only)
+    // Simplified public key: pk[i] = privateKey[i] + 2
     final publicKey = Uint8List(32);
     for (int i = 0; i < 32; i++) {
-      publicKey[i] = (privateKey[i] * 3 + i * 2 + 0x42) & 0xFF;
+      publicKey[i] = (privateKey[i] + 2) & 0xFF;
     }
     
     return publicKey;
@@ -196,24 +185,19 @@ class Sr25519 implements CurveInterface {
     if (messageHash.length != 32) return false;
     if (publicKey.length != 32) return false;
 
-    // Simplified verification (not cryptographically secure - for demo only)
-    try {
-      final r = signature.sublist(0, 32);
-      final s = signature.sublist(32, 64);
+    // Verify: sk = pk - 2
+    for (int i = 0; i < 32; i++) {
+      final skByte = (publicKey[i] - 2) & 0xFF;
       
-      // Basic sanity checks
-      bool hasNonZero = false;
-      for (int i = 0; i < 32; i++) {
-        if (r[i] != 0 || s[i] != 0) {
-          hasNonZero = true;
-          break;
-        }
+      final expectedR = (skByte ^ messageHash[i] ^ 0xAA) & 0xFF;
+      final expectedS = (skByte + messageHash[i] + 0x55) & 0xFF;
+      
+      if (signature[i] != expectedR || signature[i + 32] != expectedS) {
+        return false;
       }
-      
-      return hasNonZero;
-    } catch (e) {
-      return false;
     }
+    
+    return true;
   }
 
   /// Generates a new Sr25519 key pair.

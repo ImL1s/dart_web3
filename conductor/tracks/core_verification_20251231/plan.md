@@ -8,7 +8,7 @@
   - [x] Subtask: 驗證根目錄 `pubspec.yaml` 與 `README.md`
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Project Structure' (Protocol in workflow.md) bc91ba2
 
-## Phase 2: Core Module (Task 2)
+## Phase 2: Core Module (Task 2) [checkpoint: 3481139]
 - [x] Task: 2.1 驗證 Core 套件基礎結構 (pubspec.yaml, entry point)
 - [x] Task: 2.2 驗證 EthereumAddress 實作與測試
 - [x] Task: 2.3 驗證 BigInt 工具類實作與測試
@@ -17,4 +17,4 @@
 - [x] Task: 2.6 驗證 Bytes 工具類實作與測試
 - [x] Task: 2.7 驗證 Core 模組屬性測試 (Property 24-28)
 - [x] Task: 3. Checkpoint - Core 模組完成 (Update tasks.md)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Core Module' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Core Module' (Protocol in workflow.md) 3481139
