@@ -311,39 +311,39 @@
 
 - [x] 15. 實現 Contract 模組 (dart_web3_contract)
   - [x] 15.1 創建 contract 套件基礎結構
-    - 創建 `packages/contract/pubspec.yaml`（依賴 client、abi）
-    - 創建入口文件
+    - [x] 創建 `packages/contract/pubspec.yaml`（依賴 client、abi）
+    - [x] 創建入口文件
     - _Requirements: 12.2_
 
   - [x] 15.2 實現 Contract 類別
-    - 實現 read 方法（只讀調用）
-    - 實現 write 方法（狀態變更）
-    - 實現 simulate 方法
-    - 實現 estimateGas 方法
+    - [x] 實現 read 方法（只讀調用）
+    - [x] 實現 write 方法（狀態變更）
+    - [x] 實現 simulate 方法
+    - [x] 實現 estimateGas 方法
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
   - [x] 15.3 實現事件處理
-    - 實現 createEventFilter 方法
-    - 實現 decodeEventLog 方法
+    - [x] 實現 createEventFilter 方法
+    - [x] 實現 decodeEventLog 方法
     - _Requirements: 5.5, 5.6_
 
   - [x] 15.4 實現錯誤解碼
-    - 實現 decodeError 方法
+    - [x] 實現 decodeError 方法
     - _Requirements: 5.7_
 
   - [x] 15.5 實現 ContractFactory
-    - 實現合約部署功能
+    - [x] 實現合約部署功能
     - _Requirements: 5.1_
 
   - [x] 15.6 實現預定義合約類別
-    - 實現 ERC20Contract
-    - 實現 ERC721Contract
-    - 實現 ERC1155Contract
+    - [x] 實現 ERC20Contract
+    - [x] 實現 ERC721Contract
+    - [x] 實現 ERC1155Contract
     - _Requirements: 5.2_
 
   - [x] 15.7 編寫 Contract 模組單元測試
-    - 測試合約讀取和寫入
-    - 測試事件解碼
+    - [x] 測試合約讀取和寫入
+    - [x] 測試事件解碼
     - _Requirements: 5.1, 5.3, 5.4, 5.6_
 
 - [x] 16. 實現 Events 模組 (dart_web3_events)
@@ -615,146 +615,146 @@
 - [x] 26. Checkpoint - 硬體錢包模組完成
   - 確保所有測試通過，如有問題請詢問用戶
 
-- [-] 27. 實現 DeFi 服務模組
+- [x] 27. 實現 DeFi 服務模組
   - [x] 27.1 實現 Swap 模組 (dart_web3_swap)
-    - 創建 `packages/swap/pubspec.yaml`（依賴 client、contract）
-    - 實現 DEX 聚合器整合（1inch、0x、Paraswap）
-    - 實現報價查詢和最佳路徑選擇
-    - 實現 MEV 保護選項
-    - 實現代幣授權處理
+    - [x] 創建 `packages/swap/pubspec.yaml`（依賴 client、contract）
+    - [x] 實現 DEX 聚合器整合（1inch、0x、Paraswap）
+    - [x] 實現報價查詢和最佳路徑選擇
+    - [x] 實現 MEV 保護選項
+    - [x] 實現代幣授權處理
     - _Requirements: 17.1, 17.2, 17.3, 17.5, 17.7_
 
   - [x] 27.2 實現 Bridge 模組 (dart_web3_bridge)
-    - 創建 `packages/bridge/pubspec.yaml`（依賴 client、contract）
-    - 實現跨鏈橋接整合（LayerZero、Wormhole、Stargate）
-    - 實現費用和時間估算
-    - 實現交易追蹤
+    - [x] 創建 `packages/bridge/pubspec.yaml`（依賴 client、contract）
+    - [x] 實現跨鏈橋接整合（LayerZero、Wormhole、Stargate）
+    - [x] 實現費用和時間估算
+    - [x] 實現交易追蹤
     - _Requirements: 20.1, 20.2, 20.3, 20.5_
 
-  - [ ] 27.3 實現 NFT 模組 (dart_web3_nft)
-    - 創建 `packages/nft/pubspec.yaml`（依賴 client、contract）
-    - 實現 NFT 集合查詢
-    - 實現 ERC-721/ERC-1155 支援
-    - 實現 metadata 解析和 IPFS 網關
-    - 實現 NFT 轉移
+  - [x] 27.3 實現 NFT 模組 (dart_web3_nft)
+    - [x] 創建 `packages/nft/pubspec.yaml`（依賴 client、contract）
+    - [x] 實現 NFT 集合查詢
+    - [x] 實現 ERC-721/ERC-1155 支援
+    - [x] 實現 metadata 解析和 IPFS 網關
+    - [x] 實現 NFT 轉移
     - _Requirements: 18.1, 18.2, 18.3, 18.4, 18.5_
 
-  - [ ] 27.4 實現 Staking 模組 (dart_web3_staking)
-    - 創建 `packages/staking/pubspec.yaml`（依賴 client、contract）
-    - 實現質押機會查詢
-    - 實現 Lido、Rocket Pool 整合
-    - 實現 APY 計算
-    - 實現質押/解質押操作
+  - [x] 27.4 實現 Staking 模組 (dart_web3_staking)
+    - [x] 創建 `packages/staking/pubspec.yaml`（依賴 client、contract）
+    - [x] 實現質押機會查詢
+    - [x] 實現 Lido、Rocket Pool 整合
+    - [x] 實現 APY 計算
+    - [x] 實現質押/解質押操作
     - _Requirements: 19.1, 19.2, 19.3, 19.5_
 
-  - [ ] 27.5 編寫 DeFi 模組單元測試
-    - 測試報價查詢
-    - 測試 NFT metadata 解析
+  - [x] 27.5 編寫 DeFi 模組單元測試
+    - [x] 測試報價查詢
+    - [x] 測試 NFT metadata 解析
     - _Requirements: 17.1, 18.3_
 
-- [ ] 28. 實現用戶服務模組
-  - [ ] 28.1 實現 History 模組 (dart_web3_history)
-    - 創建 `packages/history/pubspec.yaml`（依賴 client）
-    - 實現交易歷史查詢
-    - 實現分頁和過濾
-    - 實現交易解碼
-    - 實現多鏈聚合
+- [x] 28. 實現用戶服務模組
+  - [x] 28.1 實現 History 模組 (dart_web3_history)
+    - [x] 創建 `packages/history/pubspec.yaml`（依賴 client）
+    - [x] 實現交易歷史查詢
+    - [x] 實現分頁和過濾
+    - [x] 實現交易解碼
+    - [x] 實現多鏈聚合
     - _Requirements: 23.1, 23.2, 23.3, 23.7_
 
-  - [ ] 28.2 實現 Price 模組 (dart_web3_price)
-    - 創建 `packages/price/pubspec.yaml`（依賴 core）
-    - 實現價格查詢（CoinGecko、CoinMarketCap）
-    - 實現歷史價格數據
-    - 實現緩存機制
-    - 實現法幣轉換
+  - [x] 28.2 實現 Price 模組 (dart_web3_price)
+    - [x] 創建 `packages/price/pubspec.yaml`（依賴 core）
+    - [x] 實現價格查詢（CoinGecko、CoinMarketCap）
+    - [x] 實現歷史價格數據
+    - [x] 實現緩存機制
+    - [x] 實現法幣轉換
     - _Requirements: 25.1, 25.2, 25.3, 25.4, 25.5_
 
-  - [ ] 28.3 實現 DApp 模組 (dart_web3_dapp)
-    - 創建 `packages/dapp/pubspec.yaml`（依賴 client、signer）
-    - 實現 Web3 Provider 注入
-    - 實現 EIP-1193 介面
-    - 實現 EIP-6963 多 Provider 發現
-    - 實現鏈切換和代幣添加
+  - [x] 28.3 實現 DApp 模組 (dart_web3_dapp)
+    - [x] 創建 `packages/dapp/pubspec.yaml`（依賴 client、signer）
+    - [x] 實現 Web3 Provider 注入
+    - [x] 實現 EIP-1193 介面
+    - [x] 實現 EIP-6963 多 Provider 發現
+    - [x] 實現鏈切換和代幣添加
     - _Requirements: 24.1, 24.2, 24.3, 24.6, 24.7_
 
-  - [ ] 28.4 編寫用戶服務模組單元測試
-    - 測試交易歷史查詢
-    - 測試價格緩存
+  - [x] 28.4 編寫用戶服務模組單元測試
+    - [x] 測試交易歷史查詢
+    - [x] 測試價格緩存
     - _Requirements: 23.1, 25.4_
 
-- [ ] 29. 實現進階功能模組
-  - [ ] 29.1 實現 Debug 模組 (dart_web3_debug)
-    - 創建 `packages/debug/pubspec.yaml`（依賴 provider）
-    - 實現 debug_traceTransaction
-    - 實現 debug_traceCall
-    - 實現 eth_simulateV1
-    - 實現 state override 支援
-    - 實現 trace_block、trace_filter
+- [x] 29. 實現進階功能模組
+  - [x] 29.1 實現 Debug 模組 (dart_web3_debug)
+    - [x] 創建 `packages/debug/pubspec.yaml`（依賴 provider）
+    - [x] 實現 debug_traceTransaction
+    - [x] 實現 debug_traceCall
+    - [x] 實現 eth_simulateV1
+    - [x] 實現 state override 支援
+    - [x] 實現 trace_block、trace_filter
     - _Requirements: 26.1, 26.2, 26.3, 26.4, 26.6, 26.7_
 
-  - [ ] 29.2 實現 MEV 模組 (dart_web3_mev)
-    - 創建 `packages/mev/pubspec.yaml`（依賴 provider、signer）
-    - 實現 Flashbots Protect RPC
-    - 實現 bundle 提交
-    - 實現 bundle 模擬
-    - 實現私密交易提交
+  - [x] 29.2 實現 MEV 模組 (dart_web3_mev)
+    - [x] 創建 `packages/mev/pubspec.yaml`（依賴 provider、signer）
+    - [x] 實現 Flashbots Protect RPC
+    - [x] 實現 bundle 提交
+    - [x] 實現 bundle 模擬
+    - [x] 實現私密交易提交
     - _Requirements: 27.1, 27.2, 27.4, 27.6_
 
-  - [ ] 29.3 編寫進階功能模組單元測試
-    - 測試交易追蹤
-    - 測試 bundle 構建
+  - [x] 29.3 編寫進階功能模組單元測試
+    - [x] 測試交易追蹤
+    - [x] 測試 bundle 構建
     - _Requirements: 26.1, 27.2_
 
-- [ ] 30. Checkpoint - Level 5 模組完成
+- [x] 30. Checkpoint - Level 5 模組完成
   - 確保所有測試通過，如有問題請詢問用戶
 
-- [ ] 31. 實現鏈擴展模組
-  - [ ] 31.1 實現 Solana 擴展 (dart_web3_solana)
-    - 創建 `packages/extensions/solana/pubspec.yaml`
-    - 實現 Solana 交易格式
-    - 實現 Program 交互
-    - 實現 Ed25519 簽名整合
+- [x] 31. 實現鏈擴展模組
+  - [x] 31.1 實現 Solana 擴展 (dart_web3_solana)
+    - [x] 創建 `packages/extensions/solana/pubspec.yaml`
+    - [x] 實現 Solana 交易格式
+    - [x] 實現 Program 交互
+    - [x] 實現 Ed25519 簽名整合
     - _Requirements: 13.5_
 
-  - [ ] 31.2 實現 Polkadot 擴展 (dart_web3_polkadot)
-    - 創建 `packages/extensions/polkadot/pubspec.yaml`
-    - 實現 SCALE 編碼
-    - 實現 Substrate 交易
-    - 實現 Sr25519 簽名整合
+  - [x] 31.2 實現 Polkadot 擴展 (dart_web3_polkadot)
+    - [x] 創建 `packages/extensions/polkadot/pubspec.yaml`
+    - [x] 實現 SCALE 編碼
+    - [x] 實現 Substrate 交易
+    - [x] 實現 Sr25519 簽名整合
     - _Requirements: 13.6_
 
-  - [ ] 31.3 實現 Tron 擴展 (dart_web3_tron)
-    - 創建 `packages/extensions/tron/pubspec.yaml`
-    - 實現 Tron 交易格式
-    - 實現 TRC-20 支援
+  - [x] 31.3 實現 Tron 擴展 (dart_web3_tron)
+    - [x] 創建 `packages/extensions/tron/pubspec.yaml`
+    - [x] 實現 Tron 交易格式
+    - [x] 實現 TRC-20 支援
     - _Requirements: 13.4_
 
-  - [ ] 31.4 實現 TON 擴展 (dart_web3_ton)
-    - 創建 `packages/extensions/ton/pubspec.yaml`
-    - 實現 TON 交易格式
-    - 實現 Jetton 支援
+  - [x] 31.4 實現 TON 擴展 (dart_web3_ton)
+    - [x] 創建 `packages/extensions/ton/pubspec.yaml`
+    - [x] 實現 TON 交易格式
+    - [x] 實現 Jetton 支援
     - _Requirements: 13.4_
 
-  - [ ] 31.5 實現 Bitcoin 擴展 (dart_web3_bitcoin)
-    - 創建 `packages/extensions/bitcoin/pubspec.yaml`
-    - 實現 Bitcoin 交易格式
-    - 實現 PSBT 支援
+  - [x] 31.5 實現 Bitcoin 擴展 (dart_web3_bitcoin)
+    - [x] 創建 `packages/extensions/bitcoin/pubspec.yaml`
+    - [x] 實現 Bitcoin 交易格式
+    - [x] 實現 PSBT 支援
     - _Requirements: 13.4_
 
-  - [ ] 31.6 實現 Bitcoin Inscriptions 子模組
-    - 創建 `packages/extensions/bitcoin/inscriptions/pubspec.yaml`
-    - 實現 Ordinals 銘文讀取
-    - 實現 BRC-20 代幣支援
-    - 實現 Runes 協議支援
-    - 實現 UTXO 選擇（避免花費銘文）
+  - [x] 31.6 實現 Bitcoin Inscriptions 子模組
+    - [x] 創建 `packages/extensions/bitcoin/inscriptions/pubspec.yaml`
+    - [x] 實現 Ordinals 銘文讀取
+    - [x] 實現 BRC-20 代幣支援
+    - [x] 實現 Runes 協議支援
+    - [x] 實現 UTXO 選擇（避免花費銘文）
     - _Requirements: 21.1, 21.2, 21.4, 21.5_
 
-  - [ ] 31.7 編寫鏈擴展模組屬性測試
+  - [x] 31.7 編寫鏈擴展模組屬性測試
     - **Property 29: Chain-Agnostic Signer Interface**
     - **Property 30: Multi-Curve Cryptography Support**
     - **Validates: Requirements 13.7, 13.8**
 
-- [ ] 32. Checkpoint - 鏈擴展模組完成
+- [x] 32. Checkpoint - 鏈擴展模組完成
   - 確保所有測試通過，如有問題請詢問用戶
 
 - [ ] 33. 實現 Meta-Package 和整合

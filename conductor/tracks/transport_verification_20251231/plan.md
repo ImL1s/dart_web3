@@ -23,7 +23,7 @@
 - [x] Task: 11. Checkpoint - Signer 模組完成 (Update tasks.md)
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Signer Module' (Protocol in workflow.md) 288f27a
 
-## Phase 3: Chains Module (Task 12)
+## Phase 3: Chains Module (Task 12) [checkpoint: 07105c9]
 - [x] Task: 12.1 驗證 Chains 套件基礎結構
 - [x] Task: 12.2 驗證 ChainConfig 類別實作
 - [x] Task: 12.3 驗證預定義鏈配置 (Ethereum, Polygon, etc.)
