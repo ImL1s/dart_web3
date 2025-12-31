@@ -11,17 +11,17 @@
 - [x] Task: 27.5 編寫 DeFi 模組單元測試 1bf7d07
 - [x] Task: Conductor - User Manual Verification 'Phase 1: DeFi Services' (Protocol in workflow.md) 27dd811
 
-## Phase 2: User Services
-- [~] Task: 28.1 實現 History 模組 (dart_web3_history)
-  - [ ] Subtask: 實現交易歷史查詢與多鏈聚合
-  - [ ] Subtask: 實現分頁、過濾與交易解碼
-- [ ] Task: 28.2 實現 Price 模組 (dart_web3_price)
-  - [ ] Subtask: 整合價格數據源 (CoinGecko, CoinMarketCap)
-  - [ ] Subtask: 實現緩存與法幣轉換
-- [ ] Task: 28.3 實現 DApp 模組 (dart_web3_dapp)
-  - [ ] Subtask: 實現 Web3 Provider 注入與 EIP-1193/6963 支援
-- [ ] Task: 28.4 編寫用戶服務模組單元測試
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: User Services' (Protocol in workflow.md)
+## Phase 2: User Services [checkpoint: 2f78de6]
+- [x] Task: 28.1 實現 History 模組 (dart_web3_history) d832027
+  - [x] Subtask: 實現交易歷史查詢與多鏈聚合
+  - [x] Subtask: 實現分頁、過濾與交易解碼
+- [x] Task: 28.2 實現 Price 模組 (dart_web3_price) d832027
+  - [x] Subtask: 整合價格數據源 (CoinGecko, CoinMarketCap)
+  - [x] Subtask: 實現緩存與法幣轉換
+- [x] Task: 28.3 實現 DApp 模組 (dart_web3_dapp) d832027
+  - [x] Subtask: 實現 Web3 Provider 注入與 EIP-1193/6963 支援
+- [x] Task: 28.4 編寫用戶服務模組單元測試 d832027
+- [x] Task: Conductor - User Manual Verification 'Phase 2: User Services' (Protocol in workflow.md) 2f78de6
 
 ## Phase 3: Advanced Modules
 - [ ] Task: 29.1 實現 Debug 模組 (dart_web3_debug)
