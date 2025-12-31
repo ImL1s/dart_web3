@@ -347,35 +347,65 @@
     - _Requirements: 5.1, 5.3, 5.4, 5.6_
 
 - [x] 16. 實現 Events 模組 (dart_web3_events)
+
   - [x] 16.1 創建 events 套件基礎結構
-    - 創建 `packages/events/pubspec.yaml`（依賴 client）
-    - 創建入口文件
+
+    - [x] 創建 `packages/events/pubspec.yaml`（依賴 client）
+
+    - [x] 創建入口文件
+
     - _Requirements: 12.2_
 
+
+
   - [x] 16.2 實現 EventFilter 類別
-    - 定義過濾器數據結構
+
+    - [x] 定義過濾器數據結構
+
     - _Requirements: 6.2_
 
+
+
   - [x] 16.3 實現 EventSubscriber
-    - 實現 WebSocket 訂閱
-    - 實現 HTTP 輪詢
+
+    - [x] 實現 WebSocket 訂閱
+
+    - [x] 實現 HTTP 輪詢
+
     - _Requirements: 6.1, 6.3, 6.4_
 
+
+
   - [x] 16.4 實現 EventListener
-    - 實現合約事件監聽
-    - 實現監聽管理
+
+    - [x] 實現合約事件監聽
+
+    - [x] 實現監聽管理
+
     - _Requirements: 6.1_
 
-  - [x] 16.5 實現鏈重組處理
-    - 處理 removed 標誌
+
+
+  - [x] 16.5 實現 鏈重組處理
+
+    - [x] 處理 removed 標誌
+
     - _Requirements: 6.5_
 
+
+
   - [x] 16.6 實現確認數過濾
-    - 實現區塊確認數檢查
+
+    - [x] 實現區塊確認數檢查
+
     - _Requirements: 6.6_
 
+
+
   - [x] 16.7 編寫 Events 模組單元測試
-    - 測試事件訂閱和過濾
+
+    - [x] 測試事件訂閱和過濾
+
     - _Requirements: 6.1, 6.2_
 
 - [x] 17. Checkpoint - Level 3 模組完成

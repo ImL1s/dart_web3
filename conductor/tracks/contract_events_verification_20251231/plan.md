@@ -20,11 +20,11 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Contract Module' (Protocol in workflow.md) cef5d35
 
 ## Phase 3: Events Module (Task 16)
-- [ ] Task: 16.1 驗證 Events 套件基礎結構
-- [ ] Task: 16.2 驗證 EventFilter 類別實作
-- [ ] Task: 16.3 驗證 EventSubscriber 實作 (WS/Polling)
-- [ ] Task: 16.4 驗證 EventListener 實作
-- [ ] Task: 16.5 驗證鏈重組處理實作
-- [ ] Task: 16.6 驗證確認數過濾實作
-- [ ] Task: 16.7 驗證 Events 模組單元測試
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Events Module' (Protocol in workflow.md)
+- [x] Task: 16.1 驗證 Events 套件基礎結構
+- [x] Task: 16.2 驗證 EventFilter 類別實作
+- [x] Task: 16.3 驗證 EventSubscriber 實作 (WS/Polling)
+- [x] Task: 16.4 驗證 EventListener 實作
+- [x] Task: 16.5 驗證鏈重組處理實作
+- [x] Task: 16.6 驗證確認數過濾實作
+- [x] Task: 16.7 驗證 Events 模組單元測試
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Events Module' (Protocol in workflow.md)
