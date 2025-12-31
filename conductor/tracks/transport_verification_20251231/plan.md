@@ -24,9 +24,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Signer Module' (Protocol in workflow.md) 288f27a
 
 ## Phase 3: Chains Module (Task 12)
-- [ ] Task: 12.1 驗證 Chains 套件基礎結構
-- [ ] Task: 12.2 驗證 ChainConfig 類別實作
-- [ ] Task: 12.3 驗證預定義鏈配置 (Ethereum, Polygon, etc.)
-- [ ] Task: 12.4 驗證鏈配置管理 (getById, registerChain)
-- [ ] Task: 12.5 驗證 Chains 模組單元測試
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Chains Module' (Protocol in workflow.md)
+- [x] Task: 12.1 驗證 Chains 套件基礎結構
+- [x] Task: 12.2 驗證 ChainConfig 類別實作
+- [x] Task: 12.3 驗證預定義鏈配置 (Ethereum, Polygon, etc.)
+- [x] Task: 12.4 驗證鏈配置管理 (getById, registerChain)
+- [x] Task: 12.5 驗證 Chains 模組單元測試
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Chains Module' (Protocol in workflow.md)

@@ -248,28 +248,28 @@
 
 - [x] 12. 實現 Chains 模組 (dart_web3_chains)
   - [x] 12.1 創建 chains 套件基礎結構
-    - 創建 `packages/chains/pubspec.yaml`（依賴 core）
-    - 創建入口文件
+    - [x] 創建 `packages/chains/pubspec.yaml`（依賴 core）
+    - [x] 創建入口文件
     - _Requirements: 12.2_
 
   - [x] 12.2 實現 ChainConfig 類別
-    - 定義鏈配置數據結構
-    - 包含 chainId、name、rpcUrls、blockExplorerUrls 等
+    - [x] 定義鏈配置數據結構
+    - [x] 包含 chainId、name、rpcUrls、blockExplorerUrls 等
     - _Requirements: 7.2_
 
   - [x] 12.3 實現預定義鏈配置
-    - Ethereum Mainnet、Goerli、Sepolia
-    - Polygon、BSC、Arbitrum、Optimism、Base、Avalanche
+    - [x] Ethereum Mainnet、Goerli、Sepolia
+    - [x] Polygon、BSC、Arbitrum、Optimism、Base、Avalanche
     - _Requirements: 7.1, 13.2_
 
   - [x] 12.4 實現鏈配置管理
-    - 實現 getById 方法
-    - 實現 registerChain 方法
+    - [x] 實現 getById 方法
+    - [x] 實現 registerChain 方法
     - _Requirements: 7.4, 7.5_
 
   - [x] 12.5 編寫 Chains 模組單元測試
-    - 測試預定義鏈配置正確性
-    - 測試自定義鏈註冊
+    - [x] 測試預定義鏈配置正確性
+    - [x] 測試自定義鏈註冊
     - _Requirements: 7.1, 7.4, 7.5_
 
 - [x] 13. 實現 Client 模組 (dart_web3_client)
