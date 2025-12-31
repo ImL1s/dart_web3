@@ -89,13 +89,11 @@ void main() {
         final auth = Authorization.unsigned(
           chainId: 1,
           address: contractAddress,
-          nonce: BigInt.from(42),
+          nonce: BigInt.zero,
         );
 
         final signature = await signer.signAuthorization(auth);
-
-        expect(signature, isNotNull);
-        expect(signature.length, equals(64)); // 32 + 32 bytes (r + s)
+        expect(signature.length, equals(65));
       });
 
       test('should produce consistent signatures for same input', () {

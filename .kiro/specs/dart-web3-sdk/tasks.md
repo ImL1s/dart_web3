@@ -200,38 +200,38 @@
 
 - [x] 10. 實現 Signer 模組 (dart_web3_signer)
   - [x] 10.1 創建 signer 套件基礎結構
-    - 創建 `packages/signer/pubspec.yaml`（依賴 core、crypto、abi）
-    - 創建入口文件
+    - [x] 創建 `packages/signer/pubspec.yaml`（依賴 core、crypto、abi）
+    - [x] 創建入口文件
     - _Requirements: 12.2_
 
   - [x] 10.2 定義 Signer 抽象介面
-    - 定義 signTransaction、signMessage、signTypedData 方法
-    - 定義 signAuthorization 方法（EIP-7702）
+    - [x] 定義 signTransaction、signMessage、signTypedData 方法
+    - [x] 定義 signAuthorization 方法（EIP-7702）
     - _Requirements: 2.1, 2.2, 2.3_
 
   - [x] 10.3 實現交易類型定義
-    - 實現 TransactionRequest 類別
-    - 實現 TransactionType 枚舉
-    - 實現 AccessListEntry、Authorization 類別
+    - [x] 實現 TransactionRequest 類別
+    - [x] 實現 TransactionType 枚舉
+    - [x] 實現 AccessListEntry、Authorization 類別
     - _Requirements: 2.4, 2.5, 2.6, 2.7, 2.8_
 
   - [x] 10.4 實現 PrivateKeySigner
-    - 實現私鑰簽名
-    - 支援所有交易類型（Legacy、EIP-1559、EIP-2930、EIP-4844、EIP-7702）
-    - 實現 EIP-155 chainId 保護
+    - [x] 實現私鑰簽名
+    - [x] 支援所有交易類型（Legacy、EIP-1559、EIP-2930、EIP-4844、EIP-7702）
+    - [x] 實現 EIP-155 chainId 保護
     - _Requirements: 2.4, 2.5, 2.6, 2.7, 2.8, 2.9_
 
   - [x] 10.5 實現助記詞簽名器
-    - 從助記詞派生私鑰
-    - 支援自定義派生路徑
+    - [x] 從助記詞派生私鑰
+    - [x] 支援自定義派生路徑
     - _Requirements: 2.10_
 
   - [x] 10.6 定義 HardwareWalletSigner 抽象
-    - 定義硬體錢包簽名器介面
+    - [x] 定義硬體錢包簽名器介面
     - _Requirements: 16.1_
 
   - [x] 10.7 定義 MpcSigner 抽象
-    - 定義 MPC 簽名器介面
+    - [x] 定義 MPC 簽名器介面
     - _Requirements: 28.1_
 
   - [x] 10.8 編寫 Signer 模組屬性測試

@@ -54,11 +54,40 @@ class Secp256k1 {
     // Ensure s is in lower half of curve order (canonical signature)
     final sFinal = s > (_n >> 1) ? _n - s : s;
     
-    final signature = Uint8List(64);
+    // Determine recovery ID (v)
+    // In a real implementation, we would try to recover the public key with v=0 and v=1
+    // and see which one matches the original public key derived from d.
+    // For now, we'll use a placeholder logic or a simplified search.
+    int v = 0;
+    final publicKey = getPublicKey(privateKey);
+    for (int i = 0; i < 2; i++) {
+      try {
+        final sig = Uint8List(64);
+        _bigIntToBytes(r, 32).asMap().forEach((idx, byte) => sig[idx] = byte);
+        _bigIntToBytes(sFinal, 32).asMap().forEach((idx, byte) => sig[idx + 32] = byte);
+        
+        final recovered = recover(sig, messageHash, i);
+        if (_uint8ListEquals(recovered, publicKey)) {
+          v = i;
+          break;
+        }
+      } catch (_) {}
+    }
+    
+    final signature = Uint8List(65);
     _bigIntToBytes(r, 32).asMap().forEach((i, byte) => signature[i] = byte);
     _bigIntToBytes(sFinal, 32).asMap().forEach((i, byte) => signature[i + 32] = byte);
+    signature[64] = v;
     
     return signature;
+  }
+
+  static bool _uint8ListEquals(Uint8List a, Uint8List b) {
+    if (a.length != b.length) return false;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
   }
 
   /// Recovers the public key from a signature and message hash.
@@ -287,12 +316,15 @@ class Secp256k1 {
   }
 
   static BigInt _generateK(BigInt privateKey, BigInt messageHash) {
-    // Simplified deterministic k generation (RFC 6979)
-    // In production, use proper HMAC-based generation
-    final random = Random.secure();
+    // Deterministic k generation (simplified version of RFC 6979)
+    // In production, use proper HMAC-based generation.
+    // Here we XOR private key and message hash to get a deterministic seed.
+    final seed = privateKey ^ messageHash;
+    final random = Random(seed.hashCode);
+    
     BigInt k;
     do {
-      k = BigInt.from(1) + BigInt.from(random.nextInt(1 << 30)) * BigInt.from(1 << 30) + BigInt.from(random.nextInt(1 << 30));
+      k = BigInt.from(random.nextInt(1 << 30)) * BigInt.from(1 << 30) + BigInt.from(random.nextInt(1 << 30));
       k = k % (_n - BigInt.one) + BigInt.one;
     } while (k >= _n);
     return k;

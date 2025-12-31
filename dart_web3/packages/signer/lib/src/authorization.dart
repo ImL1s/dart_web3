@@ -126,25 +126,7 @@ class Authorization {
 
     final r = BytesUtils.slice(signature, 0, 32);
     final s = BytesUtils.slice(signature, 32, 64);
-    
-    // For EIP-7702, we need to determine the recovery parameter
-    // Try both recovery parameters (0 and 1) to find the correct one
-    final publicKey = Secp256k1.getPublicKey(privateKey);
-    final expectedAddress = EthereumAddress.fromPublicKey(publicKey, Keccak256.hash);
-    
-    int recoveryId = 0;
-    for (int v = 0; v <= 1; v++) {
-      try {
-        final recoveredPublicKey = Secp256k1.recover(signature, messageHash, v);
-        final recoveredAddress = EthereumAddress.fromPublicKey(recoveredPublicKey, Keccak256.hash);
-        if (recoveredAddress.toString().toLowerCase() == expectedAddress.toString().toLowerCase()) {
-          recoveryId = v;
-          break;
-        }
-      } catch (e) {
-        // Try next recovery parameter
-      }
-    }
+    final recoveryId = signature[64];
 
     return withSignature(
       yParity: recoveryId,
