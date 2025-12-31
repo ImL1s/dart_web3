@@ -1,6 +1,6 @@
 # Plan: Transport & Signer Modules Integrity Verification
 
-## Phase 1: Provider Module (Task 8)
+## Phase 1: Provider Module (Task 8) [checkpoint: 9d43653]
 - [x] Task: 8.1 驗證 Provider 套件基礎結構
 - [x] Task: 8.2 驗證 Transport 抽象實作與測試
 - [x] Task: 8.3 驗證 HttpTransport 實作與測試
@@ -9,7 +9,7 @@
 - [x] Task: 8.6 驗證 RpcProvider 實作與測試
 - [x] Task: 8.7 驗證 Provider 模組屬性測試 (Property 1-5)
 - [x] Task: 9. Checkpoint - Provider 模組完成 (Update tasks.md)
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Provider Module' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Provider Module' (Protocol in workflow.md) 9d43653
 
 ## Phase 2: Signer Module (Task 10)
 - [ ] Task: 10.1 驗證 Signer 套件基礎結構
