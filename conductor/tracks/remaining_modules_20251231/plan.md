@@ -33,16 +33,16 @@
 - [x] Task: 30. Checkpoint - Level 5 模組完成 1a7470e
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Advanced Modules' (Protocol in workflow.md) 19241d9
 
-## Phase 4: Chain Extensions
-- [~] Task: 31.1 實現 Solana 擴展 (dart_web3_solana)
-- [ ] Task: 31.2 實現 Polkadot 擴展 (dart_web3_polkadot)
-- [ ] Task: 31.3 實現 Tron 擴展 (dart_web3_tron)
-- [ ] Task: 31.4 實現 TON 擴展 (dart_web3_ton)
-- [ ] Task: 31.5 實現 Bitcoin 擴展 (dart_web3_bitcoin)
-  - [ ] Subtask: 31.6 實現 Bitcoin Inscriptions (Ordinals, BRC-20, Runes)
-- [ ] Task: 31.7 編寫鏈擴展模組屬性測試 (Property 29, 30)
-- [ ] Task: 32. Checkpoint - 鏈擴展模組完成
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Chain Extensions' (Protocol in workflow.md)
+## Phase 4: Chain Extensions [checkpoint: 6ab7f67]
+- [x] Task: 31.1 實現 Solana 擴展 (dart_web3_solana) 4d16e78
+- [x] Task: 31.2 實現 Polkadot 擴展 (dart_web3_polkadot) 4d16e78
+- [x] Task: 31.3 實現 Tron 擴展 (dart_web3_tron) 4d16e78
+- [x] Task: 31.4 實現 TON 擴展 (dart_web3_ton) 4d16e78
+- [x] Task: 31.5 實現 Bitcoin 擴展 (dart_web3_bitcoin) 4d16e78
+  - [x] Subtask: 31.6 實現 Bitcoin Inscriptions (Ordinals, BRC-20, Runes)
+- [x] Task: 31.7 編寫鏈擴展模組屬性測試 (Property 29, 30) 4d16e78
+- [x] Task: 32. Checkpoint - 鏈擴展模組完成 4d16e78
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Chain Extensions' (Protocol in workflow.md) 6ab7f67
 
 ## Phase 5: Final Integration & QA
 - [ ] Task: 33.1 實現 Meta-Package (dart_web3) 整合
