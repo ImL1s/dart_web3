@@ -8,11 +8,11 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Integration & Docs' (Protocol in workflow.md) 197190f
 
 ## Phase 2: QA & Quality Gates (Task 34)
-- [ ] Task: 34.1 執行跨模組整合測試
-- [ ] Task: 34.2 執行測試網測試 (Sepolia/Polygon)
-- [ ] Task: 34.3 執行性能測試
-- [ ] Task: 34.4 執行安全審查
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: QA' (Protocol in workflow.md)
+- [x] Task: 34.1 執行跨模組整合測試
+- [x] Task: 34.2 執行測試網測試 (Sepolia/Polygon)
+- [x] Task: 34.3 執行性能測試
+- [x] Task: 34.4 執行安全審查
+- [~] Task: Conductor - User Manual Verification 'Phase 2: QA' (Protocol in workflow.md)
 
 ## Phase 3: Final Delivery (Task 35)
 - [ ] Task: 35. Final Checkpoint - 專案完成 (Update tasks.md)

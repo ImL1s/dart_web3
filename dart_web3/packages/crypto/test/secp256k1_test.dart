@@ -66,9 +66,7 @@ void main() {
       test('signs a message hash', () {
         final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
         final signature = Secp256k1.sign(messageHash, testPrivateKey);
-
-        // Signature is 64 bytes (32 bytes r + 32 bytes s)
-        expect(signature.length, equals(64));
+        expect(signature.length, equals(65));
       });
 
       test('throws on invalid message hash length', () {
@@ -99,26 +97,15 @@ void main() {
     });
 
     group('recover', () {
-      test('recovers public key from signature with correct v', () {
+      test('recover recovers public key from signature with correct v', () {
         final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
         final signature = Secp256k1.sign(messageHash, testPrivateKey);
+        final rAndS = signature.sublist(0, 64);
+        final v = signature[64];
         final expectedPubKey = Secp256k1.getPublicKey(testPrivateKey);
 
-        // Try recovery with different v values
-        bool recovered = false;
-        for (int v = 0; v < 4; v++) {
-          try {
-            final recoveredPubKey = Secp256k1.recover(signature, messageHash, v);
-            if (_uint8ListEquals(recoveredPubKey, expectedPubKey)) {
-              recovered = true;
-              break;
-            }
-          } catch (e) {
-            // Recovery might fail for some v values
-            continue;
-          }
-        }
-        expect(recovered, isTrue);
+        final recoveredPubKey = Secp256k1.recover(rAndS, messageHash, v);
+        expect(_uint8ListEquals(recoveredPubKey, expectedPubKey), isTrue);
       });
 
       test('throws on invalid signature length', () {
@@ -148,13 +135,13 @@ void main() {
     });
 
     group('verify', () {
-      test('verifies valid signature', () {
-        final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
-        final publicKey = Secp256k1.getPublicKey(testPrivateKey);
-        final signature = Secp256k1.sign(messageHash, testPrivateKey);
-
-        expect(Secp256k1.verify(signature, messageHash, publicKey), isTrue);
-      });
+            test('verifies valid signature', () {
+              final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
+              final publicKey = Secp256k1.getPublicKey(testPrivateKey);
+              final signature = Secp256k1.sign(messageHash, testPrivateKey);
+              final rAndS = signature.sublist(0, 64);
+              expect(Secp256k1.verify(rAndS, messageHash, publicKey), isTrue);
+            });
 
       test('rejects signature with wrong message', () {
         final messageHash1 = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
@@ -165,16 +152,14 @@ void main() {
         expect(Secp256k1.verify(signature, messageHash2, publicKey), isFalse);
       });
 
-      test('rejects signature with wrong public key', () {
+      test('verifies valid signature with wrong public key', () {
         final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
         final signature = Secp256k1.sign(messageHash, testPrivateKey);
-
-        final otherPrivateKey = HexUtils.decode(
-          '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d',
-        );
+        final rAndS = signature.sublist(0, 64);
+        final otherPrivateKey = Uint8List(32)..fillRange(0, 32, 1); // Mock key
         final wrongPublicKey = Secp256k1.getPublicKey(otherPrivateKey);
 
-        expect(Secp256k1.verify(signature, messageHash, wrongPublicKey), isFalse);
+        expect(Secp256k1.verify(rAndS, messageHash, wrongPublicKey), isFalse);
       });
     });
 
@@ -193,8 +178,9 @@ void main() {
         for (final message in messages) {
           final messageHash = Keccak256.hash(Uint8List.fromList(message.codeUnits));
           final signature = Secp256k1.sign(messageHash, testPrivateKey);
+          final rAndS = signature.sublist(0, 64);
           
-          expect(Secp256k1.verify(signature, messageHash, publicKey), isTrue,
+          expect(Secp256k1.verify(rAndS, messageHash, publicKey), isTrue,
             reason: 'Failed for message: $message');
         }
       });

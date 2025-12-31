@@ -1,7 +1,15 @@
-# melos_managed_dependency_overrides: dart_web3_abi,dart_web3_chains,dart_web3_client,dart_web3_contract,dart_web3_core,dart_web3_crypto,dart_web3_ens,dart_web3_events,dart_web3_multicall,dart_web3_provider,dart_web3_signer
+# melos_managed_dependency_overrides: dart_web3_abi,dart_web3_chains,dart_web3_client,dart_web3_contract,dart_web3_core,dart_web3_crypto,dart_web3_ens,dart_web3_events,dart_web3_multicall,dart_web3_provider,dart_web3_signer,dart_web3_aa,dart_web3_bc_ur,dart_web3_bitcoin,dart_web3_bridge,dart_web3_dapp,dart_web3_debug,dart_web3_history,dart_web3_keystone,dart_web3_ledger,dart_web3_mev,dart_web3_mpc,dart_web3_nft,dart_web3_polkadot,dart_web3_price,dart_web3_reown,dart_web3_solana,dart_web3_staking,dart_web3_swap,dart_web3_ton,dart_web3_trezor,dart_web3_tron
 dependency_overrides:
+  dart_web3_aa:
+    path: ..\\packages\\aa
   dart_web3_abi:
     path: ..\\packages\\abi
+  dart_web3_bc_ur:
+    path: ..\\packages\\hardware\\bc_ur
+  dart_web3_bitcoin:
+    path: ..\\packages\\extensions\\bitcoin
+  dart_web3_bridge:
+    path: ..\\packages\\bridge
   dart_web3_chains:
     path: ..\\packages\\chains
   dart_web3_client:
@@ -12,13 +20,47 @@ dependency_overrides:
     path: ..\\packages\\core
   dart_web3_crypto:
     path: ..\\packages\\crypto
+  dart_web3_dapp:
+    path: ..\\packages\\dapp
+  dart_web3_debug:
+    path: ..\\packages\\debug
   dart_web3_ens:
     path: ..\\packages\\ens
   dart_web3_events:
     path: ..\\packages\\events
+  dart_web3_history:
+    path: ..\\packages\\history
+  dart_web3_keystone:
+    path: ..\\packages\\hardware\\keystone
+  dart_web3_ledger:
+    path: ..\\packages\\hardware\\ledger
+  dart_web3_mev:
+    path: ..\\packages\\mev
+  dart_web3_mpc:
+    path: ..\\packages\\hardware\\mpc
   dart_web3_multicall:
     path: ..\\packages\\multicall
+  dart_web3_nft:
+    path: ..\\packages\\nft
+  dart_web3_polkadot:
+    path: ..\\packages\\extensions\\polkadot
+  dart_web3_price:
+    path: ..\\packages\\price
   dart_web3_provider:
     path: ..\\packages\\provider
+  dart_web3_reown:
+    path: ..\\packages\\reown
   dart_web3_signer:
     path: ..\\packages\\signer
+  dart_web3_solana:
+    path: ..\\packages\\extensions\\solana
+  dart_web3_staking:
+    path: ..\\packages\\staking
+  dart_web3_swap:
+    path: ..\\packages\\swap
+  dart_web3_ton:
+    path: ..\\packages\\extensions\\ton
+  dart_web3_trezor:
+    path: ..\\packages\\hardware\\trezor
+  dart_web3_tron:
+    path: ..\\packages\\extensions\\tron
