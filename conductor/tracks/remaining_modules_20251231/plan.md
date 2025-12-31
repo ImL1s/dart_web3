@@ -34,7 +34,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Advanced Modules' (Protocol in workflow.md) 19241d9
 
 ## Phase 4: Chain Extensions
-- [ ] Task: 31.1 實現 Solana 擴展 (dart_web3_solana)
+- [~] Task: 31.1 實現 Solana 擴展 (dart_web3_solana)
 - [ ] Task: 31.2 實現 Polkadot 擴展 (dart_web3_polkadot)
 - [ ] Task: 31.3 實現 Tron 擴展 (dart_web3_tron)
 - [ ] Task: 31.4 實現 TON 擴展 (dart_web3_ton)
