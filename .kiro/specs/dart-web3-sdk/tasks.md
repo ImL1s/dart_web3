@@ -154,37 +154,37 @@
 
 - [x] 8. 實現 Provider 模組 (dart_web3_provider)
   - [x] 8.1 創建 provider 套件基礎結構
-    - 創建 `packages/provider/pubspec.yaml`（依賴 core、http）
-    - 創建入口文件
+    - [x] 創建 `packages/provider/pubspec.yaml`（依賴 core、http）
+    - [x] 創建入口文件
     - _Requirements: 12.6_
 
   - [x] 8.2 實現 Transport 抽象
-    - 定義 Transport 介面
-    - 定義 RpcRequest 類別
+    - [x] 定義 Transport 介面
+    - [x] 定義 RpcRequest 類別
     - _Requirements: 1.7_
 
   - [x] 8.3 實現 HttpTransport
-    - 實現 HTTP JSON-RPC 請求
-    - 實現批次請求支援
-    - 實現超時處理
+    - [x] 實現 HTTP JSON-RPC 請求
+    - [x] 實現批次請求支援
+    - [x] 實現超時處理
     - _Requirements: 1.1, 1.3_
 
   - [x] 8.4 實現 WebSocketTransport
-    - 實現 WebSocket 連接
-    - 實現訂閱支援
-    - 實現自動重連
+    - [x] 實現 WebSocket 連接
+    - [x] 實現訂閱支援
+    - [x] 實現自動重連
     - _Requirements: 1.2, 1.6_
 
   - [x] 8.5 實現 Middleware 系統
-    - 定義 Middleware 介面
-    - 實現 RetryMiddleware
-    - 實現 LoggingMiddleware
+    - [x] 定義 Middleware 介面
+    - [x] 實現 RetryMiddleware
+    - [x] 實現 LoggingMiddleware
     - _Requirements: 1.4_
 
   - [x] 8.6 實現 RpcProvider
-    - 整合 Transport 和 Middleware
-    - 實現常用 RPC 方法
-    - 實現錯誤處理
+    - [x] 整合 Transport 和 Middleware
+    - [x] 實現常用 RPC 方法
+    - [x] 實現錯誤處理
     - _Requirements: 1.5_
 
   - [x] 8.7 編寫 Provider 模組屬性測試

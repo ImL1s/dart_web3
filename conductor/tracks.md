@@ -4,7 +4,12 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-## [~] Track: Verify and complete the implementation of Task 13 (Client Module) as per requirements.
+## [~] Track: Verify and complete the implementation of Tasks 8 (Provider), 10 (Signer), and 12 (Chains) as per requirements.
+*Link: [./conductor/tracks/transport_verification_20251231/](./conductor/tracks/transport_verification_20251231/)*
+
+---
+
+## [x] Track: Verify and complete the implementation of Task 13 (Client Module) as per requirements.
 *Link: [./conductor/tracks/client_verification_20251231/](./conductor/tracks/client_verification_20251231/)*
 
 ---
