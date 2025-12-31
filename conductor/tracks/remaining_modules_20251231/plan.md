@@ -23,15 +23,15 @@
 - [x] Task: 28.4 編寫用戶服務模組單元測試 d832027
 - [x] Task: Conductor - User Manual Verification 'Phase 2: User Services' (Protocol in workflow.md) 2f78de6
 
-## Phase 3: Advanced Modules
-- [~] Task: 29.1 實現 Debug 模組 (dart_web3_debug)
-  - [ ] Subtask: 實現交易追蹤與模擬 (traceTransaction, simulateV1)
-  - [ ] Subtask: 實現 State Override 支援
-- [ ] Task: 29.2 實現 MEV 模組 (dart_web3_mev)
-  - [ ] Subtask: 實現 Flashbots Protect 與 Bundle 提交
-- [ ] Task: 29.3 編寫進階功能模組單元測試
-- [ ] Task: 30. Checkpoint - Level 5 模組完成
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Advanced Modules' (Protocol in workflow.md)
+## Phase 3: Advanced Modules [checkpoint: 19241d9]
+- [x] Task: 29.1 實現 Debug 模組 (dart_web3_debug) 1a7470e
+  - [x] Subtask: 實現交易追蹤與模擬 (traceTransaction, simulateV1)
+  - [x] Subtask: 實現 State Override 支援
+- [x] Task: 29.2 實現 MEV 模組 (dart_web3_mev) 1a7470e
+  - [x] Subtask: 實現 Flashbots Protect 與 Bundle 提交
+- [x] Task: 29.3 編寫進階功能模組單元測試 1a7470e
+- [x] Task: 30. Checkpoint - Level 5 模組完成 1a7470e
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Advanced Modules' (Protocol in workflow.md) 19241d9
 
 ## Phase 4: Chain Extensions
 - [ ] Task: 31.1 實現 Solana 擴展 (dart_web3_solana)
