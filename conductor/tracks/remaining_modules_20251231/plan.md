@@ -1,15 +1,15 @@
 # Plan: Implement Remaining SDK Modules
 
-## Phase 1: DeFi Services (Remaining)
-- [~] Task: 27.3 實現 NFT 模組 (dart_web3_nft)
-  - [ ] Subtask: 創建套件基礎結構
-  - [ ] Subtask: 實現 NFT 集合查詢與 ERC-721/1155 支援
-  - [ ] Subtask: 實現 metadata 解析與 IPFS 網關
-- [ ] Task: 27.4 實現 Staking 模組 (dart_web3_staking)
-  - [ ] Subtask: 實現質押機會查詢與協議整合 (Lido, Rocket Pool)
-  - [ ] Subtask: 實現質押/解質押操作與 APY 計算
-- [ ] Task: 27.5 編寫 DeFi 模組單元測試
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: DeFi Services' (Protocol in workflow.md)
+## Phase 1: DeFi Services (Remaining) [checkpoint: 27dd811]
+- [x] Task: 27.3 實現 NFT 模組 (dart_web3_nft) 1bf7d07
+  - [x] Subtask: 創建套件基礎結構
+  - [x] Subtask: 實現 NFT 集合查詢與 ERC-721/1155 支援
+  - [x] Subtask: 實現 metadata 解析與 IPFS 網關
+- [x] Task: 27.4 實現 Staking 模組 (dart_web3_staking) 1bf7d07
+  - [x] Subtask: 實現質押機會查詢與協議整合 (Lido, Rocket Pool)
+  - [x] Subtask: 實現質押/解質押操作與 APY 計算
+- [x] Task: 27.5 編寫 DeFi 模組單元測試 1bf7d07
+- [x] Task: Conductor - User Manual Verification 'Phase 1: DeFi Services' (Protocol in workflow.md) 27dd811
 
 ## Phase 2: User Services
 - [ ] Task: 28.1 實現 History 模組 (dart_web3_history)
