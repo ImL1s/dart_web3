@@ -101,44 +101,44 @@
 
 - [x] 6. 實現 ABI 模組 (dart_web3_abi)
   - [x] 6.1 創建 abi 套件基礎結構
-    - 創建 `packages/abi/pubspec.yaml`（依賴 core）
-    - 創建入口文件
+    - [x] 創建 `packages/abi/pubspec.yaml`（依賴 core）
+    - [x] 創建入口文件
     - _Requirements: 12.5_
 
   - [x] 6.2 實現 ABI 類型系統
-    - 實現 AbiType 抽象類別
-    - 實現 AbiUint、AbiInt、AbiAddress、AbiBool
-    - 實現 AbiBytes、AbiString
-    - 實現 AbiArray、AbiTuple
+    - [x] 實現 AbiType 抽象類別
+    - [x] 實現 AbiUint、AbiInt、AbiAddress、AbiBool
+    - [x] 實現 AbiBytes、AbiString
+    - [x] 實現 AbiArray、AbiTuple
     - _Requirements: 3.3_
 
   - [x] 6.3 實現 ABI 編碼器
-    - 實現 encode 方法
-    - 實現 encodePacked 方法
-    - 實現 encodeFunction 方法
-    - 正確處理動態類型偏移量
+    - [x] 實現 encode 方法
+    - [x] 實現 encodePacked 方法
+    - [x] 實現 encodeFunction 方法
+    - [x] 正確處理動態類型偏移量
     - _Requirements: 3.1, 3.4, 3.5_
 
   - [x] 6.4 實現 ABI 解碼器
-    - 實現 decode 方法
-    - 實現 decodeFunction 方法
-    - 實現 decodeEvent 方法
+    - [x] 實現 decode 方法
+    - [x] 實現 decodeFunction 方法
+    - [x] 實現 decodeEvent 方法
     - _Requirements: 3.2_
 
   - [x] 6.5 實現 EIP-712 TypedData
-    - 實現 TypedData 類別
-    - 實現 domain separator 計算
-    - 實現 struct hash 計算
+    - [x] 實現 TypedData 類別
+    - [x] 實現 domain separator 計算
+    - [x] 實現 struct hash 計算
     - _Requirements: 3.6_
 
   - [x] 6.6 實現 ABI JSON 解析器
-    - 實現 AbiParser 類別
-    - 解析 functions、events、errors
-    - 實現 AbiFunction、AbiEvent 類別
+    - [x] 實現 AbiParser 類別
+    - [x] 解析 functions、events、errors
+    - [x] 實現 AbiFunction、AbiEvent 類別
     - _Requirements: 3.7_
 
   - [x] 6.7 實現 Pretty Printer
-    - 實現 ABI 數據格式化輸出
+    - [x] 實現 ABI 數據格式化輸出
     - _Requirements: 3.8_
 
   - [x] 6.8 編寫 ABI 模組屬性測試
