@@ -1,12 +1,12 @@
 # Plan: Infrastructure & Core Integrity Verification
 
-## Phase 1: Project Structure (Task 1)
+## Phase 1: Project Structure (Task 1) [checkpoint: bc91ba2]
 - [x] Task: 1.1 驗證與修補專案結構
-  - [ ] Subtask: 驗證 `dart_web3/` 與 `packages/` 目錄
-  - [ ] Subtask: 驗證 `melos.yaml` 配置
-  - [ ] Subtask: 驗證 `analysis_options.yaml`
-  - [ ] Subtask: 驗證根目錄 `pubspec.yaml` 與 `README.md`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Structure' (Protocol in workflow.md)
+  - [x] Subtask: 驗證 `dart_web3/` 與 `packages/` 目錄
+  - [x] Subtask: 驗證 `melos.yaml` 配置
+  - [x] Subtask: 驗證 `analysis_options.yaml`
+  - [x] Subtask: 驗證根目錄 `pubspec.yaml` 與 `README.md`
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Project Structure' (Protocol in workflow.md) bc91ba2
 
 ## Phase 2: Core Module (Task 2)
 - [ ] Task: 2.1 驗證 Core 套件基礎結構 (pubspec.yaml, entry point)
