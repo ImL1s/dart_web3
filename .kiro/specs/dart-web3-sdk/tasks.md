@@ -300,7 +300,7 @@
     - 實現 Log、FeeData 類別
     - _Requirements: 4.2_
 
-  - [ ] 13.6 編寫 Client 模組屬性測試
+  - [x] 13.6 編寫 Client 模組屬性測試
     - **Property 17: PublicClient Read-Only Operations**
     - **Property 18: WalletClient Inheritance**
     - **Property 19: Account Switching Persistence**

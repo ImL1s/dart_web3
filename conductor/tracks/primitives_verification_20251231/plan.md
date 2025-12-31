@@ -11,7 +11,7 @@
 - [x] Task: 5. Checkpoint - Crypto 模組完成 (Update tasks.md)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Crypto Module' (Protocol in workflow.md) ffe3e91
 
-## Phase 2: ABI Module (Task 6)
+## Phase 2: ABI Module (Task 6) [checkpoint: b3081c1]
 - [x] Task: 6.1 驗證 ABI 套件基礎結構 (pubspec.yaml, entry point)
 - [x] Task: 6.2 驗證 ABI 類型系統實作與測試
 - [x] Task: 6.3 驗證 ABI 編碼器實作與測試
@@ -21,4 +21,4 @@
 - [x] Task: 6.7 驗證 Pretty Printer 實作與測試
 - [x] Task: 6.8 驗證 ABI 模組屬性測試 (Property 12-16)
 - [x] Task: 7. Checkpoint - ABI 模組完成 (Update tasks.md)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: ABI Module' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: ABI Module' (Protocol in workflow.md) b3081c1

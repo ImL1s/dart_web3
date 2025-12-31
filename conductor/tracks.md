@@ -4,7 +4,12 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-## [~] Track: Verify and complete the implementation of Tasks 4 and 6 (Crypto and ABI Modules) as per requirements.
+## [~] Track: Verify and complete the implementation of Task 13 (Client Module) as per requirements.
+*Link: [./conductor/tracks/client_verification_20251231/](./conductor/tracks/client_verification_20251231/)*
+
+---
+
+## [x] Track: Verify and complete the implementation of Tasks 4 and 6 (Crypto and ABI Modules) as per requirements.
 *Link: [./conductor/tracks/primitives_verification_20251231/](./conductor/tracks/primitives_verification_20251231/)*
 
 ---
