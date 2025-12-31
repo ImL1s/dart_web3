@@ -19,7 +19,7 @@
 - [x] Task: 17. Checkpoint - Contract & Events 模組完成 (Update tasks.md)
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Contract Module' (Protocol in workflow.md) cef5d35
 
-## Phase 3: Events Module (Task 16)
+## Phase 3: Events Module (Task 16) [checkpoint: 713414f]
 - [x] Task: 16.1 驗證 Events 套件基礎結構
 - [x] Task: 16.2 驗證 EventFilter 類別實作
 - [x] Task: 16.3 驗證 EventSubscriber 實作 (WS/Polling)
