@@ -154,7 +154,7 @@ class NftTransferManager {
   /// Check if ERC-721 needs approval
   Future<bool> _needsErc721Approval(NftTransferParams params) async {
     final contract = Contract(
-      address: params.contractAddress,
+      address: params.contractAddress.hex,
       abi: _erc721AbiJson,
       publicClient: _client,
     );
@@ -178,7 +178,7 @@ class NftTransferManager {
   /// Check if ERC-1155 needs approval
   Future<bool> _needsErc1155Approval(NftTransferParams params) async {
     final contract = Contract(
-      address: params.contractAddress,
+      address: params.contractAddress.hex,
       abi: _erc1155AbiJson,
       publicClient: _client,
     );
@@ -194,7 +194,7 @@ class NftTransferManager {
   /// Approve ERC-721 token
   Future<String> _approveErc721(NftTransferParams params) async {
     final contract = Contract(
-      address: params.contractAddress,
+      address: params.contractAddress.hex,
       abi: _erc721AbiJson,
       publicClient: _client,
       walletClient: _client,
@@ -203,14 +203,13 @@ class NftTransferManager {
     return await contract.write(
       'approve',
       [params.to.hex, params.tokenId],
-      TransactionRequest(from: params.from.hex),
     );
   }
 
   /// Approve ERC-1155 tokens
   Future<String> _approveErc1155(NftTransferParams params) async {
     final contract = Contract(
-      address: params.contractAddress,
+      address: params.contractAddress.hex,
       abi: _erc1155AbiJson,
       publicClient: _client,
       walletClient: _client,
@@ -219,7 +218,6 @@ class NftTransferManager {
     return await contract.write(
       'setApprovalForAll',
       [params.to.hex, true],
-      TransactionRequest(from: params.from.hex),
     );
   }
 

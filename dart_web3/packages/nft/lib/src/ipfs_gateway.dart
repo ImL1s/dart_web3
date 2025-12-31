@@ -19,7 +19,7 @@ class IpfsGateway {
   IpfsGateway({
     List<String>? gateways,
     Duration timeout = const Duration(seconds: 10),
-  })  : _gateways = gateways ?? _defaultGateways,
+  })  : _gateways = List<String>.from(gateways ?? _defaultGateways),
         _timeout = timeout;
 
   /// Resolve IPFS URI to HTTP URL with fallback gateways

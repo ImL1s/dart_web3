@@ -1,7 +1,7 @@
 # Plan: Implement Remaining SDK Modules
 
 ## Phase 1: DeFi Services (Remaining)
-- [ ] Task: 27.3 實現 NFT 模組 (dart_web3_nft)
+- [~] Task: 27.3 實現 NFT 模組 (dart_web3_nft)
   - [ ] Subtask: 創建套件基礎結構
   - [ ] Subtask: 實現 NFT 集合查詢與 ERC-721/1155 支援
   - [ ] Subtask: 實現 metadata 解析與 IPFS 網關
