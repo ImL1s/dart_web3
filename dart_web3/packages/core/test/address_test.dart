@@ -119,7 +119,33 @@ void main() {
       });
     });
 
-    // Note: toChecksum and isValidChecksum tests require keccak256
-    // which is in the crypto module. These will be tested in integration tests.
+    group('checksum', () {
+      // Mock keccak256 that returns a specific hash for our test address
+      // to verify the case conversion logic.
+      // 0xd8da... hash start: 0x23... -> 0010 0011 (all < 8)
+      // We'll mock a hash where some digits are >= 8
+      Uint8List mockKeccak(Uint8List data) {
+        // Return a hash where the first few digits are 'f' (>= 8)
+        return Uint8List.fromList(List.filled(32, 0xff));
+      }
+
+      test('toChecksum converts to uppercase correctly based on hash', () {
+        final addr = EthereumAddress.fromHex(validAddress);
+        final checksum = addr.toChecksum(mockKeccak);
+        
+        // Since mockKeccak returns all 0xff, all letters should be uppercase
+        expect(checksum, equals('0xD8DA6BF26964AF9D7EED9E03E53415D37AA96045'));
+      });
+
+      test('isValidChecksum returns true for all lowercase', () {
+        expect(EthereumAddress.isValidChecksum(validAddress, mockKeccak), isTrue);
+      });
+
+      test('isValidChecksum returns true for valid checksum', () {
+        final addr = EthereumAddress.fromHex(validAddress);
+        final checksum = addr.toChecksum(mockKeccak);
+        expect(EthereumAddress.isValidChecksum(checksum, mockKeccak), isTrue);
+      });
+    });
   });
 }

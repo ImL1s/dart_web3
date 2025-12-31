@@ -6,44 +6,44 @@
 
 ## Tasks
 
-- [ ] 1. 設置專案結構和 Monorepo 配置
-  - 創建 `dart_web3/` 根目錄和 `packages/` 子目錄
-  - 配置 `melos.yaml` 用於 monorepo 管理
-  - 設置共用的 `analysis_options.yaml`
-  - 創建根目錄 `pubspec.yaml` 和 README.md
+- [x] 1. 設置專案結構和 Monorepo 配置
+  - [x] 創建 `dart_web3/` 根目錄和 `packages/` 子目錄
+  - [x] 配置 `melos.yaml` 用於 monorepo 管理
+  - [x] 設置共用的 `analysis_options.yaml`
+  - [x] 創建根目錄 `pubspec.yaml` 和 README.md
   - _Requirements: 12.1, 12.2_
 
-- [ ] 2. 實現 Core 模組 (dart_web3_core)
-  - [ ] 2.1 創建 core 套件基礎結構
-    - 創建 `packages/core/pubspec.yaml`（零外部依賴）
-    - 創建 `packages/core/lib/dart_web3_core.dart` 入口文件
+- [x] 2. 實現 Core 模組 (dart_web3_core)
+  - [x] 2.1 創建 core 套件基礎結構
+    - [x] 創建 `packages/core/pubspec.yaml`（零外部依賴）
+    - [x] 創建 `packages/core/lib/dart_web3_core.dart` 入口文件
     - _Requirements: 12.3, 12.17_
 
-  - [ ] 2.2 實現 EthereumAddress 類別
-    - 實現地址解析和驗證
-    - 實現 EIP-55 checksum 編碼/驗證
-    - 支援 checksummed 和 non-checksummed 格式
+  - [x] 2.2 實現 EthereumAddress 類別
+    - [x] 實現地址解析和驗證
+    - [x] 實現 EIP-55 checksum 編碼/驗證
+    - [x] 支援 checksummed 和 non-checksummed 格式
     - _Requirements: 14.1, 14.7_
 
-  - [ ] 2.3 實現 BigInt 工具類
-    - 實現 wei/gwei/ether 單位轉換
-    - 實現格式化輸出方法
+  - [x] 2.3 實現 BigInt 工具類
+    - [x] 實現 wei/gwei/ether 單位轉換
+    - [x] 實現格式化輸出方法
     - _Requirements: 14.2_
 
-  - [ ] 2.4 實現 Hex 編碼工具
-    - 實現 hex 編碼/解碼
-    - 處理 0x 前綴
+  - [x] 2.4 實現 Hex 編碼工具
+    - [x] 實現 hex 編碼/解碼
+    - [x] 處理 0x 前綴
     - _Requirements: 14.3_
 
-  - [ ] 2.5 實現 RLP 編碼/解碼
-    - 實現 RLP 編碼器
-    - 實現 RLP 解碼器
-    - 支援嵌套結構
+  - [x] 2.5 實現 RLP 編碼/解碼
+    - [x] 實現 RLP 編碼器
+    - [x] 實現 RLP 解碼器
+    - [x] 支援嵌套結構
     - _Requirements: 14.4_
 
-  - [ ] 2.6 實現 Bytes 工具類
-    - 實現 concat、slice、equals 方法
-    - 實現 padding 方法
+  - [x] 2.6 實現 Bytes 工具類
+    - [x] 實現 concat、slice、equals 方法
+    - [x] 實現 padding 方法
     - _Requirements: 14.5_
 
   - [x] 2.7 編寫 Core 模組屬性測試
