@@ -24,7 +24,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: User Services' (Protocol in workflow.md) 2f78de6
 
 ## Phase 3: Advanced Modules
-- [ ] Task: 29.1 實現 Debug 模組 (dart_web3_debug)
+- [~] Task: 29.1 實現 Debug 模組 (dart_web3_debug)
   - [ ] Subtask: 實現交易追蹤與模擬 (traceTransaction, simulateV1)
   - [ ] Subtask: 實現 State Override 支援
 - [ ] Task: 29.2 實現 MEV 模組 (dart_web3_mev)

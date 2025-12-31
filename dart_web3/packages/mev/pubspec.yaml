@@ -5,4 +5,12 @@ environment:
   sdk: ^3.6.0
 dependencies:
   dart_web3_core:
+    path: ../core
   dart_web3_provider:
+    path: ../provider
+  dart_web3_signer:
+    path: ../signer
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0
