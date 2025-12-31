@@ -1,0 +1,8 @@
+{
+  "track_id": "remaining_modules_20251231",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2025-12-31T17:00:00Z",
+  "updated_at": "2025-12-31T17:00:00Z",
+  "description": "Implement remaining modules of the Dart Web3 SDK, including NFT, Staking, User Services (History, Price, DApp), Advanced Modules (Debug, MEV), Chain Extensions (Solana, Polkadot, Tron, TON, Bitcoin), and final integration/QA."
+}

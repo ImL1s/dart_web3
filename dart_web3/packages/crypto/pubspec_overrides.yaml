@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: dart_web3_core
+dependency_overrides:
+  dart_web3_core:
+    path: ../core

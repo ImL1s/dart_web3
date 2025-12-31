@@ -1,0 +1,12 @@
+name: dart_web3_mpc
+description: MPC wallet support
+version: 0.1.0
+environment:
+  sdk: ^3.6.0
+dependencies:
+  dart_web3_core:
+  dart_web3_signer:
+  dart_web3_crypto:
+
+dev_dependencies:
+  test: ^1.24.0

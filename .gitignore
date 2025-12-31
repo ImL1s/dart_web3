@@ -1,0 +1,42 @@
+# General
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.log
+
+# Dart/Flutter
+.dart_tool/
+.packages
+build/
+pubspec.lock
+coverage/
+android/
+ios/
+linux/
+macos/
+web/
+windows/
+
+# Node/JS (if any)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Secrets & Environment
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+secrets.yaml
+credentials.json
+token.txt
+
+# Conductor (keep these, but ignore temp state if needed)
+# conductor/setup_state.json # We might want to keep state, but usually it's local. Let's keep it for now for resumption.
+
+# Temp
+tmp/
+temp/

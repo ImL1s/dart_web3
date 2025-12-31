@@ -1,0 +1,8 @@
+name: dart_web3_mev
+description: MEV protection and Flashbots support
+version: 0.1.0
+environment:
+  sdk: ^3.6.0
+dependencies:
+  dart_web3_core:
+  dart_web3_provider:

@@ -1,0 +1,206 @@
+import 'dart:typed_data';
+
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:dart_web3_client/dart_web3_client.dart';
+
+import 'user_operation.dart';
+
+/// Abstract base class for smart contract accounts.
+/// 
+/// A SmartAccount represents an account that is controlled by smart contract code
+/// rather than a private key. This enables advanced features like:
+/// - Multi-signature wallets
+/// - Social recovery
+/// - Spending limits
+/// - Gasless transactions via paymasters
+abstract class SmartAccount {
+  /// Gets the address of this smart account.
+  Future<String> getAddress();
+
+  /// Gets the nonce for the next UserOperation.
+  Future<BigInt> getNonce({String? key});
+
+  /// Signs a UserOperation with this account.
+  Future<String> signUserOperation(UserOperation userOp);
+
+  /// Gets the init code for deploying this account (if not deployed).
+  Future<String> getInitCode();
+
+  /// Checks if this account is deployed on-chain.
+  Future<bool> isDeployed();
+
+  /// Encodes a function call for this account.
+  String encodeCallData(String to, BigInt value, String data);
+
+  /// Encodes multiple function calls for batch execution.
+  String encodeBatchCallData(List<Call> calls);
+
+  /// Gets the factory address used to deploy this account.
+  String? get factoryAddress;
+
+  /// Gets the account implementation address.
+  String get implementationAddress;
+
+  /// Gets the owner/signer of this account.
+  Signer get owner;
+
+  /// Gets the EntryPoint address this account is compatible with.
+  String get entryPointAddress;
+}
+
+/// Represents a function call to be executed by a smart account.
+class Call {
+  /// The target contract address.
+  final String to;
+
+  /// The value to send (in wei).
+  final BigInt value;
+
+  /// The encoded function call data.
+  final String data;
+
+  Call({
+    required this.to,
+    required this.data,
+    BigInt? value,
+  }) : value = value ?? BigInt.zero;
+
+  /// Creates a call from a contract method.
+  factory Call.fromContract({
+    required String contractAddress,
+    required String functionSignature,
+    required List<dynamic> args,
+    BigInt? value,
+  }) {
+    // TODO: Use ABI encoder to encode the function call
+    // For now, this is a placeholder
+    final data = '0x'; // Encoded function call
+    
+    return Call(
+      to: contractAddress,
+      value: value ?? BigInt.zero,
+      data: data,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'to': to,
+      'value': '0x${value.toRadixString(16)}',
+      'data': data,
+    };
+  }
+}
+
+/// Base implementation of SmartAccount with common functionality.
+abstract class BaseSmartAccount implements SmartAccount {
+  final Signer _owner;
+  final PublicClient _publicClient;
+  final String _entryPointAddress;
+  final String? _factoryAddress;
+  final String _implementationAddress;
+
+  BaseSmartAccount({
+    required Signer owner,
+    required PublicClient publicClient,
+    required String entryPointAddress,
+    String? factoryAddress,
+    required String implementationAddress,
+  }) : _owner = owner,
+       _publicClient = publicClient,
+       _entryPointAddress = entryPointAddress,
+       _factoryAddress = factoryAddress,
+       _implementationAddress = implementationAddress;
+
+  @override
+  Signer get owner => _owner;
+
+  @override
+  String get entryPointAddress => _entryPointAddress;
+
+  @override
+  String? get factoryAddress => _factoryAddress;
+
+  @override
+  String get implementationAddress => _implementationAddress;
+
+  /// Protected access to the public client for subclasses.
+  PublicClient get publicClient => _publicClient;
+
+  @override
+  Future<BigInt> getNonce({String? key}) async {
+    final address = await getAddress();
+    
+    // Call EntryPoint.getNonce(sender, key)
+    final nonceKey = key != null ? BigInt.parse(key) : BigInt.zero;
+    final callData = _encodeGetNonceCall(address, nonceKey);
+    
+    final result = await _publicClient.call(CallRequest(
+      to: _entryPointAddress,
+      data: HexUtils.decode(callData),
+    ));
+    
+    return BigInt.parse(HexUtils.encode(result));
+  }
+
+  @override
+  Future<bool> isDeployed() async {
+    final address = await getAddress();
+    final code = await _publicClient.call(CallRequest(
+      to: address,
+      data: Uint8List(0),
+    ));
+    
+    return code.isNotEmpty;
+  }
+
+  @override
+  Future<String> signUserOperation(UserOperation userOp) async {
+    final userOpHash = userOp.getUserOpHash(
+      chainId: await _publicClient.getChainId(),
+      entryPointAddress: _entryPointAddress,
+      entryPointVersion: EntryPointVersion.v07, // Default to v0.7
+    );
+    
+    final signature = await _owner.signMessage(userOpHash);
+    return HexUtils.encode(signature);
+  }
+
+  /// Encodes a getNonce function call to the EntryPoint.
+  String _encodeGetNonceCall(String sender, BigInt key) {
+    // getNonce(address,uint192) function selector: 0x35567e1a
+    final selector = '35567e1a';
+    final paddedSender = sender.replaceFirst('0x', '').padLeft(64, '0');
+    final paddedKey = key.toRadixString(16).padLeft(64, '0');
+    
+    return '0x$selector$paddedSender$paddedKey';
+  }
+
+  /// Calculates the counterfactual address for this account.
+  Future<String> _calculateAddress() async {
+    if (_factoryAddress == null) {
+      throw StateError('Factory address is required to calculate account address');
+    }
+
+    final initCode = await getInitCode();
+    final salt = await _getSalt();
+    
+    // Use CREATE2 to calculate the address
+    return _calculateCreate2Address(_factoryAddress!, salt, initCode);
+  }
+
+  /// Gets the salt used for CREATE2 deployment.
+  Future<String> _getSalt() async {
+    // Default implementation uses owner address as salt
+    return _owner.address.hex;
+  }
+
+  /// Calculates CREATE2 address.
+  String _calculateCreate2Address(String factory, String salt, String initCode) {
+    // CREATE2 address calculation: keccak256(0xff + factory + salt + keccak256(initCode))
+    // This is a simplified implementation
+    // TODO: Implement proper CREATE2 address calculation
+    return '0x' + '0' * 40; // Placeholder
+  }
+}

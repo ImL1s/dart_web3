@@ -1,0 +1,17 @@
+name: dart_web3_signer
+description: Signer abstraction for Ethereum - private key, hardware wallet, MPC support
+version: 0.1.0
+homepage: https://github.com/example/dart_web3
+repository: https://github.com/example/dart_web3/tree/main/packages/signer
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  dart_web3_core:
+  dart_web3_crypto:
+  dart_web3_abi:
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

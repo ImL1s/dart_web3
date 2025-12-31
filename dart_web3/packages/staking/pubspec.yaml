@@ -1,0 +1,7 @@
+name: dart_web3_staking
+description: Staking service
+version: 0.1.0
+environment:
+  sdk: ^3.6.0
+dependencies:
+  dart_web3_core:

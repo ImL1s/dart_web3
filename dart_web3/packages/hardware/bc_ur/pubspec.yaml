@@ -1,0 +1,19 @@
+name: dart_web3_bc_ur
+description: BC-UR (Blockchain Commons Uniform Resources) encoding/decoding for QR code communication
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  # No external dependencies - pure Dart implementation
+
+dev_dependencies:
+  test: ^1.24.0
+
+topics:
+  - blockchain
+  - qr-code
+  - bc-ur
+  - hardware-wallet

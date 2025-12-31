@@ -1,0 +1,25 @@
+name: dart_web3
+description: A comprehensive pure Dart Web3 SDK - meta-package that re-exports all modules
+version: 0.1.0
+homepage: https://github.com/example/dart_web3
+repository: https://github.com/example/dart_web3/tree/main/dart_web3
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  dart_web3_core:
+  dart_web3_crypto:
+  dart_web3_abi:
+  dart_web3_provider:
+  dart_web3_signer:
+  dart_web3_chains:
+  dart_web3_client:
+  dart_web3_contract:
+  dart_web3_events:
+  dart_web3_multicall:
+  dart_web3_ens:
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

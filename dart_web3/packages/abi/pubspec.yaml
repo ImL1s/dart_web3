@@ -1,0 +1,23 @@
+name: dart_web3_abi
+description: ABI encoding and decoding for Ethereum smart contracts
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  dart_web3_core:
+    path: ../core
+  dart_web3_crypto:
+    path: ../crypto
+
+dev_dependencies:
+  test: ^1.24.0
+  glados: ^1.1.1
+
+dependency_overrides:
+  dart_web3_core:
+    path: ../core
+  dart_web3_crypto:
+    path: ../crypto

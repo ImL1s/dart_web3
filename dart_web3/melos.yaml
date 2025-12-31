@@ -1,0 +1,39 @@
+name: dart_web3_workspace
+
+packages:
+  - packages/**
+  - packages/hardware/**
+  - packages/extensions/**
+  - dart_web3
+
+scripts:
+  analyze:
+    run: melos exec -- dart analyze --fatal-infos
+    description: Run static analysis on all packages
+  
+  format:
+    run: dart format --set-exit-if-changed .
+    description: Check formatting of all packages
+  
+  test:
+    run: melos exec --concurrency=1 -- dart test
+    description: Run tests in all packages
+    packageFilters:
+      dirExists: test
+    select-package: false
+  
+  test:coverage:
+    run: melos exec -- dart test --coverage=coverage
+    description: Run tests with coverage
+    packageFilters:
+      dirExists: test
+  
+  publish:dry:
+    run: melos exec -- dart pub publish --dry-run
+    description: Dry run publish for all packages
+    packageFilters:
+      noPrivate: true
+  
+  clean:
+    run: melos clean
+    description: Clean all packages
