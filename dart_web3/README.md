@@ -81,6 +81,19 @@ void main() async {
 }
 ```
 
+## Examples
+
+We provide a variety of examples to help you get started with the SDK:
+
+| Example | Description |
+|---------|-------------|
+| [Connectivity](example/connectivity.dart) | Check connectivity across multiple networks |
+| [Wallet Management](example/wallet_overview.dart) | HD Wallet derivation, mnemonic generation, and signing |
+| [Token Interactions](example/token_interactions.dart) | Reading ERC-20 metadata and balances |
+| [Account Abstraction](example/account_abstraction_basic.dart) | ERC-4337 Smart Account setup and UserOps |
+
+Find more details in the [Usage Guide](USAGE_GUIDE.md).
+
 ## Architecture Blueprint
 
 ```mermaid
