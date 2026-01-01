@@ -8,7 +8,7 @@
 |------|--------|--------|------|
 | `crypto` (BIP-39/32) | CRITICAL | 6 | ✅ 已修復 |
 | `abi` (編碼/解析) | HIGH/MEDIUM | 4 | ✅ 已修復 |
-| `aa` (ERC-4337) | CRITICAL/HIGH | 6 | ✅ 已修復 |
+| `aa` (ERC-4337) | CRITICAL/HIGH | 6 | ✅ 全部修復 |
 
 ---
 
@@ -335,7 +335,7 @@ String _calculateCreate2Address(String factory, String salt, String initCode) {
 
 ---
 
-#### 2.4 [MEDIUM] signUserOperation 使用錯誤簽名方案 ⚠️ 部分修復
+#### 2.4 [MEDIUM] signUserOperation 使用錯誤簽名方案 ✅ 已修復
 
 **問題描述：**
 使用 EIP-191 `signMessage`（添加前綴），但 ERC-4337 要求直接簽名原始 hash。
@@ -370,16 +370,17 @@ Future<Uint8List> signHash(String hash) async {
 | **P1** | ABI | Tuple 解析 (Event/Error) | MEDIUM | ✅ 已修復 | Codex Review |
 | **P1** | ABI | 簽名解析 (嵌套括號) | MEDIUM | ✅ 已修復 | Codex Review |
 | **P2** | AA | CREATE2 地址 | HIGH | ✅ 已修復 | Codex Review |
-| **P2** | AA | signUserOperation | MEDIUM | ⚠️ 部分修復 | Codex Review |
+| **P2** | AA | signUserOperation | MEDIUM | ✅ 已修復 | Codex Review |
 | **P3** | AA | UserOpHash 編碼 (v0.6/v0.7) | CRITICAL | ✅ 已修復 | Codex Review |
-| **P3** | AA | UserOpHash 編碼 (v0.8/v0.9 EIP-712) | CRITICAL | ❌ 待實現 | Codex Review |
+| **P3** | AA | UserOpHash 編碼 (v0.8/v0.9 EIP-712) | CRITICAL | ✅ 已修復 | Codex Review |
 | **P3** | AA | EntryPoint calldata | CRITICAL | ✅ 已修復 | Codex Review |
 
 **修復進度：**
 - ✅ ABI 模組：4/4 問題已修復（100%）
-- ✅ AA 模組：5/6 問題已修復（83%）
-  - 待實現：EIP-712 typed data hashing (v0.8/v0.9)
+- ✅ AA 模組：6/6 問題已修復（100%）
 - ✅ crypto 模組：6/6 問題已修復（100%）
+
+**所有核心模組問題已完全修復！**
 
 ---
 
