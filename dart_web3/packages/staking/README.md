@@ -1,12 +1,35 @@
 # dart_web3_staking
 
-Staking and liquid staking services integration.
+Liquid and native staking service integrations.
 
 ## Features
 
-- **Lido/RocketPool**: Support for popular liquid staking protocols.
-- **Native Staking**: Tools for staking on various PoS networks.
-- **Reward Tracking**: Monitor and calculate staking rewards.
+- **Integration**: Native support for Lido (stETH) and Rocket Pool (rETH).
+- **Yield Calculation**: Track real-time APR/APY for various staking strategies.
+- **Staking Actions**: Simplified `stake`, `unstake`, and `claim` flows.
+- **Validator Tools**: (Planned) Helpers for individual node operators.
+
+## Architecture
+
+```mermaid
+graph LR
+    User[User] --> Staking[Staking Manager]
+    Staking --> Lido[Lido Protocol]
+    Staking --> RocketPool[Rocket Pool]
+```
+
+## Usage
+
+```dart
+import 'package:dart_web3_staking/dart_web3_staking.dart';
+
+void main() async {
+  final lido = LidoProvider(client: myClient);
+  
+  final apr = await lido.getCurrentAPR();
+  print('Lido APR: $apr%');
+}
+```
 
 ## Installation
 
