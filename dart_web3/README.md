@@ -169,6 +169,10 @@ graph TD
 | [`dart_web3_staking`](packages/staking) | Staking services | 5 |
 | [`dart_web3_debug`](packages/debug) | Debug/Trace API | 5 |
 | [`dart_web3_mev`](packages/mev) | MEV protection/Flashbots | 5 |
+| [`dart_web3_dapp`](packages/dapp) | DApp state & session management | 5 |
+| [`dart_web3_history`](packages/history) | Transaction history explorer | 5 |
+| [`dart_web3_price`](packages/price) | Asset pricing and oracles | 5 |
+| [`dart_web3_bc_ur`](packages/hardware/bc_ur) | BC-UR air-gapped protocol | 6 |
 | [`dart_web3_keystone`](packages/hardware/keystone) | Keystone hardware wallet | 6 |
 | [`dart_web3_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
 | [`dart_web3_trezor`](packages/hardware/trezor) | Trezor hardware wallet | 6 |
