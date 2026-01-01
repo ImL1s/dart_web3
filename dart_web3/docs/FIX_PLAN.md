@@ -6,9 +6,13 @@
 
 | 模組 | 嚴重度 | 問題數 | 狀態 |
 |------|--------|--------|------|
-| `crypto` (BIP-39/32) | CRITICAL | 6 | ✅ 已修復 |
+| `crypto` (BIP-39/32) | CRITICAL | 7 | ✅ 已修復 |
 | `abi` (編碼/解析) | HIGH/MEDIUM | 4 | ✅ 已修復 |
-| `aa` (ERC-4337) | CRITICAL/HIGH | 6 | ✅ 全部修復 |
+| `aa` (ERC-4337) | CRITICAL/HIGH | 9 | ✅ 全部修復 |
+| `signer` (簽名) | HIGH | 1 | ✅ 已修復 |
+| `test` (測試) | LOW | 1 | ✅ 已修復 |
+
+**總計：22 個問題全部修復**
 
 ---
 
@@ -361,6 +365,131 @@ Future<Uint8List> signHash(String hash) async {
 
 ---
 
+#### 2.5 [HIGH] simulateValidation ABI 編碼缺少偏移量 ✅ 已修復
+
+**問題描述：**
+v0.7 `simulateValidation` 編碼動態 tuple 時缺少 32 字節偏移量前綴。
+
+**受影響位置：**
+- `entry_point.dart:617-619`
+
+**修復方案：**
+```dart
+// 使用 AbiEncoder.encode 自動添加偏移量
+final encoded = AbiEncoder.encode([packedOpTupleType], [opValue]);
+```
+
+---
+
+#### 2.6 [MEDIUM] ValidationResult.fromBytes 解析錯誤 ✅ 已修復
+
+**問題描述：**
+1. 缺少 `paymasterValidationData` 字段
+2. bit layout 解析錯誤（accountValidationData 格式：sigAuthorizer[160] | validUntil[48] | validAfter[48]）
+
+**受影響位置：**
+- `entry_point.dart` - ReturnInfo class
+
+**修復方案：**
+```dart
+// 添加 paymasterValidationData 到 ReturnInfo tuple
+final returnInfoType = AbiTuple([
+  AbiUint(256),  // preOpGas
+  AbiUint(256),  // prefund
+  AbiUint(256),  // accountValidationData
+  AbiUint(256),  // paymasterValidationData (NEW)
+  AbiBytes(),    // paymasterContext
+]);
+
+// 正確的 bit layout 解析
+final mask48 = BigInt.parse('ffffffffffff', radix: 16);
+final mask160 = BigInt.parse('ffffffffffffffffffffffffffffffffffffffff', radix: 16);
+final sigAuthorizer = accountValidationData & mask160;
+final validUntil = (accountValidationData >> 160) & mask48;
+final validAfter = (accountValidationData >> 208) & mask48;
+```
+
+---
+
+#### 2.7 [MEDIUM] EIP-7702 Authorization initCode 編碼 ✅ 已修復
+
+**問題描述：**
+EIP-7702 authorization 的 initCode 編碼未實現（TODO）。
+
+**受影響位置：**
+- `user_operation.dart` - `_getInitCode` 方法
+
+**修復方案：**
+```dart
+String _getInitCode(String? factory, String? factoryData, Authorization? authorization) {
+  if (authorization != null) {
+    // EIP-7702: 0x05 || rlp([chain_id, address, nonce, y_parity, r, s])
+    final rlpList = authorization.toRlpList();
+    final encoded = RLP.encode(rlpList);
+    return '0x05${HexUtils.encode(encoded).replaceFirst('0x', '')}';
+  }
+  if (factory == null) return '0x';
+  return factory + (factoryData ?? '').replaceFirst('0x', '');
+}
+```
+
+---
+
+### ✅ crypto 模組補充修復
+
+#### 3.1 [LOW] PBKDF2 運算子優先級錯誤 ✅ 已修復
+
+**問題描述：**
+`1 << 32 - 1` 被解析為 `1 << 31`（等於 2147483648），而非 `(2^32 - 1)`（等於 4294967295）。
+
+**受影響位置：**
+- `pbkdf2.dart:30`
+
+**修復方案：**
+```dart
+// 錯誤：
+if (keyLength > (1 << 32 - 1) * hLen)
+
+// 正確：
+if (keyLength > ((1 << 32) - 1) * hLen)
+```
+
+---
+
+### ✅ signer 模組修復
+
+#### 4.1 [HIGH] signHash 方法缺失 ✅ 已修復
+
+**問題描述：**
+所有 Signer 實現都缺少 `signHash` 方法，無法直接簽名原始 hash（ERC-4337 需要）。
+
+**受影響位置：**
+- `private_key_signer.dart`
+- `ledger_signer.dart`
+- `trezor_signer.dart`
+- `keystone_signer.dart`
+- `mpc_signer.dart`
+- `reown_signer.dart`
+
+**修復方案：**
+在 `Signer` 接口添加 `signHash` 方法，並在所有實現中實現。
+
+---
+
+### ✅ 測試補充
+
+#### 5.1 [LOW] userOpHash 缺少測試向量 ✅ 已修復
+
+**問題描述：**
+userOpHash 計算缺乏確定性測試向量驗證。
+
+**修復方案：**
+在 `user_operation_test.dart` 中添加：
+- 確定性 hash 測試
+- v0.8 EIP-712 格式驗證測試
+
+---
+
 ## 修復狀態總結
 
 | 優先級 | 模組 | 問題 | 嚴重度 | 狀態 | 發現來源 |
@@ -374,13 +503,21 @@ Future<Uint8List> signHash(String hash) async {
 | **P3** | AA | UserOpHash 編碼 (v0.6/v0.7) | CRITICAL | ✅ 已修復 | Codex Review |
 | **P3** | AA | UserOpHash 編碼 (v0.8/v0.9 EIP-712) | CRITICAL | ✅ 已修復 | Codex Review |
 | **P3** | AA | EntryPoint calldata | CRITICAL | ✅ 已修復 | Codex Review |
+| **P3** | AA | simulateValidation ABI 偏移量 | HIGH | ✅ 已修復 | Codex Review |
+| **P3** | AA | ValidationResult.fromBytes | MEDIUM | ✅ 已修復 | Codex Review |
+| **P3** | AA | EIP-7702 initCode | MEDIUM | ✅ 已修復 | Codex Review |
+| **P4** | Crypto | PBKDF2 運算子優先級 | LOW | ✅ 已修復 | Codex Review |
+| **P4** | Signer | signHash 方法缺失 | HIGH | ✅ 已修復 | Codex Review |
+| **P4** | Test | userOpHash 測試向量 | LOW | ✅ 已修復 | Codex Review |
 
 **修復進度：**
 - ✅ ABI 模組：4/4 問題已修復（100%）
-- ✅ AA 模組：6/6 問題已修復（100%）
-- ✅ crypto 模組：6/6 問題已修復（100%）
+- ✅ AA 模組：9/9 問題已修復（100%）
+- ✅ crypto 模組：7/7 問題已修復（100%）
+- ✅ Signer 模組：1/1 問題已修復（100%）
+- ✅ 測試補充：1/1 問題已修復（100%）
 
-**所有核心模組問題已完全修復！**
+**所有核心模組問題已完全修復！** (共 22 個問題)
 
 ---
 
