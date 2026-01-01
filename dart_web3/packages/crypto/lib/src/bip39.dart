@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'keccak.dart';
+import 'pbkdf2.dart';
+import 'sha2.dart';
 
 /// Pure Dart implementation of BIP-39 mnemonic phrase generation and validation.
 /// 
@@ -51,12 +51,13 @@ class Bip39 {
 
     final mnemonicString = mnemonic.join(' ');
     final salt = 'mnemonic$passphrase';
-    
-    return _pbkdf2(
-      utf8.encode(mnemonicString),
-      utf8.encode(salt),
-      2048,
-      64,
+
+    // BIP-39 specifies: PBKDF2-HMAC-SHA512, 2048 iterations, 64-byte output
+    return Pbkdf2.deriveKey(
+      password: Uint8List.fromList(utf8.encode(mnemonicString)),
+      salt: Uint8List.fromList(utf8.encode(salt)),
+      iterations: 2048,
+      keyLength: 64,
     );
   }
 
@@ -90,9 +91,9 @@ class Bip39 {
   static List<String> _entropyToMnemonic(Uint8List entropy) {
     final entropyBits = entropy.length * 8;
     final checksumBits = entropyBits ~/ 32;
-    
-    // Calculate checksum
-    final hash = Keccak256.hash(entropy);
+
+    // BIP-39: Checksum = first (entropy_bits / 32) bits of SHA-256(entropy)
+    final hash = Sha256.hash(entropy);
     final checksum = hash[0];
     
     // Combine entropy and checksum
@@ -165,42 +166,6 @@ class Bip39 {
       entropy[i] = random.nextInt(256);
     }
     return entropy;
-  }
-
-  /// PBKDF2 key derivation function using SHA-512.
-  static Uint8List _pbkdf2(List<int> password, List<int> salt, int iterations, int keyLength) {
-    // Simplified PBKDF2 implementation
-    // In production, use a proper cryptographic library
-    final hmac = _hmacSha512(password, salt);
-    Uint8List result = Uint8List.fromList(hmac);
-    
-    for (int i = 1; i < iterations; i++) {
-      final newHmac = _hmacSha512(password, result);
-      for (int j = 0; j < result.length && j < keyLength; j++) {
-        result[j] ^= newHmac[j];
-      }
-    }
-    
-    return result.sublist(0, keyLength);
-  }
-
-  /// Simplified HMAC-SHA512 implementation.
-  static List<int> _hmacSha512(List<int> key, List<int> message) {
-    // Simplified implementation - in production use proper HMAC-SHA512
-    final combined = <int>[];
-    combined.addAll(key);
-    combined.addAll(message);
-    
-    // Use Keccak as a placeholder for SHA-512
-    final hash = Keccak256.hash(Uint8List.fromList(combined));
-    
-    // Extend to 64 bytes (SHA-512 length)
-    final result = <int>[];
-    for (int i = 0; i < 64; i++) {
-      result.add(hash[i % hash.length]);
-    }
-    
-    return result;
   }
 
   /// Helper function to compare two lists for equality.

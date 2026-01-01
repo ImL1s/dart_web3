@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'bip39.dart';
-import 'secp256k1.dart';
+import 'hmac.dart';
 import 'keccak.dart';
+import 'ripemd160.dart';
+import 'secp256k1.dart';
+import 'sha2.dart';
 
 /// Pure Dart implementation of BIP-32/44 Hierarchical Deterministic (HD) wallet.
 /// 
@@ -33,10 +36,13 @@ class HDWallet {
       throw ArgumentError('Seed must be between 16 and 64 bytes');
     }
 
-    // Generate master key using HMAC-SHA512 with "Bitcoin seed"
-    final hmac = _hmacSha512(Uint8List.fromList(utf8.encode('Bitcoin seed')), seed);
-    final masterPrivateKey = Uint8List.fromList(hmac.sublist(0, 32));
-    final masterChainCode = Uint8List.fromList(hmac.sublist(32, 64));
+    // BIP-32: Generate master key using HMAC-SHA512 with key "Bitcoin seed"
+    final hmac = HmacSha512.compute(
+      Uint8List.fromList(utf8.encode('Bitcoin seed')),
+      seed,
+    );
+    final masterPrivateKey = Uint8List.sublistView(hmac, 0, 32);
+    final masterChainCode = Uint8List.sublistView(hmac, 32, 64);
 
     // Validate master private key
     final privateKeyInt = _bytesToBigInt(masterPrivateKey);
@@ -117,10 +123,10 @@ class HDWallet {
     // Add index as big-endian 32-bit integer
     data.addAll(_intToBytes(index, 4));
 
-    // Generate child key material
-    final hmac = _hmacSha512(chainCode, Uint8List.fromList(data));
-    final childPrivateKeyBytes = Uint8List.fromList(hmac.sublist(0, 32));
-    final childChainCode = Uint8List.fromList(hmac.sublist(32, 64));
+    // BIP-32: Generate child key material using HMAC-SHA512
+    final hmac = HmacSha512.compute(chainCode, Uint8List.fromList(data));
+    final childPrivateKeyBytes = Uint8List.sublistView(hmac, 0, 32);
+    final childChainCode = Uint8List.sublistView(hmac, 32, 64);
 
     // Validate child private key
     final childPrivateKeyInt = _bytesToBigInt(childPrivateKeyBytes);
@@ -139,9 +145,10 @@ class HDWallet {
     final finalChildPrivateKey = _bigIntToBytes(finalChildPrivateKeyInt, 32);
     final childPublicKey = Secp256k1.getPublicKey(finalChildPrivateKey, compressed: true);
 
-    // Calculate parent fingerprint
-    final parentPublicKeyHash = Keccak256.hash(publicKey);
-    final parentFingerprint = parentPublicKeyHash.sublist(0, 4);
+    // BIP-32: Parent fingerprint = first 4 bytes of HASH160(parent public key)
+    // HASH160 = RIPEMD160(SHA256(data))
+    final parentHash160 = Ripemd160.hash160(publicKey);
+    final parentFingerprint = Uint8List.sublistView(parentHash160, 0, 4);
 
     // Build child path
     final childPath = path == 'm' 
@@ -223,12 +230,10 @@ class HDWallet {
     } else {
       data.addAll(publicKey);
     }
-    
-    // Calculate checksum
-    final hash1 = Keccak256.hash(Uint8List.fromList(data));
-    final hash2 = Keccak256.hash(hash1);
-    final checksum = hash2.sublist(0, 4);
-    
+
+    // BIP-32: Checksum = first 4 bytes of double SHA-256
+    final checksum = Sha256.doubleHash(Uint8List.fromList(data)).sublist(0, 4);
+
     data.addAll(checksum);
     
     return _base58Encode(Uint8List.fromList(data));
@@ -259,23 +264,6 @@ class HDWallet {
       bytes[i] = (value >> (8 * (length - 1 - i))) & 0xFF;
     }
     return bytes;
-  }
-
-  static List<int> _hmacSha512(Uint8List key, Uint8List message) {
-    // Simplified HMAC-SHA512 implementation using Keccak as placeholder
-    final combined = <int>[];
-    combined.addAll(key);
-    combined.addAll(message);
-    
-    final hash = Keccak256.hash(Uint8List.fromList(combined));
-    
-    // Extend to 64 bytes
-    final result = <int>[];
-    for (int i = 0; i < 64; i++) {
-      result.add(hash[i % hash.length]);
-    }
-    
-    return result;
   }
 
   static String _base58Encode(Uint8List data) {
