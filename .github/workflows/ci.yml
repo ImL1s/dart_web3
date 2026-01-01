@@ -28,9 +28,20 @@ jobs:
       - name: Run Tests (Core & Essential)
         run: |
           cd dart_web3
-          # Run tests only for packages that have implemented tests (skipping empty skeletons)
+          # Run tests only for packages that have implemented tests
           melos exec \
-            --scope="dart_web3_{core,crypto,abi,provider,signer,chains,client,contract,events,aa,ens,multicall}" \
+            --scope="dart_web3_core" \
+            --scope="dart_web3_crypto" \
+            --scope="dart_web3_abi" \
+            --scope="dart_web3_provider" \
+            --scope="dart_web3_signer" \
+            --scope="dart_web3_chains" \
+            --scope="dart_web3_client" \
+            --scope="dart_web3_contract" \
+            --scope="dart_web3_events" \
+            --scope="dart_web3_aa" \
+            --scope="dart_web3_ens" \
+            --scope="dart_web3_multicall" \
             --concurrency=1 \
             --fail-fast \
             -- dart test
