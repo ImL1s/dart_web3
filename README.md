@@ -151,15 +151,15 @@ graph TD
 | [`dart_web3_aa`](packages/aa) | ERC-4337 Account Abstraction | 5 |
 | [`dart_web3_reown`](packages/reown) | Reown/WalletConnect v2 | 5 |
 | [`dart_web3_swap`](packages/swap) | DEX aggregation | 5 |
-| `dart_web3_bridge` | Cross-chain bridging | 5 |
+| [`dart_web3_bridge`](packages/bridge) | Cross-chain bridging | 5 |
 | [`dart_web3_nft`](packages/nft) | NFT services | 5 |
-| `dart_web3_staking` | Staking services | 5 |
-| `dart_web3_debug` | Debug/Trace API | 5 |
-| `dart_web3_mev` | MEV protection/Flashbots | 5 |
-| `dart_web3_keystone` | Keystone hardware wallet | 6 |
+| [`dart_web3_staking`](packages/staking) | Staking services | 5 |
+| [`dart_web3_debug`](packages/debug) | Debug/Trace API | 5 |
+| [`dart_web3_mev`](packages/mev) | MEV protection/Flashbots | 5 |
+| [`dart_web3_keystone`](packages/hardware/keystone) | Keystone hardware wallet | 6 |
 | [`dart_web3_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
-| `dart_web3_trezor` | Trezor hardware wallet | 6 |
-| `dart_web3_mpc` | MPC wallet support | 6 |
+| [`dart_web3_trezor`](packages/hardware/trezor) | Trezor hardware wallet | 6 |
+| [`dart_web3_mpc`](packages/hardware/mpc) | MPC wallet support | 6 |
 | [`dart_web3_solana`](packages/extensions/solana) | Solana extension | 7 |
 | [`dart_web3_polkadot`](packages/extensions/polkadot) | Polkadot extension | 7 |
 | [`dart_web3_tron`](packages/extensions/tron) | Tron extension | 7 |
