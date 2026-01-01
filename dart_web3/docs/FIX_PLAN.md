@@ -40,6 +40,54 @@
 
 ### 1. ABI 模組問題
 
+#### 1.0 [CRITICAL] Tuple/Array 靜態大小計算錯誤 (Gemini 3 Pro 發現)
+
+**問題描述：**
+`AbiTuple.encode` 假設每個 component 佔用 32 bytes，但靜態 struct（如 `(uint256, uint256)`）實際佔用 64 bytes。
+
+**受影響位置：**
+- `types.dart:393` - `var currentOffset = components.length * 32;`
+- `types.dart:291` - AbiArray 有相同問題
+
+**權威來源（Solidity ABI Spec）：**
+> For static types, the head contains the value directly. For tuples with static components, the components are encoded in-place.
+
+**失敗案例：**
+```dart
+// 編碼 ((uint256, uint256), string)
+// 當前: offset = 2 * 32 = 64 (錯誤！)
+// 正確: offset = 64 + 32 = 96 (靜態 struct 64 + string offset 32)
+```
+
+**修復方案：**
+```dart
+// 1. 添加 getStaticSize() 方法到 AbiType
+abstract class AbiType {
+  int getStaticSize() => 32; // 默認 32 bytes
+}
+
+// 2. Override in AbiTuple
+@override
+int getStaticSize() {
+  if (isDynamic) return 32; // 動態類型只是 offset pointer
+  return components.fold(0, (sum, c) => sum + c.getStaticSize());
+}
+
+// 3. Override in AbiArray
+@override
+int getStaticSize() {
+  if (isDynamic) return 32;
+  return length! * elementType.getStaticSize();
+}
+
+// 4. 修正 AbiTuple.encode
+var currentOffset = components.fold<int>(
+  0, (sum, c) => sum + (c.isDynamic ? 32 : c.getStaticSize())
+);
+```
+
+---
+
 #### 1.1 [HIGH] UTF-16 vs UTF-8 字串編碼
 
 **問題描述：**
@@ -313,20 +361,34 @@ Future<Uint8List> signHash(String hash) async {
 
 ## 修復優先級
 
-| 優先級 | 模組 | 問題 | 預估工作量 |
-|--------|------|------|------------|
-| **P0** | ABI | UTF-8 編碼 | 2 小時 |
-| **P1** | ABI | Tuple 解析 | 2 小時 |
-| **P1** | ABI | 簽名解析 | 1 小時 |
-| **P2** | AA | CREATE2 地址 | 2 小時 |
-| **P2** | AA | signUserOperation | 1 小時 |
-| **P3** | AA | UserOpHash 編碼 | 4 小時 |
-| **P3** | AA | EntryPoint calldata | 4 小時 |
+| 優先級 | 模組 | 問題 | 嚴重度 | 預估工作量 | 發現來源 |
+|--------|------|------|--------|------------|----------|
+| **P0** | ABI | Tuple 靜態大小計算 | CRITICAL | 2 小時 | Gemini 3 Pro |
+| **P0** | ABI | UTF-8 編碼 | HIGH | 2 小時 | Codex Review |
+| **P1** | ABI | Tuple 解析 (Event/Error) | MEDIUM | 2 小時 | Codex Review |
+| **P1** | ABI | 簽名解析 (嵌套括號) | MEDIUM | 1 小時 | Codex Review |
+| **P2** | AA | CREATE2 地址 | HIGH | 2 小時 | Codex Review |
+| **P2** | AA | signUserOperation | MEDIUM | 1 小時 | Codex Review |
+| **P3** | AA | UserOpHash 編碼 | CRITICAL | 4 小時 | Codex Review |
+| **P3** | AA | EntryPoint calldata | CRITICAL | 4 小時 | Codex Review |
 
 **建議順序：**
 1. 先修復 ABI 模組（AA 模組依賴 ABI 編碼）
+   - P0: Tuple 靜態大小 + UTF-8（核心編碼正確性）
+   - P1: Tuple 解析 + 簽名解析（功能完整性）
 2. 再修復 AA 簡單問題（CREATE2、簽名）
 3. 最後實現 AA 複雜編碼（UserOpHash、EntryPoint）
+
+---
+
+## 審查來源
+
+| 來源 | 發現問題數 | 關鍵發現 |
+|------|------------|----------|
+| Claude (手動審查) | 6 | BIP-39/32 加密演算法 (已修復) |
+| Codex Review | 9 | ABI UTF-8, AA ERC-4337 |
+| Gemini 3 Pro | 1 | **Tuple 靜態大小計算 (CRITICAL)** |
+| Context7 | - | 權威文檔驗證 |
 
 ---
 
