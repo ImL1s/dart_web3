@@ -157,13 +157,13 @@ graph TD
 | `dart_web3_debug` | Debug/Trace API | 5 |
 | `dart_web3_mev` | MEV protection/Flashbots | 5 |
 | `dart_web3_keystone` | Keystone hardware wallet | 6 |
-| `dart_web3_ledger` | Ledger hardware wallet | 6 |
+| [`dart_web3_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
 | `dart_web3_trezor` | Trezor hardware wallet | 6 |
 | `dart_web3_mpc` | MPC wallet support | 6 |
-| `dart_web3_solana` | Solana extension | 7 |
-| `dart_web3_polkadot` | Polkadot extension | 7 |
-| `dart_web3_tron` | Tron extension | 7 |
-| `dart_web3_ton` | TON extension | 7 |
+| [`dart_web3_solana`](packages/extensions/solana) | Solana extension | 7 |
+| [`dart_web3_polkadot`](packages/extensions/polkadot) | Polkadot extension | 7 |
+| [`dart_web3_tron`](packages/extensions/tron) | Tron extension | 7 |
+| [`dart_web3_ton`](packages/extensions/ton) | TON extension | 7 |
 | [`dart_web3_bitcoin`](packages/extensions/bitcoin) | Bitcoin extension | 7 |
 
 ## Development
