@@ -413,7 +413,19 @@ class ResilientWebSocketTransport implements Transport {
     final response = await request(method, params);
     final subscriptionId = response['result'] as String;
 
-    final controller = StreamController<Map<String, dynamic>>();
+    // Track whether cleanup has been performed to avoid double cleanup
+    var cleanedUp = false;
+
+    Future<void> cleanup() async {
+      if (cleanedUp) return;
+      cleanedUp = true;
+      await unsubscribe(subscriptionId);
+    }
+
+    final controller = StreamController<Map<String, dynamic>>(
+      onCancel: cleanup,
+    );
+
     _subscriptions[subscriptionId] = _SubscriptionInfo(
       method: method,
       params: params,
@@ -425,7 +437,7 @@ class ResilientWebSocketTransport implements Transport {
         yield data;
       }
     } finally {
-      await unsubscribe(subscriptionId);
+      await cleanup();
     }
   }
 

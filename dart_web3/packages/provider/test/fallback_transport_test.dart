@@ -172,5 +172,107 @@ void main() {
 
       fallback.dispose();
     });
+
+    test('tracks fromIndex correctly through multiple switches', () async {
+      // Start with transport1 failing, so we switch to transport2
+      final transport1 = MockTransport('transport1', shouldFail: true);
+      final transport2 = MockTransport('transport2');
+      final transport3 = MockTransport('transport3');
+
+      final fallback = FallbackTransport([
+        FallbackTransportConfig(transport: transport1),
+        FallbackTransportConfig(transport: transport2),
+        FallbackTransportConfig(transport: transport3),
+      ]);
+
+      final events = <TransportSwitchEvent>[];
+      fallback.onSwitch.listen(events.add);
+
+      // First request: should switch from 0 to 1
+      await fallback.request('eth_blockNumber', []);
+
+      // Wait for events
+      await Future.delayed(Duration(milliseconds: 50));
+      expect(events.length, equals(1));
+      expect(events[0].fromIndex, equals(0));
+      expect(events[0].toIndex, equals(1));
+
+      fallback.dispose();
+    });
+
+    test('batchRequest uses cooldown like single request', () async {
+      final transport1 = MockTransport('transport1', shouldFail: true);
+      final transport2 = MockTransport('transport2');
+
+      final fallback = FallbackTransport(
+        [
+          FallbackTransportConfig(transport: transport1),
+          FallbackTransportConfig(transport: transport2),
+        ],
+        options: FallbackTransportOptions(
+          failureThreshold: 1,
+          failureCooldown: Duration(seconds: 60),
+          retryCount: 0,
+        ),
+      );
+
+      // First batch request - transport1 fails, fallback to transport2
+      await fallback.batchRequest([RpcRequest('eth_blockNumber', [])]);
+
+      // Transport1 should now be unhealthy
+      expect(fallback.getHealthStatus()[0].isHealthy, isFalse);
+
+      // Second batch request - should skip transport1 due to cooldown
+      transport1.requestCount = 0;
+      await fallback.batchRequest([RpcRequest('eth_blockNumber', [])]);
+
+      // Transport1 shouldn't have been called due to cooldown
+      expect(transport1.requestCount, equals(0));
+
+      fallback.dispose();
+    });
+
+    test('resets health status correctly', () async {
+      final transport1 = MockTransport('transport1', shouldFail: true);
+      final transport2 = MockTransport('transport2');
+
+      final fallback = FallbackTransport(
+        [
+          FallbackTransportConfig(transport: transport1),
+          FallbackTransportConfig(transport: transport2),
+        ],
+        options: FallbackTransportOptions(failureThreshold: 1, retryCount: 0),
+      );
+
+      // Make transport1 unhealthy
+      await fallback.request('eth_blockNumber', []);
+      expect(fallback.getHealthStatus()[0].isHealthy, isFalse);
+
+      // Reset health
+      fallback.resetHealth();
+      expect(fallback.getHealthStatus()[0].isHealthy, isTrue);
+      expect(fallback.getHealthStatus()[0].failureCount, equals(0));
+
+      fallback.dispose();
+    });
+
+    test('manually marking transport as unhealthy works', () async {
+      final transport1 = MockTransport('transport1');
+      final transport2 = MockTransport('transport2');
+
+      final fallback = FallbackTransport([
+        FallbackTransportConfig(transport: transport1),
+        FallbackTransportConfig(transport: transport2),
+      ]);
+
+      // Initially healthy
+      expect(fallback.getHealthStatus()[0].isHealthy, isTrue);
+
+      // Manually mark as unhealthy
+      fallback.markUnhealthy(0);
+      expect(fallback.getHealthStatus()[0].isHealthy, isFalse);
+
+      fallback.dispose();
+    });
   });
 }

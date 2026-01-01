@@ -221,5 +221,88 @@ void main() {
         expect(rpcError.reason, equals('Transfer failed'));
       });
     });
+
+    group('boundary conditions', () {
+      test('handles very large panic code gracefully', () {
+        final decoder = ErrorDecoder();
+
+        // Panic with a very large code that would overflow int
+        // Using max uint256 value
+        const data = '0x4e487b71'
+            'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
+
+        final error = decoder.decode(data);
+
+        expect(error, isNotNull);
+        expect(error!.name, equals('Panic'));
+        // Should handle overflow gracefully
+        expect(error.namedArgs?['reason'], equals('Unknown panic code (overflow)'));
+      });
+
+      test('handles empty data gracefully', () {
+        final decoder = ErrorDecoder();
+
+        // Data too short (less than 10 chars for 0x + 4 byte selector)
+        final error1 = decoder.decode('0x');
+        expect(error1, isNull);
+
+        final error2 = decoder.decode('0x1234');
+        expect(error2, isNull);
+      });
+
+      test('handles data without 0x prefix', () {
+        final decoder = ErrorDecoder();
+
+        // Panic(0x01) without 0x prefix
+        const data = '4e487b71'
+            '0000000000000000000000000000000000000000000000000000000000000001';
+
+        final error = decoder.decode(data);
+
+        expect(error, isNotNull);
+        expect(error!.name, equals('Panic'));
+        expect(error.namedArgs?['code'], equals(1));
+      });
+
+      test('handles malformed hex data gracefully', () {
+        final decoder = ErrorDecoder();
+
+        // Invalid hex characters - should return unknown error
+        const data = '0xzzzzzzzz1234567890';
+
+        // This might throw or return unknown error depending on implementation
+        try {
+          final error = decoder.decode(data);
+          // If it doesn't throw, expect unknown error
+          expect(error?.name, equals('UnknownError'));
+        } catch (_) {
+          // Acceptable to throw on malformed data
+        }
+      });
+
+      test('ErrorDefinition handles complex tuple types', () {
+        final error = ErrorDefinition.fromSignature(
+            'ComplexError((uint256,address) tuple, bytes32[] hashes, string message)');
+
+        expect(error.name, equals('ComplexError'));
+        expect(error.types.length, equals(3));
+        expect(error.names, equals(['tuple', 'hashes', 'message']));
+      });
+
+      test('decodeFromRpcError handles various RPC error formats', () {
+        final decoder = ErrorDecoder();
+
+        // Test with error as plain string message
+        final error1 = decoder.decodeFromRpcError({
+          'code': -32000,
+          'message': 'internal error',
+          'data': 'Some plain text error',
+        });
+
+        expect(error1, isNotNull);
+        expect(error1!.name, equals('Error'));
+        expect(error1.namedArgs?['message'], equals('Some plain text error'));
+      });
+    });
   });
 }

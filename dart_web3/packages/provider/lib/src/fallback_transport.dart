@@ -108,6 +108,9 @@ class FallbackTransport implements Transport {
   final List<List<int>> _latencySamples = [];
   bool _disposed = false;
 
+  /// Index of the last successful transport (for tracking switch events).
+  int _lastSuccessfulIndex = 0;
+
   /// Stream of transport switch events.
   final _switchController = StreamController<TransportSwitchEvent>.broadcast();
 
@@ -264,13 +267,14 @@ class FallbackTransport implements Transport {
           config.isHealthy = true;
           config.failureCount = 0;
 
-          // Emit switch event if not first transport
-          if (i > 0) {
+          // Emit switch event if transport changed
+          if (i != _lastSuccessfulIndex) {
             _switchController.add(TransportSwitchEvent(
-              fromIndex: 0,
+              fromIndex: _lastSuccessfulIndex,
               toIndex: i,
-              reason: 'Fallback due to primary failure',
+              reason: 'Fallback due to transport failure',
             ));
+            _lastSuccessfulIndex = i;
           }
 
           return result;
@@ -305,13 +309,38 @@ class FallbackTransport implements Transport {
     int retryAttempt = 0;
 
     while (retryAttempt <= options.retryCount) {
-      for (final config in _configs) {
+      for (var i = 0; i < _configs.length; i++) {
+        final config = _configs[i];
+
+        // Skip unhealthy transports unless all are unhealthy
         if (!config.isHealthy && _configs.any((c) => c.isHealthy)) {
-          continue;
+          // Check if cooldown has passed
+          if (config.lastHealthCheck != null) {
+            final elapsed = DateTime.now().difference(config.lastHealthCheck!);
+            if (elapsed < options.failureCooldown) {
+              continue;
+            }
+          }
         }
 
         try {
-          return await config.transport.batchRequest(requests);
+          final result = await config.transport.batchRequest(requests);
+
+          // Update health status
+          config.isHealthy = true;
+          config.failureCount = 0;
+
+          // Emit switch event if transport changed
+          if (i != _lastSuccessfulIndex) {
+            _switchController.add(TransportSwitchEvent(
+              fromIndex: _lastSuccessfulIndex,
+              toIndex: i,
+              reason: 'Fallback due to transport failure',
+            ));
+            _lastSuccessfulIndex = i;
+          }
+
+          return result;
         } catch (e) {
           lastError = e is Exception ? e : Exception(e.toString());
           config.failureCount++;

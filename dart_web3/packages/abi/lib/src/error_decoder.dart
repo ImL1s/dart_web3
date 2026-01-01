@@ -254,12 +254,20 @@ class ErrorDecoder {
     if (selector == panicSelector) {
       try {
         final decoded = AbiDecoder.decode([AbiUint(256)], errorData);
-        final code = (decoded[0] as BigInt).toInt();
+        final codeValue = decoded[0] as BigInt;
+        // Safe conversion: standard panic codes are small (0x00-0x51),
+        // but we handle larger values gracefully
+        final code = codeValue <= BigInt.from(0x7FFFFFFF)
+            ? codeValue.toInt()
+            : -1; // Use -1 for unknown/overflow codes
         return DecodedError(
           name: 'Panic',
           selector: selector,
           args: decoded,
-          namedArgs: {'code': code, 'reason': _panicReason(code)},
+          namedArgs: {
+            'code': code >= 0 ? code : codeValue.toString(),
+            'reason': code >= 0 ? _panicReason(code) : 'Unknown panic code (overflow)',
+          },
           data: data,
         );
       } catch (_) {
