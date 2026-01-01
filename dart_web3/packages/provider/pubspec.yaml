@@ -11,7 +11,7 @@ dependencies:
   dart_web3_core:
     path: ../core
   http: ^1.2.0
-  web_socket_channel: ^3.0.0
+  web_socket_channel: ">=2.4.0 <4.0.0"
 
 dev_dependencies:
   lints: ^5.0.0
