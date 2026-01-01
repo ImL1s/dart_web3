@@ -137,34 +137,34 @@ graph TD
 
 | Package | Description | Level |
 |---------|-------------|-------|
-| [`dart_web3_core`](packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
-| [`dart_web3_crypto`](packages/crypto) | Cryptography (secp256k1, keccak, BIP-32/39/44) | 1 |
-| [`dart_web3_abi`](packages/abi) | ABI encoding/decoding | 1 |
-| [`dart_web3_provider`](packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
-| [`dart_web3_signer`](packages/signer) | Signer abstraction | 2 |
-| [`dart_web3_chains`](packages/chains) | Chain configurations | 2 |
-| [`dart_web3_client`](packages/client) | PublicClient/WalletClient | 3 |
-| [`dart_web3_contract`](packages/contract) | Contract abstraction | 3 |
-| [`dart_web3_events`](packages/events) | Event subscription | 3 |
-| [`dart_web3_multicall`](packages/multicall) | Multicall support | 4 |
-| [`dart_web3_ens`](packages/ens) | ENS resolution | 4 |
-| [`dart_web3_aa`](packages/aa) | ERC-4337 Account Abstraction | 5 |
-| [`dart_web3_reown`](packages/reown) | Reown/WalletConnect v2 | 5 |
-| [`dart_web3_swap`](packages/swap) | DEX aggregation | 5 |
-| [`dart_web3_bridge`](packages/bridge) | Cross-chain bridging | 5 |
-| [`dart_web3_nft`](packages/nft) | NFT services | 5 |
-| [`dart_web3_staking`](packages/staking) | Staking services | 5 |
-| [`dart_web3_debug`](packages/debug) | Debug/Trace API | 5 |
-| [`dart_web3_mev`](packages/mev) | MEV protection/Flashbots | 5 |
-| [`dart_web3_keystone`](packages/hardware/keystone) | Keystone hardware wallet | 6 |
-| [`dart_web3_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
-| [`dart_web3_trezor`](packages/hardware/trezor) | Trezor hardware wallet | 6 |
-| [`dart_web3_mpc`](packages/hardware/mpc) | MPC wallet support | 6 |
-| [`dart_web3_solana`](packages/extensions/solana) | Solana extension | 7 |
-| [`dart_web3_polkadot`](packages/extensions/polkadot) | Polkadot extension | 7 |
-| [`dart_web3_tron`](packages/extensions/tron) | Tron extension | 7 |
-| [`dart_web3_ton`](packages/extensions/ton) | TON extension | 7 |
-| [`dart_web3_bitcoin`](packages/extensions/bitcoin) | Bitcoin extension | 7 |
+| [`dart_web3_core`](dart_web3/packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
+| [`dart_web3_crypto`](dart_web3/packages/crypto) | Cryptography (secp256k1, keccak, BIP-32/39/44) | 1 |
+| [`dart_web3_abi`](dart_web3/packages/abi) | ABI encoding/decoding | 1 |
+| [`dart_web3_provider`](dart_web3/packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
+| [`dart_web3_signer`](dart_web3/packages/signer) | Signer abstraction | 2 |
+| [`dart_web3_chains`](dart_web3/packages/chains) | Chain configurations | 2 |
+| [`dart_web3_client`](dart_web3/packages/client) | PublicClient/WalletClient | 3 |
+| [`dart_web3_contract`](dart_web3/packages/contract) | Contract abstraction | 3 |
+| [`dart_web3_events`](dart_web3/packages/events) | Event subscription | 3 |
+| [`dart_web3_multicall`](dart_web3/packages/multicall) | Multicall support | 4 |
+| [`dart_web3_ens`](dart_web3/packages/ens) | ENS resolution | 4 |
+| [`dart_web3_aa`](dart_web3/packages/aa) | ERC-4337 Account Abstraction | 5 |
+| [`dart_web3_reown`](dart_web3/packages/reown) | Reown/WalletConnect v2 | 5 |
+| [`dart_web3_swap`](dart_web3/packages/swap) | DEX aggregation | 5 |
+| [`dart_web3_bridge`](dart_web3/packages/bridge) | Cross-chain bridging | 5 |
+| [`dart_web3_nft`](dart_web3/packages/nft) | NFT services | 5 |
+| [`dart_web3_staking`](dart_web3/packages/staking) | Staking services | 5 |
+| [`dart_web3_debug`](dart_web3/packages/debug) | Debug/Trace API | 5 |
+| [`dart_web3_mev`](dart_web3/packages/mev) | MEV protection/Flashbots | 5 |
+| [`dart_web3_keystone`](dart_web3/packages/hardware/keystone) | Keystone hardware wallet | 6 |
+| [`dart_web3_ledger`](dart_web3/packages/hardware/ledger) | Ledger hardware wallet | 6 |
+| [`dart_web3_trezor`](dart_web3/packages/hardware/trezor) | Trezor hardware wallet | 6 |
+| [`dart_web3_mpc`](dart_web3/packages/hardware/mpc) | MPC wallet support | 6 |
+| [`dart_web3_solana`](dart_web3/packages/extensions/solana) | Solana extension | 7 |
+| [`dart_web3_polkadot`](dart_web3/packages/extensions/polkadot) | Polkadot extension | 7 |
+| [`dart_web3_tron`](dart_web3/packages/extensions/tron) | Tron extension | 7 |
+| [`dart_web3_ton`](dart_web3/packages/extensions/ton) | TON extension | 7 |
+| [`dart_web3_bitcoin`](dart_web3/packages/extensions/bitcoin) | Bitcoin extension | 7 |
 
 ## Development
 
