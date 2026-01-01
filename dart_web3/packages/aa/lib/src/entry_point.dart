@@ -658,9 +658,92 @@ class ValidationResult {
     this.aggregatorInfo,
   });
 
+  /// Decode ValidationResult from ABI-encoded bytes.
+  ///
+  /// ValidationResult struct (ERC-4337):
+  ///   - ReturnInfo returnInfo (tuple)
+  ///   - StakeInfo senderInfo (tuple)
+  ///   - StakeInfo factoryInfo (tuple)
+  ///   - StakeInfo paymasterInfo (tuple)
   factory ValidationResult.fromBytes(Uint8List data) {
-    // TODO: Decode validation result from bytes
-    // This is a complex ABI decoding task
+    if (data.isEmpty) {
+      return ValidationResult._empty();
+    }
+
+    try {
+      // Define the ValidationResult tuple type
+      // ReturnInfo: (uint256 preOpGas, uint256 prefund, bool sigFailed, uint48 validAfter, uint48 validUntil, bytes paymasterContext)
+      final returnInfoType = AbiTuple([
+        AbiUint(256),  // preOpGas
+        AbiUint(256),  // prefund
+        AbiUint(256),  // accountValidationData (packed: sigFailed, validUntil, validAfter)
+        AbiBytes(),    // paymasterContext
+      ]);
+
+      // StakeInfo: (uint256 stake, uint256 unstakeDelaySec)
+      final stakeInfoType = AbiTuple([
+        AbiUint(256),  // stake
+        AbiUint(256),  // unstakeDelaySec
+      ]);
+
+      // Full ValidationResult tuple
+      final validationResultType = AbiTuple([
+        returnInfoType,   // returnInfo
+        stakeInfoType,    // senderInfo
+        stakeInfoType,    // factoryInfo
+        stakeInfoType,    // paymasterInfo
+      ]);
+
+      final (decodedValue, _) = validationResultType.decode(data, 0);
+      final values = decodedValue as List<dynamic>;
+
+      // Parse ReturnInfo
+      final returnInfoValues = values[0] as List<dynamic>;
+      final preOpGas = returnInfoValues[0] as BigInt;
+      final prefund = returnInfoValues[1] as BigInt;
+      final accountValidationData = returnInfoValues[2] as BigInt;
+      final paymasterContext = returnInfoValues[3] as Uint8List;
+
+      // Unpack accountValidationData: sigFailed (1 bit) | validUntil (48 bits) | validAfter (48 bits)
+      final sigFailed = (accountValidationData >> 160) & BigInt.one == BigInt.one;
+      final validUntil = (accountValidationData >> 48) & BigInt.parse('ffffffffffff', radix: 16);
+      final validAfter = accountValidationData & BigInt.parse('ffffffffffff', radix: 16);
+
+      // Parse StakeInfo structs
+      final senderInfoValues = values[1] as List<dynamic>;
+      final factoryInfoValues = values[2] as List<dynamic>;
+      final paymasterInfoValues = values[3] as List<dynamic>;
+
+      return ValidationResult(
+        returnInfo: ReturnInfo(
+          preOpGas: preOpGas,
+          prefund: prefund,
+          sigFailed: sigFailed,
+          validAfter: validAfter,
+          validUntil: validUntil,
+          paymasterContext: HexUtils.encode(paymasterContext),
+        ),
+        senderInfo: StakeInfo(
+          stake: senderInfoValues[0] as BigInt,
+          unstakeDelaySec: senderInfoValues[1] as BigInt,
+        ),
+        factoryInfo: StakeInfo(
+          stake: factoryInfoValues[0] as BigInt,
+          unstakeDelaySec: factoryInfoValues[1] as BigInt,
+        ),
+        paymasterInfo: StakeInfo(
+          stake: paymasterInfoValues[0] as BigInt,
+          unstakeDelaySec: paymasterInfoValues[1] as BigInt,
+        ),
+      );
+    } catch (e) {
+      // If decoding fails, return empty result
+      return ValidationResult._empty();
+    }
+  }
+
+  /// Creates an empty ValidationResult for error cases.
+  factory ValidationResult._empty() {
     return ValidationResult(
       returnInfo: ReturnInfo(
         preOpGas: BigInt.zero,
@@ -753,8 +836,50 @@ class DepositInfo {
     required this.withdrawTime,
   });
 
+  /// Decode DepositInfo from ABI-encoded bytes.
+  ///
+  /// DepositInfo struct (ERC-4337):
+  ///   - uint112 deposit
+  ///   - bool staked
+  ///   - uint112 stake
+  ///   - uint32 unstakeDelaySec
+  ///   - uint48 withdrawTime
+  ///
+  /// Note: The values are typically returned as uint256 padded in ABI encoding.
   factory DepositInfo.fromBytes(Uint8List data) {
-    // TODO: Decode deposit info from bytes
+    if (data.isEmpty) {
+      return DepositInfo._empty();
+    }
+
+    try {
+      // DepositInfo is returned as a tuple with 5 fields
+      // In ABI encoding, each field is padded to 32 bytes
+      final depositInfoType = AbiTuple([
+        AbiUint(256),  // deposit (uint112 padded)
+        AbiUint(256),  // staked (bool as uint)
+        AbiUint(256),  // stake (uint112 padded)
+        AbiUint(256),  // unstakeDelaySec (uint32 padded)
+        AbiUint(256),  // withdrawTime (uint48 padded)
+      ]);
+
+      final (decodedValue, _) = depositInfoType.decode(data, 0);
+      final values = decodedValue as List<dynamic>;
+
+      return DepositInfo(
+        deposit: values[0] as BigInt,
+        staked: (values[1] as BigInt) != BigInt.zero,
+        stake: values[2] as BigInt,
+        unstakeDelaySec: values[3] as BigInt,
+        withdrawTime: values[4] as BigInt,
+      );
+    } catch (e) {
+      // If decoding fails, return empty result
+      return DepositInfo._empty();
+    }
+  }
+
+  /// Creates an empty DepositInfo for error cases.
+  factory DepositInfo._empty() {
     return DepositInfo(
       deposit: BigInt.zero,
       staked: false,

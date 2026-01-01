@@ -75,6 +75,16 @@ class PrivateKeySigner implements Signer {
   }
 
   @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    // Sign raw hash directly without any prefix
+    // Used for ERC-4337 UserOperation signing
+    if (hash.length != 32) {
+      throw ArgumentError('Hash must be exactly 32 bytes');
+    }
+    return Secp256k1.sign(hash, privateKey);
+  }
+
+  @override
   Future<Uint8List> signTypedData(TypedData typedData) async {
     final hash = typedData.hash();
     return Secp256k1.sign(hash, privateKey);

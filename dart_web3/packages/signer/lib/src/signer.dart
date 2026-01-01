@@ -15,7 +15,20 @@ abstract class Signer {
   Future<Uint8List> signTransaction(TransactionRequest transaction);
 
   /// Signs a personal message (EIP-191).
+  ///
+  /// This method adds the EIP-191 prefix before signing:
+  /// `\x19Ethereum Signed Message:\n{length}{message}`
   Future<Uint8List> signMessage(String message);
+
+  /// Signs a raw hash directly without any prefix.
+  ///
+  /// Use this for:
+  /// - ERC-4337 UserOperation signing (userOpHash is already a 32-byte hash)
+  /// - Any case where you need to sign a pre-computed hash
+  ///
+  /// WARNING: The hash should be exactly 32 bytes. This method does NOT add
+  /// any prefix (unlike signMessage which adds EIP-191 prefix).
+  Future<Uint8List> signHash(Uint8List hash);
 
   /// Signs typed data (EIP-712).
   Future<Uint8List> signTypedData(TypedData typedData);

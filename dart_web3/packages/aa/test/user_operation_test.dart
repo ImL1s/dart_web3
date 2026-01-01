@@ -174,24 +174,29 @@ void main() {
         );
       });
 
-      test('should throw for unimplemented EIP-712 hashing (v0.8/v0.9)', () {
-        expect(
-          () => userOp.getUserOpHash(
-            chainId: 1,
-            entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-            entryPointVersion: EntryPointVersion.v08,
-          ),
-          throwsA(isA<UnimplementedError>()),
+      test('should calculate EIP-712 userOpHash for v0.8/v0.9', () {
+        // v0.8 EIP-712 hash calculation
+        final v08Hash = userOp.getUserOpHash(
+          chainId: 1,
+          entryPointAddress: '0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108',
+          entryPointVersion: EntryPointVersion.v08,
         );
+        expect(v08Hash, isNotEmpty);
+        expect(v08Hash.startsWith('0x'), isTrue);
+        expect(v08Hash.length, equals(66)); // 0x + 64 hex chars
 
-        expect(
-          () => userOp.getUserOpHash(
-            chainId: 1,
-            entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-            entryPointVersion: EntryPointVersion.v09,
-          ),
-          throwsA(isA<UnimplementedError>()),
+        // v0.9 EIP-712 hash calculation (uses same algorithm)
+        final v09Hash = userOp.getUserOpHash(
+          chainId: 1,
+          entryPointAddress: '0x433709009B8330FDa32311DF1C2AFA402eD8D009',
+          entryPointVersion: EntryPointVersion.v09,
         );
+        expect(v09Hash, isNotEmpty);
+        expect(v09Hash.startsWith('0x'), isTrue);
+        expect(v09Hash.length, equals(66)); // 0x + 64 hex chars
+
+        // Different EntryPoint addresses should produce different hashes
+        expect(v08Hash, isNot(equals(v09Hash)));
       });
 
       test('should calculate userOpHash for v0.6 and v0.7', () {

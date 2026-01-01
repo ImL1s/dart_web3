@@ -163,8 +163,11 @@ abstract class BaseSmartAccount implements SmartAccount {
       entryPointAddress: _entryPointAddress,
       entryPointVersion: EntryPointVersion.v07, // Default to v0.7
     );
-    
-    final signature = await _owner.signMessage(userOpHash);
+
+    // Use signHash instead of signMessage to avoid EIP-191 prefix.
+    // ERC-4337 requires signing the raw userOpHash directly.
+    final hashBytes = HexUtils.decode(userOpHash);
+    final signature = await _owner.signHash(hashBytes);
     return HexUtils.encode(signature);
   }
 

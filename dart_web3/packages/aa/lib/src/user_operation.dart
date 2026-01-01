@@ -189,11 +189,89 @@ class UserOperation {
     }
   }
 
-  /// Calculate hash for EntryPoint v0.8/v0.9 using EIP-712 typed data
+  /// Calculate hash for EntryPoint v0.8/v0.9 using EIP-712 typed data.
+  ///
+  /// Per EIP-712 and ERC-4337 specification:
+  /// 1. Calculate domain separator with EntryPoint name, version, chainId, address
+  /// 2. Calculate struct hash of PackedUserOperation (excluding signature)
+  /// 3. Final hash = keccak256("\x19\x01" ++ domainSeparator ++ structHash)
   String _getTypedDataHash(int chainId, String entryPointAddress) {
-    // TODO: Implement EIP-712 typed data hashing
-    // This requires the TypedData implementation from the ABI module
-    throw UnimplementedError('EIP-712 typed data hashing not yet implemented');
+    final packedOp = toPackedUserOperation();
+
+    // EIP-712 Domain Separator
+    // keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
+    final domainTypeHash = Keccak256.hash(
+      Uint8List.fromList('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'.codeUnits)
+    );
+
+    // Domain name and version for EntryPoint
+    final nameHash = Keccak256.hash(
+      Uint8List.fromList('Account Abstraction EntryPoint'.codeUnits)
+    );
+    final versionHash = Keccak256.hash(
+      Uint8List.fromList('0.8'.codeUnits)
+    );
+
+    // Encode domain separator: keccak256(abi.encode(typeHash, nameHash, versionHash, chainId, address))
+    final domainEncoded = AbiEncoder.encode([
+      AbiFixedBytes(32),  // typeHash
+      AbiFixedBytes(32),  // nameHash
+      AbiFixedBytes(32),  // versionHash
+      AbiUint(256),       // chainId
+      AbiAddress(),       // verifyingContract
+    ], [
+      domainTypeHash,
+      nameHash,
+      versionHash,
+      BigInt.from(chainId),
+      entryPointAddress,
+    ]);
+    final domainSeparator = Keccak256.hash(domainEncoded);
+
+    // PackedUserOperation type hash (signature excluded)
+    // keccak256("PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)")
+    final userOpTypeHash = Keccak256.hash(
+      Uint8List.fromList('PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)'.codeUnits)
+    );
+
+    // Hash dynamic fields (bytes -> keccak256)
+    final initCodeHash = Keccak256.hash(HexUtils.decode(packedOp.initCode));
+    final callDataHash = Keccak256.hash(HexUtils.decode(packedOp.callData));
+    final paymasterAndDataHash = Keccak256.hash(HexUtils.decode(packedOp.paymasterAndData));
+
+    // Encode struct hash: keccak256(abi.encode(typeHash, fields...))
+    final structEncoded = AbiEncoder.encode([
+      AbiFixedBytes(32),  // typeHash
+      AbiAddress(),       // sender
+      AbiUint(256),       // nonce
+      AbiFixedBytes(32),  // initCodeHash
+      AbiFixedBytes(32),  // callDataHash
+      AbiFixedBytes(32),  // accountGasLimits
+      AbiUint(256),       // preVerificationGas
+      AbiFixedBytes(32),  // gasFees
+      AbiFixedBytes(32),  // paymasterAndDataHash
+    ], [
+      userOpTypeHash,
+      packedOp.sender,
+      packedOp.nonce,
+      initCodeHash,
+      callDataHash,
+      HexUtils.decode(packedOp.accountGasLimits),
+      packedOp.preVerificationGas,
+      HexUtils.decode(packedOp.gasFees),
+      paymasterAndDataHash,
+    ]);
+    final structHash = Keccak256.hash(structEncoded);
+
+    // EIP-712 final hash: keccak256("\x19\x01" ++ domainSeparator ++ structHash)
+    final prefix = Uint8List.fromList([0x19, 0x01]);
+    final finalData = Uint8List.fromList([
+      ...prefix,
+      ...domainSeparator,
+      ...structHash,
+    ]);
+
+    return HexUtils.encode(Keccak256.hash(finalData));
   }
 
   /// Calculate hash for EntryPoint v0.6 using ABI encoding.
