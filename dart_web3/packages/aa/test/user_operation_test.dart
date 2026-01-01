@@ -258,6 +258,91 @@ void main() {
         // Different EntryPoint addresses should produce different hashes
         expect(v06Hash, isNot(equals(v07Hash)));
       });
+
+      test('should produce deterministic userOpHash', () {
+        // Test vector: verify hash is deterministic across multiple calls
+        // This ensures the implementation is stable and reproducible
+        final testOp = UserOperation(
+          sender: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+          nonce: BigInt.zero,
+          callData: '0x',
+          callGasLimit: BigInt.from(21000),
+          verificationGasLimit: BigInt.from(100000),
+          preVerificationGas: BigInt.from(21000),
+          maxFeePerGas: BigInt.from(1000000000),
+          maxPriorityFeePerGas: BigInt.from(1000000000),
+          signature: '0x',
+        );
+
+        const chainId = 1;
+        const entryPoint = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
+
+        // Calculate hash multiple times
+        final hash1 = testOp.getUserOpHash(
+          chainId: chainId,
+          entryPointAddress: entryPoint,
+          entryPointVersion: EntryPointVersion.v06,
+        );
+        final hash2 = testOp.getUserOpHash(
+          chainId: chainId,
+          entryPointAddress: entryPoint,
+          entryPointVersion: EntryPointVersion.v06,
+        );
+
+        // Hashes must be identical for same input
+        expect(hash1, equals(hash2));
+
+        // Different chainId should produce different hash
+        final hash3 = testOp.getUserOpHash(
+          chainId: 5,
+          entryPointAddress: entryPoint,
+          entryPointVersion: EntryPointVersion.v06,
+        );
+        expect(hash1, isNot(equals(hash3)));
+
+        // Different entryPoint should produce different hash
+        final hash4 = testOp.getUserOpHash(
+          chainId: chainId,
+          entryPointAddress: '0x0000000071727De22E5E9d8BAf0edAc6f37da032',
+          entryPointVersion: EntryPointVersion.v06,
+        );
+        expect(hash1, isNot(equals(hash4)));
+      });
+
+      test('should match expected v0.8 EIP-712 hash format', () {
+        // Test vector for v0.8 with EIP-712 structured data
+        // Domain: name="ERC4337", version="1", chainId, verifyingContract=entryPoint
+        final testOp = UserOperation(
+          sender: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+          nonce: BigInt.zero,
+          callData: '0x',
+          callGasLimit: BigInt.from(21000),
+          verificationGasLimit: BigInt.from(100000),
+          preVerificationGas: BigInt.from(21000),
+          maxFeePerGas: BigInt.from(1000000000),
+          maxPriorityFeePerGas: BigInt.from(1000000000),
+          signature: '0x',
+        );
+
+        final v08Hash = testOp.getUserOpHash(
+          chainId: 1,
+          entryPointAddress: '0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108',
+          entryPointVersion: EntryPointVersion.v08,
+        );
+
+        // Verify format
+        expect(v08Hash, isNotEmpty);
+        expect(v08Hash.startsWith('0x'), isTrue);
+        expect(v08Hash.length, equals(66));
+
+        // v0.8 and v0.6 should produce different hashes (different algorithm)
+        final v06Hash = testOp.getUserOpHash(
+          chainId: 1,
+          entryPointAddress: '0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108',
+          entryPointVersion: EntryPointVersion.v06,
+        );
+        expect(v08Hash, isNot(equals(v06Hash)));
+      });
     });
 
     test('should handle equality correctly', () {
