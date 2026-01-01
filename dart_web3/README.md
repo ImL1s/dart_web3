@@ -137,14 +137,14 @@ graph TD
 
 | Package | Description | Level |
 |---------|-------------|-------|
-| `dart_web3_core` | Core utilities (address, BigInt, encoding, RLP) | 0 |
-| `dart_web3_crypto` | Cryptography (secp256k1, keccak, BIP-32/39/44) | 1 |
-| `dart_web3_abi` | ABI encoding/decoding | 1 |
-| `dart_web3_provider` | RPC Provider (HTTP/WebSocket) | 2 |
-| `dart_web3_signer` | Signer abstraction | 2 |
-| `dart_web3_chains` | Chain configurations | 2 |
-| `dart_web3_client` | PublicClient/WalletClient | 3 |
-| `dart_web3_contract` | Contract abstraction | 3 |
+| [`dart_web3_core`](packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
+| [`dart_web3_crypto`](packages/crypto) | Cryptography (secp256k1, keccak, BIP-32/39/44) | 1 |
+| [`dart_web3_abi`](packages/abi) | ABI encoding/decoding | 1 |
+| [`dart_web3_provider`](packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
+| [`dart_web3_signer`](packages/signer) | Signer abstraction | 2 |
+| [`dart_web3_chains`](packages/chains) | Chain configurations | 2 |
+| [`dart_web3_client`](packages/client) | PublicClient/WalletClient | 3 |
+| [`dart_web3_contract`](packages/contract) | Contract abstraction | 3 |
 | `dart_web3_events` | Event subscription | 3 |
 | `dart_web3_multicall` | Multicall support | 4 |
 | `dart_web3_ens` | ENS resolution | 4 |
