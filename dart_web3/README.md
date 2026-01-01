@@ -7,6 +7,7 @@ A comprehensive, pure Dart Web3 SDK for EVM-compatible blockchains and multi-cha
 - **Pure Dart Implementation** - No native dependencies (FFI, C++, Rust bindings), works on all Dart/Flutter platforms
 - **Modular Architecture** - Import only what you need, each package is independently usable
 - **Multi-Chain Support** - Core EVM support with extensions for Solana, Polkadot, Tron, TON, and Bitcoin
+- **Hardware Wallets** - Built-in support for Ledger, Trezor, Keystone, and various MPC solutions
 - **Type-Safe** - Leverages Dart's type system for compile-time error checking
 - **Modern Standards** - Supports EIP-1559, EIP-4844 (Blob), EIP-7702, ERC-4337 (Account Abstraction)
 
@@ -27,6 +28,22 @@ dependencies:
   
   # Or use the meta-package for everything
   dart_web3: ^0.1.0
+```
+
+## Usage Workflow
+
+```mermaid
+graph LR
+    A[Setup] --> B[Core Components]
+    B --> C[Connect & Sign]
+    C --> D[Interact]
+    D --> E[Advanced Features]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#bfb,stroke:#333,stroke-width:2px
+    style D fill:#fbf,stroke:#333,stroke-width:2px
+    style E fill:#fbb,stroke:#333,stroke-width:2px
 ```
 
 ## Quick Start
@@ -62,6 +79,58 @@ void main() async {
   );
   print('Transaction: $txHash');
 }
+```
+
+## Architecture Blueprint
+
+```mermaid
+graph TD
+    subgraph L0 [Layer 0: Core Primitives]
+        Core[dart_web3_core]
+    end
+
+    subgraph L1 [Layer 1: Cryptography & Encoding]
+        Crypto[dart_web3_crypto]
+        ABI[dart_web3_abi]
+    end
+
+    subgraph L2 [Layer 2: Connectivity & Identity]
+        Provider[dart_web3_provider]
+        Signer[dart_web3_signer]
+        Chains[dart_web3_chains]
+    end
+
+    subgraph L3 [Layer 3: Client & Interaction]
+        Client[dart_web3_client]
+        Contract[dart_web3_contract]
+    end
+
+    subgraph L4 [Layer 4: Advanced Features]
+        ENS[dart_web3_ens]
+        AA[dart_web3_aa]
+        NFT[dart_web3_nft]
+        Swap[dart_web3_swap]
+    end
+
+    subgraph Ext [Extensions & Hardware]
+        Solana[dart_web3_solana]
+        Bitcoin[dart_web3_bitcoin]
+        Ledger[dart_web3_ledger]
+    end
+
+    Core --> Crypto
+    Crypto --> ABI
+    ABI --> Provider
+    Provider --> Client
+    Signer --> Client
+    Chains --> Client
+    Client --> Contract
+    
+    Client -.-> ENS
+    Client -.-> AA
+    Client -.-> NFT
+    
+    L2 --- Ext
 ```
 
 ## Package Structure
