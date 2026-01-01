@@ -25,8 +25,12 @@ jobs:
           cd dart_web3
           melos bootstrap
 
-      - name: Run Tests (Monorepo)
+      - name: Run Tests (Core & Essential)
         run: |
           cd dart_web3
-          # Run tests across all packages, concurrency limited to avoid OOM on CI runners
-          melos exec --concurrency=1 --fail-fast -- dart test
+          # Run tests only for packages that have implemented tests (skipping empty skeletons)
+          melos exec \
+            --scope="dart_web3_{core,crypto,abi,provider,signer,chains,client,contract,events,aa,ens,multicall}" \
+            --concurrency=1 \
+            --fail-fast \
+            -- dart test
