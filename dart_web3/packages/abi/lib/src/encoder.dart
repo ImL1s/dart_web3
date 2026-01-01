@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dart_web3_core/dart_web3_core.dart';
@@ -47,14 +48,16 @@ class AbiEncoder {
   }
 
   /// Gets the 4-byte function selector from a signature.
+  /// Per Solidity ABI specification, the signature is UTF-8 encoded before hashing.
   static Uint8List getFunctionSelector(String signature) {
-    final hash = Keccak256.hash(Uint8List.fromList(signature.codeUnits));
+    final hash = Keccak256.hash(Uint8List.fromList(utf8.encode(signature)));
     return BytesUtils.slice(hash, 0, 4);
   }
 
   /// Gets the 32-byte event topic from a signature.
+  /// Per Solidity ABI specification, the signature is UTF-8 encoded before hashing.
   static Uint8List getEventTopic(String signature) {
-    return Keccak256.hash(Uint8List.fromList(signature.codeUnits));
+    return Keccak256.hash(Uint8List.fromList(utf8.encode(signature)));
   }
 
   static Uint8List _encodePacked(AbiType type, dynamic value) {
@@ -85,7 +88,8 @@ class AbiEncoder {
       return value as Uint8List;
     }
     if (type is AbiString) {
-      return Uint8List.fromList((value as String).codeUnits);
+      // Per Solidity ABI specification, strings are UTF-8 encoded
+      return Uint8List.fromList(utf8.encode(value as String));
     }
 
     throw ArgumentError('Unsupported type for packed encoding: ${type.name}');
@@ -105,7 +109,35 @@ class AbiEncoder {
       return [];
     }
 
-    return typesStr.split(',').map(_parseType).toList();
+    // Use bracket-aware splitting to handle nested tuples like "(uint256,string)"
+    return _splitTypes(typesStr).map(_parseType).toList();
+  }
+
+  /// Splits type string by commas, respecting bracket nesting.
+  /// Handles nested tuples like "(uint256,string),address,(bool,bytes)"
+  static List<String> _splitTypes(String typesStr) {
+    final result = <String>[];
+    var depth = 0;
+    var start = 0;
+
+    for (var i = 0; i < typesStr.length; i++) {
+      final char = typesStr[i];
+      if (char == '(' || char == '[') {
+        depth++;
+      } else if (char == ')' || char == ']') {
+        depth--;
+      } else if (char == ',' && depth == 0) {
+        result.add(typesStr.substring(start, i).trim());
+        start = i + 1;
+      }
+    }
+
+    // Add the last segment
+    if (start < typesStr.length) {
+      result.add(typesStr.substring(start).trim());
+    }
+
+    return result;
   }
 
   static AbiType _parseType(String typeStr) {
@@ -129,16 +161,44 @@ class AbiEncoder {
       return AbiFixedBytes(length);
     }
 
-    // Array types
+    // Tuple types - handle "(type1,type2,...)"
+    if (type.startsWith('(') && type.endsWith(')')) {
+      final innerTypes = type.substring(1, type.length - 1);
+      if (innerTypes.isEmpty) {
+        return AbiTuple([]);
+      }
+      final components = _splitTypes(innerTypes).map(_parseType).toList();
+      return AbiTuple(components);
+    }
+
+    // Array types - must check after tuple to handle tuple arrays like "(uint256,string)[]"
     if (type.endsWith('[]')) {
       final elementType = _parseType(type.substring(0, type.length - 2));
       return AbiArray(elementType);
     }
     if (type.contains('[') && type.endsWith(']')) {
-      final bracketStart = type.lastIndexOf('[');
-      final elementType = _parseType(type.substring(0, bracketStart));
-      final length = int.parse(type.substring(bracketStart + 1, type.length - 1));
-      return AbiArray(elementType, length);
+      // Find the last '[' that's not inside parentheses
+      var depth = 0;
+      var bracketStart = -1;
+      for (var i = type.length - 1; i >= 0; i--) {
+        final char = type[i];
+        if (char == ')') depth++;
+        else if (char == '(') depth--;
+        else if (char == '[' && depth == 0) {
+          bracketStart = i;
+          break;
+        }
+      }
+
+      if (bracketStart != -1) {
+        final elementType = _parseType(type.substring(0, bracketStart));
+        final lengthStr = type.substring(bracketStart + 1, type.length - 1);
+        if (lengthStr.isEmpty) {
+          return AbiArray(elementType);
+        }
+        final length = int.parse(lengthStr);
+        return AbiArray(elementType, length);
+      }
     }
 
     throw ArgumentError('Unknown type: $type');

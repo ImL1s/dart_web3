@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 /// Base class for all ABI types.
@@ -15,8 +16,10 @@ abstract class AbiType {
   /// Returns the decoded value and the number of bytes consumed.
   (dynamic, int) decode(Uint8List data, int offset);
 
-  /// Returns the static size in bytes (32 for most types).
-  int getSize() => 32;
+  /// Returns the static size in bytes for encoding.
+  /// For dynamic types, this returns 32 (the offset pointer size).
+  /// For static types, this returns the actual encoded size.
+  int getStaticSize() => 32;
 }
 
 /// Unsigned integer type (uint8 to uint256).
@@ -233,7 +236,7 @@ class AbiBytes extends AbiType {
   }
 }
 
-/// String type.
+/// String type (UTF-8 encoded per Solidity ABI specification).
 class AbiString extends AbiType {
   @override
   String get name => 'string';
@@ -244,14 +247,16 @@ class AbiString extends AbiType {
   @override
   Uint8List encode(dynamic value) {
     final str = value as String;
-    final bytes = Uint8List.fromList(str.codeUnits);
+    // Solidity ABI specification requires UTF-8 encoding for strings
+    final bytes = Uint8List.fromList(utf8.encode(str));
     return AbiBytes().encode(bytes);
   }
 
   @override
   (dynamic, int) decode(Uint8List data, int offset) {
     final (bytes, consumed) = AbiBytes().decode(data, offset);
-    return (String.fromCharCodes(bytes as Uint8List), consumed);
+    // Decode UTF-8 bytes back to string
+    return (utf8.decode(bytes as Uint8List), consumed);
   }
 }
 
@@ -267,6 +272,14 @@ class AbiArray extends AbiType {
 
   @override
   bool get isDynamic => length == null || elementType.isDynamic;
+
+  @override
+  int getStaticSize() {
+    // Dynamic arrays are encoded as offset pointer (32 bytes)
+    if (isDynamic) return 32;
+    // Fixed-size arrays with static elements: length * element size
+    return length! * elementType.getStaticSize();
+  }
 
   @override
   Uint8List encode(dynamic value) {
@@ -285,10 +298,11 @@ class AbiArray extends AbiType {
 
     if (elementType.isDynamic) {
       // Dynamic elements: encode offsets then data
+      // Each offset pointer is 32 bytes, regardless of element size
       final offsets = <int>[];
       final encodedElements = <Uint8List>[];
 
-      var currentOffset = list.length * 32;
+      var currentOffset = list.length * 32; // Offset pointers are always 32 bytes
       for (final element in list) {
         offsets.add(currentOffset);
         final encoded = elementType.encode(element);
@@ -301,7 +315,7 @@ class AbiArray extends AbiType {
       }
       parts.addAll(encodedElements);
     } else {
-      // Static elements: encode directly
+      // Static elements: encode directly (each element uses its full static size)
       for (final element in list) {
         parts.add(elementType.encode(element));
       }
@@ -376,6 +390,14 @@ class AbiTuple extends AbiType {
   bool get isDynamic => components.any((c) => c.isDynamic);
 
   @override
+  int getStaticSize() {
+    // Dynamic tuples are encoded as offset pointer (32 bytes)
+    if (isDynamic) return 32;
+    // Static tuples: sum of all component sizes
+    return components.fold(0, (sum, c) => sum + c.getStaticSize());
+  }
+
+  @override
   Uint8List encode(dynamic value) {
     final values = value is Map ? value.values.toList() : value as List;
 
@@ -390,7 +412,19 @@ class AbiTuple extends AbiType {
       final offsets = <int?>[];
       final encodedElements = <Uint8List>[];
 
-      var currentOffset = components.length * 32;
+      // Calculate head size: sum of static sizes for each component
+      // Dynamic components use 32 bytes for offset pointer
+      // Static components use their actual static size
+      var headSize = 0;
+      for (final component in components) {
+        if (component.isDynamic) {
+          headSize += 32; // Offset pointer
+        } else {
+          headSize += component.getStaticSize();
+        }
+      }
+
+      var currentOffset = headSize;
       for (var i = 0; i < components.length; i++) {
         if (components[i].isDynamic) {
           offsets.add(currentOffset);
