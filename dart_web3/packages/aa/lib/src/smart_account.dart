@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 import 'user_operation.dart';
 
@@ -196,11 +197,39 @@ abstract class BaseSmartAccount implements SmartAccount {
     return _owner.address.hex;
   }
 
-  /// Calculates CREATE2 address.
+  /// Calculates CREATE2 address according to EIP-1014.
+  ///
+  /// address = keccak256(0xff ++ factory ++ salt ++ keccak256(initCode))[12:]
+  ///
+  /// Reference: https://eips.ethereum.org/EIPS/eip-1014
   String _calculateCreate2Address(String factory, String salt, String initCode) {
-    // CREATE2 address calculation: keccak256(0xff + factory + salt + keccak256(initCode))
-    // This is a simplified implementation
-    // TODO: Implement proper CREATE2 address calculation
-    return '0x' + '0' * 40; // Placeholder
+    // 1. Prepare factory address (20 bytes)
+    final factoryBytes = HexUtils.decode(factory.replaceFirst('0x', ''));
+    if (factoryBytes.length != 20) {
+      throw ArgumentError('Factory address must be 20 bytes');
+    }
+
+    // 2. Prepare salt (32 bytes)
+    final saltBytes = HexUtils.decode(salt.replaceFirst('0x', '').padLeft(64, '0'));
+    if (saltBytes.length != 32) {
+      throw ArgumentError('Salt must be 32 bytes');
+    }
+
+    // 3. Calculate initCode hash
+    final initCodeBytes = HexUtils.decode(initCode.replaceFirst('0x', ''));
+    final initCodeHash = Keccak256.hash(initCodeBytes);
+
+    // 4. Concatenate: 0xff + factory (20) + salt (32) + initCodeHash (32)
+    final data = Uint8List(1 + 20 + 32 + 32);
+    data[0] = 0xff;
+    data.setRange(1, 21, factoryBytes);
+    data.setRange(21, 53, saltBytes);
+    data.setRange(53, 85, initCodeHash);
+
+    // 5. Hash and take last 20 bytes
+    final hash = Keccak256.hash(data);
+    final addressBytes = hash.sublist(12, 32);
+
+    return HexUtils.encode(addressBytes);
   }
 }

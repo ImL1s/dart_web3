@@ -194,24 +194,29 @@ void main() {
         );
       });
 
-      test('should throw for unimplemented ABI encoding (v0.6/v0.7)', () {
-        expect(
-          () => userOp.getUserOpHash(
-            chainId: 1,
-            entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-            entryPointVersion: EntryPointVersion.v06,
-          ),
-          throwsA(isA<UnimplementedError>()),
+      test('should calculate userOpHash for v0.6 and v0.7', () {
+        // v0.6 hash calculation
+        final v06Hash = userOp.getUserOpHash(
+          chainId: 1,
+          entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
+          entryPointVersion: EntryPointVersion.v06,
         );
+        expect(v06Hash, isNotEmpty);
+        expect(v06Hash.startsWith('0x'), isTrue);
+        expect(v06Hash.length, equals(66)); // 0x + 64 hex chars
 
-        expect(
-          () => userOp.getUserOpHash(
-            chainId: 1,
-            entryPointAddress: '0x0000000071727De22E5E9d8BAf0edAc6f37da032',
-            entryPointVersion: EntryPointVersion.v07,
-          ),
-          throwsA(isA<UnimplementedError>()),
+        // v0.7 hash calculation
+        final v07Hash = userOp.getUserOpHash(
+          chainId: 1,
+          entryPointAddress: '0x0000000071727De22E5E9d8BAf0edAc6f37da032',
+          entryPointVersion: EntryPointVersion.v07,
         );
+        expect(v07Hash, isNotEmpty);
+        expect(v07Hash.startsWith('0x'), isTrue);
+        expect(v07Hash.length, equals(66)); // 0x + 64 hex chars
+
+        // Different EntryPoint addresses should produce different hashes
+        expect(v06Hash, isNot(equals(v07Hash)));
       });
     });
 

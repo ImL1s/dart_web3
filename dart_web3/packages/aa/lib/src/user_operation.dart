@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:dart_web3_abi/dart_web3_abi.dart';
 
 /// Entry Point version enumeration for ERC-4337
 enum EntryPointVersion {
@@ -195,12 +196,19 @@ class UserOperation {
     throw UnimplementedError('EIP-712 typed data hashing not yet implemented');
   }
 
-  /// Calculate hash for EntryPoint v0.6 using ABI encoding
+  /// Calculate hash for EntryPoint v0.6 using ABI encoding.
+  ///
+  /// Per ERC-4337 specification:
+  /// 1. Hash initCode, callData, paymasterAndData with keccak256
+  /// 2. ABI encode the UserOperation fields with hashes
+  /// 3. Hash the packed UserOperation
+  /// 4. ABI encode with entryPointAddress and chainId
+  /// 5. Final keccak256 hash
   String _getV06Hash(int chainId, String entryPointAddress) {
     // Extract factory and factoryData from initCode for v0.6
     String? factory;
     String? factoryData;
-    
+
     if (initCode != null && initCode!.length > 2) {
       if (initCode!.length >= 42) {
         factory = initCode!.substring(0, 42);
@@ -210,57 +218,73 @@ class UserOperation {
       }
     }
 
+    // 1. Hash variable-length fields
     final initCodeToHash = _getInitCode(factory, factoryData, authorization);
-    final callDataHash = HexUtils.encode(Keccak256.hash(HexUtils.decode(callData)));
-    final paymasterAndDataHash = HexUtils.encode(
-      Keccak256.hash(HexUtils.decode(paymasterAndData ?? '0x'))
-    );
-    final initCodeHash = HexUtils.encode(Keccak256.hash(HexUtils.decode(initCodeToHash)));
+    final initCodeHash = Keccak256.hash(HexUtils.decode(initCodeToHash));
+    final callDataHash = Keccak256.hash(HexUtils.decode(callData));
+    final paymasterAndDataHash = Keccak256.hash(HexUtils.decode(paymasterAndData ?? '0x'));
 
-    // ABI encode the UserOperation fields
+    // 2. ABI encode the UserOperation fields
     final packedUserOp = _encodeUserOpV06(
       sender,
       nonce,
-      initCodeHash,
-      callDataHash,
+      HexUtils.encode(initCodeHash),
+      HexUtils.encode(callDataHash),
       callGasLimit,
       verificationGasLimit,
       preVerificationGas,
       maxFeePerGas,
       maxPriorityFeePerGas,
-      paymasterAndDataHash,
+      HexUtils.encode(paymasterAndDataHash),
     );
 
-    // Final hash: keccak256(abi.encode(packedUserOp, entryPointAddress, chainId))
-    final finalEncoded = _encodeFinalHash(packedUserOp, entryPointAddress, chainId);
-    return HexUtils.encode(Keccak256.hash(HexUtils.decode(finalEncoded)));
+    // 3. Hash the packed UserOperation
+    final userOpHash = Keccak256.hash(packedUserOp);
+
+    // 4. ABI encode with entryPointAddress and chainId
+    final finalEncoded = _encodeFinalHash(userOpHash, entryPointAddress, chainId);
+
+    // 5. Final hash
+    return HexUtils.encode(Keccak256.hash(finalEncoded));
   }
 
-  /// Calculate hash for EntryPoint v0.7 using packed UserOperation
+  /// Calculate hash for EntryPoint v0.7 using packed UserOperation.
+  ///
+  /// Per ERC-4337 specification:
+  /// 1. Convert to PackedUserOperation format
+  /// 2. Hash initCode, callData, paymasterAndData with keccak256
+  /// 3. ABI encode the packed UserOperation fields with hashes
+  /// 4. Hash the packed UserOperation
+  /// 5. ABI encode with entryPointAddress and chainId
+  /// 6. Final keccak256 hash
   String _getV07Hash(int chainId, String entryPointAddress) {
     final packedUserOp = toPackedUserOperation();
-    
-    final initCodeHash = HexUtils.encode(Keccak256.hash(HexUtils.decode(packedUserOp.initCode)));
-    final callDataHash = HexUtils.encode(Keccak256.hash(HexUtils.decode(packedUserOp.callData)));
-    final paymasterAndDataHash = HexUtils.encode(
-      Keccak256.hash(HexUtils.decode(packedUserOp.paymasterAndData))
-    );
 
-    // ABI encode the packed UserOperation fields
+    // 1. Hash variable-length fields
+    final initCodeHash = Keccak256.hash(HexUtils.decode(packedUserOp.initCode));
+    final callDataHash = Keccak256.hash(HexUtils.decode(packedUserOp.callData));
+    final paymasterAndDataHash = Keccak256.hash(HexUtils.decode(packedUserOp.paymasterAndData));
+
+    // 2. ABI encode the packed UserOperation fields
     final encoded = _encodeUserOpV07(
       packedUserOp.sender,
       packedUserOp.nonce,
-      initCodeHash,
-      callDataHash,
+      HexUtils.encode(initCodeHash),
+      HexUtils.encode(callDataHash),
       packedUserOp.accountGasLimits,
       packedUserOp.preVerificationGas,
       packedUserOp.gasFees,
-      paymasterAndDataHash,
+      HexUtils.encode(paymasterAndDataHash),
     );
 
-    // Final hash: keccak256(abi.encode(encoded, entryPointAddress, chainId))
-    final finalEncoded = _encodeFinalHash(encoded, entryPointAddress, chainId);
-    return HexUtils.encode(Keccak256.hash(HexUtils.decode(finalEncoded)));
+    // 3. Hash the packed UserOperation
+    final userOpHash = Keccak256.hash(encoded);
+
+    // 4. ABI encode with entryPointAddress and chainId
+    final finalEncoded = _encodeFinalHash(userOpHash, entryPointAddress, chainId);
+
+    // 5. Final hash
+    return HexUtils.encode(Keccak256.hash(finalEncoded));
   }
 
   /// Get initCode for hashing (handles authorization for EIP-7702)
@@ -339,8 +363,12 @@ class UserOperation {
     return bytes.reversed.toList();
   }
 
-  /// ABI encode UserOperation for v0.6
-  String _encodeUserOpV06(
+  /// ABI encode UserOperation for v0.6 according to ERC-4337 specification.
+  ///
+  /// Encodes: (address sender, uint256 nonce, bytes32 initCodeHash, bytes32 callDataHash,
+  ///           uint256 callGasLimit, uint256 verificationGasLimit, uint256 preVerificationGas,
+  ///           uint256 maxFeePerGas, uint256 maxPriorityFeePerGas, bytes32 paymasterAndDataHash)
+  Uint8List _encodeUserOpV06(
     String sender,
     BigInt nonce,
     String initCodeHash,
@@ -352,13 +380,41 @@ class UserOperation {
     BigInt maxPriorityFeePerGas,
     String paymasterAndDataHash,
   ) {
-    // TODO: Use proper ABI encoding from dart_web3_abi
-    // For now, return a placeholder
-    throw UnimplementedError('ABI encoding not yet implemented');
+    final types = [
+      AbiAddress(),        // sender
+      AbiUint(256),        // nonce
+      AbiFixedBytes(32),   // initCodeHash
+      AbiFixedBytes(32),   // callDataHash
+      AbiUint(256),        // callGasLimit
+      AbiUint(256),        // verificationGasLimit
+      AbiUint(256),        // preVerificationGas
+      AbiUint(256),        // maxFeePerGas
+      AbiUint(256),        // maxPriorityFeePerGas
+      AbiFixedBytes(32),   // paymasterAndDataHash
+    ];
+
+    final values = [
+      sender,
+      nonce,
+      HexUtils.decode(initCodeHash),
+      HexUtils.decode(callDataHash),
+      callGasLimit,
+      verificationGasLimit,
+      preVerificationGas,
+      maxFeePerGas,
+      maxPriorityFeePerGas,
+      HexUtils.decode(paymasterAndDataHash),
+    ];
+
+    return AbiEncoder.encode(types, values);
   }
 
-  /// ABI encode UserOperation for v0.7
-  String _encodeUserOpV07(
+  /// ABI encode UserOperation for v0.7 according to ERC-4337 specification.
+  ///
+  /// Encodes: (address sender, uint256 nonce, bytes32 initCodeHash, bytes32 callDataHash,
+  ///           bytes32 accountGasLimits, uint256 preVerificationGas, bytes32 gasFees,
+  ///           bytes32 paymasterAndDataHash)
+  Uint8List _encodeUserOpV07(
     String sender,
     BigInt nonce,
     String initCodeHash,
@@ -368,16 +424,48 @@ class UserOperation {
     String gasFees,
     String paymasterAndDataHash,
   ) {
-    // TODO: Use proper ABI encoding from dart_web3_abi
-    // For now, return a placeholder
-    throw UnimplementedError('ABI encoding not yet implemented');
+    final types = [
+      AbiAddress(),        // sender
+      AbiUint(256),        // nonce
+      AbiFixedBytes(32),   // initCodeHash
+      AbiFixedBytes(32),   // callDataHash
+      AbiFixedBytes(32),   // accountGasLimits (packed)
+      AbiUint(256),        // preVerificationGas
+      AbiFixedBytes(32),   // gasFees (packed)
+      AbiFixedBytes(32),   // paymasterAndDataHash
+    ];
+
+    final values = [
+      sender,
+      nonce,
+      HexUtils.decode(initCodeHash),
+      HexUtils.decode(callDataHash),
+      HexUtils.decode(accountGasLimits),
+      preVerificationGas,
+      HexUtils.decode(gasFees),
+      HexUtils.decode(paymasterAndDataHash),
+    ];
+
+    return AbiEncoder.encode(types, values);
   }
 
-  /// Encode final hash with entryPoint and chainId
-  String _encodeFinalHash(String packedUserOp, String entryPointAddress, int chainId) {
-    // TODO: Use proper ABI encoding from dart_web3_abi
-    // For now, return a placeholder
-    throw UnimplementedError('ABI encoding not yet implemented');
+  /// Encode final hash with entryPoint and chainId according to ERC-4337.
+  ///
+  /// Final hash = keccak256(abi.encode(userOpHash, entryPointAddress, chainId))
+  Uint8List _encodeFinalHash(Uint8List userOpHash, String entryPointAddress, int chainId) {
+    final types = [
+      AbiFixedBytes(32),   // userOpHash
+      AbiAddress(),        // entryPointAddress
+      AbiUint(256),        // chainId
+    ];
+
+    final values = [
+      userOpHash,
+      entryPointAddress,
+      BigInt.from(chainId),
+    ];
+
+    return AbiEncoder.encode(types, values);
   }
 
   /// Create a copy of this UserOperation with updated fields

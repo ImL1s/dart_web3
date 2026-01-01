@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 import 'user_operation.dart';
 
@@ -142,25 +144,135 @@ class EntryPointV06 implements EntryPoint {
   }
 
   /// Encodes handleOps function call.
+  ///
+  /// Function signature: handleOps(UserOperation[],address)
+  /// UserOperation struct (v0.6):
+  ///   - address sender
+  ///   - uint256 nonce
+  ///   - bytes initCode
+  ///   - bytes callData
+  ///   - uint256 callGasLimit
+  ///   - uint256 verificationGasLimit
+  ///   - uint256 preVerificationGas
+  ///   - uint256 maxFeePerGas
+  ///   - uint256 maxPriorityFeePerGas
+  ///   - bytes paymasterAndData
+  ///   - bytes signature
   String _encodeHandleOpsCall(List<UserOperation> ops, String beneficiary) {
     // handleOps(UserOperation[],address) function selector: 0x1fad948c
     final selector = '1fad948c';
-    
-    // TODO: Use proper ABI encoder from dart_web3_abi
-    // For now, return a placeholder
-    return '0x$selector';
+
+    // Define UserOperation tuple type for v0.6
+    final userOpTupleType = AbiTuple([
+      AbiAddress(),      // sender
+      AbiUint(256),      // nonce
+      AbiBytes(),        // initCode
+      AbiBytes(),        // callData
+      AbiUint(256),      // callGasLimit
+      AbiUint(256),      // verificationGasLimit
+      AbiUint(256),      // preVerificationGas
+      AbiUint(256),      // maxFeePerGas
+      AbiUint(256),      // maxPriorityFeePerGas
+      AbiBytes(),        // paymasterAndData
+      AbiBytes(),        // signature
+    ]);
+
+    // Convert UserOperations to tuple values
+    final opsValues = ops.map((op) => [
+      op.sender,
+      op.nonce,
+      HexUtils.decode(op.initCode ?? '0x'),
+      HexUtils.decode(op.callData),
+      op.callGasLimit,
+      op.verificationGasLimit,
+      op.preVerificationGas,
+      op.maxFeePerGas,
+      op.maxPriorityFeePerGas,
+      HexUtils.decode(op.paymasterAndData ?? '0x'),
+      HexUtils.decode(op.signature),
+    ]).toList();
+
+    // Encode function call
+    final types = [
+      AbiArray(userOpTupleType),  // UserOperation[]
+      AbiAddress(),               // beneficiary
+    ];
+
+    final values = [opsValues, beneficiary];
+    final encoded = AbiEncoder.encode(types, values);
+
+    return '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
   }
 
   /// Encodes handleAggregatedOps function call.
+  ///
+  /// Function signature: handleAggregatedOps(UserOpsPerAggregator[],address)
+  /// UserOpsPerAggregator struct:
+  ///   - UserOperation[] userOps
+  ///   - address aggregator
+  ///   - bytes signature
   String _encodeHandleAggregatedOpsCall(
     List<UserOperationWithAggregation> opsPerAggregator,
     String beneficiary,
   ) {
     // handleAggregatedOps(UserOpsPerAggregator[],address) function selector: 0x4b1d7cf5
     final selector = '4b1d7cf5';
-    
-    // TODO: Use proper ABI encoder
-    return '0x$selector';
+
+    // Define UserOperation tuple type for v0.6
+    final userOpTupleType = AbiTuple([
+      AbiAddress(),      // sender
+      AbiUint(256),      // nonce
+      AbiBytes(),        // initCode
+      AbiBytes(),        // callData
+      AbiUint(256),      // callGasLimit
+      AbiUint(256),      // verificationGasLimit
+      AbiUint(256),      // preVerificationGas
+      AbiUint(256),      // maxFeePerGas
+      AbiUint(256),      // maxPriorityFeePerGas
+      AbiBytes(),        // paymasterAndData
+      AbiBytes(),        // signature
+    ]);
+
+    // Define UserOpsPerAggregator tuple type
+    final aggregatorTupleType = AbiTuple([
+      AbiArray(userOpTupleType),  // userOps
+      AbiAddress(),               // aggregator
+      AbiBytes(),                 // signature
+    ]);
+
+    // Convert to tuple values
+    final aggregatorValues = opsPerAggregator.map((agg) {
+      final opsValues = agg.userOps.map((op) => [
+        op.sender,
+        op.nonce,
+        HexUtils.decode(op.initCode ?? '0x'),
+        HexUtils.decode(op.callData),
+        op.callGasLimit,
+        op.verificationGasLimit,
+        op.preVerificationGas,
+        op.maxFeePerGas,
+        op.maxPriorityFeePerGas,
+        HexUtils.decode(op.paymasterAndData ?? '0x'),
+        HexUtils.decode(op.signature),
+      ]).toList();
+
+      return [
+        opsValues,
+        agg.aggregator,
+        HexUtils.decode(agg.signature),
+      ];
+    }).toList();
+
+    // Encode function call
+    final types = [
+      AbiArray(aggregatorTupleType),  // UserOpsPerAggregator[]
+      AbiAddress(),                   // beneficiary
+    ];
+
+    final values = [aggregatorValues, beneficiary];
+    final encoded = AbiEncoder.encode(types, values);
+
+    return '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
   }
 
   /// Encodes getNonce function call.
@@ -174,12 +286,46 @@ class EntryPointV06 implements EntryPoint {
   }
 
   /// Encodes simulateValidation function call.
+  ///
+  /// Function signature: simulateValidation(UserOperation)
   String _encodeSimulateValidationCall(UserOperation userOp) {
     // simulateValidation(UserOperation) function selector: 0xee219423
     final selector = 'ee219423';
-    
-    // TODO: Use proper ABI encoder to encode UserOperation struct
-    return '0x$selector';
+
+    // Define UserOperation tuple type for v0.6
+    final userOpTupleType = AbiTuple([
+      AbiAddress(),      // sender
+      AbiUint(256),      // nonce
+      AbiBytes(),        // initCode
+      AbiBytes(),        // callData
+      AbiUint(256),      // callGasLimit
+      AbiUint(256),      // verificationGasLimit
+      AbiUint(256),      // preVerificationGas
+      AbiUint(256),      // maxFeePerGas
+      AbiUint(256),      // maxPriorityFeePerGas
+      AbiBytes(),        // paymasterAndData
+      AbiBytes(),        // signature
+    ]);
+
+    // Convert UserOperation to tuple values
+    final opValue = [
+      userOp.sender,
+      userOp.nonce,
+      HexUtils.decode(userOp.initCode ?? '0x'),
+      HexUtils.decode(userOp.callData),
+      userOp.callGasLimit,
+      userOp.verificationGasLimit,
+      userOp.preVerificationGas,
+      userOp.maxFeePerGas,
+      userOp.maxPriorityFeePerGas,
+      HexUtils.decode(userOp.paymasterAndData ?? '0x'),
+      HexUtils.decode(userOp.signature),
+    ];
+
+    // Encode function call (single tuple parameter, not array)
+    final encoded = userOpTupleType.encode(opValue);
+
+    return '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
   }
 
   /// Encodes getDepositInfo function call.
@@ -299,24 +445,129 @@ class EntryPointV07 implements EntryPoint {
   }
 
   /// Encodes handleOps function call for v0.7 (uses PackedUserOperation).
+  ///
+  /// Function signature: handleOps(PackedUserOperation[],address)
+  /// PackedUserOperation struct (v0.7):
+  ///   - address sender
+  ///   - uint256 nonce
+  ///   - bytes initCode
+  ///   - bytes callData
+  ///   - bytes32 accountGasLimits (verificationGasLimit || callGasLimit)
+  ///   - uint256 preVerificationGas
+  ///   - bytes32 gasFees (maxPriorityFeePerGas || maxFeePerGas)
+  ///   - bytes paymasterAndData
+  ///   - bytes signature
   String _encodeHandleOpsCall(List<PackedUserOperation> ops, String beneficiary) {
     // handleOps(PackedUserOperation[],address) function selector: 0x765e827f
     final selector = '765e827f';
-    
-    // TODO: Use proper ABI encoder
-    return '0x$selector';
+
+    // Define PackedUserOperation tuple type for v0.7
+    final packedOpTupleType = AbiTuple([
+      AbiAddress(),        // sender
+      AbiUint(256),        // nonce
+      AbiBytes(),          // initCode
+      AbiBytes(),          // callData
+      AbiFixedBytes(32),   // accountGasLimits
+      AbiUint(256),        // preVerificationGas
+      AbiFixedBytes(32),   // gasFees
+      AbiBytes(),          // paymasterAndData
+      AbiBytes(),          // signature
+    ]);
+
+    // Convert PackedUserOperations to tuple values
+    final opsValues = ops.map((op) => [
+      op.sender,
+      op.nonce,
+      HexUtils.decode(op.initCode),
+      HexUtils.decode(op.callData),
+      HexUtils.decode(op.accountGasLimits),
+      op.preVerificationGas,
+      HexUtils.decode(op.gasFees),
+      HexUtils.decode(op.paymasterAndData),
+      HexUtils.decode(op.signature),
+    ]).toList();
+
+    // Encode function call
+    final types = [
+      AbiArray(packedOpTupleType),  // PackedUserOperation[]
+      AbiAddress(),                 // beneficiary
+    ];
+
+    final values = [opsValues, beneficiary];
+    final encoded = AbiEncoder.encode(types, values);
+
+    return '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
   }
 
   /// Encodes handleAggregatedOps function call for v0.7.
+  ///
+  /// Function signature: handleAggregatedOps(UserOpsPerAggregator[],address)
+  /// UserOpsPerAggregator struct (v0.7 uses PackedUserOperation):
+  ///   - PackedUserOperation[] userOps
+  ///   - address aggregator
+  ///   - bytes signature
   String _encodeHandleAggregatedOpsCall(
     List<UserOperationWithAggregation> opsPerAggregator,
     String beneficiary,
   ) {
     // handleAggregatedOps(UserOpsPerAggregator[],address) function selector: 0x4b1d7cf5
     final selector = '4b1d7cf5';
-    
-    // TODO: Use proper ABI encoder
-    return '0x$selector';
+
+    // Define PackedUserOperation tuple type for v0.7
+    final packedOpTupleType = AbiTuple([
+      AbiAddress(),        // sender
+      AbiUint(256),        // nonce
+      AbiBytes(),          // initCode
+      AbiBytes(),          // callData
+      AbiFixedBytes(32),   // accountGasLimits
+      AbiUint(256),        // preVerificationGas
+      AbiFixedBytes(32),   // gasFees
+      AbiBytes(),          // paymasterAndData
+      AbiBytes(),          // signature
+    ]);
+
+    // Define UserOpsPerAggregator tuple type
+    final aggregatorTupleType = AbiTuple([
+      AbiArray(packedOpTupleType),  // userOps (PackedUserOperation[])
+      AbiAddress(),                 // aggregator
+      AbiBytes(),                   // signature
+    ]);
+
+    // Convert to tuple values
+    final aggregatorValues = opsPerAggregator.map((agg) {
+      // Convert UserOperations to PackedUserOperations
+      final opsValues = agg.userOps.map((op) {
+        final packed = op.toPackedUserOperation();
+        return [
+          packed.sender,
+          packed.nonce,
+          HexUtils.decode(packed.initCode),
+          HexUtils.decode(packed.callData),
+          HexUtils.decode(packed.accountGasLimits),
+          packed.preVerificationGas,
+          HexUtils.decode(packed.gasFees),
+          HexUtils.decode(packed.paymasterAndData),
+          HexUtils.decode(packed.signature),
+        ];
+      }).toList();
+
+      return [
+        opsValues,
+        agg.aggregator,
+        HexUtils.decode(agg.signature),
+      ];
+    }).toList();
+
+    // Encode function call
+    final types = [
+      AbiArray(aggregatorTupleType),  // UserOpsPerAggregator[]
+      AbiAddress(),                   // beneficiary
+    ];
+
+    final values = [aggregatorValues, beneficiary];
+    final encoded = AbiEncoder.encode(types, values);
+
+    return '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
   }
 
   /// Encodes getNonce function call.
@@ -330,12 +581,42 @@ class EntryPointV07 implements EntryPoint {
   }
 
   /// Encodes simulateValidation function call for v0.7.
+  ///
+  /// Function signature: simulateValidation(PackedUserOperation)
   String _encodeSimulateValidationCall(PackedUserOperation packedOp) {
     // simulateValidation(PackedUserOperation) function selector: 0xee219423
     final selector = 'ee219423';
-    
-    // TODO: Use proper ABI encoder to encode PackedUserOperation struct
-    return '0x$selector';
+
+    // Define PackedUserOperation tuple type for v0.7
+    final packedOpTupleType = AbiTuple([
+      AbiAddress(),        // sender
+      AbiUint(256),        // nonce
+      AbiBytes(),          // initCode
+      AbiBytes(),          // callData
+      AbiFixedBytes(32),   // accountGasLimits
+      AbiUint(256),        // preVerificationGas
+      AbiFixedBytes(32),   // gasFees
+      AbiBytes(),          // paymasterAndData
+      AbiBytes(),          // signature
+    ]);
+
+    // Convert PackedUserOperation to tuple values
+    final opValue = [
+      packedOp.sender,
+      packedOp.nonce,
+      HexUtils.decode(packedOp.initCode),
+      HexUtils.decode(packedOp.callData),
+      HexUtils.decode(packedOp.accountGasLimits),
+      packedOp.preVerificationGas,
+      HexUtils.decode(packedOp.gasFees),
+      HexUtils.decode(packedOp.paymasterAndData),
+      HexUtils.decode(packedOp.signature),
+    ];
+
+    // Encode function call (single tuple parameter, not array)
+    final encoded = packedOpTupleType.encode(opValue);
+
+    return '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
   }
 
   /// Encodes getDepositInfo function call.
