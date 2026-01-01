@@ -1,0 +1,32 @@
+name: Dart Web3 SDK CI
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install Melos
+        run: dart pub global activate melos
+
+      - name: Bootstrap Workspace
+        run: |
+          cd dart_web3
+          melos bootstrap
+
+      - name: Run Tests (Monorepo)
+        run: |
+          cd dart_web3
+          # Run tests across all packages, concurrency limited to avoid OOM on CI runners
+          melos exec --concurrency=1 --fail-fast -- dart test
