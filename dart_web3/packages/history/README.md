@@ -1,35 +1,64 @@
 # dart_web3_history
 
-Transaction and account history explorer for Web3 applications.
+[![Pub](https://img.shields.io/pub/v/dart_web3_history.svg)](https://pub.dev/packages/dart_web3_history)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **data-rich transaction explorer** for Web3 applications. Fetch, parse, and normalize account history from multiple sources to provide a clean activity feed for your users.
 
-- **Indexing**: Fetch and normalize transaction history from various chain explorers.
-- **Decoders**: Built-in support for decoding system transactions and common smart contract interactions.
-- **Caching**: Efficient local caching layer to reduce RPC/Explorer API calls.
-- **Pagination**: Easy-to-use pagination controls for long transaction lists.
+## 🚀 Features
 
-## Architecture
+- **Multi-Source Fetching**: Support for Etherscan, Polygonscan, and custom RPC-based indexers.
+- **Contract Decoding**: (Planned) Integrated with ABI engine to show human-readable actions (e.g., "Swapped ETH for DAI") instead of raw hex.
+- **Local Persistence**: Efficient SQLite/Hive-ready caching to reduce API overhead.
+- **Multilingual Labels**: Configurable labels for system transactions and contract interactions.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph LR
-    ExplorerAPI[Explorer API] --> Indexer[History Indexer]
-    Indexer --> Cache[Local Cache]
-    Cache --> Consumer[App UI]
+    API[External Explorer API] --> Fetcher[History Fetcher]
+    Fetcher --> Cache[Local Cache]
+    Cache --> Logic[Normalization Engine]
+    Logic --> UI[Activity Feed]
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `HistoryFetcher` | Communicates with external indexing services. |
+| `Web3Transaction` | A normalized representation of a cross-platform transaction. |
+| `HistoryCache` | Persistence layer definitions for transaction storage. |
+| `ActionDecoder` | Maps method selectors to human-readable labels. |
+
+## 🛡️ Security Considerations
+
+- **API Key Privacy**: Always use environment variables for explorer API keys. Never hardcode them in your client-side Flutter code.
+- **Trustworthy Data**: While explorers are convenient, they are centralized. For critical balance UI, verify through the `dart_web3_client` for the most recent block state.
+- **Payload Sanitization**: When displaying "Input Data" or "Calldata" strings, sanitize them to prevent injection or crashes in text rendering components.
+
+## 💻 Usage
+
+### Fetching Activity Feed
 ```dart
 import 'package:dart_web3_history/dart_web3_history.dart';
 
 void main() async {
-  final history = HistoryIndexer(apiKey: '...');
-  final txs = await history.getTransactions('0x...');
+  final history = HistoryFetcher(
+    provider: HistoryProviders.etherscan,
+    apiKey: '...',
+  );
+
+  final transactions = await history.getAccountActivity('0x...');
+  
+  for (var tx in transactions) {
+     print('Time: ${tx.timestamp}, Hash: ${tx.hash}');
+  }
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

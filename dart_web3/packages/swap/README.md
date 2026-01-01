@@ -1,43 +1,68 @@
 # dart_web3_swap
 
-DEX Aggregator and decentralized exchange integration layer.
+[![Pub](https://img.shields.io/pub/v/dart_web3_swap.svg)](https://pub.dev/packages/dart_web3_swap)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **unified DEX aggregation layer** for Dart. Perform asset swaps, fetch liquidity quotes, and interact with numerous decentralized exchanges (Uniswap, PancakeSwap, 1inch) through a single interface.
 
-- **Protocol Aggregation**: Unified interface for Uniswap, Curve, Balancer, and PancakeSwap.
-- **Smart Routing**: (Planned) Logic to find the best price across multiple liquidity sources.
-- **Quote Management**: Fetch real-time price quotes and slippage calculations.
-- **Execution**: Helper methods to execute `swapExactTokensForTokens` and similar flows.
+## 🚀 Features
 
-## Architecture
+- **Smart Route Discovery**: Connect to aggregators to find the best price across multiple liquidity pools.
+- **Price Impact Analysis**: Pre-calculate slippage and impact to protect user funds.
+- **Protocol Support**: Specialized modules for Uniswap v2/v3, Curve, and Balancer.
+- **Atomic Operations**: Bundle approval and swap transactions where the protocol supports it.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    App[DApp] --> Swap[Swap Engine]
-    Swap --> RouterV2[Uniswap v2 Router]
-    Swap --> RouterV3[Uniswap v3 Router]
-    Swap --> Curve[Curve Pools]
+    User[Swap Intent] --> Aggregator[Swap Engine]
+    Aggregator --> Q1[1inch API]
+    Aggregator --> Q2[Uniswap v3 SDK]
+    Aggregator --> Q3[0x Protocol]
+    
+    Aggregator --> BestQuote[Winner]
+    BestQuote --> Tx[Encoded Transaction]
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `SwapEngine` | Orchestrates quote fetching from multiple sources. |
+| `SwapQuote` | Container for price, path, slippage, and execution data. |
+| `TokenPair` | Helper for managing source and destination asset metadata. |
+| `Slippage` | Type-safe representation of tolerated price variance. |
+
+## 🛡️ Security Considerations
+
+- **Slippage Protection**: Never hardcode slippage to 0%. Always allow for a reasonable buffer (e.g., 0.5% - 1.0%) to prevent transaction reverts in volatile markets.
+- **Infinite Approval Risk**: Only approve the exact amount needed for a swap if your threat model involves high-risk or un-audited protocols.
+- **MEV Awareness**: For large swaps, use modules like `dart_web3_mev` to route transactions through private builders and avoid front-running.
+
+## 💻 Usage
+
+### Fetching a Quote from 1inch
 ```dart
 import 'package:dart_web3_swap/dart_web3_swap.dart';
 
 void main() async {
-  final uniswap = UniswapClient(client: myPublicClient);
+  final engine = SwapEngine(apiKey: '...');
   
-  final quote = await uniswap.getQuote(
-    from: TokenInfo.ETH,
-    to: TokenInfo.USDC,
-    amount: EthUnit.ether('1'),
+  final quote = await engine.getQuote(
+    fromToken: '0x...', // USDC
+    toToken: '0x...',   // ETH
+    amount: EthUnit.parseUnit('100', 6),
+    slippage: 0.01, // 1%
   );
-  
-  print('Output: ${quote.amountOut}');
+
+  print('Estimated Return: ${quote.toTokenAmount}');
+  print('Transaction Required: ${quote.txData}');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

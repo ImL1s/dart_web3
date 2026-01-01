@@ -1,43 +1,71 @@
 # dart_web3_signer
 
-Identity and signing abstractions for authorizing blockchain actions.
+[![Pub](https://img.shields.io/pub/v/dart_web3_signer.svg)](https://pub.dev/packages/dart_web3_signer)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **universal signing abstraction** for the Dart Web3 ecosystem. It decouples identity management from execution logic, supporting local, hardware, and remote signing workflows.
 
-- **统一 Signer 接口**: High-level interface compatible with local and remote signers.
-- **PrivateKeySigner**: Fast, local signing using `dart_web3_crypto`.
-- **EIP-712**: Typed data signing for safer user interactions.
-- **Message Signing**: Support for `eth_sign`, `personal_sign`, and `eth_signTypedData_v4`.
-- **Hardware Ready**: Abstract base classes for Ledger, Trezor, and Keystone integrations.
+## 🚀 Features
 
-## Architecture
+- **Unified Signer Protocol**: One interface for all signing methods (EOA, MPC, HW).
+- **EIP-712 Support**: Domain-separated, typed data signing for human-readable approvals.
+- **Hardware Integration**: High-level hooks for Ledger, Trezor, and Keystone devices.
+- **Message Standards**: Built-in support for `personal_sign` and Ethereum-prefixed message hashing.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph LR
-    App[App] --> Signer[Signer Context]
-    Signer --> PK[Local Private Key]
-    Signer -.-> HW[Hardware Wallet Interface]
-    Signer -.-> MPC[Multi-Party Computation]
+    User[User Intent] --> Controller[Signer Controller]
     
-    Signer --> Output[V, R, S Signature]
+    subgraph Implementations [Identity Sources]
+        PK[PrivateKeySigner]
+        HW[HardwareSigner]
+        AA[SmartAccountSigner]
+    end
+    
+    Controller --> Implementations
+    Implementations --> Sig[EthSignature]
 ```
 
-## Usage
+## 📚 Technical Reference
 
-### Local Signing
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `Signer` | The core interface for and account-bound signing. |
+| `PrivateKeySigner` | Local in-memory signer using raw ECDSA. |
+| `TypedData` | EIP-712 structure representation. |
+| `EthSignature` | Container for `v`, `r`, `s` components of a signature. |
+
+## 🛡️ Security Considerations
+
+- **Key Isolation**: Keep `PrivateKeySigner` instances confined to the narrowest possible scope. Never share them across thread boundaries if possible.
+- **Approval Verification**: When using `signTypedData`, always display the parsed JSON in the UI for the user to verify before calling the signer.
+- **Hardware Timeouts**: Implement proper timeout handling when interacting with hardware signers (Level 6) to avoid app freezes.
+
+## 💻 Usage
+
+### Signing EIP-712 Typed Data
 ```dart
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 void main() async {
-  final signer = PrivateKeySigner.fromHex('0x...', 1); // ChainID: 1
+  final signer = PrivateKeySigner.fromHex('0x...', 1);
   
-  // Sign a simple message
-  final sig = await signer.signMessage("Log in to my dApp");
-  print('Signature: $sig');
+  final data = TypedData(
+    domain: TypedDataDomain(name: 'MyDapp', version: '1'),
+    types: {...},
+    primaryType: 'Mail',
+    message: {'contents': 'Hello!'},
+  );
+
+  final signature = await signer.signTypedData(data);
+  print('Signature: ${signature.toHex()}');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

@@ -1,38 +1,69 @@
 # dart_web3_debug
 
-Advanced debugging, transaction tracing, and state simulation tools.
+[![Pub](https://img.shields.io/pub/v/dart_web3_debug.svg)](https://pub.dev/packages/dart_web3_debug)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **advanced diagnostic toolkit** for Ethereum developers. Gain deep visibility into contract execution, transaction traces, and node-level behavior using standard Debug and Trace API namespaces.
 
-- **Tracing**: Access Geth and Erigon style execution traces.
-- **Simulation**: Test transactions against arbitrary state overrides without on-chain execution.
-- **Call Analysis**: Build hierarchical dependency trees of internal smart contract calls.
-- **Gas Profiling**: Granular breakdown of gas usage per opcode/internal call.
+## 🚀 Features
 
-## Architecture
+- **Transaction Tracing**: Fetch detailed `debug_traceTransaction` results from Geth or Erigon nodes.
+- **State Overrides**: Simulate transactions with arbitrary state changes (planned).
+- **Call Tracers**: Support for JavaScript tracers and structural tracers for internal call analysis.
+- **Log Foraging**: Advanced tools for reconstructing state from sparse event data.
+
+## 🏗️ Architecture
 
 ```mermaid
-graph TD
-    Request[Trace Request] --> RPC[Debug/Trace RPC Node]
-    RPC --> RawTrace[Raw JSON Trace]
-    RawTrace --> Parser[Trace Parser]
-    Parser --> Visualization[Dart Call-Tree]
+graph LR
+    API[Debug API Client] --> Node[Archive Node]
+    Node --> Tracer[EVM Tracer]
+    Tracer --> JSON[Execution Trace]
+    JSON --> Parser[Trace Parser]
+    
+    subgraph Analysis [Visualizers]
+        CallGraph[Call Tree]
+        GasMap[Gas Usage Heatmap]
+    end
+    
+    Parser --> Analysis
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `DebugClient` | Specialized provider for the `debug_*` namespace. |
+| `TraceResult` | Nested structure reflecting the internal EVM call stack. |
+| `EvmStep` | Individual instruction execution data (PC, Opcode, Gas). |
+| `CallTracer` | Logic for parsing high-level internal contract calls. |
+
+## 🛡️ Security Considerations
+
+- **Archive Node Dependency**: Most `debug` methods require an Archive Node. Using them against standard nodes will result in RPC errors.
+- **Data Volume**: Execution traces can be dozens of megabytes. Implement streaming parsers to avoid Out-Of-Memory (OOM) errors in Flutter apps.
+- **Endpoint Protection**: The `debug` namespace is often restricted. Use authentication tokens or IP-whitelisting for your RPC provider.
+
+## 💻 Usage
+
+### Tracing Internal Calls
 ```dart
 import 'package:dart_web3_debug/dart_web3_debug.dart';
 
 void main() async {
-  final debugger = TransactionDebugger(rpcUrl: '...');
-  
-  final trace = await debugger.traceTransaction('0xTxHash...');
-  print('Number of internal calls: ${trace.calls.length}');
+  final debug = DebugClient(url: 'https://archive-node.io/...');
+
+  final trace = await debug.traceTransaction(
+    '0x...',
+    tracer: TracerType.callTracer,
+  );
+
+  print('Internal calls: ${trace.calls?.length}');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

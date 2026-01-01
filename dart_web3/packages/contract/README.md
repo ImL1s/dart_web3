@@ -1,43 +1,68 @@
 # dart_web3_contract
 
-Type-safe smart contract abstractions for the Dart Web3 SDK.
+[![Pub](https://img.shields.io/pub/v/dart_web3_contract.svg)](https://pub.dev/packages/dart_web3_contract)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **type-safe wrapper** for smart contract interaction. It bridges the gap between raw binary ABI data and developer-friendly Dart objects.
 
-- **Contract Instances**: Bind a deployed address to an ABI for intuitive calls.
-- **Standard Support**: Out-of-the-box helpers for ERC-20, ERC-721, and ERC-1155.
-- **Event Subscriptions**: Type-safe filtering and parsing of contract events.
-- **Gas Estimation**: Automatic gas estimation for contract writes.
+## 🚀 Features
 
-## Architecture
+- **Dynamic Contract Bindings**: Create instance objects for any contract using its ABI and Address.
+- **Standard Library**: High-level classes for ERC-20, ERC-721, and ERC-1155.
+- **Multi-call Optimized**: Methods are designed to be batchable using the `dart_web3_multicall` package.
+- **Type Conversion**: Automatic mapping between Solidity types and Dart primitives.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph LR
-    ABI[dart_web3_abi] --> Contract[Contract Instance]
-    Client[dart_web3_client] --> Contract
-    Contract --> Call[Method Call]
-    Contract --> Filter[Event Stream]
+    Model[AbiDefinition] --> Factory[Contract Factory]
+    Factory --> Instance[DeployedContract]
+    Instance --> Read[Static Call]
+    Instance --> Write[Transaction]
+    
+    subgraph Helpers [Included Standards]
+        ERC20[ERC20Contract]
+        ERC721[ERC721Contract]
+    end
 ```
 
-## Usage
+## 📚 Technical Reference
 
-### ERC-20 Example
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `DeployedContract` | The base class for interacting with any generic contract. |
+| `ERC20Contract` | Specialized helper for fungible token interactions. |
+| `ERC721Contract` | Specialized helper for non-fungible token (NFT) interactions. |
+| `ContractFunction` | Represents a single method on a contract instance. |
+
+## 🛡️ Security Considerations
+
+- **Decimal Precision**: In `ERC20Contract`, always check the `decimals()` method result; never assume a token has 18 decimals (e.g., USDC uses 6).
+- **Infinite Allowance**: When calling `approve`, consider using specific amounts rather than `uint256.max` unless the UX strictly requires it, to limit potential drain risk.
+- **Revert Handling**: Always wrap contract `send` operations in try-catch blocks to handle custom Solidity errors (reverts).
+
+## 💻 Usage
+
+### Managing Token Allowances
 ```dart
 import 'package:dart_web3_contract/dart_web3_contract.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 void main() async {
-  final usdt = ERC20Contract(
-    address: '0x...',
-    publicClient: myPublicClient,
-  );
+  final dai = ERC20Contract(address: '0x...', publicClient: client);
+
+  // Check current allowance
+  final current = await dai.allowance(owner, spender);
   
-  final balance = await usdt.balanceOf('0xYourAddress');
-  print('USDT Balance: $balance');
+  if (current < requiredAmount) {
+     final tx = await dai.approve(spender, requiredAmount, walletClient: wallet);
+     print('Approval sent: $tx');
+  }
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

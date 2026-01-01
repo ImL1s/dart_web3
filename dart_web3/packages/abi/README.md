@@ -1,54 +1,77 @@
 # dart_web3_abi
 
-Ethereum Application Binary Interface (ABI) encoding and decoding.
+[![Pub](https://img.shields.io/pub/v/dart_web3_abi.svg)](https://pub.dev/packages/dart_web3_abi)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **type-safe ABI codec** for Ethereum contract interaction. Encodes and decodes Solidity types with precision and full compliance with the Ethereum ABI specification.
 
-- **Type Encoding**: Strict adherence to the Ethereum ABI specification for all Solidity types.
-- **Dynamic & Static Types**: Support for `bytes`, `string`, `uint[]`, and fixed-size arrays.
-- **Tuples/Structs**: Recursive encoding/decoding of nested tuples (v2 ABI).
-- **Function Call Encoding**: Easily construct `data` fields for transactions.
-- **Event Parsing**: Decode log data and topics into structured Dart objects.
+## 🚀 Features
 
-## Architecture
+- **Full Type Support**: Handles `uint8-256`, `int8-256`, `address`, `bool`, `bytes1-32`, and `string`.
+- **Dynamic Arrays**: Support for variable length types and complex nested arrays.
+- **ABI v2 (Tuples)**: Full recursive support for structs and nested tuple objects.
+- **Event Logs**: Specialized decoders for indexing and parsing block log topics.
+
+## 🏗️ Architecture
 
 ```mermaid
-graph LR
-    JsonABI[Contract JSON ABI] --> Parser
-    Parser --> Definition[AbiFunction / AbiEvent]
-    Definition --> Encoder[Data Encoder]
-    Definition --> Decoder[Result Decoder]
+graph TD
+    JSON[JSON ABI String] --> Parser[AbiParser]
+    Parser --> Model[AbiDefinition]
     
-    subgraph Registry [Core Logic]
-        Definition
+    subgraph Execution [Codec Engine]
+        Encoder[Encoder]
+        Decoder[Decoder]
     end
+    
+    Model --> Encoder
+    Model --> Decoder
+    Encoder --> Bytes[Contract Data]
+    Bytes --> Decoder
 ```
 
-## Usage
+## 📚 Technical Reference
 
-### Encoding a Function Call
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `AbiFunction` | Logic for encoding method selector and parameters. |
+| `AbiEvent` | Logic for parsing log topics and data into objects. |
+| `ContractAbi` | A container for all functions and events in a smart contract. |
+| `AbiType` | Abstract base for individual codec logic (UintType, AddressType, etc.). |
+
+## 🛡️ Security Considerations
+
+- **Overflow Validation**: The encoder checks if provided values fit within the specific bit-width (e.g., `uint8`). Always handle the `ArgumentError` if your data sources are untrusted.
+- **Selector Collisions**: Be aware that different function signatures can result in the same 4-byte selector. The SDK strictly validates against the Provided ABI.
+- **Malformed Inputs**: The decoder uses safe-padding checks to prevent buffer overflow attacks from malicious RPC responses.
+
+## 💻 Usage
+
+### Decoding Event Logs
 ```dart
 import 'package:dart_web3_abi/dart_web3_abi.dart';
 
 void main() {
-  final transferFunction = AbiFunction(
-    name: 'transfer',
+  final transferEvent = AbiEvent(
+    name: 'Transfer',
     params: [
-      AbiParameter('to', 'address'),
-      AbiParameter('value', 'uint256'),
+      AbiParameter('from', 'address', indexed: true),
+      AbiParameter('to', 'address', indexed: true),
+      AbiParameter('value', 'uint256', indexed: false),
     ],
   );
 
-  final encoded = transferFunction.encode([
-    '0x32Be343B94f860124dC4fEe278FDCBD38C102D88',
-    BigInt.from(1000000000),
-  ]);
+  final decoded = transferEvent.decode(
+    topics: ['0x...', '0x...', '0x...'],
+    data: '0x0000000000000000000000000000000000000000000000000000000005f5e100',
+  );
   
-  print('Calldata: 0x${encoded.toHex()}');
+  print('Value: ${decoded['value']}');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

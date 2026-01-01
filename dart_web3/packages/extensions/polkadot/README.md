@@ -1,35 +1,64 @@
 # dart_web3_polkadot
 
-Substrate and Polkadot ecosystem extension for the Dart Web3 SDK.
+[![Pub](https://img.shields.io/pub/v/dart_web3_polkadot.svg)](https://pub.dev/packages/dart_web3_polkadot)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **Substrate-compatible extension** for the Dart Web3 ecosystem. Enable interaction with Polkadot, Kusama, and the entire Parachain ecosystem using a unified Dart API.
 
-- **SCALE Codec**: Highly optimized implementation of the Substrate SCALE codec.
-- **Metadata**: Recursive parsing of Substrate runtime metadata for type-safe interactions.
-- **Multi-Chain**: Seamless support for Polkadot, Kusama, and custom parachains.
-- **Extrinsics**: Build and sign Substrate transactions with full support for mortality.
+## 🚀 Features
 
-## Architecture
+- **SS58 Addressing**: Multi-chain address formatting with support for different network prefixes.
+- **SCALE Codec**: highly efficient Simple Concatenated Aggregate Little-Endian encoding.
+- **Metadata V14+**: Dynamically parse Substrate metadata to discover pallet methods and constants.
+- **SR25519 & Ed25519**: Full support for standard Substrate signature schemes.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph LR
-    Codec[SCALE Codec] --> Extrinsic[Extrinsic Builder]
-    Metadata[Runtime Metadata] --> Extrinsic
-    Extrinsic --> RPC[Substrate RPC]
+    User[User Logic] --> Substrate[Polkadot Client]
+    Substrate --> Metadata[Metadata Registry]
+    
+    subgraph Codec [Serialization]
+        SCALE[SCALE Encoder]
+    end
+    
+    Metadata --> SCALE
+    SCALE --> Node[Polkadot/Substrate Node]
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `PolkadotClient` | The core client for Substrate-based JSON-RPC. |
+| `Keyring` | Manages multiple accounts and encryption types (sr25519). |
+| `ScaleCodec` | Low-level utility for binary serialization. |
+| `Registry` | Holds types and method definitions for a specific parachain. |
+
+## 🛡️ Security Considerations
+
+- **Metadata Integrity**: Substrate updates can change underlying types. Always fetch the latest metadata from the node before encoding transactions.
+- **Existential Deposit**: Be aware of the Existential Deposit (ED) requirement; sending an amount that leaves a balance below ED will result in account reaper/deletion.
+- **Multi-sig Complexity**: Substrate multisig uses a "call hash" approach. Ensure the UI handles the 2-step approval process correctly.
+
+## 💻 Usage
+
+### Connecting and Querying Balance
 ```dart
 import 'package:dart_web3_polkadot/dart_web3_polkadot.dart';
 
 void main() async {
-  final polkadot = PolkadotClient(url: 'wss://rpc.polkadot.io');
-  // Interact using Scale-encoded extrinsics
+  final dot = PolkadotClient(url: 'wss://rpc.polkadot.io');
+  await dot.init();
+
+  final balance = await dot.queryBalance('AddressSS58...');
+  print('DOT Balance: $balance');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

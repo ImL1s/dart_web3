@@ -1,35 +1,66 @@
 # dart_web3_bc_ur
 
-Dart implementation of the BC-UR (Blockchain Uniform Resource) standard for air-gapped data transmission.
+[![Pub](https://img.shields.io/pub/v/dart_web3_bc_ur.svg)](https://pub.dev/packages/dart_web3_bc_ur)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **pure Dart implementation of the Blockchain Uniform Resource (BC-UR)** standard. It enables efficient, segmented, and secure data transmission via QR codes, specifically designed for air-gapped hardware wallets.
 
-- **UR Encoding**: Efficient encoding of binary data into QR-friendly UR strings.
-- **Fountain Codes**: Support for multi-part QR codes using Luby Transform (LT) codes.
-- **Type Safety**: Built-in registry for common blockchain data types (PSBT, ETH-TX).
-- **Interoperability**: Fully compatible with Keystone, Foundation, and BlueWallet implementations.
+## 🚀 Features
 
-## Architecture
+- **Fountain Codes (UR)**: Robust data segmentation using Luby Transform (LT) codes for large transaction payloads.
+- **Type Registry**: Support for standardized UR types including `crypto-multi-accounts`, `eth-signature`, and `psbt`.
+- **Cbor Logic**: Built-in CBOR encoding/decoding compliant with the UR specification.
+- **Hardware Agnostic**: Fully compatible with Keystone, Foundation, SeedSigner, and BlueWallet implementations.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph LR
-    Binary[Raw Binary] --> UR[UR Encoder]
-    UR --> Fountain[Fountain Encoder]
-    Fountain --> QR[QR Frame]
+    Bytes[Binary Data] --> CBOR[CBOR Encoding]
+    CBOR --> UR[UR Data Structure]
+    UR --> Fountain[Fountain Multi-part Encoding]
+    Fountain --> QR[QR Frame Generator]
+    
+    style QR fill:#fff,stroke:#333,stroke-width:2px;
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `UR` | The primary object representing a Blockchain Uniform Resource. |
+| `UREncoder` | Logic for dividing large data into multiple QR-friendly parts. |
+| `URDecoder` | Collects and reconstructs original data from scanned QR frames. |
+| `URTypes` | Standard registry for air-gapped data types. |
+
+## 🛡️ Security Considerations
+
+- **Visual Data Transfer**: Air-gapped communication via QR codes provides a physical barrier against remote exploits.
+- **Segment Integrity**: The UR protocol includes checksums for every frame; the decoder ensures 100% data integrity before reconstruction.
+- **Data Leakage**: Although QR-based, ensure sensitive data is not scanned in environments where unauthorized cameras might be recording.
+
+## 💻 Usage
+
+### Generating Multiple QR Frames
 ```dart
 import 'package:dart_web3_bc_ur/dart_web3_bc_ur.dart';
 
 void main() {
-  final ur = UR.encode(binaryData, type: 'eth-signature');
-  print('UR: ${ur.toString()}');
+  final payload = Uint8List.fromList([0xDE, 0xAD, 0xBE, 0xEF]);
+  final ur = UR.encode(payload, type: URTypes.ethTx);
+
+  final encoder = UREncoder(ur, maxPartSize: 200);
+  
+  // Get the next QR part to display
+  while (!encoder.isComplete) {
+     final frame = encoder.nextPart();
+     print('Display QR: $frame');
+  }
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

@@ -1,45 +1,82 @@
 # dart_web3_client
 
-The primary developer entry point for high-level blockchain interaction.
+[![Pub](https://img.shields.io/pub/v/dart_web3_client.svg)](https://pub.dev/packages/dart_web3_client)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Platform: Multi-platform](https://img.shields.io/badge/Platform-Flutter%20%7C%20Dart-blue)
 
-## Features
+The **primary developer interface** for the Dart Web3 SDK. It provides intuitive, high-level abstractions for reading state and executing transactions on any EVM-compatible blockchain.
 
-- **PublicClient**: Optimized for reading state (balances, gas price, call execution).
-- **WalletClient**: Optimized for transactional state changes (sending transactions, deploying contracts).
-- **Auto-Formatting**: Automatically handles hex padding and unit parsing for common RPC methods.
-- **Chain Integration**: Seamlessly works with `dart_web3_chains` for zero-config setup.
+## 🚀 Features
 
-## Architecture
+- **Public & Wallet Clients**: Decoupled clients for read-only vs. authorized write operations.
+- **Fluent API**: Modern, async-first methods for common tasks (getBalance, sendTransaction, etc.).
+- **Auto-Encoding**: Handles gas Estimation, nonce management, and transaction serialization automatically.
+- **Extensible**: Easily add support for custom RPC methods or middleware.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    UI[Application UI] --> Client[Web3 Client]
-    Client --> Public[Public Actions]
-    Client --> Wallet[Wallet Actions]
+    App[DApp View] --> Controller[Business Logic]
+    Controller --> Client[BaseWeb3Client]
     
+    subgraph Specialists [Specialized Clients]
+        Public[PublicClient]
+        Wallet[WalletClient]
+    end
+    
+    Client --> Specialists
     Public --> Provider[dart_web3_provider]
     Wallet --> Signer[dart_web3_signer]
 ```
 
-## Usage
+## 📚 Technical Reference
 
-### Using PublicClient
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `PublicClient` | Interface for read-only queries from the blockchain. |
+| `WalletClient` | Interface for signed actions (sending ETH/Tokens). |
+| `ClientFactory` | Utility to quickly create clients for specific chains. |
+| `BalanceAction` | Helper for fetching and formatting account balances. |
+
+## 🛡️ Security Considerations
+
+- **Nonce Synchronization**: In high-concurrency environments, manually manage nonces to avoid "nonce too low" errors during rapid transaction bursts.
+- **Gas Limit Safety**: While auto-estimation is provided, always set a `MAX_GAS` limit in the client configuration to prevent unintended high cost on complex contract failures.
+- **Confirmation Wait**: Always wait for at least 1-2 confirmations (depending on chain speed) before notifying the user of a "Successful" transaction in the UI.
+
+## 💻 Usage
+
+### Professional Transaction Sending
 ```dart
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_chains/dart_web3_chains.dart';
 
 void main() async {
-  final client = ClientFactory.createPublicClient(
-    rpcUrl: 'https://eth.llamarpc.com',
-    chain: Chains.ethereum,
+  final walletClient = ClientFactory.createWalletClient(
+    rpcUrl: 'https://base-mainnet.g.alchemy.com/v2/...',
+    chain: Chains.base,
+    signer: myPrivateKeySigner,
   );
-  
-  final block = await client.getBlockNumber();
-  print('Current Block: $block');
+
+  try {
+    final hash = await walletClient.sendTransaction(
+      to: '0x...',
+      amount: EthUnit.ether('0.01'),
+    );
+    print('Pending: $hash');
+    
+    // Explicitly wait for transaction receipt
+    final receipt = await walletClient.waitForTransactionReceipt(hash);
+    print('Confirmed in block: ${receipt.blockNumber}');
+  } on RpcError catch (e) {
+    print('Transaction failed: ${e.message}');
+  }
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

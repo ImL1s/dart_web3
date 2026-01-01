@@ -1,41 +1,75 @@
 # dart_web3_aa
 
-Production-ready ERC-4337 Account Abstraction for Dart and Flutter.
+[![Pub](https://img.shields.io/pub/v/dart_web3_aa.svg)](https://pub.dev/packages/dart_web3_aa)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **production-ready Account Abstraction (AA) toolkit** for Dart. It enables the implementation of ERC-4337 smart accounts, gas sponsorship, and custom validation logic in mobile and web applications.
 
-- **Smart Account Management**: Base classes for SimpleAccount, Safe, and Kernel.
-- **UserOperation Factory**: Easy construction and signing of UserOperations.
-- **Bundler Integration**: Fully compatible with popular bundlers (Stackup, Alchemy, Pimlico).
-- **Paymaster Support**: Support for gas sponsorship and ERC-20 gas payments.
-- **Counterfactuals**: Deterministic address calculation before account deployment.
+## 🚀 Features
 
-## Architecture
+- **Standard Smart Accounts**: Built-in support for SimpleAccount, Safe (Gnosis), and Kernel accounts.
+- **UserOperation Factory**: Automatic construction, estimation, and signing of UserOps.
+- **Paymaster Integration**: Seamless hooks for Verifying Paymasters (sponsorship) and ERC-20 Paymasters.
+- **Bundler Compatibility**: Standardized JSON-RPC interface for all major bundler providers (Stackup, Pimlico, Alchemy).
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    Owner[EOA Owner] --> AA[Account Abstraction Client]
-    AA --> UserOp[UserOperation]
-    UserOp --> Bundler[Bundler RPC]
-    Bundler --> EntryPoint[EntryPoint Contract]
+    EOA[Private Key / Signer] --> AAClient[Account Abstraction Client]
+    AAClient --> UserOp[UserOperation]
+    
+    subgraph Network [Chain Execution]
+        Bundler[Bundler RPC]
+        EntryPoint[EntryPoint.sol]
+        SmartAcc[Your Smart Account]
+    end
+    
+    UserOp --> Bundler
+    Bundler --> EntryPoint
+    EntryPoint --> SmartAcc
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `AAClient` | High-level client for sending transactions as a Smart Account. |
+| `UserOperation` | Data structure representing an ERC-4337 intent. |
+| `Paymaster` | Interface for interacting with sponsorship services. |
+| `SimpleAccount` | Default logic for EOA-controlled smart accounts. |
+
+## 🛡️ Security Considerations
+
+- **Private Key Isolation**: The UserOp signer should never be exposed. If using a Browser/Mobile EOA as the signer, ensure the `AAClient` uses secure signing hooks.
+- **EntryPoint Trust**: Only interact with official EntryPoint deployments (e.g., `0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789`).
+- **Paymaster Data**: Strictly validate Paymaster metadata to prevent "Gas Griefing" where a malicious paymaster could cause your UserOps to fail consistently.
+
+## 💻 Usage
+
+### Sending a Sponsored Transaction
 ```dart
 import 'package:dart_web3_aa/dart_web3_aa.dart';
 
 void main() async {
-  final smartAccount = SimpleAccount(
-    owner: mySigner,
-    factoryAddress: '0x...',
+  final smartAccount = SimpleAccount(owner: mySigner);
+  final client = AAClient(smartAccount: smartAccount, bundlerUrl: '...');
+
+  // Use a paymaster to sponsor gas
+  client.setPaymaster(StackupPaymaster(apiKey: '...'));
+
+  final userOpHash = await client.sendTransaction(
+    to: '0x...',
+    value: BigInt.from(0),
+    data: contractCallData,
   );
   
-  print('Smart Account Address: ${smartAccount.address}');
+  print('UserOp Hash: $userOpHash');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

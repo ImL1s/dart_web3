@@ -1,37 +1,71 @@
 # dart_web3_ens
 
-Complete Ethereum Name Service (ENS) integration for Dart.
+[![Pub](https://img.shields.io/pub/v/dart_web3_ens.svg)](https://pub.dev/packages/dart_web3_ens)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **human-readable identity resolver** for the Dart Web3 ecosystem. It provides fully compliant support for the Ethereum Name Service (ENS), including forward resolution, reverse resolution, and off-chain data fetching.
 
-- **Direct Resolution**: Convert `.eth` names to Ethereum addresses.
-- **Reverse Resolution**: Find the primary ENS name for any given address.
-- **Text Records**: Query metadata like email, twitter handles, and avatars.
-- **Multi-Chain Support**: Resolves names across different Ethereum-compatible networks.
+## 🚀 Features
 
-## Architecture
+- **Forward Resolution**: Map names like `alice.eth` to `0x...` addresses.
+- **Reverse Resolution**: Discover the ENS name associated with a specific address.
+- **Content Discovery**: Fetch IPFS/IPNS hashes, avatar URLs, and social metadata associated with a name.
+- **Wildcard & L2 Support**: (Planned) Support for EIP-3668 (CCIP-Read) for reduced gas resolution.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    Name[human.eth] --> Registry[ENS Registry]
-    Registry --> Resolver[Public Resolver]
-    Resolver --> Data[Address / Text / Content]
+    User[Name Context] --> Registry[ENS Registry]
+    Registry --> Resolver[Resolver Contract]
+    Resolver --> Address[Ethereum Address]
+    Resolver --> Text[Text Records / Content]
+    
+    subgraph Logic [Name Processing]
+        NameHash[UTS-46 Normalization]
+        LabelHash[Label Hashing]
+    end
+    
+    User --> Logic
+    Logic --> Registry
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `Ens` | The main entry point for all resolution requests. |
+| `EnsName` | An object representing a unique ENS node. |
+| `EnsResolver` | Low-level logic for interacting with Resolver contracts. |
+| `NameHash` | Implementation of the ENS namehash algorithm. |
+
+## 🛡️ Security Considerations
+
+- **UTS-46 Normalization**: Never manually hash a name string. Always use the built-in normalization logic to prevent homograph attacks and encoding errors.
+- **Resolver Verification**: Before acting on resolution data, ensure the resolver returned is the one currently authorized by the official ENS Registry.
+- **Trustless Avatars**: When displaying ENS avatars, use a secure proxy or verify the source URL to prevent UI-level exploits.
+
+## 💻 Usage
+
+### Complete Name Resolution
 ```dart
 import 'package:dart_web3_ens/dart_web3_ens.dart';
 
 void main() async {
-  final ens = ENS(client: myPublicClient);
-  
-  final address = await ens.resolve('vitalik.eth');
-  print('Address: $address');
+  final ens = Ens(client: publicClient);
+
+  // 1. Resolve Address
+  final address = await ens.getAddress('vitalik.eth');
+  print('Vitalik is at: $address');
+
+  // 2. Fetch Text Records (Avatar, Email, etc.)
+  final avatar = await ens.getText('vitalik.eth', key: 'avatar');
+  print('Avatar URL: $avatar');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

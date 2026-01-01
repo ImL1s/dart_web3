@@ -1,37 +1,73 @@
 # dart_web3_dapp
 
-High-level application framework for building decentralized applications (dApps) in Dart.
+[![Pub](https://img.shields.io/pub/v/dart_web3_dapp.svg)](https://pub.dev/packages/dart_web3_dapp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **comprehensive application framework** for building decentralized applications in Dart and Flutter. It provides the glue that connects your UI to state management, session persistence, and multi-provider connectivity.
 
-- **Store & State**: built-in state management for Web3 application data (accounts, networks).
-- **Session Management**: Handle pairing and session persistence across multiple platforms.
-- **Provider Discovery**: Easy integration with EIP-6963 and browser-based injection.
-- **Unified Bridge**: Abstracted layer to switch between different wallet providers (Reown, Injected, Private Key).
+## 🚀 Features
 
-## Architecture
+- **Unified Provider Store**: Switch between Injected, Reown, and Ledger providers without rewriting UI logic.
+- **Reactive State**: Stream-based updates for account changes, network swaps, and connection status.
+- **Auto-Discovery (EIP-6963)**: Intelligent detection of installed browser wallets on Web platforms.
+- **Secure Persistence**: (Optional) hooks to save session data in encrypted local storage.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    App[DApp UI] --> Store[DApp Store]
-    Store --> Session[Session Manager]
-    Session --> Providers[Provider Registry]
-    Providers --> Reown[Reown / WC]
-    Providers --> Injected[Injected / MetaMask]
+    UI[Flutter UI] --> Store[DApp Store]
+    Store --> Handler[Session Handler]
+    
+    subgraph Connectors [Abstraction Layer]
+        Injected[Injected Connector]
+        WC[Reown Connector]
+        Local[Private Key Connector]
+    end
+    
+    Handler --> Connectors
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `DAppStore` | The central state hub for the entire application. |
+| `Web3Connector` | Base class for adding new wallet connection methods. |
+| `AccountState` | Immutable snapshot of connected address and chain. |
+| `Eip6963Discovery` | Logic for detecting multiple browser extensions. |
+
+## 🛡️ Security Considerations
+
+- **Session Hijacking**: In Web environments, ensure the `origin` is strictly validated when receiving messages from browser extensions.
+- **Data Leaks**: Avoid storing unencrypted private keys in the `DAppStore`. Prefer keeping keys in the `signer` layer and only holding the address in the `UI Store`.
+- **Race Conditions**: When switching networks, ensure all pending requests are either cancelled or correctly re-routed to avoid inconsistent UI states.
+
+## 💻 Usage
+
+### Initializing a Reactive Store
 ```dart
 import 'package:dart_web3_dapp/dart_web3_dapp.dart';
 
 void main() {
-  final dapp = DAppStore();
-  dapp.connect();
+  final store = DAppStore(
+    connectors: [
+      MetaMaskConnector(),
+      ReownConnector(projectId: '...'),
+    ],
+  );
+
+  // Listen for account changes
+  store.activeAccount.listen((acc) {
+    print('Current User: ${acc?.address}');
+  });
+
+  store.connect('metamask');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

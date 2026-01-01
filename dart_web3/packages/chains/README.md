@@ -1,38 +1,65 @@
 # dart_web3_chains
 
-Comprehensive registry and configuration for EVM-compatible networks.
+[![Pub](https://img.shields.io/pub/v/dart_web3_chains.svg)](https://pub.dev/packages/dart_web3_chains)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **comprehensive network registry** for EVM-compatible blockchains. This package provides metadata, RPC configurations, and contract addresses for dozens of networks.
 
-- **Pre-configured Networks**: One-click access to Ethereum, Polygon, Arbitrum, Optimism, Base, and more.
-- **Metric Definitions**: Native currency symbols, decimals, and block explorer URLs.
-- **Multicall Registry**: Default addresses for Multicall3 contracts across supported chains.
-- **Custom Chains**: Easily define and use any EVM network not in the registry.
+## 🚀 Features
 
-## Architecture
+- **Standardized Metadata**: Access chain IDs, currency symbols, and explorer URLs.
+- **Multi-Chain Support**: Pre-configured data for Ethereum, Polygon, BSC, Avalanche, Base, etc.
+- **Advanced Features Settings**: Built-in flags for EIP-1559 and Blob support per network.
+- **Customizable**: Create and register custom private or devnet configurations effortlessly.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    Registry[Chain Registry] --> ChainData[Chain Metadata]
-    ChainData --> RPC[RPC Endpoints]
-    ChainData --> Explorer[Explorer Links]
-    ChainData --> Multicall[Multicall Config]
+    Registry[ChainRegistry] --> Categories[Network Groups]
+    Categories --> Mainnets[Production Chains]
+    Categories --> Testnets[Testing Chains]
+    
+    subgraph Data [Metadata Nodes]
+        Chain[ChainConfig]
+        RPC[RpcUrl]
+        Contracts[Well-known Contracts]
+    end
+    
+    Mainnets --> Data
 ```
 
-## Usage
+## 📚 Technical Reference
 
-### Using Predefined Chains
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `Chain` | The primary object containing all metadata for a network. |
+| `Chains` | A static collection of production-ready chain configurations. |
+| `Currency` | Describes native tokens (name, symbol, decimals). |
+| `BlockExplorer` | Configuration for standard explorer URL structures. |
+
+## 🛡️ Security Considerations
+
+- **ChainID Validation**: Always verify the `chainId` returned by the RPC matches the `ChainConfig` to prevent replay attacks on unintended networks.
+- **RPC Privacy**: Use the `rpcUrls` provided as a starting point, but encourage users to provide their own private RPC keys for production apps to avoid rate limiting and metadata tracking.
+
+## 💻 Usage
+
+### Querying Network Metadata
 ```dart
 import 'package:dart_web3_chains/dart_web3_chains.dart';
 
 void main() {
-  final chain = Chains.polygon;
+  final chain = Chains.arbitrum;
+  
   print('Network: ${chain.name}');
-  print('Main RPC: ${chain.rpcUrls.first}');
+  print('Native Asset: ${chain.nativeCurrency.symbol}');
+  print('Supports EIP-1559: ${chain.features.supportsEIP1559}');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

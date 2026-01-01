@@ -1,40 +1,67 @@
 # dart_web3_ledger
 
-Hardware-level security for Dart using the Ledger device ecosystem.
+[![Pub](https://img.shields.io/pub/v/dart_web3_ledger.svg)](https://pub.dev/packages/dart_web3_ledger)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+Professional **Ledger hardware wallet support** for Dart. Connect via USB or Bluetooth to perform secure, on-device signing for Ethereum and other supported blockchains.
 
-- **Multi-Transport**: Support for Ledger HID (USB) and Bluetooth Low Energy (BLE).
-- **App Connectivity**: Interaction with Ethereum, Bitcoin, and other specific Ledger apps.
-- **Address Validation**: Securely display and verify addresses on the physical device screen.
-- **Transaction Signing**: Support for EIP-1559, Legacy, and complex smart contract interactions.
+## 🚀 Features
 
-## Architecture
+- **Multi-Transport**: Native support for Ledger HID (USB) on Desktop/Mobile and Bluetooth (BLE) on iOS/Android.
+- **Secure Signing**: Fully compatible with the Ledger Ethereum App (including Clear Signing for EIP-712).
+- **Device Management**: List, connect, and monitor device status (Locked, App Not Open).
+- **Path Derivation**: Access any BIP-44 account directly from the hardware's secure element.
+
+## 🏗️ Architecture
 
 ```mermaid
-graph LR
-    App[Dart App] --> Transport[USB/BLE Transport]
-    Transport --> Ledger[Ledger Device]
-    Ledger --> SecureElement[Secure Element]
+graph TD
+    App[Flutter/Dart App] --> Transport[Transport HID/BLE]
+    Transport --> LedgerCLI[Ledger Client]
+    
+    subgraph Device [Ledger Hardware]
+        SEC[Secure Element]
+        Apps[Eth / BTC Apps]
+    end
+    
+    LedgerCLI <--> Apps
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `LedgerConnection` | Manages the raw byte-stream to the device. |
+| `LedgerAppEth` | High-level API for Ethereum-specific commands. |
+| `LedgerScanner` | Service for discovering Bluetooth-enabled devices. |
+| `APDU` | Low-level protocol units for Ledger communication. |
+
+## 🛡️ Security Considerations
+
+- **Bluetooth Bonding**: When using BLE, ensure your application handles bonding correctly to prevent man-in-the-middle pairing attempts.
+- **Firmware Versions**: The SDK target specific APDU versions. Warn users if their device firmware is outdated to avoid signing failures.
+- **Physical Verification**: The "Golden Rule" of hardware wallets: Never trust the computer; only trust what is on the device screen.
+
+## 💻 Usage
+
+### Fetching Address (USB)
 ```dart
 import 'package:dart_web3_ledger/dart_web3_ledger.dart';
 
 void main() async {
-  final ledger = LedgerClient();
-  final devices = await ledger.listDevices();
+  final ledger = LedgerConnection.usb();
+  await ledger.open();
+
+  final ethApp = LedgerAppEth(ledger);
   
-  if (devices.isNotEmpty) {
-     final device = await ledger.connect(devices.first);
-     final address = await device.getAddress(path: "m/44'/60'/0'/0/0");
-  }
+  // Shows 'Verify Address' prompt on device
+  final address = await ethApp.getAddress("m/44'/60'/0'/0/0", display: true);
+  print('Connected: $address');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

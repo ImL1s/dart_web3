@@ -1,35 +1,70 @@
 # dart_web3_tron
 
-Tron (TRX) blockchain and TVM extension for the Dart Web3 SDK.
+[![Pub](https://img.shields.io/pub/v/dart_web3_tron.svg)](https://pub.dev/packages/dart_web3_tron)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A **full-featured TRON extension** for the Dart Web3 ecosystem. Effortlessly interact with the TVM (Tron Virtual Machine), manage Bandwidth/Energy, and perform high-speed asset transfers.
 
-- **Account Management**: Support for base58check addresses and Tron-specific cryptography.
-- **Protocol Support**: Deep integration for TRX, TRC-10, and TRC-20 tokens.
-- **TVM**: Interact with Tron Virtual Machine smart contracts using ABI logic.
-- **Resource Management**: Manage account Energy and Bandwidth via staking.
+## 🚀 Features
 
-## Architecture
+- **TVM Primitives**: Base58Check addressing and Protobuf-based transaction modeling.
+- **Resource Management**: Logic for Freezing/Unfreezing TRX to gain Bandwidth and Energy.
+- **TRC-20 Support**: Specialized wrappers for USDT and other popular tokens on TRON.
+- **Multi-Sig & Permissions**: Advanced support for TRON's multi-signature and account permission systems.
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TD
-    App[DApp] --> TronClient[Tron Client]
-    TronClient --> TVM[Tron Virtual Machine]
-    TronClient --> HTTP[TronGrid / RPC]
+    App[Dart App] --> TronClient[Tron Client]
+    TronClient --> FullNode[Full Node RPC]
+    TronClient --> Solidity[Solidity Node]
+    
+    subgraph Resource [Economic Model]
+        BW[Bandwidth]
+        EN[Energy]
+    end
+    
+    TronClient --> Resource
 ```
 
-## Usage
+## 📚 Technical Reference
 
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `TronClient` | Primary interface for TRON HTTP and gRPC services (planned). |
+| `TronWallet` | Identity manager for TRON private keys and addresses. |
+| `Trc20Contract` | Specialized logic for TRC-20 token standards. |
+| `TronTransaction` | Unified model for TRX, Token, and Contract actions. |
+
+## 🛡️ Security Considerations
+
+- **Burn vs Stake**: If an account has zero Energy, TRX will be burned for transaction fees. Always verify resource availability in the UI before execution.
+- **Base58 Integrity**: TRON addresses use a leading `T`. Ensure proper validation to prevent sending TRX to Ethereum addresses by mistake.
+- **Contract Expiration**: TRON transaction expiration is relative. The SDK automatically sets optimal values based on the latest block height.
+
+## 💻 Usage
+
+### Transferring USDT (TRC-20)
 ```dart
 import 'package:dart_web3_tron/dart_web3_tron.dart';
 
 void main() async {
-  final tron = TronClient(url: 'https://api.trongrid.io');
-  final balance = await tron.getTRXBalance('TronAddress...');
+  final tron = TronClient(apiKey: '...');
+  final usdt = Trc20Contract(address: 'TR7NHq...', client: tron);
+
+  final hash = await usdt.transfer(
+    to: 'ReceiverTAddress...',
+    amount: BigInt.from(10000000), // 10.0 USDT
+    signer: myTronSigner,
+  );
+  
+  print('Tron Tx Hash: $hash');
 }
 ```
 
-## Installation
+## 📦 Installation
 
 ```yaml
 dependencies:

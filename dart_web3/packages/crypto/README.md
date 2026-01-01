@@ -1,52 +1,71 @@
 # dart_web3_crypto
 
-Pure Dart cryptographic primitives for the Web3 ecosystem.
+[![Pub](https://img.shields.io/pub/v/dart_web3_crypto.svg)](https://pub.dev/packages/dart_web3_crypto)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Platform: Multi-platform](https://img.shields.io/badge/Platform-Native%20%7C%20Web-green)
 
-## Features
+A **security-first** cryptographic engine for the Dart Web3 SDK. This package provides the mathematical backbone for key derivation, signatures, and mnemonic management.
 
-- **Elliptic Curve**: Full support for `secp256k1` (used by Ethereum, Bitcoin).
-- **Hardened Key Management**:
-    - **BIP-32**: Hierarchical载 Deterministic (HD) Wallets.
-    - **BIP-39**: Mnemonic seed phrase generation and entropy management.
-    - **BIP-44**: Multi-account derivation paths.
-- **Hash Functions**: Optimized implementations of Keccak-256, SHA-256, and RIPEMD-160.
-- **ECDSA**: Secure signing and recovery of public keys from signatures.
+## 🚀 Features
 
-## Architecture
+- **Elliptic Curve Engine**: High-performance `secp256k1` implementation in pure Dart.
+- **HD Wallet (BIP-32/44)**: Industry-standard hierarchical deterministic derivation for multi-chain support.
+- **Mnemonic Seed (BIP-39)**: Secure entropy generation and multilingual wordlist support.
+- **Fast Hashing**: Native-optimized Keccak-256 and SHA-256 implementations.
+
+## 🏗️ Architecture
 
 ```mermaid
-graph TD
-    Mnemonic[BIP-39 Mnemonic] --> Seed[Seed Binary]
-    Seed --> HDMaster[BIP-32 Master Key]
-    HDMaster --> Derivation[BIP-44 Path Derivation]
-    Derivation --> Secp[secp256k1 Signing]
+graph LR
+    Entropy[Entropy Source] --> BIP39[BIP-39 Mnemonic]
+    BIP39 --> Seed[PBKDF2 Seed]
+    Seed --> HDMaster[BIP-32 Master Node]
+    HDMaster --> Derived[BIP-44 Child Node]
+    Derived --> ECDSA[secp256k1 KeyPair]
     
-    subgraph Crypto_Engine [Crypto Engine]
-        Secp
-        Hashing[Keccak/SHA256]
-    end
+    style ECDSA fill:#bfb,stroke:#2d2,stroke-width:2px;
 ```
 
-## Usage
+## 📚 Technical Reference
 
-### Mnemonic and HD Wallet
+### Core Classes
+| Class | Responsibility |
+|-------|----------------|
+| `Bip39` | Generates and validates mnemonic phrases and seeds. |
+| `HDWallet` | Manages node trees and path-based key derivation. |
+| `EthKeyPair` | Represents a raw private/public key pair and performs ECDSA. |
+| `Keccak` | Provides Ethereum-standard Keccak-256 hashing. |
+
+## 🛡️ Security Considerations
+
+- **Memory Erasure**: Use `privateKey.fill(0)` (if available in buffer context) after deriving keys to minimize resident memory risk.
+- **Entropy Source**: `Bip39.generate()` uses `Random.secure()`. On some platforms, ensure the underlying system RNG is properly initialized.
+- **Do Not Log Keys**: Never log or print private keys or mnemonics in production. Use obfuscated logging if necessary.
+
+## 💻 Usage
+
+### Secure Multi-Account Derivation
 ```dart
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 void main() {
-  // 1. Generate Mnemonic
-  final mnemonic = Mnemonic.generate();
-  
-  // 2. Create Master Key
-  final hdWallet = HDWallet.fromMnemonic(mnemonic);
-  
-  // 3. Derive Ethereum Path (m/44'/60'/0'/0/0)
-  final firstAccount = hdWallet.derivePath("m/44'/60'/0'/0/0");
-  print('Private Key: ${firstAccount.privateKey}');
+  final mnemonic = "asset adjust total... (12 words)";
+  final hdRoot = HDWallet.fromMnemonic(Mnemonic.fromSentence(mnemonic, WordList.english));
+
+  // Derive Account #0 and Account #1
+  final acc0 = hdRoot.derivePath("m/44'/60'/0'/0/0");
+  final acc1 = hdRoot.derivePath("m/44'/60'/0'/0/1");
+
+  print('Acc 0 Address: ${acc0.address}');
 }
 ```
 
-## Installation
+### Performance Hashing
+```dart
+final hash = Keccak.hash(Uint8List.fromList([0x01, 0x02]));
+```
+
+## 📦 Installation
 
 ```yaml
 dependencies:
