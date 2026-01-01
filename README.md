@@ -145,14 +145,14 @@ graph TD
 | [`dart_web3_chains`](packages/chains) | Chain configurations | 2 |
 | [`dart_web3_client`](packages/client) | PublicClient/WalletClient | 3 |
 | [`dart_web3_contract`](packages/contract) | Contract abstraction | 3 |
-| `dart_web3_events` | Event subscription | 3 |
-| `dart_web3_multicall` | Multicall support | 4 |
-| `dart_web3_ens` | ENS resolution | 4 |
-| `dart_web3_aa` | ERC-4337 Account Abstraction | 5 |
-| `dart_web3_reown` | Reown/WalletConnect v2 | 5 |
-| `dart_web3_swap` | DEX aggregation | 5 |
+| [`dart_web3_events`](packages/events) | Event subscription | 3 |
+| [`dart_web3_multicall`](packages/multicall) | Multicall support | 4 |
+| [`dart_web3_ens`](packages/ens) | ENS resolution | 4 |
+| [`dart_web3_aa`](packages/aa) | ERC-4337 Account Abstraction | 5 |
+| [`dart_web3_reown`](packages/reown) | Reown/WalletConnect v2 | 5 |
+| [`dart_web3_swap`](packages/swap) | DEX aggregation | 5 |
 | `dart_web3_bridge` | Cross-chain bridging | 5 |
-| `dart_web3_nft` | NFT services | 5 |
+| [`dart_web3_nft`](packages/nft) | NFT services | 5 |
 | `dart_web3_staking` | Staking services | 5 |
 | `dart_web3_debug` | Debug/Trace API | 5 |
 | `dart_web3_mev` | MEV protection/Flashbots | 5 |
@@ -164,7 +164,7 @@ graph TD
 | `dart_web3_polkadot` | Polkadot extension | 7 |
 | `dart_web3_tron` | Tron extension | 7 |
 | `dart_web3_ton` | TON extension | 7 |
-| `dart_web3_bitcoin` | Bitcoin extension | 7 |
+| [`dart_web3_bitcoin`](packages/extensions/bitcoin) | Bitcoin extension | 7 |
 
 ## Development
 
