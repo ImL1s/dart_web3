@@ -275,7 +275,7 @@ class FallbackTransport implements Transport {
 
           return result;
         } catch (e) {
-          lastError = e as Exception;
+          lastError = e is Exception ? e : Exception(e.toString());
           config.failureCount++;
 
           if (config.failureCount >= options.failureThreshold) {
@@ -313,7 +313,7 @@ class FallbackTransport implements Transport {
         try {
           return await config.transport.batchRequest(requests);
         } catch (e) {
-          lastError = e as Exception;
+          lastError = e is Exception ? e : Exception(e.toString());
           config.failureCount++;
 
           if (config.failureCount >= options.failureThreshold) {

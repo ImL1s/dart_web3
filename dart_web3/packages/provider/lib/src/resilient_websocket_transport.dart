@@ -137,6 +137,7 @@ class ResilientWebSocketTransport implements Transport {
   int _requestId = 0;
   int _reconnectAttempts = 0;
   bool _disposed = false;
+  Completer<void>? _connectCompleter; // Prevents concurrent connect() calls
   bool _intentionalClose = false;
 
   WebSocketConnectionState _state = WebSocketConnectionState.disconnected;
@@ -175,11 +176,18 @@ class ResilientWebSocketTransport implements Transport {
   /// Connects to the WebSocket server.
   Future<void> connect() async {
     if (_disposed) return;
-    if (_state == WebSocketConnectionState.connected ||
-        _state == WebSocketConnectionState.connecting) {
+
+    // If already connected, return immediately
+    if (_state == WebSocketConnectionState.connected) {
       return;
     }
 
+    // If connection is in progress, wait for it to complete
+    if (_connectCompleter != null) {
+      return _connectCompleter!.future;
+    }
+
+    _connectCompleter = Completer<void>();
     _setState(WebSocketConnectionState.connecting);
 
     try {
@@ -202,9 +210,14 @@ class ResilientWebSocketTransport implements Transport {
 
       // Restore subscriptions
       await _restoreSubscriptions();
+
+      _connectCompleter!.complete();
     } catch (e) {
       _setState(WebSocketConnectionState.disconnected, error: e.toString());
+      _connectCompleter!.completeError(e);
       _scheduleReconnect();
+    } finally {
+      _connectCompleter = null;
     }
   }
 
@@ -227,15 +240,36 @@ class ResilientWebSocketTransport implements Transport {
   }
 
   void _handleMessage(dynamic message) {
-    final data = json.decode(message as String) as Map<String, dynamic>;
+    // Handle both String and binary messages
+    String messageStr;
+    if (message is String) {
+      messageStr = message;
+    } else if (message is List<int>) {
+      messageStr = String.fromCharCodes(message);
+    } else {
+      // Unknown message type, ignore
+      return;
+    }
+
+    Map<String, dynamic> data;
+    try {
+      data = json.decode(messageStr) as Map<String, dynamic>;
+    } catch (e) {
+      // Invalid JSON, ignore the message
+      return;
+    }
 
     // Check if it's a subscription notification
     if (data.containsKey('method') && data['method'] == 'eth_subscription') {
-      final params = data['params'] as Map<String, dynamic>;
-      final subscriptionId = params['subscription'] as String;
-      final info = _subscriptions[subscriptionId];
-      if (info != null) {
-        info.controller.add(params['result'] as Map<String, dynamic>);
+      final params = data['params'] as Map<String, dynamic>?;
+      if (params != null) {
+        final subscriptionId = params['subscription'] as String?;
+        if (subscriptionId != null) {
+          final info = _subscriptions[subscriptionId];
+          if (info != null && params['result'] is Map<String, dynamic>) {
+            info.controller.add(params['result'] as Map<String, dynamic>);
+          }
+        }
       }
       return;
     }
