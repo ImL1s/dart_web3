@@ -105,12 +105,6 @@ class AbiParser {
 
 /// Represents a function in an ABI.
 class AbiFunction {
-  final String name;
-  final List<AbiType> inputs;
-  final List<String> inputNames;
-  final List<AbiType> outputs;
-  final List<String> outputNames;
-  final String stateMutability;
 
   AbiFunction({
     required this.name,
@@ -146,6 +140,12 @@ class AbiFunction {
       stateMutability: json['stateMutability'] as String? ?? 'nonpayable',
     );
   }
+  final String name;
+  final List<AbiType> inputs;
+  final List<String> inputNames;
+  final List<AbiType> outputs;
+  final List<String> outputNames;
+  final String stateMutability;
 
   /// Gets the function signature (e.g., "transfer(address,uint256)").
   String get signature {
@@ -198,11 +198,6 @@ class AbiFunction {
 
 /// Represents an event in an ABI.
 class AbiEvent {
-  final String name;
-  final List<AbiType> inputs;
-  final List<String> inputNames;
-  final List<bool> indexed;
-  final bool anonymous;
 
   AbiEvent({
     required this.name,
@@ -232,6 +227,11 @@ class AbiEvent {
       anonymous: json['anonymous'] as bool? ?? false,
     );
   }
+  final String name;
+  final List<AbiType> inputs;
+  final List<String> inputNames;
+  final List<bool> indexed;
+  final bool anonymous;
 
   /// Gets the event signature.
   String get signature {
@@ -247,9 +247,6 @@ class AbiEvent {
 
 /// Represents an error in an ABI.
 class AbiError {
-  final String name;
-  final List<AbiType> inputs;
-  final List<String> inputNames;
 
   AbiError({
     required this.name,
@@ -273,6 +270,9 @@ class AbiError {
       inputNames: inputNames,
     );
   }
+  final String name;
+  final List<AbiType> inputs;
+  final List<String> inputNames;
 
   /// Gets the error signature.
   String get signature {

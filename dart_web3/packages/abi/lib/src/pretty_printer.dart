@@ -140,7 +140,7 @@ class AbiPrettyPrinter {
     return bigValue.toString();
   }
 
-  static String _formatArray(AbiArray type, List values, int indent) {
+  static String _formatArray(AbiArray type, List<dynamic> values, int indent) {
     if (values.isEmpty) return '[]';
     
     if (values.length <= 3 && !type.elementType.isDynamic) {

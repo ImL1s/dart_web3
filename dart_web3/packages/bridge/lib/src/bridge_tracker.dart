@@ -1,17 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:dart_web3_client/dart_web3_client.dart';
 
-import 'bridge_types.dart';
+import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'bridge_quote.dart';
+import 'bridge_types.dart';
 
 /// Bridge transaction tracker
 class BridgeTracker {
+
+  BridgeTracker(this._clients);
   final Map<int, PublicClient> _clients;
   final Map<String, BridgeTrackingInfo> _trackingMap = {};
   final StreamController<BridgeStatusUpdate> _statusController = StreamController.broadcast();
-
-  BridgeTracker(this._clients);
 
   /// Stream of bridge status updates
   Stream<BridgeStatusUpdate> get statusUpdates => _statusController.stream;
@@ -98,7 +99,7 @@ class BridgeTracker {
 
     // Poll for source transaction receipt
     TransactionReceipt? receipt;
-    int attempts = 0;
+    var attempts = 0;
     const maxAttempts = 60; // 5 minutes with 5-second intervals
     
     while (receipt == null && attempts < maxAttempts) {
@@ -107,7 +108,7 @@ class BridgeTracker {
       try {
         final receiptData = await sourceClient.getTransactionReceipt(sourceTransactionHash);
         if (receiptData != null) {
-          receipt = TransactionReceipt.fromJson(receiptData);
+          receipt = receiptData;
         }
       } catch (e) {
         // Transaction not yet mined, continue polling
@@ -150,7 +151,7 @@ class BridgeTracker {
 
     // Wait for the estimated bridge time
     final estimatedTime = trackingInfo.quote.estimatedTime;
-    await Future.delayed(estimatedTime * 0.8); // Wait for 80% of estimated time
+    await Future.delayed<void>(estimatedTime * 0.8); // Wait for 80% of estimated time
 
     // Check if we can find the destination transaction
     await _checkForDestinationTransaction(sourceTransactionHash);
@@ -168,11 +169,11 @@ class BridgeTracker {
     _emitStatusUpdate(pendingInfo);
 
     // Continue checking for destination transaction
-    int attempts = 0;
+    var attempts = 0;
     const maxAttempts = 240; // 20 minutes with 5-second intervals
     
     while (attempts < maxAttempts) {
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed<void>(const Duration(seconds: 5));
       
       final found = await _checkForDestinationTransaction(sourceTransactionHash);
       if (found) return;
@@ -244,6 +245,17 @@ class BridgeTracker {
 
 /// Bridge tracking information
 class BridgeTrackingInfo {
+
+  const BridgeTrackingInfo({
+    required this.sourceTransactionHash,
+    required this.quote, required this.startTime, required this.status, this.destinationTransactionHash,
+    this.userAddress,
+    this.endTime,
+    this.sourceReceipt,
+    this.destinationReceipt,
+    this.error,
+    this.metadata,
+  });
   final String sourceTransactionHash;
   final String? destinationTransactionHash;
   final BridgeQuote quote;
@@ -255,20 +267,6 @@ class BridgeTrackingInfo {
   final TransactionReceipt? destinationReceipt;
   final String? error;
   final Map<String, dynamic>? metadata;
-
-  const BridgeTrackingInfo({
-    required this.sourceTransactionHash,
-    this.destinationTransactionHash,
-    required this.quote,
-    this.userAddress,
-    required this.startTime,
-    this.endTime,
-    required this.status,
-    this.sourceReceipt,
-    this.destinationReceipt,
-    this.error,
-    this.metadata,
-  });
 
   /// Duration since bridge started
   Duration get duration {
@@ -294,7 +292,7 @@ class BridgeTrackingInfo {
   double get progress {
     switch (status) {
       case BridgeStatus.pending:
-        return 0.0;
+        return 0;
       case BridgeStatus.sourceConfirmed:
         return 0.2;
       case BridgeStatus.bridging:
@@ -302,10 +300,10 @@ class BridgeTrackingInfo {
       case BridgeStatus.destinationPending:
         return 0.8;
       case BridgeStatus.completed:
-        return 1.0;
+        return 1;
       case BridgeStatus.failed:
       case BridgeStatus.refunded:
-        return 0.0;
+        return 0;
     }
   }
 
@@ -367,20 +365,32 @@ class BridgeTrackingInfo {
       'startTime': startTime.toIso8601String(),
       if (endTime != null) 'endTime': endTime!.toIso8601String(),
       'status': status.toString().split('.').last,
-      if (sourceReceipt != null) 'sourceReceipt': sourceReceipt!.toJson(),
-      if (destinationReceipt != null) 'destinationReceipt': destinationReceipt!.toJson(),
+      if (sourceReceipt != null) 'sourceReceipt': _receiptToJson(sourceReceipt!),
+      if (destinationReceipt != null) 'destinationReceipt': _receiptToJson(destinationReceipt!),
       if (error != null) 'error': error,
       if (metadata != null) 'metadata': metadata,
+    };
+  }
+
+  Map<String, dynamic> _receiptToJson(TransactionReceipt receipt) {
+    // Manually map fields since TransactionReceipt doesn't have toJson
+    return {
+      'transactionHash': receipt.transactionHash,
+      'status': '0x${receipt.status.toRadixString(16)}',
+      'gasUsed': '0x${receipt.gasUsed.toRadixString(16)}',
+      if (receipt.effectiveGasPrice != null)
+        'effectiveGasPrice': '0x${receipt.effectiveGasPrice!.toRadixString(16)}',
+      'logs': receipt.logs.map((log) => {
+            'address': log.address,
+            'topics': log.topics,
+            'data': HexUtils.encode(log.data),
+          },).toList(),
     };
   }
 }
 
 /// Bridge status update event
 class BridgeStatusUpdate {
-  final String sourceTransactionHash;
-  final BridgeStatus status;
-  final BridgeTrackingInfo trackingInfo;
-  final DateTime timestamp;
 
   const BridgeStatusUpdate({
     required this.sourceTransactionHash,
@@ -388,75 +398,9 @@ class BridgeStatusUpdate {
     required this.trackingInfo,
     required this.timestamp,
   });
+  final String sourceTransactionHash;
+  final BridgeStatus status;
+  final BridgeTrackingInfo trackingInfo;
+  final DateTime timestamp;
 }
 
-/// Transaction receipt (simplified)
-class TransactionReceipt {
-  final String transactionHash;
-  final int status;
-  final BigInt gasUsed;
-  final BigInt? effectiveGasPrice;
-  final List<Log> logs;
-
-  const TransactionReceipt({
-    required this.transactionHash,
-    required this.status,
-    required this.gasUsed,
-    this.effectiveGasPrice,
-    required this.logs,
-  });
-
-  factory TransactionReceipt.fromJson(Map<String, dynamic> json) {
-    return TransactionReceipt(
-      transactionHash: json['transactionHash'] as String,
-      status: int.parse(json['status'] as String, radix: 16),
-      gasUsed: BigInt.parse(json['gasUsed'] as String, radix: 16),
-      effectiveGasPrice: json['effectiveGasPrice'] != null
-          ? BigInt.parse(json['effectiveGasPrice'] as String, radix: 16)
-          : null,
-      logs: (json['logs'] as List<dynamic>)
-          .map((log) => Log.fromJson(log as Map<String, dynamic>))
-          .toList(),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'transactionHash': transactionHash,
-      'status': '0x${status.toRadixString(16)}',
-      'gasUsed': '0x${gasUsed.toRadixString(16)}',
-      if (effectiveGasPrice != null)
-        'effectiveGasPrice': '0x${effectiveGasPrice!.toRadixString(16)}',
-      'logs': logs.map((log) => log.toJson()).toList(),
-    };
-  }
-}
-
-/// Log entry (simplified)
-class Log {
-  final String address;
-  final List<String> topics;
-  final String data;
-
-  const Log({
-    required this.address,
-    required this.topics,
-    required this.data,
-  });
-
-  factory Log.fromJson(Map<String, dynamic> json) {
-    return Log(
-      address: json['address'] as String,
-      topics: (json['topics'] as List<dynamic>).cast<String>(),
-      data: json['data'] as String,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'address': address,
-      'topics': topics,
-      'data': data,
-    };
-  }
-}

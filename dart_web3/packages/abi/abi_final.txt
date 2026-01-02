@@ -1,0 +1,37 @@
+Analyzing abi...
+
+warning - test\parser_test.dart:196:24 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\decoder.dart:88:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\decoder.dart:99:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\parser.dart:13:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:22:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\pretty_printer.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:55:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:56:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:60:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:74:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:75:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:154:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:182:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\typed_data.dart:25:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:26:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:163:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:192:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:223:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\abi_fixes_test.dart:235:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:236:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:237:15 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:39:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:40:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:41:27 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:42:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:59:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_property_test.dart:35:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:83:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:139:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:198:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:282:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\typed_data_test.dart:158:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+
+33 issues found.

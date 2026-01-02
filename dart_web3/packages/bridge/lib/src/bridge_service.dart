@@ -1,27 +1,28 @@
 import 'dart:async';
-import 'dart:math' as math;
-import 'package:dart_web3_client/dart_web3_client.dart';
 
+import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+
+import 'bridge_quote.dart';
+import 'bridge_tracker.dart';
+import 'bridge_types.dart';
 import 'protocols/bridge_protocol.dart';
 import 'protocols/layerzero_bridge.dart';
-import 'protocols/wormhole_bridge.dart';
-import 'protocols/stargate_bridge.dart';
 import 'protocols/native_bridge.dart';
-import 'bridge_quote.dart';
-import 'bridge_types.dart';
-import 'bridge_tracker.dart';
+import 'protocols/stargate_bridge.dart';
+import 'protocols/wormhole_bridge.dart';
 
 /// Main bridge service that aggregates quotes from multiple bridge protocols
 class BridgeService {
-  final Map<int, PublicClient> clients;
-  final List<BridgeProtocol> protocols;
-  final BridgeTracker bridgeTracker;
   
   BridgeService({
     required this.clients,
     List<BridgeProtocol>? protocols,
   }) : protocols = protocols ?? _createDefaultProtocols(),
        bridgeTracker = BridgeTracker(clients);
+  final Map<int, PublicClient> clients;
+  final List<BridgeProtocol> protocols;
+  final BridgeTracker bridgeTracker;
 
   /// Get the best bridge quote from all protocols
   Future<BridgeQuote?> getBestQuote(BridgeParams params) async {
@@ -96,7 +97,6 @@ class BridgeService {
           maxFeePerGas: transaction.maxFeePerGas,
           maxPriorityFeePerGas: transaction.maxPriorityFeePerGas,
           chainId: transaction.chainId,
-          type: TransactionType.eip1559,
         ),
       );
 
@@ -104,7 +104,7 @@ class BridgeService {
       bridgeTracker.trackBridge(
         sourceTransactionHash: txHash,
         quote: quote,
-        userAddress: walletClient.address.address,
+        userAddress: walletClient.address.hex,
       );
 
       return txHash;
@@ -194,7 +194,7 @@ class BridgeService {
                 sourceChainId: sourceChain,
                 destinationChainId: destChain,
                 supportedProtocols: [protocol.name],
-              ));
+              ),);
               addedPairs.add(pairKey);
             } else {
               // Add protocol to existing pair
@@ -268,7 +268,7 @@ class BridgeService {
     
     // Find the quote with the best balance of output, time, and confidence
     BridgeQuote? bestQuote;
-    double bestScore = 0.0;
+    var bestScore = 0.0;
     
     for (final quote in quotes) {
       // Calculate a composite score
@@ -336,15 +336,15 @@ class BridgeService {
 
 /// Chain pair information
 class ChainPair {
-  final int sourceChainId;
-  final int destinationChainId;
-  final List<String> supportedProtocols;
 
   ChainPair({
     required this.sourceChainId,
     required this.destinationChainId,
     required this.supportedProtocols,
   });
+  final int sourceChainId;
+  final int destinationChainId;
+  final List<String> supportedProtocols;
 
   @override
   String toString() {
@@ -354,10 +354,10 @@ class ChainPair {
 
 /// Exception thrown when bridge execution fails
 class BridgeExecutionException implements Exception {
-  final String message;
-  final dynamic originalError;
 
   const BridgeExecutionException(this.message, {this.originalError});
+  final String message;
+  final dynamic originalError;
 
   @override
   String toString() => 'BridgeExecutionException: $message';

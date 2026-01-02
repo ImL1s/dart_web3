@@ -6,14 +6,14 @@ import '../bridge_types.dart';
 import 'bridge_protocol.dart';
 
 /// Wormhole bridge protocol implementation
-class WormholeBridge implements BridgeProtocol {
-  final BridgeProtocolConfig config;
-  final http.Client _httpClient;
+class WormholeBridge extends BridgeProtocol {
 
   WormholeBridge({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final BridgeProtocolConfig config;
+  final http.Client _httpClient;
 
   @override
   String get name => 'Wormhole';
@@ -170,7 +170,7 @@ class WormholeBridge implements BridgeProtocol {
       return tokens.any((token) => 
         token.address.toLowerCase() == sourceToken.address.toLowerCase() &&
         token.getAddressOnChain(destinationChainId)?.toLowerCase() == 
-        destinationToken.address.toLowerCase()
+        destinationToken.address.toLowerCase(),
       );
     } catch (e) {
       return false;

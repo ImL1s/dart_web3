@@ -24,13 +24,13 @@ abstract class AbiType {
 
 /// Unsigned integer type (uint8 to uint256).
 class AbiUint extends AbiType {
-  final int bits;
 
   AbiUint(this.bits) {
     if (bits <= 0 || bits > 256 || bits % 8 != 0) {
       throw ArgumentError('Invalid uint bits: $bits');
     }
   }
+  final int bits;
 
   @override
   String get name => 'uint$bits';
@@ -65,13 +65,13 @@ class AbiUint extends AbiType {
 
 /// Signed integer type (int8 to int256).
 class AbiInt extends AbiType {
-  final int bits;
 
   AbiInt(this.bits) {
     if (bits <= 0 || bits > 256 || bits % 8 != 0) {
       throw ArgumentError('Invalid int bits: $bits');
     }
   }
+  final int bits;
 
   @override
   String get name => 'int$bits';
@@ -167,13 +167,13 @@ class AbiBool extends AbiType {
 
 /// Fixed-size bytes type (bytes1 to bytes32).
 class AbiFixedBytes extends AbiType {
-  final int length;
 
   AbiFixedBytes(this.length) {
     if (length <= 0 || length > 32) {
       throw ArgumentError('Invalid bytes length: $length');
     }
   }
+  final int length;
 
   @override
   String get name => 'bytes$length';
@@ -261,11 +261,11 @@ class AbiString extends AbiType {
 }
 
 /// Array type (fixed or dynamic length).
-class AbiArray extends AbiType {
-  final AbiType elementType;
-  final int? length; // null for dynamic arrays
+class AbiArray extends AbiType { // null for dynamic arrays
 
   AbiArray(this.elementType, [this.length]);
+  final AbiType elementType;
+  final int? length;
 
   @override
   String get name => length != null ? '${elementType.name}[$length]' : '${elementType.name}[]';
@@ -375,10 +375,10 @@ class AbiArray extends AbiType {
 
 /// Tuple type (struct).
 class AbiTuple extends AbiType {
-  final List<AbiType> components;
-  final List<String>? names;
 
   AbiTuple(this.components, [this.names]);
+  final List<AbiType> components;
+  final List<String>? names;
 
   @override
   String get name {
@@ -439,7 +439,7 @@ class AbiTuple extends AbiType {
 
       for (var i = 0; i < components.length; i++) {
         if (offsets[i] != null) {
-          parts.add(AbiUint(256).encode(offsets[i]!));
+          parts.add(AbiUint(256).encode(offsets[i]));
         } else {
           parts.add(encodedElements[i]);
         }

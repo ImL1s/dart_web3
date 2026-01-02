@@ -1,6 +1,7 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('AbiType Tests', () {
@@ -54,7 +55,7 @@ void main() {
       test('decodes negative int256 correctly', () {
         final type = AbiInt(256);
         final data = Uint8List(32);
-        for (int i = 0; i < 32; i++) {
+        for (var i = 0; i < 32; i++) {
           data[i] = 255;
         }
         
@@ -213,7 +214,7 @@ void main() {
         
         final (decoded, _) = type.decode(encoded, 0);
         expect((decoded as List)[0], equals(BigInt.from(42)));
-        expect((decoded)[1], equals(true));
+        expect(decoded[1], equals(true));
       });
     });
   });

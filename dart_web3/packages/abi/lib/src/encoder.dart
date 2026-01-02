@@ -79,7 +79,7 @@ class AbiEncoder {
       return HexUtils.decode(hex);
     }
     if (type is AbiBool) {
-      return Uint8List.fromList([(value as bool) ? 1 : 0]);
+      return Uint8List.fromList([if (value as bool) 1 else 0]);
     }
     if (type is AbiFixedBytes) {
       return value as Uint8List;

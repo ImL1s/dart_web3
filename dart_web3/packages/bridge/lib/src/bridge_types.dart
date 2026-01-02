@@ -1,14 +1,7 @@
 import 'dart:typed_data';
 
 /// Bridge token information
-class BridgeToken {
-  final String address;
-  final String symbol;
-  final String name;
-  final int decimals;
-  final int chainId;
-  final String? logoUri;
-  final Map<int, String>? addressByChain; // Token addresses on different chains
+class BridgeToken { // Token addresses on different chains
 
   const BridgeToken({
     required this.address,
@@ -19,12 +12,6 @@ class BridgeToken {
     this.logoUri,
     this.addressByChain,
   });
-
-  /// Get token address on a specific chain
-  String? getAddressOnChain(int targetChainId) {
-    if (targetChainId == chainId) return address;
-    return addressByChain?[targetChainId];
-  }
 
   factory BridgeToken.fromJson(Map<String, dynamic> json) {
     return BridgeToken(
@@ -38,6 +25,19 @@ class BridgeToken {
           ? Map<int, String>.from(json['addressByChain'] as Map)
           : null,
     );
+  }
+  final String address;
+  final String symbol;
+  final String name;
+  final int decimals;
+  final int chainId;
+  final String? logoUri;
+  final Map<int, String>? addressByChain;
+
+  /// Get token address on a specific chain
+  String? getAddressOnChain(int targetChainId) {
+    if (targetChainId == chainId) return address;
+    return addressByChain?[targetChainId];
   }
 
   Map<String, dynamic> toJson() {
@@ -66,16 +66,6 @@ class BridgeToken {
 
 /// Bridge transfer parameters
 class BridgeParams {
-  final BridgeToken fromToken;
-  final BridgeToken toToken;
-  final int sourceChainId;
-  final int destinationChainId;
-  final BigInt amount;
-  final String fromAddress;
-  final String toAddress;
-  final double slippage;
-  final Duration? deadline;
-  final Map<String, dynamic>? metadata;
 
   const BridgeParams({
     required this.fromToken,
@@ -89,6 +79,16 @@ class BridgeParams {
     this.deadline,
     this.metadata,
   });
+  final BridgeToken fromToken;
+  final BridgeToken toToken;
+  final int sourceChainId;
+  final int destinationChainId;
+  final BigInt amount;
+  final String fromAddress;
+  final String toAddress;
+  final double slippage;
+  final Duration? deadline;
+  final Map<String, dynamic>? metadata;
 
   /// Check if this is a cross-chain transfer
   bool get isCrossChain => sourceChainId != destinationChainId;
@@ -122,24 +122,15 @@ class BridgeParams {
 
 /// Bridge transaction data
 class BridgeTransaction {
-  final String to;
-  final Uint8List data;
-  final BigInt value;
-  final BigInt gasLimit;
-  final BigInt? gasPrice;
-  final BigInt? maxFeePerGas;
-  final BigInt? maxPriorityFeePerGas;
-  final int chainId;
 
   const BridgeTransaction({
     required this.to,
     required this.data,
     required this.value,
     required this.gasLimit,
-    this.gasPrice,
+    required this.chainId, this.gasPrice,
     this.maxFeePerGas,
     this.maxPriorityFeePerGas,
-    required this.chainId,
   });
 
   factory BridgeTransaction.fromJson(Map<String, dynamic> json) {
@@ -160,6 +151,14 @@ class BridgeTransaction {
       chainId: json['chainId'] as int,
     );
   }
+  final String to;
+  final Uint8List data;
+  final BigInt value;
+  final BigInt gasLimit;
+  final BigInt? gasPrice;
+  final BigInt? maxFeePerGas;
+  final BigInt? maxPriorityFeePerGas;
+  final int chainId;
 
   Map<String, dynamic> toJson() {
     return {
@@ -178,12 +177,6 @@ class BridgeTransaction {
 
 /// Bridge route information
 class BridgeRoute {
-  final String protocol;
-  final List<BridgeStep> steps;
-  final Duration estimatedTime;
-  final BigInt totalFee;
-  final double confidence; // 0.0 to 1.0
-  final Map<String, dynamic>? metadata;
 
   const BridgeRoute({
     required this.protocol,
@@ -193,12 +186,6 @@ class BridgeRoute {
     required this.confidence,
     this.metadata,
   });
-
-  /// Check if this is a direct bridge (single step)
-  bool get isDirect => steps.length == 1;
-
-  /// Get total number of transactions required
-  int get totalTransactions => steps.length;
 
   factory BridgeRoute.fromJson(Map<String, dynamic> json) {
     return BridgeRoute(
@@ -212,6 +199,18 @@ class BridgeRoute {
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
   }
+  final String protocol;
+  final List<BridgeStep> steps;
+  final Duration estimatedTime;
+  final BigInt totalFee;
+  final double confidence; // 0.0 to 1.0
+  final Map<String, dynamic>? metadata;
+
+  /// Check if this is a direct bridge (single step)
+  bool get isDirect => steps.length == 1;
+
+  /// Get total number of transactions required
+  int get totalTransactions => steps.length;
 
   Map<String, dynamic> toJson() {
     return {
@@ -227,16 +226,6 @@ class BridgeRoute {
 
 /// Individual step in a bridge route
 class BridgeStep {
-  final int fromChainId;
-  final int toChainId;
-  final String protocol;
-  final BridgeToken fromToken;
-  final BridgeToken toToken;
-  final BigInt inputAmount;
-  final BigInt outputAmount;
-  final BigInt fee;
-  final Duration estimatedTime;
-  final BridgeTransaction? transaction;
 
   const BridgeStep({
     required this.fromChainId,
@@ -267,6 +256,16 @@ class BridgeStep {
           : null,
     );
   }
+  final int fromChainId;
+  final int toChainId;
+  final String protocol;
+  final BridgeToken fromToken;
+  final BridgeToken toToken;
+  final BigInt inputAmount;
+  final BigInt outputAmount;
+  final BigInt fee;
+  final Duration estimatedTime;
+  final BridgeTransaction? transaction;
 
   Map<String, dynamic> toJson() {
     return {
@@ -309,12 +308,6 @@ enum BridgeProtocolType {
 
 /// Fee breakdown for bridge operations
 class BridgeFeeBreakdown {
-  final BigInt protocolFee;
-  final BigInt gasFee;
-  final BigInt relayerFee;
-  final BigInt liquidityFee;
-  final BigInt totalFee;
-  final String feeToken;
 
   const BridgeFeeBreakdown({
     required this.protocolFee,
@@ -325,12 +318,6 @@ class BridgeFeeBreakdown {
     required this.feeToken,
   });
 
-  /// Get fee as percentage of transfer amount
-  double getFeePercentage(BigInt transferAmount) {
-    if (transferAmount == BigInt.zero) return 0.0;
-    return (totalFee.toDouble() / transferAmount.toDouble()) * 100;
-  }
-
   factory BridgeFeeBreakdown.fromJson(Map<String, dynamic> json) {
     return BridgeFeeBreakdown(
       protocolFee: BigInt.parse(json['protocolFee'] as String),
@@ -340,6 +327,18 @@ class BridgeFeeBreakdown {
       totalFee: BigInt.parse(json['totalFee'] as String),
       feeToken: json['feeToken'] as String,
     );
+  }
+  final BigInt protocolFee;
+  final BigInt gasFee;
+  final BigInt relayerFee;
+  final BigInt liquidityFee;
+  final BigInt totalFee;
+  final String feeToken;
+
+  /// Get fee as percentage of transfer amount
+  double getFeePercentage(BigInt transferAmount) {
+    if (transferAmount == BigInt.zero) return 0;
+    return (totalFee.toDouble() / transferAmount.toDouble()) * 100;
   }
 
   Map<String, dynamic> toJson() {
@@ -356,10 +355,6 @@ class BridgeFeeBreakdown {
 
 /// Bridge limits for a specific route
 class BridgeLimits {
-  final BigInt minAmount;
-  final BigInt maxAmount;
-  final BigInt dailyLimit;
-  final BigInt remainingDailyLimit;
 
   const BridgeLimits({
     required this.minAmount,
@@ -368,13 +363,6 @@ class BridgeLimits {
     required this.remainingDailyLimit,
   });
 
-  /// Check if amount is within limits
-  bool isAmountValid(BigInt amount) {
-    return amount >= minAmount && 
-           amount <= maxAmount && 
-           amount <= remainingDailyLimit;
-  }
-
   factory BridgeLimits.fromJson(Map<String, dynamic> json) {
     return BridgeLimits(
       minAmount: BigInt.parse(json['minAmount'] as String),
@@ -382,6 +370,17 @@ class BridgeLimits {
       dailyLimit: BigInt.parse(json['dailyLimit'] as String),
       remainingDailyLimit: BigInt.parse(json['remainingDailyLimit'] as String),
     );
+  }
+  final BigInt minAmount;
+  final BigInt maxAmount;
+  final BigInt dailyLimit;
+  final BigInt remainingDailyLimit;
+
+  /// Check if amount is within limits
+  bool isAmountValid(BigInt amount) {
+    return amount >= minAmount && 
+           amount <= maxAmount && 
+           amount <= remainingDailyLimit;
   }
 
   Map<String, dynamic> toJson() {

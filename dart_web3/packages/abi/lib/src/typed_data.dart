@@ -5,17 +5,6 @@ import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 /// EIP-712 Typed Data for structured data signing.
 class TypedData {
-  /// The domain separator parameters.
-  final Map<String, dynamic> domain;
-
-  /// The type definitions.
-  final Map<String, List<TypedDataField>> types;
-
-  /// The primary type being signed.
-  final String primaryType;
-
-  /// The message data.
-  final Map<String, dynamic> message;
 
   TypedData({
     required this.domain,
@@ -35,7 +24,7 @@ class TypedData {
           .map((f) => TypedDataField(
                 name: f['name'] as String,
                 type: f['type'] as String,
-              ))
+              ),)
           .toList();
     }
 
@@ -46,6 +35,17 @@ class TypedData {
       message: json['message'] as Map<String, dynamic>,
     );
   }
+  /// The domain separator parameters.
+  final Map<String, dynamic> domain;
+
+  /// The type definitions.
+  final Map<String, List<TypedDataField>> types;
+
+  /// The primary type being signed.
+  final String primaryType;
+
+  /// The message data.
+  final Map<String, dynamic> message;
 
   /// Computes the EIP-712 hash for signing.
   Uint8List hash() {
@@ -211,8 +211,8 @@ class TypedData {
 
 /// A field in a typed data struct.
 class TypedDataField {
-  final String name;
-  final String type;
 
   TypedDataField({required this.name, required this.type});
+  final String name;
+  final String type;
 }

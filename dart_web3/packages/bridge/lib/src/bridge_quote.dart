@@ -2,19 +2,8 @@ import 'bridge_types.dart';
 
 /// Bridge quote from a protocol
 class BridgeQuote {
-  final String protocol;
-  final BridgeParams params;
-  final BigInt outputAmount;
-  final BigInt minimumOutputAmount;
-  final BridgeRoute route;
-  final BridgeFeeBreakdown feeBreakdown;
-  final BridgeLimits limits;
-  final Duration estimatedTime;
-  final double confidence;
-  final Duration validUntil;
-  final Map<String, dynamic>? metadata;
 
-  const BridgeQuote({
+  BridgeQuote({
     required this.protocol,
     required this.params,
     required this.outputAmount,
@@ -28,9 +17,45 @@ class BridgeQuote {
     this.metadata,
   });
 
+  factory BridgeQuote.fromJson(Map<String, dynamic> json) {
+    return BridgeQuote(
+      protocol: json['protocol'] as String,
+      params: BridgeParams(
+        fromToken: BridgeToken.fromJson(json['fromToken'] as Map<String, dynamic>),
+        toToken: BridgeToken.fromJson(json['toToken'] as Map<String, dynamic>),
+        sourceChainId: json['sourceChainId'] as int,
+        destinationChainId: json['destinationChainId'] as int,
+        amount: BigInt.parse(json['amount'] as String),
+        fromAddress: json['fromAddress'] as String,
+        toAddress: json['toAddress'] as String,
+        slippage: (json['slippage'] as num).toDouble(),
+      ),
+      outputAmount: BigInt.parse(json['outputAmount'] as String),
+      minimumOutputAmount: BigInt.parse(json['minimumOutputAmount'] as String),
+      route: BridgeRoute.fromJson(json['route'] as Map<String, dynamic>),
+      feeBreakdown: BridgeFeeBreakdown.fromJson(json['feeBreakdown'] as Map<String, dynamic>),
+      limits: BridgeLimits.fromJson(json['limits'] as Map<String, dynamic>),
+      estimatedTime: Duration(seconds: json['estimatedTimeSeconds'] as int),
+      confidence: (json['confidence'] as num).toDouble(),
+      validUntil: Duration(seconds: json['validUntilSeconds'] as int),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+  }
+  final String protocol;
+  final BridgeParams params;
+  final BigInt outputAmount;
+  final BigInt minimumOutputAmount;
+  final BridgeRoute route;
+  final BridgeFeeBreakdown feeBreakdown;
+  final BridgeLimits limits;
+  final Duration estimatedTime;
+  final double confidence;
+  final Duration validUntil;
+  final Map<String, dynamic>? metadata;
+
   /// Calculate the effective exchange rate
   double get exchangeRate {
-    if (outputAmount == BigInt.zero) return 0.0;
+    if (outputAmount == BigInt.zero) return 0;
     return outputAmount.toDouble() / params.amount.toDouble();
   }
 
@@ -65,31 +90,6 @@ class BridgeQuote {
     if (confidence >= 0.7) return 'Medium';
     if (confidence >= 0.6) return 'Low';
     return 'Very Low';
-  }
-
-  factory BridgeQuote.fromJson(Map<String, dynamic> json) {
-    return BridgeQuote(
-      protocol: json['protocol'] as String,
-      params: BridgeParams(
-        fromToken: BridgeToken.fromJson(json['fromToken'] as Map<String, dynamic>),
-        toToken: BridgeToken.fromJson(json['toToken'] as Map<String, dynamic>),
-        sourceChainId: json['sourceChainId'] as int,
-        destinationChainId: json['destinationChainId'] as int,
-        amount: BigInt.parse(json['amount'] as String),
-        fromAddress: json['fromAddress'] as String,
-        toAddress: json['toAddress'] as String,
-        slippage: (json['slippage'] as num).toDouble(),
-      ),
-      outputAmount: BigInt.parse(json['outputAmount'] as String),
-      minimumOutputAmount: BigInt.parse(json['minimumOutputAmount'] as String),
-      route: BridgeRoute.fromJson(json['route'] as Map<String, dynamic>),
-      feeBreakdown: BridgeFeeBreakdown.fromJson(json['feeBreakdown'] as Map<String, dynamic>),
-      limits: BridgeLimits.fromJson(json['limits'] as Map<String, dynamic>),
-      estimatedTime: Duration(seconds: json['estimatedTimeSeconds'] as int),
-      confidence: (json['confidence'] as num).toDouble(),
-      validUntil: Duration(seconds: json['validUntilSeconds'] as int),
-      metadata: json['metadata'] as Map<String, dynamic>?,
-    );
   }
 
   Map<String, dynamic> toJson() {
@@ -127,12 +127,6 @@ class BridgeQuote {
 
 /// Comparison result between two bridge quotes
 class BridgeQuoteComparison {
-  final BridgeQuote quote1;
-  final BridgeQuote quote2;
-  final BigInt outputDifference;
-  final BigInt feeDifference;
-  final Duration timeDifference;
-  final double confidenceDifference;
 
   const BridgeQuoteComparison({
     required this.quote1,
@@ -142,12 +136,18 @@ class BridgeQuoteComparison {
     required this.timeDifference,
     required this.confidenceDifference,
   });
+  final BridgeQuote quote1;
+  final BridgeQuote quote2;
+  final BigInt outputDifference;
+  final BigInt feeDifference;
+  final Duration timeDifference;
+  final double confidenceDifference;
 
   /// Returns true if quote1 is better than quote2 overall
   bool get isQuote1Better {
     // Simple scoring system - can be made more sophisticated
-    int score1 = 0;
-    int score2 = 0;
+    var score1 = 0;
+    var score2 = 0;
 
     // Higher output is better
     if (outputDifference > BigInt.zero) {
@@ -197,11 +197,6 @@ class BridgeQuoteComparison {
 
 /// Bridge quote aggregation result
 class BridgeQuoteAggregation {
-  final List<BridgeQuote> quotes;
-  final BridgeQuote? bestQuote;
-  final BridgeQuote? fastestQuote;
-  final BridgeQuote? cheapestQuote;
-  final BridgeQuote? mostReliableQuote;
 
   const BridgeQuoteAggregation({
     required this.quotes,
@@ -238,6 +233,11 @@ class BridgeQuoteAggregation {
       mostReliableQuote: sortedByConfidence.first,
     );
   }
+  final List<BridgeQuote> quotes;
+  final BridgeQuote? bestQuote;
+  final BridgeQuote? fastestQuote;
+  final BridgeQuote? cheapestQuote;
+  final BridgeQuote? mostReliableQuote;
 
   /// Get quotes filtered by criteria
   List<BridgeQuote> getQuotesFiltered({
@@ -256,10 +256,10 @@ class BridgeQuoteAggregation {
   /// Get average metrics across all quotes
   BridgeMetrics get averageMetrics {
     if (quotes.isEmpty) {
-      return const BridgeMetrics(
+      return BridgeMetrics(
         averageTime: Duration.zero,
         averageFee: BigInt.zero,
-        averageConfidence: 0.0,
+        averageConfidence: 0,
         averageOutput: BigInt.zero,
       );
     }
@@ -275,7 +275,7 @@ class BridgeQuoteAggregation {
     );
     
     final totalConfidence = quotes.fold<double>(
-      0.0, 
+      0, 
       (sum, quote) => sum + quote.confidence,
     );
     
@@ -295,15 +295,15 @@ class BridgeQuoteAggregation {
 
 /// Average metrics for bridge quotes
 class BridgeMetrics {
-  final Duration averageTime;
-  final BigInt averageFee;
-  final double averageConfidence;
-  final BigInt averageOutput;
 
-  const BridgeMetrics({
+  BridgeMetrics({
     required this.averageTime,
     required this.averageFee,
     required this.averageConfidence,
     required this.averageOutput,
   });
+  final Duration averageTime;
+  final BigInt averageFee;
+  final double averageConfidence;
+  final BigInt averageOutput;
 }

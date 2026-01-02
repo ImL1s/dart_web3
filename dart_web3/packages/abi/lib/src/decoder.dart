@@ -32,7 +32,6 @@ class AbiDecoder {
     final result = <String, dynamic>{};
 
     var topicIndex = 1; // Skip topic[0] (event signature)
-    var dataOffset = 0;
 
     final nonIndexedTypes = <AbiType>[];
     final nonIndexedIndices = <int>[];

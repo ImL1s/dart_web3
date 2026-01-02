@@ -6,14 +6,14 @@ import '../bridge_types.dart';
 import 'bridge_protocol.dart';
 
 /// Stargate Finance bridge protocol implementation
-class StargateBridge implements BridgeProtocol {
-  final BridgeProtocolConfig config;
-  final http.Client _httpClient;
+class StargateBridge extends BridgeProtocol {
 
   StargateBridge({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final BridgeProtocolConfig config;
+  final http.Client _httpClient;
 
   @override
   String get name => 'Stargate';

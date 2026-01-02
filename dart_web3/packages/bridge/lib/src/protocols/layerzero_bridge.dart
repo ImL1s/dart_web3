@@ -6,14 +6,14 @@ import '../bridge_types.dart';
 import 'bridge_protocol.dart';
 
 /// LayerZero bridge protocol implementation
-class LayerZeroBridge implements BridgeProtocol {
-  final BridgeProtocolConfig config;
-  final http.Client _httpClient;
+class LayerZeroBridge extends BridgeProtocol {
 
   LayerZeroBridge({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final BridgeProtocolConfig config;
+  final http.Client _httpClient;
 
   @override
   String get name => 'LayerZero';
@@ -167,7 +167,7 @@ class LayerZeroBridge implements BridgeProtocol {
       return tokens.any((token) => 
         token.address.toLowerCase() == sourceToken.address.toLowerCase() &&
         token.getAddressOnChain(destinationChainId)?.toLowerCase() == 
-        destinationToken.address.toLowerCase()
+        destinationToken.address.toLowerCase(),
       );
     } catch (e) {
       return false;

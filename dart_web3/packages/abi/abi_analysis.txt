@@ -1,0 +1,110 @@
+Analyzing abi...
+
+warning - lib\src\decoder.dart:35:9 - The value of the local variable 'dataOffset' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\pretty_printer.dart:143:45 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+warning - test\abi_fixes_test.dart:1:8 - Unused import: 'dart:convert'. Try removing the import directive. - unused_import
+warning - test\abi_official_vector_test.dart:35:51 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+warning - test\encoder_test.dart:1:8 - Unused import: 'dart:typed_data'. Try removing the import directive. - unused_import
+warning - test\parser_test.dart:195:24 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\pretty_printer_test.dart:1:8 - Unused import: 'dart:typed_data'. Try removing the import directive. - unused_import
+   info - lib\dart_web3_abi.dart:13:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\dart_web3_abi.dart:14:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\dart_web3_abi.dart:16:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\src\decoder.dart:35:5 - Local variables should be final. Try making the variable final. - prefer_final_locals
+   info - lib\src\decoder.dart:89:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\decoder.dart:100:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\encoder.dart:82:34 - Use an 'if' element to conditionally add elements. Try using an 'if' element rather than a conditional expression. - prefer_if_elements_to_conditional_expressions
+   info - lib\src\parser.dart:13:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:22:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:115:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\parser.dart:124:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\parser.dart:207:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\parser.dart:215:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\parser.dart:254:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\parser.dart:260:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\pretty_printer.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:55:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:56:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:60:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:74:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:75:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:154:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:182:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\typed_data.dart:20:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\typed_data.dart:28:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\typed_data.dart:36:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:37:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:38:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\typed_data.dart:163:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\typed_data.dart:217:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\types.dart:29:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\types.dart:70:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\types.dart:172:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\types.dart:192:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:223:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:268:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\types.dart:381:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\types.dart:442:51 - Unnecessary use of a null check ('!'). Try removing the null check. - unnecessary_null_checks
+   info - test\abi_fixes_test.dart:59:7 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_fixes_test.dart:134:9 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_fixes_test.dart:148:11 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_fixes_test.dart:160:9 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_fixes_test.dart:236:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:237:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:238:15 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:248:3 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_fixes_test.dart:249:8 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_official_vector_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\abi_official_vector_test.dart:21:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_official_vector_test.dart:35:11 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_official_vector_test.dart:37:14 - The variable 'vector' should be final. Try making the variable final. - prefer_final_in_for_each
+   info - test\abi_official_vector_test.dart:38:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:39:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:40:27 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:41:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:55:60 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+   info - test\abi_official_vector_test.dart:58:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_property_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\abi_property_test.dart:15:12 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:28:67 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:30:16 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:32:74 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:34:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:47:12 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:60:85 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:69:78 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:75:71 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:81:55 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:82:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:94:12 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:101:14 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:117:14 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:130:16 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:132:76 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:137:63 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:138:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:150:12 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:196:61 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:197:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:209:12 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:244:61 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:248:56 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:265:71 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:280:72 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - test\abi_property_test.dart:281:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:297:8 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:351:8 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:373:10 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\abi_property_test.dart:380:10 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\decoder_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\encoder_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\parser_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\pretty_printer_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\typed_data_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\typed_data_test.dart:158:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\types_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - test\types_test.dart:57:14 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - test\types_test.dart:216:16 - Unnecessary use of parentheses. Try removing the parentheses. - unnecessary_parenthesis
+
+106 issues found.

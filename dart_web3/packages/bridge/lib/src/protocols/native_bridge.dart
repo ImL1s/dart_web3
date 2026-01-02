@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../bridge_quote.dart';
@@ -6,14 +5,14 @@ import '../bridge_types.dart';
 import 'bridge_protocol.dart';
 
 /// Native L2 bridge protocol implementation (for Arbitrum, Optimism, Base, etc.)
-class NativeBridge implements BridgeProtocol {
-  final BridgeProtocolConfig config;
-  final http.Client _httpClient;
+class NativeBridge extends BridgeProtocol {
 
   NativeBridge({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final BridgeProtocolConfig config;
+  final http.Client _httpClient;
 
   @override
   String get name => 'Native Bridge';
@@ -151,7 +150,7 @@ class NativeBridge implements BridgeProtocol {
       name: 'Ethereum',
       decimals: 18,
       chainId: sourceChainId,
-    ));
+    ),);
 
     // Add some common ERC-20 tokens that are typically supported
     final commonTokens = _getCommonTokensForChain(sourceChainId);
@@ -339,13 +338,13 @@ class NativeBridge implements BridgeProtocol {
 }
 
 class _NativeBridgeInfo {
-  final String name;
-  final String contractAddress;
-  final Duration challengePeriod;
 
   const _NativeBridgeInfo({
     required this.name,
     required this.contractAddress,
     required this.challengePeriod,
   });
+  final String name;
+  final String contractAddress;
+  final Duration challengePeriod;
 }

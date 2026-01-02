@@ -67,10 +67,6 @@ abstract class BridgeProtocol {
 
 /// Exception thrown when bridge operations fail
 class BridgeException implements Exception {
-  final String protocol;
-  final String message;
-  final String? code;
-  final dynamic originalError;
 
   const BridgeException({
     required this.protocol,
@@ -78,6 +74,10 @@ class BridgeException implements Exception {
     this.code,
     this.originalError,
   });
+  final String protocol;
+  final String message;
+  final String? code;
+  final dynamic originalError;
 
   @override
   String toString() {
@@ -88,11 +88,6 @@ class BridgeException implements Exception {
 
 /// Bridge protocol configuration
 class BridgeProtocolConfig {
-  final String? apiKey;
-  final String? baseUrl;
-  final Duration timeout;
-  final Map<String, String> headers;
-  final bool testMode;
 
   const BridgeProtocolConfig({
     this.apiKey,
@@ -101,17 +96,15 @@ class BridgeProtocolConfig {
     this.headers = const {},
     this.testMode = false,
   });
+  final String? apiKey;
+  final String? baseUrl;
+  final Duration timeout;
+  final Map<String, String> headers;
+  final bool testMode;
 }
 
 /// Bridge protocol capabilities
 class BridgeCapabilities {
-  final bool supportsNativeTokens;
-  final bool supportsERC20Tokens;
-  final bool supportsNFTs;
-  final bool supportsMultiHop;
-  final bool supportsInstantFinality;
-  final bool supportsRefunds;
-  final List<String> supportedFeatures;
 
   const BridgeCapabilities({
     required this.supportsNativeTokens,
@@ -122,16 +115,17 @@ class BridgeCapabilities {
     required this.supportsRefunds,
     required this.supportedFeatures,
   });
+  final bool supportsNativeTokens;
+  final bool supportsERC20Tokens;
+  final bool supportsNFTs;
+  final bool supportsMultiHop;
+  final bool supportsInstantFinality;
+  final bool supportsRefunds;
+  final List<String> supportedFeatures;
 }
 
 /// Bridge security information
-class BridgeSecurity {
-  final String securityModel; // 'optimistic', 'zk-proof', 'multi-sig', etc.
-  final Duration challengePeriod;
-  final int validatorCount;
-  final BigInt totalValueLocked;
-  final List<String> audits;
-  final double riskScore; // 0.0 (lowest risk) to 1.0 (highest risk)
+class BridgeSecurity { // 0.0 (lowest risk) to 1.0 (highest risk)
 
   const BridgeSecurity({
     required this.securityModel,
@@ -141,17 +135,16 @@ class BridgeSecurity {
     required this.audits,
     required this.riskScore,
   });
+  final String securityModel; // 'optimistic', 'zk-proof', 'multi-sig', etc.
+  final Duration challengePeriod;
+  final int validatorCount;
+  final BigInt totalValueLocked;
+  final List<String> audits;
+  final double riskScore;
 }
 
 /// Bridge protocol metadata
 class BridgeProtocolMetadata {
-  final String name;
-  final String description;
-  final String website;
-  final String documentation;
-  final BridgeCapabilities capabilities;
-  final BridgeSecurity security;
-  final Map<String, dynamic>? additionalInfo;
 
   const BridgeProtocolMetadata({
     required this.name,
@@ -162,4 +155,11 @@ class BridgeProtocolMetadata {
     required this.security,
     this.additionalInfo,
   });
+  final String name;
+  final String description;
+  final String website;
+  final String documentation;
+  final BridgeCapabilities capabilities;
+  final BridgeSecurity security;
+  final Map<String, dynamic>? additionalInfo;
 }

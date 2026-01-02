@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dart_web3_abi/dart_web3_abi.dart';
@@ -55,7 +54,7 @@ void main() {
 
       final encoded = outerTuple.encode([
         [BigInt.from(1), BigInt.from(2)],
-        'hello'
+        'hello',
       ]);
 
       // First 64 bytes: inner tuple (1, 2)
@@ -130,7 +129,7 @@ void main() {
       final encoded = AbiEncoder.encodeFunction(
         'foo((uint256,address))',
         [
-          [BigInt.from(123), '0x1234567890123456789012345678901234567890']
+          [BigInt.from(123), '0x1234567890123456789012345678901234567890'],
         ],
       );
 
@@ -144,7 +143,7 @@ void main() {
         [
           [
             BigInt.from(123),
-            ['0x1234567890123456789012345678901234567890', true]
+            ['0x1234567890123456789012345678901234567890', true],
           ]
         ],
       );
@@ -156,7 +155,7 @@ void main() {
       final encoded = AbiEncoder.encodeFunction(
         'foo((uint256,string))',
         [
-          [BigInt.from(123), 'hello']
+          [BigInt.from(123), 'hello'],
         ],
       );
 
@@ -245,8 +244,8 @@ String _toHex(Uint8List bytes) {
 }
 
 BigInt _bytesToBigInt(Uint8List bytes) {
-  BigInt result = BigInt.zero;
-  for (int i = 0; i < bytes.length; i++) {
+  var result = BigInt.zero;
+  for (var i = 0; i < bytes.length; i++) {
     result = (result << 8) + BigInt.from(bytes[i]);
   }
   return result;

@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('AbiParser Tests', () {

@@ -1,6 +1,7 @@
 name: dart_web3_bridge
 description: Cross-chain bridge services for Dart Web3 SDK
 version: 1.0.0
+publish_to: none
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -12,6 +13,8 @@ dependencies:
     path: ../client
   dart_web3_contract:
     path: ../contract
+  dart_web3_signer:
+    path: ../signer
   http: ^1.1.0
 
 dev_dependencies:

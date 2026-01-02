@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:test/test.dart';
 
 // Helper to convert int to BigInt deeply, as dart_web3 often requires BigInt
 dynamic sanitizeValue(dynamic value) {
@@ -17,7 +18,7 @@ void main() {
     final possiblePaths = [
       'test/vectors/abi_vectors.json',
       'packages/abi/test/vectors/abi_vectors.json',
-      'dart_web3/packages/abi/test/vectors/abi_vectors.json'
+      'dart_web3/packages/abi/test/vectors/abi_vectors.json',
     ];
 
     for (final path in possiblePaths) {
@@ -32,9 +33,9 @@ void main() {
       throw Exception('Could not find abi_vectors.json');
     }
 
-    final List<dynamic> vectors = json.decode(file!.readAsStringSync());
+    final vectors = json.decode(file.readAsStringSync()) as List<dynamic>;
 
-    for (var vector in vectors) {
+    for (final vector in vectors) {
       test('Vector: ${vector['name']}', () {
         final typesStr = vector['types'] as List;
         final rawValues = vector['values'] as List;
@@ -52,7 +53,7 @@ void main() {
         }).toList();
 
         final encoded = AbiEncoder.encode(types, values);
-        final resultHex = HexUtils.encode(encoded, prefix: true);
+        final resultHex = HexUtils.encode(encoded);
         
         if (resultHex.toLowerCase() != expected.toLowerCase()) {
            fail('Mismatch for ${vector['name']}.\nExpected: $expected\nActual:   $resultHex');

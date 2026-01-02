@@ -9,9 +9,9 @@
 /// - [AbiPrettyPrinter] - Format ABI data for display
 library dart_web3_abi;
 
-export 'src/types.dart';
-export 'src/encoder.dart';
 export 'src/decoder.dart';
-export 'src/typed_data.dart';
+export 'src/encoder.dart';
 export 'src/parser.dart';
 export 'src/pretty_printer.dart';
+export 'src/typed_data.dart';
+export 'src/types.dart';

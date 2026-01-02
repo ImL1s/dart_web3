@@ -1,0 +1,39 @@
+Analyzing bridge...
+
+  error - lib\src\bridge_quote.dart:261:21 - Invalid constant value. - invalid_constant
+  error - lib\src\bridge_service.dart:283:21 - A value of type 'double' can't be assigned to a variable of type 'int'. Try changing the type of the variable, or casting the right-hand type to 'int'. - invalid_assignment
+  error - lib\src\bridge_tracker.dart:367:66 - The method 'toJson' isn't defined for the type 'TransactionReceipt'. Try correcting the name to the name of an existing method, or defining a method named 'toJson'. - undefined_method
+  error - lib\src\bridge_tracker.dart:368:81 - The method 'toJson' isn't defined for the type 'TransactionReceipt'. Try correcting the name to the name of an existing method, or defining a method named 'toJson'. - undefined_method
+warning - lib\src\bridge_tracker.dart:105:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\bridge_tracker.dart:153:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\bridge_tracker.dart:175:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+   info - lib\dart_web3_bridge.dart:12:45 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_quote.dart:186:32 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bridge_quote.dart:309:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_service.dart:128:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:163:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:227:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:254:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:297:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:364:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_tracker.dart:78:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:112:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:221:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:388:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_types.dart:56:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:64:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:394:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\bridge_protocol.dart:165:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\layerzero_bridge.dart:172:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:258:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:367:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\native_bridge.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protocols\native_bridge.dart:350:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\stargate_bridge.dart:169:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:249:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:390:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\wormhole_bridge.dart:175:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:365:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+35 issues found.

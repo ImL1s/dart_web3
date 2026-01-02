@@ -1,0 +1,113 @@
+Analyzing bridge...
+
+  error - lib\src\bridge_quote.dart:261:21 - Invalid constant value. - invalid_constant
+  error - lib\src\bridge_service.dart:108:43 - The getter 'address' isn't defined for the type 'EthereumAddress'. Try importing the library that defines 'address', correcting the name to the name of an existing getter, or defining a getter or field named 'address'. - undefined_getter
+  error - lib\src\bridge_tracker.dart:110:49 - The argument type 'TransactionReceipt' can't be assigned to the parameter type 'Map<String, dynamic>'.  - argument_type_not_assignable
+warning - lib\src\bridge_service.dart:2:8 - Unused import: 'dart:math'. Try removing the import directive. - unused_import
+warning - lib\src\bridge_tracker.dart:2:8 - Unused import: 'dart:convert'. Try removing the import directive. - unused_import
+warning - lib\src\bridge_tracker.dart:105:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\bridge_tracker.dart:153:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\bridge_tracker.dart:175:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\protocols\native_bridge.dart:1:8 - Unused import: 'dart:convert'. Try removing the import directive. - unused_import
+warning - test\basic_functionality_test.dart:2:8 - Unused import: 'package:dart_web3_bridge/dart_web3_bridge.dart'. Try removing the import directive. - unused_import
+   info - lib\dart_web3_bridge.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\dart_web3_bridge.dart:11:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\dart_web3_bridge.dart:12:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\dart_web3_bridge.dart:12:43 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_quote.dart:17:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_quote.dart:33:45 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_quote.dart:70:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_quote.dart:137:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_quote.dart:149:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - lib\src\bridge_quote.dart:150:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - lib\src\bridge_quote.dart:186:32 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bridge_quote.dart:206:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_quote.dart:215:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_quote.dart:262:28 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_quote.dart:278:7 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_quote.dart:303:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_quote.dart:309:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_service.dart:9:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\src\bridge_service.dart:10:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\src\bridge_service.dart:11:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\src\bridge_service.dart:13:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\src\bridge_service.dart:21:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_service.dart:100:17 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+   info - lib\src\bridge_service.dart:129:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:164:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:198:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\bridge_service.dart:228:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:255:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:272:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - lib\src\bridge_service.dart:272:24 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_service.dart:298:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:344:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_service.dart:361:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_service.dart:365:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_tracker.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+   info - lib\src\bridge_tracker.dart:14:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:78:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:101:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - lib\src\bridge_tracker.dart:112:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:171:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - lib\src\bridge_tracker.dart:221:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:259:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:262:19 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+   info - lib\src\bridge_tracker.dart:264:19 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+   info - lib\src\bridge_tracker.dart:266:19 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+   info - lib\src\bridge_tracker.dart:297:16 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_tracker.dart:305:16 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_tracker.dart:308:16 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_tracker.dart:385:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:401:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:406:19 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+   info - lib\src\bridge_tracker.dart:409:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:441:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:447:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_tracker.dart:462:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_types.dart:13:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:29:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:56:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:64:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:80:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:134:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:142:19 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+   info - lib\src\bridge_types.dart:145:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:188:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:203:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:241:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:254:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:319:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:330:47 - Unnecessary use of a 'double' literal. Try using an 'int' literal. - prefer_int_literals
+   info - lib\src\bridge_types.dart:334:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:364:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:378:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\bridge_types.dart:395:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\bridge_protocol.dart:75:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\bridge_protocol.dart:97:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\bridge_protocol.dart:116:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\bridge_protocol.dart:136:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\bridge_protocol.dart:156:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\bridge_protocol.dart:165:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\layerzero_bridge.dart:13:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\layerzero_bridge.dart:171:7 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\protocols\layerzero_bridge.dart:172:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:258:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:367:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\native_bridge.dart:13:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\native_bridge.dart:148:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protocols\native_bridge.dart:154:6 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\protocols\native_bridge.dart:346:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\native_bridge.dart:351:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\stargate_bridge.dart:13:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\stargate_bridge.dart:169:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:249:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:390:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\wormhole_bridge.dart:13:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\protocols\wormhole_bridge.dart:174:7 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\protocols\wormhole_bridge.dart:175:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:365:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\basic_functionality_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+
+109 issues found.
