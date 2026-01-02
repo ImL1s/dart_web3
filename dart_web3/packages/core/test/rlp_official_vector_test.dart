@@ -31,30 +31,62 @@ void main() {
     vectors.forEach((name, data) {
       test('Vector: $name', () {
         final expectedHex = data['out'];
-        final input = data['in'];
+        final rawInput = data['in'];
 
-        // Determine input type based on vector name for this subsets
-        // In a full runner we would use a more sophisticated parser
-        dynamic processedInput = input;
-        
-        if (input is String) {
-          if (name == 'singleByte' || name == 'emptyList' || name == 'nestedList') {
-             // These are hex representions in the JSON or handled specially?
-             // Actually input list is list. 
+        dynamic parseInput(dynamic input) {
+          if (input is List) {
+            return input.map(parseInput).toList();
           }
-          
-          if (name != 'shortString' && name != 'longString' && name != 'emptyString') {
-             // Assume Hex string for others if needed, but for 'singleByte' in="0f" it is hex
-             try {
-               processedInput = HexUtils.decode(input);
-             } catch (_) {
-               // keep as string if decode fails
-             }
+
+          if (input is int) {
+            return input;
           }
+
+          if (input is String) {
+            if (input.startsWith('#')) {
+              return BigInt.parse(input.substring(1));
+            }
+            return input;
+          }
+           
+           return input;
         }
 
-        final encoded = RLP.encode(processedInput);
-        expect(HexUtils.encode(encoded, prefix: false), equals(expectedHex));
+        try {
+          final processedInput = parseInput(rawInput);
+          final encoded = RLP.encode(processedInput);
+          
+          // Handle 0x prefix if present in expectedHex
+          String expected = expectedHex;
+          if (expected.startsWith('0x')) {
+             expected = expected.substring(2);
+          }
+          
+          final actual = HexUtils.encode(encoded, prefix: false);
+          
+          if (actual != expected) {
+             print('FAILED: $name');
+             // Find first difference
+             for (var i = 0; i < actual.length && i < expected.length; i++) {
+               if (actual[i] != expected[i]) {
+                 print('Mismatch at index $i:');
+                 print('Expected char: ${expected[i]} (around "...${expected.substring(i > 10 ? i - 10 : 0, i + 10 < expected.length ? i + 10 : expected.length)}...")');
+                 print('Actual char:   ${actual[i]} (around "...${actual.substring(i > 10 ? i - 10 : 0, i + 10 < actual.length ? i + 10 : actual.length)}...")');
+                 break;
+               }
+             }
+             if (actual.length != expected.length) {
+               print('Length mismatch: Expected ${expected.length}, Actual ${actual.length}');
+             }
+             fail('Mismatch for $name');
+          }
+        } catch (e, s) {
+          print('ERROR: $name');
+          print('Input: $rawInput');
+          print('Exception: $e');
+          print(s);
+          rethrow;
+        }
       });
     });
   });
