@@ -12,6 +12,23 @@ A **production-ready Account Abstraction (AA) toolkit** for Dart. It enables the
 - **Paymaster Integration**: Seamless hooks for Verifying Paymasters (sponsorship) and ERC-20 Paymasters.
 - **Bundler Compatibility**: Standardized JSON-RPC interface for all major bundler providers (Stackup, Pimlico, Alchemy).
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as AAClient
+    participant P as Paymaster
+    participant B as Bundler
+    participant E as EntryPoint
+    U->>C: sendTransaction(to, data)
+    C->>C: build UserOperation
+    C->>P: request sponsorship
+    P-->>C: paymasterAndData
+    C->>B: eth_sendUserOperation
+    B->>E: handleOps()
+    E-->>U: Transaction Confirmed
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,21 @@ A **The Open Network (TON) extension** for the Dart Web3 ecosystem. Connect your
 - **Jetton Interaction**: Standardized API for interacting with TON fungible tokens (Jettons).
 - **Lite Client Bridge**: (Planned) High-performance connectivity to the TON blockchain.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as Application
+    participant W as TonWallet (v4)
+    participant C as Cell Builder
+    participant T as TonCenter
+    A->>W: send(to, amount)
+    W->>C: build internal message
+    C->>C: serialize to BoC
+    W->>W: sign with Ed25519
+    W->>T: sendBoc(signed_payload)
+    T-->>A: msg_hash (Async)
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,17 @@ A **type-safe wrapper** for smart contract interaction. It bridges the gap betwe
 - **Multi-call Optimized**: Methods are designed to be batchable using the `dart_web3_multicall` package.
 - **Type Conversion**: Automatic mapping between Solidity types and Dart primitives.
 
+## Usage Flow
+```mermaid
+graph LR
+    A[Contract Address] --> C[DeployedContract Object]
+    B[Contract ABI] --> C
+    C --> D[Read: call()]
+    C --> E[Write: send()]
+    D --> F[Parsed Result]
+    E --> G[Tx Hash]
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

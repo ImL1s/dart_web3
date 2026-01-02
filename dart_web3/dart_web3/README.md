@@ -18,6 +18,7 @@ By importing `dart_web3`, you gain access to:
 
 ## 🏗️ Quick Start
 
+### Basic RPC
 ```dart
 import 'package:dart_web3/dart_web3.dart';
 
@@ -27,8 +28,34 @@ void main() async {
     chain: Chains.ethereum,
   );
 
-  final block = await client.getBlockNumber();
-  print('Latest Block: $block');
+  final balance = await client.getBalance('0x...');
+  print('Balance: ${EthUnit.formatEther(balance)} ETH');
+}
+```
+
+### Contract Call (ERC-20)
+```dart
+import 'package:dart_web3/dart_web3.dart';
+
+void main() async {
+  final client = ClientFactory.createPublicClient(rpcUrl: '...');
+  final usdt = ERC20(address: '0xdAC17F958D2ee523a2206206994597C13D831ec7', client: client);
+
+  print('USDT Decimals: ${await usdt.decimals()}');
+}
+```
+
+### Multi-Chain
+```dart
+import 'package:dart_web3/dart_web3.dart';
+import 'package:dart_web3_solana/dart_web3_solana.dart';
+
+void main() async {
+  // EVM
+  final ethBlock = await ClientFactory.createPublicClient(rpcUrl: '...').getBlockNumber();
+  
+  // Solana
+  final solBalance = await SolanaClient(endpoint: '...').getBalance('...');
 }
 ```
 

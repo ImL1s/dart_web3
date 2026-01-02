@@ -12,6 +12,20 @@ A **protection and arbitrage suite** for Maximal Extractable Value (MEV). Safegu
 - **Backrun Protection**: Automatically add "refund" hints to your transactions (planned).
 - **Relay Registry**: Built-in signatures and metadata for all major Ethereum relays.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant S as MevSigner
+    participant R as PrivateRelay
+    participant B as Builder
+    U->>S: sendBundle([tx1, tx2])
+    S->>S: sign with auth key
+    S->>R: POST /bundles
+    R->>B: relay to block builder
+    B-->>U: Block Inclusion (Protected)
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

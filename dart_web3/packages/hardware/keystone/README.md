@@ -12,6 +12,21 @@ A **high-security interface for Keystone hardware wallets**. Fully supports air-
 - **Multi-Account Sync**: Efficiently sync hundreds of derived accounts from a single Keystone QR scan.
 - **Safe Multisig**: Specialized support for Keystone-based multisig wallet configurations.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as App
+    participant K as Keystone Device
+    A->>A: build Transaction
+    A->>A: encode as BC-UR frames
+    A-->>A: display animated QR
+    K->>A: scan QR from screen
+    K-->>K: verify & sign
+    K-->>K: display result QR
+    A->>K: scan signature from device
+    A->>A: reconstruct & verify
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

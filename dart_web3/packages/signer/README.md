@@ -12,6 +12,21 @@ A **universal signing abstraction** for the Dart Web3 ecosystem. It decouples id
 - **Hardware Integration**: High-level hooks for Ledger, Trezor, and Keystone devices.
 - **Message Standards**: Built-in support for `personal_sign` and Ethereum-prefixed message hashing.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as Controller
+    participant S as Signer (Keys)
+    participant E as ECDSA
+    U->>C: signMessage("hello")
+    C->>S: request permission
+    S->>S: hash(prefix + "hello")
+    S->>E: sign(hash, privateKey)
+    E-->>S: signature (r,s,v)
+    S-->>U: hex string
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,17 @@ A **comprehensive network registry** for EVM-compatible blockchains. This packag
 - **Advanced Features Settings**: Built-in flags for EIP-1559 and Blob support per network.
 - **Customizable**: Create and register custom private or devnet configurations effortlessly.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant R as ChainRegistry
+    participant C as ChainConfig
+    D->>R: getByChainId(1)
+    R->>C: lookup metadata
+    C-->>D: Ethereum Mainnet Config
+```
+
 ## 🏗️ Architecture
 
 ```mermaid
@@ -37,7 +48,7 @@ graph TD
 | `Chain` | The primary object containing all metadata for a network. |
 | `Chains` | A static collection of production-ready chain configurations. |
 | `Currency` | Describes native tokens (name, symbol, decimals). |
-| `BlockExplorer` | Configuration for standard explorer URL structures. |
+40: | `BlockExplorer` | Configuration for standard explorer URL structures. |
 
 ## 🛡️ Security Considerations
 

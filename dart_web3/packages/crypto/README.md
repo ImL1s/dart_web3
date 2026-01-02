@@ -13,6 +13,19 @@ A **security-first** cryptographic engine for the Dart Web3 SDK. This package pr
 - **Mnemonic Seed (BIP-39)**: Secure entropy generation and multilingual wordlist support.
 - **Fast Hashing**: Native-optimized Keccak-256 and SHA-256 implementations.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant M as Mnemonic
+    participant S as Seed
+    participant K as PrivateKey
+    participant P as PublicKey
+    M->>S: generateSeed(pass)
+    S->>K: derive(path)
+    K->>P: compute()
+    P-->>U: Wallet Address
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

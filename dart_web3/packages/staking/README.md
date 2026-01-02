@@ -12,6 +12,21 @@ A **liquid and native staking integrator** for Dart. Simplify the complexity of 
 - **Reward Tracking**: Real-time calculation of APR/APY across different protocols.
 - **Auto-Compounding**: Logic to automatically claim and re-stake rewards where supported.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant H as StakingHub
+    participant A as ProtocolAdapter
+    participant S as Signer
+    U->>H: stake(protocol, amount)
+    H->>A: build stake data
+    A-->>H: tx requirements
+    H->>S: signTransaction
+    S-->>H: signed bytes
+    H-->>U: Transaction Submitted
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

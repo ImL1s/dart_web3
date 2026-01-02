@@ -12,6 +12,21 @@ A **advanced diagnostic toolkit** for Ethereum developers. Gain deep visibility 
 - **Call Tracers**: Support for JavaScript tracers and structural tracers for internal call analysis.
 - **Log Foraging**: Advanced tools for reconstructing state from sparse event data.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant C as DebugClient
+    participant R as Archive Node
+    participant P as Parser
+    D->>C: traceTransaction(txHash)
+    C->>R: debug_traceTransaction
+    R-->>C: raw JSON trace
+    C->>P: parse(tracerType)
+    P-->>C: StructuredTraceResult
+    C-->>D: Call Graph / PC steps
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

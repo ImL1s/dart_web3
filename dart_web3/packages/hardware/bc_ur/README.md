@@ -12,6 +12,20 @@ A **pure Dart implementation of the Blockchain Uniform Resource (BC-UR)** standa
 - **Cbor Logic**: Built-in CBOR encoding/decoding compliant with the UR specification.
 - **Hardware Agnostic**: Fully compatible with Keystone, Foundation, SeedSigner, and BlueWallet implementations.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant B as Raw Bytes
+    participant C as CBOR Encoder
+    participant F as Fountain Encoder
+    participant Q as QR Display
+    B->>C: encode()
+    C->>F: build frames
+    F->>Q: animation cycle
+    Note over Q: ur:eth-tx/1-5/...
+    Note over Q: ur:eth-tx/2-5/...
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

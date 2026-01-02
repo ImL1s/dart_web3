@@ -12,6 +12,26 @@ A **type-safe ABI codec** for Ethereum contract interaction. Encodes and decodes
 - **ABI v2 (Tuples)**: Full recursive support for structs and nested tuple objects.
 - **Event Logs**: Specialized decoders for indexing and parsing block log topics.
 
+## Usage Flow
+```mermaid
+graph TD
+    A[ABI JSON] --> B[Parser]
+    B --> C[Encoder/Decoder]
+    C --> D[Bytecode]
+```
+
+## Encoding Flow
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant E as Encoder
+    participant B as Bytes
+    D->>E: encode(types, values)
+    E->>E: padding & alignment
+    E->>B: generate
+    B-->>D: payload
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

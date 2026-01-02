@@ -12,6 +12,21 @@ A **reactive event processing engine** for Ethereum logs. It simplifies the comp
 - **Reorg Resilience**: Hooks for handling chain re-organizations (planned).
 - **Efficient Filtering**: Multi-topic filtering for complex contract interactions.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant S as Subscriber
+    participant L as EventListener
+    participant P as ABI Parser
+    participant B as Blockchain
+    S->>L: watchEvents('Transfer')
+    L->>B: eth_subscribe / getLogs
+    B-->>L: raw logs
+    L->>P: decode(log)
+    P-->>L: DecodedEvent
+    L-->>S: broadcast to Stream
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

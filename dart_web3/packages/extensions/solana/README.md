@@ -12,6 +12,24 @@ A **high-performance Solana extension** for the Dart Web3 ecosystem. Brings the 
 - **SPL Token Suite**: Direct support for Minting, Transferring, and Managing SPL tokens.
 - **PDA Derivation**: Advanced logic for deriving Program Derived Addresses with seeds.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant B as Instruction Builder
+    participant S as SolanaClient
+    participant W as Wallet
+    participant R as RPC Node
+    D->>B: createTransferInstruction()
+    B-->>D: Raw Instruction
+    D->>S: buildTransaction(instructions)
+    S->>R: getRecentBlockhash()
+    R-->>S: blockhash
+    S->>W: sign(tx)
+    W-->>S: signature
+    S->>R: sendTransaction()
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,21 @@ Industry-standard **Trezor hardware wallet integration** for Dart. Communicates 
 - **Passphrase Security**: Native handling of the Trezor "hidden wallet" (passphrase) entry.
 - **Type-Safe Commands**: Typed requests for Address, Signing, and CipherKey derivation.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as App
+    participant T as TrezorClient
+    participant D as Device
+    A->>T: connect()
+    T->>D: Initialize
+    A->>T: getAddress(path)
+    T->>D: PB.GetAddress
+    D-->>D: PIN Entry
+    D-->>T: address result
+    T-->>A: EthereumAddress
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,21 @@ A **Multi-Party Computation (MPC) extension** for the Dart Web3 ecosystem. Enabl
 - **Distributed Signing**: Create valid ECDSA signatures without ever assembling a full private key on one device.
 - **Enterprise Ready**: Designed for institutional wallet flows and 2-of-2 mobile-cloud pairings.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as Client Share
+    participant B as Server Share
+    participant C as MPC Orchestrator
+    A->>C: sign_intent(hash)
+    C->>B: request_partial_sig
+    B-->>C: partial_proof_b
+    C->>A: request_partial_sig
+    A-->>C: partial_proof_a
+    C->>C: aggregate_signatures
+    C-->>A: Final Valid Signature
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

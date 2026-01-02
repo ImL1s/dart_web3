@@ -12,6 +12,24 @@ A **full-featured TRON extension** for the Dart Web3 ecosystem. Effortlessly int
 - **TRC-20 Support**: Specialized wrappers for USDT and other popular tokens on TRON.
 - **Multi-Sig & Permissions**: Advanced support for TRON's multi-signature and account permission systems.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as TronClient
+    participant R as Resource Hub
+    participant P as ProtoBuilder
+    participant N as Tron Node
+    U->>C: transfer(TRC20)
+    C->>R: check Energy balance
+    R-->>C: sufficient
+    C->>P: encode function call
+    P-->>C: transaction protobuf
+    C->>C: sign with Base58 key
+    C->>N: broadcastTransaction
+    N-->>U: Confirmed!
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

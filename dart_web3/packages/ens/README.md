@@ -12,6 +12,21 @@ A **human-readable identity resolver** for the Dart Web3 ecosystem. It provides 
 - **Content Discovery**: Fetch IPFS/IPNS hashes, avatar URLs, and social metadata associated with a name.
 - **Wildcard & L2 Support**: (Planned) Support for EIP-3668 (CCIP-Read) for reduced gas resolution.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant E as EnsResolver
+    participant R as Registry
+    participant RV as Resolver Contract
+    U->>E: resolve('vitalik.eth')
+    E->>R: get node hash
+    R-->>E: resolver address
+    E->>RV: addr(node)
+    RV-->>E: 0xd8da...
+    E-->>U: Final Address
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

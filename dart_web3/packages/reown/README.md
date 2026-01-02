@@ -12,6 +12,21 @@ A **seamless WalletConnect (Reown) v2 integration** for Dart. Connect your decen
 - **Relay Infrastructure**: High-performance connection management via Reown's global relayers.
 - **UI Hooks**: Built-in state observables for connection status, session events, and proposed namespaces.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant D as DApp
+    participant R as Reown Relay
+    participant W as Wallet
+    D->>R: createPairing()
+    R-->>D: URI (wc:...)
+    D->>W: scan QR / Deep link
+    W->>R: join session
+    W-->>D: session_proposal
+    D->>W: approve(namespaces)
+    W-->>D: Session Established
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

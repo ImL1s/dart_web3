@@ -12,6 +12,24 @@ A **robust Bitcoin extension** for the Dart Web3 SDK. Brings Bitcoin's UTXO-base
 - **PSBT Support**: Partially Signed Bitcoin Transactions for multi-sig and air-gapped flows.
 - **Lightning Ready**: (Planned) Primitives for Lightning Network payment channels.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as BtcClient
+    participant S as UTXO Selector
+    participant B as TxBuilder
+    participant W as Wallet
+    U->>C: sendBtc(to, amount)
+    C->>S: fetch unspent outputs
+    S-->>C: selected UTXOs
+    C->>B: build PSBT
+    B-->>C: unsigned PSBT
+    C->>W: sign_psbt()
+    W-->>C: signed TX
+    C-->>U: Broadcasted Hash
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,20 @@ An **efficiency-focused batching library** that enables querying multiple pieces
 - **Aggregate v3**: Supports "allow failures," ensuring one failing call doesn't break the entire batch.
 - **Low Gas Consumption**: Optimized encoding for minimized on-chain execution cost.
 
+## Usage Flow
+```mermaid
+graph TD
+    R1[Request 1: Balance] --> B[Batch Aggregator]
+    R2[Request 2: Decimals] --> B
+    R3[Request 3: Name] --> B
+    B --> M[Multicall.aggregate()]
+    M --> S[Serialized Call Data]
+    S --> Res[Block result]
+    Res --> O1[Result 1]
+    Res --> O2[Result 2]
+    Res --> O3[Result 3]
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

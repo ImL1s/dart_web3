@@ -13,6 +13,21 @@ The **primary developer interface** for the Dart Web3 SDK. It provides intuitive
 - **Auto-Encoding**: Handles gas Estimation, nonce management, and transaction serialization automatically.
 - **Extensible**: Easily add support for custom RPC methods or middleware.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant F as ClientFactory
+    participant C as Public/WalletClient
+    participant R as RPC Node
+    D->>F: createPublicClient(chain)
+    F-->>C: Client Instance
+    D->>C: getBalance(address)
+    C->>R: eth_getBalance
+    R-->>C: hex result
+    C-->>D: EthUnit value
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

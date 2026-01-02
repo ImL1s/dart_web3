@@ -12,6 +12,22 @@ A **cross-chain interoperability wrapper** for the Dart Web3 ecosystem. Effortle
 - **L2 Optimized**: Low-latency route discovery for Ethereum rollups (Base, Arbitrum, Optimism).
 - **Security Scopes**: Built-in verification of destination chain IDs and asset compatibility.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant B as BridgeClient
+    participant SC as Source Chain
+    participant R as Relay/Messenger
+    participant DC as Dest Chain
+    U->>B: requestQuote(L1->L2)
+    B-->>U: Quote (Fees + Time)
+    U->>SC: send funds to Bridge
+    SC->>R: emit event
+    R->>DC: fulfill assets
+    DC-->>U: Assets Received
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

@@ -12,6 +12,17 @@ A **unified DEX aggregation layer** for Dart. Perform asset swaps, fetch liquidi
 - **Protocol Support**: Specialized modules for Uniswap v2/v3, Curve, and Balancer.
 - **Atomic Operations**: Bundle approval and swap transactions where the protocol supports it.
 
+## Usage Flow
+```mermaid
+graph LR
+    A[Token In/Out] --> B[Quote Engine]
+    B --> C[Fetch 1inch/Uniswap]
+    C --> D[Compare Routes]
+    D --> E[Best Quote]
+    E --> F[Encoded Tx]
+    F --> G[Approval + Swap]
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

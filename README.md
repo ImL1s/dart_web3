@@ -48,36 +48,82 @@ graph LR
 
 ## Quick Start
 
+### 1. Basic RPC Operations
 ```dart
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_chains/dart_web3_chains.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:dart_web3/dart_web3.dart';
 
 void main() async {
-  // Create a public client for read-only operations
-  final publicClient = ClientFactory.createPublicClient(
+  final client = ClientFactory.createPublicClient(
     rpcUrl: 'https://eth.llamarpc.com',
     chain: Chains.ethereum,
   );
   
-  // Get balance
-  final balance = await publicClient.getBalance('0x...');
-  print('Balance: ${EthUnit.formatEther(balance)} ETH');
-  
-  // Create a wallet client for transactions
-  final signer = PrivateKeySigner.fromHex('0x...', Chains.ethereum.chainId);
-  final walletClient = ClientFactory.createWalletClient(
-    rpcUrl: 'https://eth.llamarpc.com',
-    chain: Chains.ethereum,
+  final blockNumber = await client.getBlockNumber();
+  print('Current Block: $blockNumber');
+}
+```
+
+### 2. Contract Interaction (ERC-20)
+```dart
+import 'package:dart_web3/dart_web3.dart';
+
+void main() async {
+  final client = ClientFactory.createPublicClient(rpcUrl: '...');
+  final contract = ERC20(address: '0x...', client: client);
+
+  final symbol = await contract.symbol();
+  final balance = await contract.balanceOf('0x...');
+  print('$symbol Balance: ${EthUnit.formatEther(balance)}');
+}
+```
+
+### 3. Batch Calls (Multicall)
+```dart
+import 'package:dart_web3/dart_web3.dart';
+
+void main() async {
+  final client = ClientFactory.createPublicClient(rpcUrl: '...');
+  final multicall = Multicall(client: client);
+
+  final results = await multicall.aggregate([
+    contract.getBalanceRequest('0xUser1'),
+    contract.getBalanceRequest('0xUser2'),
+    client.getEthBalanceRequest('0xUser1'),
+  ]);
+}
+```
+
+### 4. Account Abstraction (ERC-4337)
+```dart
+import 'package:dart_web3/dart_web3.dart';
+
+void main() async {
+  final signer = PrivateKeySigner.fromHex('0x...');
+  final smartAccount = await SimpleSmartAccount.create(
     signer: signer,
+    rpcUrl: '...',
+    entryPoint: '0x...',
   );
-  
-  // Send transaction
-  final txHash = await walletClient.transfer(
-    '0xRecipient...',
-    EthUnit.ether('0.1'),
+
+  final txHash = await smartAccount.sendTransaction(
+    to: '0x...',
+    value: EthUnit.ether('0.01'),
   );
-  print('Transaction: $txHash');
+}
+```
+
+### 5. Multi-Chain Extensions
+```dart
+import 'package:dart_web3/dart_web3.dart';
+import 'package:dart_web3_solana/dart_web3_solana.dart';
+
+void main() async {
+  // Use Ethereum core for EVM
+  final evmBalance = await evmClient.getBalance('0x...');
+
+  // Use Solana extension for non-EVM
+  final solClient = SolanaClient(endpoint: '...');
+  final solBalance = await solClient.getBalance('...');
 }
 ```
 
@@ -148,40 +194,54 @@ graph TD
 
 ## Package Structure
 
-| Package | Description | Level |
-|---------|-------------|-------|
-| [`dart_web3_core`](dart_web3/packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
-| [`dart_web3_crypto`](dart_web3/packages/crypto) | Cryptography (secp256k1, keccak, BIP-32/39/44) | 1 |
-| [`dart_web3_abi`](dart_web3/packages/abi) | ABI encoding/decoding | 1 |
-| [`dart_web3_provider`](dart_web3/packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
-| [`dart_web3_signer`](dart_web3/packages/signer) | Signer abstraction | 2 |
-| [`dart_web3_chains`](dart_web3/packages/chains) | Chain configurations | 2 |
-| [`dart_web3_client`](dart_web3/packages/client) | PublicClient/WalletClient | 3 |
-| [`dart_web3_contract`](dart_web3/packages/contract) | Contract abstraction | 3 |
-| [`dart_web3_events`](dart_web3/packages/events) | Event subscription | 3 |
-| [`dart_web3_multicall`](dart_web3/packages/multicall) | Multicall support | 4 |
-| [`dart_web3_ens`](dart_web3/packages/ens) | ENS resolution | 4 |
-| [`dart_web3_aa`](dart_web3/packages/aa) | ERC-4337 Account Abstraction | 5 |
-| [`dart_web3_reown`](dart_web3/packages/reown) | Reown/WalletConnect v2 | 5 |
-| [`dart_web3_swap`](dart_web3/packages/swap) | DEX aggregation | 5 |
-| [`dart_web3_bridge`](dart_web3/packages/bridge) | Cross-chain bridging | 5 |
-| [`dart_web3_nft`](dart_web3/packages/nft) | NFT services | 5 |
-| [`dart_web3_staking`](dart_web3/packages/staking) | Staking services | 5 |
-| [`dart_web3_debug`](dart_web3/packages/debug) | Debug/Trace API | 5 |
-| [`dart_web3_mev`](dart_web3/packages/mev) | MEV protection/Flashbots | 5 |
-| [`dart_web3_dapp`](dart_web3/packages/dapp) | DApp state & session management | 5 |
-| [`dart_web3_history`](dart_web3/packages/history) | Transaction history explorer | 5 |
-| [`dart_web3_price`](dart_web3/packages/price) | Asset pricing and oracles | 5 |
-| [`dart_web3_bc_ur`](dart_web3/packages/hardware/bc_ur) | BC-UR air-gapped protocol | 6 |
-| [`dart_web3_keystone`](dart_web3/packages/hardware/keystone) | Keystone hardware wallet | 6 |
-| [`dart_web3_ledger`](dart_web3/packages/hardware/ledger) | Ledger hardware wallet | 6 |
-| [`dart_web3_trezor`](dart_web3/packages/hardware/trezor) | Trezor hardware wallet | 6 |
-| [`dart_web3_mpc`](dart_web3/packages/hardware/mpc) | MPC wallet support | 6 |
-| [`dart_web3_solana`](dart_web3/packages/extensions/solana) | Solana extension | 7 |
-| [`dart_web3_polkadot`](dart_web3/packages/extensions/polkadot) | Polkadot extension | 7 |
-| [`dart_web3_tron`](dart_web3/packages/extensions/tron) | Tron extension | 7 |
-| [`dart_web3_ton`](dart_web3/packages/extensions/ton) | TON extension | 7 |
-| [`dart_web3_bitcoin`](dart_web3/packages/extensions/bitcoin) | Bitcoin extension | 7 |
+## 📦 Modules & Capabilities
+
+The SDK is divided into specialized layers. Click on a package to see its dedicated documentation.
+
+### **Layer 0-1: Foundation** (The "Trust Wallet Core" equivalent)
+Low-level primitives for cryptography, encoding, and data models.
+- **[`dart_web3_core`](dart_web3/packages/core)**: Essential types (`EthAddress`, `BigInt` units), RLP encoding, and byte manipulation.
+- **[`dart_web3_crypto`](dart_web3/packages/crypto)**: Security-first crypto engine. `secp256k1`, `BIP-39` mnemonics, `BIP-44` HD Wallets, and `Keccak` hashing.
+- **[`dart_web3_abi`](dart_web3/packages/abi)**: Robust ABI v2 codec for encoding/decoding Solidity types, functions, and events.
+
+### **Layer 2: Connectivity & Identity**
+Standardized interfaces for connecting to blockchains and managing identities.
+- **[`dart_web3_provider`](dart_web3/packages/provider)**: JSON-RPC 2.0 gateway supporting HTTP and WebSockets with middleware support.
+- **[`dart_web3_signer`](dart_web3/packages/signer)**: Universal signing abstraction for Private Keys, Passkeys, and Hardware Wallets (Ledger/Trezor).
+- **[`dart_web3_chains`](dart_web3/packages/chains)**: Comprehensive registry of EVM networks (metadata, RPCs, contract addresses).
+
+### **Layer 3: Interaction**
+The primary developer surface for building DApps.
+- **[`dart_web3_client`](dart_web3/packages/client)**: High-level `PublicClient` and `WalletClient` for composable blockchain interaction.
+- **[`dart_web3_contract`](dart_web3/packages/contract)**: Type-safe wrapper for smart contracts (read state, write transactions, watch events).
+- **[`dart_web3_events`](dart_web3/packages/events)**: Recursive event filter polling and WebSocket subscription management.
+
+### **Layer 4-5: Advanced Features**
+Specialized modules for complex Web3 workflows.
+- **[`dart_web3_aa`](dart_web3/packages/aa)**: **Account Abstraction** (ERC-4337) toolkit. Smart Accounts, Bundlers, and Paymasters.
+- **[`dart_web3_ens`](dart_web3/packages/ens)**: Ethereum Name Service resolution and avatar fetching.
+- **[`dart_web3_multicall`](dart_web3/packages/multicall)**: Batch aggregate on-chain calls into a single RPC request.
+- **[`dart_web3_reown`](dart_web3/packages/reown)**: WalletConnect v2 integration (formerly Reown).
+- **[`dart_web3_nft`](dart_web3/packages/nft)**: Metadata fetching and standard interfaces for ERC-721/ERC-1155.
+- **[`dart_web3_swap`](dart_web3/packages/swap)**: DEX aggregation interfaces and utilities.
+- **[`dart_web3_bridge`](dart_web3/packages/bridge)**: Cross-chain bridging utilities.
+- **[`dart_web3_debug`](dart_web3/packages/debug)**: Trace API and debugging tools.
+- **[`dart_web3_mev`](dart_web3/packages/mev)**: MEV bundle submission and protections.
+
+### **Layer 6: Hardware Security**
+Air-gapped and secure-element integration.
+- **[`dart_web3_ledger`](dart_web3/packages/hardware/ledger)**: Connect via USB/BLE to Ledger Nano S/X/Stax.
+- **[`dart_web3_trezor`](dart_web3/packages/hardware/trezor)**: Connect via USB Bridge to Trezor One/T/Safe.
+- **[`dart_web3_keystone`](dart_web3/packages/hardware/keystone)**: Air-gapped QR communication with Keystone devices.
+- **[`dart_web3_bc_ur`](dart_web3/packages/hardware/bc_ur)**: Blockchain Uniform Resource (BC-UR) protocol for QR code transmission.
+
+### **Layer 7: Multi-Chain Extensions**
+Beyond the EVM. Native support for other major blockchains.
+- **[`dart_web3_solana`](dart_web3/packages/extensions/solana)**: Solana SVM support (SPL tokens, Programs, PDAs).
+- **[`dart_web3_bitcoin`](dart_web3/packages/extensions/bitcoin)**: Bitcoin UTXO management, SegWit, and PSBTs.
+- **[`dart_web3_polkadot`](dart_web3/packages/extensions/polkadot)**: Substrate/Polkadot support with SCALE codec.
+- **[`dart_web3_tron`](dart_web3/packages/extensions/tron)**: TRON network support (TRC-20, Bandwidth/Energy).
+- **[`dart_web3_ton`](dart_web3/packages/extensions/ton)**: The Open Network (TON) support (Bag of Cells, Jettons).
 
 ## Development
 

@@ -12,6 +12,21 @@ Professional **Ledger hardware wallet support** for Dart. Connect via USB or Blu
 - **Device Management**: List, connect, and monitor device status (Locked, App Not Open).
 - **Path Derivation**: Access any BIP-44 account directly from the hardware's secure element.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as App
+    participant T as Transport (USB/BLE)
+    participant L as Ledger Device
+    A->>T: open()
+    T->>L: handshake
+    A->>T: send APDU (SignTx)
+    T->>L: process data
+    L-->>L: user confirms on screen
+    L->>T: signature response
+    T-->>A: EthSignature
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

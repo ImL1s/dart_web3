@@ -13,6 +13,19 @@ The **foundational primitive layer** for the Dart Web3 SDK. This package provide
 - **Ether Units**: Type-safe conversions (Wei, Gwei, Ether) with fixed-point accuracy.
 - **Byte Manipulation**: Zero-copy friendly extraction and conversion utilities for `Uint8List`.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant A as Address
+    participant R as RLP
+    participant H as Hex
+    U->>A: parseHex(0x...)
+    A->>H: decode()
+    H->>R: encode(data)
+    R-->>U: result bytes
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

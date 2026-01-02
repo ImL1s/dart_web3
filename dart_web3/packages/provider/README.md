@@ -12,6 +12,21 @@ The **connectivity gateway** for the Dart Web3 SDK. It provides a standardized i
 - **Advanced Middleware**: Inject custom logic for request signing, rate limiting, or verbose logging.
 - **Fail-over Capability**: (Planned) Logic to automatically switch between RPC endpoints.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as Application
+    participant I as Interceptor
+    participant P as Provider
+    participant N as Network
+    A->>I: request(method, params)
+    I->>P: process()
+    P->>N: json-rpc via HTTP
+    N-->>P: response
+    P-->>I: parse
+    I-->>A: result
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

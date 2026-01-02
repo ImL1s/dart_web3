@@ -12,6 +12,18 @@ A **real-time asset pricing engine** for the Web3 stack. Integrate market data f
 - **Precision Mapping**: Maps asset symbols to native Coingecko IDs automatically.
 - **Historical Data**: Fetch OHLCV data for charts and portfolio analysis (planned).
 
+## Usage Flow
+```mermaid
+graph TD
+    A[Token Symbol] --> B[PriceHub]
+    B --> C{Strategy?}
+    C -->|API| D[CoinGecko / Binance]
+    C -->|On-Chain| E[Chainlink Oracle]
+    D --> F[Result Conversion]
+    E --> F
+    F --> G[Cached TokenPrice]
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

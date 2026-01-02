@@ -12,6 +12,17 @@ A **comprehensive NFT management suite** for Dart. Easily interact with ERC-721 
 - **Marketplace Wrappers**: Specialized modules for OpenSea, Blur, and LooksRare.
 - **Ownership Indexing**: Efficiently query all tokens owned by a specific address across collections.
 
+## Usage Flow
+```mermaid
+graph TD
+    A[Token ID] --> B[Contract Call]
+    B --> C[Metadata URI]
+    C --> D[IPFS/Cloud Resolver]
+    D --> E[Parsed Metadata]
+    E --> F[Asset Cache]
+    F --> G[UI Display]
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

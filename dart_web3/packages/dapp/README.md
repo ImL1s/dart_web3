@@ -12,6 +12,16 @@ A **comprehensive application framework** for building decentralized application
 - **Auto-Discovery (EIP-6963)**: Intelligent detection of installed browser wallets on Web platforms.
 - **Secure Persistence**: (Optional) hooks to save session data in encrypted local storage.
 
+## Usage Flow
+```mermaid
+graph LR
+    A[Launch App] --> B[Initialize DAppStore]
+    B --> C[Connect Wallet]
+    C --> D[Active Account Stream]
+    D --> E[Update UI Components]
+    E --> F[Session Persisted]
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

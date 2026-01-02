@@ -12,6 +12,23 @@ A **Substrate-compatible extension** for the Dart Web3 ecosystem. Enable interac
 - **Metadata V14+**: Dynamically parse Substrate metadata to discover pallet methods and constants.
 - **SR25519 & Ed25519**: Full support for standard Substrate signature schemes.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as Application
+    participant C as PolkadotClient
+    participant M as Metadata Registry
+    participant S as SCALE Codec
+    participant N as Substrate Node
+    A->>C: call(balances.transfer)
+    C->>M: lookup(metadata)
+    M-->>C: type definitions
+    C->>S: encode(params)
+    S-->>C: extrinsic bytes
+    C->>N: author_submitExtrinsic
+    N-->>A: system.ExtrinsicSuccess
+```
+
 ## 🏗️ Architecture
 
 ```mermaid

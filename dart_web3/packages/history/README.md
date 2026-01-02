@@ -12,6 +12,22 @@ A **data-rich transaction explorer** for Web3 applications. Fetch, parse, and no
 - **Local Persistence**: Efficient SQLite/Hive-ready caching to reduce API overhead.
 - **Multilingual Labels**: Configurable labels for system transactions and contract interactions.
 
+## Usage Flow
+```mermaid
+sequenceDiagram
+    participant A as App
+    participant F as HistoryFetcher
+    participant C as Cache
+    participant E as EtherscanAPI
+    A->>F: getHistory(address)
+    F->>C: check local activity
+    C-->>F: partial data
+    F->>E: fetch offset logs
+    E-->>F: JSON activity
+    F->>C: update storage
+    F-->>A: List<Web3Transaction>
+```
+
 ## 🏗️ Architecture
 
 ```mermaid
