@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 /// Injected Web3 Provider following EIP-1193
 class DAppProvider {
-  final PublicClient _publicClient;
-  final WalletClient? _walletClient;
 
   DAppProvider({
     required PublicClient publicClient,
     WalletClient? walletClient,
   })  : _publicClient = publicClient,
         _walletClient = walletClient;
+  final PublicClient _publicClient;
+  final WalletClient? _walletClient;
 
   /// EIP-1193 request method
   Future<dynamic> request(Map<String, dynamic> args) async {
@@ -22,7 +23,7 @@ class DAppProvider {
     switch (method) {
       case 'eth_accounts':
       case 'eth_requestAccounts':
-        return _walletClient != null ? [_walletClient!.address.hex] : [];
+        return _walletClient != null ? [_walletClient.address.hex] : [];
       
       case 'eth_chainId':
         return '0x${_publicClient.chain.chainId.toRadixString(16)}';
@@ -30,7 +31,7 @@ class DAppProvider {
       case 'eth_sendTransaction':
         if (_walletClient == null) throw Exception('Wallet not connected');
         // Handle transaction sending (would involve UI confirmation)
-        return _walletClient!.sendTransaction(_parseTransaction(params[0]));
+        return _walletClient.sendTransaction(_parseTransaction(params[0] as Map<String, dynamic>));
 
       default:
         // Forward other requests to public client (RPC)

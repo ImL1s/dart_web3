@@ -9,23 +9,57 @@ import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 
-import 'session_manager.dart';
 import 'namespace_config.dart';
+import 'session_manager.dart';
 
 /// Signer implementation that uses Reown/WalletConnect v2 for signing.
 class ReownSigner implements Signer {
-  final SessionManager sessionManager;
-  final String sessionTopic;
-  final String _address;
 
   ReownSigner({
     required this.sessionManager,
     required this.sessionTopic,
     required String address,
   }) : _address = address;
+  final SessionManager sessionManager;
+  final String sessionTopic;
+  final String _address;
 
   @override
   EthereumAddress get address => EthereumAddress.fromHex(_address);
+
+  @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    final session = sessionManager.getSession(sessionTopic);
+    if (session == null) {
+      throw Exception('Session not found: $sessionTopic');
+    }
+
+    // Check if the session supports eth_sign
+    final hasSigningMethod = session.namespaces.any((ns) => 
+        ns.supportsMethod('eth_sign'),);
+    
+    if (!hasSigningMethod) {
+      throw Exception('Session does not support raw hash signing (eth_sign)');
+    }
+
+    try {
+      // Send signing request to wallet
+      final response = await sessionManager.sendRequest(
+        topic: sessionTopic,
+        method: 'eth_sign',
+        params: {
+          'message': HexUtils.encode(hash),
+          'address': _address,
+        },
+        timeout: const Duration(minutes: 5),
+      );
+
+      final signature = response['result'] as String;
+      return HexUtils.decode(signature);
+    } on Object catch (e) {
+      throw SigningException('Failed to sign hash: $e');
+    }
+  }
 
   @override
   Future<Uint8List> signTransaction(TransactionRequest transaction) async {
@@ -37,7 +71,7 @@ class ReownSigner implements Signer {
     // Check if the session supports transaction signing
     final hasSigningMethod = session.namespaces.any((ns) => 
         ns.supportsMethod('eth_signTransaction') || 
-        ns.supportsMethod('eth_sendTransaction'));
+        ns.supportsMethod('eth_sendTransaction'),);
     
     if (!hasSigningMethod) {
       throw Exception('Session does not support transaction signing');
@@ -57,7 +91,7 @@ class ReownSigner implements Signer {
 
       final signedTx = response['result'] as String;
       return HexUtils.decode(signedTx);
-    } catch (e) {
+    } on Object catch (e) {
       throw SigningException('Failed to sign transaction: $e');
     }
   }
@@ -72,7 +106,7 @@ class ReownSigner implements Signer {
     // Check if the session supports message signing
     final hasSigningMethod = session.namespaces.any((ns) => 
         ns.supportsMethod('personal_sign') || 
-        ns.supportsMethod('eth_sign'));
+        ns.supportsMethod('eth_sign'),);
     
     if (!hasSigningMethod) {
       throw Exception('Session does not support message signing');
@@ -108,7 +142,7 @@ class ReownSigner implements Signer {
     final hasSigningMethod = session.namespaces.any((ns) => 
         ns.supportsMethod('eth_signTypedData') ||
         ns.supportsMethod('eth_signTypedData_v3') ||
-        ns.supportsMethod('eth_signTypedData_v4'));
+        ns.supportsMethod('eth_signTypedData_v4'),);
     
     if (!hasSigningMethod) {
       throw Exception('Session does not support typed data signing');
@@ -143,7 +177,7 @@ class ReownSigner implements Signer {
     // Check if the session supports EIP-7702 authorization signing
     final hasSigningMethod = session.namespaces.any((ns) => 
         ns.supportsMethod('eth_signAuthorization') ||
-        ns.supportsMethod('eth_signTypedData_v4')); // Fallback to typed data
+        ns.supportsMethod('eth_signTypedData_v4'),); // Fallback to typed data
     
     if (!hasSigningMethod) {
       throw Exception('Session does not support authorization signing');
@@ -199,7 +233,7 @@ class ReownSigner implements Signer {
 
     // Check if the session supports sending transactions
     final hasMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('eth_sendTransaction'));
+        ns.supportsMethod('eth_sendTransaction'),);
     
     if (!hasMethod) {
       throw Exception('Session does not support sending transactions');
@@ -234,8 +268,8 @@ class ReownSigner implements Signer {
       await sessionManager.sendRequest(
         topic: sessionTopic,
         method: 'wallet_requestPermissions',
-        params: {
-          'eth_accounts': {},
+        params: <String, dynamic>{
+          'eth_accounts': <String, dynamic>{},
         },
         timeout: const Duration(minutes: 5),
       );
@@ -253,7 +287,7 @@ class ReownSigner implements Signer {
 
     // Check if the session supports chain switching
     final hasMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('wallet_switchEthereumChain'));
+        ns.supportsMethod('wallet_switchEthereumChain'),);
     
     if (!hasMethod) {
       throw Exception('Session does not support chain switching');
@@ -287,7 +321,7 @@ class ReownSigner implements Signer {
 
     // Check if the session supports adding assets
     final hasMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('wallet_watchAsset'));
+        ns.supportsMethod('wallet_watchAsset'),);
     
     if (!hasMethod) {
       throw Exception('Session does not support adding assets');
@@ -371,7 +405,7 @@ class ReownSigner implements Signer {
           params['accessList'] = transaction.accessList!.map((entry) => {
             'address': entry.address,
             'storageKeys': entry.storageKeys,
-          }).toList();
+          },).toList();
         }
         break;
     }
@@ -391,9 +425,9 @@ class ReownSigner implements Signer {
 
 /// Exception thrown when signing operations fail.
 class SigningException implements Exception {
-  final String message;
   
   SigningException(this.message);
+  final String message;
   
   @override
   String toString() => 'SigningException: $message';
@@ -401,6 +435,8 @@ class SigningException implements Exception {
 
 /// Factory for creating Reown signers from sessions.
 class ReownSignerFactory {
+  ReownSignerFactory._();
+
   /// Creates a signer from an active session.
   static ReownSigner fromSession(SessionManager sessionManager, Session session) {
     if (session.account.isEmpty) {
@@ -433,7 +469,7 @@ class ReownSignerFactory {
           sessionManager: sessionManager,
           sessionTopic: session.topic,
           address: address,
-        ));
+        ),);
       }
     }
 

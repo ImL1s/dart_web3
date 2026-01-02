@@ -1,21 +1,23 @@
 import 'dart:async';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
-import 'nft_types.dart';
+
 import 'nft_metadata.dart';
+import 'nft_types.dart';
 
 /// NFT collection manager for querying and managing NFT collections
 class NftCollectionManager {
-  final PublicClient _client;
-  final NftMetadataParser _metadataParser;
-  final Map<EthereumAddress, NftCollection> _collectionCache = {};
 
   NftCollectionManager({
     required PublicClient client,
     NftMetadataParser? metadataParser,
   })  : _client = client,
         _metadataParser = metadataParser ?? NftMetadataParser();
+  final PublicClient _client;
+  final NftMetadataParser _metadataParser;
+  final Map<EthereumAddress, NftCollection> _collectionCache = {};
 
   /// Get NFT collection information
   Future<NftCollection?> getCollection(
@@ -329,7 +331,8 @@ class NftCollectionManager {
   int get cacheSize => _collectionCache.length;
 
   // Minimal ABI definitions for NFT contracts
-  static const _erc165AbiJson = '''[
+  static const _erc165AbiJson = '''
+[
     {
       "inputs": [
         {"internalType": "bytes4", "name": "interfaceId", "type": "bytes4"}
@@ -343,7 +346,8 @@ class NftCollectionManager {
     }
   ]''';
 
-  static const _erc721AbiJson = '''[
+  static const _erc721AbiJson = '''
+[
     {
       "inputs": [],
       "name": "name",
@@ -395,7 +399,8 @@ class NftCollectionManager {
     }
   ]''';
 
-  static const _erc1155AbiJson = '''[
+  static const _erc1155AbiJson = '''
+[
     {
       "inputs": [],
       "name": "name",

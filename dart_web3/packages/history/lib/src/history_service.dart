@@ -1,15 +1,11 @@
 import 'dart:async';
-import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'history_types.dart';
 
 /// Service for fetching transaction history
 class HistoryService {
-  final PublicClient _client;
 
-  HistoryService({
-    required PublicClient client,
-  }) : _client = client;
+  HistoryService();
 
   /// Fetch transaction history for an address
   Future<List<HistoryItem>> getHistory(HistoryQueryParams params) async {
@@ -26,7 +22,7 @@ class HistoryService {
     final value = BigInt.parse(tx['value'] as String);
     final input = tx['input'] as String;
 
-    TransactionType type = TransactionType.transfer;
+    var type = TransactionType.transfer;
     String? functionName;
 
     if (to == null) {

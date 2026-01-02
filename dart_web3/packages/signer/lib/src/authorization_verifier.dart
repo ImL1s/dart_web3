@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
@@ -26,7 +25,7 @@ class AuthorizationVerifier {
     }
 
     final results = <int, bool>{};
-    for (int i = 0; i < authorizations.length; i++) {
+    for (var i = 0; i < authorizations.length; i++) {
       results[i] = verifyAuthorization(authorizations[i], expectedSigners[i]);
     }
     return results;
@@ -89,7 +88,7 @@ class AuthorizationVerifier {
   /// whether each authorization has valid format.
   static Map<int, bool> validateAuthorizationListFormat(List<Authorization> authorizations) {
     final results = <int, bool>{};
-    for (int i = 0; i < authorizations.length; i++) {
+    for (var i = 0; i < authorizations.length; i++) {
       results[i] = isValidAuthorizationFormat(authorizations[i]);
     }
     return results;
@@ -141,7 +140,7 @@ class AuthorizationVerifier {
   /// the recovered signer addresses (null if recovery failed).
   static Map<int, String?> recoverSigners(List<Authorization> authorizations) {
     final results = <int, String?>{};
-    for (int i = 0; i < authorizations.length; i++) {
+    for (var i = 0; i < authorizations.length; i++) {
       results[i] = recoverSigner(authorizations[i]);
     }
     return results;

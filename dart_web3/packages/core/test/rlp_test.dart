@@ -30,7 +30,7 @@ void main() {
       });
 
       test('encodes empty list', () {
-        expect(RLP.encode([]), equals(Uint8List.fromList([0xc0])));
+        expect(RLP.encode(<dynamic>[]), equals(Uint8List.fromList([0xc0])));
       });
 
       test('encodes short list', () {
@@ -45,15 +45,15 @@ void main() {
       });
 
       test('encodes nested list', () {
-        final nested = [
-          [],
-          [[]],
-          [
-            [],
-            [[]],
+        final value = <dynamic>[
+          <dynamic>[],
+          <dynamic>[<dynamic>[]],
+          <dynamic>[
+            <dynamic>[],
+            <dynamic>[<dynamic>[]],
           ],
         ];
-        final encoded = RLP.encode(nested);
+        final encoded = RLP.encode(value);
         expect(
           encoded,
           equals(Uint8List.fromList([0xc7, 0xc0, 0xc1, 0xc0, 0xc3, 0xc0, 0xc1, 0xc0])),
@@ -112,7 +112,7 @@ void main() {
 
     group('round-trip property', () {
       test('encode then decode returns equivalent data', () {
-        final testCases = [
+        final testCases = <dynamic>[
           Uint8List(0),
           Uint8List.fromList([0x00]),
           Uint8List.fromList([0x7f]),
@@ -129,7 +129,7 @@ void main() {
       });
 
       test('encode then decode list returns equivalent data', () {
-        final testCases = [
+        final testCases = <dynamic>[
           <dynamic>[],
           [Uint8List.fromList([1, 2, 3])],
           [
@@ -137,7 +137,7 @@ void main() {
             Uint8List.fromList([2]),
           ],
           [
-            [],
+            <dynamic>[],
             [Uint8List.fromList([1])],
           ],
         ];

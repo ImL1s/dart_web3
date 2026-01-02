@@ -23,7 +23,7 @@ class Bip39 {
     'animal', 'ankle', 'announce', 'annual', 'another', 'answer', 'antenna', 'antique',
     'anxiety', 'any', 'apart', 'apology', 'appear', 'apple', 'approve', 'april',
     'arch', 'arctic', 'area', 'arena', 'argue', 'arm', 'armed', 'armor',
-    'army', 'around', 'arrange', 'arrest', 'arrive', 'arrow', 'art', 'article'
+    'army', 'around', 'arrange', 'arrest', 'arrive', 'arrow', 'art', 'article',
   ];
 
   /// Generates a new mnemonic phrase with the specified entropy strength.
@@ -105,9 +105,9 @@ class Bip39 {
     final indices = <int>[];
     final totalBits = entropyBits + checksumBits;
     
-    for (int i = 0; i < totalBits; i += 11) {
-      int index = 0;
-      for (int j = 0; j < 11 && i + j < totalBits; j++) {
+    for (var i = 0; i < totalBits; i += 11) {
+      var index = 0;
+      for (var j = 0; j < 11 && i + j < totalBits; j++) {
         final byteIndex = (i + j) ~/ 8;
         final bitIndex = (i + j) % 8;
         if (byteIndex < combined.length) {
@@ -135,19 +135,18 @@ class Bip39 {
 
     final totalBits = indices.length * 11;
     final entropyBits = (totalBits * 32) ~/ 33;
-    final checksumBits = totalBits - entropyBits;
     
     // Convert indices to bit array
     final bits = <int>[];
     for (final index in indices) {
-      for (int i = 10; i >= 0; i--) {
+      for (var i = 10; i >= 0; i--) {
         bits.add((index >> i) & 1);
       }
     }
     
     // Extract entropy and checksum
     final entropyBytes = Uint8List(entropyBits ~/ 8);
-    for (int i = 0; i < entropyBits; i++) {
+    for (var i = 0; i < entropyBits; i++) {
       final byteIndex = i ~/ 8;
       final bitIndex = i % 8;
       if (bits[i] == 1) {
@@ -162,7 +161,7 @@ class Bip39 {
   static Uint8List _generateEntropy(int bytes) {
     final random = Random.secure();
     final entropy = Uint8List(bytes);
-    for (int i = 0; i < bytes; i++) {
+    for (var i = 0; i < bytes; i++) {
       entropy[i] = random.nextInt(256);
     }
     return entropy;
@@ -171,7 +170,7 @@ class Bip39 {
   /// Helper function to compare two lists for equality.
   static bool _listEquals<T>(List<T> a, List<T> b) {
     if (a.length != b.length) return false;
-    for (int i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
       if (a[i] != b[i]) return false;
     }
     return true;

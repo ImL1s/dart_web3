@@ -1,0 +1,90 @@
+00:00 +0: loading test\abi_fixes_test.dart
+00:00 +0: test\abi_fixes_test.dart: Static Size Calculation Fixes AbiTuple.getStaticSize returns correct size for static tuple
+00:00 +1: test\abi_official_vector_test.dart: Official ABI Test Vectors Vector: uint256
+00:00 +2: test\abi_official_vector_test.dart: Official ABI Test Vectors Vector: uint256
+00:00 +3: test\abi_official_vector_test.dart: Official ABI Test Vectors Vector: uint256
+00:00 +4: test\abi_official_vector_test.dart: Official ABI Test Vectors Vector: uint256
+00:00 +5: test\abi_official_vector_test.dart: Official ABI Test Vectors Vector: uint256
+00:00 +6: test\abi_official_vector_test.dart: Official ABI Test Vectors Vector: uint256
+00:00 +7: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +8: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +9: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +10: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +11: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +12: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +13: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +14: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +15: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +16: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +17: test\decoder_test.dart: AbiDecoder Tests decodes simple values
+00:00 +18: test\decoder_test.dart: AbiDecoder Tests decodes simple values
+00:00 +19: test\decoder_test.dart: AbiDecoder Tests decodes simple values
+00:00 +20: test\decoder_test.dart: AbiDecoder Tests decodes simple values
+00:00 +21: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +22: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +23: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +24: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +25: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +26: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +27: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +28: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +29: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +30: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +31: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +32: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +33: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +34: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +35: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +36: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +37: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +38: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +39: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +40: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +41: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +42: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +43: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +44: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +45: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +46: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +47: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +48: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +49: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +50: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +51: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +52: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +53: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +54: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +55: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +56: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +57: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +58: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +59: test\typed_data_test.dart: TypedData Tests creates TypedData from constructor
+00:00 +60: test\abi_property_test.dart: ABI Module Property Tests Property 14: Dynamic Type Offset Calculation
+00:00 +61: test\abi_property_test.dart: ABI Module Property Tests Property 14: Dynamic Type Offset Calculation
+00:00 +62: test\types_test.dart: AbiType Tests AbiUint encodes uint256 correctly
+00:00 +63: test\types_test.dart: AbiType Tests AbiUint encodes uint256 correctly
+00:00 +64: test\typed_data_test.dart: TypedData Tests computes hash correctly
+00:00 +65: test\typed_data_test.dart: TypedData Tests computes hash correctly
+00:00 +66: test\typed_data_test.dart: TypedData Tests computes hash correctly
+00:00 +67: test\typed_data_test.dart: TypedData Tests computes hash correctly
+00:00 +68: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +69: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +70: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +71: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +72: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +73: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +74: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +75: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +76: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +77: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +78: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +79: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +80: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +81: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +82: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +83: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +84: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +85: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +86: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +87: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +88: All tests passed!

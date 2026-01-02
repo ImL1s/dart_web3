@@ -1,10 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 import 'user_operation.dart';
 
@@ -40,19 +39,18 @@ abstract class EntryPoint {
 
 /// EntryPoint v0.6 implementation.
 class EntryPointV06 implements EntryPoint {
+
+  EntryPointV06({
+    required PublicClient publicClient, String? address,
+    WalletClient? walletClient,
+  }) : _address = address ?? defaultAddress,
+       _publicClient = publicClient,
+       _walletClient = walletClient;
   static const String defaultAddress = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
 
   final String _address;
   final PublicClient _publicClient;
   final WalletClient? _walletClient;
-
-  EntryPointV06({
-    String? address,
-    required PublicClient publicClient,
-    WalletClient? walletClient,
-  }) : _address = address ?? defaultAddress,
-       _publicClient = publicClient,
-       _walletClient = walletClient;
 
   @override
   String get address => _address;
@@ -74,7 +72,7 @@ class EntryPointV06 implements EntryPoint {
       gasLimit: BigInt.from(1000000), // Estimate gas properly in production
     );
 
-    return await _walletClient!.sendTransaction(txRequest);
+    return _walletClient.sendTransaction(txRequest);
   }
 
   @override
@@ -94,7 +92,7 @@ class EntryPointV06 implements EntryPoint {
       gasLimit: BigInt.from(1000000),
     );
 
-    return await _walletClient!.sendTransaction(txRequest);
+    return _walletClient.sendTransaction(txRequest);
   }
 
   @override
@@ -105,7 +103,7 @@ class EntryPointV06 implements EntryPoint {
     final result = await _publicClient.call(CallRequest(
       to: _address,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return BigInt.parse(HexUtils.encode(result));
   }
@@ -118,14 +116,14 @@ class EntryPointV06 implements EntryPoint {
       final result = await _publicClient.call(CallRequest(
         to: _address,
         data: HexUtils.decode(callData),
-      ));
+      ),);
       
       return ValidationResult.fromBytes(result);
     } catch (e) {
       // simulateValidation is expected to revert with validation data
       if (e.toString().contains('ValidationResult')) {
         // Parse the revert data to extract validation result
-        return ValidationResult.fromRevertData(e.toString());
+        return ValidationResult.fromRevertData();
       }
       rethrow;
     }
@@ -138,7 +136,7 @@ class EntryPointV06 implements EntryPoint {
     final result = await _publicClient.call(CallRequest(
       to: _address,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return DepositInfo.fromBytes(result);
   }
@@ -190,7 +188,7 @@ class EntryPointV06 implements EntryPoint {
       op.maxPriorityFeePerGas,
       HexUtils.decode(op.paymasterAndData ?? '0x'),
       HexUtils.decode(op.signature),
-    ]).toList();
+    ],).toList();
 
     // Encode function call
     final types = [
@@ -254,7 +252,7 @@ class EntryPointV06 implements EntryPoint {
         op.maxPriorityFeePerGas,
         HexUtils.decode(op.paymasterAndData ?? '0x'),
         HexUtils.decode(op.signature),
-      ]).toList();
+      ],).toList();
 
       return [
         opsValues,
@@ -340,19 +338,18 @@ class EntryPointV06 implements EntryPoint {
 
 /// EntryPoint v0.7 implementation.
 class EntryPointV07 implements EntryPoint {
+
+  EntryPointV07({
+    required PublicClient publicClient, String? address,
+    WalletClient? walletClient,
+  }) : _address = address ?? defaultAddress,
+       _publicClient = publicClient,
+       _walletClient = walletClient;
   static const String defaultAddress = '0x0000000071727De22E5E9d8BAf0edAc6f37da032';
 
   final String _address;
   final PublicClient _publicClient;
   final WalletClient? _walletClient;
-
-  EntryPointV07({
-    String? address,
-    required PublicClient publicClient,
-    WalletClient? walletClient,
-  }) : _address = address ?? defaultAddress,
-       _publicClient = publicClient,
-       _walletClient = walletClient;
 
   @override
   String get address => _address;
@@ -376,7 +373,7 @@ class EntryPointV07 implements EntryPoint {
       gasLimit: BigInt.from(1000000),
     );
 
-    return await _walletClient!.sendTransaction(txRequest);
+    return _walletClient.sendTransaction(txRequest);
   }
 
   @override
@@ -396,7 +393,7 @@ class EntryPointV07 implements EntryPoint {
       gasLimit: BigInt.from(1000000),
     );
 
-    return await _walletClient!.sendTransaction(txRequest);
+    return _walletClient.sendTransaction(txRequest);
   }
 
   @override
@@ -407,7 +404,7 @@ class EntryPointV07 implements EntryPoint {
     final result = await _publicClient.call(CallRequest(
       to: _address,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return BigInt.parse(HexUtils.encode(result));
   }
@@ -421,12 +418,12 @@ class EntryPointV07 implements EntryPoint {
       final result = await _publicClient.call(CallRequest(
         to: _address,
         data: HexUtils.decode(callData),
-      ));
+      ),);
       
       return ValidationResult.fromBytes(result);
     } catch (e) {
       if (e.toString().contains('ValidationResult')) {
-        return ValidationResult.fromRevertData(e.toString());
+        return ValidationResult.fromRevertData();
       }
       rethrow;
     }
@@ -439,7 +436,7 @@ class EntryPointV07 implements EntryPoint {
     final result = await _publicClient.call(CallRequest(
       to: _address,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return DepositInfo.fromBytes(result);
   }
@@ -485,7 +482,7 @@ class EntryPointV07 implements EntryPoint {
       HexUtils.decode(op.gasFees),
       HexUtils.decode(op.paymasterAndData),
       HexUtils.decode(op.signature),
-    ]).toList();
+    ],).toList();
 
     // Encode function call
     final types = [
@@ -631,24 +628,19 @@ class EntryPointV07 implements EntryPoint {
 
 /// UserOperation with aggregation info for handleAggregatedOps.
 class UserOperationWithAggregation {
-  final List<UserOperation> userOps;
-  final String aggregator;
-  final String signature;
 
   UserOperationWithAggregation({
     required this.userOps,
     required this.aggregator,
     required this.signature,
   });
+  final List<UserOperation> userOps;
+  final String aggregator;
+  final String signature;
 }
 
 /// Result from simulateValidation.
 class ValidationResult {
-  final ReturnInfo returnInfo;
-  final StakeInfo senderInfo;
-  final StakeInfo? factoryInfo;
-  final StakeInfo? paymasterInfo;
-  final AggregatorStakeInfo? aggregatorInfo;
 
   ValidationResult({
     required this.returnInfo,
@@ -760,8 +752,8 @@ class ValidationResult {
     );
   }
 
-  factory ValidationResult.fromRevertData(String revertData) {
-    // TODO: Parse revert data to extract validation result
+  factory ValidationResult.fromRevertData() {
+    // Note: Parse revert data to extract validation result
     return ValidationResult(
       returnInfo: ReturnInfo(
         preOpGas: BigInt.zero,
@@ -777,16 +769,15 @@ class ValidationResult {
       ),
     );
   }
+  final ReturnInfo returnInfo;
+  final StakeInfo senderInfo;
+  final StakeInfo? factoryInfo;
+  final StakeInfo? paymasterInfo;
+  final AggregatorStakeInfo? aggregatorInfo;
 }
 
 /// Return info from validation.
 class ReturnInfo {
-  final BigInt preOpGas;
-  final BigInt prefund;
-  final bool sigFailed;
-  final BigInt validAfter;
-  final BigInt validUntil;
-  final String paymasterContext;
 
   ReturnInfo({
     required this.preOpGas,
@@ -796,37 +787,38 @@ class ReturnInfo {
     required this.validUntil,
     required this.paymasterContext,
   });
+  final BigInt preOpGas;
+  final BigInt prefund;
+  final bool sigFailed;
+  final BigInt validAfter;
+  final BigInt validUntil;
+  final String paymasterContext;
 }
 
 /// Stake info for an entity.
 class StakeInfo {
-  final BigInt stake;
-  final BigInt unstakeDelaySec;
 
   StakeInfo({
     required this.stake,
     required this.unstakeDelaySec,
   });
+  final BigInt stake;
+  final BigInt unstakeDelaySec;
 }
 
 /// Aggregator stake info.
 class AggregatorStakeInfo extends StakeInfo {
-  final String aggregator;
 
   AggregatorStakeInfo({
     required this.aggregator,
     required super.stake,
     required super.unstakeDelaySec,
   });
+  final String aggregator;
 }
 
 /// Deposit info for an account.
 class DepositInfo {
-  final BigInt deposit;
-  final bool staked;
-  final BigInt stake;
-  final BigInt unstakeDelaySec;
-  final BigInt withdrawTime;
 
   DepositInfo({
     required this.deposit,
@@ -888,6 +880,11 @@ class DepositInfo {
       withdrawTime: BigInt.zero,
     );
   }
+  final BigInt deposit;
+  final bool staked;
+  final BigInt stake;
+  final BigInt unstakeDelaySec;
+  final BigInt withdrawTime;
 }
 
 /// Factory for creating EntryPoint instances.
@@ -895,8 +892,7 @@ class EntryPointFactory {
   /// Creates an EntryPoint instance for the specified version.
   static EntryPoint create({
     required EntryPointVersion version,
-    String? address,
-    required PublicClient publicClient,
+    required PublicClient publicClient, String? address,
     WalletClient? walletClient,
   }) {
     switch (version) {

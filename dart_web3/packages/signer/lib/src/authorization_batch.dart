@@ -5,10 +5,64 @@ import 'signer.dart';
 
 /// Utility class for creating and managing batch authorizations.
 class AuthorizationBatch {
-  final List<Authorization> _authorizations = [];
 
   /// Creates an empty authorization batch.
   AuthorizationBatch();
+
+  /// Creates a batch authorization for multiple contracts.
+  /// 
+  /// This allows delegating to multiple contracts in a single transaction.
+  factory AuthorizationBatch.forContracts({
+    required int chainId,
+    required List<String> contractAddresses,
+    required BigInt startingNonce,
+  }) {
+    final batch = AuthorizationBatch();
+    
+    for (var i = 0; i < contractAddresses.length; i++) {
+      final authorization = Authorization.unsigned(
+        chainId: chainId,
+        address: contractAddresses[i],
+        nonce: startingNonce + BigInt.from(i),
+      );
+      batch.add(authorization);
+    }
+    
+    return batch;
+  }
+
+  /// Creates a batch with revocation authorizations.
+  /// 
+  /// This creates authorizations that revoke existing delegations.
+  factory AuthorizationBatch.revocations({
+    required int chainId,
+    required List<BigInt> nonces,
+  }) {
+    final batch = AuthorizationBatch();
+    
+    for (final nonce in nonces) {
+      final revocation = Authorization.revocation(
+        chainId: chainId,
+        nonce: nonce,
+      );
+      batch.add(revocation);
+    }
+    
+    return batch;
+  }
+
+  /// Creates a batch from RLP list.
+  factory AuthorizationBatch.fromRlpList(List<List<dynamic>> rlpList) {
+    final batch = AuthorizationBatch();
+    
+    for (final authRlp in rlpList) {
+      final authorization = Authorization.fromRlpList(authRlp);
+      batch.add(authorization);
+    }
+    
+    return batch;
+  }
+  final List<Authorization> _authorizations = [];
 
   /// Gets the list of authorizations in this batch.
   List<Authorization> get authorizations => List.unmodifiable(_authorizations);
@@ -45,48 +99,6 @@ class AuthorizationBatch {
   /// Clears all authorizations from the batch.
   void clear() {
     _authorizations.clear();
-  }
-
-  /// Creates a batch authorization for multiple contracts.
-  /// 
-  /// This allows delegating to multiple contracts in a single transaction.
-  factory AuthorizationBatch.forContracts({
-    required int chainId,
-    required List<String> contractAddresses,
-    required BigInt startingNonce,
-  }) {
-    final batch = AuthorizationBatch();
-    
-    for (int i = 0; i < contractAddresses.length; i++) {
-      final authorization = Authorization.unsigned(
-        chainId: chainId,
-        address: contractAddresses[i],
-        nonce: startingNonce + BigInt.from(i),
-      );
-      batch.add(authorization);
-    }
-    
-    return batch;
-  }
-
-  /// Creates a batch with revocation authorizations.
-  /// 
-  /// This creates authorizations that revoke existing delegations.
-  factory AuthorizationBatch.revocations({
-    required int chainId,
-    required List<BigInt> nonces,
-  }) {
-    final batch = AuthorizationBatch();
-    
-    for (final nonce in nonces) {
-      final revocation = Authorization.revocation(
-        chainId: chainId,
-        nonce: nonce,
-      );
-      batch.add(revocation);
-    }
-    
-    return batch;
   }
 
   /// Signs all authorizations in the batch with the given signer.
@@ -131,7 +143,7 @@ class AuthorizationBatch {
 
   /// Validates that all authorizations in the batch are properly formatted.
   bool validateFormat() {
-    return _authorizations.every((auth) => _isValidFormat(auth));
+    return _authorizations.every(_isValidFormat);
   }
 
   /// Gets the total gas cost estimate for this batch.
@@ -144,18 +156,6 @@ class AuthorizationBatch {
   /// Converts the batch to a list suitable for RLP encoding.
   List<List<dynamic>> toRlpList() {
     return _authorizations.map((auth) => auth.toRlpList()).toList();
-  }
-
-  /// Creates a batch from RLP list.
-  factory AuthorizationBatch.fromRlpList(List<List<dynamic>> rlpList) {
-    final batch = AuthorizationBatch();
-    
-    for (final authRlp in rlpList) {
-      final authorization = Authorization.fromRlpList(authRlp);
-      batch.add(authorization);
-    }
-    
-    return batch;
   }
 
   /// Creates a copy of this batch.
@@ -227,8 +227,8 @@ class AuthorizationBatch {
   }
 
   BigInt _bytesToBigInt(Uint8List bytes) {
-    BigInt result = BigInt.zero;
-    for (int i = 0; i < bytes.length; i++) {
+    var result = BigInt.zero;
+    for (var i = 0; i < bytes.length; i++) {
       result = (result << 8) + BigInt.from(bytes[i]);
     }
     return result;

@@ -54,6 +54,8 @@ enum KeyRefreshState {
 /// This implementation uses a proactive secret sharing protocol
 /// to refresh key shares while maintaining the same public key.
 class DefaultKeyRefresh implements KeyRefresh {
+
+  DefaultKeyRefresh({required this.communicationChannel});
   /// The communication channel for coordinating with other parties.
   final KeyRefreshCommunicationChannel communicationChannel;
   
@@ -62,8 +64,6 @@ class DefaultKeyRefresh implements KeyRefresh {
   
   /// Random number generator for refresh IDs.
   final Random _random = Random.secure();
-
-  DefaultKeyRefresh({required this.communicationChannel});
 
   @override
   Future<String> startRefresh(KeyShare keyShare) async {
@@ -172,6 +172,11 @@ abstract class KeyRefreshCommunicationChannel {
 
 /// HTTP-based key refresh communication channel.
 class HttpKeyRefreshCommunicationChannel implements KeyRefreshCommunicationChannel {
+
+  HttpKeyRefreshCommunicationChannel({
+    required this.baseUrl,
+    required this.partyId,
+  });
   /// The base URL for the coordination service.
   final String baseUrl;
   
@@ -182,21 +187,16 @@ class HttpKeyRefreshCommunicationChannel implements KeyRefreshCommunicationChann
   final StreamController<Map<String, dynamic>> _messageController = 
       StreamController<Map<String, dynamic>>.broadcast();
 
-  HttpKeyRefreshCommunicationChannel({
-    required this.baseUrl,
-    required this.partyId,
-  });
-
   @override
   Future<void> sendMessage(String partyId, Map<String, dynamic> message) async {
     // Implementation would send HTTP POST to coordination service
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 
   @override
   Future<void> broadcastMessage(String refreshId, Map<String, dynamic> message) async {
     // Implementation would send HTTP POST to coordination service
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 
   @override
@@ -206,12 +206,12 @@ class HttpKeyRefreshCommunicationChannel implements KeyRefreshCommunicationChann
 
   @override
   Future<void> joinChannel(String refreshId) async {
-    await Future.delayed(Duration(milliseconds: 50));
+    await Future<void>.delayed(const Duration(milliseconds: 50));
   }
 
   @override
   Future<void> leaveChannel(String refreshId) async {
-    await Future.delayed(Duration(milliseconds: 50));
+    await Future<void>.delayed(const Duration(milliseconds: 50));
   }
 
   /// Disposes resources.
@@ -222,6 +222,12 @@ class HttpKeyRefreshCommunicationChannel implements KeyRefreshCommunicationChann
 
 /// Internal key refresh ceremony implementation.
 class KeyRefreshCeremony {
+
+  KeyRefreshCeremony({
+    required this.refreshId,
+    required this.originalKeyShare,
+    required this.communicationChannel,
+  });
   /// The refresh ID.
   final String refreshId;
   
@@ -249,12 +255,6 @@ class KeyRefreshCeremony {
   /// Random number generator.
   final Random _random = Random.secure();
 
-  KeyRefreshCeremony({
-    required this.refreshId,
-    required this.originalKeyShare,
-    required this.communicationChannel,
-  });
-
   /// Initializes the key refresh ceremony.
   Future<void> _initialize() async {
     _state = KeyRefreshState.waitingForParties;
@@ -271,7 +271,7 @@ class KeyRefreshCeremony {
         _completionCompleter.completeError(MpcError(
           type: MpcErrorType.sessionTimeout,
           message: 'Key refresh ceremony timed out',
-        ));
+        ),);
         _state = KeyRefreshState.failed;
       }
     });
@@ -346,7 +346,7 @@ class KeyRefreshCeremony {
     // 4. The public key remains unchanged
     
     // Simulate some processing time
-    await Future.delayed(Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
     
     // Generate refreshed key shares for each party
     for (final entry in _joinedParties.entries) {
@@ -365,7 +365,7 @@ class KeyRefreshCeremony {
     
     // For simulation, create a new share with updated data
     final newShareData = Uint8List(originalShare.shareData.length);
-    for (int i = 0; i < newShareData.length; i++) {
+    for (var i = 0; i < newShareData.length; i++) {
       // Add some randomness to simulate refresh
       newShareData[i] = (originalShare.shareData[i] + _random.nextInt(256)) % 256;
     }
@@ -384,9 +384,7 @@ class KeyRefreshCeremony {
 
   /// Listens for messages from other parties.
   void _listenForMessages() {
-    communicationChannel.receiveMessages().listen((message) {
-      _handleMessage(message);
-    });
+    communicationChannel.receiveMessages().listen(_handleMessage);
   }
 
   /// Handles incoming messages.
@@ -409,7 +407,7 @@ class KeyRefreshCeremony {
           _completionCompleter.completeError(MpcError(
             type: MpcErrorType.keyGenerationFailed,
             message: 'Refresh ceremony was cancelled',
-          ));
+          ),);
         }
         break;
     }
@@ -435,7 +433,7 @@ class KeyRefreshCeremony {
       _completionCompleter.completeError(MpcError(
         type: MpcErrorType.keyGenerationFailed,
         message: 'Refresh ceremony was cancelled',
-      ));
+      ),);
     }
     
     _cleanup();
@@ -525,7 +523,7 @@ class KeyRefreshUtils {
     required CurveType curveType,
   }) {
     // Base time for key refresh
-    var baseTime = Duration(seconds: 20);
+    final baseTime = Duration(seconds: 20);
     
     // Add time based on number of parties
     final partyTime = Duration(seconds: totalParties * 3);
@@ -542,7 +540,7 @@ class KeyRefreshUtils {
   static bool _bytesEqual(Uint8List a, Uint8List b) {
     if (a.length != b.length) return false;
     
-    for (int i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
       if (a[i] != b[i]) return false;
     }
     

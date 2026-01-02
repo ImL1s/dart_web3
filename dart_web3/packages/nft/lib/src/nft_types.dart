@@ -9,15 +9,6 @@ enum NftStandard {
 
 /// NFT token information
 class NftToken {
-  final EthereumAddress contractAddress;
-  final BigInt tokenId;
-  final NftStandard standard;
-  final String? name;
-  final String? symbol;
-  final String? tokenUri;
-  final NftMetadata? metadata;
-  final BigInt? balance; // For ERC-1155
-  final EthereumAddress? owner;
 
   const NftToken({
     required this.contractAddress,
@@ -30,6 +21,15 @@ class NftToken {
     this.balance,
     this.owner,
   });
+  final EthereumAddress contractAddress;
+  final BigInt tokenId;
+  final NftStandard standard;
+  final String? name;
+  final String? symbol;
+  final String? tokenUri;
+  final NftMetadata? metadata;
+  final BigInt? balance; // For ERC-1155
+  final EthereumAddress? owner;
 
   NftToken copyWith({
     EthereumAddress? contractAddress,
@@ -77,15 +77,6 @@ class NftToken {
 
 /// NFT metadata structure following OpenSea metadata standard
 class NftMetadata {
-  final String? name;
-  final String? description;
-  final String? image;
-  final String? externalUrl;
-  final String? animationUrl;
-  final String? youtubeUrl;
-  final String? backgroundColor;
-  final List<NftAttribute> attributes;
-  final Map<String, dynamic> rawMetadata;
 
   const NftMetadata({
     this.name,
@@ -102,7 +93,7 @@ class NftMetadata {
   factory NftMetadata.fromJson(Map<String, dynamic> json) {
     final attributes = <NftAttribute>[];
     if (json['attributes'] is List) {
-      for (final attr in json['attributes']) {
+      for (final attr in json['attributes'] as List) {
         if (attr is Map<String, dynamic>) {
           attributes.add(NftAttribute.fromJson(attr));
         }
@@ -121,6 +112,15 @@ class NftMetadata {
       rawMetadata: Map<String, dynamic>.from(json),
     );
   }
+  final String? name;
+  final String? description;
+  final String? image;
+  final String? externalUrl;
+  final String? animationUrl;
+  final String? youtubeUrl;
+  final String? backgroundColor;
+  final List<NftAttribute> attributes;
+  final Map<String, dynamic> rawMetadata;
 
   Map<String, dynamic> toJson() {
     return {
@@ -144,14 +144,9 @@ class NftMetadata {
 
 /// NFT attribute/trait
 class NftAttribute {
-  final String? traitType;
-  final dynamic value;
-  final String? displayType;
-  final int? maxValue;
 
   const NftAttribute({
-    this.traitType,
-    required this.value,
+    required this.value, this.traitType,
     this.displayType,
     this.maxValue,
   });
@@ -161,9 +156,13 @@ class NftAttribute {
       traitType: json['trait_type']?.toString(),
       value: json['value'],
       displayType: json['display_type']?.toString(),
-      maxValue: json['max_value'] is int ? json['max_value'] : null,
+      maxValue: json['max_value'] is int ? json['max_value'] as int : null,
     );
   }
+  final String? traitType;
+  final dynamic value;
+  final String? displayType;
+  final int? maxValue;
 
   Map<String, dynamic> toJson() {
     return {
@@ -182,6 +181,18 @@ class NftAttribute {
 
 /// NFT collection information
 class NftCollection {
+
+  const NftCollection({
+    required this.contractAddress,
+    required this.standard, this.name,
+    this.symbol,
+    this.description,
+    this.image,
+    this.externalUrl,
+    this.totalSupply,
+    this.tokens = const [],
+    this.metadata = const {},
+  });
   final EthereumAddress contractAddress;
   final String? name;
   final String? symbol;
@@ -192,19 +203,6 @@ class NftCollection {
   final BigInt? totalSupply;
   final List<NftToken> tokens;
   final Map<String, dynamic> metadata;
-
-  const NftCollection({
-    required this.contractAddress,
-    this.name,
-    this.symbol,
-    required this.standard,
-    this.description,
-    this.image,
-    this.externalUrl,
-    this.totalSupply,
-    this.tokens = const [],
-    this.metadata = const {},
-  });
 
   NftCollection copyWith({
     EthereumAddress? contractAddress,
@@ -240,6 +238,15 @@ class NftCollection {
 
 /// NFT transfer parameters
 class NftTransferParams {
+
+  const NftTransferParams({
+    required this.from,
+    required this.to,
+    required this.contractAddress,
+    required this.tokenId,
+    required this.standard, this.amount,
+    this.requireApproval = true,
+  });
   final EthereumAddress from;
   final EthereumAddress to;
   final EthereumAddress contractAddress;
@@ -247,16 +254,6 @@ class NftTransferParams {
   final BigInt? amount; // For ERC-1155
   final NftStandard standard;
   final bool requireApproval;
-
-  const NftTransferParams({
-    required this.from,
-    required this.to,
-    required this.contractAddress,
-    required this.tokenId,
-    this.amount,
-    required this.standard,
-    this.requireApproval = true,
-  });
 
   @override
   String toString() {
@@ -266,13 +263,6 @@ class NftTransferParams {
 
 /// NFT query parameters for fetching collections
 class NftQueryParams {
-  final EthereumAddress owner;
-  final List<EthereumAddress>? contractAddresses;
-  final List<NftStandard>? standards;
-  final int? limit;
-  final String? cursor;
-  final bool includeMetadata;
-  final bool includeAttributes;
 
   const NftQueryParams({
     required this.owner,
@@ -283,6 +273,13 @@ class NftQueryParams {
     this.includeMetadata = true,
     this.includeAttributes = true,
   });
+  final EthereumAddress owner;
+  final List<EthereumAddress>? contractAddresses;
+  final List<NftStandard>? standards;
+  final int? limit;
+  final String? cursor;
+  final bool includeMetadata;
+  final bool includeAttributes;
 
   @override
   String toString() {
@@ -292,17 +289,15 @@ class NftQueryParams {
 
 /// NFT query result with pagination
 class NftQueryResult {
+
+  const NftQueryResult({
+    required this.tokens,
+    required this.totalCount, required this.hasMore, this.nextCursor,
+  });
   final List<NftToken> tokens;
   final String? nextCursor;
   final int totalCount;
   final bool hasMore;
-
-  const NftQueryResult({
-    required this.tokens,
-    this.nextCursor,
-    required this.totalCount,
-    required this.hasMore,
-  });
 
   @override
   String toString() {

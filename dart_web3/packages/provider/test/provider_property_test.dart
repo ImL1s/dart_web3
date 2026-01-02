@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_provider/dart_web3_provider.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Provider Module Property Tests', () {
@@ -11,7 +11,7 @@ void main() {
       // **Feature: dart-web3-sdk, Property 1: HTTP RPC Connection Establishment**
       // **Validates: Requirements 1.1**
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Test with various valid HTTP URLs
         final urls = [
           'http://localhost:8545',
@@ -31,7 +31,7 @@ void main() {
         expect(transport.headers, isEmpty);
         
         // Should be able to dispose without errors
-        expect(() => transport.dispose(), returnsNormally);
+        expect(transport.dispose, returnsNormally);
       }
     });
 
@@ -39,7 +39,7 @@ void main() {
       // **Feature: dart-web3-sdk, Property 2: WebSocket Persistent Connection**
       // **Validates: Requirements 1.2**
       
-      for (int i = 0; i < 30; i++) {
+      for (var i = 0; i < 30; i++) {
         // Test with various WebSocket URLs
         final urls = [
           'ws://localhost:8546',
@@ -58,7 +58,7 @@ void main() {
         expect(transport.maxReconnectAttempts, equals(3));
         
         // Should be able to dispose without errors
-        expect(() => transport.dispose(), returnsNormally);
+        expect(transport.dispose, returnsNormally);
       }
     });
 
@@ -68,7 +68,7 @@ void main() {
       
       final random = Random();
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Create mock HTTP transport
         final transport = _MockHttpTransport();
         
@@ -76,7 +76,7 @@ void main() {
         final batchSize = random.nextInt(10) + 1;
         final requests = <RpcRequest>[];
         
-        for (int j = 0; j < batchSize; j++) {
+        for (var j = 0; j < batchSize; j++) {
           final methods = ['eth_blockNumber', 'eth_gasPrice', 'eth_chainId'];
           final method = methods[random.nextInt(methods.length)];
           requests.add(RpcRequest(method, []));
@@ -101,7 +101,7 @@ void main() {
       // **Feature: dart-web3-sdk, Property 4: Middleware Execution Order**
       // **Validates: Requirements 1.4**
       
-      for (int i = 0; i < 30; i++) {
+      for (var i = 0; i < 30; i++) {
         final executionOrder = <String>[];
         
         // Create test middlewares that track execution order
@@ -135,7 +135,7 @@ void main() {
       
       final random = Random();
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Generate random error codes and messages
         final errorCodes = [-32700, -32600, -32601, -32602, -32603, -32000];
         final errorCode = errorCodes[random.nextInt(errorCodes.length)];
@@ -194,10 +194,10 @@ class _MockHttpTransport implements Transport {
 }
 
 class _TestMiddleware extends Middleware {
-  final String name;
-  final List<String> executionOrder;
   
   _TestMiddleware(this.name, this.executionOrder);
+  final String name;
+  final List<String> executionOrder;
   
   @override
   Future<Map<String, dynamic>?> beforeRequest(String method, List<dynamic> params) async {

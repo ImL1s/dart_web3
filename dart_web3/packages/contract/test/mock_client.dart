@@ -9,10 +9,6 @@ import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 /// Mock PublicClient for testing.
 class MockPublicClient extends PublicClient {
-  CallRequest? lastCallRequest;
-  Uint8List? _mockCallResult;
-  BigInt? _mockEstimateGasResult;
-  String? _mockCallError;
 
   MockPublicClient()
       : super(
@@ -28,6 +24,10 @@ class MockPublicClient extends PublicClient {
             blockExplorerUrls: ['http://localhost'],
           ),
         );
+  CallRequest? lastCallRequest;
+  Uint8List? _mockCallResult;
+  BigInt? _mockEstimateGasResult;
+  String? _mockCallError;
 
   void mockCall(Uint8List result) {
     _mockCallResult = result;
@@ -60,8 +60,6 @@ class MockPublicClient extends PublicClient {
 
 /// Mock WalletClient for testing.
 class MockWalletClient extends WalletClient {
-  TransactionRequest? lastTransactionRequest;
-  String? _mockSendTransactionResult;
 
   MockWalletClient()
       : super(
@@ -78,6 +76,8 @@ class MockWalletClient extends WalletClient {
           ),
           signer: MockSigner(),
         );
+  TransactionRequest? lastTransactionRequest;
+  String? _mockSendTransactionResult;
 
   void mockSendTransaction(String txHash) {
     _mockSendTransactionResult = txHash;
@@ -199,6 +199,11 @@ class MockSigner implements Signer {
   @override
   Future<Uint8List> signTransaction(TransactionRequest transaction) async {
     return Uint8List(65);
+  }
+
+  @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    return Uint8List.fromList(List.generate(65, (i) => (i + 5) % 256));
   }
 
   @override

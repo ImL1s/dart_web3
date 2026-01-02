@@ -1,19 +1,21 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'keystone_types.dart';
 import 'qr_communication.dart';
 
 /// Keystone hardware wallet client
 class KeystoneClient {
+  
+  KeystoneClient({QRScanner? qrScanner}) : _qrScanner = qrScanner;
   final QRCommunication _qrComm = QRCommunication();
   final QRScanner? _qrScanner;
   KeystoneDevice? _device;
   final List<KeystoneAccount> _accounts = [];
   final Random _random = Random.secure();
-  
-  KeystoneClient({QRScanner? qrScanner}) : _qrScanner = qrScanner;
   
   /// Current device information
   KeystoneDevice? get device => _device;
@@ -42,8 +44,8 @@ class KeystoneClient {
       );
     }
     
-    // Simulate device discovery
-    await Future.delayed(const Duration(milliseconds: 500));
+    // Mock signing with different curves
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
     
     _device = KeystoneDevice(
       deviceId: 'keystone-${_random.nextInt(10000)}',
@@ -81,7 +83,7 @@ class KeystoneClient {
     
     final accounts = <KeystoneAccount>[];
     
-    for (int i = offset; i < offset + count; i++) {
+    for (var i = offset; i < offset + count; i++) {
       final path = '$derivationPath/$i';
       
       // Generate mock account data
@@ -93,7 +95,7 @@ class KeystoneClient {
         derivationPath: path,
         publicKey: publicKey,
         name: 'Account ${i + 1}',
-      ));
+      ),);
     }
     
     return accounts;
@@ -182,7 +184,7 @@ class KeystoneClient {
   Future<String> _performSigning(KeystoneSignRequest request, Duration timeout) async {
     final completer = Completer<String>();
     Timer? timeoutTimer;
-    StreamSubscription? scanSubscription;
+    StreamSubscription<dynamic>? scanSubscription;
     
     try {
       // Set up timeout
@@ -191,7 +193,7 @@ class KeystoneClient {
           completer.completeError(KeystoneException(
             KeystoneErrorType.communicationTimeout,
             'Signing request timed out',
-          ));
+          ),);
         }
       });
       
@@ -256,7 +258,7 @@ class KeystoneClient {
   
   Uint8List _generateRequestId() {
     final bytes = Uint8List(16);
-    for (int i = 0; i < bytes.length; i++) {
+    for (var i = 0; i < bytes.length; i++) {
       bytes[i] = _random.nextInt(256);
     }
     return bytes;
@@ -265,7 +267,7 @@ class KeystoneClient {
   String _generateMockAddress(int index) {
     // Generate deterministic mock address for testing
     final bytes = Uint8List(20);
-    for (int i = 0; i < bytes.length; i++) {
+    for (var i = 0; i < bytes.length; i++) {
       bytes[i] = (index * 17 + i * 23) % 256;
     }
     return '0x${HexUtils.encode(bytes, prefix: false)}';
@@ -274,7 +276,7 @@ class KeystoneClient {
   Uint8List _generateMockPublicKey(int index) {
     // Generate deterministic mock public key for testing
     final bytes = Uint8List(64);
-    for (int i = 0; i < bytes.length; i++) {
+    for (var i = 0; i < bytes.length; i++) {
       bytes[i] = (index * 31 + i * 37) % 256;
     }
     return bytes;

@@ -1,17 +1,19 @@
 import 'dart:typed_data';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+
 import 'trezor_client.dart';
 import 'trezor_types.dart';
 
 /// Trezor hardware wallet signer implementation
 class TrezorSigner implements HardwareWalletSigner {
+  
+  TrezorSigner(this._client, this._derivationPath);
   final TrezorClient _client;
   final String _derivationPath;
   TrezorAccount? _account;
-  
-  TrezorSigner(this._client, this._derivationPath);
   
   /// Create a Trezor signer for a specific account
   static Future<TrezorSigner> create({
@@ -147,6 +149,36 @@ class TrezorSigner implements HardwareWalletSigner {
   }
   
   @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    if (!_client.isReady) {
+      throw TrezorException(
+        TrezorErrorType.deviceNotFound,
+        'Device not connected',
+      );
+    }
+    
+    try {
+      // Trezor doesn't have a direct signHash that avoids prefixes.
+      // Use signMessage as a fallback, but note that it adds EIP-191 prefix.
+      final response = await _client.signMessage(
+        derivationPath: _derivationPath,
+        message: hash,
+      );
+      
+      return HexUtils.decode(response.signatureHex);
+      
+    } catch (e) {
+      if (e is TrezorException && e.type == TrezorErrorType.userCancelled) {
+        throw TrezorException(
+          TrezorErrorType.userCancelled,
+          'User cancelled hash signing on device',
+        );
+      }
+      rethrow;
+    }
+  }
+  
+  @override
   Future<Uint8List> signTypedData(TypedData typedData) async {
     if (!_client.isReady) {
       throw TrezorException(
@@ -201,7 +233,7 @@ class TrezorSigner implements HardwareWalletSigner {
     }
     
     final bytes = <int>[];
-    BigInt temp = value;
+    var temp = value;
     
     while (temp > BigInt.zero) {
       bytes.insert(0, (temp & BigInt.from(0xFF)).toInt());

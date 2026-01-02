@@ -1,13 +1,13 @@
 import 'dart:typed_data';
-import 'ledger_types.dart';
+
 import 'ledger_client.dart';
-import 'apdu_commands.dart';
+import 'ledger_types.dart';
 
 /// Multi-chain signing support for Ledger
 class LedgerMultiChainSigner {
-  final LedgerClient _client;
   
   LedgerMultiChainSigner(this._client);
+  final LedgerClient _client;
   
   /// Sign Bitcoin transaction using Bitcoin app
   Future<String> signBitcoinTransaction(
@@ -154,7 +154,6 @@ class LedgerMultiChainSigner {
         break;
         
       case ChainType.ethereum:
-      default:
         // Use existing Ethereum implementation
         final account = await _client.getAccount(derivationPath);
         return account.address;
@@ -231,7 +230,6 @@ class LedgerMultiChainSigner {
         // Polkadot addresses are SS58 encoded
         return '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'; // Mock
       case ChainType.ethereum:
-      default:
         // Ethereum addresses are hex encoded
         return '0x${data.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';
     }
@@ -247,7 +245,7 @@ class LedgerMultiChainSigner {
     
     for (final part in parts) {
       int value;
-      bool hardened = false;
+      var hardened = false;
       
       if (part.endsWith("'") || part.endsWith('h')) {
         hardened = true;

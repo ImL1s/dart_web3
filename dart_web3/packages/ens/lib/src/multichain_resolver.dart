@@ -1,15 +1,11 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 /// Multi-chain address resolver implementing ENSIP-9
 class MultichainResolver {
-  final PublicClient _client;
-  final String _registryAddress;
-  final Map<String, dynamic> _cache = {};
-  final Duration _cacheTtl;
 
   MultichainResolver({
     required PublicClient client,
@@ -18,6 +14,10 @@ class MultichainResolver {
   })  : _client = client,
         _registryAddress = registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
         _cacheTtl = cacheTtl;
+  final PublicClient _client;
+  final String _registryAddress;
+  final Map<String, dynamic> _cache = {};
+  final Duration _cacheTtl;
 
   /// Resolve address for specific coin type (ENSIP-9)
   Future<String?> resolveAddress(String name, int coinType) async {
@@ -59,27 +59,27 @@ class MultichainResolver {
 
   /// Get Ethereum address (coin type 60)
   Future<String?> getEthereumAddress(String name) async {
-    return await resolveAddress(name, CoinType.ethereum);
+    return resolveAddress(name, CoinType.ethereum);
   }
 
   /// Get Bitcoin address (coin type 0)
   Future<String?> getBitcoinAddress(String name) async {
-    return await resolveAddress(name, CoinType.bitcoin);
+    return resolveAddress(name, CoinType.bitcoin);
   }
 
   /// Get Litecoin address (coin type 2)
   Future<String?> getLitecoinAddress(String name) async {
-    return await resolveAddress(name, CoinType.litecoin);
+    return resolveAddress(name, CoinType.litecoin);
   }
 
   /// Get Dogecoin address (coin type 3)
   Future<String?> getDogecoinAddress(String name) async {
-    return await resolveAddress(name, CoinType.dogecoin);
+    return resolveAddress(name, CoinType.dogecoin);
   }
 
   /// Get Monero address (coin type 128)
   Future<String?> getMoneroAddress(String name) async {
-    return await resolveAddress(name, CoinType.monero);
+    return resolveAddress(name, CoinType.monero);
   }
 
   /// Get all supported addresses for a name
@@ -201,9 +201,9 @@ class MultichainResolver {
     }
 
     final labels = name.split('.');
-    Uint8List hash = Uint8List(32); // Start with 32 zero bytes
+    var hash = Uint8List(32); // Start with 32 zero bytes
 
-    for (int i = labels.length - 1; i >= 0; i--) {
+    for (var i = labels.length - 1; i >= 0; i--) {
       final labelHash = Keccak256.hash(Uint8List.fromList(labels[i].codeUnits));
       final combined = Uint8List.fromList([...hash, ...labelHash]);
       hash = Keccak256.hash(combined);
@@ -262,7 +262,8 @@ class MultichainResolver {
   }
 
   /// ENS Registry ABI (minimal)
-  static const String _ensRegistryAbi = '''[
+  static const String _ensRegistryAbi = '''
+[
     {
       "type": "function",
       "name": "resolver",
@@ -273,7 +274,8 @@ class MultichainResolver {
   ]''';
 
   /// ENS Resolver ABI with multi-chain support
-  static const String _ensResolverAbi = '''[
+  static const String _ensResolverAbi = '''
+[
     {
       "type": "function",
       "name": "addr",

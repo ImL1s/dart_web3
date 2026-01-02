@@ -12,13 +12,6 @@ import 'sha2.dart';
 /// 
 /// Supports deriving child keys from a master seed using standard derivation paths.
 class HDWallet {
-  final Uint8List privateKey;
-  final Uint8List publicKey;
-  final Uint8List chainCode;
-  final int depth;
-  final String path;
-  final int index;
-  final Uint8List parentFingerprint;
 
   HDWallet._({
     required this.privateKey,
@@ -68,6 +61,13 @@ class HDWallet {
     final seed = Bip39.toSeed(mnemonic, passphrase: passphrase);
     return HDWallet.fromSeed(seed);
   }
+  final Uint8List privateKey;
+  final Uint8List publicKey;
+  final Uint8List chainCode;
+  final int depth;
+  final String path;
+  final int index;
+  final Uint8List parentFingerprint;
 
   /// Derives a child wallet using the specified derivation path.
   /// 
@@ -79,9 +79,9 @@ class HDWallet {
     }
 
     final pathParts = derivationPath.split('/');
-    HDWallet current = this;
+    var current = this;
 
-    for (int i = (pathParts[0] == 'm') ? 1 : 0; i < pathParts.length; i++) {
+    for (var i = (pathParts[0] == 'm') ? 1 : 0; i < pathParts.length; i++) {
       final part = pathParts[i];
       if (part.isEmpty) continue;
 
@@ -169,7 +169,7 @@ class HDWallet {
   /// Gets the Ethereum address for this wallet.
   EthereumAddress getAddress() {
     // Get uncompressed public key (remove 0x04 prefix)
-    final uncompressedPublicKey = Secp256k1.getPublicKey(privateKey, compressed: false);
+    final uncompressedPublicKey = Secp256k1.getPublicKey(privateKey);
     final publicKeyBytes = uncompressedPublicKey.sublist(1); // Remove 0x04 prefix
     
     // Hash the public key and take last 20 bytes
@@ -242,8 +242,8 @@ class HDWallet {
   static final BigInt _secp256k1Order = BigInt.parse('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141', radix: 16);
 
   static BigInt _bytesToBigInt(Uint8List bytes) {
-    BigInt result = BigInt.zero;
-    for (int i = 0; i < bytes.length; i++) {
+    var result = BigInt.zero;
+    for (var i = 0; i < bytes.length; i++) {
       result = (result << 8) + BigInt.from(bytes[i]);
     }
     return result;
@@ -251,7 +251,7 @@ class HDWallet {
 
   static Uint8List _bigIntToBytes(BigInt value, int length) {
     final bytes = Uint8List(length);
-    for (int i = length - 1; i >= 0; i--) {
+    for (var i = length - 1; i >= 0; i--) {
       bytes[i] = (value & BigInt.from(0xFF)).toInt();
       value >>= 8;
     }
@@ -260,7 +260,7 @@ class HDWallet {
 
   static Uint8List _intToBytes(int value, int length) {
     final bytes = Uint8List(length);
-    for (int i = length - 1; i >= 0; i--) {
+    for (var i = length - 1; i >= 0; i--) {
       bytes[i] = (value >> (8 * (length - 1 - i))) & 0xFF;
     }
     return bytes;
@@ -270,12 +270,12 @@ class HDWallet {
     // Simplified Base58 encoding
     const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     
-    BigInt num = BigInt.zero;
-    for (int byte in data) {
+    var num = BigInt.zero;
+    for (final byte in data) {
       num = num * BigInt.from(256) + BigInt.from(byte);
     }
     
-    String result = '';
+    var result = '';
     while (num > BigInt.zero) {
       final remainder = num % BigInt.from(58);
       result = alphabet[remainder.toInt()] + result;
@@ -283,7 +283,7 @@ class HDWallet {
     }
     
     // Add leading zeros
-    for (int byte in data) {
+    for (final byte in data) {
       if (byte == 0) {
         result = '1' + result;
       } else {

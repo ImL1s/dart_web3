@@ -13,7 +13,7 @@ class Keccak256 {
   /// 
   /// Returns a 32-byte hash as Uint8List.
   static Uint8List hash(Uint8List data) {
-    final result = _Keccak(32).update(data.toList()).digest();
+    final result = _Keccak().update(data.toList()).digest();
     return Uint8List.fromList(result);
   }
 
@@ -39,6 +39,17 @@ const int _mask32 = 0xFFFFFFFF;
 
 /// Internal Keccak implementation
 class _Keccak {
+  /// digest length
+  final int digestLength;
+
+  _Keccak() : digestLength = 32 {
+    final capacity = digestLength * 2;
+    if (capacity <= 0 || capacity > 128) {
+      throw ArgumentError('Keccak: incorrect capacity');
+    }
+    blockSize = 200 - capacity;
+  }
+
   /// temporary space for permutation (high bits)
   final List<int> _sh = List<int>.filled(25, 0);
 
@@ -56,17 +67,6 @@ class _Keccak {
 
   /// block size
   late final int blockSize;
-  
-  /// digest length
-  final int digestLength;
-
-  _Keccak([this.digestLength = 32]) {
-    final capacity = digestLength * 2;
-    if (capacity <= 0 || capacity > 128) {
-      throw ArgumentError("Keccak: incorrect capacity");
-    }
-    blockSize = 200 - capacity;
-  }
 
   /// Resets the hash computation to its initial state.
   _Keccak reset() {
@@ -110,7 +110,7 @@ class _Keccak {
 
   void _squeeze(List<int> dst) {
     if (!_finished) {
-      throw StateError("Keccak: squeezing before padAndPermute");
+      throw StateError('Keccak: squeezing before padAndPermute');
     }
 
     for (var i = 0; i < dst.length; i++) {
@@ -163,7 +163,7 @@ final _hi = List<int>.unmodifiable(const [
   0x00000000, 0x00000000, 0x00000000, 0x00000000,
   0x00000000, 0x80000000, 0x80000000, 0x80000000,
   0x80000000, 0x80000000, 0x00000000, 0x80000000,
-  0x80000000, 0x80000000, 0x00000000, 0x80000000
+  0x80000000, 0x80000000, 0x00000000, 0x80000000,
 ]);
 
 final _lo = List<int>.unmodifiable(const [
@@ -172,20 +172,29 @@ final _lo = List<int>.unmodifiable(const [
   0x0000008a, 0x00000088, 0x80008009, 0x8000000a,
   0x8000808b, 0x0000008b, 0x00008089, 0x00008003,
   0x00008002, 0x00000080, 0x0000800a, 0x8000000a,
-  0x80008081, 0x00008080, 0x80000001, 0x80008008
+  0x80008081, 0x00008080, 0x80000001, 0x80008008,
 ]);
 
 void _keccakf(List<int> sh, List<int> sl, List<int> buf) {
-  int bch0, bch1, bch2, bch3, bch4;
-  int bcl0, bcl1, bcl2, bcl3, bcl4;
-  int th, tl;
+  int bch0;
+  int bch1;
+  int bch2;
+  int bch3;
+  int bch4;
+  int bcl0;
+  int bcl1;
+  int bcl2;
+  int bcl3;
+  int bcl4;
+  int th;
+  int tl;
 
-  for (int i = 0; i < 25; i++) {
+  for (var i = 0; i < 25; i++) {
     sl[i] = _readUint32LE(buf, i * 8);
     sh[i] = _readUint32LE(buf, i * 8 + 4);
   }
 
-  for (int r = 0; r < 24; r++) {
+  for (var r = 0; r < 24; r++) {
     // Theta
     bch0 = sh[0] ^ sh[5] ^ sh[10] ^ sh[15] ^ sh[20];
     bch1 = sh[1] ^ sh[6] ^ sh[11] ^ sh[16] ^ sh[21];
@@ -423,7 +432,7 @@ void _keccakf(List<int> sh, List<int> sl, List<int> buf) {
   }
 
   // Write state back to buffer
-  for (int i = 0; i < 25; i++) {
+  for (var i = 0; i < 25; i++) {
     _writeUint32LE(sl[i], buf, i * 8);
     _writeUint32LE(sh[i], buf, i * 8 + 4);
   }

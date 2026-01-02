@@ -1,5 +1,5 @@
-import 'package:test/test.dart';
 import 'package:dart_web3_aa/dart_web3_aa.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('UserOperation', () {
@@ -344,7 +344,7 @@ void main() {
         'success': false,
         'reason': 'execution reverted',
         'entryPoint': '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-        'receipt': {},
+        'receipt': <String, dynamic>{},
       };
 
       final receipt = UserOperationReceipt.fromJson(json);

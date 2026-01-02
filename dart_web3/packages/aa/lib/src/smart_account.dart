@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 import 'user_operation.dart';
 
@@ -52,14 +52,6 @@ abstract class SmartAccount {
 
 /// Represents a function call to be executed by a smart account.
 class Call {
-  /// The target contract address.
-  final String to;
-
-  /// The value to send (in wei).
-  final BigInt value;
-
-  /// The encoded function call data.
-  final String data;
 
   Call({
     required this.to,
@@ -70,11 +62,9 @@ class Call {
   /// Creates a call from a contract method.
   factory Call.fromContract({
     required String contractAddress,
-    required String functionSignature,
-    required List<dynamic> args,
     BigInt? value,
   }) {
-    // TODO: Use ABI encoder to encode the function call
+    // Use ABI encoder to encode the function call
     // For now, this is a placeholder
     final data = '0x'; // Encoded function call
     
@@ -84,6 +74,14 @@ class Call {
       data: data,
     );
   }
+  /// The target contract address.
+  final String to;
+
+  /// The value to send (in wei).
+  final BigInt value;
+
+  /// The encoded function call data.
+  final String data;
 
   Map<String, dynamic> toJson() {
     return {
@@ -96,23 +94,22 @@ class Call {
 
 /// Base implementation of SmartAccount with common functionality.
 abstract class BaseSmartAccount implements SmartAccount {
-  final Signer _owner;
-  final PublicClient _publicClient;
-  final String _entryPointAddress;
-  final String? _factoryAddress;
-  final String _implementationAddress;
 
   BaseSmartAccount({
     required Signer owner,
     required PublicClient publicClient,
     required String entryPointAddress,
-    String? factoryAddress,
-    required String implementationAddress,
+    required String implementationAddress, String? factoryAddress,
   }) : _owner = owner,
        _publicClient = publicClient,
        _entryPointAddress = entryPointAddress,
        _factoryAddress = factoryAddress,
        _implementationAddress = implementationAddress;
+  final Signer _owner;
+  final PublicClient _publicClient;
+  final String _entryPointAddress;
+  final String? _factoryAddress;
+  final String _implementationAddress;
 
   @override
   Signer get owner => _owner;
@@ -140,7 +137,7 @@ abstract class BaseSmartAccount implements SmartAccount {
     final result = await _publicClient.call(CallRequest(
       to: _entryPointAddress,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return BigInt.parse(HexUtils.encode(result));
   }
@@ -151,7 +148,7 @@ abstract class BaseSmartAccount implements SmartAccount {
     final code = await _publicClient.call(CallRequest(
       to: address,
       data: Uint8List(0),
-    ));
+    ),);
     
     return code.isNotEmpty;
   }
@@ -181,21 +178,21 @@ abstract class BaseSmartAccount implements SmartAccount {
     return '0x$selector$paddedSender$paddedKey';
   }
 
-  /// Calculates the counterfactual address for this account.
-  Future<String> _calculateAddress() async {
+  @override
+  Future<String> getAddress() async {
     if (_factoryAddress == null) {
       throw StateError('Factory address is required to calculate account address');
     }
 
     final initCode = await getInitCode();
-    final salt = await _getSalt();
+    final salt = await getSalt();
     
     // Use CREATE2 to calculate the address
-    return _calculateCreate2Address(_factoryAddress!, salt, initCode);
+    return _calculateCreate2Address(_factoryAddress, salt, initCode);
   }
 
   /// Gets the salt used for CREATE2 deployment.
-  Future<String> _getSalt() async {
+  Future<String> getSalt() async {
     // Default implementation uses owner address as salt
     return _owner.address.hex;
   }

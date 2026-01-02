@@ -1,20 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import 'nft_types.dart';
+
 import 'ipfs_gateway.dart';
+import 'nft_types.dart';
 
 /// NFT metadata parser and resolver
 class NftMetadataParser {
-  final IpfsGateway _ipfsGateway;
-  final Duration _timeout;
-  final Map<String, NftMetadata> _cache = {};
 
   NftMetadataParser({
     IpfsGateway? ipfsGateway,
     Duration timeout = const Duration(seconds: 15),
   })  : _ipfsGateway = ipfsGateway ?? IpfsGateway(),
         _timeout = timeout;
+  final IpfsGateway _ipfsGateway;
+  final Duration _timeout;
+  final Map<String, NftMetadata> _cache = {};
 
   /// Parse metadata from token URI
   Future<NftMetadata?> parseMetadata(String? tokenUri) async {
@@ -61,7 +63,7 @@ class NftMetadataParser {
     if (imageUri == null || imageUri.isEmpty) return null;
 
     if (_isIpfsUri(imageUri)) {
-      return await _ipfsGateway.resolveUri(imageUri);
+      return _ipfsGateway.resolveUri(imageUri);
     } else if (_isHttpUri(imageUri)) {
       return imageUri;
     } else if (_isDataUri(imageUri)) {

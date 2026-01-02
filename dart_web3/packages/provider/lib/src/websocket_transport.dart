@@ -7,6 +7,12 @@ import 'transport.dart';
 
 /// WebSocket transport for JSON-RPC communication with subscription support.
 class WebSocketTransport implements Transport {
+
+  WebSocketTransport(
+    this.url, {
+    this.reconnectDelay = const Duration(seconds: 5),
+    this.maxReconnectAttempts = 3,
+  });
   /// The WebSocket endpoint URL.
   final String url;
 
@@ -22,12 +28,6 @@ class WebSocketTransport implements Transport {
   int _requestId = 0;
   int _reconnectAttempts = 0;
   bool _disposed = false;
-
-  WebSocketTransport(
-    this.url, {
-    this.reconnectDelay = const Duration(seconds: 5),
-    this.maxReconnectAttempts = 3,
-  });
 
   /// Connects to the WebSocket server.
   Future<void> connect() async {
@@ -85,7 +85,7 @@ class WebSocketTransport implements Transport {
     // Attempt reconnection
     if (_reconnectAttempts < maxReconnectAttempts) {
       _reconnectAttempts++;
-      Future.delayed(reconnectDelay, connect);
+      Future<void>.delayed(reconnectDelay, connect);
     }
   }
 

@@ -7,7 +7,6 @@ import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'package:glados/glados.dart';
-import 'package:test/test.dart';
 
 /// Mock transport for testing
 class MockTransport implements Transport {
@@ -41,7 +40,7 @@ class MockTransport implements Transport {
             'gasUsed': '0x5208',
             'baseFeePerGas': '0x3b9aca00',
             'transactions': ['0xabcdef1234567890'],
-          }
+          },
         };
       case 'eth_getTransactionByHash':
         return {
@@ -58,14 +57,14 @@ class MockTransport implements Transport {
             'input': '0x',
             'nonce': '0x1',
             'chainId': '0x1',
-          }
+          },
         };
       case 'eth_call':
         return {'result': '0x0000000000000000000000000000000000000000000000000de0b6b3a7640000'};
       case 'eth_estimateGas':
         return {'result': '0x5208'};
       case 'eth_getLogs':
-        return {'result': []};
+        return {'result': <dynamic>[]};
       case 'eth_gasPrice':
         return {'result': '0x4a817c800'};
       case 'eth_chainId':
@@ -96,11 +95,11 @@ class MockTransport implements Transport {
 
 /// Mock signer for testing
 class MockSigner implements Signer {
+
+  MockSigner(this._address);
   final EthereumAddress _address;
   final List<String> signedMessages = [];
   final List<TransactionRequest> signedTransactions = [];
-
-  MockSigner(this._address);
 
   @override
   EthereumAddress get address => _address;
@@ -130,6 +129,12 @@ class MockSigner implements Signer {
     // Return mock signature (65 bytes)
     return Uint8List.fromList(List.generate(65, (i) => (i + 3) % 256));
   }
+
+  @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    // Return mock signature (65 bytes)
+    return Uint8List.fromList(List.generate(65, (i) => (i + 4) % 256));
+  }
 }
 
 /// Custom generators for client testing
@@ -150,7 +155,7 @@ extension ClientGenerators on Any {
       to: addr.hex,
       value: BigInt.from(1000000000000000000), // 1 ETH
       data: Uint8List(0),
-    ));
+    ),);
   }
 }
 
@@ -442,7 +447,7 @@ void main() {
           // **Feature: dart-web3-sdk, Property 19: Account Switching Persistence**
           if (addresses.isEmpty) return;
           
-          final signers = addresses.map((addr) => MockSigner(addr)).toList();
+          final signers = addresses.map(MockSigner.new).toList();
           final walletClient = WalletClient(
             provider: provider,
             chain: chain,

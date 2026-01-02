@@ -1,8 +1,8 @@
 import 'dart:typed_data';
-import 'dart:convert';
+
+import 'bc_ur_registry.dart';
 import 'cbor_encoder.dart';
 import 'fountain_encoder.dart';
-import 'bc_ur_registry.dart';
 
 /// BC-UR encoder for creating UR-formatted QR codes
 class BCUREncoder {
@@ -30,7 +30,7 @@ class BCUREncoder {
     // Typically need 1.1x to 1.5x the number of fragments
     final targetParts = (encoder.fragmentCount * 1.3).ceil();
     
-    for (int i = 0; i < targetParts; i++) {
+    for (var i = 0; i < targetParts; i++) {
       final part = encoder.nextPart();
       final urPart = _encodeFountainPart(type, part);
       parts.add(urPart);
@@ -73,7 +73,7 @@ class BCUREncoder {
     
     final bits = <int>[];
     for (final byte in data) {
-      for (int i = 7; i >= 0; i--) {
+      for (var i = 7; i >= 0; i--) {
         bits.add((byte >> i) & 1);
       }
     }
@@ -84,9 +84,9 @@ class BCUREncoder {
     }
     
     final result = StringBuffer();
-    for (int i = 0; i < bits.length; i += 5) {
-      int value = 0;
-      for (int j = 0; j < 5; j++) {
+    for (var i = 0; i < bits.length; i += 5) {
+      var value = 0;
+      for (var j = 0; j < 5; j++) {
         value = (value << 1) | bits[i + j];
       }
       result.write(alphabet[value]);
@@ -98,10 +98,6 @@ class BCUREncoder {
 
 /// BC-UR part information for multi-part messages
 class BCURPart {
-  final String type;
-  final int sequenceNumber;
-  final int totalParts;
-  final Uint8List data;
   
   BCURPart({
     required this.type,
@@ -109,6 +105,10 @@ class BCURPart {
     required this.totalParts,
     required this.data,
   });
+  final String type;
+  final int sequenceNumber;
+  final int totalParts;
+  final Uint8List data;
   
   bool get isSinglePart => totalParts == 1;
   

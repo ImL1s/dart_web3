@@ -2,16 +2,15 @@ import 'dart:async';
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'nft_types.dart';
 
 /// NFT transfer manager for handling NFT transfers with approval management
 class NftTransferManager {
-  final WalletClient _client;
 
   NftTransferManager({
     required WalletClient client,
   }) : _client = client;
+  final WalletClient _client;
 
   /// Transfer NFT with automatic approval handling
   Future<String> transferNft(NftTransferParams params) async {
@@ -21,7 +20,7 @@ class NftTransferManager {
     }
 
     // Execute the transfer
-    return await _executeTransfer(params);
+    return _executeTransfer(params);
   }
 
   /// Check if approval is needed for NFT transfer
@@ -41,9 +40,9 @@ class NftTransferManager {
   /// Approve NFT for transfer
   Future<String> approveNft(NftTransferParams params) async {
     if (params.standard == NftStandard.erc721) {
-      return await _approveErc721(params);
+      return _approveErc721(params);
     } else if (params.standard == NftStandard.erc1155) {
-      return await _approveErc1155(params);
+      return _approveErc1155(params);
     } else {
       throw Exception('Unsupported NFT standard: ${params.standard}');
     }
@@ -72,7 +71,7 @@ class NftTransferManager {
         publicClient: _client,
       );
       
-      return await contract.estimateGas(
+      return contract.estimateGas(
         'safeTransferFrom',
         [params.from.hex, params.to.hex, params.tokenId],
         from: params.from.hex,
@@ -85,7 +84,7 @@ class NftTransferManager {
       );
       
       final amount = params.amount ?? BigInt.one;
-      return await contract.estimateGas(
+      return contract.estimateGas(
         'safeTransferFrom',
         [params.from.hex, params.to.hex, params.tokenId, amount, '0x'],
         from: params.from.hex,
@@ -129,7 +128,7 @@ class NftTransferManager {
         walletClient: _client,
       );
 
-      return await contract.write(
+      return contract.write(
         'safeTransferFrom',
         [params.from.hex, params.to.hex, params.tokenId],
       );
@@ -142,7 +141,7 @@ class NftTransferManager {
       );
 
       final amount = params.amount ?? BigInt.one;
-      return await contract.write(
+      return contract.write(
         'safeTransferFrom',
         [params.from.hex, params.to.hex, params.tokenId, amount, '0x'],
       );
@@ -200,7 +199,7 @@ class NftTransferManager {
       walletClient: _client,
     );
 
-    return await contract.write(
+    return contract.write(
       'approve',
       [params.to.hex, params.tokenId],
     );
@@ -215,7 +214,7 @@ class NftTransferManager {
       walletClient: _client,
     );
 
-    return await contract.write(
+    return contract.write(
       'setApprovalForAll',
       [params.to.hex, true],
     );
@@ -232,7 +231,8 @@ class NftTransferManager {
   }
 
   // ABI definitions for NFT contracts
-  static const _erc721AbiJson = '''[
+  static const _erc721AbiJson = '''
+[
     {
       "inputs": [
         {"internalType": "address", "name": "to", "type": "address"},
@@ -289,7 +289,8 @@ class NftTransferManager {
     }
   ]''';
 
-  static const _erc1155AbiJson = '''[
+  static const _erc1155AbiJson = '''
+[
     {
       "inputs": [
         {"internalType": "address", "name": "account", "type": "address"},

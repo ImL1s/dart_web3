@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_ens/dart_web3_ens.dart';
 import 'package:test/test.dart';
@@ -64,8 +63,6 @@ void main() {
         final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         
         // Mock text record call returning HTTP URL
-        final httpUrl = 'https://example.com/avatar.png';
-        final textEncoded = AbiEncoder.encode([AbiString()], [httpUrl]);
         
         mockClient.mockCall(resolverAddressEncoded);
 

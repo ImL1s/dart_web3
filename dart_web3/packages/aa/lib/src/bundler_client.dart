@@ -1,4 +1,3 @@
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 
 import 'user_operation.dart';
@@ -12,14 +11,14 @@ import 'user_operation.dart';
 /// - Bundling UserOperations into transactions
 /// - Submitting bundles to the EntryPoint contract
 class BundlerClient {
-  final RpcProvider _provider;
-  final String _bundlerUrl;
 
   BundlerClient({
     required String bundlerUrl,
     RpcProvider? provider,
   }) : _bundlerUrl = bundlerUrl,
        _provider = provider ?? RpcProvider(HttpTransport(bundlerUrl));
+  final RpcProvider _provider;
+  final String _bundlerUrl;
 
   /// Gets the bundler URL for testing purposes.
   String get bundlerUrl => _bundlerUrl;
@@ -107,7 +106,7 @@ class BundlerClient {
         return receipt;
       }
       
-      await Future.delayed(pollInterval);
+      await Future<void>.delayed(pollInterval);
     }
     
     throw TimeoutException(
@@ -141,10 +140,10 @@ class BundlerClient {
     final requests = userOps.map((userOp) => RpcRequest(
       'eth_estimateUserOperationGas',
       [userOp.toJson(), entryPoint ?? _getEntryPointAddress()],
-    )).toList();
+    ),).toList();
 
     final results = await _provider.batchCall<Map<String, dynamic>>(requests);
-    return results.map((result) => UserOperationGasEstimate.fromJson(result)).toList();
+    return results.map(UserOperationGasEstimate.fromJson).toList();
   }
 
   /// Sends multiple UserOperations in a batch.
@@ -154,7 +153,7 @@ class BundlerClient {
     final requests = userOps.map((userOp) => RpcRequest(
       'eth_sendUserOperation',
       [userOp.toJson(), _getEntryPointAddress()],
-    )).toList();
+    ),).toList();
 
     final results = await _provider.batchCall<String>(requests);
     return results;
@@ -164,7 +163,7 @@ class BundlerClient {
   /// 
   /// This is typically the latest EntryPoint version supported.
   String getEntryPointAddress() {
-    // TODO: This should be configurable or fetched from the bundler
+    // Note: This should be configurable or fetched from the bundler
     // For now, return EntryPoint v0.7 address
     return '0x0000000071727De22E5E9d8BAf0edAc6f37da032';
   }
@@ -180,11 +179,6 @@ class BundlerClient {
 
 /// Result from getUserOperationByHash
 class UserOperationByHashResult {
-  final String blockHash;
-  final BigInt blockNumber;
-  final String entryPoint;
-  final String transactionHash;
-  final UserOperation userOperation;
 
   UserOperationByHashResult({
     required this.blockHash,
@@ -203,6 +197,11 @@ class UserOperationByHashResult {
       userOperation: UserOperation.fromJson(json['userOperation'] as Map<String, dynamic>),
     );
   }
+  final String blockHash;
+  final BigInt blockNumber;
+  final String entryPoint;
+  final String transactionHash;
+  final UserOperation userOperation;
 
   Map<String, dynamic> toJson() {
     return {
@@ -217,10 +216,10 @@ class UserOperationByHashResult {
 
 /// Exception thrown when a bundler operation times out.
 class TimeoutException implements Exception {
-  final String message;
-  final Duration timeout;
 
   TimeoutException(this.message, this.timeout);
+  final String message;
+  final Duration timeout;
 
   @override
   String toString() => 'TimeoutException: $message (timeout: $timeout)';
@@ -261,9 +260,6 @@ enum BundlerErrorCode {
 
 /// Exception thrown by bundler operations
 class BundlerException implements Exception {
-  final BundlerErrorCode errorCode;
-  final String message;
-  final Map<String, dynamic>? data;
 
   BundlerException({
     required this.errorCode,
@@ -291,6 +287,9 @@ class BundlerException implements Exception {
       data: data,
     );
   }
+  final BundlerErrorCode errorCode;
+  final String message;
+  final Map<String, dynamic>? data;
 
   @override
   String toString() {

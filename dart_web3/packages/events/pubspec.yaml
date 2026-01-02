@@ -1,5 +1,6 @@
 name: dart_web3_events
 description: Event subscription and monitoring for Ethereum
+publish_to: none
 version: 0.1.0
 homepage: https://github.com/example/dart_web3
 repository: https://github.com/example/dart_web3/tree/main/packages/events
@@ -9,8 +10,13 @@ environment:
 
 dependencies:
   dart_web3_core:
+    path: ../core
   dart_web3_client:
+    path: ../client
+
+  dart_web3_provider: any
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
+  dart_web3_chains: any

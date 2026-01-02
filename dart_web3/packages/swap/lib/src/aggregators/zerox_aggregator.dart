@@ -7,14 +7,14 @@ import '../swap_types.dart';
 import 'aggregator_interface.dart';
 
 /// 0x Protocol DEX aggregator implementation
-class ZeroXAggregator implements DexAggregator {
-  final AggregatorConfig config;
-  final http.Client _httpClient;
+class ZeroXAggregator extends DexAggregator {
 
   ZeroXAggregator({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final AggregatorConfig config;
+  final http.Client _httpClient;
 
   @override
   String get name => '0x';
@@ -239,7 +239,7 @@ class ZeroXAggregator implements DexAggregator {
   SwapQuote _parseQuoteResponse(Map<String, dynamic> data, SwapParams params) {
     final outputAmount = BigInt.parse(data['buyAmount'] as String);
     final minimumOutputAmount = BigInt.parse(data['guaranteedBuyAmount'] as String? ?? 
-                                           calculateMinimumOutput(outputAmount, params.slippage).toString());
+                                           calculateMinimumOutput(outputAmount, params.slippage).toString(),);
     
     // Parse sources (route information)
     final sources = data['sources'] as List<dynamic>? ?? [];
@@ -310,7 +310,7 @@ class ZeroXAggregator implements DexAggregator {
     if (hex.isEmpty) return Uint8List(0);
     
     final bytes = <int>[];
-    for (int i = 0; i < hex.length; i += 2) {
+    for (var i = 0; i < hex.length; i += 2) {
       final hexByte = hex.substring(i, i + 2);
       bytes.add(int.parse(hexByte, radix: 16));
     }

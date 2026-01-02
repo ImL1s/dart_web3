@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:glados/glados.dart';
-import 'package:test/test.dart';
 
 /// Custom generators for property-based testing
 extension Uint8ListGenerators on Any {
@@ -207,7 +206,7 @@ void main() {
         'For any byte array, encoding without prefix then with prefix should be consistent',
         (bytes) {
           // **Feature: dart-web3-sdk, Property 26: Hex Encoding Round Trip**
-          final withPrefix = HexUtils.encode(bytes, prefix: true);
+          final withPrefix = HexUtils.encode(bytes);
           final withoutPrefix = HexUtils.encode(bytes, prefix: false);
 
           expect(withPrefix, equals('0x$withoutPrefix'));
@@ -248,7 +247,7 @@ void main() {
         (bytes) {
           // **Feature: dart-web3-sdk, Property 27: RLP Encoding Round Trip**
           final encoded = RLP.encode(bytes);
-          final decoded = RLP.decode(encoded);
+          final dynamic decoded = RLP.decode(encoded);
           expect(decoded, isA<Uint8List>());
           expect(BytesUtils.equals(decoded as Uint8List, bytes), isTrue);
         },
@@ -292,10 +291,10 @@ void main() {
         (list) {
           // **Feature: dart-web3-sdk, Property 27: RLP Encoding Round Trip**
           final encoded = RLP.encode(list);
-          final decoded = RLP.decode(encoded);
+          final dynamic decoded = RLP.decode(encoded);
 
-          expect(decoded, isA<List>());
-          final decodedList = decoded as List;
+          expect(decoded, isA<List<dynamic>>());
+          final decodedList = decoded as List<dynamic>;
           expect(decodedList.length, equals(list.length));
 
           for (var i = 0; i < list.length; i++) {

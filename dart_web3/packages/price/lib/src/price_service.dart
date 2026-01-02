@@ -4,15 +4,15 @@ import 'package:http/http.dart' as http;
 
 /// Service for fetching cryptocurrency prices
 class PriceService {
-  final http.Client _httpClient;
-  final Map<String, dynamic> _cache = {};
-  final Duration _cacheTtl;
 
   PriceService({
     http.Client? httpClient,
     Duration cacheTtl = const Duration(minutes: 5),
   })  : _httpClient = httpClient ?? http.Client(),
         _cacheTtl = cacheTtl;
+  final http.Client _httpClient;
+  final Map<String, dynamic> _cache = {};
+  final Duration _cacheTtl;
 
   /// Fetch simple price from CoinGecko
   Future<double?> getPrice(String id, {String vsCurrency = 'usd'}) async {

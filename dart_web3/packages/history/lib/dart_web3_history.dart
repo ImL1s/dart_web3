@@ -1,4 +1,4 @@
-library dart_web3_history;
+library;
 
-export 'src/history_types.dart';
 export 'src/history_service.dart';
+export 'src/history_types.dart';

@@ -30,7 +30,7 @@ void main() {
       final key = listener.listenToContract(
         '0x1234567890123456789012345678901234567890',
         '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-        onEvent: (log) => completer.complete(log),
+        onEvent: completer.complete,
       );
 
       expect(listener.isListening(key), isTrue);
@@ -64,7 +64,7 @@ void main() {
           'from': '0xfrom123',
           'to': '0xto456',
         },
-        onEvent: (log) => completer.complete(log),
+        onEvent: completer.complete,
       );
 
       expect(listener.isListening(key), isTrue);
@@ -104,7 +104,7 @@ void main() {
 
       final key = listener.listenToFilter(
         filter,
-        onEvent: (log) => completer.complete(log),
+        onEvent: completer.complete,
       );
 
       expect(listener.isListening(key), isTrue);
@@ -131,7 +131,7 @@ void main() {
       
       final key = listener.listenToAllContractEvents(
         '0x1234567890123456789012345678901234567890',
-        onEvent: (log) => completer.complete(log),
+        onEvent: completer.complete,
       );
 
       expect(listener.isListening(key), isTrue);
@@ -157,7 +157,7 @@ void main() {
       final completer = Completer<String>();
       
       final key = listener.listenToPendingTransactions(
-        onTransaction: (txHash) => completer.complete(txHash),
+        onTransaction: completer.complete,
       );
 
       expect(listener.isListening(key), isTrue);
@@ -206,7 +206,7 @@ void main() {
       final key = listenerWithoutWs.listenToContract(
         '0x1234567890123456789012345678901234567890',
         '0xabcd',
-        onEvent: (log) => completer.complete(log),
+        onEvent: completer.complete,
         useWebSocket: false,
         pollingInterval: const Duration(milliseconds: 100),
       );

@@ -1,18 +1,18 @@
-import 'dart:typed_data';
 import 'dart:math';
+import 'dart:typed_data';
 
 /// Fountain encoder for splitting large data into multiple QR code fragments
 /// Based on the Luby Transform fountain code algorithm
 class FountainEncoder {
-  final Uint8List _data;
+  
+  FountainEncoder(Uint8List data, this._fragmentLength, [int? seed])
+      : _fragments = _splitData(data, _fragmentLength),
+        _random = Random(seed ?? DateTime.now().millisecondsSinceEpoch);
+
   final int _fragmentLength;
   final List<Uint8List> _fragments;
   final Random _random;
   int _sequenceNumber = 0;
-  
-  FountainEncoder(this._data, this._fragmentLength, [int? seed])
-      : _fragments = _splitData(_data, _fragmentLength),
-        _random = Random(seed ?? DateTime.now().millisecondsSinceEpoch);
   
   /// Get the total number of fragments
   int get fragmentCount => _fragments.length;
@@ -50,7 +50,7 @@ class FountainEncoder {
   static List<Uint8List> _splitData(Uint8List data, int fragmentLength) {
     final fragments = <Uint8List>[];
     
-    for (int i = 0; i < data.length; i += fragmentLength) {
+    for (var i = 0; i < data.length; i += fragmentLength) {
       final end = (i + fragmentLength < data.length) ? i + fragmentLength : data.length;
       final fragment = Uint8List(fragmentLength);
       
@@ -100,7 +100,7 @@ class FountainEncoder {
     
     for (final index in indexes) {
       final fragment = _fragments[index];
-      for (int i = 0; i < _fragmentLength; i++) {
+      for (var i = 0; i < _fragmentLength; i++) {
         result[i] ^= fragment[i];
       }
     }
@@ -111,10 +111,6 @@ class FountainEncoder {
 
 /// Represents a single fountain part
 class FountainPart {
-  final int sequenceNumber;
-  final int fragmentCount;
-  final List<int> fragmentIndexes;
-  final Uint8List data;
   
   FountainPart({
     required this.sequenceNumber,
@@ -122,6 +118,10 @@ class FountainPart {
     required this.fragmentIndexes,
     required this.data,
   });
+  final int sequenceNumber;
+  final int fragmentCount;
+  final List<int> fragmentIndexes;
+  final Uint8List data;
   
   /// Check if this is a single-part message
   bool get isSinglePart => fragmentCount == 1;

@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Pure Dart implementation of secp256k1 elliptic curve operations.
 /// 
@@ -58,9 +57,9 @@ class Secp256k1 {
     // In a real implementation, we would try to recover the public key with v=0 and v=1
     // and see which one matches the original public key derived from d.
     // For now, we'll use a placeholder logic or a simplified search.
-    int v = 0;
+    var v = 0;
     final publicKey = getPublicKey(privateKey);
-    for (int i = 0; i < 2; i++) {
+    for (var i = 0; i < 2; i++) {
       try {
         final sig = Uint8List(64);
         _bigIntToBytes(r, 32).asMap().forEach((idx, byte) => sig[idx] = byte);
@@ -84,7 +83,7 @@ class Secp256k1 {
 
   static bool _uint8ListEquals(Uint8List a, Uint8List b) {
     if (a.length != b.length) return false;
-    for (int i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
       if (a[i] != b[i]) return false;
     }
     return true;
@@ -136,7 +135,7 @@ class Secp256k1 {
     final point2 = _scalarMult(e, _ECPoint(_gx, _gy));
     final publicKeyPoint = _scalarMult(rInv, _pointAdd(point1, point2));
 
-    return _pointToBytes(publicKeyPoint, compressed: false);
+    return _pointToBytes(publicKeyPoint);
   }
 
   /// Derives the public key from a private key.
@@ -193,8 +192,8 @@ class Secp256k1 {
   // Helper methods for elliptic curve operations
 
   static BigInt _bytesToBigInt(Uint8List bytes) {
-    BigInt result = BigInt.zero;
-    for (int i = 0; i < bytes.length; i++) {
+    var result = BigInt.zero;
+    for (var i = 0; i < bytes.length; i++) {
       result = (result << 8) + BigInt.from(bytes[i]);
     }
     return result;
@@ -202,7 +201,7 @@ class Secp256k1 {
 
   static Uint8List _bigIntToBytes(BigInt value, int length) {
     final bytes = Uint8List(length);
-    for (int i = length - 1; i >= 0; i--) {
+    for (var i = length - 1; i >= 0; i--) {
       bytes[i] = (value & BigInt.from(0xFF)).toInt();
       value >>= 8;
     }
@@ -253,8 +252,8 @@ class Secp256k1 {
     if (k == BigInt.zero) return _ECPoint.infinity();
     if (k == BigInt.one) return point;
 
-    _ECPoint result = _ECPoint.infinity();
-    _ECPoint addend = point;
+    var result = _ECPoint.infinity();
+    var addend = point;
 
     while (k > BigInt.zero) {
       if (k.isOdd) {
@@ -333,12 +332,12 @@ class Secp256k1 {
 
 /// Represents a point on the elliptic curve.
 class _ECPoint {
-  final BigInt x;
-  final BigInt y;
-  final bool isInfinity;
 
   _ECPoint(this.x, this.y) : isInfinity = false;
   _ECPoint.infinity() : x = BigInt.zero, y = BigInt.zero, isInfinity = true;
+  final BigInt x;
+  final BigInt y;
+  final bool isInfinity;
 
   @override
   bool operator ==(Object other) {

@@ -1,11 +1,17 @@
 import 'dart:typed_data';
-import 'package:meta/meta.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_contract/dart_web3_contract.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:meta/meta.dart';
 
 /// Represents a single call in a multicall batch.
 class Call {
+  
+  const Call({
+    required this.target,
+    required this.callData,
+    this.allowFailure = false,
+  });
   /// The target contract address.
   final String target;
   
@@ -14,44 +20,35 @@ class Call {
   
   /// Whether this call is allowed to fail.
   final bool allowFailure;
-  
-  const Call({
-    required this.target,
-    required this.callData,
-    this.allowFailure = false,
-  });
 }
 
 /// Result of a single call in a multicall batch.
 class CallResult {
-  /// Whether the call succeeded.
-  final bool success;
-  
-  /// The return data from the call.
-  final Uint8List returnData;
   
   const CallResult({
     required this.success,
     required this.returnData,
   });
+  /// Whether the call succeeded.
+  final bool success;
+  
+  /// The return data from the call.
+  final Uint8List returnData;
 }
 
 /// Multicall contract interface for batching multiple contract calls.
 class Multicall {
-  final PublicClient _publicClient;
-  final WalletClient? _walletClient;
-  final String _contractAddress;
-  final MulticallVersion _version;
   
   Multicall({
     required PublicClient publicClient,
-    WalletClient? walletClient,
     required String contractAddress,
     MulticallVersion version = MulticallVersion.v3,
   }) : _publicClient = publicClient,
-       _walletClient = walletClient,
        _contractAddress = contractAddress,
        _version = version;
+  final PublicClient _publicClient;
+  final String _contractAddress;
+  final MulticallVersion _version;
   
   /// Gets the public client for testing purposes.
   @visibleForTesting
@@ -64,7 +61,7 @@ class Multicall {
     final result = await _publicClient.call(CallRequest(
       to: _contractAddress,
       data: callData,
-    ));
+    ),);
     
     return _decodeAggregateResult(result, calls.length);
   }
@@ -80,7 +77,7 @@ class Multicall {
     final result = await _publicClient.call(CallRequest(
       to: _contractAddress,
       data: callData,
-    ));
+    ),);
     
     return _decodeTryAggregateResult(result);
   }
@@ -96,7 +93,7 @@ class Multicall {
     final result = await _publicClient.call(CallRequest(
       to: _contractAddress,
       data: callData,
-    ));
+    ),);
     
     return _decodeAggregateWithBlockResult(result, calls.length);
   }
@@ -105,10 +102,10 @@ class Multicall {
   Future<BigInt> estimateGas(List<Call> calls) async {
     final callData = _encodeAggregate(calls);
     
-    return await _publicClient.estimateGas(CallRequest(
+    return _publicClient.estimateGas(CallRequest(
       to: _contractAddress,
       data: callData,
-    ));
+    ),);
   }
   
   /// Encodes aggregate call data for Multicall v1/v2.
@@ -125,20 +122,20 @@ class Multicall {
       
       // Encode callData as dynamic bytes
       final callDataLength = BytesUtils.pad(
-        _bigIntToBytes(BigInt.from(call.callData.length)), 32);
+        _bigIntToBytes(BigInt.from(call.callData.length)), 32,);
       final paddedCallData = BytesUtils.pad(call.callData, 
-        ((call.callData.length + 31) ~/ 32) * 32, left: false);
+        ((call.callData.length + 31) ~/ 32) * 32, left: false,);
       
       encodedCalls.add(BytesUtils.concat([
         paddedTarget,
         callDataLength,
         paddedCallData,
-      ]));
+      ]),);
     }
     
     // Encode array length and data
     final arrayLength = BytesUtils.pad(
-      _bigIntToBytes(BigInt.from(calls.length)), 32);
+      _bigIntToBytes(BigInt.from(calls.length)), 32,);
     final arrayData = BytesUtils.concat(encodedCalls);
     
     return BytesUtils.concat([
@@ -155,7 +152,7 @@ class Multicall {
     
     // Encode requireSuccess
     final requireSuccessBytes = BytesUtils.pad(
-      Uint8List.fromList(requireSuccess ? [1] : [0]), 32);
+      Uint8List.fromList(requireSuccess ? [1] : [0]), 32,);
     
     // Encode calls (same as aggregate but with allowFailure flag)
     final encodedCalls = <Uint8List>[];
@@ -164,19 +161,19 @@ class Multicall {
       final paddedTarget = BytesUtils.pad(targetBytes, 32);
       
       final callDataLength = BytesUtils.pad(
-        _bigIntToBytes(BigInt.from(call.callData.length)), 32);
+        _bigIntToBytes(BigInt.from(call.callData.length)), 32,);
       final paddedCallData = BytesUtils.pad(call.callData, 
-        ((call.callData.length + 31) ~/ 32) * 32, left: false);
+        ((call.callData.length + 31) ~/ 32) * 32, left: false,);
       
       encodedCalls.add(BytesUtils.concat([
         paddedTarget,
         callDataLength,
         paddedCallData,
-      ]));
+      ]),);
     }
     
     final arrayLength = BytesUtils.pad(
-      _bigIntToBytes(BigInt.from(calls.length)), 32);
+      _bigIntToBytes(BigInt.from(calls.length)), 32,);
     final arrayData = BytesUtils.concat(encodedCalls);
     
     return BytesUtils.concat([
@@ -199,23 +196,23 @@ class Multicall {
       final paddedTarget = BytesUtils.pad(targetBytes, 32);
       
       final allowFailureBytes = BytesUtils.pad(
-        Uint8List.fromList(call.allowFailure ? [1] : [0]), 32);
+        Uint8List.fromList(call.allowFailure ? [1] : [0]), 32,);
       
       final callDataLength = BytesUtils.pad(
-        _bigIntToBytes(BigInt.from(call.callData.length)), 32);
+        _bigIntToBytes(BigInt.from(call.callData.length)), 32,);
       final paddedCallData = BytesUtils.pad(call.callData, 
-        ((call.callData.length + 31) ~/ 32) * 32, left: false);
+        ((call.callData.length + 31) ~/ 32) * 32, left: false,);
       
       encodedCalls.add(BytesUtils.concat([
         paddedTarget,
         allowFailureBytes,
         callDataLength,
         paddedCallData,
-      ]));
+      ]),);
     }
     
     final arrayLength = BytesUtils.pad(
-      _bigIntToBytes(BigInt.from(calls.length)), 32);
+      _bigIntToBytes(BigInt.from(calls.length)), 32,);
     final arrayData = BytesUtils.concat(encodedCalls);
     
     return BytesUtils.concat([
@@ -235,7 +232,7 @@ class Multicall {
     offset += 32;
     
     final results = <CallResult>[];
-    for (int i = 0; i < arrayLength.toInt(); i++) {
+    for (var i = 0; i < arrayLength.toInt(); i++) {
       // Read return data length
       final dataLength = _bytesToBigInt(data.sublist(offset, offset + 32));
       offset += 32;
@@ -247,7 +244,7 @@ class Multicall {
       results.add(CallResult(
         success: true, // aggregate always succeeds or reverts
         returnData: returnData,
-      ));
+      ),);
     }
     
     return results;
@@ -262,7 +259,7 @@ class Multicall {
     offset += 32;
     
     final results = <CallResult>[];
-    for (int i = 0; i < arrayLength.toInt(); i++) {
+    for (var i = 0; i < arrayLength.toInt(); i++) {
       // Read success flag
       final success = data[offset + 31] == 1;
       offset += 32;
@@ -278,7 +275,7 @@ class Multicall {
       results.add(CallResult(
         success: success,
         returnData: returnData,
-      ));
+      ),);
     }
     
     return results;
@@ -301,7 +298,7 @@ class Multicall {
     offset += 32;
     
     final results = <CallResult>[];
-    for (int i = 0; i < arrayLength.toInt(); i++) {
+    for (var i = 0; i < arrayLength.toInt(); i++) {
       final success = data[offset + 31] == 1;
       offset += 32;
       
@@ -314,7 +311,7 @@ class Multicall {
       results.add(CallResult(
         success: success,
         returnData: returnData,
-      ));
+      ),);
     }
     
     return MulticallBlockResult(
@@ -346,6 +343,12 @@ enum MulticallVersion {
 
 /// Result of aggregateWithBlock call.
 class MulticallBlockResult {
+  
+  const MulticallBlockResult({
+    required this.blockNumber,
+    required this.blockHash,
+    required this.results,
+  });
   /// The block number when the call was executed.
   final BigInt blockNumber;
   
@@ -354,10 +357,4 @@ class MulticallBlockResult {
   
   /// The results of individual calls.
   final List<CallResult> results;
-  
-  const MulticallBlockResult({
-    required this.blockNumber,
-    required this.blockHash,
-    required this.results,
-  });
 }

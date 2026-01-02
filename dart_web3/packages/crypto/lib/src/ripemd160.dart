@@ -106,7 +106,11 @@ class _Ripemd160Impl {
 
     // Initialize working variables
     var al = _state[0], bl = _state[1], cl = _state[2], dl = _state[3], el = _state[4];
-    var ar = _state[0], br = _state[1], cr = _state[2], dr = _state[3], er = _state[4];
+    var ar = _state[0];
+    var br = _state[1];
+    var cr = _state[2];
+    var dr = _state[3];
+    var er = _state[4];
 
     // 80 rounds - left line
     for (var j = 0; j < 80; j++) {

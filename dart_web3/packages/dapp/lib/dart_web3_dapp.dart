@@ -1,3 +1,3 @@
-library dart_web3_dapp;
+library;
 
 export 'src/dapp_provider.dart';

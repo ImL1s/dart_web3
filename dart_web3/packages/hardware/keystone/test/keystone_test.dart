@@ -1,8 +1,9 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
+import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_keystone/dart_web3_keystone.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Keystone Client', () {
@@ -35,7 +36,7 @@ void main() {
       final accounts = await client.getAccounts(count: 3);
       
       expect(accounts.length, equals(3));
-      for (int i = 0; i < accounts.length; i++) {
+      for (var i = 0; i < accounts.length; i++) {
         expect(accounts[i].derivationPath, contains("m/44'/60'/0'/0/$i"));
         expect(accounts[i].address, startsWith('0x'));
         expect(accounts[i].publicKey.length, equals(64));
@@ -74,7 +75,7 @@ void main() {
     });
     
     test('should get multiple addresses', () async {
-      final addresses = await signer.getAddresses(count: 5);
+      final addresses = await signer.getAddresses();
       
       expect(addresses.length, equals(5));
       for (final address in addresses) {

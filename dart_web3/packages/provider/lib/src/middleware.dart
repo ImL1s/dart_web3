@@ -12,6 +12,12 @@ abstract class Middleware {
 
 /// Middleware that retries failed requests.
 class RetryMiddleware extends Middleware {
+
+  RetryMiddleware({
+    this.maxRetries = 3,
+    this.delay = const Duration(seconds: 1),
+    this.retryableCodes = const {-32000, -32603}, // Server error, internal error
+  });
   /// Maximum number of retry attempts.
   final int maxRetries;
 
@@ -22,12 +28,6 @@ class RetryMiddleware extends Middleware {
   final Set<int> retryableCodes;
 
   int _currentAttempt = 0;
-
-  RetryMiddleware({
-    this.maxRetries = 3,
-    this.delay = const Duration(seconds: 1),
-    this.retryableCodes = const {-32000, -32603}, // Server error, internal error
-  });
 
   @override
   Future<void> onError(Exception error) async {
@@ -46,6 +46,12 @@ class RetryMiddleware extends Middleware {
 
 /// Middleware that logs requests and responses.
 class LoggingMiddleware extends Middleware {
+
+  LoggingMiddleware({
+    this.logRequests = true,
+    this.logResponses = false,
+    this.logger,
+  });
   /// Whether to log requests.
   final bool logRequests;
 
@@ -54,12 +60,6 @@ class LoggingMiddleware extends Middleware {
 
   /// Custom log function.
   final void Function(String message)? logger;
-
-  LoggingMiddleware({
-    this.logRequests = true,
-    this.logResponses = false,
-    this.logger,
-  });
 
   void _log(String message) {
     if (logger != null) {
@@ -93,13 +93,6 @@ class LoggingMiddleware extends Middleware {
 
 /// Middleware that caches responses.
 class CacheMiddleware extends Middleware {
-  /// Cache duration.
-  final Duration cacheDuration;
-
-  /// Methods that should be cached.
-  final Set<String> cacheableMethods;
-
-  final _cache = <String, _CacheEntry>{};
 
   CacheMiddleware({
     this.cacheDuration = const Duration(seconds: 30),
@@ -111,6 +104,13 @@ class CacheMiddleware extends Middleware {
       'eth_getCode',
     },
   });
+  /// Cache duration.
+  final Duration cacheDuration;
+
+  /// Methods that should be cached.
+  final Set<String> cacheableMethods;
+
+  final _cache = <String, _CacheEntry>{};
 
   String _cacheKey(String method, List<dynamic> params) {
     return '$method:${params.join(',')}';
@@ -149,10 +149,10 @@ class CacheMiddleware extends Middleware {
 }
 
 class _CacheEntry {
-  final Map<String, dynamic> response;
-  final DateTime expiresAt;
 
   _CacheEntry(this.response, this.expiresAt);
+  final Map<String, dynamic> response;
+  final DateTime expiresAt;
 
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 }

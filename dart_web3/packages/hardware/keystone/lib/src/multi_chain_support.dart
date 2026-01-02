@@ -1,13 +1,13 @@
 import 'dart:typed_data';
-import 'package:dart_web3_bc_ur/dart_web3_bc_ur.dart';
-import 'keystone_types.dart';
+
 import 'keystone_client.dart';
+import 'keystone_types.dart';
 
 /// Multi-chain signing support for Keystone
 class KeystoneMultiChainSigner {
-  final KeystoneClient _client;
   
   KeystoneMultiChainSigner(this._client);
+  final KeystoneClient _client;
   
   /// Sign Bitcoin transaction (PSBT format)
   Future<String> signBitcoinTransaction(
@@ -21,14 +21,9 @@ class KeystoneMultiChainSigner {
       );
     }
     
-    final requestId = _generateRequestId();
-    
-    // Create BC-UR PSBT request
-    final urData = BCUREncoder.encodeSingle('crypto-psbt', psbtData);
-    
+    // In real implementation, requestId and PSBT encoding would be used
     // For now, return mock signature
-    // In real implementation, this would go through QR communication
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     return '0x' + List.filled(130, 'a').join(); // Mock signature
   }
   
@@ -54,7 +49,7 @@ class KeystoneMultiChainSigner {
     );
     
     // Use Ed25519 curve for Solana
-    return await _performSigning(request, CurveType.ed25519);
+    return _performSigning(request, CurveType.ed25519);
   }
   
   /// Sign Polkadot transaction
@@ -79,7 +74,7 @@ class KeystoneMultiChainSigner {
     );
     
     // Use Sr25519 curve for Polkadot
-    return await _performSigning(request, CurveType.sr25519);
+    return _performSigning(request, CurveType.sr25519);
   }
   
   /// Get address for different chains
@@ -100,14 +95,13 @@ class KeystoneMultiChainSigner {
       case ChainType.polkadot:
         return '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY';
       case ChainType.ethereum:
-      default:
         return '0x742d35Cc6634C0532925a3b8D0C9e3e0C8b8c8c8';
     }
   }
   
   Future<String> _performSigning(KeystoneSignRequest request, CurveType curveType) async {
     // Mock signing with different curves
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
     
     switch (curveType) {
       case CurveType.secp256k1:
@@ -120,7 +114,12 @@ class KeystoneMultiChainSigner {
   }
   
   Uint8List _generateRequestId() {
-    return Uint8List.fromList(List.generate(16, (i) => i));
+    final bytes = Uint8List(16);
+    // Fill with some data
+    for (var i = 0; i < 16; i++) {
+      bytes[i] = i;
+    }
+    return bytes;
   }
 }
 
@@ -149,16 +148,4 @@ class MultiChainDerivationPaths {
   
   /// Standard Solana path
   static String solana(int account, int index) => "m/44'/501'/$account'/$index'";
-  
-  /// Standard Polkadot path
-  static String polkadot(int account, int index) => "m/44'/354'/$account'/0'/$index'";
-  
-  /// Get chain type from derivation path
-  static ChainType? getChainType(String path) {
-    if (path.contains("44'/60'")) return ChainType.ethereum;
-    if (path.contains("44'/0'") || path.contains("84'/0'")) return ChainType.bitcoin;
-    if (path.contains("44'/501'")) return ChainType.solana;
-    if (path.contains("44'/354'")) return ChainType.polkadot;
-    return null;
-  }
 }

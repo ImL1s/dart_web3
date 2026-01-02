@@ -2,12 +2,6 @@ import 'dart:typed_data';
 
 /// Token information for swaps
 class SwapToken {
-  final String address;
-  final String symbol;
-  final String name;
-  final int decimals;
-  final int chainId;
-  final String? logoUri;
 
   const SwapToken({
     required this.address,
@@ -28,6 +22,12 @@ class SwapToken {
       logoUri: json['logoUri'] as String?,
     );
   }
+  final String address;
+  final String symbol;
+  final String name;
+  final int decimals;
+  final int chainId;
+  final String? logoUri;
 
   Map<String, dynamic> toJson() {
     return {
@@ -54,15 +54,6 @@ class SwapToken {
 
 /// Swap parameters
 class SwapParams {
-  final SwapToken fromToken;
-  final SwapToken toToken;
-  final BigInt amount;
-  final String fromAddress;
-  final String? toAddress;
-  final double slippage;
-  final bool enableMevProtection;
-  final Duration? deadline;
-  final Map<String, dynamic>? metadata;
 
   const SwapParams({
     required this.fromToken,
@@ -75,6 +66,15 @@ class SwapParams {
     this.deadline,
     this.metadata,
   });
+  final SwapToken fromToken;
+  final SwapToken toToken;
+  final BigInt amount;
+  final String fromAddress;
+  final String? toAddress;
+  final double slippage;
+  final bool enableMevProtection;
+  final Duration? deadline;
+  final Map<String, dynamic>? metadata;
 
   SwapParams copyWith({
     SwapToken? fromToken,
@@ -103,11 +103,6 @@ class SwapParams {
 
 /// Swap route information
 class SwapRoute {
-  final List<SwapToken> path;
-  final List<String> exchanges;
-  final List<double> portions;
-  final BigInt gasEstimate;
-  final Map<String, dynamic>? metadata;
 
   const SwapRoute({
     required this.path,
@@ -128,6 +123,11 @@ class SwapRoute {
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
   }
+  final List<SwapToken> path;
+  final List<String> exchanges;
+  final List<double> portions;
+  final BigInt gasEstimate;
+  final Map<String, dynamic>? metadata;
 
   Map<String, dynamic> toJson() {
     return {
@@ -142,13 +142,6 @@ class SwapRoute {
 
 /// Swap transaction data
 class SwapTransaction {
-  final String to;
-  final Uint8List data;
-  final BigInt value;
-  final BigInt gasLimit;
-  final BigInt? gasPrice;
-  final BigInt? maxFeePerGas;
-  final BigInt? maxPriorityFeePerGas;
 
   const SwapTransaction({
     required this.to,
@@ -177,6 +170,13 @@ class SwapTransaction {
           : null,
     );
   }
+  final String to;
+  final Uint8List data;
+  final BigInt value;
+  final BigInt gasLimit;
+  final BigInt? gasPrice;
+  final BigInt? maxFeePerGas;
+  final BigInt? maxPriorityFeePerGas;
 
   Map<String, dynamic> toJson() {
     return {
@@ -210,11 +210,6 @@ enum MevProtectionType {
 
 /// Cross-chain swap information
 class CrossChainSwapInfo {
-  final int sourceChainId;
-  final int destinationChainId;
-  final String bridgeProtocol;
-  final Duration estimatedTime;
-  final BigInt bridgeFee;
 
   const CrossChainSwapInfo({
     required this.sourceChainId,
@@ -233,6 +228,11 @@ class CrossChainSwapInfo {
       bridgeFee: BigInt.parse(json['bridgeFee'] as String),
     );
   }
+  final int sourceChainId;
+  final int destinationChainId;
+  final String bridgeProtocol;
+  final Duration estimatedTime;
+  final BigInt bridgeFee;
 
   Map<String, dynamic> toJson() {
     return {

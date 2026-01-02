@@ -1,5 +1,6 @@
 name: dart_web3_contract
-description: Smart contract abstraction for Ethereum
+description: Smart contract interaction and ERC-20/721/1155 support
+publish_to: none
 version: 0.1.0
 homepage: https://github.com/example/dart_web3
 repository: https://github.com/example/dart_web3/tree/main/packages/contract
@@ -15,6 +16,11 @@ dependencies:
   dart_web3_client:
     path: ../client
 
+  dart_web3_crypto: any
+  dart_web3_signer: any
+
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
+  dart_web3_chains: any
+  dart_web3_provider: any

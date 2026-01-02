@@ -29,7 +29,6 @@ abstract class TrezorTransport {
 /// WebUSB transport implementation (mock for pure Dart)
 class TrezorWebUSBTransport implements TrezorTransport {
   bool _isConnected = false;
-  TrezorDevice? _device;
   
   @override
   bool get isSupported => false; // WebUSB requires browser environment
@@ -47,14 +46,13 @@ class TrezorWebUSBTransport implements TrezorTransport {
     }
     
     // Mock connection
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     _isConnected = true;
   }
   
   @override
   Future<void> disconnect() async {
     _isConnected = false;
-    _device = null;
   }
   
   @override
@@ -67,7 +65,7 @@ class TrezorWebUSBTransport implements TrezorTransport {
     }
     
     // Mock message exchange
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     
     // Return mock response based on message type
     switch (message.type) {
@@ -98,7 +96,7 @@ class TrezorWebUSBTransport implements TrezorTransport {
     }
     
     // Mock device discovery
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
     
     return [
       TrezorDevice(
@@ -143,7 +141,7 @@ class MockTrezorTransport implements TrezorTransport {
   
   @override
   Future<void> connect() async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     _isConnected = true;
   }
   
@@ -161,7 +159,7 @@ class MockTrezorTransport implements TrezorTransport {
       );
     }
     
-    await Future.delayed(const Duration(milliseconds: 50));
+    await Future<void>.delayed(const Duration(milliseconds: 50));
     
     // Check for mock response
     final mockResponse = _mockResponses[message.type];
@@ -208,7 +206,7 @@ class MockTrezorTransport implements TrezorTransport {
   
   @override
   Future<List<TrezorDevice>> discoverDevices() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     
     return [
       TrezorDevice(

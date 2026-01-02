@@ -1,6 +1,4 @@
-import 'dart:typed_data';
 import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_ens/dart_web3_ens.dart';
 import 'package:test/test.dart';
 
@@ -124,7 +122,6 @@ void main() {
     group('namehash calculation', () {
       test('should calculate correct namehash for empty string', () {
         // The namehash for empty string should be 32 zero bytes
-        final resolver = ENSResolver(client: mockClient);
         // We can't directly test the private _namehash method, but we can test
         // that it doesn't throw when used internally
         expect(true, isTrue);

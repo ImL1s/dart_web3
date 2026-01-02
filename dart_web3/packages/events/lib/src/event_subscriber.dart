@@ -7,13 +7,13 @@ import 'event_filter.dart';
 
 /// Event subscriber for blockchain events.
 class EventSubscriber {
+
+  EventSubscriber(this.publicClient, [this.wsTransport]);
   /// The public client for blockchain queries.
   final PublicClient publicClient;
 
   /// The WebSocket transport for subscriptions (optional).
   final WebSocketTransport? wsTransport;
-
-  EventSubscriber(this.publicClient, [this.wsTransport]);
 
   /// Subscribes to events using WebSocket.
   /// 
@@ -26,7 +26,7 @@ class EventSubscriber {
 
     return wsTransport!
         .subscribe('eth_subscribe', ['logs', filter.toJson()])
-        .map((data) => Log.fromJson(data));
+        .map(Log.fromJson);
   }
 
   /// Polls for events using HTTP transport.
@@ -60,7 +60,7 @@ class EventSubscriber {
           topics: pollFilter.topics?.cast<String?>(),
           fromBlock: pollFilter.fromBlock,
           toBlock: pollFilter.toBlock,
-        ));
+        ),);
 
         // Emit logs
         for (final log in logs) {
@@ -71,10 +71,10 @@ class EventSubscriber {
         lastBlock = currentBlockHex;
 
         // Wait for next interval
-        await Future.delayed(interval);
-      } catch (e) {
+        await Future<void>.delayed(interval);
+      } catch (_) {
         // Continue polling on error
-        await Future.delayed(interval);
+        await Future<void>.delayed(interval);
       }
     }
   }
@@ -95,7 +95,7 @@ class EventSubscriber {
             return BigInt.parse(cleanHex, radix: 16);
           });
     } else {
-      return Stream.periodic(interval)
+      return Stream<void>.periodic(interval)
           .asyncMap((_) => publicClient.getBlockNumber());
     }
   }
@@ -132,7 +132,7 @@ class EventSubscriber {
       topics: filter.topics?.cast<String?>(),
       fromBlock: filter.fromBlock,
       toBlock: filter.toBlock,
-    ));
+    ),);
 
     // Sort logs
     if (!ascending) {
@@ -169,7 +169,7 @@ class EventSubscriber {
 
   /// Creates a filter ID for use with eth_getFilterChanges.
   Future<String> createFilter(EventFilter filter) async {
-    return await publicClient.provider.call<String>('eth_newFilter', [filter.toJson()]);
+    return publicClient.provider.call<String>('eth_newFilter', [filter.toJson()]);
   }
 
   /// Gets changes for a filter ID.
@@ -180,7 +180,7 @@ class EventSubscriber {
 
   /// Uninstalls a filter.
   Future<bool> uninstallFilter(String filterId) async {
-    return await publicClient.provider.call<bool>('eth_uninstallFilter', [filterId]);
+    return publicClient.provider.call<bool>('eth_uninstallFilter', [filterId]);
   }
 
   /// Disposes of the subscriber.

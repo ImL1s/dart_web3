@@ -12,21 +12,17 @@
 /// - Multi-curve support (Ed25519, Sr25519)
 library dart_web3_crypto;
 
-// Hash functions
-export 'src/keccak.dart';
-export 'src/sha2.dart';
-export 'src/ripemd160.dart';
-
-// Message authentication
-export 'src/hmac.dart';
-
-// Key derivation
-export 'src/pbkdf2.dart';
-
-// Elliptic curves
-export 'src/secp256k1.dart';
-export 'src/curves.dart';
-
 // BIP standards
 export 'src/bip39.dart';
+export 'src/curves.dart';
 export 'src/hd_wallet.dart';
+// Message authentication
+export 'src/hmac.dart';
+// Hash functions
+export 'src/keccak.dart';
+// Key derivation
+export 'src/pbkdf2.dart';
+export 'src/ripemd160.dart';
+// Elliptic curves
+export 'src/secp256k1.dart';
+export 'src/sha2.dart';

@@ -9,7 +9,8 @@ void main() {
     late MockWalletClient mockWalletClient;
 
     const contractAddress = '0x1234567890123456789012345678901234567890';
-    const simpleAbi = '''[
+    const simpleAbi = '''
+[
       {
         "type": "function",
         "name": "getValue",

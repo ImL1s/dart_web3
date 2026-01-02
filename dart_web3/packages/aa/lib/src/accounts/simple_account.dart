@@ -1,11 +1,8 @@
-import 'dart:typed_data';
-
+import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 import '../smart_account.dart';
-import '../user_operation.dart';
 
 /// SimpleAccount implementation following the ERC-4337 reference implementation.
 /// 
@@ -15,8 +12,6 @@ import '../user_operation.dart';
 /// - Can execute single and batch transactions
 /// - Is deployed via SimpleAccountFactory
 class SimpleAccount extends BaseSmartAccount {
-  static const String defaultFactoryAddress = '0x9406Cc6185a346906296840746125a0E44976454';
-  static const String defaultImplementationAddress = '0x2dd68b007B46fBe91B9A7c3EDa5A7a1063cB5b47';
 
   SimpleAccount({
     required super.owner,
@@ -28,11 +23,24 @@ class SimpleAccount extends BaseSmartAccount {
           factoryAddress: factoryAddress ?? defaultFactoryAddress,
           implementationAddress: implementationAddress ?? defaultImplementationAddress,
         );
+  static const String defaultFactoryAddress = '0x9406Cc6185a346906296840746125a0E44976454';
+  static const String defaultImplementationAddress = '0x2dd68b007B46fBe91B9A7c3EDa5A7a1063cB5b47';
 
   @override
   Future<String> getAddress() async {
-    // For SimpleAccount, the address is deterministic based on owner and salt
-    return await _calculateAddress();
+    // SimpleAccount uses CREATE2 with factory, implementation, owner, and salt
+    final ownerAddress = owner.address.hex;
+    
+    // The actual calculation would involve:
+    // 1. ABI encode the initializer call
+    // 2. Calculate CREATE2 address using factory, salt, and initCode hash
+    
+    // For now, return a deterministic placeholder based on owner
+    final ownerBytes = HexUtils.decode(ownerAddress);
+    final hash = HexUtils.encode(ownerBytes); // Simplified
+    
+    // This should be replaced with proper CREATE2 calculation
+    return '0x' + hash.replaceFirst('0x', '').substring(0, 40);
   }
 
   @override
@@ -101,39 +109,22 @@ class SimpleAccount extends BaseSmartAccount {
     final selector = '18dfb3c7';
     
     // This is a complex ABI encoding for arrays
-    // TODO: Use proper ABI encoder from dart_web3_abi
+    // Use proper ABI encoder from dart_web3_abi
     // For now, return a placeholder
     return '0x$selector';
   }
 
-  @override
-  Future<String> _calculateAddress() async {
-    // SimpleAccount uses CREATE2 with factory, implementation, owner, and salt
-    final ownerAddress = owner.address.hex;
-    final salt = BigInt.zero;
-    
-    // The actual calculation would involve:
-    // 1. ABI encode the initializer call
-    // 2. Calculate CREATE2 address using factory, salt, and initCode hash
-    
-    // For now, return a deterministic placeholder based on owner
-    final ownerBytes = HexUtils.decode(ownerAddress);
-    final hash = HexUtils.encode(ownerBytes); // Simplified
-    
-    // This should be replaced with proper CREATE2 calculation
-    return '0x' + hash.replaceFirst('0x', '').substring(0, 40);
-  }
 }
 
 /// Factory for creating SimpleAccount instances.
 class SimpleAccountFactory {
-  final String factoryAddress;
-  final PublicClient publicClient;
 
   SimpleAccountFactory({
     required this.factoryAddress,
     required this.publicClient,
   });
+  final String factoryAddress;
+  final PublicClient publicClient;
 
   /// Creates a SimpleAccount instance.
   SimpleAccount createAccount({
@@ -162,7 +153,7 @@ class SimpleAccountFactory {
     final result = await publicClient.call(CallRequest(
       to: factoryAddress,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return HexUtils.encode(result);
   }

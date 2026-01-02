@@ -25,6 +25,23 @@ enum TransactionType {
 
 /// Represents a transaction request.
 class TransactionRequest {
+
+  TransactionRequest({
+    this.to,
+    this.value,
+    this.data,
+    this.gasLimit,
+    this.gasPrice,
+    this.maxFeePerGas,
+    this.maxPriorityFeePerGas,
+    this.nonce,
+    this.chainId,
+    this.type = TransactionType.eip1559,
+    this.accessList,
+    this.blobVersionedHashes,
+    this.maxFeePerBlobGas,
+    this.authorizationList,
+  });
   /// The recipient address (null for contract creation).
   final String? to;
 
@@ -67,23 +84,6 @@ class TransactionRequest {
   /// Authorization list (for EIP-7702).
   final List<Authorization>? authorizationList;
 
-  TransactionRequest({
-    this.to,
-    this.value,
-    this.data,
-    this.gasLimit,
-    this.gasPrice,
-    this.maxFeePerGas,
-    this.maxPriorityFeePerGas,
-    this.nonce,
-    this.chainId,
-    this.type = TransactionType.eip1559,
-    this.accessList,
-    this.blobVersionedHashes,
-    this.maxFeePerBlobGas,
-    this.authorizationList,
-  });
-
   /// Creates a copy with updated fields.
   TransactionRequest copyWith({
     String? to,
@@ -122,11 +122,11 @@ class TransactionRequest {
 
 /// An entry in an access list.
 class AccessListEntry {
+
+  AccessListEntry({required this.address, required this.storageKeys});
   /// The address.
   final String address;
 
   /// The storage keys.
   final List<String> storageKeys;
-
-  AccessListEntry({required this.address, required this.storageKeys});
 }

@@ -1,24 +1,7 @@
-import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Event filter for subscribing to blockchain events.
 class EventFilter {
-  /// Contract address to filter by (optional).
-  final String? address;
-
-  /// List of topics to filter by (optional).
-  /// Each topic can be null (any topic), a string (exact match), or a list of strings (OR match).
-  final List<dynamic>? topics;
-
-  /// Starting block number or tag ('earliest', 'latest', 'pending').
-  final String? fromBlock;
-
-  /// Ending block number or tag ('earliest', 'latest', 'pending').
-  final String? toBlock;
-
-  /// Block hash to filter by (alternative to fromBlock/toBlock).
-  final String? blockHash;
 
   EventFilter({
     this.address,
@@ -60,6 +43,32 @@ class EventFilter {
   })  : fromBlock = from,
         toBlock = to;
 
+  /// Creates an EventFilter from JSON.
+  factory EventFilter.fromJson(Map<String, dynamic> json) {
+    return EventFilter(
+      address: json['address'] as String?,
+      topics: json['topics'] as List<dynamic>?,
+      fromBlock: json['fromBlock'] as String?,
+      toBlock: json['toBlock'] as String?,
+      blockHash: json['blockHash'] as String?,
+    );
+  }
+  /// Contract address to filter by (optional).
+  final String? address;
+
+  /// List of topics to filter by (optional).
+  /// Each topic can be null (any topic), a string (exact match), or a list of strings (OR match).
+  final List<dynamic>? topics;
+
+  /// Starting block number or tag ('earliest', 'latest', 'pending').
+  final String? fromBlock;
+
+  /// Ending block number or tag ('earliest', 'latest', 'pending').
+  final String? toBlock;
+
+  /// Block hash to filter by (alternative to fromBlock/toBlock).
+  final String? blockHash;
+
   /// Converts the filter to JSON format for RPC calls.
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -84,17 +93,6 @@ class EventFilter {
     }
 
     return json;
-  }
-
-  /// Creates an EventFilter from JSON.
-  factory EventFilter.fromJson(Map<String, dynamic> json) {
-    return EventFilter(
-      address: json['address'] as String?,
-      topics: json['topics'] as List<dynamic>?,
-      fromBlock: json['fromBlock'] as String?,
-      toBlock: json['toBlock'] as String?,
-      blockHash: json['blockHash'] as String?,
-    );
   }
 
   @override
@@ -129,7 +127,7 @@ class EventFilter {
     if (a == null && b == null) return true;
     if (a == null || b == null) return false;
     if (a.length != b.length) return false;
-    for (int i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
       if (a[i] != b[i]) return false;
     }
     return true;
@@ -138,7 +136,7 @@ class EventFilter {
   /// Helper method to compute hash code for lists.
   int _listHashCode(List<dynamic>? list) {
     if (list == null) return 0;
-    int hash = 0;
+    var hash = 0;
     for (final item in list) {
       hash = hash ^ item.hashCode;
     }

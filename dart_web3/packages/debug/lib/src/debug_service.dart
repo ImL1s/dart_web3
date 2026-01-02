@@ -4,9 +4,9 @@ import 'debug_types.dart';
 
 /// Service for Debug and Trace API
 class DebugService {
-  final RpcProvider _provider;
 
   DebugService(this._provider);
+  final RpcProvider _provider;
 
   /// Trace a transaction execution
   Future<TraceResult> traceTransaction(

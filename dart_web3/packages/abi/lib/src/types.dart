@@ -40,7 +40,21 @@ class AbiUint extends AbiType {
 
   @override
   Uint8List encode(dynamic value) {
-    final bigValue = value is BigInt ? value : BigInt.from(value as int);
+    BigInt bigValue;
+    if (value is BigInt) {
+      bigValue = value;
+    } else if (value is int) {
+      bigValue = BigInt.from(value);
+    } else if (value is String) {
+      final v = value.toLowerCase();
+      if (v.startsWith('0x')) {
+        bigValue = BigInt.parse(v.substring(2), radix: 16);
+      } else {
+        bigValue = BigInt.parse(v);
+      }
+    } else {
+      throw ArgumentError('Unsupported type for uint: ${value.runtimeType}');
+    }
     final result = Uint8List(32);
 
     // Big-endian encoding, right-aligned
@@ -81,7 +95,21 @@ class AbiInt extends AbiType {
 
   @override
   Uint8List encode(dynamic value) {
-    final bigValue = value is BigInt ? value : BigInt.from(value as int);
+    BigInt bigValue;
+    if (value is BigInt) {
+      bigValue = value;
+    } else if (value is int) {
+      bigValue = BigInt.from(value);
+    } else if (value is String) {
+      final v = value.toLowerCase();
+      if (v.startsWith('0x')) {
+        bigValue = BigInt.parse(v.substring(2), radix: 16);
+      } else {
+        bigValue = BigInt.parse(v);
+      }
+    } else {
+      throw ArgumentError('Unsupported type for int: ${value.runtimeType}');
+    }
 
     // Two's complement for negative values
     var v = bigValue;

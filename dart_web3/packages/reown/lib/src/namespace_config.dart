@@ -1,27 +1,13 @@
 /// Namespace configuration for WalletConnect v2 protocol.
 library;
 
+import 'package:meta/meta.dart';
+
 /// Represents a namespace configuration for WalletConnect v2.
 /// 
 /// Namespaces define which chains and methods are supported in a session.
+@immutable
 class NamespaceConfig {
-  /// The namespace identifier (e.g., 'eip155' for Ethereum).
-  final String namespace;
-  
-  /// List of supported chains in CAIP-2 format (e.g., 'eip155:1' for Ethereum mainnet).
-  final List<String> chains;
-  
-  /// List of supported methods (e.g., 'eth_sendTransaction', 'personal_sign').
-  final List<String> methods;
-  
-  /// List of supported events (e.g., 'chainChanged', 'accountsChanged').
-  final List<String> events;
-  
-  /// List of accounts in CAIP-10 format (e.g., 'eip155:1:0x123...').
-  final List<String> accounts;
-  
-  /// Optional extension data.
-  final Map<String, dynamic>? extension;
 
   NamespaceConfig({
     required this.namespace,
@@ -43,6 +29,23 @@ class NamespaceConfig {
       extension: json['extension'] as Map<String, dynamic>?,
     );
   }
+  /// The namespace identifier (e.g., 'eip155' for Ethereum).
+  final String namespace;
+  
+  /// List of supported chains in CAIP-2 format (e.g., 'eip155:1' for Ethereum mainnet).
+  final List<String> chains;
+  
+  /// List of supported methods (e.g., 'eth_sendTransaction', 'personal_sign').
+  final List<String> methods;
+  
+  /// List of supported events (e.g., 'chainChanged', 'accountsChanged').
+  final List<String> events;
+  
+  /// List of accounts in CAIP-10 format (e.g., 'eip155:1:0x123...').
+  final List<String> accounts;
+  
+  /// Optional extension data.
+  final Map<String, dynamic>? extension;
 
   /// Converts the namespace config to JSON.
   Map<String, dynamic> toJson() {
@@ -138,7 +141,7 @@ class NamespaceConfig {
   bool _listEquals<T>(List<T>? a, List<T>? b) {
     if (a == null) return b == null;
     if (b == null || a.length != b.length) return false;
-    for (int index = 0; index < a.length; index += 1) {
+    for (var index = 0; index < a.length; index += 1) {
       if (a[index] != b[index]) return false;
     }
     return true;
@@ -147,7 +150,7 @@ class NamespaceConfig {
   bool _mapEquals<T, U>(Map<T, U>? a, Map<T, U>? b) {
     if (a == null) return b == null;
     if (b == null || a.length != b.length) return false;
-    for (final T key in a.keys) {
+    for (final key in a.keys) {
       if (!b.containsKey(key) || b[key] != a[key]) return false;
     }
     return true;
@@ -156,6 +159,8 @@ class NamespaceConfig {
 
 /// Predefined namespace configurations for common blockchains.
 class NamespaceConfigs {
+  NamespaceConfigs._();
+
   /// Ethereum namespace configuration.
   static NamespaceConfig ethereum({
     List<String>? chains,
@@ -393,6 +398,8 @@ class NamespaceConfigs {
 
 /// Utilities for working with CAIP identifiers.
 class CaipUtils {
+  CaipUtils._();
+
   /// Parses a CAIP-2 chain identifier.
   /// Format: namespace:reference
   /// Example: eip155:1
@@ -442,7 +449,7 @@ class CaipUtils {
     try {
       parseChainId(chainId);
       return true;
-    } catch (_) {
+    } on Object catch (_) {
       return false;
     }
   }
@@ -452,7 +459,7 @@ class CaipUtils {
     try {
       parseAccountId(accountId);
       return true;
-    } catch (_) {
+    } on Object catch (_) {
       return false;
     }
   }

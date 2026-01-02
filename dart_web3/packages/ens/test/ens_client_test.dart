@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_ens/dart_web3_ens.dart';
 import 'package:test/test.dart';

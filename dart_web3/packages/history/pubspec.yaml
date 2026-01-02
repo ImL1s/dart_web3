@@ -1,5 +1,6 @@
 name: dart_web3_history
-description: Transaction history service
+description: Account transaction history support
+publish_to: none
 version: 0.1.0
 environment:
   sdk: ^3.6.0

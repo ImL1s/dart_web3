@@ -1,6 +1,4 @@
-import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 
 import 'user_operation.dart';
@@ -29,20 +27,6 @@ abstract class Paymaster {
 
 /// Paymaster data to be included in a UserOperation.
 class PaymasterData {
-  /// The paymaster contract address.
-  final String paymaster;
-
-  /// Data to be passed to the paymaster contract.
-  final String paymasterData;
-
-  /// Gas limit for paymaster verification (EntryPoint v0.7+).
-  final BigInt? paymasterVerificationGasLimit;
-
-  /// Gas limit for paymaster post-operation (EntryPoint v0.7+).
-  final BigInt? paymasterPostOpGasLimit;
-
-  /// Paymaster signature for parallelizable signing (EntryPoint v0.9+).
-  final String? paymasterSignature;
 
   PaymasterData({
     required this.paymaster,
@@ -66,6 +50,20 @@ class PaymasterData {
       paymasterSignature: json['paymasterSignature'] as String?,
     );
   }
+  /// The paymaster contract address.
+  final String paymaster;
+
+  /// Data to be passed to the paymaster contract.
+  final String paymasterData;
+
+  /// Gas limit for paymaster verification (EntryPoint v0.7+).
+  final BigInt? paymasterVerificationGasLimit;
+
+  /// Gas limit for paymaster post-operation (EntryPoint v0.7+).
+  final BigInt? paymasterPostOpGasLimit;
+
+  /// Paymaster signature for parallelizable signing (EntryPoint v0.9+).
+  final String? paymasterSignature;
 
   /// Converts PaymasterData to JSON.
   Map<String, dynamic> toJson() {
@@ -109,19 +107,15 @@ class PaymasterData {
 
 /// HTTP-based paymaster that communicates with a paymaster service.
 class HttpPaymaster implements Paymaster {
-  final String _paymasterUrl;
-  final String _paymasterAddress;
-  final RpcProvider _provider;
-  final Map<String, String> _headers;
 
   HttpPaymaster({
     required String paymasterUrl,
     required String paymasterAddress,
     Map<String, String> headers = const {},
-  }) : _paymasterUrl = paymasterUrl,
-       _paymasterAddress = paymasterAddress,
-       _headers = headers,
+  }) : _paymasterAddress = paymasterAddress,
        _provider = RpcProvider(HttpTransport(paymasterUrl, headers: headers));
+  final String _paymasterAddress;
+  final RpcProvider _provider;
 
   @override
   String get address => _paymasterAddress;
@@ -183,17 +177,14 @@ class HttpPaymaster implements Paymaster {
 
 /// Verifying paymaster that requires users to deposit tokens.
 class VerifyingPaymaster implements Paymaster {
-  final String _paymasterAddress;
-  final RpcProvider _provider;
-  final String _entryPointAddress;
 
   VerifyingPaymaster({
     required String paymasterAddress,
     required RpcProvider provider,
-    required String entryPointAddress,
   }) : _paymasterAddress = paymasterAddress,
-       _provider = provider,
-       _entryPointAddress = entryPointAddress;
+       _provider = provider;
+  final String _paymasterAddress;
+  final RpcProvider _provider;
 
   @override
   String get address => _paymasterAddress;
@@ -221,7 +212,7 @@ class VerifyingPaymaster implements Paymaster {
 
   @override
   Future<bool> canSponsor(UserOperation userOp) async {
-    return await _checkUserDeposit(userOp.sender);
+    return _checkUserDeposit(userOp.sender);
   }
 
   /// Checks if the user has sufficient deposit in the paymaster.
@@ -267,11 +258,7 @@ class VerifyingPaymaster implements Paymaster {
 }
 
 /// ERC-20 token paymaster that accepts specific tokens as payment.
-class TokenPaymaster implements Paymaster {
-  final String _paymasterAddress;
-  final String _tokenAddress;
-  final RpcProvider _provider;
-  final BigInt _exchangeRate; // Token units per gas unit
+class TokenPaymaster implements Paymaster { // Token units per gas unit
 
   TokenPaymaster({
     required String paymasterAddress,
@@ -282,6 +269,10 @@ class TokenPaymaster implements Paymaster {
        _tokenAddress = tokenAddress,
        _provider = provider,
        _exchangeRate = exchangeRate;
+  final String _paymasterAddress;
+  final String _tokenAddress;
+  final RpcProvider _provider;
+  final BigInt _exchangeRate;
 
   @override
   String get address => _paymasterAddress;
@@ -312,7 +303,7 @@ class TokenPaymaster implements Paymaster {
 
   @override
   Future<bool> canSponsor(UserOperation userOp) async {
-    return await _checkTokenBalance(userOp.sender, userOp);
+    return _checkTokenBalance(userOp.sender, userOp);
   }
 
   /// Checks if the user has sufficient token balance.
@@ -368,9 +359,9 @@ class TokenPaymaster implements Paymaster {
 
 /// Paymaster manager that handles multiple paymaster options.
 class PaymasterManager {
-  final List<Paymaster> _paymasters;
 
   PaymasterManager(this._paymasters);
+  final List<Paymaster> _paymasters;
 
   /// Finds the best paymaster for a UserOperation.
   /// 

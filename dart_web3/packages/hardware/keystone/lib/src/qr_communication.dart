@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'package:dart_web3_bc_ur/dart_web3_bc_ur.dart';
 import 'keystone_types.dart';
 
@@ -55,8 +54,8 @@ class QRCommunication {
       // Start displaying QR codes
       final qrStream = _currentRequest!.start();
       qrStream.listen(
-        (qrData) => _qrDisplayController.add(qrData),
-        onError: (error) => _handleError(KeystoneErrorType.qrCodeError, 'QR display error: $error'),
+        _qrDisplayController.add,
+        onError: (Object error) => _handleError(KeystoneErrorType.qrCodeError, 'QR display error: $error'),
       );
       
       _setState(QRCommunicationState.waitingForResponse);
@@ -194,7 +193,7 @@ class MockQRScanner implements QRScanner {
       _controller.add(QRScanResult(
         data: qrData,
         timestamp: DateTime.now(),
-      ));
+      ),);
     }
   }
   

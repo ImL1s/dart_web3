@@ -1,0 +1,48 @@
+$ melos analyze
+  └> dart analyze --fatal-infos
+     └> RUNNING (in 1 packages)
+
+--------------------------------------------------------------------------------
+dart_web3_reown:
+Analyzing reown...
+
+warning - lib\src\relay_client.dart:284:21 - The type argument(s) of 'Map' can't be inferred. Use explicit type argument(s) for 'Map'. - inference_failure_on_collection_literal
+warning - lib\src\reown_client.dart:35:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\reown_client.dart:36:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\session_manager.dart:20:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\siwe_auth.dart:480:10 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+   info - lib\src\namespace_config.dart:113:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\namespace_config.dart:125:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\namespace_config.dart:157:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\namespace_config.dart:394:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\namespace_config.dart:445:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\namespace_config.dart:455:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\pairing_uri.dart:129:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\pairing_uri.dart:139:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\relay_client.dart:62:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\relay_client.dart:87:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\relay_client.dart:164:5 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\relay_client.dart:170:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\relay_client.dart:227:15 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\relay_client.dart:237:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\reown_client.dart:349:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\reown_signer.dart:436:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\session_manager.dart:312:45 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\session_manager.dart:528:17 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\siwe_auth.dart:114:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\siwe_auth.dart:303:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:304:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:305:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:309:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:313:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:314:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:315:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:316:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+
+32 issues found.
+--------------------------------------------------------------------------------
+
+$ melos analyze
+  └> dart analyze --fatal-infos
+     └> FAILED (in 1 packages)
+        └> dart_web3_reown (with exit code 2)

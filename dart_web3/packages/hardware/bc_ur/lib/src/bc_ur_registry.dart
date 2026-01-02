@@ -58,12 +58,6 @@ class BCURRegistry {
 
 /// Ethereum Sign Request structure
 class EthSignRequest {
-  final Uint8List requestId;
-  final Uint8List signData;
-  final int dataType; // 1 = transaction, 2 = typed data, 3 = personal message
-  final int? chainId;
-  final String? derivationPath;
-  final Uint8List? address;
   
   EthSignRequest({
     required this.requestId,
@@ -73,9 +67,15 @@ class EthSignRequest {
     this.derivationPath,
     this.address,
   });
+  final Uint8List requestId;
+  final Uint8List signData;
+  final int dataType; // 1 = transaction, 2 = typed data, 3 = personal message
+  final int? chainId;
+  final String? derivationPath;
+  final Uint8List? address;
   
   Map<int, dynamic> toCbor() {
-    final Map<int, dynamic> cbor = {
+    final cbor = <int, dynamic>{
       1: requestId, // request-id
       2: signData, // sign-data
       3: dataType, // data-type
@@ -102,13 +102,13 @@ class EthSignRequest {
 
 /// Ethereum Signature structure
 class EthSignature {
-  final Uint8List requestId;
-  final Uint8List signature;
   
   EthSignature({
     required this.requestId,
     required this.signature,
   });
+  final Uint8List requestId;
+  final Uint8List signature;
   
   Map<int, dynamic> toCbor() {
     return {

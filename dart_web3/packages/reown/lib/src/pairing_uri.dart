@@ -1,15 +1,12 @@
 /// Pairing URI generation for Reown/WalletConnect v2 protocol.
 library;
 
-import 'dart:convert';
 import 'dart:math';
+import 'package:meta/meta.dart';
 
 /// Generates pairing URIs for WalletConnect v2 protocol.
+@immutable
 class PairingUri {
-  final String topic;
-  final String symKey;
-  final String relay;
-  final int? expiryTimestamp;
 
   PairingUri({
     required this.topic,
@@ -89,6 +86,10 @@ class PairingUri {
       expiryTimestamp: expiryTimestamp,
     );
   }
+  final String topic;
+  final String symKey;
+  final String relay;
+  final int? expiryTimestamp;
 
   /// Converts the pairing URI to a string format.
   String toUri() {

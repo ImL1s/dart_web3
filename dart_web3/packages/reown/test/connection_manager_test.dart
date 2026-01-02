@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:dart_web3_reown/dart_web3_reown.dart';
 import 'package:test/test.dart';

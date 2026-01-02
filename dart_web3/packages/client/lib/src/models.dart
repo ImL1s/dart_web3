@@ -4,15 +4,6 @@ import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Block data.
 class Block {
-  final String hash;
-  final String parentHash;
-  final BigInt number;
-  final BigInt timestamp;
-  final String miner;
-  final BigInt gasLimit;
-  final BigInt gasUsed;
-  final BigInt? baseFeePerGas;
-  final List<String> transactions;
 
   Block({
     required this.hash,
@@ -22,8 +13,7 @@ class Block {
     required this.miner,
     required this.gasLimit,
     required this.gasUsed,
-    this.baseFeePerGas,
-    required this.transactions,
+    required this.transactions, this.baseFeePerGas,
   });
 
   factory Block.fromJson(Map<String, dynamic> json) {
@@ -44,40 +34,29 @@ class Block {
       }).toList(),
     );
   }
+  final String hash;
+  final String parentHash;
+  final BigInt number;
+  final BigInt timestamp;
+  final String miner;
+  final BigInt gasLimit;
+  final BigInt gasUsed;
+  final BigInt? baseFeePerGas;
+  final List<String> transactions;
 }
 
 /// Transaction data.
 class Transaction {
-  final String hash;
-  final String? blockHash;
-  final BigInt? blockNumber;
-  final int? transactionIndex;
-  final String from;
-  final String? to;
-  final BigInt value;
-  final BigInt gasLimit;
-  final BigInt? gasPrice;
-  final BigInt? maxFeePerGas;
-  final BigInt? maxPriorityFeePerGas;
-  final Uint8List data;
-  final BigInt nonce;
-  final int chainId;
 
   Transaction({
     required this.hash,
-    this.blockHash,
+    required this.from, required this.value, required this.gasLimit, required this.data, required this.nonce, required this.chainId, this.blockHash,
     this.blockNumber,
     this.transactionIndex,
-    required this.from,
     this.to,
-    required this.value,
-    required this.gasLimit,
     this.gasPrice,
     this.maxFeePerGas,
     this.maxPriorityFeePerGas,
-    required this.data,
-    required this.nonce,
-    required this.chainId,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
@@ -110,22 +89,24 @@ class Transaction {
           : 1,
     );
   }
+  final String hash;
+  final String? blockHash;
+  final BigInt? blockNumber;
+  final int? transactionIndex;
+  final String from;
+  final String? to;
+  final BigInt value;
+  final BigInt gasLimit;
+  final BigInt? gasPrice;
+  final BigInt? maxFeePerGas;
+  final BigInt? maxPriorityFeePerGas;
+  final Uint8List data;
+  final BigInt nonce;
+  final int chainId;
 }
 
 /// Transaction receipt.
 class TransactionReceipt {
-  final String transactionHash;
-  final int transactionIndex;
-  final String blockHash;
-  final BigInt blockNumber;
-  final String from;
-  final String? to;
-  final BigInt cumulativeGasUsed;
-  final BigInt gasUsed;
-  final String? contractAddress;
-  final List<Log> logs;
-  final int status;
-  final BigInt? effectiveGasPrice;
 
   TransactionReceipt({
     required this.transactionHash,
@@ -133,12 +114,8 @@ class TransactionReceipt {
     required this.blockHash,
     required this.blockNumber,
     required this.from,
-    this.to,
-    required this.cumulativeGasUsed,
-    required this.gasUsed,
+    required this.cumulativeGasUsed, required this.gasUsed, required this.logs, required this.status, this.to,
     this.contractAddress,
-    required this.logs,
-    required this.status,
     this.effectiveGasPrice,
   });
 
@@ -161,6 +138,36 @@ class TransactionReceipt {
           : null,
     );
   }
+  final String transactionHash;
+  final int transactionIndex;
+  final String blockHash;
+  final BigInt blockNumber;
+  final String from;
+  final String? to;
+  final BigInt cumulativeGasUsed;
+  final BigInt gasUsed;
+  final String? contractAddress;
+  final List<Log> logs;
+  final int status;
+  final BigInt? effectiveGasPrice;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'transactionHash': transactionHash,
+      'transactionIndex': '0x${transactionIndex.toRadixString(16)}',
+      'blockHash': blockHash,
+      'blockNumber': '0x${blockNumber.toRadixString(16)}',
+      'from': from,
+      if (to != null) 'to': to,
+      'cumulativeGasUsed': '0x${cumulativeGasUsed.toRadixString(16)}',
+      'gasUsed': '0x${gasUsed.toRadixString(16)}',
+      if (contractAddress != null) 'contractAddress': contractAddress,
+      'logs': logs.map((l) => l.toJson()).toList(),
+      'status': '0x${status.toRadixString(16)}',
+      if (effectiveGasPrice != null)
+        'effectiveGasPrice': '0x${effectiveGasPrice!.toRadixString(16)}',
+    };
+  }
 
   /// Whether the transaction succeeded.
   bool get success => status == 1;
@@ -168,15 +175,6 @@ class TransactionReceipt {
 
 /// Event log.
 class Log {
-  final String address;
-  final List<String> topics;
-  final Uint8List data;
-  final String blockHash;
-  final BigInt blockNumber;
-  final String transactionHash;
-  final int transactionIndex;
-  final int logIndex;
-  final bool removed;
 
   Log({
     required this.address,
@@ -203,16 +201,39 @@ class Log {
       removed: json['removed'] as bool? ?? false,
     );
   }
+  final String address;
+  final List<String> topics;
+  final Uint8List data;
+  final String blockHash;
+  final BigInt blockNumber;
+  final String transactionHash;
+  final int transactionIndex;
+  final int logIndex;
+  final bool removed;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'address': address,
+      'topics': topics,
+      'data': HexUtils.encode(data),
+      'blockHash': blockHash,
+      'blockNumber': '0x${blockNumber.toRadixString(16)}',
+      'transactionHash': transactionHash,
+      'transactionIndex': '0x${transactionIndex.toRadixString(16)}',
+      'logIndex': '0x${logIndex.toRadixString(16)}',
+      'removed': removed,
+    };
+  }
 }
 
 /// Log filter.
 class LogFilter {
+
+  LogFilter({this.address, this.topics, this.fromBlock, this.toBlock});
   final String? address;
   final List<String?>? topics;
   final String? fromBlock;
   final String? toBlock;
-
-  LogFilter({this.address, this.topics, this.fromBlock, this.toBlock});
 
   Map<String, dynamic> toJson() {
     return {
@@ -226,14 +247,6 @@ class LogFilter {
 
 /// Call request.
 class CallRequest {
-  final String? from;
-  final String? to;
-  final Uint8List? data;
-  final BigInt? value;
-  final BigInt? gasLimit;
-  final BigInt? gasPrice;
-  final BigInt? maxFeePerGas;
-  final BigInt? maxPriorityFeePerGas;
 
   CallRequest({
     this.from,
@@ -245,6 +258,14 @@ class CallRequest {
     this.maxFeePerGas,
     this.maxPriorityFeePerGas,
   });
+  final String? from;
+  final String? to;
+  final Uint8List? data;
+  final BigInt? value;
+  final BigInt? gasLimit;
+  final BigInt? gasPrice;
+  final BigInt? maxFeePerGas;
+  final BigInt? maxPriorityFeePerGas;
 
   Map<String, dynamic> toJson() {
     return {
@@ -263,13 +284,13 @@ class CallRequest {
 
 /// Fee data for EIP-1559 transactions.
 class FeeData {
-  final BigInt gasPrice;
-  final BigInt maxFeePerGas;
-  final BigInt maxPriorityFeePerGas;
 
   FeeData({
     required this.gasPrice,
     required this.maxFeePerGas,
     required this.maxPriorityFeePerGas,
   });
+  final BigInt gasPrice;
+  final BigInt maxFeePerGas;
+  final BigInt maxPriorityFeePerGas;
 }

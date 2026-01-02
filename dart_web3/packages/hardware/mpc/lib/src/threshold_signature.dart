@@ -52,20 +52,6 @@ abstract class ThresholdSignature {
 
 /// Signature share created by a party in threshold signing.
 class SignatureShare {
-  /// The party ID that created this share.
-  final String partyId;
-  
-  /// The signature share data.
-  final Uint8List shareData;
-  
-  /// The session ID this share belongs to.
-  final String sessionId;
-  
-  /// Additional metadata for the share.
-  final Map<String, dynamic> metadata;
-  
-  /// Timestamp when the share was created.
-  final DateTime createdAt;
 
   SignatureShare({
     required this.partyId,
@@ -85,6 +71,20 @@ class SignatureShare {
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }
+  /// The party ID that created this share.
+  final String partyId;
+  
+  /// The signature share data.
+  final Uint8List shareData;
+  
+  /// The session ID this share belongs to.
+  final String sessionId;
+  
+  /// Additional metadata for the share.
+  final Map<String, dynamic> metadata;
+  
+  /// Timestamp when the share was created.
+  final DateTime createdAt;
 
   /// Converts the SignatureShare to JSON.
   Map<String, dynamic> toJson() {
@@ -100,17 +100,6 @@ class SignatureShare {
 
 /// ECDSA threshold signature implementation for secp256k1.
 class EcdsaThresholdSignature implements ThresholdSignature {
-  @override
-  final CurveType curveType = CurveType.secp256k1;
-  
-  @override
-  final int threshold;
-  
-  @override
-  final int totalParties;
-  
-  /// Random number generator.
-  final Random _random = Random.secure();
 
   EcdsaThresholdSignature({
     required this.threshold,
@@ -123,6 +112,17 @@ class EcdsaThresholdSignature implements ThresholdSignature {
       );
     }
   }
+  @override
+  final CurveType curveType = CurveType.secp256k1;
+  
+  @override
+  final int threshold;
+  
+  @override
+  final int totalParties;
+  
+  /// Random number generator.
+  final Random _random = Random.secure();
 
   @override
   Future<List<KeyShare>> generateKeyShares({
@@ -145,7 +145,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
 
     // Create KeyShare objects for each party
     final keyShares = <KeyShare>[];
-    for (int i = 0; i < partyIds.length; i++) {
+    for (var i = 0; i < partyIds.length; i++) {
       final keyShare = KeyShare(
         partyId: partyIds[i],
         shareData: _encryptShare(shares[i], partyIds[i]),
@@ -302,7 +302,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   /// Generates a random private key for secp256k1.
   Uint8List _generateRandomPrivateKey() {
     final privateKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       privateKey[i] = _random.nextInt(256);
     }
     return privateKey;
@@ -315,15 +315,15 @@ class EcdsaThresholdSignature implements ThresholdSignature {
     
     final shares = <Uint8List>[];
     
-    for (int i = 1; i <= totalShares; i++) {
+    for (var i = 1; i <= totalShares; i++) {
       final share = Uint8List(32);
       
       // Generate polynomial coefficients (simplified)
-      for (int j = 0; j < 32; j++) {
+      for (var j = 0; j < 32; j++) {
         var value = secret[j];
         
         // Add polynomial terms (simplified)
-        for (int k = 1; k < threshold; k++) {
+        for (var k = 1; k < threshold; k++) {
           value = (value + _random.nextInt(256) * pow(i, k).toInt()) % 256;
         }
         
@@ -344,7 +344,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
     final encrypted = Uint8List(share.length);
     final keyBytes = partyId.codeUnits;
     
-    for (int i = 0; i < share.length; i++) {
+    for (var i = 0; i < share.length; i++) {
       encrypted[i] = share[i] ^ keyBytes[i % keyBytes.length];
     }
     
@@ -371,7 +371,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
     
     final signatureShare = Uint8List(32);
     
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       signatureShare[i] = (messageHash[i] ^ 
                           privateKeyShare[i] ^ 
                           ephemeralKey[i]) % 256;
@@ -388,7 +388,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
     final combinedSignature = Uint8List(65); // r(32) + s(32) + v(1)
     
     // Combine the shares (simplified)
-    for (int i = 0; i < 64; i++) {
+    for (var i = 0; i < 64; i++) {
       var combined = 0;
       for (final share in shares.take(threshold)) {
         combined ^= share.shareData[i % share.shareData.length];
@@ -407,7 +407,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
     final result = Uint8List(32);
     var carry = 0;
     
-    for (int i = 31; i >= 0; i--) {
+    for (var i = 31; i >= 0; i--) {
       final sum = key1[i] + key2[i] + carry;
       result[i] = sum % 256;
       carry = sum ~/ 256;
@@ -419,17 +419,6 @@ class EcdsaThresholdSignature implements ThresholdSignature {
 
 /// EdDSA threshold signature implementation for ed25519.
 class EddsaThresholdSignature implements ThresholdSignature {
-  @override
-  final CurveType curveType = CurveType.ed25519;
-  
-  @override
-  final int threshold;
-  
-  @override
-  final int totalParties;
-  
-  /// Random number generator.
-  final Random _random = Random.secure();
 
   EddsaThresholdSignature({
     required this.threshold,
@@ -442,6 +431,17 @@ class EddsaThresholdSignature implements ThresholdSignature {
       );
     }
   }
+  @override
+  final CurveType curveType = CurveType.ed25519;
+  
+  @override
+  final int threshold;
+  
+  @override
+  final int totalParties;
+  
+  /// Random number generator.
+  final Random _random = Random.secure();
 
   @override
   Future<List<KeyShare>> generateKeyShares({
@@ -459,7 +459,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
     final masterPrivateKey = _generateRandomEd25519PrivateKey();
     // For ed25519, we'll use a mock public key since we don't have the actual implementation
     final masterPublicKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       masterPublicKey[i] = Random().nextInt(256);
     }
 
@@ -468,7 +468,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
 
     // Create KeyShare objects for each party
     final keyShares = <KeyShare>[];
-    for (int i = 0; i < partyIds.length; i++) {
+    for (var i = 0; i < partyIds.length; i++) {
       final keyShare = KeyShare(
         partyId: partyIds[i],
         shareData: _encryptShare(shares[i], partyIds[i]),
@@ -603,7 +603,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
   /// Generates a random private key for ed25519.
   Uint8List _generateRandomEd25519PrivateKey() {
     final privateKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       privateKey[i] = _random.nextInt(256);
     }
     return privateKey;
@@ -614,13 +614,13 @@ class EddsaThresholdSignature implements ThresholdSignature {
     // Similar to secp256k1 but adapted for ed25519 field arithmetic
     final shares = <Uint8List>[];
     
-    for (int i = 1; i <= totalShares; i++) {
+    for (var i = 1; i <= totalShares; i++) {
       final share = Uint8List(32);
       
-      for (int j = 0; j < 32; j++) {
+      for (var j = 0; j < 32; j++) {
         var value = secret[j];
         
-        for (int k = 1; k < threshold; k++) {
+        for (var k = 1; k < threshold; k++) {
           value = (value + _random.nextInt(256) * pow(i, k).toInt()) % 256;
         }
         
@@ -638,7 +638,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
     final encrypted = Uint8List(share.length);
     final keyBytes = partyId.codeUnits;
     
-    for (int i = 0; i < share.length; i++) {
+    for (var i = 0; i < share.length; i++) {
       encrypted[i] = share[i] ^ keyBytes[i % keyBytes.length];
     }
     
@@ -659,7 +659,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
     // Simplified EdDSA signature share creation
     final signatureShare = Uint8List(32);
     
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       signatureShare[i] = (messageHash[i] ^ privateKeyShare[i]) % 256;
     }
     
@@ -671,7 +671,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
     // Simplified EdDSA signature combination
     final combinedSignature = Uint8List(64); // EdDSA signatures are 64 bytes
     
-    for (int i = 0; i < 64; i++) {
+    for (var i = 0; i < 64; i++) {
       var combined = 0;
       for (final share in shares.take(threshold)) {
         combined ^= share.shareData[i % share.shareData.length];
@@ -687,7 +687,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
     final result = Uint8List(32);
     var carry = 0;
     
-    for (int i = 31; i >= 0; i--) {
+    for (var i = 31; i >= 0; i--) {
       final sum = key1[i] + key2[i] + carry;
       result[i] = sum % 256;
       carry = sum ~/ 256;

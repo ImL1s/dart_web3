@@ -1,0 +1,6 @@
+00:00 +0: loading test/abi_official_vector_test.dart
+00:00 +0: Official ABI Test Vectors Vector: uint256
+00:00 +1: Official ABI Test Vectors Vector: address
+00:00 +2: Official ABI Test Vectors Vector: string
+00:00 +3: Official ABI Test Vectors Vector: tuple
+00:00 +4: All tests passed!

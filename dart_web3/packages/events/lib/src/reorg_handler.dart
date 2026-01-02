@@ -7,6 +7,12 @@ import 'event_subscriber.dart';
 
 /// Handles blockchain reorganizations and manages event consistency.
 class ReorgHandler {
+
+  ReorgHandler(
+    this.subscriber, {
+    this.maxCacheSize = 1000,
+    this.confirmationDepth = 12,
+  });
   /// The event subscriber.
   final EventSubscriber subscriber;
 
@@ -21,12 +27,6 @@ class ReorgHandler {
 
   /// Number of confirmations required before considering a log final.
   final int confirmationDepth;
-
-  ReorgHandler(
-    this.subscriber, {
-    this.maxCacheSize = 1000,
-    this.confirmationDepth = 12,
-  });
 
   /// Processes logs and handles potential reorganizations.
   /// 
@@ -95,7 +95,7 @@ class ReorgHandler {
           transactionIndex: log.transactionIndex,
           logIndex: log.logIndex,
           removed: true, // Mark as removed due to reorg
-        ));
+        ),);
       }
 
       // Remove from caches
@@ -195,23 +195,6 @@ class ReorgHandler {
 
 /// Represents different types of reorganization events.
 class ReorgEvent {
-  /// The type of event.
-  final ReorgEventType type;
-
-  /// The affected log.
-  final Log? log;
-
-  /// The block number where reorganization occurred.
-  final BigInt? blockNumber;
-
-  /// Logs that were removed due to reorganization.
-  final List<Log> removedLogs;
-
-  /// New logs that replaced the removed ones.
-  final List<Log> newLogs;
-
-  /// Number of confirmations (for pending logs).
-  final int? confirmations;
 
   ReorgEvent._({
     required this.type,
@@ -260,6 +243,23 @@ class ReorgEvent {
       newLogs: newLogs,
     );
   }
+  /// The type of event.
+  final ReorgEventType type;
+
+  /// The affected log.
+  final Log? log;
+
+  /// The block number where reorganization occurred.
+  final BigInt? blockNumber;
+
+  /// Logs that were removed due to reorganization.
+  final List<Log> removedLogs;
+
+  /// New logs that replaced the removed ones.
+  final List<Log> newLogs;
+
+  /// Number of confirmations (for pending logs).
+  final int? confirmations;
 
   @override
   String toString() {

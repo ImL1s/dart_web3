@@ -6,14 +6,14 @@ import 'staking_types.dart';
 
 /// Service for managing staking operations across different protocols
 class StakingService {
-  final PublicClient _publicClient;
-  final WalletClient? _walletClient;
 
   StakingService({
     required PublicClient publicClient,
     WalletClient? walletClient,
   })  : _publicClient = publicClient,
         _walletClient = walletClient;
+  final PublicClient _publicClient;
+  final WalletClient? _walletClient;
 
   /// Get available staking opportunities
   Future<List<StakingOpportunity>> getOpportunities() async {
@@ -51,7 +51,7 @@ class StakingService {
           opportunityId: opp.id,
           owner: owner,
           stakedAmount: balance,
-        ));
+        ),);
       }
     }
 
@@ -66,9 +66,9 @@ class StakingService {
 
     switch (opportunity.protocol) {
       case StakingProtocol.lido:
-        return await _stakeLido(opportunity, amount);
+        return _stakeLido(opportunity, amount);
       case StakingProtocol.rocketPool:
-        return await _stakeRocketPool(opportunity, amount);
+        return _stakeRocketPool(opportunity, amount);
       default:
         throw UnimplementedError('Staking for ${opportunity.protocol} not implemented');
     }
@@ -104,7 +104,7 @@ class StakingService {
       walletClient: _walletClient,
     );
 
-    return await contract.write('submit', [], value: amount);
+    return contract.write('submit', [], value: amount);
   }
 
   Future<String> _stakeRocketPool(StakingOpportunity opp, BigInt amount) async {

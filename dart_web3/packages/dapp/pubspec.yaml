@@ -1,5 +1,6 @@
 name: dart_web3_dapp
-description: DApp browser support
+description: dApp provider and EIP-1193 support
+publish_to: none
 version: 0.1.0
 environment:
   sdk: ^3.6.0

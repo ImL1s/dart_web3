@@ -13,6 +13,8 @@ dependencies:
     path: ../../core
   dart_web3_crypto:
     path: ../../crypto
+  dart_web3_abi:
+    path: ../../abi
 
 dev_dependencies:
   test: ^1.24.0

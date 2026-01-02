@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Crypto Module Property Tests', () {
@@ -12,10 +13,10 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 100; i++) {
+      for (var i = 0; i < 100; i++) {
         // Generate random private key
         final privateKey = Uint8List(32);
-        for (int j = 0; j < 32; j++) {
+        for (var j = 0; j < 32; j++) {
           privateKey[j] = random.nextInt(256);
         }
         
@@ -28,7 +29,7 @@ void main() {
         
         // Generate random message hash
         final messageHash = Uint8List(32);
-        for (int j = 0; j < 32; j++) {
+        for (var j = 0; j < 32; j++) {
           messageHash[j] = random.nextInt(256);
         }
         
@@ -40,8 +41,8 @@ void main() {
           final signature = Secp256k1.sign(messageHash, privateKey);
           
           // Try recovery with different v values
-          bool recovered = false;
-          for (int v = 0; v < 4; v++) {
+          var recovered = false;
+          for (var v = 0; v < 4; v++) {
             try {
               final recoveredPublicKey = Secp256k1.recover(signature, messageHash, v);
               
@@ -58,7 +59,7 @@ void main() {
           
           // For any valid private key and message, we should be able to recover the public key
           expect(recovered, isTrue, 
-            reason: 'Should be able to recover public key from signature');
+            reason: 'Should be able to recover public key from signature',);
             
         } catch (e) {
           // Some edge cases might fail, but most should succeed
@@ -73,11 +74,11 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 100; i++) {
+      for (var i = 0; i < 100; i++) {
         // Generate random input data
         final length = random.nextInt(1000) + 1;
         final input = Uint8List(length);
-        for (int j = 0; j < length; j++) {
+        for (var j = 0; j < length; j++) {
           input[j] = random.nextInt(256);
         }
         
@@ -88,13 +89,13 @@ void main() {
         
         // All hashes should be identical (deterministic)
         expect(_uint8ListEquals(hash1, hash2), isTrue,
-          reason: 'Keccak-256 should be deterministic');
+          reason: 'Keccak-256 should be deterministic',);
         expect(_uint8ListEquals(hash2, hash3), isTrue,
-          reason: 'Keccak-256 should be deterministic');
+          reason: 'Keccak-256 should be deterministic',);
         
         // Hash should always be 32 bytes
         expect(hash1.length, equals(32),
-          reason: 'Keccak-256 should always produce 32-byte hash');
+          reason: 'Keccak-256 should always produce 32-byte hash',);
         
         // Different inputs should produce different hashes (with high probability)
         if (input.length > 1) {
@@ -103,7 +104,7 @@ void main() {
           final differentHash = Keccak256.hash(modifiedInput);
           
           expect(_uint8ListEquals(hash1, differentHash), isFalse,
-            reason: 'Different inputs should produce different hashes');
+            reason: 'Different inputs should produce different hashes',);
         }
       }
     });
@@ -112,7 +113,7 @@ void main() {
       // **Feature: dart-web3-sdk, Property 22: BIP-39 Mnemonic Validation**
       // **Validates: Requirements 8.3**
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Generate mnemonic with different strengths
         final strengths = [128, 160, 192, 224, 256];
         final strength = strengths[i % strengths.length];
@@ -123,27 +124,27 @@ void main() {
           
           // Generated mnemonic should be valid
           expect(Bip39.validate(mnemonic), isTrue,
-            reason: 'Generated mnemonic should be valid');
+            reason: 'Generated mnemonic should be valid',);
           
           // Mnemonic should have correct length
           final expectedLength = (strength ~/ 32) * 3;
           expect(mnemonic.length, equals(expectedLength),
-            reason: 'Mnemonic length should match strength');
+            reason: 'Mnemonic length should match strength',);
           
           // Should be able to convert to seed
           final seed = Bip39.toSeed(mnemonic);
           expect(seed.length, equals(64),
-            reason: 'BIP-39 seed should be 64 bytes');
+            reason: 'BIP-39 seed should be 64 bytes',);
           
           // Same mnemonic should produce same seed
           final seed2 = Bip39.toSeed(mnemonic);
           expect(_uint8ListEquals(seed, seed2), isTrue,
-            reason: 'Same mnemonic should produce same seed');
+            reason: 'Same mnemonic should produce same seed',);
           
           // Different passphrase should produce different seed
           final seedWithPassphrase = Bip39.toSeed(mnemonic, passphrase: 'test');
           expect(_uint8ListEquals(seed, seedWithPassphrase), isFalse,
-            reason: 'Different passphrase should produce different seed');
+            reason: 'Different passphrase should produce different seed',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -158,10 +159,10 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Generate random seed
         final seed = Uint8List(64);
-        for (int j = 0; j < 64; j++) {
+        for (var j = 0; j < 64; j++) {
           seed[j] = random.nextInt(256);
         }
         
@@ -171,11 +172,11 @@ void main() {
           
           // Master wallet should have depth 0
           expect(wallet.depth, equals(0),
-            reason: 'Master wallet should have depth 0');
+            reason: 'Master wallet should have depth 0',);
           
           // Master wallet path should be "m"
           expect(wallet.path, equals('m'),
-            reason: 'Master wallet path should be "m"');
+            reason: 'Master wallet path should be "m"',);
           
           // Derive same path multiple times should give same result
           final path = "m/44'/60'/0'/0/0";
@@ -183,28 +184,28 @@ void main() {
           final derived2 = wallet.derive(path);
           
           expect(_uint8ListEquals(derived1.getPrivateKey(), derived2.getPrivateKey()), isTrue,
-            reason: 'Same derivation path should produce same private key');
+            reason: 'Same derivation path should produce same private key',);
           
           expect(_uint8ListEquals(derived1.getPublicKey(), derived2.getPublicKey()), isTrue,
-            reason: 'Same derivation path should produce same public key');
+            reason: 'Same derivation path should produce same public key',);
           
           expect(derived1.getAddress().toString(), equals(derived2.getAddress().toString()),
-            reason: 'Same derivation path should produce same address');
+            reason: 'Same derivation path should produce same address',);
           
           // Derived wallet should have correct depth
           expect(derived1.depth, equals(5),
-            reason: 'Derived wallet should have correct depth');
+            reason: 'Derived wallet should have correct depth',);
           
           // Different paths should produce different keys
           final derived3 = wallet.derive("m/44'/60'/0'/0/1");
           expect(_uint8ListEquals(derived1.getPrivateKey(), derived3.getPrivateKey()), isFalse,
-            reason: 'Different paths should produce different private keys');
+            reason: 'Different paths should produce different private keys',);
           
           // Child derivation should be consistent
           final child0 = wallet.deriveChild(0);
           final child1 = wallet.deriveChild(1);
           expect(_uint8ListEquals(child0.getPrivateKey(), child1.getPrivateKey()), isFalse,
-            reason: 'Different child indices should produce different keys');
+            reason: 'Different child indices should produce different keys',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -218,8 +219,8 @@ void main() {
 // Helper functions
 
 BigInt _bytesToBigInt(Uint8List bytes) {
-  BigInt result = BigInt.zero;
-  for (int i = 0; i < bytes.length; i++) {
+  var result = BigInt.zero;
+  for (var i = 0; i < bytes.length; i++) {
     result = (result << 8) + BigInt.from(bytes[i]);
   }
   return result;
@@ -227,7 +228,7 @@ BigInt _bytesToBigInt(Uint8List bytes) {
 
 bool _uint8ListEquals(Uint8List a, Uint8List b) {
   if (a.length != b.length) return false;
-  for (int i = 0; i < a.length; i++) {
+  for (var i = 0; i < a.length; i++) {
     if (a[i] != b[i]) return false;
   }
   return true;

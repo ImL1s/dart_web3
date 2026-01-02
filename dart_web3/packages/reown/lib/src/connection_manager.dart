@@ -8,6 +8,13 @@ import 'relay_client.dart';
 
 /// Manages connection state and implements advanced reconnection strategies.
 class ConnectionManager {
+
+  ConnectionManager({
+    required this.relayClient,
+    ReconnectionConfig? config,
+  }) : config = config ?? ReconnectionConfig.defaultConfig() {
+    _relaySubscription = relayClient.events.listen(_handleRelayEvent);
+  }
   final RelayClient relayClient;
   final ReconnectionConfig config;
   
@@ -21,14 +28,7 @@ class ConnectionManager {
   final StreamController<ConnectionState> _stateController = StreamController.broadcast();
   ConnectionState _currentState = ConnectionState.disconnected;
   
-  late StreamSubscription _relaySubscription;
-
-  ConnectionManager({
-    required this.relayClient,
-    ReconnectionConfig? config,
-  }) : config = config ?? ReconnectionConfig.defaultConfig() {
-    _relaySubscription = relayClient.events.listen(_handleRelayEvent);
-  }
+  late StreamSubscription<RelayEvent> _relaySubscription;
 
   /// Stream of connection state changes.
   Stream<ConnectionState> get stateChanges => _stateController.stream;
@@ -53,7 +53,7 @@ class ConnectionManager {
     try {
       await relayClient.connect();
       _onConnectionSuccess();
-    } catch (e) {
+    } on Object catch (e) {
       _onConnectionFailure(e);
     }
   }
@@ -76,10 +76,10 @@ class ConnectionManager {
     
     try {
       await relayClient.disconnect();
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future<void>.delayed(const Duration(milliseconds: 500));
       await relayClient.connect();
       _onConnectionSuccess();
-    } catch (e) {
+    } on Object catch (e) {
       _onConnectionFailure(e);
     }
   }
@@ -183,7 +183,7 @@ class ConnectionManager {
     try {
       await relayClient.connect();
       _onConnectionSuccess();
-    } catch (e) {
+    } on Object catch (e) {
       _onConnectionFailure(e);
     }
   }
@@ -332,32 +332,6 @@ enum ReconnectionStrategy {
 
 /// Configuration for reconnection behavior.
 class ReconnectionConfig {
-  /// Maximum number of reconnection attempts.
-  final int maxAttempts;
-  
-  /// Base delay between attempts.
-  final Duration baseDelay;
-  
-  /// Maximum delay between attempts.
-  final Duration maxDelay;
-  
-  /// Backoff multiplier for exponential strategy.
-  final double backoffMultiplier;
-  
-  /// Reconnection strategy to use.
-  final ReconnectionStrategy strategy;
-  
-  /// Random jitter range for jittered strategy.
-  final Duration jitterRange;
-  
-  /// Whether to enable health checks.
-  final bool enableHealthCheck;
-  
-  /// Interval between health checks.
-  final Duration healthCheckInterval;
-  
-  /// Timeout for health check responses.
-  final Duration healthCheckTimeout;
 
   ReconnectionConfig({
     required this.maxAttempts,
@@ -377,7 +351,7 @@ class ReconnectionConfig {
       maxAttempts: 5,
       baseDelay: const Duration(seconds: 1),
       maxDelay: const Duration(seconds: 30),
-      backoffMultiplier: 2.0,
+      backoffMultiplier: 2,
       strategy: ReconnectionStrategy.exponential,
       jitterRange: const Duration(milliseconds: 1000),
       enableHealthCheck: true,
@@ -407,7 +381,7 @@ class ReconnectionConfig {
       maxAttempts: 3,
       baseDelay: const Duration(seconds: 5),
       maxDelay: const Duration(minutes: 2),
-      backoffMultiplier: 3.0,
+      backoffMultiplier: 3,
       strategy: ReconnectionStrategy.exponential,
       jitterRange: const Duration(seconds: 2),
       enableHealthCheck: false,
@@ -415,16 +389,36 @@ class ReconnectionConfig {
       healthCheckTimeout: const Duration(minutes: 2),
     );
   }
+  /// Maximum number of reconnection attempts.
+  final int maxAttempts;
+  
+  /// Base delay between attempts.
+  final Duration baseDelay;
+  
+  /// Maximum delay between attempts.
+  final Duration maxDelay;
+  
+  /// Backoff multiplier for exponential strategy.
+  final double backoffMultiplier;
+  
+  /// Reconnection strategy to use.
+  final ReconnectionStrategy strategy;
+  
+  /// Random jitter range for jittered strategy.
+  final Duration jitterRange;
+  
+  /// Whether to enable health checks.
+  final bool enableHealthCheck;
+  
+  /// Interval between health checks.
+  final Duration healthCheckInterval;
+  
+  /// Timeout for health check responses.
+  final Duration healthCheckTimeout;
 }
 
 /// Connection statistics.
 class ConnectionStats {
-  final ConnectionState currentState;
-  final int reconnectAttempts;
-  final DateTime? lastSuccessfulConnection;
-  final DateTime? lastConnectionAttempt;
-  final Duration? timeSinceLastConnection;
-  final bool isHealthy;
 
   ConnectionStats({
     required this.currentState,
@@ -434,6 +428,12 @@ class ConnectionStats {
     required this.timeSinceLastConnection,
     required this.isHealthy,
   });
+  final ConnectionState currentState;
+  final int reconnectAttempts;
+  final DateTime? lastSuccessfulConnection;
+  final DateTime? lastConnectionAttempt;
+  final Duration? timeSinceLastConnection;
+  final bool isHealthy;
 
   @override
   String toString() {

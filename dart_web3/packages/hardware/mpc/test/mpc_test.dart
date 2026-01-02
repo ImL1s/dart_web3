@@ -166,7 +166,7 @@ void main() {
 
         // Create signature shares from threshold number of parties
         final signatureShares = <SignatureShare>[];
-        for (int i = 0; i < thresholdSig.threshold; i++) {
+        for (var i = 0; i < thresholdSig.threshold; i++) {
           final share = await thresholdSig.createSignatureShare(
             messageHash: messageHash,
             keyShare: keyShares[i],
@@ -201,7 +201,7 @@ void main() {
         expect(refreshedShares.length, equals(originalShares.length));
         
         // Public keys should remain the same after refresh
-        for (int i = 0; i < refreshedShares.length; i++) {
+        for (var i = 0; i < refreshedShares.length; i++) {
           expect(refreshedShares[i].publicKey, equals(originalShares[i].publicKey));
           expect(refreshedShares[i].partyId, equals(originalShares[i].partyId));
           expect(refreshedShares[i].lastRefreshed, isNotNull);
@@ -243,7 +243,7 @@ void main() {
             providerName: 'unsupported',
             apiUrl: 'https://example.com',
             apiKey: 'test_key',
-          )),
+          ),),
           throwsA(isA<MpcError>()),
         );
       });

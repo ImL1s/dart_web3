@@ -10,6 +10,15 @@ enum TransactionType {
 
 /// Transaction history item
 class HistoryItem {
+
+  const HistoryItem({
+    required this.hash,
+    required this.blockNumber,
+    required this.timestamp,
+    required this.from,
+    required this.value, required this.type, required this.rawTransaction, this.to,
+    this.functionName,
+  });
   final String hash;
   final BigInt blockNumber;
   final DateTime timestamp;
@@ -20,30 +29,12 @@ class HistoryItem {
   final String? functionName;
   final Map<String, dynamic> rawTransaction;
 
-  const HistoryItem({
-    required this.hash,
-    required this.blockNumber,
-    required this.timestamp,
-    required this.from,
-    this.to,
-    required this.value,
-    required this.type,
-    this.functionName,
-    required this.rawTransaction,
-  });
-
   @override
   String toString() => 'HistoryItem(hash: $hash, type: $type, value: $value)';
 }
 
 /// Query parameters for fetching history
 class HistoryQueryParams {
-  final EthereumAddress address;
-  final int? fromBlock;
-  final int? toBlock;
-  final int page;
-  final int pageSize;
-  final List<TransactionType>? types;
 
   const HistoryQueryParams({
     required this.address,
@@ -53,4 +44,10 @@ class HistoryQueryParams {
     this.pageSize = 20,
     this.types,
   });
+  final EthereumAddress address;
+  final int? fromBlock;
+  final int? toBlock;
+  final int page;
+  final int pageSize;
+  final List<TransactionType>? types;
 }

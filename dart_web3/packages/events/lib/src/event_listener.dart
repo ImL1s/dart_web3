@@ -7,6 +7,8 @@ import 'event_subscriber.dart';
 
 /// Event listener for managing contract event subscriptions.
 class EventListener {
+
+  EventListener(this.subscriber);
   /// The event subscriber.
   final EventSubscriber subscriber;
 
@@ -17,9 +19,7 @@ class EventListener {
   final Map<String, StreamSubscription<Log>> _filterSubscriptions = {};
 
   /// Active non-log subscriptions (for blocks, pending transactions, etc.).
-  final Map<String, StreamSubscription> _otherSubscriptions = {};
-
-  EventListener(this.subscriber);
+  final Map<String, StreamSubscription<dynamic>> _otherSubscriptions = {};
 
   /// Listens to contract events.
   /// 
@@ -35,8 +35,7 @@ class EventListener {
   String listenToContract(
     String contractAddress,
     String eventSignature, {
-    Map<String, dynamic>? indexedArgs,
-    required void Function(Log) onEvent,
+    required void Function(Log) onEvent, Map<String, dynamic>? indexedArgs,
     void Function(Object)? onError,
     bool useWebSocket = true,
     Duration pollingInterval = const Duration(seconds: 5),

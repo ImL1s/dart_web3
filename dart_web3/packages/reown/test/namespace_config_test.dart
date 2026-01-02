@@ -95,7 +95,6 @@ void main() {
 
     test('should create multi-chain config', () {
       final configs = NamespaceConfigs.multiChain(
-        includeEthereum: true,
         includePolygon: true,
         includeSolana: true,
       );

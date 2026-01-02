@@ -8,18 +8,18 @@ import 'dart:typed_data';
 
 import 'package:dart_web3_core/dart_web3_core.dart';
 
-import 'session_manager.dart';
 import 'namespace_config.dart';
+import 'session_manager.dart';
 
 /// Sign-In with Ethereum (SIWE) authentication manager.
 class SiweAuth {
-  final SessionManager sessionManager;
-  final SiweConfig config;
 
   SiweAuth({
     required this.sessionManager,
     SiweConfig? config,
   }) : config = config ?? SiweConfig.defaultConfig();
+  final SessionManager sessionManager;
+  final SiweConfig config;
 
   /// Initiates One-Click Auth flow combining session proposal and SIWE authentication.
   Future<SiweAuthResult> initiateOneClickAuth({
@@ -111,7 +111,7 @@ class SiweAuth {
       // Verify that the signature was created by the expected address
       // This would typically involve ECDSA signature recovery
       return _verifyEcdsaSignature(messageBytes, signatureBytes, address);
-    } catch (e) {
+    } on Object catch (_) {
       return false;
     }
   }
@@ -158,97 +158,16 @@ class SiweAuth {
 
 /// SIWE message structure according to EIP-4361.
 class SiweMessage {
-  /// The domain that is requesting the signing.
-  final String domain;
-  
-  /// The Ethereum address performing the signing.
-  final String address;
-  
-  /// A human-readable ASCII assertion that the user will sign.
-  final String? statement;
-  
-  /// An RFC 3986 URI referring to the resource that is the subject of the signing.
-  final String uri;
-  
-  /// The current version of the message.
-  final String version;
-  
-  /// The EIP-155 Chain ID to which the session is bound.
-  final int chainId;
-  
-  /// A randomized token used to prevent replay attacks.
-  final String nonce;
-  
-  /// The time when the message was generated.
-  final DateTime issuedAt;
-  
-  /// The time when the signed authentication message is no longer valid.
-  final DateTime? expirationTime;
-  
-  /// The time when the signed authentication message will become valid.
-  final DateTime? notBefore;
-  
-  /// An system-specific identifier that may be used to uniquely refer to the sign-in request.
-  final String? requestId;
-  
-  /// A list of information or references to information the user wishes to have resolved.
-  final List<String>? resources;
 
   SiweMessage({
     required this.domain,
     required this.address,
-    this.statement,
-    required this.uri,
-    required this.version,
-    required this.chainId,
-    required this.nonce,
-    required this.issuedAt,
+    required this.uri, required this.version, required this.chainId, required this.nonce, required this.issuedAt, this.statement,
     this.expirationTime,
     this.notBefore,
     this.requestId,
     this.resources,
   });
-
-  /// Converts the SIWE message to its string representation.
-  String toMessage() {
-    final buffer = StringBuffer();
-    
-    buffer.writeln('$domain wants you to sign in with your Ethereum account:');
-    buffer.writeln(address);
-    buffer.writeln();
-    
-    if (statement != null) {
-      buffer.writeln(statement);
-      buffer.writeln();
-    }
-    
-    buffer.writeln('URI: $uri');
-    buffer.writeln('Version: $version');
-    buffer.writeln('Chain ID: $chainId');
-    buffer.writeln('Nonce: $nonce');
-    buffer.writeln('Issued At: ${issuedAt.toIso8601String()}');
-    
-    if (expirationTime != null) {
-      buffer.writeln('Expiration Time: ${expirationTime!.toIso8601String()}');
-    }
-    
-    if (notBefore != null) {
-      buffer.writeln('Not Before: ${notBefore!.toIso8601String()}');
-    }
-    
-    if (requestId != null) {
-      buffer.writeln('Request ID: $requestId');
-    }
-    
-    if (resources != null && resources!.isNotEmpty) {
-      buffer.writeln('Resources:');
-      for (final resource in resources!) {
-        buffer.writeln('- $resource');
-      }
-    }
-    
-    return buffer.toString().trim();
-  }
 
   /// Creates a SIWE message from its string representation.
   factory SiweMessage.parse(String message) {
@@ -271,7 +190,7 @@ class SiweMessage {
     
     // Find statement (optional)
     String? statement;
-    int lineIndex = 2;
+    var lineIndex = 2;
     
     if (lines[lineIndex].isEmpty) {
       lineIndex++; // Skip empty line
@@ -280,7 +199,7 @@ class SiweMessage {
       while (lineIndex < lines.length && !lines[lineIndex].startsWith('URI:')) {
         if (lines[lineIndex].isNotEmpty) {
           statement = (statement ?? '') + lines[lineIndex];
-          if (lineIndex + 1 < lines.length && !lines[lineIndex + 1].isEmpty) {
+          if (lineIndex + 1 < lines.length && lines[lineIndex + 1].isNotEmpty) {
             statement += '\n';
           }
         }
@@ -320,24 +239,6 @@ class SiweMessage {
     );
   }
 
-  /// Converts to JSON representation.
-  Map<String, dynamic> toJson() {
-    return {
-      'domain': domain,
-      'address': address,
-      'statement': statement,
-      'uri': uri,
-      'version': version,
-      'chainId': chainId,
-      'nonce': nonce,
-      'issuedAt': issuedAt.toIso8601String(),
-      'expirationTime': expirationTime?.toIso8601String(),
-      'notBefore': notBefore?.toIso8601String(),
-      'requestId': requestId,
-      'resources': resources,
-    };
-  }
-
   /// Creates from JSON representation.
   factory SiweMessage.fromJson(Map<String, dynamic> json) {
     return SiweMessage(
@@ -359,6 +260,102 @@ class SiweMessage {
       resources: (json['resources'] as List?)?.cast<String>(),
     );
   }
+  /// The domain that is requesting the signing.
+  final String domain;
+  
+  /// The Ethereum address performing the signing.
+  final String address;
+  
+  /// A human-readable ASCII assertion that the user will sign.
+  final String? statement;
+  
+  /// An RFC 3986 URI referring to the resource that is the subject of the signing.
+  final String uri;
+  
+  /// The current version of the message.
+  final String version;
+  
+  /// The EIP-155 Chain ID to which the session is bound.
+  final int chainId;
+  
+  /// A randomized token used to prevent replay attacks.
+  final String nonce;
+  
+  /// The time when the message was generated.
+  final DateTime issuedAt;
+  
+  /// The time when the signed authentication message is no longer valid.
+  final DateTime? expirationTime;
+  
+  /// The time when the signed authentication message will become valid.
+  final DateTime? notBefore;
+  
+  /// An system-specific identifier that may be used to uniquely refer to the sign-in request.
+  final String? requestId;
+  
+  /// A list of information or references to information the user wishes to have resolved.
+  final List<String>? resources;
+
+  /// Converts the SIWE message to its string representation.
+  String toMessage() {
+    final buffer = StringBuffer()
+
+      ..writeln('$domain wants you to sign in with your Ethereum account:')
+      ..writeln(address)
+      ..writeln();
+    
+    if (statement != null) {
+      buffer
+        ..writeln(statement)
+        ..writeln();
+    }
+    
+    buffer
+      ..writeln('URI: $uri')
+      ..writeln('Version: $version')
+      ..writeln('Chain ID: $chainId')
+      ..writeln('Nonce: $nonce')
+      ..writeln('Issued At: ${issuedAt.toIso8601String()}');
+    
+    if (expirationTime != null) {
+      buffer.writeln('Expiration Time: ${expirationTime!.toIso8601String()}');
+    }
+    
+    if (notBefore != null) {
+      buffer.writeln('Not Before: ${notBefore!.toIso8601String()}');
+    }
+    
+    if (requestId != null) {
+      buffer.writeln('Request ID: $requestId');
+    }
+    
+    if (resources != null && resources!.isNotEmpty) {
+      buffer.writeln('Resources:');
+      for (final resource in resources!) {
+        buffer.writeln('- $resource');
+      }
+    }
+    
+    return buffer.toString().trim();
+  }
+
+  /// Converts to JSON representation.
+  Map<String, dynamic> toJson() {
+    return {
+      'domain': domain,
+      'address': address,
+      'statement': statement,
+      'uri': uri,
+      'version': version,
+      'chainId': chainId,
+      'nonce': nonce,
+      'issuedAt': issuedAt.toIso8601String(),
+      'expirationTime': expirationTime?.toIso8601String(),
+      'notBefore': notBefore?.toIso8601String(),
+      'requestId': requestId,
+      'resources': resources,
+    };
+  }
 
   /// Checks if the message is currently valid.
   bool get isValid {
@@ -378,6 +375,26 @@ class SiweMessage {
 
 /// Configuration for SIWE authentication.
 class SiweConfig {
+
+  SiweConfig({
+    required this.domain,
+    required this.uri, required this.chainId, this.statement,
+    this.expirationTime,
+    this.notBefore,
+    this.requestId,
+    this.resources,
+  });
+
+  /// Default configuration.
+  factory SiweConfig.defaultConfig() {
+    return SiweConfig(
+      domain: 'localhost:3000',
+      statement: 'Sign in to the application',
+      uri: 'http://localhost:3000',
+      chainId: 1,
+      expirationTime: const Duration(hours: 24),
+    );
+  }
   /// The domain requesting the signing.
   final String domain;
   
@@ -401,32 +418,18 @@ class SiweConfig {
   
   /// Additional resources to include.
   final List<String>? resources;
-
-  SiweConfig({
-    required this.domain,
-    this.statement,
-    required this.uri,
-    required this.chainId,
-    this.expirationTime,
-    this.notBefore,
-    this.requestId,
-    this.resources,
-  });
-
-  /// Default configuration.
-  factory SiweConfig.defaultConfig() {
-    return SiweConfig(
-      domain: 'localhost:3000',
-      statement: 'Sign in to the application',
-      uri: 'http://localhost:3000',
-      chainId: 1,
-      expirationTime: const Duration(hours: 24),
-    );
-  }
 }
 
 /// Result of SIWE authentication.
 class SiweAuthResult {
+
+  SiweAuthResult({
+    required this.siweMessage, this.proposal,
+    this.session,
+    this.signature,
+    this.isOneClickAuth = false,
+    this.isAuthenticated = false,
+  });
   /// The session proposal (for One-Click Auth).
   final SessionProposal? proposal;
   
@@ -445,15 +448,6 @@ class SiweAuthResult {
   /// Whether authentication was successful.
   final bool isAuthenticated;
 
-  SiweAuthResult({
-    this.proposal,
-    this.session,
-    required this.siweMessage,
-    this.signature,
-    this.isOneClickAuth = false,
-    this.isAuthenticated = false,
-  });
-
   /// Whether the authentication is complete and valid.
   bool get isComplete => isAuthenticated && signature != null;
   
@@ -468,9 +462,9 @@ class SiweAuthResult {
 
 /// One-Click Auth helper for simplified integration.
 class OneClickAuth {
-  final SiweAuth siweAuth;
   
   OneClickAuth(this.siweAuth);
+  final SiweAuth siweAuth;
 
   /// Initiates a complete One-Click Auth flow.
   Future<SiweAuthResult> authenticate({
@@ -485,7 +479,7 @@ class OneClickAuth {
 
     // Wait for session establishment with timeout
     final completer = Completer<Session>();
-    late StreamSubscription subscription;
+    late StreamSubscription<SessionEvent> subscription;
     
     subscription = siweAuth.sessionManager.events.listen((event) {
       if (event.type == SessionEventType.established) {

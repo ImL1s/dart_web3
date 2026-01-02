@@ -1,5 +1,5 @@
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:typed_data';
 
 /// Simple CBOR decoder for BC-UR
 /// Implements subset of CBOR needed for BC-UR communication
@@ -76,22 +76,22 @@ class CBORDecoder {
     return utf8.decode(bytes);
   }
   
-  List _decodeArray(int additionalInfo) {
+  List<dynamic> _decodeArray(int additionalInfo) {
     final length = _decodeUnsigned(additionalInfo);
     final result = <dynamic>[];
     
-    for (int i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       result.add(_decodeValue());
     }
     
     return result;
   }
   
-  Map _decodeMap(int additionalInfo) {
+  Map<dynamic, dynamic> _decodeMap(int additionalInfo) {
     final length = _decodeUnsigned(additionalInfo);
     final result = <dynamic, dynamic>{};
     
-    for (int i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       final key = _decodeValue();
       final value = _decodeValue();
       result[key] = value;
@@ -146,8 +146,8 @@ class CBORDecoder {
       throw FormatException('Not enough data for uint64');
     }
     
-    int result = 0;
-    for (int i = 0; i < 8; i++) {
+    var result = 0;
+    for (var i = 0; i < 8; i++) {
       result = (result << 8) | _data[_offset + i];
     }
     _offset += 8;

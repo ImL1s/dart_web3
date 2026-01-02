@@ -242,7 +242,7 @@ class ProtobufMessages {
     final components = <int>[];
     for (final part in parts) {
       int value;
-      bool hardened = false;
+      var hardened = false;
       
       if (part.endsWith("'") || part.endsWith('h')) {
         hardened = true;
@@ -279,7 +279,7 @@ class ProtobufMessages {
     final cleanHex = hex.startsWith('0x') ? hex.substring(2) : hex;
     final bytes = <int>[];
     
-    for (int i = 0; i < cleanHex.length; i += 2) {
+    for (var i = 0; i < cleanHex.length; i += 2) {
       final hexByte = cleanHex.substring(i, i + 2);
       bytes.add(int.parse(hexByte, radix: 16));
     }

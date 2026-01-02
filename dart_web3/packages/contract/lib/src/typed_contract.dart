@@ -1,19 +1,14 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 import 'contract.dart';
-import 'event_filter.dart';
 
 /// Base class for type-safe contract implementations.
 abstract class TypedContract extends Contract {
   TypedContract({
-    required String address,
-    required PublicClient publicClient,
-    WalletClient? walletClient,
+    required super.address,
+    required super.publicClient,
+    super.walletClient,
   }) : super(
-          address: address,
           abi: _getAbiForType(),
-          publicClient: publicClient,
-          walletClient: walletClient,
         );
 
   /// Returns the ABI JSON for this contract type.

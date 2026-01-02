@@ -10,8 +10,9 @@ class AbiParser {
   static List<AbiFunction> parseFunctions(String abiJson) {
     final abi = json.decode(abiJson) as List;
     return abi
+        .cast<Map<String, dynamic>>()
         .where((item) => item['type'] == 'function')
-        .map((item) => AbiFunction.fromJson(item as Map<String, dynamic>))
+        .map((item) => AbiFunction.fromJson(item))
         .toList();
   }
 
@@ -19,8 +20,9 @@ class AbiParser {
   static List<AbiEvent> parseEvents(String abiJson) {
     final abi = json.decode(abiJson) as List;
     return abi
+        .cast<Map<String, dynamic>>()
         .where((item) => item['type'] == 'event')
-        .map((item) => AbiEvent.fromJson(item as Map<String, dynamic>))
+        .map((item) => AbiEvent.fromJson(item))
         .toList();
   }
 
@@ -28,8 +30,9 @@ class AbiParser {
   static List<AbiError> parseErrors(String abiJson) {
     final abi = json.decode(abiJson) as List;
     return abi
+        .cast<Map<String, dynamic>>()
         .where((item) => item['type'] == 'error')
-        .map((item) => AbiError.fromJson(item as Map<String, dynamic>))
+        .map((item) => AbiError.fromJson(item))
         .toList();
   }
 

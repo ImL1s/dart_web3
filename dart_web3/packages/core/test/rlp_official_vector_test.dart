@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Official RLP Test Vectors', () {
@@ -10,7 +11,7 @@ void main() {
     final possiblePaths = [
       'test/vectors/rlp_vectors.json',
       'packages/core/test/vectors/rlp_vectors.json',
-      'dart_web3/packages/core/test/vectors/rlp_vectors.json'
+      'dart_web3/packages/core/test/vectors/rlp_vectors.json',
     ];
 
     for (final path in possiblePaths) {
@@ -25,7 +26,7 @@ void main() {
       throw Exception('Could not find rlp_vectors.json. Tried: $possiblePaths. Current dir: ${Directory.current.path}');
     }
 
-    final Map<String, dynamic> vectors = json.decode(file!.readAsStringSync());
+    final vectors = json.decode(file.readAsStringSync()) as Map<String, dynamic>;
 
     vectors.forEach((name, data) {
       test('Vector: $name', () {

@@ -1,27 +1,15 @@
-import 'package:test/test.dart';
 import 'package:dart_web3_aa/dart_web3_aa.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('BundlerClient', () {
     late BundlerClient bundlerClient;
-    late UserOperation testUserOp;
 
     setUp(() {
       bundlerClient = BundlerClient(
         bundlerUrl: 'https://api.stackup.sh/v1/node/test-bundler-key',
       );
 
-      testUserOp = UserOperation(
-        sender: '0x1234567890123456789012345678901234567890',
-        nonce: BigInt.from(1),
-        callData: '0xabcdef',
-        callGasLimit: BigInt.from(100000),
-        verificationGasLimit: BigInt.from(50000),
-        preVerificationGas: BigInt.from(21000),
-        maxFeePerGas: BigInt.from(20000000000),
-        maxPriorityFeePerGas: BigInt.from(1000000000),
-        signature: '0x1234',
-      );
     });
 
     tearDown(() {

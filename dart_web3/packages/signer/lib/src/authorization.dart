@@ -4,23 +4,6 @@ import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 /// EIP-7702 authorization for EOA code delegation.
 class Authorization {
-  /// The chain ID.
-  final int chainId;
-
-  /// The contract address to delegate to.
-  final String address;
-
-  /// The nonce.
-  final BigInt nonce;
-
-  /// The signature y-parity (0 or 1).
-  final int yParity;
-
-  /// The signature r value.
-  final BigInt r;
-
-  /// The signature s value.
-  final BigInt s;
 
   Authorization({
     required this.chainId,
@@ -58,6 +41,51 @@ class Authorization {
     );
   }
 
+  /// Creates a revocation authorization.
+  factory Authorization.revocation({
+    required int chainId,
+    required BigInt nonce,
+  }) {
+    return Authorization(
+      chainId: chainId,
+      address: '0x${'0' * 40}',
+      nonce: nonce,
+    );
+  }
+
+  /// Creates an authorization from RLP list.
+  factory Authorization.fromRlpList(List<dynamic> rlpList) {
+    if (rlpList.length != 6) {
+      throw ArgumentError('Authorization RLP list must have 6 elements');
+    }
+
+    return Authorization(
+      chainId: rlpList[0] as int,
+      address: HexUtils.encode(rlpList[1] as Uint8List),
+      nonce: rlpList[2] as BigInt,
+      yParity: rlpList[3] as int,
+      r: rlpList[4] as BigInt,
+      s: rlpList[5] as BigInt,
+    );
+  }
+  /// The chain ID.
+  final int chainId;
+
+  /// The contract address to delegate to.
+  final String address;
+
+  /// The nonce.
+  final BigInt nonce;
+
+  /// The signature y-parity (0 or 1).
+  final int yParity;
+
+  /// The signature r value.
+  final BigInt r;
+
+  /// The signature s value.
+  final BigInt s;
+
   /// Converts this authorization to JSON.
   Map<String, dynamic> toJson() {
     return {
@@ -91,18 +119,6 @@ class Authorization {
 
   /// Whether this authorization is a revocation (address is zero).
   bool get isRevocation => address == '0x${'0' * 40}';
-
-  /// Creates a revocation authorization.
-  factory Authorization.revocation({
-    required int chainId,
-    required BigInt nonce,
-  }) {
-    return Authorization(
-      chainId: chainId,
-      address: '0x${'0' * 40}',
-      nonce: nonce,
-    );
-  }
 
   /// Gets the message hash for signing this authorization.
   /// 
@@ -169,21 +185,5 @@ class Authorization {
       r,
       s,
     ];
-  }
-
-  /// Creates an authorization from RLP list.
-  factory Authorization.fromRlpList(List<dynamic> rlpList) {
-    if (rlpList.length != 6) {
-      throw ArgumentError('Authorization RLP list must have 6 elements');
-    }
-
-    return Authorization(
-      chainId: rlpList[0] as int,
-      address: HexUtils.encode(rlpList[1] as Uint8List),
-      nonce: rlpList[2] as BigInt,
-      yParity: rlpList[3] as int,
-      r: rlpList[4] as BigInt,
-      s: rlpList[5] as BigInt,
-    );
   }
 }

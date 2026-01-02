@@ -1,0 +1,640 @@
+$ melos analyze
+  └> dart analyze --fatal-infos
+     └> RUNNING (in 33 packages)
+
+--------------------------------------------------------------------------------
+dart_web3:
+Analyzing dart_web3...
+
+   info - example\main.dart:29:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - example\main.dart:40:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\dart_web3.dart:34:53 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+3 issues found.
+--------------------------------------------------------------------------------
+dart_web3_aa:
+Analyzing aa...
+
+warning - lib\src\accounts\light_account.dart:129:24 - The exception variable 'e' isn't used, so the 'catch' clause can be removed. Try removing the catch clause. - unused_catch_clause
+warning - lib\src\accounts\light_account.dart:150:24 - The exception variable 'e' isn't used, so the 'catch' clause can be removed. Try removing the catch clause. - unused_catch_clause
+warning - lib\src\bundler_client.dart:166:8 - TODO: This should be configurable or fetched from the bundler - todo
+warning - lib\src\entry_point.dart:756:8 - TODO: Parse revert data to extract validation result - todo
+warning - lib\src\user_operation.dart:373:10 - TODO: Implement proper authorization encoding - todo
+warning - test\user_operation_test.dart:347:20 - The type argument(s) of 'Map' can't be inferred. Use explicit type argument(s) for 'Map'. - inference_failure_on_collection_literal
+   info - lib\src\bundler_client.dart:68:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bundler_client.dart:86:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\entry_point.dart:731:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\entry_point.dart:867:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\entry_point.dart:890:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\paymaster.dart:140:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:154:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:167:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:235:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:328:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\smart_account.dart:226:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\smart_account.dart:227:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\user_operation.dart:601:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\user_operation.dart:616:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+
+20 issues found.
+--------------------------------------------------------------------------------
+dart_web3_abi:
+Analyzing abi...
+
+warning - test\parser_test.dart:196:24 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\parser.dart:15:14 - Closure should be a tearoff. Try using a tearoff rather than a closure. - unnecessary_lambdas
+   info - lib\src\parser.dart:25:14 - Closure should be a tearoff. Try using a tearoff rather than a closure. - unnecessary_lambdas
+   info - lib\src\parser.dart:35:14 - Closure should be a tearoff. Try using a tearoff rather than a closure. - unnecessary_lambdas
+   info - lib\src\pretty_printer.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:55:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:56:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:60:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:74:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:75:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:154:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:182:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\typed_data.dart:25:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:26:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:163:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:192:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:223:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\abi_fixes_test.dart:235:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:236:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:237:15 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:39:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:40:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:41:27 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:42:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:59:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_property_test.dart:35:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:83:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:139:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:198:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:282:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\typed_data_test.dart:158:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+
+31 issues found.
+--------------------------------------------------------------------------------
+dart_web3_bc_ur:
+Analyzing bc_ur...
+
+   info - lib\src\animated_qr.dart:89:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\animated_qr.dart:94:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bc_ur_encoder.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\bc_ur_registry.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\bc_ur_registry.dart:91:25 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bc_ur_registry.dart:120:23 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\cbor_decoder.dart:13:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_decoder.dart:14:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:12:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:59:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:62:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:65:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:68:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:78:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:81:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:84:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:87:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:102:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:105:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:118:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:121:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:124:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:137:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:140:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:143:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:158:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:161:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:164:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+
+29 issues found.
+--------------------------------------------------------------------------------
+dart_web3_bitcoin:
+Analyzing bitcoin...
+No issues found!
+dart_web3_bitcoin: SUCCESS
+--------------------------------------------------------------------------------
+dart_web3_bridge:
+Analyzing bridge...
+
+   info - lib\src\bridge_quote.dart:186:32 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bridge_service.dart:128:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:163:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:227:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:254:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:297:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:79:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:113:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:221:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:404:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_types.dart:56:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:64:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\protocols\layerzero_bridge.dart:172:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:258:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\native_bridge.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protocols\stargate_bridge.dart:169:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:249:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:175:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+19 issues found.
+--------------------------------------------------------------------------------
+dart_web3_chains:
+Analyzing chains...
+No issues found!
+dart_web3_chains: SUCCESS
+--------------------------------------------------------------------------------
+dart_web3_client:
+Analyzing client...
+
+warning - test\client_property_test.dart:67:27 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\models.dart:33:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\wallet_client.dart:297:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\client_property_test.dart:16:8 - Unreachable member 'setResponse' in an executable library. Try referencing the member or removing it. - unreachable_from_main
+
+4 issues found.
+--------------------------------------------------------------------------------
+dart_web3_contract:
+Analyzing contract...
+
+   info - lib\src\contract.dart:122:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\contract.dart:249:13 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\erc1155_contract.dart:158:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\erc721_contract.dart:202:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - test\contract_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\mock_client.dart:42:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_client.dart:82:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+
+7 issues found.
+--------------------------------------------------------------------------------
+dart_web3_core:
+Analyzing core...
+
+warning - test\core_property_test.dart:296:31 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+warning - test\rlp_test.dart:33:27 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:49:11 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:50:12 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:52:13 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:53:14 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:140:13 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\address.dart:133:30 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\address.dart:139:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\address.dart:146:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\hex.dart:26:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\rlp.dart:103:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\rlp_official_vector_test.dart:31:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\rlp_official_vector_test.dart:33:29 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\rlp_official_vector_test.dart:34:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\rlp_official_vector_test.dart:50:16 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+16 issues found.
+--------------------------------------------------------------------------------
+dart_web3_crypto:
+Analyzing crypto...
+
+   info - lib\src\bip39.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\bip39.dart:85:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bip39.dart:101:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\bip39.dart:102:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\curves.dart:255:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\hd_wallet.dart:117:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:218:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:221:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:224:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:229:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:256:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\keccak.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\keccak.dart:45:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\keccak.dart:78:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\keccak.dart:96:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\mnemonic.dart:74:44 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\pbkdf2.dart:66:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ripemd160.dart:19:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ripemd160.dart:108:25 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+   info - lib\src\secp256k1.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\secp256k1.dart:73:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\secp256k1.dart:124:16 - Use 'isEven' rather than '% 2'. Try using 'isEven'. - use_is_even_rather_than_modulo
+   info - lib\src\secp256k1.dart:187:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\secp256k1.dart:206:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:263:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:343:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\secp256k1.dart:351:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - test\crypto_property_test.dart:54:15 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:64:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:149:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:210:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+31 issues found.
+--------------------------------------------------------------------------------
+dart_web3_dapp:
+Analyzing dapp...
+No issues found!
+dart_web3_dapp: SUCCESS
+--------------------------------------------------------------------------------
+dart_web3_debug:
+Analyzing debug...
+No issues found!
+dart_web3_debug: SUCCESS
+--------------------------------------------------------------------------------
+dart_web3_ens:
+Analyzing ens...
+
+   info - lib\src\ens_records.dart:49:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_records.dart:158:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_records.dart:207:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_records.dart:257:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_records.dart:263:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_resolver.dart:50:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:99:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:137:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:155:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:183:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_resolver.dart:189:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\multichain_resolver.dart:55:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\multichain_resolver.dart:134:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\multichain_resolver.dart:242:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\multichain_resolver.dart:248:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\multichain_resolver.dart:320:20 - The constant name 'bitcoin_cash' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - constant_identifier_names
+
+16 issues found.
+--------------------------------------------------------------------------------
+dart_web3_events:
+Analyzing events...
+
+warning - lib\src\event_listener.dart:22:21 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\event_subscriber.dart:75:26 - The exception variable 'e' isn't used, so the 'catch' clause can be removed. Try removing the catch clause. - unused_catch_clause
+   info - lib\src\confirmation_filter.dart:100:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\confirmation_filter.dart:202:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\event_filter.dart:104:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\event_filter.dart:115:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\event_listener.dart:59:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:94:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:151:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:178:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\reorg_handler.dart:119:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\reorg_handler.dart:157:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+12 issues found.
+--------------------------------------------------------------------------------
+dart_web3_history:
+Analyzing history...
+No issues found!
+dart_web3_history: SUCCESS
+--------------------------------------------------------------------------------
+dart_web3_keystone:
+Analyzing keystone...
+
+warning - lib\src\multi_chain_support.dart:26:11 - The value of the local variable 'requestId' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\multi_chain_support.dart:29:11 - The value of the local variable 'urData' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\multi_chain_support.dart:33:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\multi_chain_support.dart:105:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+warning - lib\src\qr_communication.dart:58:19 - The type of error can't be inferred; a type must be explicitly provided. Try specifying the type of the parameter. - inference_failure_on_untyped_parameter
+   info - lib\src\keystone_client.dart:227:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\multi_chain_support.dart:144:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\qr_communication.dart:56:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\qr_communication.dart:63:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\qr_communication.dart:113:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+10 issues found.
+--------------------------------------------------------------------------------
+dart_web3_ledger:
+Analyzing ledger...
+
+warning - test\ledger_test.dart:257:13 - The value of the local variable 'mockSignature' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib\src\apdu_commands.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\apdu_commands.dart:117:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\apdu_commands.dart:157:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\ledger_transport.dart:276:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\ledger_types.dart:83:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ledger_types.dart:88:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:244:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:281:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+
+9 issues found.
+--------------------------------------------------------------------------------
+dart_web3_mev:
+Analyzing mev...
+
+warning - test\mev_service_test.dart:23:31 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+
+1 issue found.
+--------------------------------------------------------------------------------
+dart_web3_mpc:
+Analyzing mpc...
+
+  error - lib\src\mpc_provider.dart:11:40 - Classes and mixins can only implement other classes and mixins. Try specifying a class or mixin, or remove the name from the list. - implements_non_class
+  error - lib\src\mpc_provider.dart:47:10 - The name 'MpcWalletInfo' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'MpcWalletInfo'. - non_type_as_type_argument
+  error - lib\src\mpc_provider.dart:52:12 - The method 'MpcWalletInfo' isn't defined for the type 'FireblocksMpcProvider'. Try correcting the name to the name of an existing method, or defining a method named 'MpcWalletInfo'. - undefined_method
+  error - lib\src\mpc_provider.dart:59:15 - Undefined name 'MpcWalletStatus'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\mpc_provider.dart:66:15 - The name 'MpcWalletInfo' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'MpcWalletInfo'. - non_type_as_type_argument
+  error - lib\src\mpc_provider.dart:94:10 - The name 'MpcSigningStatus' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'MpcSigningStatus'. - non_type_as_type_argument
+  error - lib\src\mpc_provider.dart:99:12 - Undefined name 'MpcSigningStatus'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\mpc_provider.dart:152:37 - Classes and mixins can only implement other classes and mixins. Try specifying a class or mixin, or remove the name from the list. - implements_non_class
+  error - lib\src\mpc_provider.dart:186:10 - The name 'MpcWalletInfo' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'MpcWalletInfo'. - non_type_as_type_argument
+  error - lib\src\mpc_provider.dart:189:12 - The method 'MpcWalletInfo' isn't defined for the type 'FordefiMpcProvider'. Try correcting the name to the name of an existing method, or defining a method named 'MpcWalletInfo'. - undefined_method
+  error - lib\src\mpc_provider.dart:196:15 - Undefined name 'MpcWalletStatus'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\mpc_provider.dart:203:15 - The name 'MpcWalletInfo' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'MpcWalletInfo'. - non_type_as_type_argument
+  error - lib\src\mpc_provider.dart:227:10 - The name 'MpcSigningStatus' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'MpcSigningStatus'. - non_type_as_type_argument
+  error - lib\src\mpc_provider.dart:229:12 - Undefined name 'MpcSigningStatus'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\mpc_test.dart:217:26 - Undefined name 'MpcProviderFactory'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\mpc_test.dart:229:26 - Undefined name 'MpcProviderFactory'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\mpc_test.dart:242:17 - Undefined name 'MpcProviderFactory'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+warning - lib\src\mpc_provider.dart:15:27 - The field doesn't override an inherited getter or setter. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:18:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:24:18 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:31:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:47:25 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:66:31 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:78:18 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:79:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:94:28 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:103:30 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:118:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:124:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:130:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:156:27 - The field doesn't override an inherited getter or setter. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:159:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:164:18 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:171:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:186:25 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:203:31 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:213:18 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:214:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:227:28 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:233:30 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:246:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:251:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\mpc_provider.dart:256:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+   info - lib\src\key_generation.dart:499:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\key_refresh.dart:464:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\mpc_signer.dart:337:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\threshold_signature.dart:246:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\threshold_signature.dart:564:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\threshold_signature.dart:700:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+
+49 issues found.
+--------------------------------------------------------------------------------
+dart_web3_multicall:
+Analyzing multicall...
+
+   info - lib\src\multicall_builder.dart:27:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:42:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:48:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:54:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:140:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\multicall_factory.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - test\mock_client.dart:43:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_client.dart:84:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:118:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:122:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:126:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:130:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\multicall_builder_test.dart:92:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:96:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:162:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:183:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:207:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:246:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+
+19 issues found.
+--------------------------------------------------------------------------------
+dart_web3_nft:
+Analyzing nft...
+
+warning - test\nft_service_test.dart:121:38 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+   info - lib\src\ipfs_gateway.dart:52:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ipfs_gateway.dart:75:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ipfs_gateway.dart:96:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ipfs_gateway.dart:123:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\ipfs_gateway.dart:133:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\nft_collection.dart:67:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:143:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:173:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:178:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:197:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:215:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:233:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:277:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:296:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:44:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:54:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:132:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:151:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:184:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_transfer.dart:35:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_transfer.dart:60:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_types.dart:64:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\nft_types.dart:73:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+
+25 issues found.
+--------------------------------------------------------------------------------
+dart_web3_polkadot:
+Analyzing polkadot...
+
+   info - lib\src\scale_codec.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+
+1 issue found.
+--------------------------------------------------------------------------------
+dart_web3_price:
+Analyzing price...
+
+   info - lib\src\price_service.dart:21:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:36:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\price_service.dart:39:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:54:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:71:28 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:77:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\price_service.dart:86:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\price_service_test.dart:8:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+
+9 issues found.
+--------------------------------------------------------------------------------
+dart_web3_provider:
+Analyzing provider...
+
+   info - lib\src\provider.dart:76:62 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\provider.dart:81:65 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\websocket_transport.dart:53:13 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\websocket_transport.dart:130:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\websocket_transport.dart:144:5 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - test\provider_property_test.dart:88:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\provider_property_test.dart:118:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+7 issues found.
+--------------------------------------------------------------------------------
+dart_web3_reown:
+Analyzing reown...
+
+   info - lib\src\namespace_config.dart:4:8 - The imported package 'meta' isn't a dependency of the importing package. Try adding a dependency for 'meta' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+   info - lib\src\pairing_uri.dart:5:8 - The imported package 'meta' isn't a dependency of the importing package. Try adding a dependency for 'meta' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+
+2 issues found.
+--------------------------------------------------------------------------------
+dart_web3_signer:
+Analyzing signer...
+
+   info - lib\src\authorization.dart:173:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_batch.dart:164:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\authorization_batch.dart:224:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_revocation.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\authorization_verifier.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\authorization_verifier.dart:80:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_verifier.dart:123:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\transaction.dart:23:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - test\eip7702_test.dart:276:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\eip7702_test.dart:277:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\eip7702_test.dart:278:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\signer_property_test.dart:41:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:86:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:139:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:186:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:234:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:279:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+17 issues found.
+--------------------------------------------------------------------------------
+dart_web3_solana:
+Analyzing solana...
+
+   info - lib\src\solana_types.dart:8:36 - The parameter 'address' is not used in the constructor. Try using the parameter or removing it. - avoid_unused_constructor_parameters
+
+1 issue found.
+--------------------------------------------------------------------------------
+dart_web3_staking:
+Analyzing staking...
+
+   info - lib\src\staking_service.dart:94:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+1 issue found.
+--------------------------------------------------------------------------------
+dart_web3_swap:
+Analyzing swap...
+
+warning - lib\src\swap_service.dart:2:8 - Unused import: 'dart:math'. Try removing the import directive. - unused_import
+warning - lib\src\swap_tracker.dart:184:18 - The value of the local variable 'log' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib\src\aggregators\oneinch_aggregator.dart:104:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\oneinch_aggregator.dart:123:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\oneinch_aggregator.dart:263:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\paraswap_aggregator.dart:86:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\paraswap_aggregator.dart:105:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\paraswap_aggregator.dart:321:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\rango_aggregator.dart:86:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\rango_aggregator.dart:115:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\rango_aggregator.dart:345:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\zerox_aggregator.dart:104:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\zerox_aggregator.dart:129:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\zerox_aggregator.dart:198:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\zerox_aggregator.dart:308:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\mev_protection.dart:128:31 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\mev_protection.dart:182:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\mev_protection.dart:237:34 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\slippage_calculator.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\swap_quote.dart:135:26 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\swap_service.dart:103:17 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+   info - lib\src\swap_service.dart:157:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:174:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:199:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:250:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:262:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:309:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:82:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:108:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:161:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:198:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:208:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_types.dart:44:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\swap_types.dart:52:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\token_approval.dart:51:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:119:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:201:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:244:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+39 issues found.
+--------------------------------------------------------------------------------
+dart_web3_ton:
+Analyzing ton...
+No issues found!
+dart_web3_ton: SUCCESS
+--------------------------------------------------------------------------------
+dart_web3_trezor:
+Analyzing trezor...
+
+   info - lib\src\multi_chain_support.dart:166:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:171:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:172:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:188:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:193:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:194:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:210:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:215:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:216:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:279:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\protobuf_messages.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\protobuf_messages.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:56:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:62:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:63:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:69:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:70:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:76:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:77:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:84:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:85:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:91:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:92:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:98:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:105:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:123:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:128:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:129:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:146:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:159:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:160:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:270:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\trezor_transport.dart:272:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\trezor_types.dart:138:24 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+
+36 issues found.
+--------------------------------------------------------------------------------
+dart_web3_tron:
+Analyzing tron...
+No issues found!
+dart_web3_tron: SUCCESS
+--------------------------------------------------------------------------------
+
+$ melos analyze
+  └> dart analyze --fatal-infos
+     └> FAILED (in 26 packages)
+        └> dart_web3 (with exit code 1)
+        └> dart_web3_aa (with exit code 2)
+        └> dart_web3_abi (with exit code 2)
+        └> dart_web3_bc_ur (with exit code 1)
+        └> dart_web3_bridge (with exit code 1)
+        └> dart_web3_client (with exit code 2)
+        └> dart_web3_contract (with exit code 1)
+        └> dart_web3_core (with exit code 2)
+        └> dart_web3_crypto (with exit code 1)
+        └> dart_web3_ens (with exit code 1)
+        └> dart_web3_events (with exit code 2)
+        └> dart_web3_keystone (with exit code 2)
+        └> dart_web3_ledger (with exit code 2)
+        └> dart_web3_mev (with exit code 2)
+        └> dart_web3_mpc (with exit code 3)
+        └> dart_web3_multicall (with exit code 1)
+        └> dart_web3_nft (with exit code 2)
+        └> dart_web3_polkadot (with exit code 1)
+        └> dart_web3_price (with exit code 1)
+        └> dart_web3_provider (with exit code 1)
+        └> dart_web3_reown (with exit code 1)
+        └> dart_web3_signer (with exit code 1)
+        └> dart_web3_solana (with exit code 1)
+        └> dart_web3_staking (with exit code 1)
+        └> dart_web3_swap (with exit code 2)
+        └> dart_web3_trezor (with exit code 1)

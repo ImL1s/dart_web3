@@ -1,6 +1,5 @@
-import 'package:test/test.dart';
 import 'package:dart_web3_mev/dart_web3_mev.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('MEV Service Tests', () {
@@ -21,8 +20,8 @@ void main() {
       );
 
       final json = bundle.toJson();
-      expect(json['txs'], isA<List>());
-      expect((json['txs'] as List).length, equals(1));
+      expect(json['txs'], isA<List<dynamic>>());
+      expect((json['txs'] as List<dynamic>).length, equals(1));
       // Assuming HexUtils.encode handles the big int conversion correctly
       // We just check structure here
       expect(json.containsKey('blockNumber'), isTrue);

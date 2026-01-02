@@ -45,7 +45,8 @@ void main() {
     });
 
     test('should parse message string correctly', () {
-      final messageString = '''example.com wants you to sign in with your Ethereum account:
+      final messageString = '''
+example.com wants you to sign in with your Ethereum account:
 0x1234567890123456789012345678901234567890
 
 Sign in to the application
@@ -136,7 +137,8 @@ Issued At: 2023-01-01T00:00:00.000Z''';
     });
 
     test('should handle message without statement', () {
-      final messageString = '''example.com wants you to sign in with your Ethereum account:
+      final messageString = '''
+example.com wants you to sign in with your Ethereum account:
 0x1234567890123456789012345678901234567890
 
 URI: https://example.com
@@ -221,7 +223,6 @@ Issued At: 2023-01-01T00:00:00.000Z''';
       // Incomplete result
       final incompleteResult = SiweAuthResult(
         siweMessage: siweMessage,
-        isAuthenticated: false,
       );
       
       expect(incompleteResult.isComplete, isFalse);

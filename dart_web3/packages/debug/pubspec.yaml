@@ -1,5 +1,6 @@
 name: dart_web3_debug
 description: Debug and trace API support
+publish_to: none
 version: 0.1.0
 environment:
   sdk: ^3.6.0

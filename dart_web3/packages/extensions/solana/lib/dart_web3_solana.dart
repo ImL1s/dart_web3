@@ -1,4 +1,4 @@
-library dart_web3_solana;
+library;
 
-export 'src/solana_types.dart';
 export 'src/solana_transaction.dart';
+export 'src/solana_types.dart';

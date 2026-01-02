@@ -1,4 +1,3 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 import 'contract.dart';
 import 'event_filter.dart';
@@ -6,17 +5,15 @@ import 'event_filter.dart';
 /// ERC-1155 multi-token contract implementation.
 class ERC1155Contract extends Contract {
   ERC1155Contract({
-    required String address,
-    required PublicClient publicClient,
-    WalletClient? walletClient,
+    required super.address,
+    required super.publicClient,
+    super.walletClient,
   }) : super(
-          address: address,
           abi: _erc1155Abi,
-          publicClient: publicClient,
-          walletClient: walletClient,
         );
 
-  static const String _erc1155Abi = '''[
+  static const String _erc1155Abi = '''
+[
     {
       "type": "function",
       "name": "uri",
@@ -159,7 +156,7 @@ class ERC1155Contract extends Contract {
 
   /// Sets approval for all tokens.
   Future<String> setApprovalForAll(String operator, bool approved) async {
-    return await write('setApprovalForAll', [operator, approved]);
+    return write('setApprovalForAll', [operator, approved]);
   }
 
   /// Safely transfers a single token type.
@@ -170,7 +167,7 @@ class ERC1155Contract extends Contract {
     BigInt amount, [
     String data = '0x',
   ]) async {
-    return await write('safeTransferFrom', [from, to, id, amount, data]);
+    return write('safeTransferFrom', [from, to, id, amount, data]);
   }
 
   /// Safely transfers multiple token types in batch.
@@ -181,7 +178,7 @@ class ERC1155Contract extends Contract {
     List<BigInt> amounts, [
     String data = '0x',
   ]) async {
-    return await write('safeBatchTransferFrom', [from, to, ids, amounts, data]);
+    return write('safeBatchTransferFrom', [from, to, ids, amounts, data]);
   }
 
   // Event filters
@@ -196,7 +193,7 @@ class ERC1155Contract extends Contract {
       if (operator != null) 'operator': operator,
       if (from != null) 'from': from,
       if (to != null) 'to': to,
-    });
+    },);
   }
 
   /// Creates a filter for TransferBatch events.
@@ -209,7 +206,7 @@ class ERC1155Contract extends Contract {
       if (operator != null) 'operator': operator,
       if (from != null) 'from': from,
       if (to != null) 'to': to,
-    });
+    },);
   }
 
   /// Creates a filter for ApprovalForAll events.
@@ -217,13 +214,13 @@ class ERC1155Contract extends Contract {
     return createEventFilter('ApprovalForAll', indexedArgs: {
       if (account != null) 'account': account,
       if (operator != null) 'operator': operator,
-    });
+    },);
   }
 
   /// Creates a filter for URI events.
   EventFilter uriFilter({BigInt? id}) {
     return createEventFilter('URI', indexedArgs: {
       if (id != null) 'id': id,
-    });
+    },);
   }
 }

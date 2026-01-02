@@ -1,9 +1,7 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Solana address (Base58 encoded)
 class SolanaAddress {
-  final Uint8List bytes;
 
   const SolanaAddress(this.bytes);
 
@@ -12,6 +10,7 @@ class SolanaAddress {
     // For now, we simulate with 32 bytes
     return SolanaAddress(Uint8List(32));
   }
+  final Uint8List bytes;
 
   String toBase58() {
     // Placeholder
@@ -24,25 +23,25 @@ class SolanaAddress {
 
 /// Solana Instruction
 class SolanaInstruction {
-  final SolanaAddress programId;
-  final List<SolanaAccountMeta> keys;
-  final Uint8List data;
 
   const SolanaInstruction({
     required this.programId,
     required this.keys,
     required this.data,
   });
+  final SolanaAddress programId;
+  final List<SolanaAccountMeta> keys;
+  final Uint8List data;
 }
 
 class SolanaAccountMeta {
-  final SolanaAddress pubkey;
-  final bool isSigner;
-  final bool isWritable;
 
   const SolanaAccountMeta({
     required this.pubkey,
     required this.isSigner,
     required this.isWritable,
   });
+  final SolanaAddress pubkey;
+  final bool isSigner;
+  final bool isWritable;
 }

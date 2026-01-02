@@ -1,5 +1,5 @@
-import 'package:test/test.dart';
 import 'package:dart_web3_polkadot/dart_web3_polkadot.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Polkadot Module Property Tests', () {

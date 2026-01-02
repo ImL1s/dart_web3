@@ -1,5 +1,5 @@
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:typed_data';
 
 /// Simple CBOR encoder for BC-UR
 /// Implements subset of CBOR needed for BC-UR communication
@@ -26,9 +26,9 @@ class CBOREncoder {
       _encodeBytes(value);
     } else if (value is List<int>) {
       _encodeBytes(Uint8List.fromList(value));
-    } else if (value is List) {
+    } else if (value is List<dynamic>) {
       _encodeArray(value);
-    } else if (value is Map) {
+    } else if (value is Map<dynamic, dynamic>) {
       _encodeMap(value);
     } else {
       throw ArgumentError('Unsupported type: ${value.runtimeType}');
@@ -127,7 +127,7 @@ class CBOREncoder {
     _buffer.add(value);
   }
   
-  void _encodeArray(List value) {
+  void _encodeArray(List<dynamic> value) {
     final length = value.length;
     
     if (length < 24) {
@@ -148,7 +148,7 @@ class CBOREncoder {
     }
   }
   
-  void _encodeMap(Map value) {
+  void _encodeMap(Map<dynamic, dynamic> value) {
     final length = value.length;
     
     if (length < 24) {

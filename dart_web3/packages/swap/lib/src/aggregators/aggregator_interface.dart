@@ -52,10 +52,6 @@ abstract class DexAggregator {
 
 /// Exception thrown when aggregator operations fail
 class AggregatorException implements Exception {
-  final String aggregator;
-  final String message;
-  final String? code;
-  final dynamic originalError;
 
   const AggregatorException({
     required this.aggregator,
@@ -63,6 +59,10 @@ class AggregatorException implements Exception {
     this.code,
     this.originalError,
   });
+  final String aggregator;
+  final String message;
+  final String? code;
+  final dynamic originalError;
 
   @override
   String toString() {
@@ -73,24 +73,19 @@ class AggregatorException implements Exception {
 
 /// Rate limiting information for aggregators
 class RateLimit {
-  final int requestsPerMinute;
-  final int requestsPerHour;
-  final Duration resetTime;
 
   const RateLimit({
     required this.requestsPerMinute,
     required this.requestsPerHour,
     required this.resetTime,
   });
+  final int requestsPerMinute;
+  final int requestsPerHour;
+  final Duration resetTime;
 }
 
 /// Aggregator configuration
 class AggregatorConfig {
-  final String? apiKey;
-  final String? baseUrl;
-  final Duration timeout;
-  final RateLimit? rateLimit;
-  final Map<String, String> headers;
 
   const AggregatorConfig({
     this.apiKey,
@@ -99,4 +94,9 @@ class AggregatorConfig {
     this.rateLimit,
     this.headers = const {},
   });
+  final String? apiKey;
+  final String? baseUrl;
+  final Duration timeout;
+  final RateLimit? rateLimit;
+  final Map<String, String> headers;
 }

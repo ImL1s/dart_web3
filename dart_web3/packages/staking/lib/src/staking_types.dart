@@ -10,14 +10,6 @@ enum StakingProtocol {
 
 /// Staking opportunity information
 class StakingOpportunity {
-  final String id;
-  final String name;
-  final StakingProtocol protocol;
-  final EthereumAddress contractAddress;
-  final String tokenSymbol;
-  final double? apy;
-  final BigInt? tvl;
-  final String? description;
 
   const StakingOpportunity({
     required this.id,
@@ -29,6 +21,14 @@ class StakingOpportunity {
     this.tvl,
     this.description,
   });
+  final String id;
+  final String name;
+  final StakingProtocol protocol;
+  final EthereumAddress contractAddress;
+  final String tokenSymbol;
+  final double? apy;
+  final BigInt? tvl;
+  final String? description;
 
   @override
   String toString() => 'StakingOpportunity(name: $name, protocol: $protocol, apy: $apy%)';
@@ -36,11 +36,6 @@ class StakingOpportunity {
 
 /// Staking position information
 class StakingPosition {
-  final String opportunityId;
-  final EthereumAddress owner;
-  final BigInt stakedAmount;
-  final BigInt? rewards;
-  final double? currentApy;
 
   const StakingPosition({
     required this.opportunityId,
@@ -49,6 +44,11 @@ class StakingPosition {
     this.rewards,
     this.currentApy,
   });
+  final String opportunityId;
+  final EthereumAddress owner;
+  final BigInt stakedAmount;
+  final BigInt? rewards;
+  final double? currentApy;
 
   @override
   String toString() => 'StakingPosition(opportunity: $opportunityId, amount: $stakedAmount)';

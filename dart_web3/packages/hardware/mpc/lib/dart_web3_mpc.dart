@@ -9,10 +9,10 @@
 /// - [ThresholdSignature] - Threshold signature schemes
 library dart_web3_mpc;
 
-export 'src/mpc_signer.dart';
-export 'src/mpc_provider.dart';
 export 'src/key_generation.dart';
 export 'src/key_refresh.dart';
+export 'src/mpc_provider.dart';
+export 'src/mpc_signer.dart';
+export 'src/mpc_types.dart';
 export 'src/signing_coordinator.dart';
 export 'src/threshold_signature.dart';
-export 'src/mpc_types.dart';

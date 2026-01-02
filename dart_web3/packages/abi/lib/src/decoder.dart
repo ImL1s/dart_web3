@@ -85,7 +85,7 @@ class AbiDecoder {
       try {
         final decoded = decode([AbiString()], data.sublist(4));
         return decoded[0] as String;
-      } catch (_) {
+      } on Object catch (_) {
         return null;
       }
     }
@@ -96,7 +96,7 @@ class AbiDecoder {
         final decoded = decode([AbiUint(256)], data.sublist(4));
         final code = (decoded[0] as BigInt).toInt();
         return _panicMessage(code);
-      } catch (_) {
+      } on Object catch (_) {
         return null;
       }
     }

@@ -118,7 +118,7 @@ class EthereumAPDU {
     
     for (final part in parts) {
       int value;
-      bool hardened = false;
+      var hardened = false;
       
       if (part.endsWith("'") || part.endsWith('h')) {
         hardened = true;
@@ -177,7 +177,7 @@ class EthereumResponseParser {
     final publicKeyLength = data[0];
     final publicKey = data.sublist(1, 1 + publicKeyLength);
     
-    int offset = 1 + publicKeyLength;
+    var offset = 1 + publicKeyLength;
     final addressLength = data[offset];
     offset++;
     final address = data.sublist(offset, offset + addressLength);
@@ -271,7 +271,7 @@ class EthereumResponseParser {
     final nameLength = data[0];
     final name = String.fromCharCodes(data.sublist(1, 1 + nameLength));
     
-    int offset = 1 + nameLength;
+    var offset = 1 + nameLength;
     final versionLength = data[offset];
     offset++;
     final version = String.fromCharCodes(data.sublist(offset, offset + versionLength));

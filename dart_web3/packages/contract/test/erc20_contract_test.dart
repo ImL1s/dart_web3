@@ -1,6 +1,5 @@
 import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:test/test.dart';
 
 import 'mock_client.dart';

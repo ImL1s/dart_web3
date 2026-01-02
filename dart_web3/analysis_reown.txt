@@ -1,0 +1,75 @@
+$ melos exec
+  └> dart analyze --fatal-infos
+     └> RUNNING (in 1 packages)
+
+--------------------------------------------------------------------------------
+dart_web3_reown:
+Analyzing reown...
+
+  error - lib\src\relay_client.dart:211:57 - The argument type 'dynamic' can't be assigned to the parameter type 'Map<String, dynamic>'.  - argument_type_not_assignable
+  error - lib\src\session_manager.dart:314:30 - The argument type 'dynamic' can't be assigned to the parameter type 'FutureOr<Map<String, dynamic>>?'.  - argument_type_not_assignable
+  error - lib\src\session_manager.dart:339:55 - The argument type 'dynamic' can't be assigned to the parameter type 'Map<String, dynamic>'.  - argument_type_not_assignable
+  error - lib\src\session_manager.dart:438:53 - The argument type 'dynamic' can't be assigned to the parameter type 'Map<String, dynamic>'.  - argument_type_not_assignable
+  error - lib\src\session_manager.dart:515:53 - The argument type 'dynamic' can't be assigned to the parameter type 'Map<String, dynamic>'.  - argument_type_not_assignable
+  error - lib\src\session_manager.dart:520:53 - The argument type 'dynamic' can't be assigned to the parameter type 'Map<String, dynamic>'.  - argument_type_not_assignable
+warning - lib\src\connection_manager.dart:31:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\connection_manager.dart:79:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\relay_client.dart:284:21 - The type argument(s) of 'Map' can't be inferred. Use explicit type argument(s) for 'Map'. - inference_failure_on_collection_literal
+warning - lib\src\reown_client.dart:35:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\reown_client.dart:36:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\reown_signer.dart:272:27 - The type argument(s) of 'Map' can't be inferred. Use explicit type argument(s) for 'Map'. - inference_failure_on_collection_literal
+warning - lib\src\session_manager.dart:20:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\siwe_auth.dart:480:10 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:14:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:16:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\src\connection_manager.dart:56:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\connection_manager.dart:82:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\connection_manager.dart:186:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\connection_manager.dart:447:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\namespace_config.dart:113:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\namespace_config.dart:125:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\namespace_config.dart:157:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\namespace_config.dart:394:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\namespace_config.dart:445:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\namespace_config.dart:455:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\namespace_config.dart:459:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\pairing_uri.dart:129:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\pairing_uri.dart:139:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\pairing_uri.dart:144:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\relay_client.dart:62:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\relay_client.dart:87:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\relay_client.dart:164:5 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\relay_client.dart:170:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\relay_client.dart:227:15 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\relay_client.dart:237:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\relay_client.dart:338:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\reown_client.dart:349:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\reown_client.dart:389:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\reown_signer.dart:436:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\reown_signer.dart:476:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\session_manager.dart:312:45 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\session_manager.dart:528:17 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\session_manager.dart:614:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\siwe_auth.dart:114:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\siwe_auth.dart:303:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:304:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:305:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:309:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:313:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:314:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:315:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:316:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:522:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\connection_manager_test.dart:107:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\namespace_config_test.dart:169:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\pairing_uri_test.dart:78:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\siwe_auth_test.dart:240:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+59 issues found.
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart analyze --fatal-infos
+     └> FAILED (in 1 packages)
+        └> dart_web3_reown (with exit code 3)

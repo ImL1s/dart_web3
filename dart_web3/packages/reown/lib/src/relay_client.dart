@@ -7,6 +7,13 @@ import 'dart:io';
 
 /// Relay protocol client for WalletConnect v2.
 class RelayClient {
+
+  RelayClient({
+    required this.relayUrl,
+    required this.projectId,
+    this.reconnectDelay = const Duration(seconds: 5),
+    this.maxReconnectAttempts = 3,
+  });
   final String relayUrl;
   final String projectId;
   final Duration reconnectDelay;
@@ -23,13 +30,6 @@ class RelayClient {
   bool _isConnecting = false;
   bool _shouldReconnect = true;
   int _requestId = 0;
-
-  RelayClient({
-    required this.relayUrl,
-    required this.projectId,
-    this.reconnectDelay = const Duration(seconds: 5),
-    this.maxReconnectAttempts = 3,
-  });
 
   /// Stream of relay events.
   Stream<RelayEvent> get events => _eventController.stream;
@@ -59,7 +59,7 @@ class RelayClient {
       _startHeartbeat();
       
       _eventController.add(RelayEvent.connected());
-    } catch (e) {
+    } on Object catch (e) {
       _isConnecting = false;
       _handleError(e);
     }
@@ -84,7 +84,7 @@ class RelayClient {
     
     // Close all subscriptions
     for (final controller in _subscriptions.values) {
-      controller.close();
+      await controller.close();
     }
     _subscriptions.clear();
     
@@ -161,16 +161,18 @@ class RelayClient {
     await _sendRequest(request);
     
     // Close and remove subscription
-    _subscriptions[subscriptionId]?.close();
+    await _subscriptions[subscriptionId]?.close();
     _subscriptions.remove(subscriptionId);
   }
 
   /// Gets messages for a subscription.
   Stream<Map<String, dynamic>> getSubscription(String subscriptionId) {
+    // ignore: close_sinks
     final controller = _subscriptions[subscriptionId];
     if (controller == null) {
       throw Exception('Subscription not found: $subscriptionId');
     }
+    // Controller is closed in unsubscribe or dispose
     return controller.stream;
   }
 
@@ -208,7 +210,7 @@ class RelayClient {
         
         if (completer != null && !completer.isCompleted) {
           if (message.containsKey('error')) {
-            completer.completeError(RelayError.fromJson(message['error']));
+            completer.completeError(RelayError.fromJson(message['error'] as Map<String, dynamic>));
           } else {
             completer.complete(message);
           }
@@ -224,6 +226,7 @@ class RelayClient {
         final decodedBytes = base64Decode(encodedMessage);
         final decodedMessage = jsonDecode(utf8.decode(decodedBytes)) as Map<String, dynamic>;
         
+        // ignore: close_sinks
         final controller = _subscriptions[subscriptionId];
         if (controller != null && !controller.isClosed) {
           controller.add(decodedMessage);
@@ -232,9 +235,9 @@ class RelayClient {
         _eventController.add(RelayEvent.message(
           topic: data['topic'] as String,
           message: decodedMessage,
-        ));
+        ),);
       }
-    } catch (e) {
+    } on Object catch (e) {
       _eventController.add(RelayEvent.error(e));
     }
   }
@@ -281,14 +284,21 @@ class RelayClient {
           'id': ++_requestId,
           'jsonrpc': '2.0',
           'method': 'irn_ping',
-          'params': {},
-        }));
+          'params': <String, dynamic>{},
+        }),);
       }
     });
   }
 
   /// Disposes the client.
   void dispose() {
+    for (final controller in _subscriptions.values) {
+      if (!controller.isClosed) {
+        controller.close();
+      }
+    }
+    _subscriptions.clear();
+    
     disconnect();
     _eventController.close();
   }
@@ -296,10 +306,6 @@ class RelayClient {
 
 /// Relay event types.
 class RelayEvent {
-  final RelayEventType type;
-  final String? topic;
-  final Map<String, dynamic>? message;
-  final dynamic error;
 
   RelayEvent._(this.type, {this.topic, this.message, this.error});
 
@@ -308,6 +314,10 @@ class RelayEvent {
   factory RelayEvent.message({required String topic, required Map<String, dynamic> message}) =>
       RelayEvent._(RelayEventType.message, topic: topic, message: message);
   factory RelayEvent.error(dynamic error) => RelayEvent._(RelayEventType.error, error: error);
+  final RelayEventType type;
+  final String? topic;
+  final Map<String, dynamic>? message;
+  final dynamic error;
 }
 
 enum RelayEventType {
@@ -319,9 +329,6 @@ enum RelayEventType {
 
 /// Relay error.
 class RelayError implements Exception {
-  final int code;
-  final String message;
-  final dynamic data;
 
   RelayError(this.code, this.message, [this.data]);
 
@@ -332,6 +339,9 @@ class RelayError implements Exception {
       json['data'],
     );
   }
+  final int code;
+  final String message;
+  final dynamic data;
 
   @override
   String toString() => 'RelayError($code): $message';

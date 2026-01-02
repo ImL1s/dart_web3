@@ -5,16 +5,23 @@ import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 
-import 'mpc_types.dart';
-import 'signing_coordinator.dart';
 import 'key_generation.dart';
 import 'key_refresh.dart';
+import 'mpc_types.dart';
+import 'signing_coordinator.dart';
 
 /// MPC (Multi-Party Computation) signer implementation.
 /// 
 /// Supports threshold signature schemes (t-of-n) where t parties out of n total
 /// parties must collaborate to create a signature.
 class MpcSignerImpl extends MpcSigner {
+
+  MpcSignerImpl({
+    required this.keyShare,
+    required this.coordinator,
+    required this.keyGeneration,
+    required this.keyRefresh,
+  });
   /// The key share for this party.
   final KeyShare keyShare;
   
@@ -26,13 +33,6 @@ class MpcSignerImpl extends MpcSigner {
   
   /// The key refresh manager.
   final KeyRefresh keyRefresh;
-
-  MpcSignerImpl({
-    required this.keyShare,
-    required this.coordinator,
-    required this.keyGeneration,
-    required this.keyRefresh,
-  });
 
   @override
   String get partyId => keyShare.partyId;
@@ -56,7 +56,7 @@ class MpcSignerImpl extends MpcSigner {
         // For ed25519, use the public key directly as address (Solana style)
         return EthereumAddress(keyShare.publicKey.length >= 20 
             ? keyShare.publicKey.sublist(0, 20) 
-            : keyShare.publicKey);
+            : keyShare.publicKey,);
     }
   }
 
@@ -118,6 +118,19 @@ class MpcSignerImpl extends MpcSigner {
   }
 
   @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    // Start MPC signing session
+    final session = await startSigning(hash);
+    
+    try {
+      return await session.waitForCompletion();
+    } catch (e) {
+      await session.cancel();
+      rethrow;
+    }
+  }
+
+  @override
   Future<Uint8List> signAuthorization(Authorization authorization) async {
     // Encode authorization for EIP-7702
     final encoded = _encodeAuthorization(authorization);
@@ -156,7 +169,7 @@ class MpcSignerImpl extends MpcSigner {
       keyShareId: '${keyShare.partyId}_${keyShare.createdAt.millisecondsSinceEpoch}',
     );
     
-    return await coordinator.startSigningSession(request, keyShare);
+    return coordinator.startSigningSession(request, keyShare);
   }
 
   /// Encodes a transaction for signing.
@@ -188,7 +201,7 @@ class MpcSignerImpl extends MpcSigner {
           transaction.accessList?.map((entry) => [
             entry.address,
             entry.storageKeys,
-          ]).toList() ?? [],
+          ],).toList() ?? [],
         ];
         break;
         
@@ -204,7 +217,7 @@ class MpcSignerImpl extends MpcSigner {
           transaction.accessList?.map((entry) => [
             entry.address,
             entry.storageKeys,
-          ]).toList() ?? [],
+          ],).toList() ?? [],
         ];
         break;
         
@@ -221,7 +234,7 @@ class MpcSignerImpl extends MpcSigner {
           transaction.accessList?.map((entry) => [
             entry.address,
             entry.storageKeys,
-          ]).toList() ?? [],
+          ],).toList() ?? [],
           transaction.maxFeePerBlobGas ?? BigInt.zero,
           transaction.blobVersionedHashes ?? [],
         ];
@@ -240,7 +253,7 @@ class MpcSignerImpl extends MpcSigner {
           transaction.accessList?.map((entry) => [
             entry.address,
             entry.storageKeys,
-          ]).toList() ?? [],
+          ],).toList() ?? [],
           transaction.authorizationList?.map((auth) => [
             auth.chainId,
             auth.address,
@@ -248,7 +261,7 @@ class MpcSignerImpl extends MpcSigner {
             auth.yParity,
             auth.r,
             auth.s,
-          ]).toList() ?? [],
+          ],).toList() ?? [],
         ];
         break;
     }

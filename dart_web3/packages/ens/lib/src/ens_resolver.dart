@@ -1,15 +1,12 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 /// ENS resolver for name and address resolution
 class ENSResolver {
-  final PublicClient _client;
-  final String _registryAddress;
-  final Map<String, dynamic> _cache = {};
-  final Duration _cacheTtl;
 
   ENSResolver({
     required PublicClient client,
@@ -18,6 +15,10 @@ class ENSResolver {
   })  : _client = client,
         _registryAddress = registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
         _cacheTtl = cacheTtl;
+  final PublicClient _client;
+  final String _registryAddress;
+  final Map<String, dynamic> _cache = {};
+  final Duration _cacheTtl;
 
   /// Resolve ENS name to Ethereum address
   Future<String?> resolveName(String name) async {
@@ -163,9 +164,9 @@ class ENSResolver {
     }
 
     final labels = name.split('.');
-    Uint8List hash = Uint8List(32); // Start with 32 zero bytes
+    var hash = Uint8List(32); // Start with 32 zero bytes
 
-    for (int i = labels.length - 1; i >= 0; i--) {
+    for (var i = labels.length - 1; i >= 0; i--) {
       final labelHash = Keccak256.hash(Uint8List.fromList(labels[i].codeUnits));
       final combined = Uint8List.fromList([...hash, ...labelHash]);
       hash = Keccak256.hash(combined);
@@ -224,7 +225,8 @@ class ENSResolver {
   }
 
   /// ENS Registry ABI (minimal)
-  static const String _ensRegistryAbi = '''[
+  static const String _ensRegistryAbi = '''
+[
     {
       "type": "function",
       "name": "resolver",
@@ -235,7 +237,8 @@ class ENSResolver {
   ]''';
 
   /// ENS Resolver ABI (minimal)
-  static const String _ensResolverAbi = '''[
+  static const String _ensResolverAbi = '''
+[
     {
       "type": "function",
       "name": "addr",

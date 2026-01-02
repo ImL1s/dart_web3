@@ -2,18 +2,6 @@ import 'swap_types.dart';
 
 /// Swap quote from an aggregator
 class SwapQuote {
-  final String aggregator;
-  final SwapParams params;
-  final BigInt outputAmount;
-  final BigInt minimumOutputAmount;
-  final SwapRoute route;
-  final SwapTransaction transaction;
-  final BigInt estimatedGas;
-  final BigInt gasCost;
-  final double priceImpact;
-  final Duration validUntil;
-  final CrossChainSwapInfo? crossChainInfo;
-  final Map<String, dynamic>? metadata;
 
   const SwapQuote({
     required this.aggregator,
@@ -29,27 +17,6 @@ class SwapQuote {
     this.crossChainInfo,
     this.metadata,
   });
-
-  /// Calculate the effective exchange rate
-  double get exchangeRate {
-    if (outputAmount == BigInt.zero) return 0.0;
-    return outputAmount.toDouble() / params.amount.toDouble();
-  }
-
-  /// Calculate the total cost including gas
-  BigInt get totalCost => gasCost;
-
-  /// Calculate net output amount after gas costs (in output token terms)
-  BigInt get netOutputAmount {
-    // This is a simplified calculation - in reality you'd need to convert gas cost to output token
-    return outputAmount;
-  }
-
-  /// Check if the quote is still valid
-  bool get isValid => DateTime.now().isBefore(DateTime.now().add(validUntil));
-
-  /// Check if this is a cross-chain swap
-  bool get isCrossChain => crossChainInfo != null;
 
   factory SwapQuote.fromJson(Map<String, dynamic> json) {
     return SwapQuote(
@@ -77,6 +44,39 @@ class SwapQuote {
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
   }
+  final String aggregator;
+  final SwapParams params;
+  final BigInt outputAmount;
+  final BigInt minimumOutputAmount;
+  final SwapRoute route;
+  final SwapTransaction transaction;
+  final BigInt estimatedGas;
+  final BigInt gasCost;
+  final double priceImpact;
+  final Duration validUntil;
+  final CrossChainSwapInfo? crossChainInfo;
+  final Map<String, dynamic>? metadata;
+
+  /// Calculate the effective exchange rate
+  double get exchangeRate {
+    if (outputAmount == BigInt.zero) return 0;
+    return outputAmount.toDouble() / params.amount.toDouble();
+  }
+
+  /// Calculate the total cost including gas
+  BigInt get totalCost => gasCost;
+
+  /// Calculate net output amount after gas costs (in output token terms)
+  BigInt get netOutputAmount {
+    // This is a simplified calculation - in reality you'd need to convert gas cost to output token
+    return outputAmount;
+  }
+
+  /// Check if the quote is still valid
+  bool get isValid => DateTime.now().isBefore(DateTime.now().add(validUntil));
+
+  /// Check if this is a cross-chain swap
+  bool get isCrossChain => crossChainInfo != null;
 
   Map<String, dynamic> toJson() {
     return {
@@ -112,11 +112,6 @@ class SwapQuote {
 
 /// Comparison result between two quotes
 class QuoteComparison {
-  final SwapQuote quote1;
-  final SwapQuote quote2;
-  final BigInt outputDifference;
-  final BigInt gasDifference;
-  final double priceImpactDifference;
 
   const QuoteComparison({
     required this.quote1,
@@ -125,6 +120,11 @@ class QuoteComparison {
     required this.gasDifference,
     required this.priceImpactDifference,
   });
+  final SwapQuote quote1;
+  final SwapQuote quote2;
+  final BigInt outputDifference;
+  final BigInt gasDifference;
+  final double priceImpactDifference;
 
   /// Returns true if quote1 is better than quote2
   bool get isQuote1Better => outputDifference > BigInt.zero;

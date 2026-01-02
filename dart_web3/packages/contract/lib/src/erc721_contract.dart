@@ -1,4 +1,3 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 import 'contract.dart';
 import 'event_filter.dart';
@@ -6,17 +5,15 @@ import 'event_filter.dart';
 /// ERC-721 NFT contract implementation.
 class ERC721Contract extends Contract {
   ERC721Contract({
-    required String address,
-    required PublicClient publicClient,
-    WalletClient? walletClient,
+    required super.address,
+    required super.publicClient,
+    super.walletClient,
   }) : super(
-          address: address,
           abi: _erc721Abi,
-          publicClient: publicClient,
-          walletClient: walletClient,
         );
 
-  static const String _erc721Abi = '''[
+  static const String _erc721Abi = '''
+[
     {
       "type": "function",
       "name": "name",
@@ -198,25 +195,25 @@ class ERC721Contract extends Contract {
 
   /// Approves an address to transfer a specific token.
   Future<String> approve(String to, BigInt tokenId) async {
-    return await write('approve', [to, tokenId]);
+    return write('approve', [to, tokenId]);
   }
 
   /// Sets approval for all tokens.
   Future<String> setApprovalForAll(String operator, bool approved) async {
-    return await write('setApprovalForAll', [operator, approved]);
+    return write('setApprovalForAll', [operator, approved]);
   }
 
   /// Transfers a token from one address to another.
   Future<String> transferFrom(String from, String to, BigInt tokenId) async {
-    return await write('transferFrom', [from, to, tokenId]);
+    return write('transferFrom', [from, to, tokenId]);
   }
 
   /// Safely transfers a token (checks if recipient can receive NFTs).
   Future<String> safeTransferFrom(String from, String to, BigInt tokenId, [String? data]) async {
     if (data != null) {
-      return await write('safeTransferFrom', [from, to, tokenId, data]);
+      return write('safeTransferFrom', [from, to, tokenId, data]);
     } else {
-      return await write('safeTransferFrom', [from, to, tokenId]);
+      return write('safeTransferFrom', [from, to, tokenId]);
     }
   }
 
@@ -228,7 +225,7 @@ class ERC721Contract extends Contract {
       if (from != null) 'from': from,
       if (to != null) 'to': to,
       if (tokenId != null) 'tokenId': tokenId,
-    });
+    },);
   }
 
   /// Creates a filter for Approval events.
@@ -237,7 +234,7 @@ class ERC721Contract extends Contract {
       if (owner != null) 'owner': owner,
       if (approved != null) 'approved': approved,
       if (tokenId != null) 'tokenId': tokenId,
-    });
+    },);
   }
 
   /// Creates a filter for ApprovalForAll events.
@@ -245,6 +242,6 @@ class ERC721Contract extends Contract {
     return createEventFilter('ApprovalForAll', indexedArgs: {
       if (owner != null) 'owner': owner,
       if (operator != null) 'operator': operator,
-    });
+    },);
   }
 }

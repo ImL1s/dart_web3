@@ -16,3 +16,6 @@ dependencies:
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
+  dart_web3_abi: any
+  dart_web3_chains: any
+  dart_web3_provider: any

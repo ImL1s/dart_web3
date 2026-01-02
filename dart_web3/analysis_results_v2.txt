@@ -1,0 +1,950 @@
+$ melos analyze
+  └> dart analyze --fatal-infos
+     └> RUNNING (in 33 packages)
+
+--------------------------------------------------------------------------------
+dart_web3:
+Analyzing dart_web3...
+
+   info - example\main.dart:29:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - example\main.dart:40:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\dart_web3.dart:34:53 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+3 issues found.
+--------------------------------------------------------------------------------
+dart_web3_aa:
+Analyzing aa...
+
+warning - lib\src\accounts\light_account.dart:108:8 - TODO: Use proper ABI encoder from dart_web3_abi - todo
+warning - lib\src\accounts\simple_account.dart:112:8 - TODO: Use proper ABI encoder from dart_web3_abi - todo
+warning - lib\src\bundler_client.dart:109:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\bundler_client.dart:166:8 - TODO: This should be configurable or fetched from the bundler - todo
+warning - lib\src\entry_point.dart:756:8 - TODO: Parse revert data to extract validation result - todo
+warning - lib\src\paymaster.dart:119:16 - The value of the field '_paymasterUrl' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\paymaster.dart:122:29 - The value of the field '_headers' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\paymaster.dart:194:16 - The value of the field '_entryPointAddress' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\smart_account.dart:67:8 - TODO: Use ABI encoder to encode the function call - todo
+warning - lib\src\smart_account.dart:191:52 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+warning - lib\src\user_operation.dart:373:10 - TODO: Implement proper authorization encoding - todo
+warning - test\bundler_client_test.dart:7:24 - The value of the local variable 'testUserOp' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - test\user_operation_test.dart:347:20 - The type argument(s) of 'Map' can't be inferred. Use explicit type argument(s) for 'Map'. - inference_failure_on_collection_literal
+   info - lib\src\accounts\light_account.dart:129:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\accounts\light_account.dart:150:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\accounts\light_account.dart:234:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\accounts\simple_account.dart:170:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bundler_client.dart:68:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bundler_client.dart:86:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bundler_client.dart:302:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\entry_point.dart:731:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\entry_point.dart:867:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\entry_point.dart:890:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\entry_point.dart:941:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\paymaster.dart:144:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:158:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:171:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:242:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:335:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\paymaster.dart:434:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\smart_account.dart:226:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\smart_account.dart:227:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\smart_account.dart:235:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\user_operation.dart:601:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\user_operation.dart:616:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\user_operation.dart:767:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\bundler_client_test.dart:192:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\user_operation_test.dart:366:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+38 issues found.
+--------------------------------------------------------------------------------
+dart_web3_abi:
+Analyzing abi...
+
+warning - test\parser_test.dart:196:24 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\decoder.dart:88:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\decoder.dart:99:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\parser.dart:13:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:22:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\parser.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\pretty_printer.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:55:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:56:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:60:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:74:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:75:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:154:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\pretty_printer.dart:182:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\typed_data.dart:25:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:26:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\typed_data.dart:163:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:192:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\types.dart:223:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\abi_fixes_test.dart:235:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:236:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_fixes_test.dart:237:15 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:39:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:40:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:41:27 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:42:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_official_vector_test.dart:59:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\abi_property_test.dart:35:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:83:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:139:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:198:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\abi_property_test.dart:282:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\typed_data_test.dart:158:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+
+33 issues found.
+--------------------------------------------------------------------------------
+dart_web3_bc_ur:
+Analyzing bc_ur...
+
+warning - lib\src\animated_qr.dart:110:3 - The generic type 'StreamSubscription<dynamic>?' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>?'. - strict_raw_type
+warning - lib\src\animated_qr.dart:110:23 - The value of the field '_subscription' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\bc_ur_decoder.dart:143:45 - The generic type 'Map<dynamic, dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'Map<dynamic, dynamic>'. - strict_raw_type
+warning - lib\src\cbor_decoder.dart:79:3 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+warning - lib\src\cbor_decoder.dart:90:3 - The generic type 'Map<dynamic, dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'Map<dynamic, dynamic>'. - strict_raw_type
+warning - lib\src\cbor_encoder.dart:130:21 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+warning - lib\src\cbor_encoder.dart:151:19 - The generic type 'Map<dynamic, dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'Map<dynamic, dynamic>'. - strict_raw_type
+warning - lib\src\fountain_encoder.dart:11:19 - The value of the field '_data' isn't used. Try removing the field, or using it. - unused_field
+   info - lib\dart_web3_bc_ur.dart:15:36 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\animated_qr.dart:89:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\animated_qr.dart:94:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\animated_qr.dart:110:23 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\animated_qr.dart:110:23 - Use 'late' for private members with a non-nullable type. Try making adding the modifier 'late'. - use_late_for_private_fields_and_variables
+   info - lib\src\animated_qr.dart:174:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bc_ur_decoder.dart:199:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bc_ur_encoder.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\bc_ur_encoder.dart:119:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bc_ur_registry.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\bc_ur_registry.dart:91:25 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bc_ur_registry.dart:120:23 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bc_ur_registry.dart:126:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\cbor_decoder.dart:13:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_decoder.dart:14:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_decoder.dart:156:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\cbor_encoder.dart:12:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:59:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:62:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:65:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:68:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:78:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:81:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:84:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:87:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:102:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:105:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:118:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:121:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:124:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:137:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:140:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:143:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:158:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:161:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:164:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\cbor_encoder.dart:201:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\fountain_decoder.dart:143:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\fountain_encoder.dart:136:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\bc_ur_test.dart:127:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+49 issues found.
+--------------------------------------------------------------------------------
+dart_web3_bitcoin:
+Analyzing bitcoin...
+
+warning - pubspec.yaml:18:3 - The dev dependency on dart_web3_crypto is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+   info - lib\dart_web3_bitcoin.dart:3:52 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+2 issues found.
+--------------------------------------------------------------------------------
+dart_web3_bridge:
+Analyzing bridge...
+
+warning - lib\src\bridge_tracker.dart:106:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+   info - lib\dart_web3_bridge.dart:12:45 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_quote.dart:186:32 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\bridge_quote.dart:309:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_service.dart:128:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:163:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:227:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:254:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:297:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_service.dart:364:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_tracker.dart:79:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:113:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:222:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bridge_tracker.dart:405:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bridge_types.dart:56:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:64:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\bridge_types.dart:394:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\bridge_protocol.dart:165:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\layerzero_bridge.dart:172:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:258:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\layerzero_bridge.dart:367:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\native_bridge.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protocols\native_bridge.dart:350:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\stargate_bridge.dart:169:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:249:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\stargate_bridge.dart:390:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protocols\wormhole_bridge.dart:175:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\protocols\wormhole_bridge.dart:365:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+29 issues found.
+--------------------------------------------------------------------------------
+dart_web3_chains:
+Analyzing chains...
+
+   info - test\chain_config_test.dart:78:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\chains_test.dart:297:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+2 issues found.
+--------------------------------------------------------------------------------
+dart_web3_client:
+Analyzing client...
+
+warning - test\client_property_test.dart:67:27 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\models.dart:33:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\wallet_client.dart:297:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\client_property_test.dart:16:8 - Unreachable member 'setResponse' in an executable library. Try referencing the member or removing it. - unreachable_from_main
+   info - test\client_property_test.dart:532:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+5 issues found.
+--------------------------------------------------------------------------------
+dart_web3_contract:
+Analyzing contract...
+
+warning - lib\src\contract_factory.dart:59:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - pubspec.yaml:26:3 - The dev dependency on dart_web3_signer is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+   info - lib\src\contract.dart:122:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\contract.dart:249:13 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\contract.dart:297:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\contract_factory.dart:135:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\erc1155_contract.dart:158:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\erc1155_contract.dart:226:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\erc20_contract.dart:183:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\erc721_contract.dart:202:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\erc721_contract.dart:247:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\event_filter.dart:37:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\simulate_result.dart:30:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\typed_contract.dart:24:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\contract_factory_test.dart:98:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\contract_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\contract_test.dart:255:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\erc20_contract_test.dart:161:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\mock_client.dart:42:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_client.dart:82:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_client.dart:223:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+21 issues found.
+--------------------------------------------------------------------------------
+dart_web3_core:
+Analyzing core...
+
+warning - test\core_property_test.dart:296:31 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+warning - test\rlp_test.dart:33:27 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:49:11 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:50:12 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:52:13 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:53:14 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+warning - test\rlp_test.dart:140:13 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+   info - lib\src\address.dart:133:30 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\address.dart:139:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\address.dart:146:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\hex.dart:26:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\rlp.dart:103:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\rlp_official_vector_test.dart:31:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\rlp_official_vector_test.dart:33:29 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\rlp_official_vector_test.dart:34:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\rlp_official_vector_test.dart:50:16 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+16 issues found.
+--------------------------------------------------------------------------------
+dart_web3_crypto:
+Analyzing crypto...
+
+warning - lib\src\bip39.dart:138:11 - The value of the local variable 'checksumBits' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\curves.dart:48:23 - The value of the field '_p' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\curves.dart:49:23 - The value of the field '_l' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\curves.dart:50:23 - The value of the field '_d' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\keccak.dart:45:17 - A value for optional parameter 'digestLength' isn't ever given. Try removing the unused parameter. - unused_element
+warning - test\mnemonic_test.dart:72:15 - The value of the local variable 'mnemonicString' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib\dart_web3_crypto.dart:28:24 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\bip39.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\bip39.dart:85:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\bip39.dart:101:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\bip39.dart:102:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\bip39.dart:179:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\curves.dart:258:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\curves.dart:280:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\hd_wallet.dart:117:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:218:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:221:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:224:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:229:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\hd_wallet.dart:256:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\hd_wallet.dart:296:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\keccak.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\keccak.dart:45:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\keccak.dart:78:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\keccak.dart:96:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\mnemonic.dart:74:44 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\mnemonic.dart:126:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\pbkdf2.dart:66:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ripemd160.dart:19:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ripemd160.dart:108:25 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+   info - lib\src\secp256k1.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\secp256k1.dart:73:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\secp256k1.dart:124:16 - Use 'isEven' rather than '% 2'. Try using 'isEven'. - use_is_even_rather_than_modulo
+   info - lib\src\secp256k1.dart:187:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\secp256k1.dart:206:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:263:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:343:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\secp256k1.dart:351:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\secp256k1.dart:352:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\crypto_property_test.dart:54:15 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:64:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:149:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:210:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\crypto_property_test.dart:235:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+44 issues found.
+--------------------------------------------------------------------------------
+dart_web3_dapp:
+Analyzing dapp...
+
+   info - lib\dart_web3_dapp.dart:3:33 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+1 issue found.
+--------------------------------------------------------------------------------
+dart_web3_debug:
+Analyzing debug...
+
+   info - lib\dart_web3_debug.dart:4:31 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\debug_service_test.dart:30:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+2 issues found.
+--------------------------------------------------------------------------------
+dart_web3_ens:
+Analyzing ens...
+
+warning - test\ens_records_test.dart:67:15 - The value of the local variable 'textEncoded' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - test\ens_resolver_test.dart:125:15 - The value of the local variable 'resolver' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib\src\ens_client.dart:155:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ens_records.dart:49:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_records.dart:158:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_records.dart:207:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_records.dart:257:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_records.dart:263:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_records.dart:373:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ens_resolver.dart:50:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:99:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:137:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:155:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ens_resolver.dart:183:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_resolver.dart:189:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\ens_resolver.dart:277:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multichain_resolver.dart:55:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\multichain_resolver.dart:134:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\multichain_resolver.dart:242:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\multichain_resolver.dart:248:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\multichain_resolver.dart:320:20 - The constant name 'bitcoin_cash' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - constant_identifier_names
+   info - lib\src\multichain_resolver.dart:325:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\ens_client_test.dart:206:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\ens_records_test.dart:166:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\ens_resolver_test.dart:132:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\mock_client.dart:112:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+26 issues found.
+--------------------------------------------------------------------------------
+dart_web3_events:
+Analyzing events...
+
+warning - lib\src\confirmation_filter.dart:69:11 - The value of the local variable 'controller' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\event_listener.dart:22:21 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\event_subscriber.dart:74:15 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\event_subscriber.dart:77:15 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\event_subscriber.dart:98:14 - The type argument(s) of the constructor 'Stream.periodic' can't be inferred. Use explicit type argument(s) for 'Stream.periodic'. - inference_failure_on_instance_creation
+warning - pubspec.yaml:19:3 - The dev dependency on dart_web3_provider is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+   info - lib\src\confirmation_filter.dart:50:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\confirmation_filter.dart:69:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\confirmation_filter.dart:101:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\confirmation_filter.dart:203:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\confirmation_filter.dart:309:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\event_filter.dart:104:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\event_filter.dart:115:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\event_filter.dart:145:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\event_listener.dart:59:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:94:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:151:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:178:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+   info - lib\src\event_listener.dart:239:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\event_subscriber.dart:75:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\event_subscriber.dart:190:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\reorg_handler.dart:119:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\reorg_handler.dart:157:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\reorg_handler.dart:292:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\event_filter_test.dart:168:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\event_listener_test.dart:298:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\event_subscriber_test.dart:291:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\mock_client.dart:245:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+28 issues found.
+--------------------------------------------------------------------------------
+dart_web3_history:
+Analyzing history...
+
+warning - lib\src\history_service.dart:12:22 - The value of the field '_client' isn't used. Try removing the field, or using it. - unused_field
+   info - lib\dart_web3_history.dart:4:33 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+2 issues found.
+--------------------------------------------------------------------------------
+dart_web3_keystone:
+Analyzing keystone...
+
+warning - lib\src\keystone_client.dart:48:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\keystone_client.dart:187:5 - The generic type 'StreamSubscription<dynamic>?' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>?'. - strict_raw_type
+warning - lib\src\multi_chain_support.dart:26:11 - The value of the local variable 'requestId' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\multi_chain_support.dart:29:11 - The value of the local variable 'urData' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\multi_chain_support.dart:33:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\multi_chain_support.dart:105:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+warning - lib\src\multi_chain_support.dart:112:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\qr_communication.dart:58:19 - The type of error can't be inferred; a type must be explicitly provided. Try specifying the type of the parameter. - inference_failure_on_untyped_parameter
+   info - lib\dart_web3_keystone.dart:11:36 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\keystone_client.dart:227:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\keystone_client.dart:289:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\keystone_signer.dart:254:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\keystone_types.dart:133:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multi_chain_support.dart:144:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\multi_chain_support.dart:166:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\qr_communication.dart:56:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\qr_communication.dart:63:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\qr_communication.dart:113:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\qr_communication.dart:203:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\keystone_test.dart:200:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+20 issues found.
+--------------------------------------------------------------------------------
+dart_web3_ledger:
+Analyzing ledger...
+
+warning - lib\src\ledger_transport.dart:35:17 - The value of the field '_device' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\ledger_transport.dart:56:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:76:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:92:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:113:17 - The value of the field '_device' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\ledger_transport.dart:134:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:154:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:169:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:210:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:228:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\ledger_transport.dart:253:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\multi_chain_support.dart:157:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+warning - lib\src\multi_chain_support.dart:234:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+warning - test\ledger_test.dart:257:13 - The value of the local variable 'mockSignature' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib\dart_web3_ledger.dart:12:39 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\apdu_commands.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\apdu_commands.dart:117:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\apdu_commands.dart:157:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\apdu_commands.dart:285:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ledger_client.dart:266:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ledger_signer.dart:311:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ledger_transport.dart:276:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\ledger_transport.dart:302:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ledger_types.dart:83:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ledger_types.dart:88:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\ledger_types.dart:236:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multi_chain_support.dart:246:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:283:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\multi_chain_support.dart:305:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\ledger_test.dart:346:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+30 issues found.
+--------------------------------------------------------------------------------
+dart_web3_mev:
+Analyzing mev...
+
+warning - lib\src\mev_service.dart:11:17 - The value of the field '_authSigner' isn't used. Try removing the field, or using it. - unused_field
+warning - test\mev_service_test.dart:23:31 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+   info - lib\dart_web3_mev.dart:4:31 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\mev_service.dart:11:17 - Use 'late' for private members with a non-nullable type. Try making adding the modifier 'late'. - use_late_for_private_fields_and_variables
+
+4 issues found.
+--------------------------------------------------------------------------------
+dart_web3_mpc:
+Analyzing mpc...
+
+warning - lib\src\key_generation.dart:210:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_generation.dart:216:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_generation.dart:226:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_generation.dart:231:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_generation.dart:356:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_refresh.dart:193:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_refresh.dart:199:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_refresh.dart:209:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_refresh.dart:214:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\key_refresh.dart:349:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:195:21 - The value of the field '_baseUrl' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\mpc_provider.dart:198:34 - The value of the field '_headers' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\mpc_provider.dart:214:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:223:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:232:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:251:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:262:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:270:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:279:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:288:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:303:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:309:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:320:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:348:21 - The value of the field '_baseUrl' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\mpc_provider.dart:351:34 - The value of the field '_headers' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\mpc_provider.dart:366:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:375:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:382:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:399:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:409:11 - The value of the local variable 'requestBody' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\mpc_provider.dart:416:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:423:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:429:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:442:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:447:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:457:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\mpc_provider.dart:665:17 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\signing_coordinator.dart:182:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\signing_coordinator.dart:192:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\signing_coordinator.dart:210:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\signing_coordinator.dart:220:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\signing_coordinator.dart:262:14 - The value of the field '_signature' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\signing_coordinator.dart:353:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+   info - lib\src\key_generation.dart:499:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\key_generation.dart:548:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\key_refresh.dart:464:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\key_refresh.dart:549:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\mpc_provider.dart:471:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\mpc_provider.dart:710:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\mpc_signer.dart:337:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\mpc_signer.dart:403:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\mpc_types.dart:298:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\signing_coordinator.dart:262:14 - Use 'late' for private members with a non-nullable type. Try making adding the modifier 'late'. - use_late_for_private_fields_and_variables
+   info - lib\src\signing_coordinator.dart:442:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\threshold_signature.dart:246:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\threshold_signature.dart:564:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\threshold_signature.dart:700:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\threshold_signature.dart:743:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\mpc_test.dart:488:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+59 issues found.
+--------------------------------------------------------------------------------
+dart_web3_multicall:
+Analyzing multicall...
+
+warning - lib\src\multicall.dart:51:23 - The value of the field '_walletClient' isn't used. Try removing the field, or using it. - unused_field
+warning - pubspec.yaml:20:3 - The dev dependency on dart_web3_abi is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+warning - test\mock_contract.dart:45:13 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+   info - lib\src\multicall.dart:362:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multicall_builder.dart:27:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:42:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:48:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:54:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\multicall_builder.dart:140:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\multicall_builder.dart:215:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multicall_error.dart:101:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multicall_factory.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\multicall_factory.dart:146:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\mock_client.dart:43:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_client.dart:84:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_client.dart:225:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\mock_contract.dart:119:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:123:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:127:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:131:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+   info - test\mock_contract.dart:163:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\multicall_builder_test.dart:92:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:96:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:162:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:183:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:207:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:246:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\multicall_builder_test.dart:347:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\multicall_error_test.dart:134:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\multicall_factory_test.dart:145:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\multicall_test.dart:217:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+32 issues found.
+--------------------------------------------------------------------------------
+dart_web3_nft:
+Analyzing nft...
+
+warning - test\nft_service_test.dart:121:38 - The generic type 'List<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'List<dynamic>'. - strict_raw_type
+   info - lib\dart_web3_nft.dart:16:29 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\ipfs_gateway.dart:52:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ipfs_gateway.dart:75:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ipfs_gateway.dart:96:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\ipfs_gateway.dart:123:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\ipfs_gateway.dart:133:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\ipfs_gateway.dart:148:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\nft_collection.dart:67:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:143:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:173:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:178:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:197:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:215:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:233:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:277:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:296:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_collection.dart:446:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\nft_metadata.dart:44:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:54:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:132:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:151:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:184:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_metadata.dart:201:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\nft_service.dart:253:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\nft_transfer.dart:35:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_transfer.dart:60:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\nft_transfer.dart:330:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\nft_types.dart:64:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\nft_types.dart:73:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\nft_types.dart:306:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\nft_service_test.dart:176:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+33 issues found.
+--------------------------------------------------------------------------------
+dart_web3_polkadot:
+Analyzing polkadot...
+
+warning - pubspec.yaml:8:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:10:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\dart_web3_polkadot.dart:3:31 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\scale_codec.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+
+5 issues found.
+--------------------------------------------------------------------------------
+dart_web3_price:
+Analyzing price...
+
+warning - pubspec.yaml:8:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\dart_web3_price.dart:3:33 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\price_service.dart:21:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:36:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\price_service.dart:39:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:54:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:71:28 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\price_service.dart:77:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\price_service.dart:86:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - test\price_service_test.dart:8:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+
+11 issues found.
+--------------------------------------------------------------------------------
+dart_web3_provider:
+Analyzing provider...
+
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\src\provider.dart:76:62 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\provider.dart:81:65 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+   info - lib\src\websocket_transport.dart:53:13 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\websocket_transport.dart:130:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\websocket_transport.dart:144:5 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - test\provider_property_test.dart:88:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\provider_property_test.dart:118:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\provider_property_test.dart:218:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+9 issues found.
+--------------------------------------------------------------------------------
+dart_web3_reown:
+Analyzing reown...
+
+warning - lib\src\connection_manager.dart:31:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\connection_manager.dart:79:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\relay_client.dart:284:21 - The type argument(s) of 'Map' can't be inferred. Use explicit type argument(s) for 'Map'. - inference_failure_on_collection_literal
+warning - lib\src\reown_client.dart:35:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\reown_client.dart:36:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\session_manager.dart:20:8 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+warning - lib\src\siwe_auth.dart:480:10 - The generic type 'StreamSubscription<dynamic>' should have explicit type arguments but doesn't. Use explicit type arguments for 'StreamSubscription<dynamic>'. - strict_raw_type
+   info - lib\src\connection_manager.dart:56:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\connection_manager.dart:82:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\connection_manager.dart:186:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\connection_manager.dart:447:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\namespace_config.dart:113:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\namespace_config.dart:125:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\namespace_config.dart:157:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\namespace_config.dart:394:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\namespace_config.dart:445:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\namespace_config.dart:455:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\namespace_config.dart:459:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\pairing_uri.dart:129:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\pairing_uri.dart:139:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\pairing_uri.dart:144:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\relay_client.dart:62:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\relay_client.dart:87:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\relay_client.dart:164:5 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - lib\src\relay_client.dart:170:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\relay_client.dart:227:15 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+   info - lib\src\relay_client.dart:237:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\relay_client.dart:338:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\reown_client.dart:349:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\reown_client.dart:389:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\reown_signer.dart:436:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\reown_signer.dart:476:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\session_manager.dart:312:45 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\session_manager.dart:528:17 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\session_manager.dart:614:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\siwe_auth.dart:114:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\siwe_auth.dart:303:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:304:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:305:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:309:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:313:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:314:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:315:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:316:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\siwe_auth.dart:522:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\connection_manager_test.dart:107:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\namespace_config_test.dart:169:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\pairing_uri_test.dart:78:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\siwe_auth_test.dart:240:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+49 issues found.
+--------------------------------------------------------------------------------
+dart_web3_signer:
+Analyzing signer...
+
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:14:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:16:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\src\authorization.dart:173:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_batch.dart:164:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\authorization_batch.dart:224:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_batch.dart:236:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\authorization_revocation.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\authorization_revocation.dart:212:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\authorization_verifier.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\authorization_verifier.dart:80:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_verifier.dart:123:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\authorization_verifier.dart:148:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\transaction.dart:23:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - test\eip7702_test.dart:276:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\eip7702_test.dart:277:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\eip7702_test.dart:278:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - test\eip7702_test.dart:410:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\signer_property_test.dart:41:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:86:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:139:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:186:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:234:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:279:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - test\signer_property_test.dart:343:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+25 issues found.
+--------------------------------------------------------------------------------
+dart_web3_solana:
+Analyzing solana...
+
+warning - pubspec.yaml:8:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:10:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\dart_web3_solana.dart:4:32 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\solana_types.dart:8:36 - The parameter 'address' is not used in the constructor. Try using the parameter or removing it. - avoid_unused_constructor_parameters
+
+5 issues found.
+--------------------------------------------------------------------------------
+dart_web3_staking:
+Analyzing staking...
+
+warning - pubspec.yaml:8:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:10:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\dart_web3_staking.dart:4:33 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\staking_service.dart:94:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+5 issues found.
+--------------------------------------------------------------------------------
+dart_web3_swap:
+Analyzing swap...
+
+  error - lib\src\swap_service.dart:113:30 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\swap_service.dart:119:56 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+warning - lib\src\aggregators\paraswap_aggregator.dart:293:19 - The value of the local variable 'srcToken' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\aggregators\paraswap_aggregator.dart:294:19 - The value of the local variable 'destToken' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - lib\src\swap_service.dart:312:13 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\swap_tracker.dart:75:15 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\swap_tracker.dart:184:18 - The value of the local variable 'log' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - pubspec.yaml:10:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:14:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+   info - lib\dart_web3_swap.dart:15:34 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\aggregators\aggregator_interface.dart:102:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\aggregators\oneinch_aggregator.dart:104:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\oneinch_aggregator.dart:123:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\oneinch_aggregator.dart:263:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\oneinch_aggregator.dart:278:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\aggregators\paraswap_aggregator.dart:86:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\paraswap_aggregator.dart:105:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\paraswap_aggregator.dart:323:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\paraswap_aggregator.dart:338:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\aggregators\rango_aggregator.dart:86:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\rango_aggregator.dart:115:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\rango_aggregator.dart:345:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\rango_aggregator.dart:360:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\aggregators\zerox_aggregator.dart:104:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\zerox_aggregator.dart:129:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\zerox_aggregator.dart:198:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\aggregators\zerox_aggregator.dart:308:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\aggregators\zerox_aggregator.dart:323:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\mev_protection.dart:128:31 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\mev_protection.dart:182:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\mev_protection.dart:237:34 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+   info - lib\src\mev_protection.dart:354:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\slippage_calculator.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\slippage_calculator.dart:281:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\swap_quote.dart:135:26 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\swap_quote.dart:144:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\swap_service.dart:102:17 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+   info - lib\src\swap_service.dart:156:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:173:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:198:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:249:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:261:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:308:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_service.dart:379:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\swap_tracker.dart:82:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:108:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:161:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:198:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:208:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\swap_tracker.dart:390:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\swap_types.dart:44:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\swap_types.dart:52:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\swap_types.dart:246:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\token_approval.dart:51:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:119:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:201:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:244:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\token_approval.dart:332:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+60 issues found.
+--------------------------------------------------------------------------------
+dart_web3_ton:
+Analyzing ton...
+
+warning - pubspec.yaml:8:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:10:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:17:3 - The dev dependency on dart_web3_crypto is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+
+4 issues found.
+--------------------------------------------------------------------------------
+dart_web3_trezor:
+Analyzing trezor...
+
+warning - lib\src\multi_chain_support.dart:138:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+warning - lib\src\multi_chain_support.dart:265:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+warning - lib\src\trezor_transport.dart:32:17 - The value of the field '_device' isn't used. Try removing the field, or using it. - unused_field
+warning - lib\src\trezor_transport.dart:50:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\trezor_transport.dart:70:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\trezor_transport.dart:101:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\trezor_transport.dart:146:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\trezor_transport.dart:164:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - lib\src\trezor_transport.dart:211:11 - The type argument(s) of the constructor 'Future.delayed' can't be inferred. Use explicit type argument(s) for 'Future.delayed'. - inference_failure_on_instance_creation
+warning - pubspec.yaml:21:3 - The dev dependency on dart_web3_abi is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+   info - lib\dart_web3_trezor.dart:12:32 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\multi_chain_support.dart:167:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:172:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:173:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:189:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:194:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:195:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:211:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:216:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:217:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:281:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\multi_chain_support.dart:303:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\protobuf_messages.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\protobuf_messages.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:56:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:62:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:63:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:69:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:70:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:76:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:77:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:84:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:85:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:91:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:92:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:98:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:105:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:123:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:128:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:129:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:146:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:159:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:160:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:270:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\protobuf_messages.dart:289:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\trezor_client.dart:362:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\trezor_signer.dart:245:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\trezor_transport.dart:274:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\trezor_transport.dart:295:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - lib\src\trezor_types.dart:138:24 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\trezor_types.dart:337:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+   info - test\trezor_test.dart:358:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+
+54 issues found.
+--------------------------------------------------------------------------------
+dart_web3_tron:
+Analyzing tron...
+
+warning - pubspec.yaml:8:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:10:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:12:5 - Publishable packages can't have 'path' dependencies. Try adding a 'publish_to: none' entry to mark the package as not for publishing or remove the path dependency. - invalid_dependency
+warning - pubspec.yaml:17:3 - The dev dependency on dart_web3_crypto is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+
+4 issues found.
+--------------------------------------------------------------------------------
+
+$ melos analyze
+  └> dart analyze --fatal-infos
+     └> FAILED (in 33 packages)
+        └> dart_web3 (with exit code 1)
+        └> dart_web3_aa (with exit code 2)
+        └> dart_web3_abi (with exit code 2)
+        └> dart_web3_bc_ur (with exit code 2)
+        └> dart_web3_bitcoin (with exit code 2)
+        └> dart_web3_bridge (with exit code 2)
+        └> dart_web3_chains (with exit code 1)
+        └> dart_web3_client (with exit code 2)
+        └> dart_web3_contract (with exit code 2)
+        └> dart_web3_core (with exit code 2)
+        └> dart_web3_crypto (with exit code 2)
+        └> dart_web3_dapp (with exit code 1)
+        └> dart_web3_debug (with exit code 1)
+        └> dart_web3_ens (with exit code 2)
+        └> dart_web3_events (with exit code 2)
+        └> dart_web3_history (with exit code 2)
+        └> dart_web3_keystone (with exit code 2)
+        └> dart_web3_ledger (with exit code 2)
+        └> dart_web3_mev (with exit code 2)
+        └> dart_web3_mpc (with exit code 2)
+        └> dart_web3_multicall (with exit code 2)
+        └> dart_web3_nft (with exit code 2)
+        └> dart_web3_polkadot (with exit code 2)
+        └> dart_web3_price (with exit code 2)
+        └> dart_web3_provider (with exit code 2)
+        └> dart_web3_reown (with exit code 2)
+        └> dart_web3_signer (with exit code 2)
+        └> dart_web3_solana (with exit code 2)
+        └> dart_web3_staking (with exit code 2)
+        └> dart_web3_swap (with exit code 3)
+        └> dart_web3_ton (with exit code 2)
+        └> dart_web3_trezor (with exit code 2)
+        └> dart_web3_tron (with exit code 2)

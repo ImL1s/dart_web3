@@ -1,6 +1,7 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_bc_ur/dart_web3_bc_ur.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('BC-UR Encoding/Decoding', () {
@@ -18,7 +19,7 @@ void main() {
     
     test('should handle multi-part encoding', () {
       final largeData = Uint8List(1000);
-      for (int i = 0; i < largeData.length; i++) {
+      for (var i = 0; i < largeData.length; i++) {
         largeData[i] = i % 256;
       }
       
@@ -81,7 +82,7 @@ void main() {
   group('Fountain Codes', () {
     test('should encode and decode with fountain codes', () {
       final data = Uint8List(500);
-      for (int i = 0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         data[i] = i % 256;
       }
       
@@ -92,7 +93,7 @@ void main() {
       expect(decoder.isComplete, isFalse);
       
       // Collect parts until decoding is complete
-      int partsReceived = 0;
+      var partsReceived = 0;
       while (!decoder.isComplete && partsReceived < 20) {
         final part = encoder.nextPart();
         decoder.receivePart(part);

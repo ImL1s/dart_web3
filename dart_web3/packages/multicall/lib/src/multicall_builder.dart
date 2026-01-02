@@ -1,6 +1,8 @@
 import 'dart:typed_data';
-import 'package:dart_web3_contract/dart_web3_contract.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_contract/dart_web3_contract.dart';
+
 import 'multicall.dart';
 
 /// Builder for creating multicall batches with type-safe contract calls.
@@ -20,7 +22,7 @@ class MulticallBuilder {
       target: contract.address,
       callData: callData,
       allowFailure: allowFailure,
-    ));
+    ),);
     
     return this;
   }
@@ -35,7 +37,7 @@ class MulticallBuilder {
       target: target,
       callData: callData,
       allowFailure: allowFailure,
-    ));
+    ),);
     
     return this;
   }
@@ -70,7 +72,7 @@ class MulticallBuilder {
       return [];
     }
     
-    return await multicall.aggregate(_calls);
+    return multicall.aggregate(_calls);
   }
   
   /// Executes the batch with failure handling.
@@ -82,7 +84,7 @@ class MulticallBuilder {
       return [];
     }
     
-    return await multicall.tryAggregate(_calls, requireSuccess: requireSuccess);
+    return multicall.tryAggregate(_calls, requireSuccess: requireSuccess);
   }
   
   /// Executes the batch and returns block information.
@@ -95,7 +97,7 @@ class MulticallBuilder {
       );
     }
     
-    return await multicall.aggregateWithBlock(_calls);
+    return multicall.aggregateWithBlock(_calls);
   }
   
   /// Estimates gas for the batch.
@@ -104,7 +106,7 @@ class MulticallBuilder {
       return BigInt.zero;
     }
     
-    return await multicall.estimateGas(_calls);
+    return multicall.estimateGas(_calls);
   }
 }
 
@@ -198,12 +200,12 @@ class MulticallUtils {
     
     // Convert to bytes and pad to 32 bytes
     final bytes = <int>[];
-    for (int i = 0; i < 12; i++) {
+    for (var i = 0; i < 12; i++) {
       bytes.add(0); // 12 zero bytes for padding
     }
     
     // Add the 20-byte address
-    for (int i = 0; i < cleanAddress.length; i += 2) {
+    for (var i = 0; i < cleanAddress.length; i += 2) {
       final hex = cleanAddress.substring(i, i + 2);
       bytes.add(int.parse(hex, radix: 16));
     }

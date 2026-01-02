@@ -7,6 +7,12 @@ import 'event_subscriber.dart';
 
 /// Filters events based on block confirmations.
 class ConfirmationFilter {
+
+  ConfirmationFilter(
+    this.subscriber, {
+    this.requiredConfirmations = 12,
+    this.checkInterval = const Duration(seconds: 30),
+  });
   /// The event subscriber.
   final EventSubscriber subscriber;
 
@@ -21,12 +27,6 @@ class ConfirmationFilter {
 
   /// Confirmation check interval.
   final Duration checkInterval;
-
-  ConfirmationFilter(
-    this.subscriber, {
-    this.requiredConfirmations = 12,
-    this.checkInterval = const Duration(seconds: 30),
-  });
 
   /// Filters events to only emit those with sufficient confirmations.
   /// 
@@ -47,7 +47,7 @@ class ConfirmationFilter {
         yield log;
       }
     } finally {
-      subscription.cancel();
+      unawaited(subscription.cancel());
       _stopConfirmationTimer();
     }
   }
@@ -62,12 +62,10 @@ class ConfirmationFilter {
   /// Returns a subscription that can be cancelled.
   StreamSubscription<Log> filterWithCallback(
     EventFilter filter, {
-    int? confirmations,
-    required void Function(Log) onConfirmed,
+    required void Function(Log) onConfirmed, int? confirmations,
     void Function(Log, int)? onPending,
   }) {
     final requiredConf = confirmations ?? requiredConfirmations;
-    final controller = StreamController<Log>();
 
     // Custom pending logs for this filter
     final pendingLogs = <String, _PendingLog>{};
@@ -75,7 +73,7 @@ class ConfirmationFilter {
     // Timer for this specific filter
     Timer? timer;
 
-    void checkConfirmations() async {
+    Future<void> checkConfirmations() async {
       try {
         final currentBlock = await subscriber.publicClient.getBlockNumber();
         final confirmedKeys = <String>[];
@@ -215,17 +213,23 @@ class ConfirmationFilter {
 
 /// Represents a log waiting for confirmations.
 class _PendingLog {
+
+  _PendingLog(this.log, this.timestamp);
   /// The log.
   final Log log;
 
   /// When the log was first seen.
   final DateTime timestamp;
-
-  _PendingLog(this.log, this.timestamp);
 }
 
 /// Configuration for confirmation filtering.
 class ConfirmationConfig {
+
+  const ConfirmationConfig({
+    this.confirmations = 12,
+    this.checkInterval = const Duration(seconds: 30),
+    this.timeout,
+  });
   /// Required number of confirmations.
   final int confirmations;
 
@@ -235,12 +239,6 @@ class ConfirmationConfig {
   /// Maximum time to wait for confirmations before timing out.
   final Duration? timeout;
 
-  const ConfirmationConfig({
-    this.confirmations = 12,
-    this.checkInterval = const Duration(seconds: 30),
-    this.timeout,
-  });
-
   /// Configuration for fast confirmations (suitable for testnets).
   static const fast = ConfirmationConfig(
     confirmations: 3,
@@ -249,8 +247,7 @@ class ConfirmationConfig {
 
   /// Configuration for standard confirmations (mainnet).
   static const standard = ConfirmationConfig(
-    confirmations: 12,
-    checkInterval: Duration(seconds: 30),
+    
   );
 
   /// Configuration for high security confirmations.
@@ -262,11 +259,11 @@ class ConfirmationConfig {
 
 /// Custom subscription implementation for confirmation filtering.
 class _CustomSubscription<T> implements StreamSubscription<T> {
+
+  _CustomSubscription({Future<void> Function()? onCancel}) : _onCancel = onCancel;
   final Future<void> Function()? _onCancel;
   bool _isPaused = false;
   bool _isCanceled = false;
-
-  _CustomSubscription({Future<void> Function()? onCancel}) : _onCancel = onCancel;
 
   @override
   Future<void> cancel() async {

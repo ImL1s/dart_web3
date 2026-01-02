@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:dart_web3_chains/dart_web3_chains.dart';
 import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 
 /// Mock RPC provider for testing.
@@ -45,77 +43,77 @@ class MockRpcProvider implements RpcProvider {
 
   @override
   Future<BigInt> getBalance(String address, [String block = 'latest']) async {
-    return await call<BigInt>('eth_getBalance', [address, block]);
+    return call<BigInt>('eth_getBalance', [address, block]);
   }
 
   @override
   Future<Map<String, dynamic>?> getBlockByHash(String hash, [bool fullTx = false]) async {
-    return await call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
+    return call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
   }
 
   @override
   Future<Map<String, dynamic>?> getBlockByNumber(String block, [bool fullTx = false]) async {
-    return await call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
+    return call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
   }
 
   @override
   Future<BigInt> getBlockNumber() async {
-    return await call<BigInt>('eth_blockNumber', []);
+    return call<BigInt>('eth_blockNumber', []);
   }
 
   @override
   Future<Map<String, dynamic>?> getTransaction(String hash) async {
-    return await call<Map<String, dynamic>?>('eth_getTransactionByHash', [hash]);
+    return call<Map<String, dynamic>?>('eth_getTransactionByHash', [hash]);
   }
 
   @override
   Future<Map<String, dynamic>?> getTransactionReceipt(String hash) async {
-    return await call<Map<String, dynamic>?>('eth_getTransactionReceipt', [hash]);
+    return call<Map<String, dynamic>?>('eth_getTransactionReceipt', [hash]);
   }
 
   @override
   Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
-    return await call<BigInt>('eth_getTransactionCount', [address, block]);
+    return call<BigInt>('eth_getTransactionCount', [address, block]);
   }
 
   @override
   Future<String> ethCall(Map<String, dynamic> transaction, [String block = 'latest']) async {
-    return await call<String>('eth_call', [transaction, block]);
+    return call<String>('eth_call', [transaction, block]);
   }
 
   @override
   Future<BigInt> estimateGas(Map<String, dynamic> transaction) async {
-    return await call<BigInt>('eth_estimateGas', [transaction]);
+    return call<BigInt>('eth_estimateGas', [transaction]);
   }
 
   @override
   Future<List<Map<String, dynamic>>> getLogs(Map<String, dynamic> filter) async {
-    return await call<List<Map<String, dynamic>>>('eth_getLogs', [filter]);
+    return call<List<Map<String, dynamic>>>('eth_getLogs', [filter]);
   }
 
   @override
   Future<BigInt> getGasPrice() async {
-    return await call<BigInt>('eth_gasPrice', []);
+    return call<BigInt>('eth_gasPrice', []);
   }
 
   @override
   Future<int> getChainId() async {
-    return await call<int>('eth_chainId', []);
+    return call<int>('eth_chainId', []);
   }
 
   @override
   Future<String> getCode(String address, [String block = 'latest']) async {
-    return await call<String>('eth_getCode', [address, block]);
+    return call<String>('eth_getCode', [address, block]);
   }
 
   @override
   Future<String> sendRawTransaction(String signedTx) async {
-    return await call<String>('eth_sendRawTransaction', [signedTx]);
+    return call<String>('eth_sendRawTransaction', [signedTx]);
   }
 
   @override
   Future<String> getStorageAt(String address, String position, [String block = 'latest']) async {
-    return await call<String>('eth_getStorageAt', [address, position, block]);
+    return call<String>('eth_getStorageAt', [address, position, block]);
   }
 
   @override
@@ -233,7 +231,6 @@ class MockWebSocketTransport implements WebSocketTransport {
 
 /// Mock public client for testing.
 class MockPublicClient extends PublicClient {
-  final MockRpcProvider mockProvider;
 
   MockPublicClient()
       : mockProvider = MockRpcProvider(),
@@ -241,6 +238,7 @@ class MockPublicClient extends PublicClient {
           provider: MockRpcProvider(),
           chain: Chains.ethereum,
         );
+  final MockRpcProvider mockProvider;
 
   @override
   RpcProvider get provider => mockProvider;

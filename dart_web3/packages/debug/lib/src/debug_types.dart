@@ -2,11 +2,6 @@ import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Trace configuration
 class TraceConfig {
-  final bool disableStorage;
-  final bool disableMemory;
-  final bool disableStack;
-  final String? tracer;
-  final Map<String, dynamic>? tracerConfig;
 
   const TraceConfig({
     this.disableStorage = false,
@@ -15,6 +10,11 @@ class TraceConfig {
     this.tracer,
     this.tracerConfig,
   });
+  final bool disableStorage;
+  final bool disableMemory;
+  final bool disableStack;
+  final String? tracer;
+  final Map<String, dynamic>? tracerConfig;
 
   Map<String, dynamic> toJson() {
     return {
@@ -29,11 +29,6 @@ class TraceConfig {
 
 /// State override set
 class StateOverride {
-  final BigInt? balance;
-  final BigInt? nonce;
-  final String? code;
-  final Map<String, String>? state;
-  final Map<String, String>? stateDiff;
 
   const StateOverride({
     this.balance,
@@ -42,6 +37,11 @@ class StateOverride {
     this.state,
     this.stateDiff,
   });
+  final BigInt? balance;
+  final BigInt? nonce;
+  final String? code;
+  final Map<String, String>? state;
+  final Map<String, String>? stateDiff;
 
   Map<String, dynamic> toJson() {
     return {
@@ -56,8 +56,6 @@ class StateOverride {
 
 /// Trace result
 class TraceResult {
-  final dynamic output;
-  final TraceResultError? error;
 
   const TraceResult({
     this.output,
@@ -67,17 +65,19 @@ class TraceResult {
   factory TraceResult.fromJson(Map<String, dynamic> json) {
     return TraceResult(
       output: json['output'] ?? json['result'],
-      error: json['error'] != null ? TraceResultError.fromJson(json['error']) : null,
+      error: json['error'] != null ? TraceResultError.fromJson(json['error'] as String) : null,
     );
   }
+  final dynamic output;
+  final TraceResultError? error;
 }
 
 class TraceResultError {
-  final String message;
 
   const TraceResultError(this.message);
 
   factory TraceResultError.fromJson(String message) {
     return TraceResultError(message);
   }
+  final String message;
 }

@@ -1,6 +1,8 @@
 name: dart_web3_price
 description: Price service for cryptocurrency
 version: 0.1.0
+publish_to: none
+
 environment:
   sdk: ^3.6.0
 dependencies:

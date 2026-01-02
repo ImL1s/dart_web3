@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:test/test.dart';
 

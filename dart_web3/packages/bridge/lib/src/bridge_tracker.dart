@@ -103,7 +103,7 @@ class BridgeTracker {
     const maxAttempts = 60; // 5 minutes with 5-second intervals
     
     while (receipt == null && attempts < maxAttempts) {
-      await Future.delayed(const Duration(seconds: 5));
+      await Future<void>.delayed(const Duration(seconds: 5));
       
       try {
         final receiptData = await sourceClient.getTransactionReceipt(sourceTransactionHash);
@@ -150,8 +150,7 @@ class BridgeTracker {
     _emitStatusUpdate(bridgingInfo);
 
     // Wait for the estimated bridge time
-    final estimatedTime = trackingInfo.quote.estimatedTime;
-    await Future.delayed<void>(estimatedTime * 0.8); // Wait for 80% of estimated time
+    await Future<void>.delayed(Duration(milliseconds: (trackingInfo.quote.estimatedTime.inMilliseconds * 0.8).toInt())); // Wait for 80% of estimated time
 
     // Check if we can find the destination transaction
     await _checkForDestinationTransaction(sourceTransactionHash);
@@ -173,7 +172,7 @@ class BridgeTracker {
     const maxAttempts = 240; // 20 minutes with 5-second intervals
     
     while (attempts < maxAttempts) {
-      await Future.delayed<void>(const Duration(seconds: 5));
+      await Future<void>.delayed(const Duration(seconds: 5));
       
       final found = await _checkForDestinationTransaction(sourceTransactionHash);
       if (found) return;

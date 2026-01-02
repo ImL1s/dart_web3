@@ -1,15 +1,15 @@
-import 'transport.dart';
 import 'middleware.dart';
+import 'transport.dart';
 
 /// High-level RPC provider with middleware support.
 class RpcProvider {
+
+  RpcProvider(this.transport, {this.middlewares = const []});
   /// The underlying transport.
   final Transport transport;
 
   /// Middleware chain.
   final List<Middleware> middlewares;
-
-  RpcProvider(this.transport, {this.middlewares = const []});
 
   /// Sends an RPC request.
   Future<T> call<T>(String method, List<dynamic> params) async {
@@ -74,22 +74,22 @@ class RpcProvider {
 
   /// Gets a block by hash.
   Future<Map<String, dynamic>?> getBlockByHash(String hash, [bool fullTx = false]) async {
-    return await call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
+    return call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
   }
 
   /// Gets a block by number.
   Future<Map<String, dynamic>?> getBlockByNumber(String block, [bool fullTx = false]) async {
-    return await call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
+    return call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
   }
 
   /// Gets a transaction by hash.
   Future<Map<String, dynamic>?> getTransaction(String hash) async {
-    return await call<Map<String, dynamic>?>('eth_getTransactionByHash', [hash]);
+    return call<Map<String, dynamic>?>('eth_getTransactionByHash', [hash]);
   }
 
   /// Gets a transaction receipt.
   Future<Map<String, dynamic>?> getTransactionReceipt(String hash) async {
-    return await call<Map<String, dynamic>?>('eth_getTransactionReceipt', [hash]);
+    return call<Map<String, dynamic>?>('eth_getTransactionReceipt', [hash]);
   }
 
   /// Gets the transaction count (nonce) for an address.
@@ -112,12 +112,12 @@ class RpcProvider {
 
   /// Executes a call without creating a transaction.
   Future<String> ethCall(Map<String, dynamic> tx, [String block = 'latest']) async {
-    return await call<String>('eth_call', [tx, block]);
+    return call<String>('eth_call', [tx, block]);
   }
 
   /// Sends a raw signed transaction.
   Future<String> sendRawTransaction(String signedTx) async {
-    return await call<String>('eth_sendRawTransaction', [signedTx]);
+    return call<String>('eth_sendRawTransaction', [signedTx]);
   }
 
   /// Gets logs matching a filter.
@@ -128,12 +128,12 @@ class RpcProvider {
 
   /// Gets the code at an address.
   Future<String> getCode(String address, [String block = 'latest']) async {
-    return await call<String>('eth_getCode', [address, block]);
+    return call<String>('eth_getCode', [address, block]);
   }
 
   /// Gets storage at a position.
   Future<String> getStorageAt(String address, String position, [String block = 'latest']) async {
-    return await call<String>('eth_getStorageAt', [address, position, block]);
+    return call<String>('eth_getStorageAt', [address, position, block]);
   }
 
   /// Disposes of the provider.

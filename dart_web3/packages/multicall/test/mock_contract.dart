@@ -1,9 +1,10 @@
 import 'dart:typed_data';
-import 'package:dart_web3_contract/dart_web3_contract.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
+
 import 'package:dart_web3_chains/dart_web3_chains.dart';
+import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_contract/dart_web3_contract.dart';
 import 'package:dart_web3_multicall/dart_web3_multicall.dart';
+import 'package:dart_web3_provider/dart_web3_provider.dart';
 
 /// Mock Contract for testing multicall functionality.
 class MockContract extends Contract {
@@ -14,7 +15,8 @@ class MockContract extends Contract {
           publicClient: _createMockClient(),
         );
 
-  static const _mockAbi = '''[
+  static const _mockAbi = '''
+[
     {
       "type": "function",
       "name": "balanceOf",
@@ -39,7 +41,6 @@ class MockContract extends Contract {
     return MockPublicClientForContract();
   }
 
-  @override
   Uint8List encodeFunction(String functionName, List<dynamic> args) {
     // Mock encoding - return function selector + padded args
     switch (functionName) {

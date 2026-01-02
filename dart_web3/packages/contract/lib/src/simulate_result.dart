@@ -1,5 +1,12 @@
 /// Result of a contract function simulation.
 class SimulateResult {
+
+  SimulateResult({
+    required this.result,
+    required this.gasUsed,
+    required this.success,
+    this.revertReason,
+  });
   /// The decoded return values.
   final List<dynamic> result;
 
@@ -11,13 +18,6 @@ class SimulateResult {
 
   /// The revert reason if the simulation failed.
   final String? revertReason;
-
-  SimulateResult({
-    required this.result,
-    required this.gasUsed,
-    required this.success,
-    this.revertReason,
-  });
 
   @override
   String toString() {

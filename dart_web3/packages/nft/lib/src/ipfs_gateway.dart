@@ -4,6 +4,12 @@ import 'package:http/http.dart' as http;
 
 /// IPFS gateway manager with fallback support
 class IpfsGateway {
+
+  IpfsGateway({
+    List<String>? gateways,
+    Duration timeout = const Duration(seconds: 10),
+  })  : _gateways = List<String>.from(gateways ?? _defaultGateways),
+        _timeout = timeout;
   static const List<String> _defaultGateways = [
     'https://ipfs.io/ipfs/',
     'https://gateway.pinata.cloud/ipfs/',
@@ -15,12 +21,6 @@ class IpfsGateway {
   final List<String> _gateways;
   final Duration _timeout;
   final Map<String, String> _cache = {};
-
-  IpfsGateway({
-    List<String>? gateways,
-    Duration timeout = const Duration(seconds: 10),
-  })  : _gateways = List<String>.from(gateways ?? _defaultGateways),
-        _timeout = timeout;
 
   /// Resolve IPFS URI to HTTP URL with fallback gateways
   Future<String?> resolveUri(String uri) async {

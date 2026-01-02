@@ -1,5 +1,6 @@
 name: dart_web3_bitcoin
 description: Bitcoin blockchain extension
+publish_to: none
 version: 0.1.0
 environment:
   sdk: ^3.6.0
@@ -14,4 +15,3 @@ dependencies:
 dev_dependencies:
   test: ^1.25.0
   lints: ^5.0.0
-  dart_web3_crypto:

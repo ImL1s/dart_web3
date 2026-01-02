@@ -193,7 +193,7 @@ void main() {
                 ],
               },
             ],
-            'outputs': [],
+            'outputs': <Map<String, dynamic>>[],
             'stateMutability': 'nonpayable',
           },
         ]);

@@ -2,6 +2,14 @@ import 'package:dart_web3_abi/dart_web3_abi.dart';
 
 /// Event filter for contract event subscriptions.
 class EventFilter {
+
+  EventFilter({
+    this.address,
+    this.topics,
+    this.fromBlock,
+    this.toBlock,
+    this.event,
+  });
   /// The contract address to filter by.
   final String? address;
 
@@ -16,14 +24,6 @@ class EventFilter {
 
   /// The event definition (for decoding).
   final AbiEvent? event;
-
-  EventFilter({
-    this.address,
-    this.topics,
-    this.fromBlock,
-    this.toBlock,
-    this.event,
-  });
 
   /// Converts to JSON for RPC calls.
   Map<String, dynamic> toJson() {

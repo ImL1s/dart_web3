@@ -1,20 +1,16 @@
 import 'dart:async';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
-import 'nft_types.dart';
-import 'nft_metadata.dart';
-import 'nft_collection.dart';
-import 'nft_transfer.dart';
+
 import 'ipfs_gateway.dart';
+import 'nft_collection.dart';
+import 'nft_metadata.dart';
+import 'nft_transfer.dart';
+import 'nft_types.dart';
 
 /// Main NFT service providing comprehensive NFT functionality
 class NftService {
-  final PublicClient _publicClient;
-  final WalletClient? _walletClient;
-  final NftMetadataParser _metadataParser;
-  final NftCollectionManager _collectionManager;
-  final NftTransferManager? _transferManager;
-  final IpfsGateway _ipfsGateway;
 
   NftService({
     required PublicClient publicClient,
@@ -32,6 +28,12 @@ class NftService {
         _transferManager = walletClient != null
             ? NftTransferManager(client: walletClient)
             : null;
+  final PublicClient _publicClient;
+  final WalletClient? _walletClient;
+  final NftMetadataParser _metadataParser;
+  final NftCollectionManager _collectionManager;
+  final NftTransferManager? _transferManager;
+  final IpfsGateway _ipfsGateway;
 
   /// Get NFT collections owned by an address
   Future<List<NftCollection>> getCollections(
@@ -75,7 +77,6 @@ class NftService {
       tokens: tokens,
       totalCount: tokens.length,
       hasMore: false, // Would be determined by actual pagination
-      nextCursor: null,
     );
   }
 
@@ -85,7 +86,7 @@ class NftService {
     BigInt tokenId, {
     bool includeMetadata = true,
   }) async {
-    return await _collectionManager.getToken(
+    return _collectionManager.getToken(
       contractAddress,
       tokenId,
       includeMetadata: includeMetadata,
@@ -98,7 +99,7 @@ class NftService {
     bool includeTokens = false,
     int? tokenLimit,
   }) async {
-    return await _collectionManager.getCollection(
+    return _collectionManager.getCollection(
       contractAddress,
       includeTokens: includeTokens,
       tokenLimit: tokenLimit,
@@ -107,12 +108,12 @@ class NftService {
 
   /// Parse NFT metadata from URI
   Future<NftMetadata?> parseMetadata(String? tokenUri) async {
-    return await _metadataParser.parseMetadataWithImages(tokenUri);
+    return _metadataParser.parseMetadataWithImages(tokenUri);
   }
 
   /// Resolve IPFS URI to accessible URL
   Future<String?> resolveIpfsUri(String uri) async {
-    return await _ipfsGateway.resolveUri(uri);
+    return _ipfsGateway.resolveUri(uri);
   }
 
   /// Transfer NFT (requires wallet client)
@@ -120,7 +121,7 @@ class NftService {
     if (_transferManager == null) {
       throw Exception('Wallet client required for NFT transfers');
     }
-    return await _transferManager!.transferNft(params);
+    return _transferManager!.transferNft(params);
   }
 
   /// Check if approval is needed for NFT transfer
@@ -128,7 +129,7 @@ class NftService {
     if (_transferManager == null) {
       throw Exception('Wallet client required for approval checks');
     }
-    return await _transferManager!.needsApproval(params);
+    return _transferManager!.needsApproval(params);
   }
 
   /// Approve NFT for transfer
@@ -136,7 +137,7 @@ class NftService {
     if (_transferManager == null) {
       throw Exception('Wallet client required for NFT approvals');
     }
-    return await _transferManager!.approveNft(params);
+    return _transferManager!.approveNft(params);
   }
 
   /// Get approval status for NFT
@@ -144,7 +145,7 @@ class NftService {
     if (_transferManager == null) {
       throw Exception('Wallet client required for approval status');
     }
-    return await _transferManager!.isApproved(params);
+    return _transferManager!.isApproved(params);
   }
 
   /// Estimate gas for NFT transfer
@@ -152,7 +153,7 @@ class NftService {
     if (_transferManager == null) {
       throw Exception('Wallet client required for gas estimation');
     }
-    return await _transferManager!.estimateTransferGas(params);
+    return _transferManager!.estimateTransferGas(params);
   }
 
   /// Batch transfer multiple NFTs
@@ -160,7 +161,7 @@ class NftService {
     if (_transferManager == null) {
       throw Exception('Wallet client required for NFT transfers');
     }
-    return await _transferManager!.batchTransferNfts(transfers);
+    return _transferManager!.batchTransferNfts(transfers);
   }
 
   /// Search NFTs by metadata attributes
@@ -199,7 +200,7 @@ class NftService {
   ) async {
     // Clear cached metadata and re-fetch
     _metadataParser.clearCache();
-    await getNft(contractAddress, tokenId, includeMetadata: true);
+    await getNft(contractAddress, tokenId);
   }
 
   /// Add custom IPFS gateway

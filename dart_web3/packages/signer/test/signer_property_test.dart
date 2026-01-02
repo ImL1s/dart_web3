@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:test/test.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Signer Module Property Tests', () {
@@ -15,7 +15,7 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 100; i++) {
+      for (var i = 0; i < 100; i++) {
         // Generate random private key
         final privateKey = _generateValidPrivateKey(random);
         final signer = PrivateKeySigner(privateKey, 1);
@@ -29,14 +29,14 @@ void main() {
           
           // Signed transaction should not be null or empty
           expect(signedTx, isNotNull,
-            reason: 'Signed transaction should not be null');
+            reason: 'Signed transaction should not be null',);
           expect(signedTx.length, greaterThan(0),
-            reason: 'Signed transaction should not be empty');
+            reason: 'Signed transaction should not be empty',);
           
           // For any valid transaction, signing should be deterministic
           final signedTx2 = await signer.signTransaction(tx);
           expect(_uint8ListEquals(signedTx, signedTx2), isTrue,
-            reason: 'Transaction signing should be deterministic');
+            reason: 'Transaction signing should be deterministic',);
             
         } catch (e) {
           // Some edge cases might fail, but most should succeed
@@ -51,7 +51,7 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 100; i++) {
+      for (var i = 0; i < 100; i++) {
         // Generate random private key
         final privateKey = _generateValidPrivateKey(random);
         final signer = PrivateKeySigner(privateKey, 1);
@@ -59,7 +59,7 @@ void main() {
         // Generate random message
         final messageLength = random.nextInt(100) + 1;
         final message = String.fromCharCodes(
-          List.generate(messageLength, (_) => random.nextInt(95) + 32)
+          List.generate(messageLength, (_) => random.nextInt(95) + 32),
         );
         
         try {
@@ -69,19 +69,19 @@ void main() {
           
           // Same message should produce same signature (deterministic)
           expect(_uint8ListEquals(signature1, signature2), isTrue,
-            reason: 'Message signing should be deterministic');
+            reason: 'Message signing should be deterministic',);
           
           // Signature should not be null or empty
           expect(signature1, isNotNull,
-            reason: 'Message signature should not be null');
+            reason: 'Message signature should not be null',);
           expect(signature1.length, greaterThan(0),
-            reason: 'Message signature should not be empty');
+            reason: 'Message signature should not be empty',);
           
           // Different messages should produce different signatures
-          final differentMessage = message + 'x';
+          final differentMessage = '${message}x';
           final differentSignature = await signer.signMessage(differentMessage);
           expect(_uint8ListEquals(signature1, differentSignature), isFalse,
-            reason: 'Different messages should produce different signatures');
+            reason: 'Different messages should produce different signatures',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -95,7 +95,7 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Generate random private key
         final privateKey = _generateValidPrivateKey(random);
         final signer = PrivateKeySigner(privateKey, 1);
@@ -106,7 +106,7 @@ void main() {
             'name': 'Test Domain',
             'version': '1',
             'chainId': 1,
-            'verifyingContract': '0x' + '0' * 40,
+            'verifyingContract': '0x${'0' * 40}',
           },
           types: {
             'TestMessage': [
@@ -128,13 +128,13 @@ void main() {
           
           // Same typed data should produce same signature (deterministic)
           expect(_uint8ListEquals(signature1, signature2), isTrue,
-            reason: 'Typed data signing should be deterministic');
+            reason: 'Typed data signing should be deterministic',);
           
           // Signature should not be null or empty
           expect(signature1, isNotNull,
-            reason: 'Typed data signature should not be null');
+            reason: 'Typed data signature should not be null',);
           expect(signature1.length, greaterThan(0),
-            reason: 'Typed data signature should not be empty');
+            reason: 'Typed data signature should not be empty',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -148,7 +148,7 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Generate random private key
         final privateKey = _generateValidPrivateKey(random);
         final chainId = random.nextInt(1000) + 1;
@@ -157,7 +157,7 @@ void main() {
         // Create legacy transaction
         final tx = TransactionRequest(
           type: TransactionType.legacy,
-          to: '0x' + List.generate(40, (_) => random.nextInt(16).toRadixString(16)).join(),
+          to: '0x${List.generate(40, (_) => random.nextInt(16).toRadixString(16)).join()}',
           value: BigInt.from(random.nextInt(1000000)),
           gasLimit: BigInt.from(21000 + random.nextInt(100000)),
           gasPrice: BigInt.from(random.nextInt(100) + 1) * BigInt.from(1000000000), // 1-100 gwei
@@ -171,9 +171,9 @@ void main() {
           
           // Signed transaction should include chain ID protection
           expect(signedTx, isNotNull,
-            reason: 'Signed legacy transaction should not be null');
+            reason: 'Signed legacy transaction should not be null',);
           expect(signedTx.length, greaterThan(0),
-            reason: 'Signed legacy transaction should not be empty');
+            reason: 'Signed legacy transaction should not be empty',);
           
           // Different chain IDs should produce different signatures
           final differentChainSigner = PrivateKeySigner(privateKey, chainId + 1);
@@ -181,7 +181,7 @@ void main() {
           final differentSignature = await differentChainSigner.signTransaction(differentChainTx);
           
           expect(_uint8ListEquals(signedTx, differentSignature), isFalse,
-            reason: 'Different chain IDs should produce different signatures');
+            reason: 'Different chain IDs should produce different signatures',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -195,7 +195,7 @@ void main() {
       
       final random = Random.secure();
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         // Generate random private key
         final privateKey = _generateValidPrivateKey(random);
         final signer = PrivateKeySigner(privateKey, 1);
@@ -205,8 +205,7 @@ void main() {
         final maxFeePerGas = maxPriorityFeePerGas + BigInt.from(random.nextInt(50) + 10) * BigInt.from(1000000000); // higher than priority
         
         final tx = TransactionRequest(
-          type: TransactionType.eip1559,
-          to: '0x' + List.generate(40, (_) => random.nextInt(16).toRadixString(16)).join(),
+          to: '0x${List.generate(40, (_) => random.nextInt(16).toRadixString(16)).join()}',
           value: BigInt.from(random.nextInt(1000000)),
           gasLimit: BigInt.from(21000 + random.nextInt(100000)),
           maxFeePerGas: maxFeePerGas,
@@ -221,16 +220,16 @@ void main() {
           
           // Signed transaction should not be null or empty
           expect(signedTx, isNotNull,
-            reason: 'Signed EIP-1559 transaction should not be null');
+            reason: 'Signed EIP-1559 transaction should not be null',);
           expect(signedTx.length, greaterThan(0),
-            reason: 'Signed EIP-1559 transaction should not be empty');
+            reason: 'Signed EIP-1559 transaction should not be empty',);
           
           // Different fee values should produce different signatures
           final differentTx = tx.copyWith(maxFeePerGas: maxFeePerGas + BigInt.from(1000000000));
           final differentSignature = await signer.signTransaction(differentTx);
           
           expect(_uint8ListEquals(signedTx, differentSignature), isFalse,
-            reason: 'Different fee values should produce different signatures');
+            reason: 'Different fee values should produce different signatures',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -242,10 +241,10 @@ void main() {
       // **Feature: dart-web3-sdk, Property 11: Mnemonic to Private Key Derivation**
       // **Validates: Requirements 2.10**
       
-      for (int i = 0; i < 50; i++) {
+      for (var i = 0; i < 50; i++) {
         try {
           // Generate mnemonic
-          final mnemonic = Bip39.generate(strength: 128);
+          final mnemonic = Bip39.generate();
           
           // Create signer from mnemonic
           final signer1 = PrivateKeySigner.fromMnemonic(mnemonic, 1);
@@ -253,17 +252,16 @@ void main() {
           
           // Same mnemonic should produce same address
           expect(signer1.address.toString(), equals(signer2.address.toString()),
-            reason: 'Same mnemonic should produce same address');
+            reason: 'Same mnemonic should produce same address',);
           
           // Different paths should produce different addresses
           final signer3 = PrivateKeySigner.fromMnemonic(mnemonic, 1, path: "m/44'/60'/0'/0/1");
           expect(signer1.address.toString(), isNot(equals(signer3.address.toString())),
-            reason: 'Different derivation paths should produce different addresses');
+            reason: 'Different derivation paths should produce different addresses',);
           
           // Should be able to sign transactions
           final tx = TransactionRequest(
-            type: TransactionType.eip1559,
-            to: '0x' + '0' * 40,
+            to: '0x${'0' * 40}',
             value: BigInt.from(1000),
             gasLimit: BigInt.from(21000),
             maxFeePerGas: BigInt.from(20000000000),
@@ -274,9 +272,9 @@ void main() {
           
           final signature = await signer1.signTransaction(tx);
           expect(signature, isNotNull,
-            reason: 'Should be able to sign transaction with mnemonic-derived signer');
+            reason: 'Should be able to sign transaction with mnemonic-derived signer',);
           expect(signature.length, greaterThan(0),
-            reason: 'Signature should not be empty');
+            reason: 'Signature should not be empty',);
             
         } catch (e) {
           // Some edge cases might fail in simplified implementation
@@ -293,7 +291,7 @@ Uint8List _generateValidPrivateKey(Random random) {
   
   while (true) {
     final privateKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       privateKey[i] = random.nextInt(256);
     }
     
@@ -317,7 +315,7 @@ TransactionRequest _generateRandomTransaction(Random random) {
   
   return TransactionRequest(
     type: type,
-    to: '0x' + List.generate(40, (_) => random.nextInt(16).toRadixString(16)).join(),
+    to: '0x${List.generate(40, (_) => random.nextInt(16).toRadixString(16)).join()}',
     value: BigInt.from(random.nextInt(1000000)),
     gasLimit: BigInt.from(21000 + random.nextInt(100000)),
     gasPrice: type == TransactionType.legacy ? BigInt.from(random.nextInt(100) + 1) * BigInt.from(1000000000) : null,
@@ -329,8 +327,8 @@ TransactionRequest _generateRandomTransaction(Random random) {
 }
 
 BigInt _bytesToBigInt(Uint8List bytes) {
-  BigInt result = BigInt.zero;
-  for (int i = 0; i < bytes.length; i++) {
+  var result = BigInt.zero;
+  for (var i = 0; i < bytes.length; i++) {
     result = (result << 8) + BigInt.from(bytes[i]);
   }
   return result;
@@ -338,7 +336,7 @@ BigInt _bytesToBigInt(Uint8List bytes) {
 
 bool _uint8ListEquals(Uint8List a, Uint8List b) {
   if (a.length != b.length) return false;
-  for (int i = 0; i < a.length; i++) {
+  for (var i = 0; i < a.length; i++) {
     if (a[i] != b[i]) return false;
   }
   return true;

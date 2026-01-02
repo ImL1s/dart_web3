@@ -4,13 +4,13 @@ import 'fountain_encoder.dart';
 /// Fountain decoder for reconstructing data from multiple QR code fragments
 /// Based on the Luby Transform fountain code algorithm
 class FountainDecoder {
+  
+  FountainDecoder(this._fragmentLength);
   final int _fragmentLength;
   final Map<int, Uint8List> _solvedFragments = {};
   final List<FountainPart> _receivedParts = [];
   int? _expectedFragmentCount;
   bool _isComplete = false;
-  
-  FountainDecoder(this._fragmentLength);
   
   /// Check if decoding is complete
   bool get isComplete => _isComplete;
@@ -23,7 +23,7 @@ class FountainDecoder {
   
   /// Get completion percentage (0.0 to 1.0)
   double get progress {
-    if (_expectedFragmentCount == null) return 0.0;
+    if (_expectedFragmentCount == null) return 0;
     return _solvedFragments.length / _expectedFragmentCount!;
   }
   
@@ -48,7 +48,7 @@ class FountainDecoder {
     }
     
     // Check if we already have all fragments referenced by this part
-    final hasAllFragments = part.fragmentIndexes.every((index) => _solvedFragments.containsKey(index));
+    final hasAllFragments = part.fragmentIndexes.every(_solvedFragments.containsKey);
     if (hasAllFragments) {
       return false; // This part doesn't provide new information
     }
@@ -72,7 +72,7 @@ class FountainDecoder {
     if (!_isComplete || _expectedFragmentCount == null) return null;
     
     final result = BytesBuilder();
-    for (int i = 0; i < _expectedFragmentCount!; i++) {
+    for (var i = 0; i < _expectedFragmentCount!; i++) {
       final fragment = _solvedFragments[i];
       if (fragment == null) return null;
       result.add(fragment);
@@ -83,14 +83,14 @@ class FountainDecoder {
   
   /// Process received parts to solve fragments
   bool _processReceivedParts() {
-    bool madeProgress = false;
+    var madeProgress = false;
     
     // Keep processing until no more progress can be made
-    bool continueProcessing = true;
+    var continueProcessing = true;
     while (continueProcessing) {
       continueProcessing = false;
       
-      for (int i = 0; i < _receivedParts.length; i++) {
+      for (var i = 0; i < _receivedParts.length; i++) {
         final part = _receivedParts[i];
         
         // Find unsolved fragments in this part
@@ -124,7 +124,7 @@ class FountainDecoder {
     for (final index in part.fragmentIndexes) {
       final knownFragment = _solvedFragments[index];
       if (knownFragment != null) {
-        for (int i = 0; i < _fragmentLength; i++) {
+        for (var i = 0; i < _fragmentLength; i++) {
           result[i] ^= knownFragment[i];
         }
       }

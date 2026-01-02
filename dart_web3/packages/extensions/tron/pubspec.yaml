@@ -1,6 +1,7 @@
 name: dart_web3_tron
-description: Tron blockchain extension
-version: 0.1.0
+description: TRON support library for dart_web3.
+publish_to: none
+version: 0.0.1
 environment:
   sdk: ^3.6.0
 dependencies:
@@ -13,5 +14,3 @@ dependencies:
 
 dev_dependencies:
   test: ^1.25.0
-  lints: ^5.0.0
-  dart_web3_crypto:

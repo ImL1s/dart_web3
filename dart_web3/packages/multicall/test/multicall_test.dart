@@ -1,22 +1,20 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_multicall/dart_web3_multicall.dart';
+import 'package:test/test.dart';
+
 import 'mock_client.dart';
 
 void main() {
   group('Multicall', () {
     late MockPublicClient publicClient;
-    late MockWalletClient walletClient;
     late Multicall multicall;
 
     setUp(() {
       publicClient = MockPublicClient();
-      walletClient = MockWalletClient();
       multicall = Multicall(
         publicClient: publicClient,
-        walletClient: walletClient,
         contractAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
-        version: MulticallVersion.v3,
       );
     });
 
@@ -61,7 +59,7 @@ void main() {
       test('should handle empty calls list', () async {
         publicClient.mockCall(Uint8List.fromList([
           ...List.filled(31, 0), 0, // Empty array
-        ]));
+        ]),);
 
         final results = await multicall.aggregate([]);
         expect(results, isEmpty);

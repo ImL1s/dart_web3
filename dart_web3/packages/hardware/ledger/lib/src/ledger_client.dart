@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'ledger_types.dart';
-import 'ledger_transport.dart';
+
 import 'apdu_commands.dart';
+import 'ledger_transport.dart';
+import 'ledger_types.dart';
 
 /// Ledger hardware wallet client
 class LedgerClient {
+  
+  LedgerClient(this._transport);
   final LedgerTransport _transport;
   LedgerConnectionState _state = LedgerConnectionState.disconnected;
   LedgerDevice? _device;
   EthereumAppConfig? _appConfig;
   final StreamController<LedgerConnectionState> _stateController = StreamController.broadcast();
-  
-  LedgerClient(this._transport);
   
   /// Current connection state
   LedgerConnectionState get state => _state;
@@ -32,7 +32,7 @@ class LedgerClient {
   
   /// Discover available Ledger devices
   Future<List<LedgerDevice>> discoverDevices() async {
-    return await _transport.discoverDevices();
+    return _transport.discoverDevices();
   }
   
   /// Connect to Ledger device
@@ -101,7 +101,7 @@ class LedgerClient {
   }) async {
     final accounts = <LedgerAccount>[];
     
-    for (int i = offset; i < offset + count; i++) {
+    for (var i = offset; i < offset + count; i++) {
       final path = '$basePath/$i';
       final account = await getAccount(path);
       accounts.add(account);
@@ -247,7 +247,7 @@ class LedgerClient {
     final parts = derivationPath.split('/');
     if (parts.isNotEmpty) {
       final lastPart = parts.last;
-      final cleanPart = lastPart.replaceAll("'", "").replaceAll('h', '');
+      final cleanPart = lastPart.replaceAll("'", '').replaceAll('h', '');
       return int.tryParse(cleanPart) ?? 0;
     }
     return 0;
@@ -261,6 +261,6 @@ class LedgerClient {
   
   /// Send raw APDU command (for multi-chain support)
   Future<APDUResponse> sendCommand(APDUCommand command) async {
-    return await _transport.exchange(command);
+    return _transport.exchange(command);
   }
 }

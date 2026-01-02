@@ -1,7 +1,4 @@
-import 'dart:typed_data';
 
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_events/dart_web3_events.dart';
 import 'package:test/test.dart';
 
@@ -132,7 +129,7 @@ void main() {
       final subscriberWithoutWs = EventSubscriber(mockClient);
 
       expect(
-        () => subscriberWithoutWs.watchPendingTransactions(),
+        subscriberWithoutWs.watchPendingTransactions,
         throwsA(isA<StateError>()),
       );
     });
@@ -240,7 +237,7 @@ void main() {
         'transactionIndex': '0x0',
         'logIndex': '0x0',
         'removed': false,
-      });
+      },);
 
       mockClient.mockProvider.setResponse('eth_getLogs', mockLogs);
 

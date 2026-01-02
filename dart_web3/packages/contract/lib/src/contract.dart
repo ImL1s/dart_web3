@@ -11,6 +11,15 @@ import 'simulate_result.dart';
 
 /// Smart contract abstraction for type-safe contract interactions.
 class Contract {
+
+  Contract({
+    required this.address,
+    required String abi,
+    required this.publicClient,
+    this.walletClient,
+  })  : functions = AbiParser.parseFunctions(abi),
+        events = AbiParser.parseEvents(abi),
+        errors = AbiParser.parseErrors(abi);
   /// The contract address.
   final String address;
 
@@ -28,15 +37,6 @@ class Contract {
 
   /// The wallet client for write operations (optional).
   final WalletClient? walletClient;
-
-  Contract({
-    required this.address,
-    required String abi,
-    required this.publicClient,
-    this.walletClient,
-  })  : functions = AbiParser.parseFunctions(abi),
-        events = AbiParser.parseEvents(abi),
-        errors = AbiParser.parseErrors(abi);
 
   /// Executes a read-only contract function call.
   Future<List<dynamic>> read(
@@ -86,7 +86,7 @@ class Contract {
       maxPriorityFeePerGas: maxPriorityFeePerGas,
     );
 
-    return await walletClient!.sendTransaction(request);
+    return walletClient!.sendTransaction(request);
   }
 
   /// Simulates a contract function call.
@@ -118,7 +118,6 @@ class Contract {
         result: decoded,
         gasUsed: gasUsed,
         success: true,
-        revertReason: null,
       );
     } catch (e) {
       // Try to decode error message
@@ -155,7 +154,7 @@ class Contract {
       value: value,
     );
 
-    return await publicClient.estimateGas(request);
+    return publicClient.estimateGas(request);
   }
 
   /// Creates an event filter for the specified event.
@@ -282,7 +281,7 @@ class Contract {
       // Static types are encoded normally but padded to 32 bytes
       final encoded = type.encode(value);
       if (encoded.length < 32) {
-        return BytesUtils.pad(encoded, 32, left: true);
+        return BytesUtils.pad(encoded, 32);
       }
       return encoded;
     }

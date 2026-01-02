@@ -1,10 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_chains/dart_web3_chains.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 import 'models.dart';
@@ -12,14 +10,14 @@ import 'public_client.dart';
 
 /// Wallet client for signing and sending transactions.
 class WalletClient extends PublicClient {
-  /// The signer.
-  Signer signer;
 
   WalletClient({
     required super.provider,
     required super.chain,
     required this.signer,
   });
+  /// The signer.
+  Signer signer;
 
   /// The wallet address.
   EthereumAddress get address => signer.address;
@@ -33,33 +31,33 @@ class WalletClient extends PublicClient {
     final signedTx = await signer.signTransaction(prepared);
 
     // Send the signed transaction
-    return await sendRawTransaction(HexUtils.encode(signedTx));
+    return sendRawTransaction(HexUtils.encode(signedTx));
   }
 
   /// Sends a raw signed transaction.
   Future<String> sendRawTransaction(String signedTx) async {
-    return await provider.sendRawTransaction(signedTx);
+    return provider.sendRawTransaction(signedTx);
   }
 
   /// Signs a message.
   Future<Uint8List> signMessage(String message) async {
-    return await signer.signMessage(message);
+    return signer.signMessage(message);
   }
 
   /// Signs typed data (EIP-712).
   Future<Uint8List> signTypedData(TypedData typedData) async {
-    return await signer.signTypedData(typedData);
+    return signer.signTypedData(typedData);
   }
 
   /// Signs a transaction without sending.
   Future<Uint8List> signTransaction(TransactionRequest transaction) async {
     final prepared = await prepareTransaction(transaction);
-    return await signer.signTransaction(prepared);
+    return signer.signTransaction(prepared);
   }
 
   /// Signs an EIP-7702 authorization.
   Future<Uint8List> signAuthorization(Authorization authorization) async {
-    return await signer.signAuthorization(authorization);
+    return signer.signAuthorization(authorization);
   }
 
   /// Creates and signs an EIP-7702 authorization for contract delegation.
@@ -94,7 +92,7 @@ class WalletClient extends PublicClient {
   }) async {
     final authorizations = <Authorization>[];
     
-    for (int i = 0; i < contractAddresses.length; i++) {
+    for (var i = 0; i < contractAddresses.length; i++) {
       final authorization = await createAuthorization(
         contractAddress: contractAddresses[i],
         nonce: startingNonce + BigInt.from(i),
@@ -130,10 +128,9 @@ class WalletClient extends PublicClient {
 
   /// Sends an EIP-7702 transaction with authorization list.
   Future<String> sendEip7702Transaction({
-    String? to,
+    required List<Authorization> authorizationList, String? to,
     BigInt? value,
     Uint8List? data,
-    required List<Authorization> authorizationList,
     BigInt? gasLimit,
     BigInt? maxFeePerGas,
     BigInt? maxPriorityFeePerGas,
@@ -151,7 +148,7 @@ class WalletClient extends PublicClient {
       nonce: nonce,
     );
 
-    return await sendTransaction(request);
+    return sendTransaction(request);
   }
 
   /// Calls a method on a delegated contract.
@@ -177,7 +174,7 @@ class WalletClient extends PublicClient {
     );
 
     // Send EIP-7702 transaction
-    return await sendEip7702Transaction(
+    return sendEip7702Transaction(
       to: address.hex, // Call to self with delegated code
       value: value,
       data: data,
@@ -197,7 +194,7 @@ class WalletClient extends PublicClient {
   }) async {
     final revocation = await createRevocation(nonce: nonce);
 
-    return await sendEip7702Transaction(
+    return sendEip7702Transaction(
       authorizationList: [revocation],
       gasLimit: gasLimit,
       maxFeePerGas: maxFeePerGas,
@@ -219,7 +216,7 @@ class WalletClient extends PublicClient {
       revocations.add(revocation);
     }
 
-    return await sendEip7702Transaction(
+    return sendEip7702Transaction(
       authorizationList: revocations,
       gasLimit: gasLimit,
       maxFeePerGas: maxFeePerGas,
@@ -229,10 +226,9 @@ class WalletClient extends PublicClient {
 
   /// Estimates gas for an EIP-7702 transaction.
   Future<BigInt> estimateEip7702Gas({
-    String? to,
+    required List<Authorization> authorizationList, String? to,
     BigInt? value,
     Uint8List? data,
-    required List<Authorization> authorizationList,
   }) async {
     final request = CallRequest(
       from: address.hex,
@@ -251,10 +247,10 @@ class WalletClient extends PublicClient {
 
   /// Transfers native currency.
   Future<String> transfer(String to, BigInt amount) async {
-    return await sendTransaction(TransactionRequest(
+    return sendTransaction(TransactionRequest(
       to: to,
       value: amount,
-    ));
+    ),);
   }
 
   /// Prepares a transaction by filling in missing fields.
@@ -316,8 +312,8 @@ class WalletClient extends PublicClient {
   }
 
   BigInt _bytesToBigInt(Uint8List bytes) {
-    BigInt result = BigInt.zero;
-    for (int i = 0; i < bytes.length; i++) {
+    var result = BigInt.zero;
+    for (var i = 0; i < bytes.length; i++) {
       result = (result << 8) + BigInt.from(bytes[i]);
     }
     return result;

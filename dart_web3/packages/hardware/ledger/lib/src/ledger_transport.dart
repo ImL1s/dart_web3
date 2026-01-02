@@ -32,7 +32,7 @@ abstract class LedgerTransport {
 /// USB transport implementation (mock for pure Dart)
 class LedgerUSBTransport implements LedgerTransport {
   bool _isConnected = false;
-  LedgerDevice? _device;
+
   
   @override
   LedgerTransportType get type => LedgerTransportType.usb;
@@ -53,14 +53,14 @@ class LedgerUSBTransport implements LedgerTransport {
     }
     
     // Mock connection
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     _isConnected = true;
   }
   
   @override
   Future<void> disconnect() async {
     _isConnected = false;
-    _device = null;
+
   }
   
   @override
@@ -73,7 +73,7 @@ class LedgerUSBTransport implements LedgerTransport {
     }
     
     // Mock APDU exchange - in real implementation, this would communicate with USB device
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     
     // Return mock success response
     return APDUResponse(
@@ -89,7 +89,7 @@ class LedgerUSBTransport implements LedgerTransport {
     }
     
     // Mock device discovery
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
     
     return [
       LedgerDevice(
@@ -110,7 +110,7 @@ class LedgerUSBTransport implements LedgerTransport {
 /// Bluetooth Low Energy transport implementation (mock for pure Dart)
 class LedgerBLETransport implements LedgerTransport {
   bool _isConnected = false;
-  LedgerDevice? _device;
+
   
   @override
   LedgerTransportType get type => LedgerTransportType.ble;
@@ -131,14 +131,14 @@ class LedgerBLETransport implements LedgerTransport {
     }
     
     // Mock connection
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
     _isConnected = true;
   }
   
   @override
   Future<void> disconnect() async {
     _isConnected = false;
-    _device = null;
+
   }
   
   @override
@@ -151,7 +151,7 @@ class LedgerBLETransport implements LedgerTransport {
     }
     
     // Mock APDU exchange
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future<void>.delayed(const Duration(milliseconds: 200));
     
     return APDUResponse(
       data: Uint8List.fromList([0x90, 0x00]),
@@ -166,7 +166,7 @@ class LedgerBLETransport implements LedgerTransport {
     }
     
     // Mock device discovery
-    await Future.delayed(const Duration(milliseconds: 2000));
+    await Future<void>.delayed(const Duration(milliseconds: 2000));
     
     return [
       LedgerDevice(
@@ -207,7 +207,7 @@ class MockLedgerTransport implements LedgerTransport {
   
   @override
   Future<void> connect() async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     _isConnected = true;
   }
   
@@ -225,7 +225,7 @@ class MockLedgerTransport implements LedgerTransport {
       );
     }
     
-    await Future.delayed(const Duration(milliseconds: 50));
+    await Future<void>.delayed(const Duration(milliseconds: 50));
     
     final key = _commandKey(command);
     final response = _mockResponses[key];
@@ -250,7 +250,7 @@ class MockLedgerTransport implements LedgerTransport {
   
   @override
   Future<List<LedgerDevice>> discoverDevices() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     
     return [
       LedgerDevice(

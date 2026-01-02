@@ -1,6 +1,4 @@
-import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
@@ -58,7 +56,7 @@ class ContractFactory {
     const maxAttempts = 60; // Wait up to 60 seconds
 
     while (receipt == null && attempts < maxAttempts) {
-      await Future.delayed(const Duration(seconds: 1));
+      await Future<void>.delayed(const Duration(seconds: 1));
       receipt = await walletClient.getTransactionReceipt(txHash);
       attempts++;
     }
@@ -111,12 +109,18 @@ class ContractFactory {
       value: value,
     );
 
-    return await publicClient.estimateGas(request);
+    return publicClient.estimateGas(request);
   }
 }
 
 /// Result of a contract deployment.
 class DeployResult {
+
+  DeployResult({
+    required this.contract,
+    required this.transactionHash,
+    required this.receipt,
+  });
   /// The deployed contract instance.
   final Contract contract;
 
@@ -125,12 +129,6 @@ class DeployResult {
 
   /// The deployment transaction receipt.
   final TransactionReceipt receipt;
-
-  DeployResult({
-    required this.contract,
-    required this.transactionHash,
-    required this.receipt,
-  });
 
   /// The deployed contract address.
   String get address => contract.address;

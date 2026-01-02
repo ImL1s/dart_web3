@@ -15,7 +15,8 @@ void main() {
     late Contract contract;
 
     const contractAddress = '0x1234567890123456789012345678901234567890';
-    const erc20Abi = '''[
+    const erc20Abi = '''
+[
       {
         "type": "function",
         "name": "balanceOf",
@@ -164,7 +165,7 @@ void main() {
         final filter = contract.createEventFilter('Transfer', indexedArgs: {
           'from': '0x0000000000000000000000000000000000001111',
           'to': '0x0000000000000000000000000000000000002222',
-        });
+        },);
 
         // Assert
         expect(filter.address, equals(contractAddress));

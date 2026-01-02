@@ -2,10 +2,6 @@ import 'dart:typed_data';
 
 /// Keystone device information
 class KeystoneDevice {
-  final String deviceId;
-  final String name;
-  final String version;
-  final List<String> supportedCurves;
   
   KeystoneDevice({
     required this.deviceId,
@@ -13,14 +9,14 @@ class KeystoneDevice {
     required this.version,
     required this.supportedCurves,
   });
+  final String deviceId;
+  final String name;
+  final String version;
+  final List<String> supportedCurves;
 }
 
 /// Keystone account information
 class KeystoneAccount {
-  final String address;
-  final String derivationPath;
-  final Uint8List publicKey;
-  final String? name;
   
   KeystoneAccount({
     required this.address,
@@ -28,15 +24,14 @@ class KeystoneAccount {
     required this.publicKey,
     this.name,
   });
+  final String address;
+  final String derivationPath;
+  final Uint8List publicKey;
+  final String? name;
 }
 
 /// Keystone signing request
 class KeystoneSignRequest {
-  final Uint8List requestId;
-  final Uint8List data;
-  final KeystoneDataType dataType;
-  final String derivationPath;
-  final int? chainId;
   
   KeystoneSignRequest({
     required this.requestId,
@@ -45,19 +40,24 @@ class KeystoneSignRequest {
     required this.derivationPath,
     this.chainId,
   });
+  final Uint8List requestId;
+  final Uint8List data;
+  final KeystoneDataType dataType;
+  final String derivationPath;
+  final int? chainId;
 }
 
 /// Keystone signing response
 class KeystoneSignResponse {
-  final Uint8List requestId;
-  final Uint8List signature;
-  final String? error;
   
   KeystoneSignResponse({
     required this.requestId,
     required this.signature,
     this.error,
   });
+  final Uint8List requestId;
+  final Uint8List signature;
+  final String? error;
   
   bool get isSuccess => error == null;
 }
@@ -84,25 +84,25 @@ enum QRCommunicationState {
 
 /// QR scan result
 class QRScanResult {
-  final String data;
-  final DateTime timestamp;
   
   QRScanResult({
     required this.data,
     required this.timestamp,
   });
+  final String data;
+  final DateTime timestamp;
 }
 
 /// Multi-part QR progress
 class QRProgress {
-  final int currentPart;
-  final int totalParts;
-  final double percentage;
   
   QRProgress({
     required this.currentPart,
     required this.totalParts,
   }) : percentage = totalParts > 0 ? currentPart / totalParts : 0.0;
+  final int currentPart;
+  final int totalParts;
+  final double percentage;
   
   bool get isComplete => currentPart >= totalParts;
 }
@@ -120,11 +120,11 @@ enum KeystoneErrorType {
 
 /// Keystone exception
 class KeystoneException implements Exception {
+  
+  KeystoneException(this.type, this.message, [this.originalError]);
   final KeystoneErrorType type;
   final String message;
   final dynamic originalError;
-  
-  KeystoneException(this.type, this.message, [this.originalError]);
   
   @override
   String toString() {

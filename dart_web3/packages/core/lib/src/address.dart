@@ -8,8 +8,6 @@ import 'hex.dart';
 ///
 /// Supports EIP-55 checksum encoding for mixed-case addresses.
 class EthereumAddress {
-  /// The raw 20-byte address.
-  final Uint8List bytes;
 
   /// Creates an EthereumAddress from raw bytes.
   ///
@@ -71,6 +69,8 @@ class EthereumAddress {
     final hash = keccak256(key);
     return EthereumAddress(BytesUtils.slice(hash, 12));
   }
+  /// The raw 20-byte address.
+  final Uint8List bytes;
 
   /// Returns the address as a lowercase hex string with 0x prefix.
   String get hex => HexUtils.encode(bytes).toLowerCase();

@@ -1,8 +1,9 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
+import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_ledger/dart_web3_ledger.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Ledger Transport', () {
@@ -167,7 +168,7 @@ void main() {
       await client.connect();
       
       // Mock responses for multiple accounts
-      for (int i = 0; i < 3; i++) {
+      for (var i = 0; i < 3; i++) {
         final command = EthereumAPDU.getPublicKey("m/44'/60'/0'/0/$i");
         final data = Uint8List.fromList([
           65, // Public key length
@@ -181,7 +182,7 @@ void main() {
       final accounts = await client.getAccounts(count: 3);
       
       expect(accounts.length, equals(3));
-      for (int i = 0; i < accounts.length; i++) {
+      for (var i = 0; i < accounts.length; i++) {
         expect(accounts[i].derivationPath, contains('/$i'));
         expect(accounts[i].index, equals(i));
       }
@@ -231,7 +232,7 @@ void main() {
     
     test('should get multiple addresses', () async {
       // Mock responses for multiple addresses
-      for (int i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         final command = EthereumAPDU.getPublicKey("m/44'/60'/0'/0/$i");
         final data = Uint8List.fromList([
           65, // Public key length
@@ -242,7 +243,7 @@ void main() {
         transport.setMockResponse(command, data);
       }
       
-      final addresses = await signer.getAddresses(count: 5);
+      final addresses = await signer.getAddresses();
       
       expect(addresses.length, equals(5));
       for (final address in addresses) {
@@ -253,12 +254,6 @@ void main() {
     
     test('should handle transaction signing', () async {
       // Mock signature response
-      final mockSignature = Uint8List.fromList([
-        0x1B, // v
-        ...List.filled(32, 0xAA), // r
-        ...List.filled(32, 0xBB), // s
-      ]);
-      
       // We can't easily mock the exact command since it depends on transaction encoding
       // So we'll just verify the method doesn't throw
       final transaction = TransactionRequest(

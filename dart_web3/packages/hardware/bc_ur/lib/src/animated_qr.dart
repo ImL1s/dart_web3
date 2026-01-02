@@ -4,14 +4,14 @@ import 'bc_ur_encoder.dart';
 
 /// Animated QR code generator for BC-UR multi-part messages
 class AnimatedQR {
+  
+  AnimatedQR(this._parts, {Duration interval = const Duration(milliseconds: 500)})
+      : _interval = interval;
   final List<String> _parts;
   final Duration _interval;
   int _currentIndex = 0;
   Timer? _timer;
   StreamController<String>? _controller;
-  
-  AnimatedQR(this._parts, {Duration interval = const Duration(milliseconds: 500)})
-      : _interval = interval;
   
   /// Get the total number of parts
   int get partCount => _parts.length;
@@ -102,12 +102,11 @@ class AnimatedQR {
 
 /// QR code animation controller with additional features
 class QRAnimationController {
+  
+  QRAnimationController(this._animatedQR);
   final AnimatedQR _animatedQR;
   bool _isPlaying = false;
   bool _isPaused = false;
-  StreamSubscription? _subscription;
-  
-  QRAnimationController(this._animatedQR);
   
   /// Check if animation is currently playing
   bool get isPlaying => _isPlaying;
@@ -168,7 +167,7 @@ class QRAnimationController {
   
   /// Get progress as percentage (0.0 to 1.0)
   double get progress {
-    if (_animatedQR.partCount <= 1) return 1.0;
+    if (_animatedQR.partCount <= 1) return 1;
     return _animatedQR.currentIndex / (_animatedQR.partCount - 1);
   }
 }

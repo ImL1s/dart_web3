@@ -1,4 +1,4 @@
-library dart_web3_debug;
+library;
 
-export 'src/debug_types.dart';
 export 'src/debug_service.dart';
+export 'src/debug_types.dart';

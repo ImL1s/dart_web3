@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'swap_types.dart';
 import 'swap_quote.dart';
+import 'swap_types.dart';
 
 /// Dynamic slippage calculator for swap operations
 class SlippageCalculator {
@@ -15,7 +15,7 @@ class SlippageCalculator {
     double maxSlippage = 0.05,   // 5% max
   }) {
     // Start with base slippage
-    double dynamicSlippage = baseSlippage;
+    var dynamicSlippage = baseSlippage;
 
     // Adjust based on price impact
     if (quotes.isNotEmpty) {
@@ -53,7 +53,7 @@ class SlippageCalculator {
     double confidenceLevel = 0.95, // 95% confidence
   }) {
     // Base slippage from price impact
-    double optimalSlippage = quote.priceImpact * 1.5;
+    var optimalSlippage = quote.priceImpact * 1.5;
 
     // Add buffer based on confidence level
     final confidenceBuffer = (1.0 - confidenceLevel) * 0.1;
@@ -144,7 +144,7 @@ class SlippageCalculator {
 
   /// Calculate variance in quote outputs (volatility indicator)
   static double _calculateQuoteVariance(List<SwapQuote> quotes) {
-    if (quotes.length < 2) return 0.0;
+    if (quotes.length < 2) return 0;
 
     final outputs = quotes.map((q) => q.outputAmount.toDouble()).toList();
     final mean = outputs.reduce((a, b) => a + b) / outputs.length;
@@ -163,13 +163,13 @@ class SlippageCalculator {
     
     // Larger swaps need more slippage tolerance
     if (normalizedAmount > 100000) {
-      return 2.0; // Very large swap
+      return 2; // Very large swap
     } else if (normalizedAmount > 10000) {
       return 1.5; // Large swap
     } else if (normalizedAmount > 1000) {
       return 1.2; // Medium swap
     } else {
-      return 1.0; // Small swap
+      return 1; // Small swap
     }
   }
 
@@ -178,14 +178,14 @@ class SlippageCalculator {
     // This is a simplified heuristic - in practice you'd use on-chain liquidity data
     
     final majorTokens = [
-      'ETH', 'WETH', 'USDC', 'USDT', 'DAI', 'WBTC', 'BTC'
+      'ETH', 'WETH', 'USDC', 'USDT', 'DAI', 'WBTC', 'BTC',
     ];
     
     final fromMajor = majorTokens.contains(fromToken.symbol.toUpperCase());
     final toMajor = majorTokens.contains(toToken.symbol.toUpperCase());
     
     if (fromMajor && toMajor) {
-      return 1.0; // High liquidity pair
+      return 1; // High liquidity pair
     } else if (fromMajor || toMajor) {
       return 1.3; // Medium liquidity pair
     } else {
@@ -212,10 +212,6 @@ class SlippageCalculator {
 
 /// Slippage tier for UI selection
 class SlippageTier {
-  final String name;
-  final double slippage;
-  final String description;
-  final bool recommended;
 
   const SlippageTier({
     required this.name,
@@ -223,6 +219,10 @@ class SlippageTier {
     required this.description,
     required this.recommended,
   });
+  final String name;
+  final double slippage;
+  final String description;
+  final bool recommended;
 
   /// Get slippage as percentage string
   String get slippagePercentage => '${(slippage * 100).toStringAsFixed(2)}%';
@@ -230,11 +230,6 @@ class SlippageTier {
 
 /// Slippage impact calculation result
 class SlippageImpact {
-  final BigInt expectedOutput;
-  final BigInt minimumOutput;
-  final BigInt potentialLoss;
-  final double lossPercentage;
-  final double slippage;
 
   const SlippageImpact({
     required this.expectedOutput,
@@ -243,6 +238,11 @@ class SlippageImpact {
     required this.lossPercentage,
     required this.slippage,
   });
+  final BigInt expectedOutput;
+  final BigInt minimumOutput;
+  final BigInt potentialLoss;
+  final double lossPercentage;
+  final double slippage;
 
   /// Get formatted loss percentage
   String get formattedLossPercentage => '${lossPercentage.toStringAsFixed(3)}%';

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_chains/dart_web3_chains.dart';
+import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 
 class MockPublicClient implements PublicClient {

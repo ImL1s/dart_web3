@@ -1,15 +1,11 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 /// ENS records resolver for text records and avatar resolution
 class ENSRecords {
-  final PublicClient _client;
-  final String _registryAddress;
-  final Map<String, dynamic> _cache = {};
-  final Duration _cacheTtl;
 
   ENSRecords({
     required PublicClient client,
@@ -18,6 +14,10 @@ class ENSRecords {
   })  : _client = client,
         _registryAddress = registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
         _cacheTtl = cacheTtl;
+  final PublicClient _client;
+  final String _registryAddress;
+  final Map<String, dynamic> _cache = {};
+  final Duration _cacheTtl;
 
   /// Get text record for ENS name
   Future<String?> getTextRecord(String name, String key) async {
@@ -70,7 +70,7 @@ class ENSRecords {
 
     // Handle NFT avatars (eip155:1/erc721:0x...)
     if (avatar.startsWith('eip155:')) {
-      return await _resolveNftAvatar(avatar);
+      return _resolveNftAvatar(avatar);
     }
 
     return avatar;
@@ -216,9 +216,9 @@ class ENSRecords {
     }
 
     final labels = name.split('.');
-    Uint8List hash = Uint8List(32); // Start with 32 zero bytes
+    var hash = Uint8List(32); // Start with 32 zero bytes
 
-    for (int i = labels.length - 1; i >= 0; i--) {
+    for (var i = labels.length - 1; i >= 0; i--) {
       final labelHash = Keccak256.hash(Uint8List.fromList(labels[i].codeUnits));
       final combined = Uint8List.fromList([...hash, ...labelHash]);
       hash = Keccak256.hash(combined);
@@ -277,7 +277,8 @@ class ENSRecords {
   }
 
   /// ENS Registry ABI (minimal)
-  static const String _ensRegistryAbi = '''[
+  static const String _ensRegistryAbi = '''
+[
     {
       "type": "function",
       "name": "resolver",
@@ -288,7 +289,8 @@ class ENSRecords {
   ]''';
 
   /// ENS Resolver ABI (minimal)
-  static const String _ensResolverAbi = '''[
+  static const String _ensResolverAbi = '''
+[
     {
       "type": "function",
       "name": "text",
@@ -302,7 +304,8 @@ class ENSRecords {
   ]''';
 
   /// ERC-721 ABI (minimal)
-  static const String _erc721Abi = '''[
+  static const String _erc721Abi = '''
+[
     {
       "type": "function",
       "name": "tokenURI",
@@ -315,19 +318,6 @@ class ENSRecords {
 
 /// ENS profile data structure
 class ENSProfile {
-  final String name;
-  final String? avatar;
-  final String? description;
-  final String? display;
-  final String? email;
-  final String? keywords;
-  final String? notice;
-  final String? location;
-  final String? phone;
-  final String? url;
-  final String? github;
-  final String? twitter;
-  final String? discord;
 
   ENSProfile({
     required this.name,
@@ -344,6 +334,19 @@ class ENSProfile {
     this.twitter,
     this.discord,
   });
+  final String name;
+  final String? avatar;
+  final String? description;
+  final String? display;
+  final String? email;
+  final String? keywords;
+  final String? notice;
+  final String? location;
+  final String? phone;
+  final String? url;
+  final String? github;
+  final String? twitter;
+  final String? discord;
 
   Map<String, dynamic> toJson() {
     return {

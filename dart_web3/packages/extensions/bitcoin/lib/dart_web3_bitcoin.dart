@@ -1,3 +1,3 @@
-library dart_web3_bitcoin;
+library;
 
 export 'src/inscriptions/inscription_service.dart';

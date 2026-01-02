@@ -1,8 +1,9 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 /// Entry Point version enumeration for ERC-4337
 enum EntryPointVersion {
@@ -20,6 +21,59 @@ enum EntryPointVersion {
 /// Supports multiple EntryPoint versions (0.6, 0.7, 0.8, 0.9) with
 /// version-specific fields and validation.
 class UserOperation {
+
+  UserOperation({
+    required this.sender,
+    required this.nonce,
+    required this.callData,
+    required this.callGasLimit,
+    required this.verificationGasLimit,
+    required this.preVerificationGas,
+    required this.maxFeePerGas,
+    required this.maxPriorityFeePerGas,
+    required this.signature,
+    this.initCode,
+    this.paymasterAndData,
+    this.factory,
+    this.factoryData,
+    this.paymaster,
+    this.paymasterData,
+    this.paymasterVerificationGasLimit,
+    this.paymasterPostOpGasLimit,
+    this.paymasterSignature,
+    this.authorization,
+  });
+
+  /// Create a UserOperation from JSON
+  factory UserOperation.fromJson(Map<String, dynamic> json) {
+    return UserOperation(
+      sender: json['sender'] as String,
+      nonce: BigInt.parse(json['nonce'] as String),
+      callData: json['callData'] as String,
+      callGasLimit: BigInt.parse(json['callGasLimit'] as String),
+      verificationGasLimit: BigInt.parse(json['verificationGasLimit'] as String),
+      preVerificationGas: BigInt.parse(json['preVerificationGas'] as String),
+      maxFeePerGas: BigInt.parse(json['maxFeePerGas'] as String),
+      maxPriorityFeePerGas: BigInt.parse(json['maxPriorityFeePerGas'] as String),
+      signature: json['signature'] as String,
+      initCode: json['initCode'] as String?,
+      paymasterAndData: json['paymasterAndData'] as String?,
+      factory: json['factory'] as String?,
+      factoryData: json['factoryData'] as String?,
+      paymaster: json['paymaster'] as String?,
+      paymasterData: json['paymasterData'] as String?,
+      paymasterVerificationGasLimit: json['paymasterVerificationGasLimit'] != null
+          ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
+          : null,
+      paymasterPostOpGasLimit: json['paymasterPostOpGasLimit'] != null
+          ? BigInt.parse(json['paymasterPostOpGasLimit'] as String)
+          : null,
+      paymasterSignature: json['paymasterSignature'] as String?,
+      authorization: json['authorization'] != null
+          ? Authorization.fromJson(json['authorization'] as Map<String, dynamic>)
+          : null,
+    );
+  }
   /// The account making the operation
   final String sender;
   
@@ -79,59 +133,6 @@ class UserOperation {
   
   /// Authorization data for EIP-7702 (v0.7+)
   final Authorization? authorization;
-
-  UserOperation({
-    required this.sender,
-    required this.nonce,
-    required this.callData,
-    required this.callGasLimit,
-    required this.verificationGasLimit,
-    required this.preVerificationGas,
-    required this.maxFeePerGas,
-    required this.maxPriorityFeePerGas,
-    required this.signature,
-    this.initCode,
-    this.paymasterAndData,
-    this.factory,
-    this.factoryData,
-    this.paymaster,
-    this.paymasterData,
-    this.paymasterVerificationGasLimit,
-    this.paymasterPostOpGasLimit,
-    this.paymasterSignature,
-    this.authorization,
-  });
-
-  /// Create a UserOperation from JSON
-  factory UserOperation.fromJson(Map<String, dynamic> json) {
-    return UserOperation(
-      sender: json['sender'] as String,
-      nonce: BigInt.parse(json['nonce'] as String),
-      callData: json['callData'] as String,
-      callGasLimit: BigInt.parse(json['callGasLimit'] as String),
-      verificationGasLimit: BigInt.parse(json['verificationGasLimit'] as String),
-      preVerificationGas: BigInt.parse(json['preVerificationGas'] as String),
-      maxFeePerGas: BigInt.parse(json['maxFeePerGas'] as String),
-      maxPriorityFeePerGas: BigInt.parse(json['maxPriorityFeePerGas'] as String),
-      signature: json['signature'] as String,
-      initCode: json['initCode'] as String?,
-      paymasterAndData: json['paymasterAndData'] as String?,
-      factory: json['factory'] as String?,
-      factoryData: json['factoryData'] as String?,
-      paymaster: json['paymaster'] as String?,
-      paymasterData: json['paymasterData'] as String?,
-      paymasterVerificationGasLimit: json['paymasterVerificationGasLimit'] != null
-          ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
-          : null,
-      paymasterPostOpGasLimit: json['paymasterPostOpGasLimit'] != null
-          ? BigInt.parse(json['paymasterPostOpGasLimit'] as String)
-          : null,
-      paymasterSignature: json['paymasterSignature'] as String?,
-      authorization: json['authorization'] != null
-          ? Authorization.fromJson(json['authorization'] as Map<String, dynamic>)
-          : null,
-    );
-  }
 
   /// Convert UserOperation to JSON
   Map<String, dynamic> toJson() {
@@ -201,15 +202,15 @@ class UserOperation {
     // EIP-712 Domain Separator
     // keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
     final domainTypeHash = Keccak256.hash(
-      Uint8List.fromList('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'.codeUnits)
+      Uint8List.fromList('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'.codeUnits),
     );
 
     // Domain name and version for EntryPoint
     final nameHash = Keccak256.hash(
-      Uint8List.fromList('Account Abstraction EntryPoint'.codeUnits)
+      Uint8List.fromList('Account Abstraction EntryPoint'.codeUnits),
     );
     final versionHash = Keccak256.hash(
-      Uint8List.fromList('0.8'.codeUnits)
+      Uint8List.fromList('0.8'.codeUnits),
     );
 
     // Encode domain separator: keccak256(abi.encode(typeHash, nameHash, versionHash, chainId, address))
@@ -231,7 +232,7 @@ class UserOperation {
     // PackedUserOperation type hash (signature excluded)
     // keccak256("PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)")
     final userOpTypeHash = Keccak256.hash(
-      Uint8List.fromList('PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)'.codeUnits)
+      Uint8List.fromList('PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)'.codeUnits),
     );
 
     // Hash dynamic fields (bytes -> keccak256)
@@ -369,7 +370,7 @@ class UserOperation {
   String _getInitCode(String? factory, String? factoryData, Authorization? authorization) {
     if (authorization != null) {
       // For EIP-7702, encode authorization data
-      // TODO: Implement proper authorization encoding
+      // Note: Implement proper authorization encoding
       return '0x';
     }
     
@@ -391,7 +392,7 @@ class UserOperation {
         : '0x';
     
     // Concatenate paymaster fields
-    String paymasterAndData = '0x';
+    var paymasterAndData = '0x';
     if (paymaster != null) {
       paymasterAndData = paymaster!;
       if (paymasterVerificationGasLimit != null && paymasterPostOpGasLimit != null) {
@@ -629,15 +630,6 @@ class UserOperation {
 
 /// Packed UserOperation for EntryPoint v0.7+
 class PackedUserOperation {
-  final String sender;
-  final BigInt nonce;
-  final String initCode;
-  final String callData;
-  final String accountGasLimits;
-  final BigInt preVerificationGas;
-  final String gasFees;
-  final String paymasterAndData;
-  final String signature;
 
   PackedUserOperation({
     required this.sender,
@@ -650,29 +642,19 @@ class PackedUserOperation {
     required this.paymasterAndData,
     required this.signature,
   });
+  final String sender;
+  final BigInt nonce;
+  final String initCode;
+  final String callData;
+  final String accountGasLimits;
+  final BigInt preVerificationGas;
+  final String gasFees;
+  final String paymasterAndData;
+  final String signature;
 }
 
 /// UserOperation request for building operations
 class UserOperationRequest {
-  final String? sender;
-  final BigInt? nonce;
-  final String? callData;
-  final BigInt? callGasLimit;
-  final BigInt? verificationGasLimit;
-  final BigInt? preVerificationGas;
-  final BigInt? maxFeePerGas;
-  final BigInt? maxPriorityFeePerGas;
-  final String? signature;
-  final String? initCode;
-  final String? paymasterAndData;
-  final String? factory;
-  final String? factoryData;
-  final String? paymaster;
-  final String? paymasterData;
-  final BigInt? paymasterVerificationGasLimit;
-  final BigInt? paymasterPostOpGasLimit;
-  final String? paymasterSignature;
-  final Authorization? authorization;
 
   UserOperationRequest({
     this.sender,
@@ -695,15 +677,29 @@ class UserOperationRequest {
     this.paymasterSignature,
     this.authorization,
   });
+  final String? sender;
+  final BigInt? nonce;
+  final String? callData;
+  final BigInt? callGasLimit;
+  final BigInt? verificationGasLimit;
+  final BigInt? preVerificationGas;
+  final BigInt? maxFeePerGas;
+  final BigInt? maxPriorityFeePerGas;
+  final String? signature;
+  final String? initCode;
+  final String? paymasterAndData;
+  final String? factory;
+  final String? factoryData;
+  final String? paymaster;
+  final String? paymasterData;
+  final BigInt? paymasterVerificationGasLimit;
+  final BigInt? paymasterPostOpGasLimit;
+  final String? paymasterSignature;
+  final Authorization? authorization;
 }
 
 /// Gas estimation result for UserOperation
 class UserOperationGasEstimate {
-  final BigInt preVerificationGas;
-  final BigInt verificationGasLimit;
-  final BigInt callGasLimit;
-  final BigInt? paymasterVerificationGasLimit;
-  final BigInt? paymasterPostOpGasLimit;
 
   UserOperationGasEstimate({
     required this.preVerificationGas,
@@ -726,32 +722,22 @@ class UserOperationGasEstimate {
           : null,
     );
   }
+  final BigInt preVerificationGas;
+  final BigInt verificationGasLimit;
+  final BigInt callGasLimit;
+  final BigInt? paymasterVerificationGasLimit;
+  final BigInt? paymasterPostOpGasLimit;
 }
 
 /// UserOperation receipt from bundler
 class UserOperationReceipt {
-  final String userOpHash;
-  final String sender;
-  final BigInt nonce;
-  final String? paymaster;
-  final BigInt actualGasCost;
-  final BigInt actualGasUsed;
-  final bool success;
-  final String? reason;
-  final String entryPoint;
-  final Map<String, dynamic> receipt;
 
   UserOperationReceipt({
     required this.userOpHash,
     required this.sender,
     required this.nonce,
-    this.paymaster,
-    required this.actualGasCost,
-    required this.actualGasUsed,
-    required this.success,
+    required this.actualGasCost, required this.actualGasUsed, required this.success, required this.entryPoint, required this.receipt, this.paymaster,
     this.reason,
-    required this.entryPoint,
-    required this.receipt,
   });
 
   factory UserOperationReceipt.fromJson(Map<String, dynamic> json) {
@@ -768,4 +754,14 @@ class UserOperationReceipt {
       receipt: Map<String, dynamic>.from(json['receipt'] as Map),
     );
   }
+  final String userOpHash;
+  final String sender;
+  final BigInt nonce;
+  final String? paymaster;
+  final BigInt actualGasCost;
+  final BigInt actualGasUsed;
+  final bool success;
+  final String? reason;
+  final String entryPoint;
+  final Map<String, dynamic> receipt;
 }

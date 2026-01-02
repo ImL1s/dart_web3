@@ -46,6 +46,8 @@ abstract class KeyGeneration {
 /// This implementation uses a distributed key generation protocol
 /// suitable for threshold signatures.
 class DefaultKeyGeneration implements KeyGeneration {
+
+  DefaultKeyGeneration({required this.communicationChannel});
   /// The communication channel for coordinating with other parties.
   final KeyGenerationCommunicationChannel communicationChannel;
   
@@ -54,8 +56,6 @@ class DefaultKeyGeneration implements KeyGeneration {
   
   /// Random number generator for ceremony IDs.
   final Random _random = Random.secure();
-
-  DefaultKeyGeneration({required this.communicationChannel});
 
   @override
   Future<String> startCeremony({
@@ -189,6 +189,11 @@ abstract class KeyGenerationCommunicationChannel {
 
 /// HTTP-based key generation communication channel.
 class HttpKeyGenerationCommunicationChannel implements KeyGenerationCommunicationChannel {
+
+  HttpKeyGenerationCommunicationChannel({
+    required this.baseUrl,
+    required this.partyId,
+  });
   /// The base URL for the coordination service.
   final String baseUrl;
   
@@ -199,21 +204,16 @@ class HttpKeyGenerationCommunicationChannel implements KeyGenerationCommunicatio
   final StreamController<Map<String, dynamic>> _messageController = 
       StreamController<Map<String, dynamic>>.broadcast();
 
-  HttpKeyGenerationCommunicationChannel({
-    required this.baseUrl,
-    required this.partyId,
-  });
-
   @override
   Future<void> sendMessage(String partyId, Map<String, dynamic> message) async {
     // Implementation would send HTTP POST to coordination service
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 
   @override
   Future<void> broadcastMessage(String ceremonyId, Map<String, dynamic> message) async {
     // Implementation would send HTTP POST to coordination service
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 
   @override
@@ -223,12 +223,12 @@ class HttpKeyGenerationCommunicationChannel implements KeyGenerationCommunicatio
 
   @override
   Future<void> joinChannel(String ceremonyId) async {
-    await Future.delayed(Duration(milliseconds: 50));
+    await Future<void>.delayed(const Duration(milliseconds: 50));
   }
 
   @override
   Future<void> leaveChannel(String ceremonyId) async {
-    await Future.delayed(Duration(milliseconds: 50));
+    await Future<void>.delayed(const Duration(milliseconds: 50));
   }
 
   /// Disposes resources.
@@ -239,6 +239,15 @@ class HttpKeyGenerationCommunicationChannel implements KeyGenerationCommunicatio
 
 /// Internal key generation ceremony implementation.
 class KeyGenerationCeremony {
+
+  KeyGenerationCeremony({
+    required this.ceremonyId,
+    required this.threshold,
+    required this.totalParties,
+    required this.curveType,
+    required this.metadata,
+    required this.communicationChannel,
+  });
   /// The ceremony ID.
   final String ceremonyId;
   
@@ -275,15 +284,6 @@ class KeyGenerationCeremony {
   /// Random number generator.
   final Random _random = Random.secure();
 
-  KeyGenerationCeremony({
-    required this.ceremonyId,
-    required this.threshold,
-    required this.totalParties,
-    required this.curveType,
-    required this.metadata,
-    required this.communicationChannel,
-  });
-
   /// Initializes the key generation ceremony.
   Future<void> _initialize() async {
     _state = KeyGenerationState.waitingForParties;
@@ -297,7 +297,7 @@ class KeyGenerationCeremony {
         _completionCompleter.completeError(MpcError(
           type: MpcErrorType.sessionTimeout,
           message: 'Key generation ceremony timed out',
-        ));
+        ),);
         _state = KeyGenerationState.failed;
       }
     });
@@ -353,7 +353,7 @@ class KeyGenerationCeremony {
     // such as Shamir's Secret Sharing or more advanced threshold schemes
     
     // Simulate some processing time
-    await Future.delayed(Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
     
     // Generate a master key pair based on the curve type
     final masterKeyPair = _generateMasterKeyPair();
@@ -371,7 +371,7 @@ class KeyGenerationCeremony {
       case CurveType.secp256k1:
         // Generate secp256k1 key pair
         final privateKey = Uint8List(32);
-        for (int i = 0; i < 32; i++) {
+        for (var i = 0; i < 32; i++) {
           privateKey[i] = _random.nextInt(256);
         }
         final publicKey = Secp256k1.getPublicKey(privateKey);
@@ -380,12 +380,12 @@ class KeyGenerationCeremony {
       case CurveType.ed25519:
         // Generate ed25519 key pair
         final privateKey = Uint8List(32);
-        for (int i = 0; i < 32; i++) {
+        for (var i = 0; i < 32; i++) {
           privateKey[i] = _random.nextInt(256);
         }
         // For ed25519, we'll use a mock public key since we don't have the actual implementation
         final publicKey = Uint8List(32);
-        for (int i = 0; i < 32; i++) {
+        for (var i = 0; i < 32; i++) {
           publicKey[i] = _random.nextInt(256);
         }
         return {'private': privateKey, 'public': publicKey};
@@ -399,7 +399,7 @@ class KeyGenerationCeremony {
     
     // For simulation, create a mock key share
     final shareData = Uint8List(64); // Mock encrypted share data
-    for (int i = 0; i < 64; i++) {
+    for (var i = 0; i < 64; i++) {
       shareData[i] = _random.nextInt(256);
     }
     
@@ -416,9 +416,7 @@ class KeyGenerationCeremony {
 
   /// Listens for messages from other parties.
   void _listenForMessages() {
-    communicationChannel.receiveMessages().listen((message) {
-      _handleMessage(message);
-    });
+    communicationChannel.receiveMessages().listen(_handleMessage);
   }
 
   /// Handles incoming messages.
@@ -445,7 +443,7 @@ class KeyGenerationCeremony {
           _completionCompleter.completeError(MpcError(
             type: MpcErrorType.keyGenerationFailed,
             message: 'Ceremony was cancelled',
-          ));
+          ),);
         }
         break;
     }
@@ -470,7 +468,7 @@ class KeyGenerationCeremony {
       _completionCompleter.completeError(MpcError(
         type: MpcErrorType.keyGenerationFailed,
         message: 'Ceremony was cancelled',
-      ));
+      ),);
     }
     
     _cleanup();
@@ -535,7 +533,7 @@ class KeyGenerationUtils {
     required CurveType curveType,
   }) {
     // Base time for key generation
-    var baseTime = Duration(seconds: 30);
+    final baseTime = Duration(seconds: 30);
     
     // Add time based on number of parties
     final partyTime = Duration(seconds: totalParties * 5);

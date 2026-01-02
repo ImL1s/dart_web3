@@ -7,14 +7,14 @@ import '../swap_types.dart';
 import 'aggregator_interface.dart';
 
 /// ParaSwap DEX aggregator implementation
-class ParaSwapAggregator implements DexAggregator {
-  final AggregatorConfig config;
-  final http.Client _httpClient;
+class ParaSwapAggregator extends DexAggregator {
 
   ParaSwapAggregator({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final AggregatorConfig config;
+  final http.Client _httpClient;
 
   @override
   String get name => 'ParaSwap';
@@ -59,7 +59,7 @@ class ParaSwapAggregator implements DexAggregator {
       final transaction = await _getTransaction(priceRoute, params);
       if (transaction == null) return null;
 
-      return _buildSwapQuote(priceRoute, transaction, params);
+      return await _buildSwapQuote(priceRoute, transaction, params);
     } catch (e) {
       if (e is AggregatorException) rethrow;
       throw AggregatorException(
@@ -236,11 +236,11 @@ class ParaSwapAggregator implements DexAggregator {
     return json.decode(response.body) as Map<String, dynamic>;
   }
 
-  SwapQuote _buildSwapQuote(
+  Future<SwapQuote> _buildSwapQuote(
     Map<String, dynamic> priceRoute,
     Map<String, dynamic> transactionData,
     SwapParams params,
-  ) {
+  ) async {
     final outputAmount = BigInt.parse(priceRoute['destAmount'] as String);
     final minimumOutputAmount = calculateMinimumOutput(outputAmount, params.slippage);
     
@@ -290,8 +290,6 @@ class ParaSwapAggregator implements DexAggregator {
         
         for (final swap in swaps) {
           if (swap is Map<String, dynamic>) {
-            final srcToken = swap['srcToken'] as Map<String, dynamic>?;
-            final destToken = swap['destToken'] as Map<String, dynamic>?;
             final swapExchanges = swap['swapExchanges'] as List<dynamic>? ?? [];
             
             for (final exchange in swapExchanges) {
@@ -325,7 +323,7 @@ class ParaSwapAggregator implements DexAggregator {
     if (hex.isEmpty) return Uint8List(0);
     
     final bytes = <int>[];
-    for (int i = 0; i < hex.length; i += 2) {
+    for (var i = 0; i < hex.length; i += 2) {
       final hexByte = hex.substring(i, i + 2);
       bytes.add(int.parse(hexByte, radix: 16));
     }

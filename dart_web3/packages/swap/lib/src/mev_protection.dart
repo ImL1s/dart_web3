@@ -5,13 +5,13 @@ import 'swap_types.dart';
 
 /// MEV protection service for swap transactions
 class MevProtectionService {
-  final MevProtectionConfig config;
-  final http.Client _httpClient;
 
   MevProtectionService({
     required this.config,
     http.Client? httpClient,
   }) : _httpClient = httpClient ?? http.Client();
+  final MevProtectionConfig config;
+  final http.Client _httpClient;
 
   /// Submit transaction with MEV protection
   Future<MevProtectionResult> submitProtectedTransaction({
@@ -275,10 +275,6 @@ class MevProtectionService {
 
 /// MEV protection configuration
 class MevProtectionConfig {
-  final String? apiKey;
-  final String? origin;
-  final Duration timeout;
-  final Map<String, String> headers;
 
   const MevProtectionConfig({
     this.apiKey,
@@ -286,16 +282,14 @@ class MevProtectionConfig {
     this.timeout = const Duration(seconds: 30),
     this.headers = const {},
   });
+  final String? apiKey;
+  final String? origin;
+  final Duration timeout;
+  final Map<String, String> headers;
 }
 
 /// MEV protection result
 class MevProtectionResult {
-  final String transactionHash;
-  final MevProtectionType protectionType;
-  final MevProtectionStatus status;
-  final String protectionId;
-  final BigInt estimatedSavings;
-  final Map<String, dynamic>? metadata;
 
   const MevProtectionResult({
     required this.transactionHash,
@@ -320,6 +314,12 @@ class MevProtectionResult {
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
   }
+  final String transactionHash;
+  final MevProtectionType protectionType;
+  final MevProtectionStatus status;
+  final String protectionId;
+  final BigInt estimatedSavings;
+  final Map<String, dynamic>? metadata;
 
   Map<String, dynamic> toJson() {
     return {
@@ -344,10 +344,10 @@ enum MevProtectionStatus {
 
 /// Exception thrown when MEV protection operations fail
 class MevProtectionException implements Exception {
-  final String message;
-  final dynamic originalError;
 
   const MevProtectionException(this.message, {this.originalError});
+  final String message;
+  final dynamic originalError;
 
   @override
   String toString() => 'MevProtectionException: $message';

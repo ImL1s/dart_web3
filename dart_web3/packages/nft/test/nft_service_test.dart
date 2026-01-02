@@ -1,6 +1,6 @@
-import 'package:test/test.dart';
-import 'package:dart_web3_nft/dart_web3_nft.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_nft/dart_web3_nft.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('NFT Service Tests', () {
@@ -84,7 +84,6 @@ void main() {
       final params = NftQueryParams(
         owner: owner,
         limit: 50,
-        includeMetadata: true,
       );
 
       expect(params.owner, equals(owner));
@@ -119,8 +118,8 @@ void main() {
       expect(json['name'], equals('Test NFT'));
       expect(json['description'], equals('A test NFT'));
       expect(json['image'], equals('https://example.com/image.png'));
-      expect(json['attributes'], isA<List>());
-      expect((json['attributes'] as List).length, equals(1));
+      expect(json['attributes'], isA<List<dynamic>>());
+      expect((json['attributes'] as List<dynamic>).length, equals(1));
     });
 
     test('should handle NFT query result', () {
@@ -142,6 +141,7 @@ void main() {
       expect(result.totalCount, equals(1));
       expect(result.hasMore, isFalse);
     });
+
   });
 
   group('IPFS Gateway Tests', () {
@@ -150,7 +150,7 @@ void main() {
 
       // Test resolveUri with non-IPFS URI (should return as-is)
       expect(gateway.resolveUri('https://example.com/image.png'), 
-             completion(equals('https://example.com/image.png')));
+             completion(equals('https://example.com/image.png')),);
     });
 
     test('should handle gateway management', () {

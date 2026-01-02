@@ -1,5 +1,6 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
+import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_contract/dart_web3_contract.dart';
 
@@ -7,10 +8,10 @@ import 'swap_types.dart';
 
 /// Token approval manager for swap operations
 class TokenApprovalManager {
-  final WalletClient walletClient;
-  final Map<String, ERC20Contract> _contractCache = {};
 
   TokenApprovalManager(this.walletClient);
+  final WalletClient walletClient;
+  final Map<String, ERC20Contract> _contractCache = {};
 
   /// Check if token approval is needed for a swap
   Future<bool> isApprovalNeeded({
@@ -23,7 +24,7 @@ class TokenApprovalManager {
       return false; // Native tokens don't need approval
     }
 
-    final ownerAddress = owner ?? walletClient.address.address;
+    final ownerAddress = owner ?? walletClient.address.hex;
     final currentAllowance = await getCurrentAllowance(
       token: token,
       owner: ownerAddress,
@@ -103,7 +104,7 @@ class TokenApprovalManager {
       }
 
       // Get nonce for permit
-      final nonce = await _getPermitNonce(contract, walletClient.address.address);
+      final nonce = await _getPermitNonce(contract, walletClient.address.hex);
       
       // Create permit signature
       final signature = await _createPermitSignature(
@@ -140,13 +141,14 @@ class TokenApprovalManager {
         : amount;
 
     // Encode approval function call
-    final data = contract.encodeFunction('approve', [spender, approvalAmount]);
+    final approvalFunc = contract.functions.firstWhere((f) => f.name == 'approve');
+    final data = AbiEncoder.encodeFunction(approvalFunc.signature, [spender, approvalAmount]);
     
     // Estimate gas
     final gasEstimate = await walletClient.estimateGas(CallRequest(
       to: token.address,
       data: data,
-    ));
+    ),);
 
     return ApprovalTransaction(
       to: token.address,
@@ -182,9 +184,9 @@ class TokenApprovalManager {
     }
 
     final results = <SwapToken, bool>{};
-    final ownerAddress = owner ?? walletClient.address.address;
+    final ownerAddress = owner ?? walletClient.address.hex;
 
-    for (int i = 0; i < tokens.length; i++) {
+    for (var i = 0; i < tokens.length; i++) {
       final token = tokens[i];
       final amount = amounts[i];
       
@@ -284,12 +286,6 @@ class TokenApprovalManager {
 
 /// Token approval transaction data
 class ApprovalTransaction {
-  final String to;
-  final Uint8List data;
-  final BigInt gasEstimate;
-  final SwapToken token;
-  final String spender;
-  final BigInt amount;
 
   const ApprovalTransaction({
     required this.to,
@@ -299,15 +295,16 @@ class ApprovalTransaction {
     required this.spender,
     required this.amount,
   });
+  final String to;
+  final Uint8List data;
+  final BigInt gasEstimate;
+  final SwapToken token;
+  final String spender;
+  final BigInt amount;
 }
 
 /// EIP-2612 permit signature
 class ApprovalSignature {
-  final int v;
-  final BigInt r;
-  final BigInt s;
-  final BigInt deadline;
-  final BigInt nonce;
 
   const ApprovalSignature({
     required this.v,
@@ -316,14 +313,19 @@ class ApprovalSignature {
     required this.deadline,
     required this.nonce,
   });
+  final int v;
+  final BigInt r;
+  final BigInt s;
+  final BigInt deadline;
+  final BigInt nonce;
 }
 
 /// Exception thrown when token approval operations fail
 class TokenApprovalException implements Exception {
-  final String message;
-  final dynamic originalError;
 
   const TokenApprovalException(this.message, {this.originalError});
+  final String message;
+  final dynamic originalError;
 
   @override
   String toString() => 'TokenApprovalException: $message';

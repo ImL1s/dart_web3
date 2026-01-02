@@ -12,13 +12,13 @@ abstract class Web3Exception implements Exception {
 
 /// Exception thrown when an invalid address is encountered.
 class InvalidAddressException extends Web3Exception {
+
+  InvalidAddressException(this.address, [this.reason]);
   /// The invalid address string.
   final String address;
 
   /// Optional reason for invalidity.
   final String? reason;
-
-  InvalidAddressException(this.address, [this.reason]);
 
   @override
   String get message =>
@@ -30,10 +30,10 @@ class InvalidAddressException extends Web3Exception {
 
 /// Exception thrown when hex encoding/decoding fails.
 class HexException extends Web3Exception {
-  @override
-  final String message;
 
   HexException(this.message);
+  @override
+  final String message;
 
   @override
   String get code => 'HEX_ERROR';
@@ -41,10 +41,10 @@ class HexException extends Web3Exception {
 
 /// Exception thrown when RLP encoding/decoding fails.
 class RlpException extends Web3Exception {
-  @override
-  final String message;
 
   RlpException(this.message);
+  @override
+  final String message;
 
   @override
   String get code => 'RLP_ERROR';
@@ -52,10 +52,10 @@ class RlpException extends Web3Exception {
 
 /// Exception thrown when unit conversion fails.
 class UnitConversionException extends Web3Exception {
-  @override
-  final String message;
 
   UnitConversionException(this.message);
+  @override
+  final String message;
 
   @override
   String get code => 'UNIT_CONVERSION_ERROR';

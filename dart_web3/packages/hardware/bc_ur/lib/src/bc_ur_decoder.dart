@@ -1,9 +1,10 @@
 import 'dart:typed_data';
+
+import 'bc_ur_encoder.dart';
+import 'bc_ur_registry.dart';
 import 'cbor_decoder.dart';
 import 'fountain_decoder.dart';
 import 'fountain_encoder.dart';
-import 'bc_ur_registry.dart';
-import 'bc_ur_encoder.dart';
 
 /// BC-UR decoder for parsing UR-formatted QR codes
 class BCURDecoder {
@@ -122,7 +123,7 @@ class BCURDecoder {
     }
     
     final cbor = CBORDecoder.decode(part.data);
-    final intMap = _convertToIntMap(cbor as Map);
+    final intMap = _convertToIntMap(cbor as Map<dynamic, dynamic>);
     return EthSignRequest.fromCbor(intMap);
   }
   
@@ -134,12 +135,12 @@ class BCURDecoder {
     }
     
     final cbor = CBORDecoder.decode(part.data);
-    final intMap = _convertToIntMap(cbor as Map);
+    final intMap = _convertToIntMap(cbor as Map<dynamic, dynamic>);
     return EthSignature.fromCbor(intMap);
   }
   
   /// Convert dynamic map to int-keyed map
-  static Map<int, dynamic> _convertToIntMap(Map map) {
+  static Map<int, dynamic> _convertToIntMap(Map<dynamic, dynamic> map) {
     final result = <int, dynamic>{};
     map.forEach((key, value) {
       if (key is int) {
@@ -154,7 +155,7 @@ class BCURDecoder {
     const alphabet = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
     final charToValue = <String, int>{};
     
-    for (int i = 0; i < alphabet.length; i++) {
+    for (var i = 0; i < alphabet.length; i++) {
       charToValue[alphabet[i]] = i;
     }
     
@@ -167,7 +168,7 @@ class BCURDecoder {
         throw FormatException('Invalid character in base32: $char');
       }
       
-      for (int i = 4; i >= 0; i--) {
+      for (var i = 4; i >= 0; i--) {
         bits.add((value >> i) & 1);
       }
     }
@@ -178,9 +179,9 @@ class BCURDecoder {
     }
     
     final result = <int>[];
-    for (int i = 0; i < bits.length; i += 8) {
-      int byte = 0;
-      for (int j = 0; j < 8; j++) {
+    for (var i = 0; i < bits.length; i += 8) {
+      var byte = 0;
+      for (var j = 0; j < 8; j++) {
         byte = (byte << 1) | bits[i + j];
       }
       result.add(byte);

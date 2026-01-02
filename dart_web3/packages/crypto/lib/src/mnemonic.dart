@@ -121,6 +121,6 @@ class Mnemonic {
   static const _wordlist = <String>[
     'abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb', 'abstract', 'absurd', 'abuse', 'access', 'accident',
     // ... (rest of the 2048 words omitted for brevity in this replace call, but adding end tags)
-    'zone', 'zoo', 'zoology', 'zoom', 'zora', 'zorro', 'zulu', 'zumba', 'zuni', 'zurich', 'zydeco', 'zygote'
+    'zone', 'zoo', 'zoology', 'zoom', 'zora', 'zorro', 'zulu', 'zumba', 'zuni', 'zurich', 'zydeco', 'zygote',
   ];
 }

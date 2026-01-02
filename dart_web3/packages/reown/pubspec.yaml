@@ -1,6 +1,7 @@
 name: dart_web3_reown
 description: Reown/WalletConnect v2 integration for connecting to mobile wallets
-version: 0.1.0
+version: 0.0.1
+publish_to: none
 homepage: https://github.com/example/dart_web3
 repository: https://github.com/example/dart_web3/tree/main/packages/reown
 
@@ -14,6 +15,7 @@ dependencies:
     path: ../signer
   dart_web3_abi:
     path: ../abi
+  meta: ^1.11.0
 
 dev_dependencies:
   lints: ^5.0.0

@@ -1,13 +1,14 @@
 import 'dart:typed_data';
-import 'trezor_types.dart';
-import 'trezor_client.dart';
+
 import 'protobuf_messages.dart';
+import 'trezor_client.dart';
+import 'trezor_types.dart';
 
 /// Multi-chain signing support for Trezor
 class TrezorMultiChainSigner {
-  final TrezorClient _client;
   
   TrezorMultiChainSigner(this._client);
+  final TrezorClient _client;
   
   /// Sign Bitcoin transaction
   Future<String> signBitcoinTransaction(
@@ -134,7 +135,6 @@ class TrezorMultiChainSigner {
         break;
         
       case ChainType.ethereum:
-      default:
         // Use existing Ethereum implementation
         final account = await _client.getAccount(derivationPath);
         return account.address;
@@ -221,21 +221,18 @@ class TrezorMultiChainSigner {
   Uint8List _encodeBitcoinGetAddress(String derivationPath) {
     return ProtobufMessages.encodeEthereumGetAddress(
       derivationPath: derivationPath,
-      showDisplay: false,
     );
   }
   
   Uint8List _encodeSolanaGetAddress(String derivationPath) {
     return ProtobufMessages.encodeEthereumGetAddress(
       derivationPath: derivationPath,
-      showDisplay: false,
     );
   }
   
   Uint8List _encodePolkadotGetAddress(String derivationPath) {
     return ProtobufMessages.encodeEthereumGetAddress(
       derivationPath: derivationPath,
-      showDisplay: false,
     );
   }
   
@@ -264,7 +261,6 @@ class TrezorMultiChainSigner {
       case ChainType.polkadot:
         return '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'; // Mock Polkadot address
       case ChainType.ethereum:
-      default:
         // Use existing Ethereum parsing
         final result = ProtobufMessages.decodeEthereumAddress(data);
         return result['address'] as String;

@@ -8,17 +8,17 @@ import 'models.dart';
 
 /// Public client for read-only blockchain operations.
 class PublicClient {
+
+  PublicClient({required this.provider, required this.chain});
   /// The RPC provider.
   final RpcProvider provider;
 
   /// The chain configuration.
   final ChainConfig chain;
 
-  PublicClient({required this.provider, required this.chain});
-
   /// Gets the balance of an address.
   Future<BigInt> getBalance(String address, [String block = 'latest']) async {
-    return await provider.getBalance(address, block);
+    return provider.getBalance(address, block);
   }
 
   /// Gets a block by hash.
@@ -35,7 +35,7 @@ class PublicClient {
 
   /// Gets the current block number.
   Future<BigInt> getBlockNumber() async {
-    return await provider.getBlockNumber();
+    return provider.getBlockNumber();
   }
 
   /// Gets a transaction by hash.
@@ -52,7 +52,7 @@ class PublicClient {
 
   /// Gets the transaction count (nonce) for an address.
   Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
-    return await provider.getTransactionCount(address, block);
+    return provider.getTransactionCount(address, block);
   }
 
   /// Executes a call without creating a transaction.
@@ -63,18 +63,18 @@ class PublicClient {
 
   /// Estimates gas for a transaction.
   Future<BigInt> estimateGas(CallRequest request) async {
-    return await provider.estimateGas(request.toJson());
+    return provider.estimateGas(request.toJson());
   }
 
   /// Gets logs matching a filter.
   Future<List<Log>> getLogs(LogFilter filter) async {
     final data = await provider.getLogs(filter.toJson());
-    return data.map((d) => Log.fromJson(d)).toList();
+    return data.map(Log.fromJson).toList();
   }
 
   /// Gets the current gas price.
   Future<BigInt> getGasPrice() async {
-    return await provider.getGasPrice();
+    return provider.getGasPrice();
   }
 
   /// Gets fee data for EIP-1559 transactions.
@@ -93,7 +93,7 @@ class PublicClient {
 
   /// Gets the chain ID.
   Future<int> getChainId() async {
-    return await provider.getChainId();
+    return provider.getChainId();
   }
 
   /// Gets the code at an address.

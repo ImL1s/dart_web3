@@ -18,7 +18,7 @@ void main() {
       test('sign and verify round trip', () {
         final keyPair = Ed25519.generateKeyPair();
         final messageHash = Uint8List(32);
-        for (int i = 0; i < 32; i++) messageHash[i] = i;
+        for (var i = 0; i < 32; i++) messageHash[i] = i;
 
         final signature = keyPair.sign(messageHash);
         expect(signature.length, equals(64));
@@ -57,7 +57,7 @@ void main() {
       test('sign and verify round trip', () {
         final keyPair = Sr25519.generateKeyPair();
         final messageHash = Uint8List(32);
-        for (int i = 0; i < 32; i++) messageHash[i] = i;
+        for (var i = 0; i < 32; i++) messageHash[i] = i;
 
         final signature = keyPair.sign(messageHash);
         expect(signature.length, equals(64));

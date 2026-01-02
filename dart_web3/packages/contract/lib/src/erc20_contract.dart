@@ -1,4 +1,3 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 import 'contract.dart';
 import 'event_filter.dart';
@@ -6,17 +5,15 @@ import 'event_filter.dart';
 /// ERC-20 token contract implementation.
 class ERC20Contract extends Contract {
   ERC20Contract({
-    required String address,
-    required PublicClient publicClient,
-    WalletClient? walletClient,
+    required super.address,
+    required super.publicClient,
+    super.walletClient,
   }) : super(
-          address: address,
           abi: _erc20Abi,
-          publicClient: publicClient,
-          walletClient: walletClient,
         );
 
-  static const String _erc20Abi = '''[
+  static const String _erc20Abi = '''
+[
     {
       "type": "function",
       "name": "name",
@@ -153,17 +150,17 @@ class ERC20Contract extends Contract {
 
   /// Transfers tokens to another account.
   Future<String> transfer(String to, BigInt amount) async {
-    return await write('transfer', [to, amount]);
+    return write('transfer', [to, amount]);
   }
 
   /// Approves a spender to spend tokens.
   Future<String> approve(String spender, BigInt amount) async {
-    return await write('approve', [spender, amount]);
+    return write('approve', [spender, amount]);
   }
 
   /// Transfers tokens from one account to another (requires allowance).
   Future<String> transferFrom(String from, String to, BigInt amount) async {
-    return await write('transferFrom', [from, to, amount]);
+    return write('transferFrom', [from, to, amount]);
   }
 
   // Event filters
@@ -173,7 +170,7 @@ class ERC20Contract extends Contract {
     return createEventFilter('Transfer', indexedArgs: {
       if (from != null) 'from': from,
       if (to != null) 'to': to,
-    });
+    },);
   }
 
   /// Creates a filter for Approval events.
@@ -181,6 +178,6 @@ class ERC20Contract extends Contract {
     return createEventFilter('Approval', indexedArgs: {
       if (owner != null) 'owner': owner,
       if (spender != null) 'spender': spender,
-    });
+    },);
   }
 }

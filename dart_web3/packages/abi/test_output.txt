@@ -1,0 +1,16 @@
+00:00 +0: loading test/abi_official_vector_test.dart
+00:00 +0: Official ABI Test Vectors Vector: uint256
+00:00 +0 -1: Official ABI Test Vectors Vector: uint256 [E]
+  type 'String' is not a subtype of type 'int' in type cast
+  package:dart_web3_abi/src/types.dart 43:66    AbiUint.encode
+  package:dart_web3_abi/src/types.dart 455:33   AbiTuple.encode
+  package:dart_web3_abi/src/encoder.dart 20:18  AbiEncoder.encode
+  test\abi_official_vector_test.dart 55:36      main.<fn>.<fn>
+  
+00:00 +0 -1: Official ABI Test Vectors Vector: address
+00:00 +1 -1: Official ABI Test Vectors Vector: string
+00:00 +2 -1: Official ABI Test Vectors Vector: tuple
+00:00 +3 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

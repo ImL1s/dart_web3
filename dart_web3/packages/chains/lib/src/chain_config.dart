@@ -1,5 +1,20 @@
 /// Configuration for a blockchain network.
 class ChainConfig {
+
+  ChainConfig({
+    required this.chainId,
+    required this.name,
+    required this.shortName,
+    required this.nativeCurrency,
+    required this.symbol,
+    required this.decimals,
+    required this.rpcUrls,
+    required this.blockExplorerUrls,
+    this.iconUrl,
+    this.testnet = false,
+    this.multicallAddress,
+    this.ensRegistryAddress,
+  });
   /// The chain ID.
   final int chainId;
 
@@ -35,21 +50,6 @@ class ChainConfig {
 
   /// ENS registry address.
   final String? ensRegistryAddress;
-
-  ChainConfig({
-    required this.chainId,
-    required this.name,
-    required this.shortName,
-    required this.nativeCurrency,
-    required this.symbol,
-    required this.decimals,
-    required this.rpcUrls,
-    required this.blockExplorerUrls,
-    this.iconUrl,
-    this.testnet = false,
-    this.multicallAddress,
-    this.ensRegistryAddress,
-  });
 
   /// Creates a copy with updated fields.
   ChainConfig copyWith({

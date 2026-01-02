@@ -1,17 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
+
 import 'package:dart_web3_client/dart_web3_client.dart';
 
-import 'swap_types.dart';
 import 'swap_quote.dart';
+import 'swap_types.dart';
 
 /// Swap transaction tracker
 class SwapTracker {
+
+  SwapTracker(this.publicClient);
   final PublicClient publicClient;
   final Map<String, SwapTrackingInfo> _trackingMap = {};
   final StreamController<SwapStatusUpdate> _statusController = StreamController.broadcast();
-
-  SwapTracker(this.publicClient);
 
   /// Stream of swap status updates
   Stream<SwapStatusUpdate> get statusUpdates => _statusController.stream;
@@ -68,16 +68,16 @@ class SwapTracker {
     try {
       // Poll for transaction receipt
       TransactionReceipt? receipt;
-      int attempts = 0;
+      var attempts = 0;
       const maxAttempts = 60; // 5 minutes with 5-second intervals
       
       while (receipt == null && attempts < maxAttempts) {
-        await Future.delayed(const Duration(seconds: 5));
+        await Future<void>.delayed(const Duration(seconds: 5));
         
         try {
           final receiptData = await publicClient.getTransactionReceipt(transactionHash);
           if (receiptData != null) {
-            receipt = TransactionReceipt.fromJson(receiptData);
+            receipt = receiptData;
           }
         } catch (e) {
           // Transaction not yet mined, continue polling
@@ -181,7 +181,7 @@ class SwapTracker {
       double? actualPriceImpact;
       
       // Look for Transfer events to determine actual amounts
-      for (final log in receipt.logs) {
+      for (final _ in receipt.logs) {
         // This would involve decoding Transfer events and matching them to the swap
         // For now, we'll use the quote's expected output as a placeholder
       }
@@ -229,6 +229,20 @@ class SwapTracker {
 
 /// Swap tracking information
 class SwapTrackingInfo {
+
+  const SwapTrackingInfo({
+    required this.transactionHash,
+    required this.quote,
+    required this.startTime, required this.status, this.userAddress,
+    this.endTime,
+    this.receipt,
+    this.actualGasCost,
+    this.swapResult,
+    this.error,
+    this.attempts = 0,
+    this.lastChecked,
+    this.metadata,
+  });
   final String transactionHash;
   final SwapQuote quote;
   final String? userAddress;
@@ -242,22 +256,6 @@ class SwapTrackingInfo {
   final int attempts;
   final DateTime? lastChecked;
   final Map<String, dynamic>? metadata;
-
-  const SwapTrackingInfo({
-    required this.transactionHash,
-    required this.quote,
-    this.userAddress,
-    required this.startTime,
-    this.endTime,
-    required this.status,
-    this.receipt,
-    this.actualGasCost,
-    this.swapResult,
-    this.error,
-    this.attempts = 0,
-    this.lastChecked,
-    this.metadata,
-  });
 
   /// Duration since swap started
   Duration get duration {
@@ -327,13 +325,6 @@ class SwapTrackingInfo {
 
 /// Swap result analysis
 class SwapResult {
-  final BigInt actualOutputAmount;
-  final BigInt expectedOutputAmount;
-  final double actualPriceImpact;
-  final double expectedPriceImpact;
-  final double slippageUsed;
-  final BigInt gasUsed;
-  final BigInt gasCost;
 
   const SwapResult({
     required this.actualOutputAmount,
@@ -344,13 +335,20 @@ class SwapResult {
     required this.gasUsed,
     required this.gasCost,
   });
+  final BigInt actualOutputAmount;
+  final BigInt expectedOutputAmount;
+  final double actualPriceImpact;
+  final double expectedPriceImpact;
+  final double slippageUsed;
+  final BigInt gasUsed;
+  final BigInt gasCost;
 
   /// Difference between actual and expected output
   BigInt get outputDifference => actualOutputAmount - expectedOutputAmount;
 
   /// Percentage difference in output
   double get outputDifferencePercentage {
-    if (expectedOutputAmount == BigInt.zero) return 0.0;
+    if (expectedOutputAmount == BigInt.zero) return 0;
     return (outputDifference.toDouble() / expectedOutputAmount.toDouble()) * 100;
   }
 
@@ -359,7 +357,7 @@ class SwapResult {
 
   /// Actual slippage experienced
   double get actualSlippage {
-    if (expectedOutputAmount == BigInt.zero) return 0.0;
+    if (expectedOutputAmount == BigInt.zero) return 0;
     return 1.0 - (actualOutputAmount.toDouble() / expectedOutputAmount.toDouble());
   }
 
@@ -378,10 +376,6 @@ class SwapResult {
 
 /// Swap status update event
 class SwapStatusUpdate {
-  final String transactionHash;
-  final SwapStatus status;
-  final SwapTrackingInfo trackingInfo;
-  final DateTime timestamp;
 
   const SwapStatusUpdate({
     required this.transactionHash,
@@ -389,75 +383,8 @@ class SwapStatusUpdate {
     required this.trackingInfo,
     required this.timestamp,
   });
-}
-
-/// Transaction receipt (simplified)
-class TransactionReceipt {
   final String transactionHash;
-  final int status;
-  final BigInt gasUsed;
-  final BigInt? effectiveGasPrice;
-  final List<Log> logs;
-
-  const TransactionReceipt({
-    required this.transactionHash,
-    required this.status,
-    required this.gasUsed,
-    this.effectiveGasPrice,
-    required this.logs,
-  });
-
-  factory TransactionReceipt.fromJson(Map<String, dynamic> json) {
-    return TransactionReceipt(
-      transactionHash: json['transactionHash'] as String,
-      status: int.parse(json['status'] as String, radix: 16),
-      gasUsed: BigInt.parse(json['gasUsed'] as String, radix: 16),
-      effectiveGasPrice: json['effectiveGasPrice'] != null
-          ? BigInt.parse(json['effectiveGasPrice'] as String, radix: 16)
-          : null,
-      logs: (json['logs'] as List<dynamic>)
-          .map((log) => Log.fromJson(log as Map<String, dynamic>))
-          .toList(),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'transactionHash': transactionHash,
-      'status': '0x${status.toRadixString(16)}',
-      'gasUsed': '0x${gasUsed.toRadixString(16)}',
-      if (effectiveGasPrice != null)
-        'effectiveGasPrice': '0x${effectiveGasPrice!.toRadixString(16)}',
-      'logs': logs.map((log) => log.toJson()).toList(),
-    };
-  }
-}
-
-/// Log entry (simplified)
-class Log {
-  final String address;
-  final List<String> topics;
-  final String data;
-
-  const Log({
-    required this.address,
-    required this.topics,
-    required this.data,
-  });
-
-  factory Log.fromJson(Map<String, dynamic> json) {
-    return Log(
-      address: json['address'] as String,
-      topics: (json['topics'] as List<dynamic>).cast<String>(),
-      data: json['data'] as String,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'address': address,
-      'topics': topics,
-      'data': data,
-    };
-  }
+  final SwapStatus status;
+  final SwapTrackingInfo trackingInfo;
+  final DateTime timestamp;
 }

@@ -2,15 +2,15 @@ import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Flashbots bundle transaction
 class FlashbotsBundleTransaction {
-  final String? signedTransaction;
-  final Map<String, dynamic>? transaction;
-  final List<String>? signer;
 
   FlashbotsBundleTransaction({
     this.signedTransaction,
     this.transaction,
     this.signer,
   });
+  final String? signedTransaction;
+  final Map<String, dynamic>? transaction;
+  final List<String>? signer;
 
   Map<String, dynamic> toJson() {
     return {
@@ -23,11 +23,6 @@ class FlashbotsBundleTransaction {
 
 /// Flashbots bundle
 class FlashbotsBundle {
-  final List<FlashbotsBundleTransaction> txs;
-  final BigInt blockNumber;
-  final int? minTimestamp;
-  final int? maxTimestamp;
-  final List<String>? revertingTxHashes;
 
   FlashbotsBundle({
     required this.txs,
@@ -36,6 +31,11 @@ class FlashbotsBundle {
     this.maxTimestamp,
     this.revertingTxHashes,
   });
+  final List<FlashbotsBundleTransaction> txs;
+  final BigInt blockNumber;
+  final int? minTimestamp;
+  final int? maxTimestamp;
+  final List<String>? revertingTxHashes;
 
   Map<String, dynamic> toJson() {
     return {

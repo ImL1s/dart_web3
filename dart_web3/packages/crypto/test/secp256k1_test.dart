@@ -181,7 +181,7 @@ void main() {
           final rAndS = signature.sublist(0, 64);
           
           expect(Secp256k1.verify(rAndS, messageHash, publicKey), isTrue,
-            reason: 'Failed for message: $message');
+            reason: 'Failed for message: $message',);
         }
       });
     });
@@ -190,7 +190,7 @@ void main() {
 
 bool _uint8ListEquals(Uint8List a, Uint8List b) {
   if (a.length != b.length) return false;
-  for (int i = 0; i < a.length; i++) {
+  for (var i = 0; i < a.length; i++) {
     if (a[i] != b[i]) return false;
   }
   return true;

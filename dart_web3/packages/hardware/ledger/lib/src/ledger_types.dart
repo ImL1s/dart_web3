@@ -2,11 +2,6 @@ import 'dart:typed_data';
 
 /// Ledger device information
 class LedgerDevice {
-  final String deviceId;
-  final String name;
-  final String version;
-  final LedgerTransportType transportType;
-  final bool isConnected;
   
   LedgerDevice({
     required this.deviceId,
@@ -15,6 +10,11 @@ class LedgerDevice {
     required this.transportType,
     this.isConnected = false,
   });
+  final String deviceId;
+  final String name;
+  final String version;
+  final LedgerTransportType transportType;
+  final bool isConnected;
   
   @override
   String toString() {
@@ -31,23 +31,19 @@ enum LedgerTransportType {
 
 /// Ledger application information
 class LedgerApp {
-  final String name;
-  final String version;
-  final bool isOpen;
   
   LedgerApp({
     required this.name,
     required this.version,
     this.isOpen = false,
   });
+  final String name;
+  final String version;
+  final bool isOpen;
 }
 
 /// Ledger account information
 class LedgerAccount {
-  final String address;
-  final String derivationPath;
-  final Uint8List publicKey;
-  final int index;
   
   LedgerAccount({
     required this.address,
@@ -55,16 +51,14 @@ class LedgerAccount {
     required this.publicKey,
     required this.index,
   });
+  final String address;
+  final String derivationPath;
+  final Uint8List publicKey;
+  final int index;
 }
 
 /// APDU command structure
-class APDUCommand {
-  final int cla; // Class byte
-  final int ins; // Instruction byte
-  final int p1;  // Parameter 1
-  final int p2;  // Parameter 2
-  final Uint8List? data; // Command data
-  final int? le; // Expected response length
+class APDUCommand { // Expected response length
   
   APDUCommand({
     required this.cla,
@@ -74,6 +68,12 @@ class APDUCommand {
     this.data,
     this.le,
   });
+  final int cla; // Class byte
+  final int ins; // Instruction byte
+  final int p1;  // Parameter 1
+  final int p2;  // Parameter 2
+  final Uint8List? data; // Command data
+  final int? le;
   
   /// Serialize APDU command to bytes
   Uint8List toBytes() {
@@ -101,13 +101,13 @@ class APDUCommand {
 
 /// APDU response structure
 class APDUResponse {
-  final Uint8List data;
-  final int statusWord;
   
   APDUResponse({
     required this.data,
     required this.statusWord,
   });
+  final Uint8List data;
+  final int statusWord;
   
   /// Check if response indicates success
   bool get isSuccess => statusWord == 0x9000;
@@ -165,10 +165,6 @@ enum LedgerErrorType {
 
 /// Ledger exception
 class LedgerException implements Exception {
-  final LedgerErrorType type;
-  final String message;
-  final int? statusWord;
-  final dynamic originalError;
   
   LedgerException(
     this.type,
@@ -176,6 +172,10 @@ class LedgerException implements Exception {
     this.statusWord,
     this.originalError,
   });
+  final LedgerErrorType type;
+  final String message;
+  final int? statusWord;
+  final dynamic originalError;
   
   @override
   String toString() {
@@ -186,28 +186,28 @@ class LedgerException implements Exception {
 
 /// Ethereum app configuration
 class EthereumAppConfig {
-  final bool arbitraryDataEnabled;
-  final bool erc20ProvisioningNecessary;
-  final String version;
   
   EthereumAppConfig({
     required this.arbitraryDataEnabled,
     required this.erc20ProvisioningNecessary,
     required this.version,
   });
+  final bool arbitraryDataEnabled;
+  final bool erc20ProvisioningNecessary;
+  final String version;
 }
 
 /// Signing request for Ledger
 class LedgerSignRequest {
-  final Uint8List data;
-  final String derivationPath;
-  final LedgerSignType signType;
   
   LedgerSignRequest({
     required this.data,
     required this.derivationPath,
     required this.signType,
   });
+  final Uint8List data;
+  final String derivationPath;
+  final LedgerSignType signType;
 }
 
 /// Types of signing operations
@@ -219,10 +219,6 @@ enum LedgerSignType {
 
 /// Ledger signing response
 class LedgerSignResponse {
-  final Uint8List signature;
-  final int v;
-  final Uint8List r;
-  final Uint8List s;
   
   LedgerSignResponse({
     required this.signature,
@@ -230,6 +226,10 @@ class LedgerSignResponse {
     required this.r,
     required this.s,
   });
+  final Uint8List signature;
+  final int v;
+  final Uint8List r;
+  final Uint8List s;
   
   /// Get signature as hex string
   String get signatureHex => '0x${signature.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';

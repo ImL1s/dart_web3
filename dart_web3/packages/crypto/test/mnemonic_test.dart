@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:test/test.dart';
@@ -16,7 +15,7 @@ void main() {
       });
 
       test('generates 12 words for 128-bit strength', () {
-        final mnemonic = Bip39.generate(strength: 128);
+        final mnemonic = Bip39.generate();
         expect(mnemonic.length, equals(12));
       });
 
@@ -41,8 +40,8 @@ void main() {
       });
 
       test('generates different mnemonics each time', () {
-        final mnemonic1 = Bip39.generate(strength: 128);
-        final mnemonic2 = Bip39.generate(strength: 128);
+        final mnemonic1 = Bip39.generate();
+        final mnemonic2 = Bip39.generate();
         // Very unlikely to be the same
         expect(mnemonic1.join(' '), isNot(equals(mnemonic2.join(' '))));
       });
@@ -68,10 +67,9 @@ void main() {
     group('toSeed', () {
       test('generates 64-byte seed', () {
         // Generate a mnemonic and use it directly (bypassing validation)
-        final mnemonic = Bip39.generate(strength: 128);
+        final mnemonic = Bip39.generate();
         // Use the internal method to generate seed without validation
-        final mnemonicString = mnemonic.join(' ');
-        // The seed generation should work even if validation is imperfect
+          // The seed generation should work even if validation is imperfect
         expect(mnemonic.length, equals(12));
       });
     });

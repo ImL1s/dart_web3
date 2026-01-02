@@ -1,6 +1,8 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_multicall/dart_web3_multicall.dart';
+import 'package:test/test.dart';
+
 import 'mock_client.dart';
 import 'mock_contract.dart';
 
@@ -18,7 +20,6 @@ void main() {
       multicall = Multicall(
         publicClient: publicClient,
         contractAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
-        version: MulticallVersion.v3,
       );
     });
 
@@ -134,7 +135,7 @@ void main() {
           ...List.filled(31, 0), 1, // Array length (1 result)
           ...List.filled(31, 0), 32, // Result data length
           ...List.filled(32, 0), // Result data
-        ]));
+        ]),);
 
         final results = await builder.execute(multicall);
 
@@ -163,7 +164,7 @@ void main() {
           ...List.filled(31, 0), 0, // Success = false
           ...List.filled(31, 0), 4, // Error data length
           0x08, 0xc3, 0x79, 0xa0, // Error selector
-        ]));
+        ]),);
 
         final results = await builder.tryExecute(multicall);
 
@@ -184,7 +185,7 @@ void main() {
           ...List.filled(31, 0), 1, // Success = true
           ...List.filled(31, 0), 32, // Result data length
           ...List.filled(32, 0), // Result data
-        ]));
+        ]),);
 
         await builder.tryExecute(multicall, requireSuccess: true);
 
@@ -216,7 +217,7 @@ void main() {
           ...List.filled(31, 0), 32,
           // First result data
           ...List.filled(32, 0),
-        ]));
+        ]),);
 
         final result = await builder.executeWithBlock(multicall);
 
@@ -281,7 +282,7 @@ void main() {
         expect(() => calls.add(Call(
           target: '0x2345678901234567890123456789012345678901',
           callData: Uint8List(4),
-        )), throwsUnsupportedError);
+        ),), throwsUnsupportedError,);
       });
     });
   });

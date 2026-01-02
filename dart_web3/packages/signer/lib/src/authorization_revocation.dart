@@ -99,7 +99,7 @@ class AuthorizationRevocation {
       }
     }
 
-    return await revocationBatch.signAll(signer);
+    return revocationBatch.signAll(signer);
   }
 
   /// Signs multiple revocation authorizations with a private key.
@@ -146,7 +146,7 @@ class AuthorizationRevocation {
   static Map<int, bool> validateRevocationBatch(AuthorizationBatch batch) {
     final results = <int, bool>{};
     
-    for (int i = 0; i < batch.length; i++) {
+    for (var i = 0; i < batch.length; i++) {
       results[i] = isValidRevocation(batch.authorizations[i]);
     }
     
@@ -203,8 +203,8 @@ class AuthorizationRevocation {
 
   // Helper method
   static BigInt _bytesToBigInt(Uint8List bytes) {
-    BigInt result = BigInt.zero;
-    for (int i = 0; i < bytes.length; i++) {
+    var result = BigInt.zero;
+    for (var i = 0; i < bytes.length; i++) {
       result = (result << 8) + BigInt.from(bytes[i]);
     }
     return result;

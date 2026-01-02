@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'trezor_types.dart';
-import 'trezor_transport.dart';
+
 import 'protobuf_messages.dart';
+import 'trezor_transport.dart';
+import 'trezor_types.dart';
 
 /// Trezor hardware wallet client
 class TrezorClient {
+  
+  TrezorClient(this._transport);
   final TrezorTransport _transport;
   TrezorConnectionState _state = TrezorConnectionState.disconnected;
   TrezorDevice? _device;
   TrezorFeatures? _features;
   final StreamController<TrezorConnectionState> _stateController = StreamController.broadcast();
-  
-  TrezorClient(this._transport);
   
   /// Current connection state
   TrezorConnectionState get state => _state;
@@ -32,7 +32,7 @@ class TrezorClient {
   
   /// Discover available Trezor devices
   Future<List<TrezorDevice>> discoverDevices() async {
-    return await _transport.discoverDevices();
+    return _transport.discoverDevices();
   }
   
   /// Connect to Trezor device
@@ -121,7 +121,7 @@ class TrezorClient {
   }) async {
     final accounts = <TrezorAccount>[];
     
-    for (int i = offset; i < offset + count; i++) {
+    for (var i = offset; i < offset + count; i++) {
       final path = '$basePath/$i';
       final account = await getAccount(path);
       accounts.add(account);
@@ -265,12 +265,12 @@ class TrezorClient {
   /// Send message and handle user interaction (public method for multi-chain support)
   Future<TrezorMessage> sendMessage(TrezorMessage request) async {
     _ensureConnected();
-    return await _handleUserInteraction(request);
+    return _handleUserInteraction(request);
   }
   
   /// Handle user interaction (button presses, PIN, passphrase)
   Future<TrezorMessage> _handleUserInteraction(TrezorMessage request) async {
-    TrezorMessage response = await _transport.exchange(request);
+    var response = await _transport.exchange(request);
     
     // Handle various user interaction requests
     while (true) {
@@ -348,7 +348,7 @@ class TrezorClient {
     final parts = derivationPath.split('/');
     if (parts.isNotEmpty) {
       final lastPart = parts.last;
-      final cleanPart = lastPart.replaceAll("'", "").replaceAll('h', '');
+      final cleanPart = lastPart.replaceAll("'", '').replaceAll('h', '');
       return int.tryParse(cleanPart) ?? 0;
     }
     return 0;

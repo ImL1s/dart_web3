@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'flashbots_types.dart';
 
 /// Service for MEV protection and Flashbots
-class MevService {
-  final RpcProvider _provider;
-  final Signer? _authSigner; // Flashbots requires authentication header
+class MevService { // Flashbots requires authentication header
 
-  MevService(this._provider, [this._authSigner]);
+  MevService(this._provider);
+  final RpcProvider _provider;
 
   /// Send a bundle to Flashbots relay
   Future<String> sendBundle(FlashbotsBundle bundle) async {
@@ -34,7 +32,7 @@ class MevService {
       'latest', // State block tag
     ];
 
-    return await _provider.call<Map<String, dynamic>>(
+    return _provider.call<Map<String, dynamic>>(
       'eth_callBundle',
       params,
     );

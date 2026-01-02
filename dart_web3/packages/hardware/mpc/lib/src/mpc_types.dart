@@ -11,29 +11,6 @@ enum CurveType {
 
 /// MPC key share information.
 class KeyShare {
-  /// The party ID that owns this key share.
-  final String partyId;
-  
-  /// The key share data (encrypted).
-  final Uint8List shareData;
-  
-  /// The curve type for this key share.
-  final CurveType curveType;
-  
-  /// The threshold required for signing.
-  final int threshold;
-  
-  /// The total number of parties.
-  final int totalParties;
-  
-  /// The public key derived from all shares.
-  final Uint8List publicKey;
-  
-  /// Creation timestamp.
-  final DateTime createdAt;
-  
-  /// Last refresh timestamp.
-  final DateTime? lastRefreshed;
 
   KeyShare({
     required this.partyId,
@@ -61,6 +38,29 @@ class KeyShare {
           : null,
     );
   }
+  /// The party ID that owns this key share.
+  final String partyId;
+  
+  /// The key share data (encrypted).
+  final Uint8List shareData;
+  
+  /// The curve type for this key share.
+  final CurveType curveType;
+  
+  /// The threshold required for signing.
+  final int threshold;
+  
+  /// The total number of parties.
+  final int totalParties;
+  
+  /// The public key derived from all shares.
+  final Uint8List publicKey;
+  
+  /// Creation timestamp.
+  final DateTime createdAt;
+  
+  /// Last refresh timestamp.
+  final DateTime? lastRefreshed;
 
   /// Converts the KeyShare to JSON.
   Map<String, dynamic> toJson() {
@@ -121,17 +121,6 @@ enum KeyGenerationState {
 
 /// MPC provider configuration.
 class MpcProviderConfig {
-  /// The provider name (e.g., 'fireblocks', 'fordefi').
-  final String providerName;
-  
-  /// API endpoint URL.
-  final String apiUrl;
-  
-  /// API key for authentication.
-  final String apiKey;
-  
-  /// Additional configuration parameters.
-  final Map<String, dynamic> additionalConfig;
 
   MpcProviderConfig({
     required this.providerName,
@@ -149,6 +138,17 @@ class MpcProviderConfig {
       additionalConfig: Map<String, dynamic>.from(json['additionalConfig'] as Map? ?? {}),
     );
   }
+  /// The provider name (e.g., 'fireblocks', 'fordefi').
+  final String providerName;
+  
+  /// API endpoint URL.
+  final String apiUrl;
+  
+  /// API key for authentication.
+  final String apiKey;
+  
+  /// Additional configuration parameters.
+  final Map<String, dynamic> additionalConfig;
 
   /// Converts the MpcProviderConfig to JSON.
   Map<String, dynamic> toJson() {
@@ -163,17 +163,6 @@ class MpcProviderConfig {
 
 /// MPC signing request.
 class MpcSigningRequest {
-  /// The message hash to sign.
-  final Uint8List messageHash;
-  
-  /// The curve type to use for signing.
-  final CurveType curveType;
-  
-  /// The key share ID to use.
-  final String keyShareId;
-  
-  /// Additional metadata for the signing request.
-  final Map<String, dynamic> metadata;
 
   MpcSigningRequest({
     required this.messageHash,
@@ -191,6 +180,17 @@ class MpcSigningRequest {
       metadata: Map<String, dynamic>.from(json['metadata'] as Map? ?? {}),
     );
   }
+  /// The message hash to sign.
+  final Uint8List messageHash;
+  
+  /// The curve type to use for signing.
+  final CurveType curveType;
+  
+  /// The key share ID to use.
+  final String keyShareId;
+  
+  /// Additional metadata for the signing request.
+  final Map<String, dynamic> metadata;
 
   /// Converts the MpcSigningRequest to JSON.
   Map<String, dynamic> toJson() {
@@ -205,23 +205,10 @@ class MpcSigningRequest {
 
 /// MPC signing response.
 class MpcSigningResponse {
-  /// The signature bytes.
-  final Uint8List signature;
-  
-  /// The recovery ID (for ECDSA signatures).
-  final int? recoveryId;
-  
-  /// The session ID that produced this signature.
-  final String sessionId;
-  
-  /// Timestamp when the signature was completed.
-  final DateTime completedAt;
 
   MpcSigningResponse({
     required this.signature,
-    this.recoveryId,
-    required this.sessionId,
-    required this.completedAt,
+    required this.sessionId, required this.completedAt, this.recoveryId,
   });
 
   /// Creates an MpcSigningResponse from JSON.
@@ -233,6 +220,17 @@ class MpcSigningResponse {
       completedAt: DateTime.parse(json['completedAt'] as String),
     );
   }
+  /// The signature bytes.
+  final Uint8List signature;
+  
+  /// The recovery ID (for ECDSA signatures).
+  final int? recoveryId;
+  
+  /// The session ID that produced this signature.
+  final String sessionId;
+  
+  /// Timestamp when the signature was completed.
+  final DateTime completedAt;
 
   /// Converts the MpcSigningResponse to JSON.
   Map<String, dynamic> toJson() {
@@ -274,6 +272,13 @@ enum MpcErrorType {
 
 /// MPC-specific error.
 class MpcError implements Exception {
+
+  MpcError({
+    required this.type,
+    required this.message,
+    this.data,
+    this.cause,
+  });
   /// The error type.
   final MpcErrorType type;
   
@@ -286,15 +291,81 @@ class MpcError implements Exception {
   /// The underlying cause.
   final Exception? cause;
 
-  MpcError({
-    required this.type,
-    required this.message,
-    this.data,
-    this.cause,
-  });
-
   @override
   String toString() {
     return 'MpcError(${type.name}): $message';
   }
+}
+
+/// MPC wallet information.
+class MpcWalletInfo {
+
+  MpcWalletInfo({
+    required this.walletId,
+    required this.name,
+    required this.curveType,
+    required this.threshold,
+    required this.totalParties,
+    required this.publicKey,
+    required this.status,
+    required this.createdAt,
+    required this.lastActivity,
+  });
+  final String walletId;
+  final String name;
+  final CurveType curveType;
+  final int threshold;
+  final int totalParties;
+  final Uint8List publicKey;
+  final MpcWalletStatus status;
+  final DateTime createdAt;
+  final DateTime lastActivity;
+}
+
+/// MPC wallet status.
+enum MpcWalletStatus {
+  active,
+  pending,
+  frozen,
+  archived,
+}
+
+/// MPC signing status.
+enum MpcSigningStatus {
+  pending,
+  processing,
+  completed,
+  failed,
+  cancelled,
+}
+
+/// Abstract MPC provider interface.
+abstract class MpcProvider {
+  MpcProviderConfig get config;
+  
+  Future<void> initialize();
+  
+  Future<String> createWallet({
+    required String name,
+    required int threshold,
+    required int totalParties,
+    required CurveType curveType,
+    Map<String, dynamic>? metadata,
+  });
+  
+  Future<MpcWalletInfo> getWallet(String walletId);
+  
+  Future<List<MpcWalletInfo>> listWallets();
+  
+  Future<String> initiateSigningRequest(MpcSigningRequest request);
+  
+  Future<MpcSigningStatus> getSigningStatus(String requestId);
+  
+  Future<MpcSigningResponse> getSigningResult(String requestId);
+  
+  Future<void> cancelSigningRequest(String requestId);
+  
+  Future<void> refreshWalletKeys(String walletId);
+  
+  Future<void> dispose();
 }

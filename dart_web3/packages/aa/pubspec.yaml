@@ -1,6 +1,7 @@
 name: dart_web3_aa
 description: ERC-4337 Account Abstraction support for Dart Web3 SDK
 version: 0.1.0
+publish_to: none
 
 environment:
   sdk: ^3.6.0
@@ -19,5 +20,6 @@ dependencies:
   dart_web3_abi:
     path: ../abi
 
+  dart_web3_provider: any
 dev_dependencies:
   test: ^1.24.0

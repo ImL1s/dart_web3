@@ -10,13 +10,6 @@ import 'transaction.dart';
 
 /// Signer implementation using a private key.
 class PrivateKeySigner implements Signer {
-  /// The private key bytes.
-  final Uint8List privateKey;
-
-  /// The chain ID.
-  final int chainId;
-
-  late final EthereumAddress _address;
 
   PrivateKeySigner(this.privateKey, this.chainId) {
     if (privateKey.length != 32) {
@@ -42,6 +35,13 @@ class PrivateKeySigner implements Signer {
     final wallet = HDWallet.fromMnemonic(words).derive(path);
     return PrivateKeySigner(wallet.getPrivateKey(), chainId);
   }
+  /// The private key bytes.
+  final Uint8List privateKey;
+
+  /// The chain ID.
+  final int chainId;
+
+  late final EthereumAddress _address;
 
   @override
   EthereumAddress get address => _address;
@@ -111,7 +111,7 @@ class PrivateKeySigner implements Signer {
       tx.nonce ?? BigInt.zero,
       tx.gasPrice ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       tx.chainId ?? chainId,
@@ -136,7 +136,7 @@ class PrivateKeySigner implements Signer {
       tx.nonce ?? BigInt.zero,
       tx.gasPrice ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       v,
@@ -156,7 +156,7 @@ class PrivateKeySigner implements Signer {
       tx.nonce ?? BigInt.zero,
       tx.gasPrice ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -175,7 +175,7 @@ class PrivateKeySigner implements Signer {
       tx.nonce ?? BigInt.zero,
       tx.gasPrice ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -197,7 +197,7 @@ class PrivateKeySigner implements Signer {
       tx.maxPriorityFeePerGas ?? BigInt.zero,
       tx.maxFeePerGas ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -217,7 +217,7 @@ class PrivateKeySigner implements Signer {
       tx.maxPriorityFeePerGas ?? BigInt.zero,
       tx.maxFeePerGas ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -240,7 +240,7 @@ class PrivateKeySigner implements Signer {
       tx.maxPriorityFeePerGas ?? BigInt.zero,
       tx.maxFeePerGas ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -262,7 +262,7 @@ class PrivateKeySigner implements Signer {
       tx.maxPriorityFeePerGas ?? BigInt.zero,
       tx.maxFeePerGas ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -287,7 +287,7 @@ class PrivateKeySigner implements Signer {
       tx.maxPriorityFeePerGas ?? BigInt.zero,
       tx.maxFeePerGas ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,
@@ -308,7 +308,7 @@ class PrivateKeySigner implements Signer {
       tx.maxPriorityFeePerGas ?? BigInt.zero,
       tx.maxFeePerGas ?? BigInt.zero,
       tx.gasLimit ?? BigInt.zero,
-      tx.to != null ? HexUtils.decode(tx.to!) : Uint8List(0),
+      if (tx.to != null) HexUtils.decode(tx.to!) else Uint8List(0),
       tx.value ?? BigInt.zero,
       tx.data ?? Uint8List(0),
       accessList,

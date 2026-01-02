@@ -1,15 +1,14 @@
-import 'package:test/test.dart';
 import 'package:dart_web3_multicall/dart_web3_multicall.dart';
+import 'package:test/test.dart';
+
 import 'mock_client.dart';
 
 void main() {
   group('MulticallFactory', () {
     late MockPublicClient publicClient;
-    late MockWalletClient walletClient;
 
     setUp(() {
       publicClient = MockPublicClient();
-      walletClient = MockWalletClient();
     });
 
     group('create', () {
@@ -41,14 +40,7 @@ void main() {
         expect(multicall, isA<Multicall>());
       });
 
-      test('should include wallet client when provided', () {
-        final multicall = MulticallFactory.create(
-          publicClient: publicClient,
-          walletClient: walletClient,
-        );
 
-        expect(multicall, isA<Multicall>());
-      });
     });
 
     group('isSupported', () {
@@ -92,7 +84,7 @@ void main() {
           MulticallVersion.v1,
           MulticallVersion.v2,
           MulticallVersion.v3,
-        ]));
+        ]),);
       });
 
       test('should return all versions for Polygon', () {
@@ -101,7 +93,7 @@ void main() {
           MulticallVersion.v1,
           MulticallVersion.v2,
           MulticallVersion.v3,
-        ]));
+        ]),);
       });
 
       test('should return only v3 for most chains', () {

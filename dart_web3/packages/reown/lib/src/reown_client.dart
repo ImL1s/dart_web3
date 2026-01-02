@@ -13,6 +13,14 @@ import 'siwe_auth.dart';
 
 /// Main client for Reown/WalletConnect v2 integration.
 class ReownClient {
+
+  ReownClient({
+    required this.projectId,
+    this.relayUrl = 'wss://relay.walletconnect.com',
+    this.reconnectionConfig,
+  }) {
+    _initialize();
+  }
   final String projectId;
   final String relayUrl;
   final ReconnectionConfig? reconnectionConfig;
@@ -24,16 +32,8 @@ class ReownClient {
   
   final StreamController<ReownEvent> _eventController = StreamController.broadcast();
   
-  late StreamSubscription _sessionSubscription;
-  late StreamSubscription _connectionSubscription;
-
-  ReownClient({
-    required this.projectId,
-    this.relayUrl = 'wss://relay.walletconnect.com',
-    this.reconnectionConfig,
-  }) {
-    _initialize();
-  }
+  late StreamSubscription<SessionEvent> _sessionSubscription;
+  late StreamSubscription<ConnectionState> _connectionSubscription;
 
   /// Stream of Reown events.
   Stream<ReownEvent> get events => _eventController.stream;
@@ -105,7 +105,7 @@ class ReownClient {
       await connect();
     }
 
-    return await _sessionManager.proposeSession(
+    return _sessionManager.proposeSession(
       requiredNamespaces: requiredNamespaces,
       optionalNamespaces: optionalNamespaces,
       metadata: metadata,
@@ -120,7 +120,7 @@ class ReownClient {
     required String account,
     Map<String, dynamic>? metadata,
   }) async {
-    return await _sessionManager.approveSession(
+    return _sessionManager.approveSession(
       proposalId: proposalId,
       topic: topic,
       namespaces: namespaces,
@@ -195,7 +195,7 @@ class ReownClient {
     }
 
     final oneClickAuth = OneClickAuth(_siweAuth);
-    return await oneClickAuth.authenticate(
+    return oneClickAuth.authenticate(
       namespaces: requiredNamespaces,
       config: siweConfig,
       timeout: timeout,
@@ -207,7 +207,7 @@ class ReownClient {
     required String sessionTopic,
     SiweConfig? config,
   }) async {
-    return await _siweAuth.authenticateWithSiwe(
+    return _siweAuth.authenticateWithSiwe(
       sessionTopic: sessionTopic,
     );
   }
@@ -219,7 +219,7 @@ class ReownClient {
     required Map<String, dynamic> params,
     Duration? timeout,
   }) async {
-    return await _sessionManager.sendRequest(
+    return _sessionManager.sendRequest(
       topic: sessionTopic,
       method: method,
       params: params,
@@ -245,7 +245,7 @@ class ReownClient {
         _eventController.add(ReownEvent.sessionProposalRejected(
           event.proposalId!,
           event.reason,
-        ));
+        ),);
         break;
       case SessionEventType.established:
         _eventController.add(ReownEvent.sessionEstablished(event.session!));
@@ -260,13 +260,13 @@ class ReownClient {
         _eventController.add(ReownEvent.sessionDisconnected(
           event.session!,
           event.reason,
-        ));
+        ),);
         break;
       case SessionEventType.request:
         _eventController.add(ReownEvent.sessionRequest(
           event.session!,
           event.request!,
-        ));
+        ),);
         break;
     }
   }
@@ -289,13 +289,6 @@ class ReownClient {
 
 /// Reown client events.
 class ReownEvent {
-  final ReownEventType type;
-  final SessionProposal? proposal;
-  final Session? session;
-  final String? proposalId;
-  final String? reason;
-  final Map<String, dynamic>? request;
-  final ConnectionState? connectionState;
 
   ReownEvent._(this.type, {
     this.proposal,
@@ -332,6 +325,13 @@ class ReownEvent {
 
   factory ReownEvent.connectionStateChanged(ConnectionState state) =>
       ReownEvent._(ReownEventType.connectionStateChanged, connectionState: state);
+  final ReownEventType type;
+  final SessionProposal? proposal;
+  final Session? session;
+  final String? proposalId;
+  final String? reason;
+  final Map<String, dynamic>? request;
+  final ConnectionState? connectionState;
 }
 
 enum ReownEventType {
@@ -348,6 +348,8 @@ enum ReownEventType {
 
 /// Factory for creating Reown clients with common configurations.
 class ReownClientFactory {
+  ReownClientFactory._();
+
   /// Creates a client for DApp integration.
   static ReownClient createDAppClient({
     required String projectId,

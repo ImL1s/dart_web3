@@ -1,4 +1,4 @@
-library dart_web3_staking;
+library;
 
-export 'src/staking_types.dart';
 export 'src/staking_service.dart';
+export 'src/staking_types.dart';

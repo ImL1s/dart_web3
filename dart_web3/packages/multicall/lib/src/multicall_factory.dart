@@ -1,5 +1,4 @@
 import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_contract/dart_web3_contract.dart';
 import 'multicall.dart';
 
 /// Factory for creating Multicall instances with chain-specific configurations.
@@ -7,7 +6,6 @@ class MulticallFactory {
   /// Creates a Multicall instance for the given chain.
   static Multicall create({
     required PublicClient publicClient,
-    WalletClient? walletClient,
     String? contractAddress,
     MulticallVersion? version,
   }) {
@@ -24,7 +22,6 @@ class MulticallFactory {
     
     return Multicall(
       publicClient: publicClient,
-      walletClient: walletClient,
       contractAddress: address,
       version: multicallVersion,
     );
@@ -139,7 +136,6 @@ extension WalletMulticallExtension on WalletClient {
   }) {
     return MulticallFactory.create(
       publicClient: this,
-      walletClient: this,
       contractAddress: contractAddress,
       version: version,
     );

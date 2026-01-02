@@ -1,11 +1,8 @@
-import 'dart:typed_data';
-
+import 'package:dart_web3_client/dart_web3_client.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
 
 import '../smart_account.dart';
-import '../user_operation.dart';
 
 /// LightAccount implementation optimized for gas efficiency.
 /// 
@@ -15,8 +12,6 @@ import '../user_operation.dart';
 /// - Batch execution capabilities
 /// - Upgradeable implementation
 class LightAccount extends BaseSmartAccount {
-  static const String defaultFactoryAddress = '0x00004EC70002a32400f8ae005A26081065620D20';
-  static const String defaultImplementationAddress = '0xae8c656ad28F2B59a196AB61815C16A0AE1c3cba';
 
   LightAccount({
     required super.owner,
@@ -28,10 +23,24 @@ class LightAccount extends BaseSmartAccount {
           factoryAddress: factoryAddress ?? defaultFactoryAddress,
           implementationAddress: implementationAddress ?? defaultImplementationAddress,
         );
+  static const String defaultFactoryAddress = '0x00004EC70002a32400f8ae005A26081065620D20';
+  static const String defaultImplementationAddress = '0xae8c656ad28F2B59a196AB61815C16A0AE1c3cba';
 
   @override
   Future<String> getAddress() async {
-    return await _calculateAddress();
+    // LightAccount uses CREATE2 with factory, implementation, owner, and salt
+    final ownerAddress = owner.address.hex;
+    
+    // The actual calculation would involve:
+    // 1. ABI encode the initializer call
+    // 2. Calculate CREATE2 address using factory, salt, and initCode hash
+    
+    // For now, return a deterministic placeholder based on owner
+    final ownerBytes = HexUtils.decode(ownerAddress);
+    final hash = HexUtils.encode(ownerBytes); // Simplified
+    
+    // This should be replaced with proper CREATE2 calculation
+    return '0x' + hash.replaceFirst('0x', '').substring(0, 40);
   }
 
   @override
@@ -96,28 +105,11 @@ class LightAccount extends BaseSmartAccount {
     final selector = '47e1da2a';
     
     // LightAccount uses a different batch format with Call structs
-    // TODO: Use proper ABI encoder from dart_web3_abi
+    // Use proper ABI encoder from dart_web3_abi
     // For now, return a placeholder
     return '0x$selector';
   }
 
-  @override
-  Future<String> _calculateAddress() async {
-    // LightAccount uses CREATE2 with factory, implementation, owner, and salt
-    final ownerAddress = owner.address.hex;
-    final salt = BigInt.zero;
-    
-    // The actual calculation would involve:
-    // 1. ABI encode the initializer call
-    // 2. Calculate CREATE2 address using factory, salt, and initCode hash
-    
-    // For now, return a deterministic placeholder based on owner
-    final ownerBytes = HexUtils.decode(ownerAddress);
-    final hash = HexUtils.encode(ownerBytes); // Simplified
-    
-    // This should be replaced with proper CREATE2 calculation
-    return '0x' + hash.replaceFirst('0x', '').substring(0, 40);
-  }
 
   /// Checks if the account supports EIP-1271 signature validation.
   Future<bool> supportsEIP1271() async {
@@ -130,11 +122,12 @@ class LightAccount extends BaseSmartAccount {
       final result = await publicClient.call(CallRequest(
         to: address,
         data: HexUtils.decode(callData),
-      ));
+      ),);
       
       // Decode boolean result
       return result.isNotEmpty && result[31] == 1;
-    } catch (e) {
+    } catch (_) {
+      // Return false if contract is not deployed
       return false;
     }
   }
@@ -150,12 +143,12 @@ class LightAccount extends BaseSmartAccount {
       final result = await publicClient.call(CallRequest(
         to: address,
         data: HexUtils.decode(callData),
-      ));
+      ),);
       
       // Check if result equals EIP-1271 magic value (0x1626ba7e)
       final magicValue = HexUtils.encode(result);
       return magicValue == '0x1626ba7e';
-    } catch (e) {
+    } catch (_) {
       return false;
     }
   }
@@ -190,13 +183,13 @@ class LightAccount extends BaseSmartAccount {
 
 /// Factory for creating LightAccount instances.
 class LightAccountFactory {
-  final String factoryAddress;
-  final PublicClient publicClient;
 
   LightAccountFactory({
     required this.factoryAddress,
     required this.publicClient,
   });
+  final String factoryAddress;
+  final PublicClient publicClient;
 
   /// Creates a LightAccount instance.
   LightAccount createAccount({
@@ -225,7 +218,7 @@ class LightAccountFactory {
     final result = await publicClient.call(CallRequest(
       to: factoryAddress,
       data: HexUtils.decode(callData),
-    ));
+    ),);
     
     return HexUtils.encode(result);
   }

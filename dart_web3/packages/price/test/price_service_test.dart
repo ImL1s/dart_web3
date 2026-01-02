@@ -1,5 +1,5 @@
-import 'package:test/test.dart';
 import 'package:dart_web3_price/dart_web3_price.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Price Service Tests', () {

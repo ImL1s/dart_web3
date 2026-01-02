@@ -5,7 +5,7 @@ void main() async {
 
   // 1. Core Utilities
   final address = EthereumAddress.fromHex('0xd8da6bf26964af9d7eed9e03e53415d37aa96045');
-  print('Address: ${address.toChecksum((data) => Keccak256.hash(data))}');
+  print('Address: ${address.toChecksum(Keccak256.hash)}');
 
   // 2. Crypto & Wallets
   // Note: Using hardcoded key for demo as full BIP39 wordlist is truncated in MVP source

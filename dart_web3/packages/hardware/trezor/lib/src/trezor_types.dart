@@ -2,12 +2,6 @@ import 'dart:typed_data';
 
 /// Trezor device information
 class TrezorDevice {
-  final String deviceId;
-  final String model;
-  final String label;
-  final String firmwareVersion;
-  final bool isBootloader;
-  final bool isConnected;
   
   TrezorDevice({
     required this.deviceId,
@@ -17,6 +11,12 @@ class TrezorDevice {
     this.isBootloader = false,
     this.isConnected = false,
   });
+  final String deviceId;
+  final String model;
+  final String label;
+  final String firmwareVersion;
+  final bool isBootloader;
+  final bool isConnected;
   
   @override
   String toString() {
@@ -37,11 +37,6 @@ enum TrezorModel {
 
 /// Trezor account information
 class TrezorAccount {
-  final String address;
-  final String derivationPath;
-  final Uint8List publicKey;
-  final int index;
-  final String? label;
   
   TrezorAccount({
     required this.address,
@@ -50,6 +45,11 @@ class TrezorAccount {
     required this.index,
     this.label,
   });
+  final String address;
+  final String derivationPath;
+  final Uint8List publicKey;
+  final int index;
+  final String? label;
 }
 
 /// Trezor connection state
@@ -101,13 +101,13 @@ enum TrezorMessageType {
 
 /// Trezor message structure
 class TrezorMessage {
-  final TrezorMessageType type;
-  final Uint8List data;
   
   TrezorMessage({
     required this.type,
     required this.data,
   });
+  final TrezorMessageType type;
+  final Uint8List data;
   
   /// Serialize message to wire format
   Uint8List toWireFormat() {
@@ -182,10 +182,6 @@ class TrezorMessage {
 
 /// Trezor signing request
 class TrezorSignRequest {
-  final Uint8List data;
-  final String derivationPath;
-  final TrezorSignType signType;
-  final int? chainId;
   
   TrezorSignRequest({
     required this.data,
@@ -193,6 +189,10 @@ class TrezorSignRequest {
     required this.signType,
     this.chainId,
   });
+  final Uint8List data;
+  final String derivationPath;
+  final TrezorSignType signType;
+  final int? chainId;
 }
 
 /// Types of signing operations
@@ -204,13 +204,13 @@ enum TrezorSignType {
 
 /// Trezor signing response
 class TrezorSignResponse {
-  final Uint8List signature;
-  final String address;
   
   TrezorSignResponse({
     required this.signature,
     required this.address,
   });
+  final Uint8List signature;
+  final String address;
   
   /// Get signature as hex string
   String get signatureHex => '0x${signature.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';
@@ -232,10 +232,6 @@ enum TrezorErrorType {
 
 /// Trezor exception
 class TrezorException implements Exception {
-  final TrezorErrorType type;
-  final String message;
-  final int? code;
-  final dynamic originalError;
   
   TrezorException(
     this.type,
@@ -243,6 +239,10 @@ class TrezorException implements Exception {
     this.code,
     this.originalError,
   });
+  final TrezorErrorType type;
+  final String message;
+  final int? code;
+  final dynamic originalError;
   
   @override
   String toString() {
@@ -253,6 +253,17 @@ class TrezorException implements Exception {
 
 /// Trezor features (device capabilities)
 class TrezorFeatures {
+  
+  TrezorFeatures({
+    required this.vendor,
+    required this.majorVersion,
+    required this.minorVersion,
+    required this.patchVersion,
+    required this.bootloaderMode,
+    required this.pinProtection, required this.passphraseProtection, required this.initialized, required this.coins, this.deviceId,
+    this.language,
+    this.label,
+  });
   final String vendor;
   final int majorVersion;
   final int minorVersion;
@@ -265,21 +276,6 @@ class TrezorFeatures {
   final String? label;
   final bool initialized;
   final List<int> coins;
-  
-  TrezorFeatures({
-    required this.vendor,
-    required this.majorVersion,
-    required this.minorVersion,
-    required this.patchVersion,
-    required this.bootloaderMode,
-    this.deviceId,
-    required this.pinProtection,
-    required this.passphraseProtection,
-    this.language,
-    this.label,
-    required this.initialized,
-    required this.coins,
-  });
   
   String get firmwareVersion => '$majorVersion.$minorVersion.$patchVersion';
   
@@ -317,25 +313,25 @@ enum ButtonRequestType {
 
 /// PIN matrix request
 class PinMatrixRequest {
-  final String? message;
   
   PinMatrixRequest({this.message});
+  final String? message;
 }
 
 /// Passphrase request
 class PassphraseRequest {
-  final bool onDevice;
   
   PassphraseRequest({required this.onDevice});
+  final bool onDevice;
 }
 
 /// Button request
 class ButtonRequest {
-  final ButtonRequestType type;
-  final String? message;
   
   ButtonRequest({
     required this.type,
     this.message,
   });
+  final ButtonRequestType type;
+  final String? message;
 }

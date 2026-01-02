@@ -6,11 +6,11 @@
 /// - [HexUtils] - Hexadecimal encoding/decoding
 /// - [RLP] - Recursive Length Prefix encoding/decoding
 /// - [BytesUtils] - Byte array manipulation utilities
-library dart_web3_core;
+library;
 
 export 'src/address.dart';
-export 'src/units.dart';
-export 'src/hex.dart';
-export 'src/rlp.dart';
 export 'src/bytes.dart';
 export 'src/exceptions.dart';
+export 'src/hex.dart';
+export 'src/rlp.dart';
+export 'src/units.dart';

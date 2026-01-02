@@ -1,9 +1,10 @@
 import 'dart:typed_data';
-import 'package:test/test.dart';
-import 'package:dart_web3_trezor/dart_web3_trezor.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart' as abi;
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:dart_web3_trezor/dart_web3_trezor.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Trezor Transport', () {
@@ -185,7 +186,7 @@ void main() {
       final accounts = await client.getAccounts(count: 3);
       
       expect(accounts.length, equals(3));
-      for (int i = 0; i < accounts.length; i++) {
+      for (var i = 0; i < accounts.length; i++) {
         expect(accounts[i].derivationPath, contains('/$i'));
         expect(accounts[i].index, equals(i));
       }
@@ -234,7 +235,7 @@ void main() {
     });
     
     test('should get multiple addresses', () async {
-      final addresses = await signer.getAddresses(count: 5);
+      final addresses = await signer.getAddresses();
       
       expect(addresses.length, equals(5));
       for (final address in addresses) {
@@ -283,7 +284,7 @@ void main() {
         types: {
           'Test': [
             abi.TypedDataField(name: 'value', type: 'uint256'),
-          ]
+          ],
         },
         primaryType: 'Test',
         message: {'value': 123},

@@ -1,26 +1,23 @@
 import 'dart:async';
-import 'dart:math' as math;
+
 import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
 
 import 'aggregators/aggregator_interface.dart';
 import 'aggregators/oneinch_aggregator.dart';
-import 'aggregators/zerox_aggregator.dart';
 import 'aggregators/paraswap_aggregator.dart';
 import 'aggregators/rango_aggregator.dart';
-import 'swap_quote.dart';
-import 'swap_types.dart';
-import 'token_approval.dart';
+import 'aggregators/zerox_aggregator.dart';
 import 'mev_protection.dart';
 import 'slippage_calculator.dart';
+import 'swap_quote.dart';
 import 'swap_tracker.dart';
+import 'swap_types.dart';
+import 'token_approval.dart';
 
 /// Main swap service that aggregates quotes from multiple DEX aggregators
 class SwapService {
-  final WalletClient walletClient;
-  final List<DexAggregator> aggregators;
-  final TokenApprovalManager approvalManager;
-  final MevProtectionService? mevProtectionService;
-  final SwapTracker swapTracker;
   
   SwapService({
     required this.walletClient,
@@ -30,6 +27,11 @@ class SwapService {
        approvalManager = TokenApprovalManager(walletClient),
        mevProtectionService = mevProtectionService,
        swapTracker = SwapTracker(walletClient);
+  final WalletClient walletClient;
+  final List<DexAggregator> aggregators;
+  final TokenApprovalManager approvalManager;
+  final MevProtectionService? mevProtectionService;
+  final SwapTracker swapTracker;
 
   /// Get the best swap quote from all aggregators
   Future<SwapQuote?> getBestQuote(SwapParams params) async {
@@ -68,7 +70,7 @@ class SwapService {
     // Get new quotes with dynamic slippage if it's significantly different
     if ((dynamicSlippage - params.slippage).abs() > 0.001) {
       final dynamicParams = params.copyWith(slippage: dynamicSlippage);
-      return await getQuotes(dynamicParams);
+      return getQuotes(dynamicParams);
     }
 
     return baseQuotes;
@@ -108,20 +110,20 @@ class SwapService {
           mevProtection != MevProtectionType.none && 
           mevProtectionService != null) {
         final result = await mevProtectionService!.submitProtectedTransaction(
-          signedTransaction: signedTx,
+          signedTransaction: HexUtils.encode(signedTx),
           protectionType: mevProtection,
         );
         txHash = result.transactionHash;
       } else {
         // Submit normally
-        txHash = await walletClient.sendRawTransaction(signedTx);
+        txHash = await walletClient.sendRawTransaction(HexUtils.encode(signedTx));
       }
 
       // Start tracking the swap
       swapTracker.trackSwap(
         transactionHash: txHash,
         quote: quote,
-        userAddress: walletClient.address.address,
+        userAddress: walletClient.address.hex,
       );
 
       return txHash;
@@ -138,7 +140,7 @@ class SwapService {
     try {
       final result = await walletClient.call(
         CallRequest(
-          from: walletClient.address.address,
+        from: walletClient.address.hex,
           to: quote.transaction.to,
           data: quote.transaction.data,
           value: quote.transaction.value,
@@ -238,6 +240,18 @@ class SwapService {
     return tiers.firstWhere((tier) => tier.recommended).slippage;
   }
 
+  /// Get the current gas price for a chain
+  Future<BigInt> getGasPrice(int chainId) async {
+    for (final aggregator in aggregators) {
+      if (aggregator.supportedChains.contains(chainId)) {
+        try {
+          return await aggregator.getGasPrice(chainId);
+        } catch (_) {}
+      }
+    }
+    return BigInt.from(20000000000); // 20 gwei default
+  }
+
   Future<SwapQuote?> _getQuoteFromAggregator(
     DexAggregator aggregator,
     SwapParams params,
@@ -282,7 +296,7 @@ class SwapService {
   }
 
   Future<void> _waitForTransaction(String txHash) async {
-    int attempts = 0;
+    var attempts = 0;
     const maxAttempts = 60; // 5 minutes
 
     while (attempts < maxAttempts) {
@@ -295,7 +309,7 @@ class SwapService {
         // Continue waiting
       }
 
-      await Future.delayed(const Duration(seconds: 5));
+      await Future<void>.delayed(const Duration(seconds: 5));
       attempts++;
     }
 
@@ -340,10 +354,6 @@ class SwapService {
 
 /// Swap simulation result
 class SwapSimulationResult {
-  final bool success;
-  final BigInt? gasUsed;
-  final List<int>? returnData;
-  final String? error;
 
   const SwapSimulationResult({
     required this.success,
@@ -351,14 +361,18 @@ class SwapSimulationResult {
     this.returnData,
     this.error,
   });
+  final bool success;
+  final BigInt? gasUsed;
+  final List<int>? returnData;
+  final String? error;
 }
 
 /// Exception thrown when swap execution fails
 class SwapExecutionException implements Exception {
-  final String message;
-  final dynamic originalError;
 
   const SwapExecutionException(this.message, {this.originalError});
+  final String message;
+  final dynamic originalError;
 
   @override
   String toString() => 'SwapExecutionException: $message';

@@ -1,17 +1,19 @@
 import 'dart:typed_data';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+
 import 'ledger_client.dart';
 import 'ledger_types.dart';
 
 /// Ledger hardware wallet signer implementation
 class LedgerSigner implements HardwareWalletSigner {
+  
+  LedgerSigner(this._client, this._derivationPath);
   final LedgerClient _client;
   final String _derivationPath;
   LedgerAccount? _account;
-  
-  LedgerSigner(this._client, this._derivationPath);
   
   /// Create a Ledger signer for a specific account
   static Future<LedgerSigner> create({
@@ -151,6 +153,34 @@ class LedgerSigner implements HardwareWalletSigner {
         throw LedgerException(
           LedgerErrorType.userDenied,
           'User denied typed data signing on device',
+        );
+      }
+      rethrow;
+    }
+  }
+  
+  @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    if (!_client.isReady) {
+      throw LedgerException(
+        LedgerErrorType.deviceNotFound,
+        'Device not connected',
+      );
+    }
+    
+    try {
+      // Ledger doesn't have a direct signHash for Ethereum app usually, 
+      // but we can use the message signing or transaction signing path if appropriate.
+      // For generic 32-byte hash, we'll use the typed data path with a dummy domain if needed,
+      // or if the client supports it directly.
+      final response = await _client.signPersonalMessage(hash, _derivationPath);
+      return HexUtils.decode(response.signatureHex);
+      
+    } catch (e) {
+      if (e is LedgerException && e.type == LedgerErrorType.userDenied) {
+        throw LedgerException(
+          LedgerErrorType.userDenied,
+          'User denied hash signing on device',
         );
       }
       rethrow;

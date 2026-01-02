@@ -1,17 +1,19 @@
 import 'dart:typed_data';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+
 import 'package:dart_web3_abi/dart_web3_abi.dart';
+import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:dart_web3_signer/dart_web3_signer.dart';
+
 import 'keystone_client.dart';
 import 'keystone_types.dart';
 
 /// Keystone hardware wallet signer implementation
 class KeystoneSigner implements HardwareWalletSigner {
+  
+  KeystoneSigner(this._client, this._derivationPath);
   final KeystoneClient _client;
   final String _derivationPath;
   KeystoneAccount? _account;
-  
-  KeystoneSigner(this._client, this._derivationPath);
   
   /// Create a Keystone signer for a specific account
   static Future<KeystoneSigner> create({
@@ -134,6 +136,19 @@ class KeystoneSigner implements HardwareWalletSigner {
   }
   
   @override
+  Future<Uint8List> signHash(Uint8List hash) async {
+    if (!_client.isConnected) {
+      throw KeystoneException(
+        KeystoneErrorType.deviceNotFound,
+        'Device not connected',
+      );
+    }
+    
+    final signature = await _client.signTypedData(hash, _derivationPath);
+    return HexUtils.decode(signature);
+  }
+  
+  @override
   Future<Uint8List> signAuthorization(Authorization authorization) async {
     // EIP-7702 authorization signing
     if (!_client.isConnected) {
@@ -166,7 +181,7 @@ class KeystoneSigner implements HardwareWalletSigner {
   
   /// Manually process a QR response (for UI integration)
   Future<String?> processQRResponse(String qrData) async {
-    return await _client.processQRResponse(qrData);
+    return _client.processQRResponse(qrData);
   }
   
   Future<void> _loadAccount() async {

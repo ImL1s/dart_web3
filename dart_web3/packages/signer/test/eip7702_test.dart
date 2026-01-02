@@ -1,9 +1,8 @@
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:test/test.dart';
+
 import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('EIP-7702 Authorization Tests', () {
@@ -14,7 +13,7 @@ void main() {
     setUp(() {
       privateKey = _generateValidPrivateKey();
       signer = PrivateKeySigner(privateKey, 1);
-      contractAddress = '0x' + List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join();
+      contractAddress = '0x${List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join()}';
     });
 
     group('Authorization Creation', () {
@@ -140,7 +139,7 @@ void main() {
         );
 
         final signedAuth = auth.sign(privateKey);
-        final wrongAddress = '0x' + List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join();
+        final wrongAddress = '0x${List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join()}';
         final isValid = signedAuth.verifySignature(wrongAddress);
 
         expect(isValid, isFalse);
@@ -391,7 +390,7 @@ Uint8List _generateValidPrivateKey() {
   
   while (true) {
     final privateKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       privateKey[i] = random.nextInt(256);
     }
     
@@ -403,8 +402,8 @@ Uint8List _generateValidPrivateKey() {
 }
 
 BigInt _bytesToBigInt(Uint8List bytes) {
-  BigInt result = BigInt.zero;
-  for (int i = 0; i < bytes.length; i++) {
+  var result = BigInt.zero;
+  for (var i = 0; i < bytes.length; i++) {
     result = (result << 8) + BigInt.from(bytes[i]);
   }
   return result;

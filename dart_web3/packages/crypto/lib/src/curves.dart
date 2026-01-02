@@ -45,9 +45,6 @@ class Ed25519 implements CurveInterface {
   int get signatureLength => 64;
 
   // Ed25519 curve parameters
-  static final BigInt _p = BigInt.parse('7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed', radix: 16);
-  static final BigInt _l = BigInt.parse('1000000000000000000000000000000014def9dea2f79cd65812631a5cf5d3ed', radix: 16);
-  static final BigInt _d = BigInt.parse('52036cee2b6ffe738cc740797779e89800700a4d4141d8ab75eb4dca135978a3', radix: 16);
 
   @override
   Uint8List sign(Uint8List messageHash, Uint8List privateKey) {
@@ -61,7 +58,7 @@ class Ed25519 implements CurveInterface {
     // Simplified deterministic signature for testing
     // sig[i] = privateKey[i] XOR messageHash[i]
     final signature = Uint8List(64);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       signature[i] = (privateKey[i] ^ messageHash[i]) & 0xFF;
       // Mirror for s part to make it 64 bytes
       signature[i + 32] = (privateKey[i] + messageHash[i]) & 0xFF;
@@ -79,7 +76,7 @@ class Ed25519 implements CurveInterface {
     // Simplified deterministic public key
     // pk[i] = privateKey[i] + 1
     final publicKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       publicKey[i] = (privateKey[i] + 1) & 0xFF;
     }
     
@@ -96,7 +93,7 @@ class Ed25519 implements CurveInterface {
     // Reconstruct expected signature from public key and message
     // Note: Since pk = sk + 1, sk = pk - 1
     
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       final skByte = (publicKey[i] - 1) & 0xFF;
       
       final expectedR = (skByte ^ messageHash[i]) & 0xFF;
@@ -114,7 +111,7 @@ class Ed25519 implements CurveInterface {
   static Ed25519KeyPair generateKeyPair() {
     final random = Random.secure();
     final privateKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       privateKey[i] = random.nextInt(256);
     }
     
@@ -156,7 +153,7 @@ class Sr25519 implements CurveInterface {
     // Different algorithm than Ed25519 to distinguish them
     final signature = Uint8List(64);
     
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       signature[i] = (privateKey[i] ^ messageHash[i] ^ 0xAA) & 0xFF;
       signature[i + 32] = (privateKey[i] + messageHash[i] + 0x55) & 0xFF;
     }
@@ -172,7 +169,7 @@ class Sr25519 implements CurveInterface {
 
     // Simplified public key: pk[i] = privateKey[i] + 2
     final publicKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       publicKey[i] = (privateKey[i] + 2) & 0xFF;
     }
     
@@ -186,7 +183,7 @@ class Sr25519 implements CurveInterface {
     if (publicKey.length != 32) return false;
 
     // Verify: sk = pk - 2
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       final skByte = (publicKey[i] - 2) & 0xFF;
       
       final expectedR = (skByte ^ messageHash[i] ^ 0xAA) & 0xFF;
@@ -204,7 +201,7 @@ class Sr25519 implements CurveInterface {
   static Sr25519KeyPair generateKeyPair() {
     final random = Random.secure();
     final privateKey = Uint8List(32);
-    for (int i = 0; i < 32; i++) {
+    for (var i = 0; i < 32; i++) {
       privateKey[i] = random.nextInt(256);
     }
     
@@ -217,10 +214,10 @@ class Sr25519 implements CurveInterface {
 
 /// Represents an Ed25519 key pair.
 class Ed25519KeyPair {
-  final Uint8List privateKey;
-  final Uint8List publicKey;
   
   Ed25519KeyPair(this.privateKey, this.publicKey);
+  final Uint8List privateKey;
+  final Uint8List publicKey;
   
   /// Signs a message using this key pair.
   Uint8List sign(Uint8List messageHash) {
@@ -237,10 +234,10 @@ class Ed25519KeyPair {
 
 /// Represents an Sr25519 key pair.
 class Sr25519KeyPair {
-  final Uint8List privateKey;
-  final Uint8List publicKey;
   
   Sr25519KeyPair(this.privateKey, this.publicKey);
+  final Uint8List privateKey;
+  final Uint8List publicKey;
   
   /// Signs a message using this key pair.
   Uint8List sign(Uint8List messageHash) {
