@@ -1,6 +1,6 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_utxo/dart_web3_utxo.dart';
+import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_utxo/src/models/transaction.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_utxo/src/models/transaction.dart';
 
 /// Represents an Unspent Transaction Output.
 class Utxo {

@@ -2,7 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:convert/convert.dart'; // for hex
-import 'package:dart_web3_utxo/src/script/script.dart';
+import 'package:web3_universal_utxo/src/script/script.dart';
 import 'package:test/test.dart';
 
 void main() {

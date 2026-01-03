@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_chains/dart_web3_chains.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_provider/web3_universal_provider.dart';
 
 class MockPublicClient implements PublicClient {
   Map<String, dynamic>? _mockCallResult;

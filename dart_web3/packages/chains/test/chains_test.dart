@@ -1,4 +1,4 @@
-import 'package:dart_web3_chains/dart_web3_chains.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart' as abi;
-import 'package:dart_web3_chains/dart_web3_chains.dart';
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart' as abi;
+import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_provider/web3_universal_provider.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 /// Mock PublicClient for testing.
 class MockPublicClient extends PublicClient {

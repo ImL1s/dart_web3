@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import 'mpc_types.dart';
 

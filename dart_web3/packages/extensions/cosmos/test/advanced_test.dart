@@ -1,8 +1,8 @@
 
-import 'package:dart_web3_cosmos/dart_web3_cosmos.dart'; // Ensure exported
-import 'package:dart_web3_cosmos/src/models/ibc.dart';
-import 'package:dart_web3_cosmos/src/models/staking.dart';
-import 'package:dart_web3_cosmos/src/models/transaction.dart';
+import 'package:web3_universal_cosmos/web3_universal_cosmos.dart'; // Ensure exported
+import 'package:web3_universal_cosmos/src/models/ibc.dart';
+import 'package:web3_universal_cosmos/src/models/staking.dart';
+import 'package:web3_universal_cosmos/src/models/transaction.dart';
 import 'package:test/test.dart';
 
 void main() {

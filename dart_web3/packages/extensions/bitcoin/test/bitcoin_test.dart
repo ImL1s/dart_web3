@@ -1,4 +1,4 @@
-import 'package:dart_web3_bitcoin/dart_web3_bitcoin.dart';
+import 'package:web3_universal_bitcoin/web3_universal_bitcoin.dart';
 import 'package:test/test.dart';
 
 void main() {

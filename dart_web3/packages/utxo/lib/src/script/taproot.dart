@@ -1,6 +1,6 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Represents a Taproot Script Leaf (BIP-341).
 class TapLeaf {
@@ -111,5 +111,5 @@ Uint8List _taggedHash(String tag, Uint8List data) {
 }
 
 Uint8List _sha256(Uint8List data) {
-  return Sha256.hash(data); // Use static method from dart_web3_crypto
+  return Sha256.hash(data); // Use static method from web3_universal_crypto
 }

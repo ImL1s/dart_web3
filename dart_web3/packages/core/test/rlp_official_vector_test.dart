@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -11,7 +11,7 @@ void main() {
     final possiblePaths = [
       'test/vectors/rlp_vectors.json',
       'packages/core/test/vectors/rlp_vectors.json',
-      'dart_web3/packages/core/test/vectors/rlp_vectors.json',
+      'web3_universal/packages/core/test/vectors/rlp_vectors.json',
     ];
 
     for (final path in possiblePaths) {

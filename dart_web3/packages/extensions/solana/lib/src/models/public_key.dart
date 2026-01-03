@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Represents a Solana Public Key.
 class PublicKey {
@@ -68,7 +68,7 @@ class PublicKey {
        // The `crypto` package might not expose `isOnCurve` directly but `PublicKey.verify` 
        // or low level usage implies validity.
        // Actually, for PDA, we just need to ensure it DOES NOT map to a valid Ed25519 public key.
-       // However, `dart_web3_crypto` Ed25519 implementation naturally handles valid points.
+       // However, `web3_universal_crypto` Ed25519 implementation naturally handles valid points.
        // If we interpret the 32 bytes as a Point, is it valid?
        // TODO: Expose `isOnCurve` in Ed25519 low-level or attempt to decode.
        // For now, attempting to construct an Ed25519 public key might throw if invalid?

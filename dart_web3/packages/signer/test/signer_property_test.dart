@@ -1,7 +1,7 @@
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_signer/src/private_key_signer.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+import 'package:web3_universal_signer/src/private_key_signer.dart';
 import 'package:glados/glados.dart';
 import 'package:test/test.dart' as test_pkg;
 

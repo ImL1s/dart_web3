@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import 'bridge_quote.dart';
 import 'bridge_tracker.dart';

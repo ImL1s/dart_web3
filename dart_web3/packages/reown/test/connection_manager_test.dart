@@ -1,5 +1,5 @@
 
-import 'package:dart_web3_reown/dart_web3_reown.dart';
+import 'package:web3_universal_reown/web3_universal_reown.dart';
 import 'package:test/test.dart';
 
 void main() {

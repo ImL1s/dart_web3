@@ -42,7 +42,7 @@ class IpfsGateway {
         final url = '$gateway$hash';
         final response = await http.head(
           Uri.parse(url),
-          headers: {'User-Agent': 'dart_web3_nft/1.0'},
+          headers: {'User-Agent': 'web3_universal_nft/1.0'},
         ).timeout(_timeout);
 
         if (response.statusCode == 200) {
@@ -66,7 +66,7 @@ class IpfsGateway {
     try {
       final response = await http.get(
         Uri.parse(resolvedUri),
-        headers: {'User-Agent': 'dart_web3_nft/1.0'},
+        headers: {'User-Agent': 'web3_universal_nft/1.0'},
       ).timeout(_timeout);
 
       if (response.statusCode == 200) {
@@ -87,7 +87,7 @@ class IpfsGateway {
     try {
       final response = await http.get(
         Uri.parse(resolvedUri),
-        headers: {'User-Agent': 'dart_web3_nft/1.0'},
+        headers: {'User-Agent': 'web3_universal_nft/1.0'},
       ).timeout(_timeout);
 
       if (response.statusCode == 200) {

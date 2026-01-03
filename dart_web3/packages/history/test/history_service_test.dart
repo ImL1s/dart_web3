@@ -1,5 +1,5 @@
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_history/dart_web3_history.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_history/web3_universal_history.dart';
 import 'package:test/test.dart';
 
 void main() {

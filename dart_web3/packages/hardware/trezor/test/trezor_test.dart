@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart' as abi;
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_trezor/dart_web3_trezor.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart' as abi;
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
+import 'package:web3_universal_trezor/web3_universal_trezor.dart';
 import 'package:test/test.dart';
 
 void main() {

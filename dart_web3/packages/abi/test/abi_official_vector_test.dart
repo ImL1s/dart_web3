@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:test/test.dart';
 
 // Helper to convert inputs for ABI encoder
@@ -58,7 +58,7 @@ void main() {
     final possiblePaths = [
       'test/vectors/abi_basic_vectors.json',
       'packages/abi/test/vectors/abi_basic_vectors.json',
-      'dart_web3/packages/abi/test/vectors/abi_basic_vectors.json',
+      'web3_universal/packages/abi/test/vectors/abi_basic_vectors.json',
     ];
 
     for (final path in possiblePaths) {

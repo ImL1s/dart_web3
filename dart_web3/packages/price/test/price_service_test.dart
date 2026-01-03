@@ -1,4 +1,4 @@
-import 'package:dart_web3_price/dart_web3_price.dart';
+import 'package:web3_universal_price/web3_universal_price.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,6 +1,6 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import '../smart_account.dart';
 
@@ -99,7 +99,7 @@ class LightAccount extends BaseSmartAccount {
     final selector = '47e1da2a';
     
     // LightAccount uses a different batch format with Call structs
-    // Use proper ABI encoder from dart_web3_abi
+    // Use proper ABI encoder from web3_universal_abi
     // For now, return a placeholder
     return '0x$selector';
   }

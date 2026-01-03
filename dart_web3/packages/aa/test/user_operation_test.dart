@@ -1,4 +1,4 @@
-import 'package:dart_web3_aa/dart_web3_aa.dart';
+import 'package:web3_universal_aa/web3_universal_aa.dart';
 import 'package:test/test.dart';
 
 void main() {

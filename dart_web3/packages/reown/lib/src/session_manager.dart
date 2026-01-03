@@ -410,7 +410,7 @@ class SessionManager {
     return {
       'name': 'Dart Web3 SDK',
       'description': 'Dart Web3 SDK with Reown integration',
-      'url': 'https://github.com/example/dart_web3',
+      'url': 'https://github.com/example/web3_universal',
       'icons': ['https://example.com/icon.png'],
     };
   }

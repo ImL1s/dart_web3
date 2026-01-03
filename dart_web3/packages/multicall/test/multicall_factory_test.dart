@@ -1,4 +1,4 @@
-import 'package:dart_web3_multicall/dart_web3_multicall.dart';
+import 'package:web3_universal_multicall/web3_universal_multicall.dart';
 import 'package:test/test.dart';
 
 import 'mock_client.dart';

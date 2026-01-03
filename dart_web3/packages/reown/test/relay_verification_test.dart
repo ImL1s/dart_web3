@@ -1,6 +1,6 @@
 
 import 'dart:async';
-import 'package:dart_web3_reown/src/relay_client.dart';
+import 'package:web3_universal_reown/src/relay_client.dart';
 import 'package:test/test.dart';
 
 void main() {

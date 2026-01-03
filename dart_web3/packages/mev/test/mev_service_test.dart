@@ -1,4 +1,4 @@
-import 'package:dart_web3_mev/dart_web3_mev.dart';
+import 'package:web3_universal_mev/web3_universal_mev.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:dart_web3_events/dart_web3_events.dart';
+import 'package:web3_universal_events/web3_universal_events.dart';
 import 'package:test/test.dart';
 
 void main() {

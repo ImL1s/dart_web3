@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:dart_web3_solana/dart_web3_solana.dart';
+import 'package:web3_universal_solana/web3_universal_solana.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:test/test.dart';

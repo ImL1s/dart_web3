@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:dart_web3_solana/dart_web3_solana.dart';
+import 'package:web3_universal_solana/web3_universal_solana.dart';
 import 'package:test/test.dart';
 
 void main() {
