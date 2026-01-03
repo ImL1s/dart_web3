@@ -1,17 +1,47 @@
-# dart_web3_crypto
+# web3_universal_crypto
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_crypto.svg)](https://pub.dev/packages/dart_web3_crypto)
+![Web3 Universal Banner](https://raw.githubusercontent.com/ImL1s/dart_web3/master/art/web3_universal_banner.png)
+
+[![Pub Version](https://img.shields.io/pub/v/web3_universal_crypto)](https://pub.dev/packages/web3_universal_crypto)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Platform: Multi-platform](https://img.shields.io/badge/Platform-Native%20%7C%20Web-green)
 
-A **security-first** cryptographic engine for the Dart Web3 SDK. This package provides the mathematical backbone for key derivation, signatures, and mnemonic management.
+Cryptographic primitives for the **Web3 Universal SDK**. This package provides security-first implementations of Ed25519, Schnorr (BIP-340), and Secp256k1 for cross-chain signing.
 
-## 🚀 Features
+## Features
 
-- **Elliptic Curve Engine**: High-performance `secp256k1` implementation in pure Dart.
-- **HD Wallet (BIP-32/44)**: Industry-standard hierarchical deterministic derivation for multi-chain support.
-- **Mnemonic Seed (BIP-39)**: Secure entropy generation and multilingual wordlist support.
-- **Fast Hashing**: Native-optimized Keccak-256 and SHA-256 implementations.
+- 🔐 **Multi-Signature Support**: Native Schnorr (BIP-340) for Bitcoin Taproot.
+- 🐚 **Ed25519**: High-performance implementation for Solana and Cosmos.
+- 🔑 **HD Wallet**: Full BIP-32 and BIP-44 hierarchical deterministic derivation.
+- 🧪 **High Test Coverage**: Verified against official test vectors from RFC 8032 and Bitcoin Core.
+
+## Installation
+
+Add this to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  web3_universal_crypto: ^0.1.0
+```
+
+## Quick Start
+
+```dart
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+
+void main() {
+  // Generate a Schnorr signature
+  final keyPair = SchnorrKeyPair.generate();
+  final message = Uint8List.fromList([0x01, 0x02]);
+  final signature = keyPair.sign(message);
+  print('Signature: ${signature.toHex()}');
+}
+```
+
+## Platform Support
+
+| Android | iOS | Web | macOS | Windows | Linux |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Usage Flow
 ```mermaid

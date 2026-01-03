@@ -17,9 +17,23 @@ coverage/
 *.g.dart
 *.freezed.dart
 
-# OS
-.DS_Store
-Thumbs.db
-
 # Logs
 *.log
+
+# Sensitive Files & Secrets
+.env
+.env.*
+*.pem
+*.key
+*.keystore
+*.jks
+lib/src/secrets.dart
+secrets.dart
+google-services.json
+GoogleService-Info.plist
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
