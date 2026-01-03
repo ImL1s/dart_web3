@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:web3_universal_contract/web3_universal_contract.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
 
 void main() async {
   // ERC20 ABI snippet for balancing
@@ -17,6 +18,7 @@ void main() async {
 
   final client = ClientFactory.createPublicClient(
     rpcUrl: 'https://eth-mainnet.g.alchemy.com/v2/your-api-key',
+    chain: Chains.ethereum,
   );
   final contractAddress = '0xdAC17F958D2ee523a2206206994597C13D831ec7'; // USDT
 

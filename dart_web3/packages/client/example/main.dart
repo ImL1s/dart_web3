@@ -1,10 +1,12 @@
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
 
 void main() async {
   // Initialize the Web3 client with an RPC URL
   final client = ClientFactory.createPublicClient(
     rpcUrl: 'https://eth-mainnet.g.alchemy.com/v2/your-api-key',
+    chain: Chains.ethereum,
   );
 
   try {
