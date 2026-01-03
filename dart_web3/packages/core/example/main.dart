@@ -16,7 +16,7 @@ void main() {
 
   // 3. Unit Conversions (Wei/Gwei/Ether)
   final BigInt amountInWei = BigInt.from(10).pow(17); // 0.1 ETH
-  final ether = EthUnit.formatUnit(amountInWei, 18);
+  final ether = EthUnit.formatEther(amountInWei);
   print('Amount: $ether ETH');
 
   // 4. RLP Encoding
