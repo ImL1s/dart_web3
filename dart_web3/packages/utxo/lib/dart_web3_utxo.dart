@@ -7,3 +7,4 @@ export 'src/models/transaction.dart';
 export 'src/models/utxo.dart';
 export 'src/script/script.dart';
 export 'src/selection/coin_selector.dart';
+export 'src/script/taproot.dart';

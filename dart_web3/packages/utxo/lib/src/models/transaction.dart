@@ -133,6 +133,12 @@ class BitcoinTransaction {
     return ''; 
   }
 
+  /// Checks if this transaction signals RBF (Replace-By-Fee) eligibility.
+  ///
+  /// According to BIP-125, a transaction is considered opt-in RBF if at least
+  /// one input has a sequence number less than 0xfffffffe.
+  bool get isRbf => inputs.any((input) => input.sequence < 0xfffffffe);
+
   /// Parses a transaction from raw bytes.
   static BitcoinTransaction fromBytes(Uint8List bytes) {
     if (bytes.length < 10) throw FormatException('Transaction too short');

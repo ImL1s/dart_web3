@@ -19,13 +19,19 @@ class ProtobufBuilder {
 
   void addString(int fieldNumber, String value) {
     if (value.isEmpty) return;
-    addBytes(fieldNumber, utf8.encode(value) as Uint8List);
+    addBytes(fieldNumber, Uint8List.fromList(utf8.encode(value)));
   }
 
   void addInt64(int fieldNumber, int value) {
     if (value == 0) return;
     _writeTag(fieldNumber, wireVarint);
     _writeVarint(value);
+  }
+
+  void addUint64(int fieldNumber, BigInt value) {
+    if (value == BigInt.zero) return;
+    _writeTag(fieldNumber, wireVarint);
+    _writeVarintBigInt(value);
   }
   
   // Note: Protobuf varints are unsigned by default encoding logic here (base 128)
@@ -36,6 +42,18 @@ class ProtobufBuilder {
       v >>= 7;
     }
     _buffer.addByte(v);
+  }
+
+  void _writeVarintBigInt(BigInt value) {
+    var v = value;
+    final wrap = BigInt.from(0x80);
+    final mask = BigInt.from(0x7f);
+    
+    while (v >= wrap) {
+      _buffer.addByte((v & mask).toInt() | 0x80);
+      v >>= 7;
+    }
+    _buffer.addByte(v.toInt());
   }
 
   void _writeTag(int fieldNumber, int wireType) {

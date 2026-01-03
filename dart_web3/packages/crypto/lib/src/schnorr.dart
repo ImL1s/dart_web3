@@ -152,6 +152,41 @@ class SchnorrSignature {
     return _bigIntToBytes(P[0], 32);
   }
 
+  /// Tweaks a public key according to BIP-341 (Taproot).
+  ///
+  /// [publicKey]: 32-byte x-only public key P.
+  /// [tweak]: 32-byte tweak value t.
+  ///
+  /// Computes Q = P + t*G.
+  /// Returns Map { 'x': Uint8List(32), 'yParity': int (0 or 1) }
+  /// Returns null if P is invalid or result is potentially invalid (rare).
+  static Map<String, dynamic>? tweakPublicKey(Uint8List publicKey, Uint8List tweak) {
+    if (publicKey.length != 32 || tweak.length != 32) {
+      throw ArgumentError('Inputs must be 32 bytes');
+    }
+
+    final P = _liftX(publicKey);
+    if (P == null) return null; // Invalid P
+
+    final t = _bytesToBigInt(tweak);
+    if (t >= _n) return null; // Invalid tweak
+
+    // T = t * G
+    final T = _scalarMult(t, [_Gx, _Gy]);
+    
+    // Q = P + T
+    final Q = _pointAdd(P, T);
+
+    if (Q[0] == BigInt.zero && Q[1] == BigInt.zero) return null; // Point at infinity
+
+    final parity = _hasOddY(Q) ? 1 : 0;
+    
+    return {
+      'x': _bigIntToBytes(Q[0], 32),
+      'yParity': parity,
+    };
+  }
+
   // --- Tagged Hash (BIP-340) ---
 
   static Uint8List _taggedHash(String tag, Uint8List data) {
