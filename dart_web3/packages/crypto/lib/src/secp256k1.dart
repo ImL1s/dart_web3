@@ -13,6 +13,21 @@ class Secp256k1 {
   static final BigInt _a = BigInt.zero;
   static final BigInt _b = BigInt.from(7);
 
+  /// Generates a valid private key.
+  static Uint8List generatePrivateKey() {
+    final random = Random.secure();
+    while (true) {
+      final key = Uint8List(32);
+      for (var i = 0; i < 32; i++) {
+        key[i] = random.nextInt(256);
+      }
+      final bigInt = _bytesToBigInt(key);
+      if (bigInt > BigInt.zero && bigInt < _n) {
+        return key;
+      }
+    }
+  }
+
   /// Signs a message hash with the given private key.
   /// 
   /// Returns the signature as a 64-byte array (32 bytes r + 32 bytes s).

@@ -18,6 +18,10 @@ dependencies:
     path: ../../core
   web3_universal_crypto:
     path: ../../crypto
+  web3_universal_signer:
+    path: ../../signer
+  web3_universal_abi:
+    path: ../../abi
   ledger_flutter: ^1.0.0
 
 dev_dependencies:

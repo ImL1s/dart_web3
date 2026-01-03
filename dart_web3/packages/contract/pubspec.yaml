@@ -23,6 +23,8 @@ dependencies:
     path: ../crypto
   web3_universal_signer:
     path: ../signer
+  web3_universal_client:
+    path: ../client
 
 dev_dependencies:
   lints: ^5.0.0

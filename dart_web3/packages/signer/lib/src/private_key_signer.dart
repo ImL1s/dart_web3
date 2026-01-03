@@ -35,6 +35,33 @@ class PrivateKeySigner implements Signer {
     final wallet = HDWallet.fromMnemonic(words).derive(path);
     return PrivateKeySigner(wallet.getPrivateKey(), chainId);
   }
+
+  /// Creates a random signer.
+  factory PrivateKeySigner.createRandom(int chainId) {
+    // Generate 32 bytes of random entropy
+    final random = HDWallet.fromMnemonic(Bip39.generate());
+    // Or just use random bytes directly if crypto exposes it?
+    // Using Bip39 generate effectively gives random wallet.
+    // But slightly inefficient.
+    // Secp256k1 doesn't have generate private key helper in interface shown?
+    // HDWallet has fromSeed.
+    // Let's use Bip39 for simplicity/standardness or EthPrivateKey logic if I can find it.
+    // web3dart used Random.secure.
+    
+    // I will use HDWallet.fromSeed(Bip39.toSeed(Bip39.generate())) to get a valid key?
+    // Or just random bytes.
+    // PrivateKeySigner constructor checks length 32.
+    // I need secure random.
+    // I will import dart:math.
+    // I need to add import 'dart:math'; to the file.
+    
+    // Waiting, verify imports first from previous view_file.
+    // File imports: dart:typed_data, abi, core, crypto, authorization, signer, transaction.
+    // No dart:math.
+    
+    return PrivateKeySigner(Secp256k1.generatePrivateKey(), chainId);
+  }
+
   /// The private key bytes.
   final Uint8List privateKey;
 
