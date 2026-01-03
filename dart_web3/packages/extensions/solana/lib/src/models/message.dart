@@ -130,11 +130,17 @@ class Message {
 
     for (final entry in accountMap.values) {
         if (entry.isSigner) {
-            if (entry.isWritable) writableSigners.add(entry.publicKey);
-            else readonlySigners.add(entry.publicKey);
+            if (entry.isWritable) {
+              writableSigners.add(entry.publicKey);
+            } else {
+              readonlySigners.add(entry.publicKey);
+            }
         } else {
-            if (entry.isWritable) writableNonSigners.add(entry.publicKey);
-            else readonlyNonSigners.add(entry.publicKey);
+            if (entry.isWritable) {
+              writableNonSigners.add(entry.publicKey);
+            } else {
+              readonlyNonSigners.add(entry.publicKey);
+            }
         }
     }
 
@@ -189,7 +195,7 @@ class Message {
         header: header, 
         accountKeys: accountKeys, 
         recentBlockhash: recentBlockhash, 
-        instructions: compiledInstructions
+        instructions: compiledInstructions,
     );
   }
 }

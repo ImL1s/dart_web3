@@ -1,6 +1,5 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import '../models/public_key.dart';
 
 class MetaplexMetadata {
@@ -11,6 +10,7 @@ class MetaplexMetadata {
     required this.symbol,
     required this.uri,
     required this.sellerFeeBasisPoints,
+    this.creators,
   });
 
   final PublicKey updateAuthority;
@@ -19,6 +19,7 @@ class MetaplexMetadata {
   final String symbol;
   final String uri;
   final int sellerFeeBasisPoints;
+  final List<MetaplexCreator>? creators;
 
   static final programId = PublicKey.fromString('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
 
@@ -75,7 +76,25 @@ class MetaplexMetadata {
     final sellerFeeBasisPoints = buffer.getUint16(offset, Endian.little);
     offset += 2;
 
-    // ... Creators (Option) ... not implementing for now
+    // Creators (Option<Vec<Creator>>)
+    final creators = <MetaplexCreator>[];
+    if (offset < data.length) {
+      final hasCreators = data[offset] == 1;
+      offset += 1;
+      if (hasCreators && offset < data.length) {
+          final creatorCount = buffer.getUint32(offset, Endian.little);
+          offset += 4;
+          for (var i = 0; i < creatorCount; i++) {
+              final address = PublicKey(data.sublist(offset, offset + 32));
+              offset += 32;
+              final verified = data[offset] == 1;
+              offset += 1;
+              final share = data[offset];
+              offset += 1;
+              creators.add(MetaplexCreator(address: address, verified: verified, share: share));
+          }
+      }
+    }
 
     return MetaplexMetadata(
       updateAuthority: updateAuthority,
@@ -84,6 +103,7 @@ class MetaplexMetadata {
       symbol: symbol,
       uri: uri,
       sellerFeeBasisPoints: sellerFeeBasisPoints,
+      creators: creators.isEmpty ? null : creators,
     );
   }
 
@@ -96,6 +116,17 @@ class MetaplexMetadata {
     
     return _BorshStringResult(str, end);
   }
+}
+
+class MetaplexCreator {
+    MetaplexCreator({
+        required this.address,
+        required this.verified,
+        required this.share,
+    });
+    final PublicKey address;
+    final bool verified;
+    final int share;
 }
 
 class _BorshStringResult {

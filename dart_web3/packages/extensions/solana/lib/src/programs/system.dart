@@ -21,7 +21,7 @@ class SystemProgram {
             programId: programId,
             keys: [
                 AccountMeta.writable(from, isSigner: true),
-                AccountMeta.writable(to, isSigner: false),
+                AccountMeta.writable(to),
             ],
             data: data.buffer.asUint8List(),
         );

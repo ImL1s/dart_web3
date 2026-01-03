@@ -20,7 +20,6 @@ void main() {
       final inputFinal = TransactionInput(
         txId: Uint8List(32),
         vout: 0,
-        sequence: 0xffffffff, // Final
       );
       
       final txFinal = BitcoinTransaction(inputs: [inputFinal]);

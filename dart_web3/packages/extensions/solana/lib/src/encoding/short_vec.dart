@@ -3,11 +3,11 @@ import 'dart:typed_data';
 class ShortVec {
   static Uint8List encodeLength(int len) {
     final out = BytesBuilder();
-    var rem_len = len;
+    var remLen = len;
     for (;;) {
-      var elem = rem_len & 0x7f;
-      rem_len >>= 7;
-      if (rem_len == 0) {
+      var elem = remLen & 0x7f;
+      remLen >>= 7;
+      if (remLen == 0) {
         out.addByte(elem);
         break;
       } else {
@@ -34,9 +34,9 @@ class ShortVec {
   
   static int encodeLengthSize(int len) {
      var size = 1;
-     var rem_len = len;
-     while (rem_len >= 0x80) {
-         rem_len >>= 7;
+     var remLen = len;
+     while (remLen >= 0x80) {
+         remLen >>= 7;
          size += 1;
      }
      return size;

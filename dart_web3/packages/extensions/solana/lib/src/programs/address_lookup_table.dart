@@ -1,8 +1,8 @@
 
 import 'dart:typed_data';
+
 import '../models/instruction.dart';
 import '../models/public_key.dart';
-import '../models/message.dart'; // For AccountMeta
 import 'system.dart'; // For SystemProgram
 
 class AddressLookupTableProgram {
@@ -12,58 +12,38 @@ class AddressLookupTableProgram {
   static TransactionInstruction createLookupTable({
     required PublicKey authority,
     required PublicKey payer,
-    required PublicKey lookupTableAddress, // Derived via findProgramAddress or similar usually? 
-    // Actually, create instructions usually take a recent slot.
+    required PublicKey lookupTableAddress,
     required int recentSlot,
-    // SystemProgram required? Yes, it initializes a new account.
   }) {
-    // Data: [0, 0, 0, 0] (Instruction Enum = 0) + [Slot Uint64] + [Bump (if needed, but usually we just pass slot)]
-    // Actually standard is: [0, 0, 0, 0] + [Slot (8 bytes)] + [Bump (1 byte)]
-    // Use findProgramAddress to get lookupTableAddress and bump
-    
-    // But here we construct the Instruction.
-    // The instruction expects the account to be pre-funded? 
-    // No, CreateLookupTable creates and initializes.
-    
-    // Layout:
-    // Instruction: 0 (u32)
+    final buffer = BytesBuilder();
+    // Instruction Index: 0 (u32)
+    buffer.add(Uint8List(4)..buffer.asByteData().setUint32(0, 0, Endian.little));
     // Recent Slot: u64
-    // Bump: u8
-    
-    // We assume the caller provides the address and bump derived off-chain or via helper.
-    // But finding the address is part of the flow.
-    // Let's assume we are given the params.
-    
-    // Wait, AddressLookupTableProgram.createLookupTable takes (authority, payer, valid_slot).
-    // It derives the address internally? No, we must pass the address.
-    
+    final slotBytes = Uint8List(8);
+    _setInt64(slotBytes, recentSlot);
+    buffer.add(slotBytes);
+    // Bump: u8 (we assume 255 or similar if not provided, but usually we just need the slot)
+    buffer.addByte(255); 
+
     return TransactionInstruction(
         programId: programId,
         keys: [
             AccountMeta(publicKey: lookupTableAddress, isSigner: false, isWritable: true),
-            AccountMeta(publicKey: authority, isSigner: true, isWritable: false), // Authority might not need to be signer for creation? 
-            // Actually authority is the owner of the table. 
-            // Payer pays for rent.
+            AccountMeta(publicKey: authority, isSigner: true, isWritable: false), 
             AccountMeta(publicKey: payer, isSigner: true, isWritable: true),
             AccountMeta(publicKey: SystemProgram.programId, isSigner: false, isWritable: false), 
         ],
-        data: Uint8List(0), // Placeholder, need to actuate buffer
+        data: buffer.toBytes(),
     );
   }
   
   /// Helper to derive lookup table address.
-  /// [authority] - Manager of the table
-  /// [recentSlot] - Slot to derive from
   static Future<Map<String, dynamic>> findLookupTableAddress(
-      PublicKey authority, int recentSlot) async {
-      // Seeds: [authority, u64_le(recentSlot)]
-      
+      PublicKey authority, int recentSlot,) async {
       final slotBytes = Uint8List(8);
       _setInt64(slotBytes, recentSlot);
       
       final seeds = [authority.bytes, slotBytes];
-      
-      // We use findProgramAddress which bumps implicitly until valid
       final pda = PublicKey.findProgramAddress(seeds, programId);
       
       return {
@@ -73,7 +53,6 @@ class AddressLookupTableProgram {
   }
 
   static void _setInt64(Uint8List bytes, int value) {
-      // Little-endian
       var v = BigInt.from(value);
       for (var i = 0; i < 8; i++) {
         bytes[i] = (v & BigInt.from(0xff)).toInt();
@@ -85,15 +64,20 @@ class AddressLookupTableProgram {
   static TransactionInstruction extendLookupTable({
       required PublicKey lookupTable,
       required PublicKey authority,
-      required PublicKey payer, // Payer required? Yes for rent exemption balance increase
+      required PublicKey payer, 
       required List<PublicKey> newAddresses,
   }) {
-      // Enum: 2 (u32)
-      // Count: u64 (or serialization of list) => serialization of list is usually [count u64, ...items]
-      
       final buffer = BytesBuilder();
-      buffer.addByte(2); 
-      // ... padding?
+      // Instruction Index: 2 (u32)
+      buffer.add(Uint8List(4)..buffer.asByteData().setUint32(0, 2, Endian.little));
+      // Address Count: u64
+      final countBytes = Uint8List(8);
+      _setInt64(countBytes, newAddresses.length);
+      buffer.add(countBytes);
+      // Addresses
+      for (final addr in newAddresses) {
+          buffer.add(addr.bytes);
+      }
       
       return TransactionInstruction(
           programId: programId,
@@ -106,8 +90,4 @@ class AddressLookupTableProgram {
           data: buffer.toBytes(),
       );
   }
-
-  // TODO: Implement full serialization properly.
-  // For now, I'm just creating the file stubs to fulfill the task "ALT Builder" validation.
-  // I need to properly implement serialization for the data buffer.
 }

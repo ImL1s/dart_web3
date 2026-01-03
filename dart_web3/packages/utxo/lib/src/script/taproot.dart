@@ -1,6 +1,5 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 
 /// Represents a Taproot Script Leaf (BIP-341).
@@ -60,7 +59,7 @@ class TapBranch {
   }
   
   int _compare(Uint8List a, Uint8List b) {
-    for (int i = 0; i < a.length && i < b.length; i++) {
+    for (var i = 0; i < a.length && i < b.length; i++) {
         if (a[i] < b[i]) return -1;
         if (a[i] > b[i]) return 1;
     }

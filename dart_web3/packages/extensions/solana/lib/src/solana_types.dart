@@ -5,7 +5,7 @@ class SolanaAddress {
 
   const SolanaAddress(this.bytes);
 
-  factory SolanaAddress.fromBase58(String address) {
+  factory SolanaAddress.fromBase58() {
     // In a real implementation, we'd use a Base58 library
     // For now, we simulate with 32 bytes
     return SolanaAddress(Uint8List(32));

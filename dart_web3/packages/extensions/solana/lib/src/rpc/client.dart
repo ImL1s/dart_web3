@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 
-import '../encoding/short_vec.dart';
+import 'package:http/http.dart' as http;
+
 import '../models/public_key.dart';
 import '../models/transaction.dart';
 
 /// Solana JSON-RPC Client.
 class SolanaClient {
-  SolanaClient(String url, {List<Middleware> middlewares = const []})
-      : provider = RpcProvider(HttpTransport(url), middlewares: middlewares);
+  SolanaClient(String url, {List<Middleware> middlewares = const [], http.Client? httpClient})
+      : provider = RpcProvider(HttpTransport(url, client: httpClient), middlewares: middlewares);
 
   final RpcProvider provider;
 
@@ -25,7 +25,7 @@ class SolanaClient {
   Future<AccountInfo?> getAccountInfo(PublicKey pubKey) async {
     final response = await provider.call<Map<String, dynamic>?>('getAccountInfo', [
       pubKey.toBase58(),
-      {'encoding': 'base64'}
+      {'encoding': 'base64'},
     ]);
     
     if (response == null || response['value'] == null) return null;
@@ -37,7 +37,7 @@ class SolanaClient {
   /// Gets a recent blockhash.
   Future<String> getRecentBlockhash() async {
     final response = await provider.call<Map<String, dynamic>>('getLatestBlockhash', [
-      {'commitment': 'finalized'}
+      {'commitment': 'finalized'},
     ]);
     final value = response['value'] as Map<String, dynamic>;
     return value['blockhash'] as String;
@@ -48,17 +48,17 @@ class SolanaClient {
     final serialized = transaction.serialize();
     final base64Tx = base64Encode(serialized);
     
-    return await provider.call<String>('sendTransaction', [
+    return provider.call<String>('sendTransaction', [
       base64Tx,
-      {'encoding': 'base64'}
+      {'encoding': 'base64'},
     ]);
   }
   
   /// Request airdrop (devnet/testnet only).
   Future<String> requestAirdrop(PublicKey pubKey, int lamports) async {
-    return await provider.call<String>('requestAirdrop', [
+    return provider.call<String>('requestAirdrop', [
       pubKey.toBase58(),
-      lamports
+      lamports,
     ]);
   }
 

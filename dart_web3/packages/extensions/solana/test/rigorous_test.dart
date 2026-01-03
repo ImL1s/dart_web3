@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:dart_web3_solana/dart_web3_solana.dart';
 import 'package:test/test.dart';
 
@@ -25,7 +24,7 @@ void main() {
         wallet.bytes,
         tokenProgramId.bytes,
         mint.bytes,
-      ], ataProgramId);
+      ], ataProgramId,);
 
       // Verified via SPL Token command: 
       // spl-token address --token 2wmVewK9WCRBJBdy6S4Prti4eF567SWhGq47Jpx8CNoM --owner 4u68Abtp6YF34T8uKktS9kFidQByx2hTFYJb5yF8KPBn

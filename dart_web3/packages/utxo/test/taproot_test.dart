@@ -32,7 +32,7 @@ void main() {
         final result = TaprootKey.tweak(internalKey);
         
         expect(result['outputKey'], isNotNull);
-        expect(result['outputKey'].length, 32);
+        expect((result['outputKey'] as Uint8List).length, 32);
         expect(result['parity'], isA<int>());
         // Parity should be 0 or 1
         expect(result['parity'] == 0 || result['parity'] == 1, isTrue);
@@ -47,10 +47,10 @@ void main() {
         final result = TaprootKey.tweak(internalKey, leaf.hash);
         
         expect(result['outputKey'], isNotNull);
-        expect(result['outputKey'].length, 32);
+        expect((result['outputKey'] as Uint8List).length, 32);
         
         // Output key should differ from internal key
-        expect(HexUtils.encode(result['outputKey']), isNot(equals(HexUtils.encode(internalKey))));
+        expect(HexUtils.encode(result['outputKey'] as Uint8List), isNot(equals(HexUtils.encode(internalKey))));
     });
   });
 }

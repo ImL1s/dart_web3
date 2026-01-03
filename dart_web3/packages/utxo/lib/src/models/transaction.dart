@@ -70,6 +70,10 @@ class BitcoinTransaction {
   /// Transaction lock time.
   final int lockTime;
 
+  /// Returns true if any input has a sequence number less than 0xffffffff - 1.
+  /// This indicates the transaction is eligible for Replace-By-Fee (BIP-125).
+  bool get isRBF => inputs.any((input) => input.sequence < 0xfffffffe);
+
   /// Serializes the transaction to raw bytes.
   ///
   /// [segwit] - Whether to include witness data (BIP-144).
@@ -186,7 +190,7 @@ class BitcoinTransaction {
             vout: vout,
             scriptSig: scriptSig,
             sequence: sequence,
-        ));
+        ),);
     }
 
     // 3. Outputs
