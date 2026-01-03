@@ -22,4 +22,5 @@ dependencies:
   web3_universal_abi:
     path: ../../abi
 dev_dependencies:
+  lints: ^5.0.0
   test: ^1.24.0
