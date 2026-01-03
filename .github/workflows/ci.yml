@@ -28,7 +28,14 @@ jobs:
           ls -la
           melos list
           melos clean
-          melos exec --concurrency=1 --fail-fast -- "dart pub get"
+          # Explicit loop to find the failure
+          for d in packages/* packages/extensions/* packages/hardware/*; do
+            if [ -d "$d" ] && [ -f "$d/pubspec.yaml" ]; then
+              echo "---------------------------------------------------"
+              echo "Bootstrapping $d..."
+              (cd "$d" && dart pub get) || exit 1
+            fi
+          done
 
       - name: Static Analysis
         run: |
