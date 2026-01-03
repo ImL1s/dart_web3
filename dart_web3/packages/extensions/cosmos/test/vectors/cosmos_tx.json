@@ -1,0 +1,15 @@
+[
+    {
+        "description": "Basic MsgSend Serialization",
+        "fromAddress": "cosmos1vxu5fjspsdu846kz6666666666666666666666",
+        "toAddress": "cosmos1vxu5fjspsdu846kz6666666666666666666666",
+        "amount": [
+            {
+                "denom": "uatom",
+                "amount": "1000"
+            }
+        ],
+        "typeUrl": "/cosmos.bank.v1beta1.MsgSend",
+        "expectedValueHex": "0a2d636f736d6f733176787535666a73707364753834366b7a36363636363636363636363636363636363636363636122d636f736d6f733176787535666a73707364753834366b7a363636363636363636363636363636363636363636361a0d0a057561746f6d120431303030"
+    }
+]
