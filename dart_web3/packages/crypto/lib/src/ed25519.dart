@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import 'sha2.dart';
 
+import 'curves.dart';
+
 /// Pure Dart implementation of Ed25519 elliptic curve.
 ///
 /// Ed25519 is defined in RFC 8032 and is used by Solana, Polkadot,
@@ -9,8 +11,20 @@ import 'sha2.dart';
 ///
 /// This implementation follows the specification exactly and passes
 /// all RFC 8032 test vectors.
-class Ed25519 {
-  Ed25519._();
+class Ed25519 implements CurveInterface {
+  Ed25519();
+
+  @override
+  String get curveName => 'Ed25519';
+
+  @override
+  int get privateKeyLength => 32;
+
+  @override
+  int get publicKeyLength => 32;
+
+  @override
+  int get signatureLength => 64;
 
   // Ed25519 curve parameters
   // p = 2^255 - 19
@@ -57,7 +71,7 @@ class Ed25519 {
   /// Signs a message with the given private key.
   ///
   /// Returns a 64-byte signature (R || S).
-  static Uint8List sign(Uint8List message, Uint8List privateKey) {
+  static Uint8List _sign(Uint8List message, Uint8List privateKey) {
     if (privateKey.length != 32) {
       throw ArgumentError('Ed25519 private key must be 32 bytes');
     }
@@ -91,10 +105,15 @@ class Ed25519 {
     return Uint8List.fromList([...RBytes, ...SBytes]);
   }
 
+  @override
+  Uint8List sign(Uint8List messageHash, Uint8List privateKey) {
+    return _sign(messageHash, privateKey);
+  }
+
   /// Verifies a signature against a message and public key.
   ///
   /// Returns true if the signature is valid.
-  static bool verify(Uint8List signature, Uint8List message, Uint8List publicKey) {
+  static bool _verify(Uint8List signature, Uint8List message, Uint8List publicKey) {
     if (signature.length != 64) return false;
     if (publicKey.length != 32) return false;
 
@@ -131,6 +150,11 @@ class Ed25519 {
     }
   }
 
+  @override
+  bool verify(Uint8List signature, Uint8List messageHash, Uint8List publicKey) {
+    return _verify(signature, messageHash, publicKey);
+  }
+
   /// Checks if the provided point bytes lie on the Ed25519 curve.
   static bool isOnCurve(Uint8List bytes) {
     return _bytesToPoint(bytes) != null;
@@ -139,7 +163,7 @@ class Ed25519 {
   /// Derives the public key from a private key.
   ///
   /// Returns a 32-byte compressed public key.
-  static Uint8List getPublicKey(Uint8List privateKey) {
+  static Uint8List _getPublicKey(Uint8List privateKey) {
     if (privateKey.length != 32) {
       throw ArgumentError('Ed25519 private key must be 32 bytes');
     }
@@ -153,6 +177,11 @@ class Ed25519 {
     return _pointToBytes(A);
   }
 
+  @override
+  Uint8List getPublicKey(Uint8List privateKey) {
+    return _getPublicKey(privateKey);
+  }
+
   /// Generates a new Ed25519 key pair.
   static Ed25519KeyPair generateKeyPair() {
     final random = Uint8List(32);
@@ -162,7 +191,7 @@ class Ed25519 {
     }
     // Mix with hash for better entropy
     final privateKey = _sha512(random).sublist(0, 32);
-    final publicKey = getPublicKey(privateKey);
+    final publicKey = _getPublicKey(privateKey);
     return Ed25519KeyPair(privateKey, publicKey);
   }
 
@@ -309,11 +338,11 @@ class Ed25519KeyPair {
 
   /// Signs a message using this key pair.
   Uint8List sign(Uint8List message) {
-    return Ed25519.sign(message, privateKey);
+    return Ed25519._sign(message, privateKey);
   }
 
   /// Verifies a signature using this key pair's public key.
   bool verify(Uint8List signature, Uint8List message) {
-    return Ed25519.verify(signature, message, publicKey);
+    return Ed25519._verify(signature, message, publicKey);
   }
 }

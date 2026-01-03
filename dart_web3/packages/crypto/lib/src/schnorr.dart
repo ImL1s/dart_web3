@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'keccak.dart';
@@ -286,5 +287,41 @@ class SchnorrSignature {
   static BigInt _modInverse(BigInt a, BigInt m) {
     final normalized = a % m;
     return normalized.modPow(m - BigInt.two, m);
+  }
+
+  /// Generates a new Schnorr key pair.
+  static SchnorrKeyPair generateKeyPair() {
+    final random = Random.secure();
+    final privateKey = Uint8List(32);
+    for (var i = 0; i < 32; i++) {
+      privateKey[i] = random.nextInt(256);
+    }
+    final publicKey = getPublicKey(privateKey);
+    return SchnorrKeyPair(privateKey, publicKey);
+  }
+}
+
+/// Represents a Schnorr key pair (BIP-340).
+class SchnorrKeyPair {
+  SchnorrKeyPair(this.privateKey, this.publicKey);
+
+  final Uint8List privateKey;
+  final Uint8List publicKey;
+
+  /// Signs a message using this key pair.
+  Uint8List sign(Uint8List message) {
+    return SchnorrSignature.sign(message, privateKey);
+  }
+
+  /// Verifies a signature using this key pair's public key.
+  bool verify(Uint8List signature, Uint8List message) {
+    return SchnorrSignature.verify(signature, message, publicKey);
+  }
+  
+  /// Generates a new key pair.
+  static SchnorrKeyPair generate() {
+     // We need to implement generation.
+     // See below for full implementation including imports.
+     return SchnorrSignature.generateKeyPair();
   }
 }

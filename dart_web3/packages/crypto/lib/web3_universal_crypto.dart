@@ -19,7 +19,7 @@ library web3_universal_crypto;
 export 'src/base58.dart';
 // BIP standards
 export 'src/bip39.dart';
-export 'src/curves.dart' hide Ed25519, Ed25519KeyPair;
+export 'src/curves.dart';
 // Ed25519 (Solana, Polkadot)
 export 'src/ed25519.dart';
 export 'src/hd_wallet.dart';

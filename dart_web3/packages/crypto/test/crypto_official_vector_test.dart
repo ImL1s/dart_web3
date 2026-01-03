@@ -11,7 +11,7 @@ void main() {
     
     group('BIP39 (Mnemonic to Seed)', () {
       final vectorsJson = File(p.join('test', 'vectors', 'bip39_vectors.json')).readAsStringSync();
-      final List<dynamic> vectors = jsonDecode(vectorsJson);
+      final List<dynamic> vectors = jsonDecode(vectorsJson) as List<dynamic>;
 
       for (var i = 0; i < vectors.length; i++) {
         final vector = vectors[i];
