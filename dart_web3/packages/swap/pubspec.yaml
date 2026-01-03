@@ -1,6 +1,6 @@
 name: web3_universal_swap
 description: DEX aggregation and swap services for Web3 Universal SDK. Provides unified interfaces for token swapping features.
-version: 0.1.0+1
+version: 0.1.0+2
 homepage: https://github.com/ImL1s/dart_web3
 repository: https://github.com/ImL1s/dart_web3/tree/master/packages/swap
 topics:

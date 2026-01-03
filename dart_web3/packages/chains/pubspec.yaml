@@ -1,6 +1,6 @@
 name: web3_universal_chains
 description: Chain configurations and metadata for Web3 Universal SDK. Includes pre-configured settings for Ethereum, Polygon, BSC, and more.
-version: 0.1.0
+version: 0.1.0+1
 homepage: https://github.com/ImL1s/dart_web3
 repository: https://github.com/ImL1s/dart_web3/tree/master/packages/chains
 topics:

@@ -1,3 +1,7 @@
+## 0.1.1+1
+
+ - Update a dependency to the latest release.
+
 ## 0.1.1
 
  - **FIX**: resolve all remaining analysis warnings and errors. ([8a1b250e](https://github.com/ImL1s/dart_web3/commit/8a1b250e933fc6f40f36d87e9aee1a21c3a6ba7a))

@@ -1,6 +1,6 @@
 name: web3_universal_client
 description: PublicClient and WalletClient for Ethereum interaction in Web3 Universal SDK.
-version: 0.1.1
+version: 0.1.1+1
 homepage: https://github.com/ImL1s/dart_web3
 repository: https://github.com/ImL1s/dart_web3/tree/master/packages/client
 topics:

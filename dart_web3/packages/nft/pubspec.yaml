@@ -1,6 +1,6 @@
 name: web3_universal_nft
 description: NFT services for Web3 Universal SDK - ERC-721/ERC-1155, metadata, and IPFS support.
-version: 0.1.1
+version: 0.1.1+1
 homepage: https://github.com/ImL1s/dart_web3
 repository: https://github.com/ImL1s/dart_web3/tree/master/packages/nft
 topics:

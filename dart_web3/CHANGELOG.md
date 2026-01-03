@@ -11,6 +11,59 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`web3_universal_chains` - `v0.1.0+1`](#web3_universal_chains---v0101)
+ - [`web3_universal_client` - `v0.1.1+1`](#web3_universal_client---v0111)
+ - [`web3_universal_aa` - `v0.1.1+1`](#web3_universal_aa---v0111)
+ - [`web3_universal_bridge` - `v0.1.0+2`](#web3_universal_bridge---v0102)
+ - [`web3_universal_dapp` - `v0.1.1+1`](#web3_universal_dapp---v0111)
+ - [`web3_universal_ens` - `v0.1.1+1`](#web3_universal_ens---v0111)
+ - [`web3_universal_events` - `v0.1.0+2`](#web3_universal_events---v0102)
+ - [`web3_universal_history` - `v0.1.1+1`](#web3_universal_history---v0111)
+ - [`web3_universal_multicall` - `v0.1.0+2`](#web3_universal_multicall---v0102)
+ - [`web3_universal_nft` - `v0.1.1+1`](#web3_universal_nft---v0111)
+ - [`web3_universal_staking` - `v0.1.1+1`](#web3_universal_staking---v0111)
+ - [`web3_universal_swap` - `v0.1.0+2`](#web3_universal_swap---v0102)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `web3_universal_client` - `v0.1.1+1`
+ - `web3_universal_aa` - `v0.1.1+1`
+ - `web3_universal_bridge` - `v0.1.0+2`
+ - `web3_universal_dapp` - `v0.1.1+1`
+ - `web3_universal_ens` - `v0.1.1+1`
+ - `web3_universal_events` - `v0.1.0+2`
+ - `web3_universal_history` - `v0.1.1+1`
+ - `web3_universal_multicall` - `v0.1.0+2`
+ - `web3_universal_nft` - `v0.1.1+1`
+ - `web3_universal_staking` - `v0.1.1+1`
+ - `web3_universal_swap` - `v0.1.0+2`
+
+---
+
+#### `web3_universal_chains` - `v0.1.0+1`
+
+ - **FIX**(chains): remove publish_to: none to enable publishing. ([680ef3a1](https://github.com/ImL1s/dart_web3/commit/680ef3a1cf3c8bd8f6042a2cffc3f880a106d425))
+ - **FIX**: resolve all remaining analysis warnings and errors. ([8a1b250e](https://github.com/ImL1s/dart_web3/commit/8a1b250e933fc6f40f36d87e9aee1a21c3a6ba7a))
+ - **DOCS**: enhanced module documentation with comprehensive visual diagrams. ([1cdf9a8a](https://github.com/ImL1s/dart_web3/commit/1cdf9a8a721997724ff6b75a3152fd457b0dc54b))
+ - **DOCS**: deep enhancement of all 32 module READMEs with professional standards. ([af6731d3](https://github.com/ImL1s/dart_web3/commit/af6731d3c2e8aca5751e3c957f30df30ac41cabd))
+ - **DOCS**: enrich all 28 module READMEs with architecture and usage. ([b091dfd5](https://github.com/ImL1s/dart_web3/commit/b091dfd5b68cec4ecbdab78f130d2a9e4d25ae3f))
+ - **DOCS**: add READMEs for core packages and link them in main README. ([dc504fbd](https://github.com/ImL1s/dart_web3/commit/dc504fbd905f4c145f7a52439ab2a78cf0f8c8d4))
+
+
+## 2026-01-03
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - [`web3_universal_crypto` - `v0.2.0`](#web3_universal_crypto---v020)
 
 Packages with other changes:

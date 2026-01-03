@@ -1,6 +1,6 @@
 name: web3_universal_multicall
 description: Multicall support for batching contract calls in Web3 Universal SDK.
-version: 0.1.0+1
+version: 0.1.0+2
 homepage: https://github.com/ImL1s/dart_web3
 repository: https://github.com/ImL1s/dart_web3/tree/master/packages/multicall
 topics:
@@ -26,6 +26,6 @@ dependencies:
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  web3_universal_chains: any
+  web3_universal_chains: ^0.1.0+1
   web3_universal_provider: ^0.1.0+1
   web3_universal_signer: ^0.1.1
