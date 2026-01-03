@@ -27,7 +27,7 @@ jobs:
       - name: Bootstrap Workspace
         run: |
           melos clean
-          melos bootstrap
+          melos bootstrap --verbose
 
       - name: Verify formatting
         run: melos run format
