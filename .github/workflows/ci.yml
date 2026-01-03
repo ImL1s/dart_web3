@@ -24,8 +24,11 @@ jobs:
         run: |
           git config --global --add safe.directory '*'
           cd dart_web3
+          pwd
+          ls -la
+          melos list
           melos clean
-          melos bootstrap --verbose > bootstrap_log.txt 2>&1 || (cat bootstrap_log.txt && exit 1)
+          melos bootstrap --verbose
 
       - name: Static Analysis
         run: |

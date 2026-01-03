@@ -3,7 +3,7 @@ repository: https://github.com/ImL1s/dart_web3
 
 packages:
   - packages/**
-  - web3_universal
+  # - web3_universal
 
 command:
   version:
