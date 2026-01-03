@@ -6,9 +6,9 @@ void main() {
   print('Ethereum Chain ID: ${ethereum.chainId}');
   print('Ethereum Native Currency: ${ethereum.nativeCurrency.symbol}');
 
-  final solana = Chains.solana;
-  print('Solana Genesis Hash: ${solana.extra['genesisHash']}');
+  final sepolia = Chains.sepolia;
+  print('Sepolia Native Currency: ${sepolia.nativeCurrency.symbol}');
 
   // List all supported chains
-  print('Supported chains: ${Chains.all.length}');
+  print('Supported chains: ${Chains.getAllChains().length}');
 }

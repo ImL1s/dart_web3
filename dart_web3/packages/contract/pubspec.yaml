@@ -27,7 +27,7 @@ dependencies:
     path: ../client
 
 dev_dependencies:
-  lints: ^5.0.0
+  lints: ^5.1.1
   test: ^1.25.0
   web3_universal_chains:
     path: ../chains

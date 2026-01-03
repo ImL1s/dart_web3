@@ -1,0 +1,2261 @@
+build	Bootstrap Workspace	﻿2026-01-03T16:26:16.7893199Z ##[group]Run git config --global --add safe.directory '*'
+build	Bootstrap Workspace	2026-01-03T16:26:16.7893665Z [36;1mgit config --global --add safe.directory '*'[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7893947Z [36;1mcd dart_web3[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7894131Z [36;1mpwd[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7894294Z [36;1mls -la[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7894469Z [36;1mmelos list[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7894641Z [36;1mmelos clean[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7894930Z [36;1mmelos exec --concurrency=1 --fail-fast -- "dart pub get"[0m
+build	Bootstrap Workspace	2026-01-03T16:26:16.7928782Z shell: /usr/bin/bash -e {0}
+build	Bootstrap Workspace	2026-01-03T16:26:16.7929003Z env:
+build	Bootstrap Workspace	2026-01-03T16:26:16.7929209Z   DART_HOME: /opt/hostedtoolcache/dart/3.10.7/x64
+build	Bootstrap Workspace	2026-01-03T16:26:16.7929491Z   PUB_CACHE: /home/runner/.pub-cache
+build	Bootstrap Workspace	2026-01-03T16:26:16.7929725Z ##[endgroup]
+build	Bootstrap Workspace	2026-01-03T16:26:16.7998800Z /home/runner/work/dart_web3/dart_web3/dart_web3
+build	Bootstrap Workspace	2026-01-03T16:26:16.8014062Z total 2772
+build	Bootstrap Workspace	2026-01-03T16:26:16.8014377Z drwxr-xr-x  7 runner runner   4096 Jan  3 16:26 .
+build	Bootstrap Workspace	2026-01-03T16:26:16.8014686Z drwxr-xr-x  9 runner runner   4096 Jan  3 16:26 ..
+build	Bootstrap Workspace	2026-01-03T16:26:16.8015034Z drwxr-xr-x  3 runner runner   4096 Jan  3 16:26 .github
+build	Bootstrap Workspace	2026-01-03T16:26:16.8015348Z -rw-r--r--  1 runner runner    360 Jan  3 16:26 .gitignore
+build	Bootstrap Workspace	2026-01-03T16:26:16.8015708Z -rw-r--r--  1 runner runner  41074 Jan  3 16:26 CHANGELOG.md
+build	Bootstrap Workspace	2026-01-03T16:26:16.8016028Z -rw-r--r--  1 runner runner   7305 Jan  3 16:26 README.md
+build	Bootstrap Workspace	2026-01-03T16:26:16.8016347Z -rw-r--r--  1 runner runner   2996 Jan  3 16:26 USAGE_GUIDE.md
+build	Bootstrap Workspace	2026-01-03T16:26:16.8016879Z -rw-r--r--  1 runner runner   6975 Jan  3 16:26 analysis_nft.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8017235Z -rw-r--r--  1 runner runner   3235 Jan  3 16:26 analysis_options.yaml
+build	Bootstrap Workspace	2026-01-03T16:26:16.8017602Z -rw-r--r--  1 runner runner 180889 Jan  3 16:26 analysis_output.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8017980Z -rw-r--r--  1 runner runner 178737 Jan  3 16:26 analysis_output_v2.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8018345Z -rw-r--r--  1 runner runner 139536 Jan  3 16:26 analysis_output_v3.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8018697Z -rw-r--r--  1 runner runner  11249 Jan  3 16:26 analysis_reown.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8019066Z -rw-r--r--  1 runner runner  73123 Jan  3 16:26 analysis_result_final.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8019439Z -rw-r--r--  1 runner runner 133021 Jan  3 16:26 analysis_results_v2.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8020028Z -rw-r--r--  1 runner runner 128408 Jan  3 16:26 analysis_results_v3.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8020420Z -rw-r--r--  1 runner runner 127171 Jan  3 16:26 analysis_results_v4.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8020790Z -rw-r--r--  1 runner runner 125591 Jan  3 16:26 analysis_results_v5.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8021140Z -rw-r--r--  1 runner runner  97934 Jan  3 16:26 analysis_results_v6.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8021521Z -rw-r--r--  1 runner runner  85215 Jan  3 16:26 analysis_results_v8.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8021890Z -rw-r--r--  1 runner runner  88748 Jan  3 16:26 analysis_results_v9.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8022261Z -rw-r--r--  1 runner runner 537247 Jan  3 16:26 ci_error_log.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8022585Z drwxr-xr-x  2 runner runner   4096 Jan  3 16:26 docs
+build	Bootstrap Workspace	2026-01-03T16:26:16.8022903Z drwxr-xr-x  2 runner runner   4096 Jan  3 16:26 example
+build	Bootstrap Workspace	2026-01-03T16:26:16.8023271Z -rw-r--r--  1 runner runner 134230 Jan  3 16:26 final_analysis.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8023651Z -rw-r--r--  1 runner runner 139238 Jan  3 16:26 final_analysis_output.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8024038Z -rw-r--r--  1 runner runner  72776 Jan  3 16:26 final_analysis_report.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8024417Z -rw-r--r--  1 runner runner  71059 Jan  3 16:26 final_analysis_v2.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8024782Z -rw-r--r--  1 runner runner  69662 Jan  3 16:26 final_analysis_v3.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8025135Z -rw-r--r--  1 runner runner  69013 Jan  3 16:26 final_analysis_v4.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8025483Z -rw-r--r--  1 runner runner  68843 Jan  3 16:26 final_analysis_v5.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8025836Z -rw-r--r--  1 runner runner  68675 Jan  3 16:26 final_analysis_v6.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8026178Z -rw-r--r--  1 runner runner  24492 Jan  3 16:26 forced_log.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8026494Z -rw-r--r--  1 runner runner  24492 Jan  3 16:26 job_log.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8027005Z -rw-r--r--  1 runner runner   1620 Jan  3 16:26 melos.yaml
+build	Bootstrap Workspace	2026-01-03T16:26:16.8027311Z drwxr-xr-x 27 runner runner   4096 Jan  3 16:26 packages
+build	Bootstrap Workspace	2026-01-03T16:26:16.8027633Z -rw-r--r--  1 runner runner    223 Jan  3 16:26 pubspec.yaml
+build	Bootstrap Workspace	2026-01-03T16:26:16.8027966Z -rw-r--r--  1 runner runner   6483 Jan  3 16:26 reown_analysis.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8028308Z -rw-r--r--  1 runner runner  24492 Jan  3 16:26 safe_dir_log.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8028668Z -rw-r--r--  1 runner runner   1113 Jan  3 16:26 serial_audit_final.dart
+build	Bootstrap Workspace	2026-01-03T16:26:16.8029017Z -rw-r--r--  1 runner runner   3688 Jan  3 16:26 test_output.txt
+build	Bootstrap Workspace	2026-01-03T16:26:16.8029354Z drwxr-xr-x  4 runner runner   4096 Jan  3 16:26 web3_universal
+build	Bootstrap Workspace	2026-01-03T16:26:16.9332353Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:17.2759379Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:18.5870811Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5871305Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5871633Z + ansi_styles 0.3.2+1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5871988Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5872180Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5872391Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5872619Z + charcode 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5872824Z + checked_yaml 2.0.4
+build	Bootstrap Workspace	2026-01-03T16:26:18.5873032Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5939995Z + cli_launcher 0.3.2+1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5940424Z + cli_util 0.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5940736Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5941251Z + conventional_commit 0.6.1+1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5941483Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5941690Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5941884Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:18.5942061Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5942257Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5942495Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:18.5942670Z + graphs 2.3.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5942841Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5943027Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5943332Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5943504Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:18.5943675Z + json_annotation 4.9.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5943862Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:18.5944069Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5944229Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:18.5944402Z + melos 6.3.3 (7.3.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:18.5944596Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5944749Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5944909Z + mustache_template 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5945101Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5945298Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5945482Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5945645Z + platform 3.1.6
+build	Bootstrap Workspace	2026-01-03T16:26:18.5945806Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5945962Z + process 5.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:18.5946137Z + prompts 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5946306Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5946473Z + pub_updater 0.5.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5946652Z + pubspec_parse 1.5.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5946822Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5946996Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5947208Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:18.5947390Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5947586Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5947781Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:18.5947957Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5948127Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5948307Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:18.5948485Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5948667Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5948836Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5948999Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:18.5949165Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:18.5949337Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5949508Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:18.5949672Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:18.5950037Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5950237Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5950422Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:18.5950634Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:18.5950852Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:18.5951004Z + yaml_edit 2.2.3
+build	Bootstrap Workspace	2026-01-03T16:26:18.5951247Z Changed 65 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:18.5951796Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:18.5952173Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:19.8061313Z web3_universal_aa
+build	Bootstrap Workspace	2026-01-03T16:26:19.8061742Z web3_universal_abi
+build	Bootstrap Workspace	2026-01-03T16:26:19.8062019Z web3_universal_bc_ur
+build	Bootstrap Workspace	2026-01-03T16:26:19.8062239Z web3_universal_bitcoin
+build	Bootstrap Workspace	2026-01-03T16:26:19.8062441Z web3_universal_bridge
+build	Bootstrap Workspace	2026-01-03T16:26:19.8062652Z web3_universal_chains
+build	Bootstrap Workspace	2026-01-03T16:26:19.8062825Z web3_universal_client
+build	Bootstrap Workspace	2026-01-03T16:26:19.8063010Z web3_universal_contract
+build	Bootstrap Workspace	2026-01-03T16:26:19.8063192Z web3_universal_core
+build	Bootstrap Workspace	2026-01-03T16:26:19.8063377Z web3_universal_cosmos
+build	Bootstrap Workspace	2026-01-03T16:26:19.8063564Z web3_universal_crypto
+build	Bootstrap Workspace	2026-01-03T16:26:19.8063754Z web3_universal_dapp
+build	Bootstrap Workspace	2026-01-03T16:26:19.8063930Z web3_universal_debug
+build	Bootstrap Workspace	2026-01-03T16:26:19.8064105Z web3_universal_ens
+build	Bootstrap Workspace	2026-01-03T16:26:19.8064357Z web3_universal_events
+build	Bootstrap Workspace	2026-01-03T16:26:19.8064661Z web3_universal_history
+build	Bootstrap Workspace	2026-01-03T16:26:19.8064969Z web3_universal_keystone
+build	Bootstrap Workspace	2026-01-03T16:26:19.8065286Z web3_universal_ledger
+build	Bootstrap Workspace	2026-01-03T16:26:19.8065585Z web3_universal_mev
+build	Bootstrap Workspace	2026-01-03T16:26:19.8065865Z web3_universal_mpc
+build	Bootstrap Workspace	2026-01-03T16:26:19.8066163Z web3_universal_multicall
+build	Bootstrap Workspace	2026-01-03T16:26:19.8066484Z web3_universal_nft
+build	Bootstrap Workspace	2026-01-03T16:26:19.8066784Z web3_universal_polkadot
+build	Bootstrap Workspace	2026-01-03T16:26:19.8067098Z web3_universal_price
+build	Bootstrap Workspace	2026-01-03T16:26:19.8067403Z web3_universal_provider
+build	Bootstrap Workspace	2026-01-03T16:26:19.8068087Z web3_universal_reown
+build	Bootstrap Workspace	2026-01-03T16:26:19.8068392Z web3_universal_signer
+build	Bootstrap Workspace	2026-01-03T16:26:19.8068766Z web3_universal_solana
+build	Bootstrap Workspace	2026-01-03T16:26:19.8069063Z web3_universal_staking
+build	Bootstrap Workspace	2026-01-03T16:26:19.8069377Z web3_universal_swap
+build	Bootstrap Workspace	2026-01-03T16:26:19.8069667Z web3_universal_ton
+build	Bootstrap Workspace	2026-01-03T16:26:19.8070167Z web3_universal_trezor
+build	Bootstrap Workspace	2026-01-03T16:26:19.8070450Z web3_universal_tron
+build	Bootstrap Workspace	2026-01-03T16:26:19.8070734Z web3_universal_utxo
+build	Bootstrap Workspace	2026-01-03T16:26:20.3612349Z Cleaning workspace...
+build	Bootstrap Workspace	2026-01-03T16:26:20.4580498Z 
+build	Bootstrap Workspace	2026-01-03T16:26:20.4581263Z Workspace cleaned. You will need to run the bootstrap command again to use this workspace.
+build	Bootstrap Workspace	2026-01-03T16:26:21.0591336Z $ melos exec
+build	Bootstrap Workspace	2026-01-03T16:26:21.0614349Z   └> dart pub get
+build	Bootstrap Workspace	2026-01-03T16:26:21.0616266Z      └> RUNNING (in 34 packages)
+build	Bootstrap Workspace	2026-01-03T16:26:21.0626397Z 
+build	Bootstrap Workspace	2026-01-03T16:26:21.0676084Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:21.0677011Z web3_universal_aa:
+build	Bootstrap Workspace	2026-01-03T16:26:21.1037034Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:21.3925481Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:21.7088388Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7088881Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7089226Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7089509Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7090056Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7090427Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7090727Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7091026Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7091311Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7091610Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:21.7091883Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7092228Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7092584Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:21.7092858Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7093144Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7093483Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7093765Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:21.7094022Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7094278Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7094564Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:21.7094859Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7095123Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7095392Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7095715Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7096020Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7096315Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:21.7096689Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7096941Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7097213Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7097495Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7097847Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:21.7098145Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7098775Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7099128Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:21.7099481Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7100068Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7100396Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:21.7100709Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7101029Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7101316Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7101612Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:21.7101911Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:21.7102197Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7102517Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:21.7102812Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:21.7103095Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7103397Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:21.7103887Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:21.7104402Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:21.7104942Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:21.7105496Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:21.7105985Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:21.7106518Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:21.7107029Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:21.7107463Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7107771Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:21.7108146Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:21.7108764Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:21.7109062Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:21.7109575Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:21.7110461Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:21.7285119Z web3_universal_aa: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:21.7285739Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:21.7286262Z web3_universal_abi:
+build	Bootstrap Workspace	2026-01-03T16:26:21.7531535Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:22.0333451Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:22.0359942Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0360391Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0360733Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0361055Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0361405Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0361783Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0362024Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0362248Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0362473Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0362694Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:22.0362900Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0363118Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0363375Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.0363587Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0363830Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0364046Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:22.0364231Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0364426Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0364631Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:22.0364842Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0365042Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0365256Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0365498Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0365730Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0365963Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:22.0366252Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0366463Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0366675Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0366898Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0367164Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.0367407Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0367662Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0367925Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:22.0368157Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0368377Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0368584Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:22.0368795Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0369009Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0369202Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0369390Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:22.0369583Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:22.0369938Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0370380Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.0370582Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.0370770Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0371038Z ! web3_universal_core 0.1.1 from path ../core (overridden)
+build	Bootstrap Workspace	2026-01-03T16:26:22.0371460Z ! web3_universal_crypto 0.2.0 from path ../crypto (overridden)
+build	Bootstrap Workspace	2026-01-03T16:26:22.0371803Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0372014Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.0372265Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.0372523Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.0372718Z Changed 49 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:22.0373071Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:22.0373498Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:22.0485758Z web3_universal_abi: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:22.0486492Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:22.0495839Z web3_universal_bc_ur:
+build	Bootstrap Workspace	2026-01-03T16:26:22.0688075Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:22.3395937Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:22.3416909Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3417363Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3417657Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3417918Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3418217Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3418534Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3418817Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3419472Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3419751Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3420294Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:22.3420563Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3420853Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3421198Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.3421486Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3421839Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3422129Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:22.3422392Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3422671Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:22.3422956Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3423220Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3423517Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3423834Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3424148Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3424410Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3424682Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3424971Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3425271Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3425624Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.3425936Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3426285Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3426632Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:22.3426915Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3427202Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3427498Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:22.3427798Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3428095Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3428361Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3428613Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:22.3428891Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:22.3429191Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3429494Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.3430065Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.3430355Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3430628Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3430937Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.3431301Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.3431682Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.3431967Z Changed 47 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:22.3546658Z web3_universal_bc_ur: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:22.3547308Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:22.3547822Z web3_universal_bitcoin:
+build	Bootstrap Workspace	2026-01-03T16:26:22.3762954Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:22.6691573Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:22.6714206Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6715138Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6715765Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6716927Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6717500Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6718079Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6718573Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6719671Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6721439Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6721783Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:22.6722118Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6722441Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6722819Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.6723149Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6723575Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6723928Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:22.6724265Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6724591Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:22.6725007Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6725368Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:22.6725707Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6726043Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6726346Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6726666Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6727013Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6727350Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:22.6727880Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6728236Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6728581Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6728930Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6729341Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.6729639Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6730172Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6730535Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:22.6730840Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6731125Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6731697Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:22.6732012Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6732336Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6732631Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6732903Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:22.6733186Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:22.6733465Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6733756Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.6734057Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.6734350Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6734671Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:22.6735153Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:22.6735665Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:22.6736188Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:22.6736634Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6736935Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.6737307Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.6737658Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.6737940Z Changed 54 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:22.6738433Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:22.6739061Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:22.6848205Z web3_universal_bitcoin: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:22.6848796Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:22.6850400Z web3_universal_bridge:
+build	Bootstrap Workspace	2026-01-03T16:26:22.7047555Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:22.9901962Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:22.9929701Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9930271Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9930811Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9931137Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9931463Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9931800Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9932115Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9932315Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9932490Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9932674Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:22.9932894Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9933227Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9933572Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.9933822Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9934101Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9934303Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9934472Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:22.9934617Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9934767Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9934925Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:22.9935089Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9935238Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9935399Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9935582Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9936029Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9936213Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:22.9936439Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9936601Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9936763Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9936940Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9937141Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.9937325Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9937528Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9937738Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:22.9937914Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9938091Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9938260Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:22.9938448Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9938625Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9938786Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9938946Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:22.9939128Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:22.9939297Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9939468Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:22.9939638Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:22.9940027Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9940226Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:22.9940517Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:22.9940812Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:22.9941110Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:22.9941556Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:22.9941826Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:22.9942125Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:22.9942414Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:22.9942666Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9942845Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.9943061Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:22.9943278Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:22.9943441Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:22.9943750Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:22.9944113Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:23.0060169Z web3_universal_bridge: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:23.0060904Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:23.0061424Z web3_universal_chains:
+build	Bootstrap Workspace	2026-01-03T16:26:23.0253508Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:23.3073198Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:23.3101789Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3102231Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3102518Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3102786Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3103072Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3103423Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3103681Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3103861Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3104033Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3104277Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:23.3104511Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3104681Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3104907Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.3105067Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3105262Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3105423Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:23.3105590Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:23.3105802Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3105972Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:23.3106137Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3106300Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3106459Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3106641Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3106829Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3106980Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3107141Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3107303Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3107476Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3107674Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.3107858Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3108052Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3108253Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:23.3108441Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3108963Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3109139Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:23.3109317Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3109495Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3109654Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3110040Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:23.3110211Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:23.3110392Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3110564Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.3110730Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.3110888Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3111063Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:23.3111313Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3111481Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.3111696Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.3111905Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.3112074Z Changed 49 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:23.3112363Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:23.3112725Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:23.3218400Z web3_universal_chains: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:23.3220446Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:23.3220980Z web3_universal_client:
+build	Bootstrap Workspace	2026-01-03T16:26:23.3427010Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:23.6503031Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:23.7413038Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7413664Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7413970Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7414242Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7414543Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7414877Z + characters 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7415172Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7415466Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7415743Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7416027Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7416313Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:23.7416597Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7416929Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7417291Z + glados 1.1.7
+build	Bootstrap Workspace	2026-01-03T16:26:23.7417575Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.7417841Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7418123Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7418463Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7418749Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:23.7419002Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7419272Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:23.7419615Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7420132Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:23.7420484Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7420818Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7421122Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7421448Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7421773Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7422077Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:23.7422458Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7422738Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7423018Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7423312Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7423665Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.7423943Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7424280Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7424618Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:23.7424921Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7425206Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7425493Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:23.7425802Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7426127Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7426420Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7426714Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:23.7427002Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:23.7427295Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7427585Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:23.7427879Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:23.7428160Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7428460Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:23.7428943Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:23.7429427Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:23.7430156Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:23.7430691Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:23.7431714Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:23.7432146Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7432462Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.7432837Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:23.7433275Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:23.7433572Z Changed 59 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:23.7434116Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:23.7434753Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:23.7553332Z web3_universal_client: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:23.7554009Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:23.7554526Z web3_universal_contract:
+build	Bootstrap Workspace	2026-01-03T16:26:23.7752454Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:24.0687037Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:24.0715065Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0715542Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0715988Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0716304Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0716622Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0716969Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0717285Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0717593Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0717899Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0718202Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:24.0718494Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0719197Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0719568Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.0720019Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0720327Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0720688Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0720987Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:24.0721255Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0721543Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:24.0721793Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0721983Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:24.0722181Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0722362Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0722550Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0722773Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0722994Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0723211Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:24.0723492Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0723682Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0723877Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0724080Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0724317Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.0724542Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0724774Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0725016Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:24.0725231Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0725435Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0725646Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:24.0725863Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0726084Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0726277Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0726467Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:24.0726658Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:24.0726859Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0727079Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.0727252Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.0727412Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0727591Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:24.0727880Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:24.0728161Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:24.0728428Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:24.0728749Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:24.0729040Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:24.0729285Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0729458Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.0729673Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.0730113Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.0730303Z Changed 57 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:24.0730618Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:24.0730976Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:24.0845813Z web3_universal_contract: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:24.0846476Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:24.0847018Z web3_universal_core:
+build	Bootstrap Workspace	2026-01-03T16:26:24.1042329Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:24.3836114Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:24.3859366Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3860028Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3860369Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3860637Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3860919Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3861237Z + characters 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3861521Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3861816Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3862102Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3862379Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3862655Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:24.3862939Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3863226Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3863585Z + glados 1.1.7
+build	Bootstrap Workspace	2026-01-03T16:26:24.3863874Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.3864159Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3864490Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3864780Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:24.3865049Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:24.3865403Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3865681Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:24.3865965Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3866229Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3866854Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3867179Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3867489Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3867759Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3868025Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3868314Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3868603Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3868950Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.3869223Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3869562Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3870174Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:24.3870476Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3870771Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3871057Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:24.3871368Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3871681Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3871986Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3872260Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:24.3872555Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:24.3872842Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3873135Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.3873433Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.3873713Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3873975Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3874277Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.3874649Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.3875025Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.3875334Z Changed 50 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:24.3875853Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:24.3876499Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:24.3993986Z web3_universal_core: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:24.3994587Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:24.3995105Z web3_universal_cosmos:
+build	Bootstrap Workspace	2026-01-03T16:26:24.4183799Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:24.7068797Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:24.7715216Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7715706Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7716003Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7716283Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7716582Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7716923Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7717219Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7717518Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7717800Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7718091Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:24.7718364Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7718634Z + fixnum 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7718929Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7719294Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.7719553Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7720098Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7720748Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7721048Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:24.7721302Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7721569Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:24.7721922Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7722203Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:24.7722489Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7722753Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7723032Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7723326Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7723627Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7723914Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:24.7724304Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7724575Z + protobuf 3.1.0 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:24.7724937Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7725229Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7725547Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7725921Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.7726237Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7726589Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7726941Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:24.7727271Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7727570Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7727876Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:24.7728186Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7728500Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7728794Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7729090Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:24.7729370Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:24.7730089Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7730398Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:24.7730695Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:24.7730981Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7731302Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:24.7731818Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:24.7732265Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7732577Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.7732943Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:24.7733325Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:24.7733612Z Changed 55 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:24.7734159Z 3 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:24.7734805Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:24.7845572Z web3_universal_cosmos: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:24.7846574Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:24.7847116Z web3_universal_crypto:
+build	Bootstrap Workspace	2026-01-03T16:26:24.8038896Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:25.0935495Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:25.0959087Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0959576Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0960122Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0960430Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0960639Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0960835Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0961016Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0961185Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0961482Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0961667Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:25.0961829Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0962039Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0962239Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.0962404Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0962692Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0962984Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:25.0963225Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0963480Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0963751Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:25.0963924Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0964085Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0964245Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0964427Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0964609Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0964779Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:25.0965008Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0965168Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0965330Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0965501Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0965699Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.0965881Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0966072Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0966595Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:25.0966765Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0966937Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0967105Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:25.0967288Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0967461Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0967625Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0967785Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:25.0967944Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:25.0968118Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0968279Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.0968446Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.0968600Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0968816Z ! web3_universal_core 0.1.1 from path ../core (overridden)
+build	Bootstrap Workspace	2026-01-03T16:26:25.0969089Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0969262Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.0969467Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.0969688Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.0970211Z Changed 49 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:25.0970541Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:25.0987157Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:25.1088582Z web3_universal_crypto: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:25.1089342Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:25.1090096Z web3_universal_dapp:
+build	Bootstrap Workspace	2026-01-03T16:26:25.1282231Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:25.4184849Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:25.4212068Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4212480Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4212780Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4213066Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4213353Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4213692Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4213986Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4214284Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4214568Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4214848Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:25.4215123Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4215408Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4215788Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.4216051Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4216337Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4216665Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4216953Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:25.4217206Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4217483Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:25.4217821Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4218104Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:25.4218398Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4218667Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4218943Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4219226Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4219438Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4219632Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:25.4220164Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4220346Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4220534Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4220735Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4220969Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.4221168Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4221395Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4221625Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:25.4221824Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4222026Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4222197Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:25.4222382Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4222553Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4222723Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4222882Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:25.4223052Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:25.4223214Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4223386Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.4223548Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.4223711Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4223887Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:25.4224159Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:25.4224449Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:25.4224714Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:25.4224983Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:25.4225535Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:25.4225835Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:25.4226073Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4226255Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.4226468Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.4226677Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.4226855Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:25.4227154Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:25.4227531Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:25.4347176Z web3_universal_dapp: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:25.4347741Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:25.4348260Z web3_universal_debug:
+build	Bootstrap Workspace	2026-01-03T16:26:25.4540779Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:25.7318126Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:25.7340614Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7341670Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7342001Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7342287Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7342572Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7342898Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7343188Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7343475Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7343773Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7344065Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:25.7344772Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7345059Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7345397Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.7345658Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7345944Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7346279Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7346576Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:25.7346847Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:25.7347198Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7347488Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:25.7347767Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7348036Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7348309Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7348647Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7348957Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7349228Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7349500Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7350051Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7350380Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7350748Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.7351057Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7351419Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7351767Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:25.7352041Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7352339Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7352631Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:25.7352942Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7353237Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7353528Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7353779Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:25.7354072Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:25.7354363Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7354664Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:25.7354969Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:25.7355259Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7355588Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:25.7356113Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:25.7356584Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7356895Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.7357257Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:25.7357646Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:25.7357922Z Changed 51 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:25.7358428Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:25.7359054Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:25.7483970Z web3_universal_debug: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:25.7484633Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:25.7486570Z web3_universal_ens:
+build	Bootstrap Workspace	2026-01-03T16:26:25.7722923Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:26.0753524Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:26.0778693Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0779143Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0779475Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0779979Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0780310Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0780621Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0780817Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0781004Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0781174Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0781383Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:26.0781670Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0781985Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0782356Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.0782645Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0782936Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0783271Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0783544Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:26.0783707Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0783882Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:26.0784106Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0784290Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:26.0784468Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0784656Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0784831Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0785039Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0785266Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0785462Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:26.0785718Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0785895Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0786085Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0786272Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0786720Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.0786917Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0787140Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0787361Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:26.0787562Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0787751Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0787955Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:26.0788157Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0788351Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0788535Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0788711Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:26.0788905Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:26.0789087Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0789278Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.0789462Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.0789642Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0790202Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:26.0790521Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:26.0790852Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:26.0791199Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:26.0791527Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:26.0791827Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:26.0792163Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:26.0792489Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:26.0792769Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0792963Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.0793200Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.0793450Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.0793643Z Changed 59 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:26.0793973Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:26.0794332Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:26.0909942Z web3_universal_ens: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:26.0910500Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:26.0911049Z web3_universal_events:
+build	Bootstrap Workspace	2026-01-03T16:26:26.1111779Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:26.4057761Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:26.4083575Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4083972Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4084264Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4084548Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4084840Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4085168Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4085452Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4085736Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4086003Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4086634Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:26.4086840Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4087154Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4087519Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.4087798Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4088069Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4088286Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4088465Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:26.4088670Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4088855Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:26.4089057Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4089232Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:26.4089407Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4089567Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4089743Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4090169Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4090367Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4090548Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:26.4090789Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4090954Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4091130Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4091363Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4091718Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.4092032Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4092366Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4092635Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:26.4092821Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4093004Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4093181Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:26.4093560Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4093748Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4093926Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4094087Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:26.4094260Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:26.4094429Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4094603Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.4094773Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.4094942Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4095125Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:26.4095425Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:26.4095732Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:26.4096022Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:26.4096315Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:26.4096628Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:26.4096937Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:26.4097188Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4097377Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.4097594Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.4097817Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.4097993Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:26.4098308Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:26.4098702Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:26.4257996Z web3_universal_events: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:26.4259019Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:26.4259566Z web3_universal_history:
+build	Bootstrap Workspace	2026-01-03T16:26:26.4463703Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:26.7497412Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:26.7525347Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7525759Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7526065Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7526327Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7526609Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7526929Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7527144Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7527361Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7527521Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7527694Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:26.7527851Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7528065Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7528402Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.7528659Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7528923Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7529207Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7529369Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:26.7529517Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7529677Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:26.7530722Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7530975Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:26.7531228Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7531477Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7531734Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7532030Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7532329Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7532620Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:26.7532978Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7533252Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7533508Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7533795Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7534142Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.7534442Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7534763Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7535096Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:26.7535382Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7535648Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7535944Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:26.7536124Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7536305Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7536485Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7536651Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:26.7536820Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:26.7536992Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7537152Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:26.7537318Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:26.7537471Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7537651Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:26.7538143Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:26.7538435Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:26.7538702Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:26.7538978Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:26.7539280Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:26.7539601Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:26.7540166Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7540441Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.7540750Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:26.7540970Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:26.7541139Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:26.7541438Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:26.7541805Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:26.7661913Z web3_universal_history: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:26.7662398Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:26.7662741Z web3_universal_keystone:
+build	Bootstrap Workspace	2026-01-03T16:26:26.7862977Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:27.0802233Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:27.0824877Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0825303Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0825649Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0825969Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0826305Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0826688Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0827047Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0827394Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0827785Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0828130Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:27.0828455Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0828798Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0829200Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.0829537Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0830115Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0830466Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:27.0830765Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0831098Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:27.0831500Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0831841Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:27.0832165Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0832470Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0832691Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0832928Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0833145Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0833350Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:27.0833617Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0833800Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0834004Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0834203Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0834746Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.0834961Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0835192Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0835436Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:27.0835647Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0835854Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0836056Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:27.0836276Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0836485Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0836683Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0836866Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:27.0837065Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:27.0837259Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0837460Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.0837656Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.0837846Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0838070Z + web3_universal_bc_ur 0.1.0+1 from path ../bc_ur
+build	Bootstrap Workspace	2026-01-03T16:26:27.0838402Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:27.0838746Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:27.0839055Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0839267Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.0839513Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.0839988Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.0840223Z Changed 53 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:27.0840586Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:27.0841209Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:27.0954724Z web3_universal_keystone: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:27.0955431Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:27.0955988Z web3_universal_ledger:
+build	Bootstrap Workspace	2026-01-03T16:26:27.1149739Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:27.3532109Z ERROR: Because web3_universal_ledger depends on ledger_flutter any which requires the Flutter SDK, version solving failed.
+build	Bootstrap Workspace	2026-01-03T16:26:27.3532943Z 
+build	Bootstrap Workspace	2026-01-03T16:26:27.3533202Z Flutter users should use `flutter pub` instead of `dart pub`.
+build	Bootstrap Workspace	2026-01-03T16:26:27.3533637Z 
+build	Bootstrap Workspace	2026-01-03T16:26:27.3633084Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:27.3633535Z 
+build	Bootstrap Workspace	2026-01-03T16:26:27.3633624Z $ melos exec
+build	Bootstrap Workspace	2026-01-03T16:26:27.3634041Z   └> dart pub get
+build	Bootstrap Workspace	2026-01-03T16:26:27.3634873Z      └> FAILED (in 1 packages)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3636617Z         └> web3_universal_ledger (with exit code 1)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3637587Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:27.3637971Z web3_universal_mev:
+build	Bootstrap Workspace	2026-01-03T16:26:27.3644294Z      └> CANCELED (in 16 packages)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3644818Z         └> web3_universal_mev (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3645343Z         └> web3_universal_mpc (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3645997Z         └> web3_universal_multicall (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3646426Z         └> web3_universal_nft (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3646739Z         └> web3_universal_polkadot (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3647078Z         └> web3_universal_price (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3647410Z         └> web3_universal_provider (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3647722Z         └> web3_universal_reown (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3648038Z         └> web3_universal_signer (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3648350Z         └> web3_universal_solana (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3648680Z         └> web3_universal_staking (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3649007Z         └> web3_universal_swap (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3649311Z         └> web3_universal_ton (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3649618Z         └> web3_universal_trezor (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3650131Z         └> web3_universal_tron (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3650443Z         └> web3_universal_utxo (due to failFast)
+build	Bootstrap Workspace	2026-01-03T16:26:27.3835728Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:27.6658228Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:27.6682996Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6683840Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6684144Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6684409Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6684713Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6685035Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6685328Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6685651Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6685920Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6686210Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:27.6686512Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6686815Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6687159Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.6687418Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6687689Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6688023Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6688298Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:27.6688550Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6688819Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:27.6689173Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6689451Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:27.6689736Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6690348Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6690643Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6690971Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6691280Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6691586Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:27.6691971Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6692248Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6692533Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6692832Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6693412Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.6693734Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6694070Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6694423Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:27.6694740Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6695042Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6695320Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:27.6695602Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6695910Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6696181Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6696447Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:27.6696717Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:27.6697008Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6697272Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.6697549Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.6697825Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6698139Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:27.6698603Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:27.6699092Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:27.6699645Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:27.6700362Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:27.6700803Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6701107Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.6701474Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.6701857Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.6702146Z Changed 56 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:27.6702679Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:27.6703331Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:27.6836179Z web3_universal_mev: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:27.6836894Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:27.6837428Z web3_universal_mpc:
+build	Bootstrap Workspace	2026-01-03T16:26:27.7033068Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:27.9958086Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:27.9980399Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9980894Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9981352Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9981715Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9982122Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9982543Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9982907Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9983255Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9983613Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9983994Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:27.9984346Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9984683Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9984935Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.9985143Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9985382Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9985969Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:27.9986149Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9986334Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9986531Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:27.9986738Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9986926Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9987126Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9987350Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9987583Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9987812Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:27.9988101Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9988302Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9988502Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9988714Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9989010Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.9989268Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9989497Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9989739Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:27.9990287Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9990617Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9990934Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:27.9991280Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9991506Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9991700Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9991888Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:27.9992080Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:27.9992279Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9992475Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:27.9992677Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:27.9993032Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9993252Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:27.9993587Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:27.9993936Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:27.9994286Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:27.9994581Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9994796Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.9995042Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:27.9995301Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:27.9995504Z Changed 53 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:27.9995865Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:27.9996292Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:28.0144690Z web3_universal_mpc: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:28.0145256Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:28.0145761Z web3_universal_multicall:
+build	Bootstrap Workspace	2026-01-03T16:26:28.0340137Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:28.3221705Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:28.3246719Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3247730Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3248128Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3248464Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3248810Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3249223Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3249603Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3250267Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3250658Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3251049Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:28.3251380Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3251764Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3252183Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.3252386Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3252606Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3252864Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3253071Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:28.3253262Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3253456Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:28.3253703Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3253918Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:28.3254118Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3254309Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3254506Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3254750Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3255009Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3255214Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:28.3255463Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3255654Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3255840Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3256052Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3256290Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.3256720Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3256941Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3257167Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:28.3257362Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3257558Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3257747Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:28.3257951Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3258146Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3258338Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3258514Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:28.3258701Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:28.3258882Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3259072Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.3259261Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.3259434Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3259630Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:28.3260254Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:28.3260595Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:28.3260933Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:28.3261267Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:28.3261570Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:28.3261910Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:28.3262240Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:28.3262510Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3262891Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.3263120Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.3263358Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.3263537Z Changed 59 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:28.3263873Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:28.3264277Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:28.3388161Z web3_universal_multicall: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:28.3388862Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:28.3389224Z web3_universal_nft:
+build	Bootstrap Workspace	2026-01-03T16:26:28.3581855Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:28.6589310Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:28.6616918Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6617456Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6617765Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6618008Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6618313Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6618546Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6618755Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6618992Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6619186Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6619389Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:28.6619573Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6619898Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6620140Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.6620330Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6620524Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6620756Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6620951Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:28.6621129Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6621303Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6621500Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:28.6621700Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6621887Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6622079Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6622299Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6622517Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6622723Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:28.6623003Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6623188Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6623399Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6623597Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6623844Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.6624054Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6624291Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6624528Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:28.6624742Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6624948Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6625150Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:28.6625366Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6625577Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6625781Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6626329Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:28.6626535Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:28.6626733Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6626935Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.6627130Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.6627324Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6627531Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:28.6627860Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:28.6628210Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:28.6628560Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:28.6628914Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:28.6629240Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:28.6629603Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:28.6630063Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:28.6630358Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6630565Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.6630824Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.6631082Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.6631276Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:28.6631644Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:28.6632081Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:28.6750358Z web3_universal_nft: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:28.6752289Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:28.6753145Z web3_universal_polkadot:
+build	Bootstrap Workspace	2026-01-03T16:26:28.6957888Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:28.9671318Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:28.9693657Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9694237Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9694571Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9694877Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9695198Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9695542Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9695852Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9696166Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9696494Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9696807Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:28.9697101Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9697404Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9697775Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.9698072Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9698425Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9698739Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:28.9699013Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9699306Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:28.9699680Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9700231Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:28.9700533Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9700823Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9701115Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9701425Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9701647Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9701864Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:28.9702140Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9702335Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9702533Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9702748Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9702991Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.9703212Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9703451Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9703692Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:28.9703907Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9704112Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9704367Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:28.9704583Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9704799Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9704996Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9705187Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:28.9705382Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:28.9705580Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9705774Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:28.9705976Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:28.9706166Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9706381Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:28.9706719Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:28.9707058Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:28.9707643Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:28.9707942Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9708156Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.9708390Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:28.9708613Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:28.9708779Z Changed 54 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:28.9709088Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:28.9709471Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:28.9828773Z web3_universal_polkadot: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:28.9829325Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:28.9830021Z web3_universal_price:
+build	Bootstrap Workspace	2026-01-03T16:26:29.0021093Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:29.2825164Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:29.2864068Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2864631Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2865094Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2865367Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2865662Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2865987Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2866267Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2866559Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2866831Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2867114Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:29.2867389Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2868085Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2868305Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.2868470Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2868636Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2868838Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2869000Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:29.2869176Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:29.2869386Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2869547Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:29.2869721Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2870313Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2870603Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2870915Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2871228Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2871477Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2871748Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2873309Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2873626Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2874072Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.2874511Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2882943Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2883357Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:29.2883744Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2884053Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2884365Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:29.2884667Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2884971Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2885248Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2885498Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:29.2885764Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:29.2886029Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2886315Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.2886579Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.2886833Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2887138Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:29.2887556Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2887846Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.2888228Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.2888613Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.2888886Z Changed 50 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:29.2889396Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:29.2890226Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:29.3015224Z web3_universal_price: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:29.3015826Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:29.3016372Z web3_universal_provider:
+build	Bootstrap Workspace	2026-01-03T16:26:29.3219616Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:29.6042862Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:29.6067611Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6068060Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6068374Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6068671Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6069360Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6069709Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6070081Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6070271Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6070457Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6070719Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:29.6070984Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6071176Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6071418Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.6071584Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6071770Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6071981Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6072166Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:29.6072339Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:29.6072563Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6072746Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:29.6072924Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6073100Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6073275Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6073488Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6073693Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6073883Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6074053Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6074241Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6074426Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6074657Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.6074855Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6075077Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6075300Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:29.6075684Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6075881Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6076072Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:29.6076276Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6076472Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6076660Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6076833Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:29.6077050Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:29.6077233Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6077426Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.6077611Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.6077790Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6077992Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:29.6078273Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6078470Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.6078710Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.6078954Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.6079136Z Changed 50 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:29.6079474Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:29.6080263Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:29.6200165Z web3_universal_provider: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:29.6200777Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:29.6201188Z web3_universal_reown:
+build	Bootstrap Workspace	2026-01-03T16:26:29.6398287Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:29.9341282Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:29.9372780Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9373261Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9373583Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9373868Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9374154Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9374515Z + characters 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9374778Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9375095Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9375316Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9375530Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9375754Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:29.9376009Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9376331Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9376582Z + glados 1.1.7
+build	Bootstrap Workspace	2026-01-03T16:26:29.9376789Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.9376980Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9377213Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9377411Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:29.9377589Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9377778Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:29.9378018Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9378220Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:29.9378414Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9378603Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9378791Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9379018Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9379233Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9379763Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:29.9380298Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9380501Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9380698Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9380907Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9381155Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.9381387Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9381620Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9381874Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:29.9382082Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9382291Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9382494Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:29.9382715Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9382927Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9383120Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9383309Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:29.9383502Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:29.9383702Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9383902Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:29.9384101Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:29.9384290Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9384503Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:29.9384817Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:29.9385149Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:29.9385508Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:29.9385817Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9386148Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.9386369Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:29.9386591Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:29.9386754Z Changed 56 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:29.9387067Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:29.9387432Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:29.9521171Z web3_universal_reown: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:29.9521656Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:29.9522047Z web3_universal_signer:
+build	Bootstrap Workspace	2026-01-03T16:26:29.9720290Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:30.2702391Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:30.2742704Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2743171Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2743475Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2743761Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2744003Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2744217Z + characters 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2744398Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2744587Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2744759Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2744938Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2745252Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:30.2745538Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2745858Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2746206Z + glados 1.1.7
+build	Bootstrap Workspace	2026-01-03T16:26:30.2746471Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.2746738Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2746981Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2747156Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:30.2747308Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2747464Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:30.2747688Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2747851Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:30.2748016Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2748176Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2748344Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2748531Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2748710Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2748888Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:30.2749119Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2749275Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2749442Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2749610Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2749994Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.2750175Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2750374Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2750569Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:30.2750748Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2750913Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2751086Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:30.2751261Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2751765Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2751931Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2752093Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:30.2752260Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:30.2752418Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2752586Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.2752746Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.2752907Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2753084Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:30.2753369Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:30.2753643Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:30.2753895Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2754070Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.2754285Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.2754500Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.2754664Z Changed 55 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:30.2754972Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:30.2755331Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:30.2884650Z web3_universal_signer: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:30.2885285Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:30.2885801Z web3_universal_solana:
+build	Bootstrap Workspace	2026-01-03T16:26:30.3083024Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:30.5964510Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:30.5987824Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5990114Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5990432Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5990700Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5990900Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5991280Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5991493Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5991684Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5991862Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5992067Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:30.5992353Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5992656Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5992893Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.5993058Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5993253Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5993463Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5993646Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:30.5993807Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5993982Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:30.5994203Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5994383Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:30.5994558Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5994729Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5994903Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5995109Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5995307Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5995509Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:30.5995763Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5995935Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5996121Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5996305Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5996533Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.5996728Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5996947Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5997166Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:30.5997373Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5997563Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5997764Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:30.5997961Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5998164Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5998345Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5998497Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:30.5998667Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:30.5998838Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5999007Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.5999168Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.5999331Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.5999513Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:30.6000029Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:30.6000339Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:30.6000659Z + web3_universal_provider 0.1.0+1 from path ../../provider
+build	Bootstrap Workspace	2026-01-03T16:26:30.6000972Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:30.6001218Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.6001648Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.6001856Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.6002077Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.6002242Z Changed 56 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:30.6002561Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:30.6002918Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:30.6128010Z web3_universal_solana: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:30.6128521Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:30.6128837Z web3_universal_staking:
+build	Bootstrap Workspace	2026-01-03T16:26:30.6324559Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:30.9276800Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:30.9304462Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9304884Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9305181Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9305453Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9305739Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9306068Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9306389Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9306677Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9306949Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9307230Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:30.9307493Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9307782Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9308113Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.9308368Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9308644Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9309355Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9309638Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:30.9310086Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9310360Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:30.9310700Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9310983Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:30.9311254Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9311516Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9311779Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9312094Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9312387Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9312576Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:30.9312825Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9312998Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9313172Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9313350Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9313558Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.9313733Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9313937Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9314131Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:30.9314323Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9314502Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9314677Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:30.9314852Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9315032Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9315204Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9315363Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:30.9315524Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:30.9315689Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9315850Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:30.9316019Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:30.9316179Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9316353Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:30.9316649Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:30.9316936Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:30.9317236Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:30.9317515Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:30.9317787Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:30.9318082Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:30.9318368Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:30.9318612Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9318786Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.9318999Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:30.9319209Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:30.9319379Z Changed 59 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:30.9319680Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:30.9320204Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:30.9443033Z web3_universal_staking: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:30.9443655Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:30.9444185Z web3_universal_swap:
+build	Bootstrap Workspace	2026-01-03T16:26:30.9641000Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:31.2824654Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:31.2851863Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2852339Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2852699Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2852989Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2853181Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2853422Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2853741Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2854046Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2854343Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2854629Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:31.2854804Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2854974Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2855183Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.2855337Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2855505Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2855716Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2855885Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:31.2856034Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2856186Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2856355Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:31.2856514Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2856673Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2856827Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2857016Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2857504Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2857681Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:31.2857905Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2858066Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2858226Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2858396Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2858595Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.2858770Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2858963Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2859157Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:31.2859331Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2859499Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2859683Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:31.2860102Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2860291Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2860451Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2860607Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:31.2860769Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:31.2860948Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2861127Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.2861311Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.2861464Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2861644Z + web3_universal_abi 0.1.1 from path ../abi
+build	Bootstrap Workspace	2026-01-03T16:26:31.2861922Z + web3_universal_chains 0.1.0+1 from path ../chains
+build	Bootstrap Workspace	2026-01-03T16:26:31.2862218Z + web3_universal_client 0.1.1+1 from path ../client
+build	Bootstrap Workspace	2026-01-03T16:26:31.2862537Z + web3_universal_contract 0.1.0+1 from path ../contract
+build	Bootstrap Workspace	2026-01-03T16:26:31.2862820Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:31.2863090Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:31.2863379Z + web3_universal_provider 0.1.0+1 from path ../provider
+build	Bootstrap Workspace	2026-01-03T16:26:31.2863682Z + web3_universal_signer 0.1.1 from path ../signer
+build	Bootstrap Workspace	2026-01-03T16:26:31.2863926Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2864109Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.2864318Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.2864537Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.2864706Z Changed 58 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:31.2864998Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:31.2865369Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:31.2988539Z web3_universal_swap: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:31.2989137Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:31.2989463Z web3_universal_ton:
+build	Bootstrap Workspace	2026-01-03T16:26:31.3195356Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:31.6159712Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:31.6182206Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6182625Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6182930Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6183639Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6183934Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6184251Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6184548Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6184836Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6185136Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6185434Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:31.6185718Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6186008Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6186361Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.6186643Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6186951Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6187240Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:31.6187491Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6187777Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6188056Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:31.6188348Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6188611Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6188890Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6189218Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6189530Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6190015Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:31.6190425Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6190705Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6190990Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6191289Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6191645Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.6191964Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6192302Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6192663Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:31.6193204Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6193503Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6193775Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:31.6194081Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6194387Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6194663Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6194926Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:31.6195192Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:31.6195458Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6195730Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.6196030Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.6196308Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6196632Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:31.6197130Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:31.6197638Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:31.6198154Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:31.6198595Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6198907Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.6199325Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.6199711Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.6200200Z Changed 53 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:31.6200738Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:31.6201369Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:31.6316980Z web3_universal_ton: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:31.6317668Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:31.6318028Z web3_universal_trezor:
+build	Bootstrap Workspace	2026-01-03T16:26:31.6516312Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:31.9381630Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:31.9406337Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9406766Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9407048Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9407300Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9407575Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9407923Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9408215Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9408521Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9408825Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9409168Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:31.9409434Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9409707Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9410488Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.9410788Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9411130Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9411426Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:31.9411671Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9411930Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9412214Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:31.9412491Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9412758Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9413486Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9413812Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9414125Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9414435Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:31.9414820Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9415095Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9415378Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9415674Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9416032Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.9416358Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9416681Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9416993Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:31.9417304Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9417591Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9417885Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:31.9418185Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9418484Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9418743Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9419010Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:31.9419299Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:31.9419596Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9420089Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:31.9420390Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:31.9420663Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9420988Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:31.9421480Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:31.9421973Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:31.9422748Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:31.9423204Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9423501Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.9423856Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:31.9424230Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:31.9424516Z Changed 53 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:31.9425043Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:31.9425670Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:31.9551634Z web3_universal_trezor: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:31.9552214Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:31.9552757Z web3_universal_tron:
+build	Bootstrap Workspace	2026-01-03T16:26:31.9751280Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:32.2615318Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:32.2637947Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2638460Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2638999Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2639371Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2640098Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2640473Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2640717Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2640923Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2641244Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2641492Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:32.2641695Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2641897Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2642196Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.2642482Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2642721Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2642924Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:32.2643105Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2643313Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2643506Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:32.2643710Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2643889Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2644080Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2644300Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2644523Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2644729Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:32.2645003Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2645194Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2645409Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2645613Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2645857Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.2646073Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2646301Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2646548Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:32.2646756Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2646964Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2647167Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:32.2647384Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2647952Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2648152Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2648340Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:32.2648542Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:32.2648749Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2648954Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.2649155Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.2649341Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2649560Z + web3_universal_abi 0.1.1 from path ../../abi
+build	Bootstrap Workspace	2026-01-03T16:26:32.2650133Z + web3_universal_core 0.1.1 from path ../../core
+build	Bootstrap Workspace	2026-01-03T16:26:32.2650441Z + web3_universal_crypto 0.2.0 from path ../../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:32.2650734Z + web3_universal_signer 0.1.1 from path ../../signer
+build	Bootstrap Workspace	2026-01-03T16:26:32.2650999Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2651182Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.2651390Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.2651607Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.2651774Z Changed 53 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:32.2652072Z 1 package has newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:32.2652443Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:32.2773687Z web3_universal_tron: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:32.2774350Z --------------------------------------------------------------------------------
+build	Bootstrap Workspace	2026-01-03T16:26:32.2774914Z web3_universal_utxo:
+build	Bootstrap Workspace	2026-01-03T16:26:32.2964211Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T16:26:32.5796199Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T16:26:32.5818618Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5819075Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5819378Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5819635Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5820147Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5820464Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5820747Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5821046Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5821342Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5821623Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T16:26:32.5821893Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5822177Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5822528Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.5822835Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5823171Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5823465Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T16:26:32.5823715Z + js 0.7.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5823987Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:32.5824331Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5824619Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T16:26:32.5824895Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5825164Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5825447Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5825769Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5826078Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5826383Z + pointycastle 3.9.1 (4.0.0 available)
+build	Bootstrap Workspace	2026-01-03T16:26:32.5826776Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5827048Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5827339Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5827627Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5827990Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.5828301Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5828645Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5828963Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T16:26:32.5829269Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5829558Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5830052Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T16:26:32.5830357Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5830656Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5830917Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5831186Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T16:26:32.5831479Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T16:26:32.5831791Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5832090Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T16:26:32.5832385Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T16:26:32.5832671Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5832984Z + web3_universal_core 0.1.1 from path ../core
+build	Bootstrap Workspace	2026-01-03T16:26:32.5833473Z + web3_universal_crypto 0.2.0 from path ../crypto
+build	Bootstrap Workspace	2026-01-03T16:26:32.5833911Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5834222Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.5834586Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T16:26:32.5834969Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T16:26:32.5835257Z Changed 52 dependencies!
+build	Bootstrap Workspace	2026-01-03T16:26:32.5836048Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T16:26:32.5836729Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T16:26:32.5960306Z web3_universal_utxo: SUCCESS
+build	Bootstrap Workspace	2026-01-03T16:26:32.6545881Z ##[error]Process completed with exit code 1.

@@ -1,8 +1,11 @@
 import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 void main() async {
   // Initialize the Web3 client with an RPC URL
-  final client = Web3Client('https://eth-mainnet.g.alchemy.com/v2/your-api-key');
+  final client = ClientFactory.createPublicClient(
+    rpcUrl: 'https://eth-mainnet.g.alchemy.com/v2/your-api-key',
+  );
 
   try {
     // Get the current block number
@@ -16,7 +19,7 @@ void main() async {
     // Get balance of a specific address
     final address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'; // vitalik.eth
     final balance = await client.getBalance(address);
-    print('Balance of $address: ${balance.getValueInUnit(EtherUnit.ether)} ETH');
+    print('Balance of $address: ${balance.getValueInUnit(EthUnit.ether)} ETH');
   } finally {
     await client.dispose();
   }
