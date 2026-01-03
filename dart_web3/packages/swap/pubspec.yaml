@@ -1,27 +1,26 @@
-name: dart_web3_swap
-description: DEX aggregation and swap services for Dart Web3 SDK
-version: 1.0.0
-publish_to: none
-
+name: web3_universal_swap
+description: DEX aggregation and swap services for Web3 Universal SDK. Provides unified interfaces for token swapping features.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/swap
+topics:
+  - web3
+  - ethereum
+  - dex
+  - swap
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
   http: ^1.1.0
 
 dev_dependencies:
   test: ^1.24.0
 
-topics:
-  - blockchain
-  - ethereum
-  - web3
-  - defi
-  - swap

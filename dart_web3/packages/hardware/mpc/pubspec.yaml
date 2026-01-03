@@ -1,13 +1,24 @@
-name: dart_web3_mpc
-description: MPC wallet support
-version: 0.1.0
+name: web3_universal_mpc
+description: MPC wallet support for Web3 Universal SDK. Implements threshold cryptography for secure key management and signing.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/hardware/mpc
+topics:
+  - web3
+  - mpc
+  - threshold-cryptography
+
 environment:
   sdk: ^3.6.0
-dependencies:
-  dart_web3_core:
-  dart_web3_signer:
-  dart_web3_crypto:
 
-  dart_web3_abi: any
+dependencies:
+  web3_universal_core:
+    path: ../../core
+  web3_universal_signer:
+    path: ../../signer
+  web3_universal_crypto:
+    path: ../../crypto
+
+  web3_universal_abi: ^0.1.1
 dev_dependencies:
   test: ^1.24.0

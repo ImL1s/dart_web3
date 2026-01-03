@@ -1,15 +1,22 @@
-name: dart_web3_staking
-description: Staking service
-version: 0.1.0
-publish_to: none
+name: web3_universal_staking
+description: Staking services for Web3 Universal SDK. Supports ETH 2.0 deposit contract and liquid staking protocols.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/staking
+topics:
+  - web3
+  - ethereum
+  - staking
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
   http: ^1.1.0
 

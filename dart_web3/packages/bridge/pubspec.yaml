@@ -1,28 +1,27 @@
-name: dart_web3_bridge
-description: Cross-chain bridge services for Dart Web3 SDK
-version: 1.0.0
-publish_to: none
+name: web3_universal_bridge
+description: Cross-chain bridge services for Web3 Universal SDK. Supports data formatting for standard bridge interfaces.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/bridge
+topics:
+  - web3
+  - bridge
+  - cross-chain
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../signer
   http: ^1.1.0
 
 dev_dependencies:
   test: ^1.24.0
 
-topics:
-  - blockchain
-  - ethereum
-  - web3
-  - bridge
-  - cross-chain

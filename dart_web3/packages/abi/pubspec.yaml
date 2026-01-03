@@ -1,23 +1,29 @@
-name: dart_web3_abi
-description: ABI encoding and decoding for Ethereum smart contracts
-version: 0.1.0
-publish_to: none
+name: web3_universal_abi
+description: Ethereum Contract ABI encoding and decoding for Web3 Universal SDK.
+version: 0.1.1
+
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/abi
+topics:
+  - web3
+  - ethereum
+  - abi
+  - solidity
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_crypto:
+  convert: ^3.1.1
+  web3_universal_crypto:
     path: ../crypto
 
 dev_dependencies:
   test: ^1.24.0
-  glados: ^1.1.1
-
 dependency_overrides:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../crypto

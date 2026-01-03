@@ -1,8 +1,13 @@
-name: dart_web3_core
-description: Core utilities for Dart Web3 SDK - address handling, BigInt tools, encoding, RLP
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/core
+name: web3_universal_core
+description: Core utilities for Web3 Universal SDK - address handling, BigInt tools, and RLP encoding.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/core
+topics:
+  - web3
+  - ethereum
+  - multisig
+  - blockchain
 
 environment:
   sdk: ^3.6.0

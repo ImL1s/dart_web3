@@ -1,17 +1,25 @@
-name: dart_web3_solana
-description: Solana blockchain extension
-version: 0.1.0
-publish_to: none
+name: web3_universal_solana
+description: Solana blockchain extension for Web3 Universal SDK - PDA, Transactions, and Metaplex support.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/extensions/solana
+topics:
+  - web3
+  - solana
+  - metaplex
+  - blockchain
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../../signer
-  dart_web3_provider:
+  web3_universal_provider:
     path: ../../provider
   http: ^1.1.0
 

@@ -1,17 +1,24 @@
-name: dart_web3_cosmos
-description: Cosmos blockchain extension
-version: 0.1.0
-publish_to: none
+name: web3_universal_cosmos
+description: Cosmos blockchain extension for Web3 Universal SDK - Protobuf, IBC, and Staking support.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/extensions/cosmos
+topics:
+  - web3
+  - cosmos
+  - ibc
+  - blockchain
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
-  protobuf: ^3.0.0
+  fixnum: ^1.1.0
+  protobuf: ^3.1.0
   http: ^1.1.0
 
 dev_dependencies:

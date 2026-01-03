@@ -1,27 +1,25 @@
-name: dart_web3_keystone
-description: Keystone hardware wallet integration for Dart Web3 SDK
-version: 0.1.0
-publish_to: none
+name: web3_universal_keystone
+description: Keystone hardware wallet support for Web3 Universal SDK. Implements QR-code based air-gapped signing via BC-UR.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/hardware/keystone
+topics:
+  - web3
+  - keystone
+  - hardware-wallet
+  - qr-code
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
-  dart_web3_bc_ur:
-    path: ../bc_ur
-  dart_web3_signer:
-    path: ../../signer
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
+  web3_universal_bc_ur:
+    path: ../bc_ur
 
-  dart_web3_abi: any
 dev_dependencies:
   test: ^1.24.0
-
-topics:
-  - blockchain
-  - hardware-wallet
-  - keystone
-  - qr-code
+  lints: ^5.0.0

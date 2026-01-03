@@ -1,15 +1,22 @@
-name: dart_web3_tron
-description: TRON support library for dart_web3.
-publish_to: none
-version: 0.0.1
+name: web3_universal_tron
+description: TRON blockchain support library for Web3 Universal SDK. Includes standard TRC-10, TRC-20 and resource handling.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/extensions/tron
+topics:
+  - web3
+  - tron
+  - blockchain
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../../signer
 
 dev_dependencies:

@@ -1,15 +1,22 @@
-name: dart_web3_bitcoin
-description: Bitcoin blockchain extension
-publish_to: none
-version: 0.1.0
+name: web3_universal_bitcoin
+description: Bitcoin blockchain extension for Web3 Universal SDK. Supports P2PKH, P2SH, P2TR (Taproot) and PSBT.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/extensions/bitcoin
+topics:
+  - web3
+  - bitcoin
+  - blockchain
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../../signer
 
 dev_dependencies:

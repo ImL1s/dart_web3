@@ -1,26 +1,28 @@
-name: dart_web3_contract
-description: Smart contract interaction and ERC-20/721/1155 support
-publish_to: none
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/contract
+name: web3_universal_contract
+description: Smart contract interaction layer for Web3 Universal SDK. simplifying ABI encoding, event decoding, and method calls.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/contract
+topics:
+  - web3
+  - ethereum
+  - smart-contracts
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../abi
-  dart_web3_client:
-    path: ../client
+  web3_universal_provider:
+    path: ../provider
 
-  dart_web3_crypto: any
-  dart_web3_signer: any
+  web3_universal_crypto: ^0.2.0
+  web3_universal_signer: ^0.1.1
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  dart_web3_chains: any
-  dart_web3_provider: any
+  web3_universal_chains: any

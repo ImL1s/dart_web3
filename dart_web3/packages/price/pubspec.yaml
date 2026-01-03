@@ -1,12 +1,19 @@
-name: dart_web3_price
-description: Price service for cryptocurrency
-version: 0.1.0
-publish_to: none
+name: web3_universal_price
+description: Price service for cryptocurrency in Web3 Universal SDK. Fetch real-time token prices from Coingecko and standard Oracles.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/price
+topics:
+  - web3
+  - ethereum
+  - price
+  - oracle
 
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
   http: ^1.1.0
 

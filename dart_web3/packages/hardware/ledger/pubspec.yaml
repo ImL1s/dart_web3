@@ -1,26 +1,25 @@
-name: dart_web3_ledger
-description: Ledger hardware wallet integration for Dart Web3 SDK
-version: 0.1.0
-publish_to: none
-
-environment:
-  sdk: '>=3.0.0 <4.0.0'
-
-dependencies:
-  dart_web3_signer:
-    path: ../../signer
-  dart_web3_core:
-    path: ../../core
-  dart_web3_crypto:
-    path: ../../crypto
-
-  dart_web3_abi: any
-dev_dependencies:
-  test: ^1.24.0
-
+name: web3_universal_ledger
+description: Ledger hardware wallet support for Web3 Universal SDK. Enables secure signing via USB and Bluetooth connections.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/hardware/ledger
 topics:
-  - blockchain
-  - hardware-wallet
+  - web3
   - ledger
+  - hardware-wallet
   - usb
   - bluetooth
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  web3_universal_core:
+    path: ../../core
+  web3_universal_crypto:
+    path: ../../crypto
+  ledger_flutter: ^1.0.0
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^5.0.0

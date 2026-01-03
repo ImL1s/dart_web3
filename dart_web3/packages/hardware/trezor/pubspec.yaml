@@ -1,26 +1,25 @@
-name: dart_web3_trezor
-description: Trezor hardware wallet integration for Dart Web3 SDK
-version: 0.1.0
-publish_to: none
+name: web3_universal_trezor
+description: Trezor hardware wallet integration for Web3 Universal SDK. Supports secure signing via Trezor Connect.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/hardware/trezor
+topics:
+  - web3
+  - hardware-wallet
+  - trezor
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../../signer
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../../abi
 
 dev_dependencies:
   test: ^1.24.0
-
-topics:
-  - blockchain
-  - hardware-wallet
-  - trezor
-  - webusb

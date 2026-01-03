@@ -1,13 +1,21 @@
-name: dart_web3_history
-description: Account transaction history support
-publish_to: none
-version: 0.1.0
+name: web3_universal_history
+description: Account transaction history support for Web3 Universal SDK. Query past transactions and transfer events.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/history
+topics:
+  - web3
+  - ethereum
+  - history
+  - transactions
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
   http: ^1.1.0
 

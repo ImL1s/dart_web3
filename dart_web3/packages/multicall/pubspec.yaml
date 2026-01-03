@@ -1,27 +1,31 @@
-name: dart_web3_multicall
-description: Multicall support for batching contract calls
-publish_to: none
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/multicall
+name: web3_universal_multicall
+description: Multicall support for batching contract calls in Web3 Universal SDK.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/multicall
+topics:
+  - web3
+  - ethereum
+  - multicall
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
 
   meta: any
-  dart_web3_abi: any
+  web3_universal_abi:
+    path: ../abi
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  dart_web3_chains: any
-  dart_web3_provider: any
-  dart_web3_signer: any
+  web3_universal_chains: any
+  web3_universal_provider: ^0.1.0+1
+  web3_universal_signer: ^0.1.1
