@@ -1,0 +1,55 @@
+00:00 +0: loading test/rlp_official_vector_test.dart
+00:00 +0: Official RLP Test Vectors Vector: emptystring
+00:00 +1: Official RLP Test Vectors Vector: bytestring00
+00:00 +2: Official RLP Test Vectors Vector: bytestring01
+00:00 +3: Official RLP Test Vectors Vector: bytestring7F
+00:00 +4: Official RLP Test Vectors Vector: shortstring
+00:00 +5: Official RLP Test Vectors Vector: shortstring2
+00:00 +6: Official RLP Test Vectors Vector: longstring
+00:00 +7: Official RLP Test Vectors Vector: longstring2
+FAILED: longstring2
+Mismatch at index 241:
+Expected char: 6 (around "...c6973206666175636962...")
+Actual char:   1 (around "...c6973206661756369627...")
+Length mismatch: Expected 2055, Actual 2054
+ERROR: longstring2
+Input: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mauris magna, suscipit sed vehicula non, iaculis faucibus tortor. Proin suscipit ultricies malesuada. Duis tortor elit, dictum quis tristique eu, ultrices at risus. Morbi a est imperdiet mi ullamcorper aliquet suscipit nec lorem. Aenean quis leo mollis, vulputate elit varius, consequat enim. Nulla ultrices turpis justo, et posuere urna concectetur nec. Proin non convallis metus. Donec tempor ipsum in mauris congue sollicitudin. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse convallis sem vel massa faucibus, eget lacinia lacus tempor. Nulla quis ultricies purus. Proin auctor rhoncus nibh condimentum mollis. Aliquam consequat enim at metus luctus, a eleifend purus egestas. Curabitur at nibh metus. Nam bibendum, neque at auctor tristique, lorem libero aliquet arcu, non interdum tellus lectus sit amet eros. Cras rhoncus, metus ac ornare cursus, dolor justo ultrices metus, at ullamcorper volutpat
+Exception: Mismatch for longstring2
+#0      fail (package:matcher/src/expect/expect.dart:149:31)
+#1      main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/dart_web3/dart_web3/packages/core/test/rlp_official_vector_test.dart:81:14)
+#2      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#3      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#4      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +7 -1: Official RLP Test Vectors Vector: longstring2 [E]
+  Mismatch for longstring2
+  package:matcher                           fail
+  test\rlp_official_vector_test.dart 81:14  main.<fn>.<fn>.<fn>
+  
+00:00 +7 -1: Official RLP Test Vectors Vector: zero
+00:00 +8 -1: Official RLP Test Vectors Vector: smallint
+00:00 +9 -1: Official RLP Test Vectors Vector: smallint2
+00:00 +10 -1: Official RLP Test Vectors Vector: smallint3
+00:00 +11 -1: Official RLP Test Vectors Vector: smallint4
+00:00 +12 -1: Official RLP Test Vectors Vector: mediumint1
+00:00 +13 -1: Official RLP Test Vectors Vector: mediumint2
+00:00 +14 -1: Official RLP Test Vectors Vector: mediumint3
+00:00 +15 -1: Official RLP Test Vectors Vector: mediumint4
+00:00 +16 -1: Official RLP Test Vectors Vector: mediumint5
+00:00 +17 -1: Official RLP Test Vectors Vector: emptylist
+00:00 +18 -1: Official RLP Test Vectors Vector: stringlist
+00:00 +19 -1: Official RLP Test Vectors Vector: multilist
+00:00 +20 -1: Official RLP Test Vectors Vector: shortListMax1
+00:00 +21 -1: Official RLP Test Vectors Vector: longList1
+00:00 +22 -1: Official RLP Test Vectors Vector: longList2
+00:00 +23 -1: Official RLP Test Vectors Vector: listsoflists
+00:00 +24 -1: Official RLP Test Vectors Vector: listsoflists2
+00:00 +25 -1: Official RLP Test Vectors Vector: dictTest1
+00:00 +26 -1: Official RLP Test Vectors Vector: bigint
+00:00 +27 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

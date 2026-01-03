@@ -95,6 +95,15 @@ class ReownClient {
     );
   }
 
+  /// Pairs with a dApp using a URI string.
+  Future<void> pair(String uri) async {
+    final pairingUri = PairingUri.parse(uri);
+    if (!isConnected) {
+      await connect();
+    }
+    await _connectionManager.relayClient.subscribe(pairingUri.topic);
+  }
+
   /// Proposes a new session.
   Future<SessionProposal> proposeSession({
     required List<NamespaceConfig> requiredNamespaces,

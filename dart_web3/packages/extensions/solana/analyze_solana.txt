@@ -1,0 +1,49 @@
+Analyzing solana...
+
+  error - lib\src\rpc\client.dart:5:8 - Target of URI doesn't exist: 'package:dart_web3_provider/dart_web3_provider.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - lib\src\rpc\client.dart:13:34 - The name 'Middleware' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'Middleware'. - non_type_as_type_argument
+  error - lib\src\rpc\client.dart:14:20 - The method 'RpcProvider' isn't defined for the type 'SolanaClient'. Try correcting the name to the name of an existing method, or defining a method named 'RpcProvider'. - undefined_method
+  error - lib\src\rpc\client.dart:14:32 - The method 'HttpTransport' isn't defined for the type 'SolanaClient'. Try correcting the name to the name of an existing method, or defining a method named 'HttpTransport'. - undefined_method
+  error - lib\src\rpc\client.dart:16:9 - Undefined class 'RpcProvider'. Try changing the name to the name of an existing class, or creating a class with the name 'RpcProvider'. - undefined_class
+warning - lib\src\models\message.dart:3:8 - Unused import: 'package:dart_web3_core/dart_web3_core.dart'. Try removing the import directive. - unused_import
+warning - lib\src\models\public_key.dart:73:11 - TODO: Expose `isOnCurve` in Ed25519 low-level or attempt to decode. - todo
+warning - test\basic_test.dart:1:8 - Unused import: 'dart:convert'. Try removing the import directive. - unused_import
+warning - test\basic_test.dart:4:8 - Unused import: 'package:dart_web3_core/dart_web3_core.dart'. Try removing the import directive. - unused_import
+   info - lib\dart_web3_solana.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+   info - lib\src\encoding\short_vec.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\encoding\short_vec.dart:6:9 - The variable name 'rem_len' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\encoding\short_vec.dart:37:10 - The variable name 'rem_len' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\models\instruction.dart:12:22 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\models\instruction.dart:16:22 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\models\message.dart:43:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:44:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:45:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:46:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:47:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:70:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:73:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:82:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:91:18 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\models\message.dart:134:35 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib\src\models\message.dart:135:18 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib\src\models\message.dart:137:35 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib\src\models\message.dart:138:18 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib\src\models\message.dart:155:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\message.dart:194:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\models\public_key.dart:35:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\models\public_key.dart:42:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\models\public_key.dart:48:20 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\src\models\public_key.dart:54:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\models\public_key.dart:81:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\models\public_key.dart:94:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+   info - lib\src\models\transaction.dart:68:9 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+   info - lib\src\models\transaction.dart:69:18 - The variable 'b' should be final. Try making the variable final. - prefer_final_in_for_each
+   info - lib\src\models\transaction.dart:69:41 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+   info - lib\src\models\transaction.dart:111:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\rpc\client.dart:29:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\rpc\client.dart:41:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\rpc\client.dart:54:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\rpc\client.dart:62:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+   info - lib\src\solana_types.dart:8:36 - The parameter 'address' is not used in the constructor. Try using the parameter or removing it. - avoid_unused_constructor_parameters
+
+45 issues found.

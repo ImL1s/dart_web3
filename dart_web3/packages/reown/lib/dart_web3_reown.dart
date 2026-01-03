@@ -10,5 +10,7 @@ export 'src/pairing_uri.dart';
 export 'src/relay_client.dart';
 export 'src/reown_client.dart';
 export 'src/reown_signer.dart';
+export 'src/reown_app_kit.dart';
+export 'src/reown_wallet_kit.dart';
 export 'src/session_manager.dart';
 export 'src/siwe_auth.dart';

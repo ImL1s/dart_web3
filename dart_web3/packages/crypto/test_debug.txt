@@ -1,0 +1,21 @@
+00:00 +0: loading test/ed25519_test.dart
+00:00 +0: Ed25519 RFC 8032 Test Vector 1
+H: [53, 124, 131, 134, 79, 40, 51, 203, 66, 122, 46, 241, 192, 10, 1, 60, 253, 255, 39, 104, 217, 128, 192, 163, 165, 32, 240, 6, 144, 77, 233, 15, 155, 79, 10, 254, 40, 11, 116, 106, 119, 134, 132, 231, 84, 66, 80, 32, 87, 183, 71, 58, 3, 240, 143, 150, 245, 163, 142, 146, 135, 224, 31, 143]
+a: 36144925721603087658594284515452164870581325872720374094707712194495455132720
+A: [19080398151999984517402185744604438844327311190893822788107495043224339855903, 11903303657706407974989296177215005343713679411332034699907763981919547054807]
+00:00 +0 -1: Ed25519 RFC 8032 Test Vector 1 [E]
+  Expected: '0xd75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a'
+    Actual: '0xd75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707519a'
+     Which: is different.
+            Expected: ... 1a68f707511a
+              Actual: ... 1a68f707519a
+                                    ^
+             Differ at offset 64
+  
+  package:matcher              expect
+  test\ed25519_test.dart 16:7  main.<fn>.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

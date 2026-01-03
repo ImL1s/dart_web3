@@ -1,0 +1,18 @@
+00:00 +0: loading test/ed25519_test.dart
+00:00 +0: Ed25519 RFC 8032 Test Vector 1
+00:00 +0 -1: Ed25519 RFC 8032 Test Vector 1 [E]
+  Expected: '0xd75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a'
+    Actual: '0xcd519a88722837c639e6398ff4933cea685af4a98df5e911b7d7574e0721396f'
+     Which: is different.
+            Expected: 0xd75a980182 ...
+              Actual: 0xcd519a8872 ...
+                        ^
+             Differ at offset 2
+  
+  package:matcher              expect
+  test\ed25519_test.dart 16:7  main.<fn>.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

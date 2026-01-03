@@ -15,10 +15,12 @@ class BundlerClient {
   BundlerClient({
     required String bundlerUrl,
     RpcProvider? provider,
+    this.entryPointVersion = EntryPointVersion.v07,
   }) : _bundlerUrl = bundlerUrl,
        _provider = provider ?? RpcProvider(HttpTransport(bundlerUrl));
   final RpcProvider _provider;
   final String _bundlerUrl;
+  final EntryPointVersion entryPointVersion;
 
   /// Gets the bundler URL for testing purposes.
   String get bundlerUrl => _bundlerUrl;
@@ -29,7 +31,7 @@ class BundlerClient {
   Future<String> sendUserOperation(UserOperation userOp) async {
     final result = await _provider.call<String>(
       'eth_sendUserOperation',
-      [userOp.toJson(), _getEntryPointAddress()],
+      [userOp.toJson(entryPointVersion), _getEntryPointAddress()],
     );
     return result;
   }
@@ -48,7 +50,7 @@ class BundlerClient {
   }) async {
     final result = await _provider.call<Map<String, dynamic>>(
       'eth_estimateUserOperationGas',
-      [userOp.toJson(), entryPoint ?? _getEntryPointAddress()],
+      [userOp.toJson(entryPointVersion), entryPoint ?? _getEntryPointAddress()],
     );
     return UserOperationGasEstimate.fromJson(result);
   }

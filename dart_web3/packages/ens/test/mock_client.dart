@@ -109,4 +109,7 @@ class MockPublicClient implements PublicClient {
 
   @override
   ChainConfig get chain => throw UnimplementedError();
+
+  @override
+  late CCIPReadHandler ccipHandler;
 }

@@ -11,6 +11,8 @@ dependencies:
     path: ../../crypto
   dart_web3_signer:
     path: ../../signer
+  dart_web3_provider:
+    path: ../../provider
   http: ^1.1.0
 
 dev_dependencies:

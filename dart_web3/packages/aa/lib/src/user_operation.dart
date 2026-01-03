@@ -46,6 +46,18 @@ class UserOperation {
 
   /// Create a UserOperation from JSON
   factory UserOperation.fromJson(Map<String, dynamic> json) {
+    var factory = json['factory'] as String?;
+    var factoryData = json['factoryData'] as String?;
+    final initCode = json['initCode'] as String?;
+
+    // Parse factory and factoryData from initCode if not provided
+    if (factory == null && initCode != null && initCode.length >= 42) {
+      factory = initCode.substring(0, 42);
+      if (initCode.length > 42) {
+        factoryData = '0x${initCode.substring(42)}';
+      }
+    }
+
     return UserOperation(
       sender: json['sender'] as String,
       nonce: BigInt.parse(json['nonce'] as String),
@@ -56,10 +68,10 @@ class UserOperation {
       maxFeePerGas: BigInt.parse(json['maxFeePerGas'] as String),
       maxPriorityFeePerGas: BigInt.parse(json['maxPriorityFeePerGas'] as String),
       signature: json['signature'] as String,
-      initCode: json['initCode'] as String?,
+      initCode: initCode,
       paymasterAndData: json['paymasterAndData'] as String?,
-      factory: json['factory'] as String?,
-      factoryData: json['factoryData'] as String?,
+      factory: factory,
+      factoryData: factoryData,
       paymaster: json['paymaster'] as String?,
       paymasterData: json['paymasterData'] as String?,
       paymasterVerificationGasLimit: json['paymasterVerificationGasLimit'] != null
@@ -135,31 +147,52 @@ class UserOperation {
   final Authorization? authorization;
 
   /// Convert UserOperation to JSON
-  Map<String, dynamic> toJson() {
+  /// 
+  /// [version] specifies the EntryPoint version to target.
+  /// If not provided, it defaults to v0.7 formatting including packed fields where required.
+  Map<String, dynamic> toJson([EntryPointVersion version = EntryPointVersion.v07]) {
     final json = <String, dynamic>{
       'sender': sender,
       'nonce': '0x${nonce.toRadixString(16)}',
       'callData': callData,
-      'callGasLimit': '0x${callGasLimit.toRadixString(16)}',
-      'verificationGasLimit': '0x${verificationGasLimit.toRadixString(16)}',
-      'preVerificationGas': '0x${preVerificationGas.toRadixString(16)}',
-      'maxFeePerGas': '0x${maxFeePerGas.toRadixString(16)}',
-      'maxPriorityFeePerGas': '0x${maxPriorityFeePerGas.toRadixString(16)}',
       'signature': signature,
     };
 
-    if (initCode != null) json['initCode'] = initCode;
-    if (paymasterAndData != null) json['paymasterAndData'] = paymasterAndData;
-    if (factory != null) json['factory'] = factory;
-    if (factoryData != null) json['factoryData'] = factoryData;
-    if (paymaster != null) json['paymaster'] = paymaster;
-    if (paymasterData != null) json['paymasterData'] = paymasterData;
-    if (paymasterVerificationGasLimit != null) {
-      json['paymasterVerificationGasLimit'] = '0x${paymasterVerificationGasLimit!.toRadixString(16)}';
+    if (version == EntryPointVersion.v06) {
+      json['callGasLimit'] = '0x${callGasLimit.toRadixString(16)}';
+      json['verificationGasLimit'] = '0x${verificationGasLimit.toRadixString(16)}';
+      json['preVerificationGas'] = '0x${preVerificationGas.toRadixString(16)}';
+      json['maxFeePerGas'] = '0x${maxFeePerGas.toRadixString(16)}';
+      json['maxPriorityFeePerGas'] = '0x${maxPriorityFeePerGas.toRadixString(16)}';
+      
+      if (initCode != null) json['initCode'] = initCode;
+      if (paymasterAndData != null) json['paymasterAndData'] = paymasterAndData;
+    } else {
+      // v0.7+ uses packed fields
+      json['accountGasLimits'] = _packGasLimits(verificationGasLimit, callGasLimit);
+      json['preVerificationGas'] = '0x${preVerificationGas.toRadixString(16)}';
+      json['gasFees'] = _packGasLimits(maxPriorityFeePerGas, maxFeePerGas);
+      
+      // Combined initCode (factory + factoryData)
+      final packedInitCode = factory != null 
+          ? factory! + (factoryData ?? '').replaceFirst('0x', '')
+          : '0x';
+      json['initCode'] = packedInitCode;
+
+      // Combined paymasterAndData
+      var packedPmData = '0x';
+      if (paymaster != null) {
+        packedPmData = paymaster!;
+        if (paymasterVerificationGasLimit != null && paymasterPostOpGasLimit != null) {
+          packedPmData += _packGasLimits(paymasterVerificationGasLimit!, paymasterPostOpGasLimit!).replaceFirst('0x', '');
+        }
+        if (paymasterData != null) {
+          packedPmData += paymasterData!.replaceFirst('0x', '');
+        }
+      }
+      json['paymasterAndData'] = packedPmData;
     }
-    if (paymasterPostOpGasLimit != null) {
-      json['paymasterPostOpGasLimit'] = '0x${paymasterPostOpGasLimit!.toRadixString(16)}';
-    }
+
     if (paymasterSignature != null) json['paymasterSignature'] = paymasterSignature;
     if (authorization != null) json['authorization'] = authorization!.toJson();
 

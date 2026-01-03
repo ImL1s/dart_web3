@@ -1,0 +1,9 @@
+00:00 +0: loading test/reown_kits_test.dart
+00:00 +0 -1: loading test/reown_kits_test.dart [E]
+  Failed to load "test/reown_kits_test.dart":
+  lib/src/reown_wallet_kit.dart:77:23: Error: The getter 'pairingTopic' isn't defined for the class 'SessionProposal'.
+   - 'SessionProposal' is from 'package:dart_web3_reown/src/session_manager.dart' ('lib/src/session_manager.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'pairingTopic'.
+        topic: proposal.pairingTopic,
+                        ^^^^^^^^^^^^
+00:00 +0 -1: Some tests failed.

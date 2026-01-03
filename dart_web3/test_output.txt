@@ -1,0 +1,54 @@
+00:00 +0: loading packages/reown/test/reown_kits_test.dart
+00:00 +0 -1: loading packages/reown/test/reown_kits_test.dart [E]
+  Failed to load "packages/reown/test/reown_kits_test.dart":
+  Couldn't resolve the package 'dart_web3_reown' in 'package:dart_web3_reown/dart_web3_reown.dart'.
+  Error: Couldn't resolve the package 'dart_web3_reown' in 'package:dart_web3_reown/src/relay_client.dart'.
+  Error: Couldn't resolve the package 'dart_web3_reown' in 'package:dart_web3_reown/src/session_manager.dart'.
+  Error: Couldn't resolve the package 'dart_web3_reown' in 'package:dart_web3_reown/src/namespace_config.dart'.
+  packages/reown/test/reown_kits_test.dart:3:8: Error: Not found: 'package:dart_web3_reown/dart_web3_reown.dart'
+  import 'package:dart_web3_reown/dart_web3_reown.dart';
+         ^
+  packages/reown/test/reown_kits_test.dart:4:8: Error: Not found: 'package:dart_web3_reown/src/relay_client.dart'
+  import 'package:dart_web3_reown/src/relay_client.dart';
+         ^
+  packages/reown/test/reown_kits_test.dart:5:8: Error: Not found: 'package:dart_web3_reown/src/session_manager.dart'
+  import 'package:dart_web3_reown/src/session_manager.dart';
+         ^
+  packages/reown/test/reown_kits_test.dart:6:8: Error: Not found: 'package:dart_web3_reown/src/namespace_config.dart'
+  import 'package:dart_web3_reown/src/namespace_config.dart';
+         ^
+  packages/reown/test/reown_kits_test.dart:8:31: Error: Type 'RelayClient' not found.
+  class MockRelayClient extends RelayClient {
+                                ^^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:15:10: Error: Type 'RelayEvent' not found.
+    Stream<RelayEvent> get events => _eventController.stream;
+           ^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:12:45: Error: 'RelayEvent' isn't a type.
+    final _eventController = StreamController<RelayEvent>.broadcast();
+                                              ^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:9:29: Error: No named parameter with the name 'relayUrl'.
+    MockRelayClient() : super(relayUrl: 'mock://host', projectId: 'test');
+                              ^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:22:26: Error: The getter 'RelayEvent' isn't defined for the class 'MockRelayClient'.
+   - 'MockRelayClient' is from 'packages/reown/test/reown_kits_test.dart'.
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'RelayEvent'.
+      _eventController.add(RelayEvent.connected());
+                           ^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:42:26: Error: The getter 'RelayEvent' isn't defined for the class 'MockRelayClient'.
+   - 'MockRelayClient' is from 'packages/reown/test/reown_kits_test.dart'.
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'RelayEvent'.
+      _eventController.add(RelayEvent.message(topic: topic, message: message));
+                           ^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:55:10: Error: 'SessionManager' isn't a type.
+      late SessionManager sessionManager;
+           ^^^^^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:59:24: Error: Method not found: 'SessionManager'.
+        sessionManager = SessionManager(mockRelay);
+                         ^^^^^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:65:9: Error: Method not found: 'NamespaceConfig'.
+          NamespaceConfig(
+          ^^^^^^^^^^^^^^^
+  packages/reown/test/reown_kits_test.dart:92:32: Error: Undefined name 'SessionProposal'.
+        final receivedProposal = SessionProposal.fromJson(
+                                 ^^^^^^^^^^^^^^^
+00:00 +0 -1: Some tests failed.

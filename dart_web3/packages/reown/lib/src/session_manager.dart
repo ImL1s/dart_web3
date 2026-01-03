@@ -28,6 +28,8 @@ class SessionManager {
   /// Gets a session by topic.
   Session? getSession(String topic) => _sessions[topic];
 
+  final Map<String, Completer<Session>> _pendingProposals = {};
+
   /// Proposes a new session.
   Future<SessionProposal> proposeSession({
     required List<NamespaceConfig> requiredNamespaces,
@@ -36,24 +38,28 @@ class SessionManager {
     Duration? expiry,
   }) async {
     final proposalId = _generateId();
-    final sessionTopic = _generateTopic();
+    final pairingTopic = _generateTopic();
     
-    // Subscribe to session topic
-    await relayClient.subscribe(sessionTopic);
+    // Subscribe to pairing topic
+    await relayClient.subscribe(pairingTopic);
     
+    final completer = Completer<Session>();
+    _pendingProposals[pairingTopic] = completer;
+
     final proposal = SessionProposal(
       id: proposalId,
-      topic: sessionTopic,
+      topic: pairingTopic,
       requiredNamespaces: requiredNamespaces,
       optionalNamespaces: optionalNamespaces ?? [],
       metadata: metadata ?? _defaultMetadata(),
       expiry: expiry ?? const Duration(minutes: 5),
       createdAt: DateTime.now(),
+      onApprove: completer.future,
     );
 
     // Send session proposal
     await relayClient.publish(
-      topic: sessionTopic,
+      topic: pairingTopic,
       message: {
         'id': proposalId,
         'jsonrpc': '2.0',
@@ -327,6 +333,13 @@ class SessionManager {
     final params = message['params'] as Map<String, dynamic>;
     final session = Session.fromSettleParams(topic, params);
     _sessions[topic] = session;
+    
+    // Resolve pending proposal if matches pairing topic
+    final completer = _pendingProposals.remove(session.pairingTopic);
+    if (completer != null && !completer.isCompleted) {
+      completer.complete(session);
+    }
+
     _eventController.add(SessionEvent.established(session));
   }
 
@@ -507,9 +520,10 @@ class SessionProposal {
     required this.metadata,
     required this.expiry,
     required this.createdAt,
+    required this.onApprove,
   });
 
-  factory SessionProposal.fromJson(Map<String, dynamic> json, String topic) {
+  factory SessionProposal.fromJson(Map<String, dynamic> json, String topic, {Future<Session>? onApprove}) {
     final requiredNamespaces = (json['requiredNamespaces'] as Map<String, dynamic>)
         .entries
         .map((e) => NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
@@ -528,6 +542,7 @@ class SessionProposal {
       metadata: (json['proposer'] as Map<String, dynamic>)['metadata'] as Map<String, dynamic>,
       expiry: Duration(seconds: json['expiry'] as int? ?? 300),
       createdAt: DateTime.now(),
+      onApprove: onApprove ?? Completer<Session>().future,
     );
   }
   final String id;
@@ -537,6 +552,7 @@ class SessionProposal {
   final Map<String, dynamic> metadata;
   final Duration expiry;
   final DateTime createdAt;
+  final Future<Session> onApprove;
 
   bool get isExpired => DateTime.now().isAfter(createdAt.add(expiry));
 

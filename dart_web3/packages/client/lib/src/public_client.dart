@@ -4,17 +4,23 @@ import 'package:dart_web3_chains/dart_web3_chains.dart';
 import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:dart_web3_provider/dart_web3_provider.dart';
 
+import 'ccip_read.dart';
 import 'models.dart';
 
 /// Public client for read-only blockchain operations.
 class PublicClient {
 
-  PublicClient({required this.provider, required this.chain});
+  PublicClient({required this.provider, required this.chain}) {
+    ccipHandler = CCIPReadHandler(this);
+  }
   /// The RPC provider.
   final RpcProvider provider;
 
   /// The chain configuration.
   final ChainConfig chain;
+
+  /// CCIP-Read handler (EIP-3668).
+  late CCIPReadHandler ccipHandler;
 
   /// Gets the balance of an address.
   Future<BigInt> getBalance(String address, [String block = 'latest']) async {
@@ -56,9 +62,22 @@ class PublicClient {
   }
 
   /// Executes a call without creating a transaction.
+  /// 
+  /// Supports EIP-3668 (CCIP-Read) off-chain lookups.
   Future<Uint8List> call(CallRequest request, [String block = 'latest']) async {
-    final result = await provider.ethCall(request.toJson(), block);
-    return HexUtils.decode(result);
+    try {
+      final result = await provider.ethCall(request.toJson(), block);
+      return HexUtils.decode(result);
+    } on RpcError catch (e) {
+      if (e.data != null && e.data is String) {
+        final errorData = HexUtils.decode(e.data as String);
+        if (errorData.length >= 4 && 
+            BytesUtils.equals(errorData.sublist(0, 4), CCIPReadHandler.offchainLookupSelector)) {
+          return await ccipHandler.handle(request.to ?? '', errorData, block);
+        }
+      }
+      rethrow;
+    }
   }
 
   /// Estimates gas for a transaction.

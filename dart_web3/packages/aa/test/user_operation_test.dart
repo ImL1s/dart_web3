@@ -27,7 +27,7 @@ void main() {
       expect(userOp.signature, equals('0x1234'));
     });
 
-    test('should serialize to JSON correctly', () {
+    test('should serialize to JSON correctly (v0.6)', () {
       final userOp = UserOperation(
         sender: '0x1234567890123456789012345678901234567890',
         nonce: BigInt.from(1),
@@ -40,7 +40,7 @@ void main() {
         signature: '0x1234',
       );
 
-      final json = userOp.toJson();
+      final json = userOp.toJson(EntryPointVersion.v06);
 
       expect(json['sender'], equals('0x1234567890123456789012345678901234567890'));
       expect(json['nonce'], equals('0x1'));
@@ -51,6 +51,35 @@ void main() {
       expect(json['maxFeePerGas'], equals('0x4a817c800'));
       expect(json['maxPriorityFeePerGas'], equals('0x3b9aca00'));
       expect(json['signature'], equals('0x1234'));
+    });
+
+    test('should serialize to JSON correctly (v0.7)', () {
+      final userOp = UserOperation(
+        sender: '0x1234567890123456789012345678901234567890',
+        nonce: BigInt.from(1),
+        callData: '0xabcdef',
+        callGasLimit: BigInt.from(100000),
+        verificationGasLimit: BigInt.from(50000),
+        preVerificationGas: BigInt.from(21000),
+        maxFeePerGas: BigInt.from(20000000000),
+        maxPriorityFeePerGas: BigInt.from(1000000000),
+        signature: '0x1234',
+      );
+
+      final json = userOp.toJson(EntryPointVersion.v07);
+
+      expect(json['sender'], equals('0x1234567890123456789012345678901234567890'));
+      expect(json['nonce'], equals('0x1'));
+      expect(json['callData'], equals('0xabcdef'));
+      expect(json['accountGasLimits'], isNotNull);
+      expect(json['gasFees'], isNotNull);
+      expect(json['preVerificationGas'], equals('0x5208'));
+      expect(json['signature'], equals('0x1234'));
+      
+      // Check packed values (verificationGasLimit 50000=0xc350, callGasLimit 100000=0x186a0)
+      // accountGasLimits = 0x0000000000000000000000000000c350000000000000000000000000000186a0
+      expect(json['accountGasLimits'], contains('c350'));
+      expect(json['accountGasLimits'], contains('186a0'));
     });
 
     test('should deserialize from JSON correctly', () {

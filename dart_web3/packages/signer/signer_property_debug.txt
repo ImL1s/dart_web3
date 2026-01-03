@@ -1,0 +1,24 @@
+00:00 +0: loading test/signer_property_test.dart
+00:00 +0: Signer: Key Generation Consistency (testing 100 inputs)
+Tested 44 inputs, shrunk 0 times.
+Failing for input: 0
+00:00 +0 -1: Signer: Key Generation Consistency (testing 100 inputs) [E]
+  A property test behaved undeterministically. For the input
+  0, it failed the first time, but succeeded the second time
+  with output Instance of 'Future<void>'.
+  
+  Make sure that if given the same input, the property test
+  always behaves the same way.
+  
+  package:glados/src/glados.dart 180:9  Glados.test.<fn>
+  
+  Invalid argument(s): Invalid private key
+  package:dart_web3_crypto/src/secp256k1.dart 151:7           Secp256k1.getPublicKey
+  package:dart_web3_signer/src/private_key_signer.dart 19:17  new PrivateKeySigner
+  test\signer_property_test.dart 20:20                        main.<fn>
+  package:glados/src/glados.dart 178:28                       Glados.test.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

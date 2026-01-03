@@ -44,18 +44,12 @@ class SimpleAccount extends BaseSmartAccount {
   }
 
   @override
-  Future<String> getInitCode() async {
-    if (await isDeployed()) {
-      return '0x';
-    }
+  Future<String?> getFactoryData() async {
+    if (await isDeployed()) return null;
 
-    // SimpleAccountFactory.createAccount(owner, salt)
     final ownerAddress = owner.address.hex;
-    final salt = BigInt.zero; // Default salt
-    
-    final createAccountCallData = _encodeCreateAccountCall(ownerAddress, salt);
-    
-    return factoryAddress! + createAccountCallData.replaceFirst('0x', '');
+    final salt = BigInt.zero;
+    return _encodeCreateAccountCall(ownerAddress, salt);
   }
 
   @override

@@ -25,7 +25,21 @@ abstract class SmartAccount {
   /// Signs a UserOperation with this account.
   Future<String> signUserOperation(UserOperation userOp);
 
-  /// Gets the init code for deploying this account (if not deployed).
+  /// Builds a UserOperation for execution.
+  Future<UserOperation> buildUserOperation({
+    required Call call,
+    BigInt? maxFeePerGas,
+    BigInt? maxPriorityFeePerGas,
+    BigInt? nonce,
+  });
+
+  /// Gets the factory address used to deploy this account (v0.7+).
+  Future<String?> getFactory();
+
+  /// Gets the data for the account factory (v0.7+).
+  Future<String?> getFactoryData();
+
+  /// Gets the init code for deploying this account (v0.6 only).
   Future<String> getInitCode();
 
   /// Checks if this account is deployed on-chain.
@@ -99,7 +113,9 @@ abstract class BaseSmartAccount implements SmartAccount {
     required Signer owner,
     required PublicClient publicClient,
     required String entryPointAddress,
-    required String implementationAddress, String? factoryAddress,
+    required String implementationAddress,
+    this.entryPointVersion = EntryPointVersion.v07,
+    String? factoryAddress,
   }) : _owner = owner,
        _publicClient = publicClient,
        _entryPointAddress = entryPointAddress,
@@ -110,6 +126,7 @@ abstract class BaseSmartAccount implements SmartAccount {
   final String _entryPointAddress;
   final String? _factoryAddress;
   final String _implementationAddress;
+  final EntryPointVersion entryPointVersion;
 
   @override
   Signer get owner => _owner;
@@ -158,7 +175,7 @@ abstract class BaseSmartAccount implements SmartAccount {
     final userOpHash = userOp.getUserOpHash(
       chainId: await _publicClient.getChainId(),
       entryPointAddress: _entryPointAddress,
-      entryPointVersion: EntryPointVersion.v07, // Default to v0.7
+      entryPointVersion: entryPointVersion,
     );
 
     // Use signHash instead of signMessage to avoid EIP-191 prefix.
@@ -166,6 +183,45 @@ abstract class BaseSmartAccount implements SmartAccount {
     final hashBytes = HexUtils.decode(userOpHash);
     final signature = await _owner.signHash(hashBytes);
     return HexUtils.encode(signature);
+  }
+
+  @override
+  Future<UserOperation> buildUserOperation({
+    required Call call,
+    BigInt? maxFeePerGas,
+    BigInt? maxPriorityFeePerGas,
+    BigInt? nonce,
+  }) async {
+    final sender = await getAddress();
+    final callData = encodeCallData(call.to, call.value, call.data);
+    final opNonce = nonce ?? await getNonce();
+    
+    // Init factory fields
+    String? factory;
+    String? factoryData;
+    String? initCode;
+
+    if (!await isDeployed()) {
+      factory = await getFactory();
+      factoryData = await getFactoryData();
+      initCode = await getInitCode();
+      if (initCode == '0x') initCode = null;
+    }
+
+    return UserOperation(
+      sender: sender,
+      nonce: opNonce,
+      callData: callData,
+      callGasLimit: BigInt.from(1000000), // Default high limit for estimation
+      verificationGasLimit: BigInt.from(1000000),
+      preVerificationGas: BigInt.from(100000),
+      maxFeePerGas: maxFeePerGas ?? BigInt.zero,
+      maxPriorityFeePerGas: maxPriorityFeePerGas ?? BigInt.zero,
+      signature: '0x',
+      factory: factory,
+      factoryData: factoryData,
+      initCode: initCode,
+    );
   }
 
   /// Encodes a getNonce function call to the EntryPoint.
@@ -178,6 +234,28 @@ abstract class BaseSmartAccount implements SmartAccount {
     return '0x$selector$paddedSender$paddedKey';
   }
 
+  @override
+  Future<String?> getFactory() async {
+    if (await isDeployed()) return null;
+    return factoryAddress;
+  }
+
+  @override
+  Future<String?> getFactoryData() async {
+    // Default implementation returns null, subclasses should override
+    return null;
+  }
+
+  @override
+  Future<String> getInitCode() async {
+    if (await isDeployed()) return '0x';
+    
+    final factory = await getFactory();
+    final factoryData = await getFactoryData();
+    
+    if (factory == null) return '0x';
+    return factory + (factoryData ?? '').replaceFirst('0x', '');
+  }
   @override
   Future<String> getAddress() async {
     if (_factoryAddress == null) {

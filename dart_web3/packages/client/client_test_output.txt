@@ -1,0 +1,15 @@
+00:00 +0: loading test/ccip_read_test.dart
+00:00 +0: CCIP-Read should handle OffchainLookup correctly
+00:00 +0 -1: CCIP-Read should handle OffchainLookup correctly [E]
+  Exception: Failed to resolve off-chain data from all URLs
+  package:dart_web3_client/src/ccip_read.dart 89:5       CCIPReadHandler.handle
+  ===== asynchronous gap ===========================
+  package:dart_web3_client/src/public_client.dart 76:18  PublicClient.call
+  ===== asynchronous gap ===========================
+  test\ccip_read_test.dart 105:22                        main.<fn>.<fn>
+  
+00:00 +0 -1: CCIP-Read CCIPReadHandler placeholder replacement should replace placeholders in URL
+00:00 +1 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.
