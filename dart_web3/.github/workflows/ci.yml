@@ -25,7 +25,9 @@ jobs:
         run: dart pub global activate melos
 
       - name: Bootstrap Workspace
-        run: melos bootstrap
+        run: |
+          melos clean
+          melos bootstrap
 
       - name: Verify formatting
         run: melos run format
