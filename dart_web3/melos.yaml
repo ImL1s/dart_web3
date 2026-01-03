@@ -1,11 +1,11 @@
-name: dart_web3_workspace
+name: web3_universal_workspace
 repository: https://github.com/ImL1s/dart_web3
 
 packages:
   - packages/**
   - packages/hardware/**
   - packages/extensions/**
-  - dart_web3
+  - web3_universal
 
 command:
   version:
