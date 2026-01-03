@@ -29,3 +29,5 @@ dev_dependencies:
   web3_universal_chains: ^0.1.0+1
   web3_universal_provider: ^0.1.0+1
   web3_universal_signer: ^0.1.1
+  web3_universal_core:
+    path: ../core

@@ -19,6 +19,7 @@ dependencies:
   web3_universal_crypto:
     path: ../../crypto
 
-  web3_universal_abi: ^0.1.1
+  web3_universal_abi:
+    path: ../../abi
 dev_dependencies:
   test: ^1.24.0
