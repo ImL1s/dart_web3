@@ -28,7 +28,7 @@ jobs:
           ls -la
           melos list
           melos clean
-          melos bootstrap --verbose
+          melos bootstrap --verbose --no-concurrent
 
       - name: Static Analysis
         run: |
