@@ -7,7 +7,7 @@ topics:
   - web3
   - ethereum
   - networks
-publish_to: none
+
 
 environment:
   sdk: ^3.6.0
