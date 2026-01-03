@@ -28,13 +28,7 @@ jobs:
           ls -la
           melos list
           melos clean
-          echo "Testing packages/core..."
-          cd packages/core && dart pub get && cd ../..
-          echo "Testing packages/abi..."
-          cd packages/abi && dart pub get && cd ../..
-          echo "Testing packages/extensions/ton..."
-          cd packages/extensions/ton && dart pub get && cd ../../..
-          # melos bootstrap --verbose --no-concurrent
+          melos exec --concurrency=1 --fail-fast -- "dart pub get"
 
       - name: Static Analysis
         run: |
