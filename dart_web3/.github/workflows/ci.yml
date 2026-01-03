@@ -27,7 +27,7 @@ jobs:
       - name: Bootstrap Workspace
         run: |
           melos clean
-          melos bootstrap --verbose
+          melos bootstrap --verbose > bootstrap_log.txt 2>&1 || (cat bootstrap_log.txt && exit 1)
 
       - name: Verify formatting
         run: melos run format
