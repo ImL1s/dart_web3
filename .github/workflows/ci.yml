@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          channel: 'stable'
 
       - name: Install Melos
         run: dart pub global activate melos
@@ -28,14 +28,7 @@ jobs:
           ls -la
           melos list
           melos clean
-          # Explicit loop to find the failure
-          for d in packages/* packages/extensions/* packages/hardware/*; do
-            if [ -d "$d" ] && [ -f "$d/pubspec.yaml" ]; then
-              echo "---------------------------------------------------"
-              echo "Bootstrapping $d..."
-              (cd "$d" && dart pub get) || exit 1
-            fi
-          done
+          melos bootstrap --verbose
 
       - name: Static Analysis
         run: |
