@@ -16,8 +16,10 @@ dependencies:
   dart_web3_client:
     path: ../client
 
-  dart_web3_crypto: any
-  dart_web3_signer: any
+  dart_web3_crypto:
+    path: ../crypto
+  dart_web3_signer:
+    path: ../signer
 
 dev_dependencies:
   lints: ^5.0.0

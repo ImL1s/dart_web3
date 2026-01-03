@@ -21,7 +21,8 @@ dependencies:
     path: ../chains
 
   http: ^1.2.0
-  dart_web3_crypto: any
+  dart_web3_crypto:
+    path: ../crypto
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
