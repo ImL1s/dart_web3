@@ -18,9 +18,11 @@ dependencies:
   web3_universal_client:
     path: ../client
 
-  web3_universal_provider: ^0.1.0+1
+  web3_universal_provider:
+    path: ../provider
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  web3_universal_chains: ^0.1.0+1
+  web3_universal_chains:
+    path: ../chains
