@@ -22,8 +22,10 @@ jobs:
 
       - name: Bootstrap Workspace
         run: |
+          git config --global --add safe.directory '*'
           cd dart_web3
-          melos bootstrap
+          melos clean
+          melos bootstrap --verbose > bootstrap_log.txt 2>&1 || (cat bootstrap_log.txt && exit 1)
 
       - name: Static Analysis
         run: |
