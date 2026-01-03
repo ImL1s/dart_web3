@@ -28,9 +28,10 @@ void main() {
 
     final vectors = json.decode(file.readAsStringSync()) as Map<String, dynamic>;
 
-    vectors.forEach((name, data) {
+    vectors.forEach((name, rawData) {
+      final data = rawData as Map<String, dynamic>;
       test('Vector: $name', () {
-        final expectedHex = data['out'];
+        final expectedHex = data['out'] as String;
         final rawInput = data['in'];
 
         dynamic parseInput(dynamic input) {
