@@ -1,6 +1,6 @@
 
-import 'package:web3_universal_reown/web3_universal_reown.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_reown/web3_universal_reown.dart';
 
 void main() {
   group('ReconnectionConfig', () {

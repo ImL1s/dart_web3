@@ -10,7 +10,7 @@ void main() async {
 
   // 2. Client Interaction (Mock URL example)
   final client = CosmosClient('https://rest.cosmos.directory/cosmoshub');
-  print('Ready to query bank balances and broadcast transactions...');
+  print('Cosmos client initialized: $client');
 
   // 3. Message Building
   final sendMsg = MsgSend(

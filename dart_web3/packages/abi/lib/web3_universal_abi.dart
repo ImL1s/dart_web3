@@ -7,7 +7,7 @@
 /// - [EIP712TypedData] - EIP-712 structured data
 /// - [AbiParser] - Parse ABI JSON
 /// - [AbiPrettyPrinter] - Format ABI data for display
-library web3_universal_abi;
+library;
 
 export 'src/decoder.dart';
 export 'src/encoder.dart';

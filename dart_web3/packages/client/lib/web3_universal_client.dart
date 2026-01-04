@@ -1,5 +1,5 @@
 /// PublicClient and WalletClient for Ethereum blockchain interaction.
-library web3_universal_client;
+library;
 
 export 'src/client_factory.dart';
 export 'src/models.dart';

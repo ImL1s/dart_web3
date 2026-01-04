@@ -202,9 +202,9 @@ class KeystoneClient {
       
       // Set up QR scanner if available
       if (_qrScanner != null) {
-        await _qrScanner!.startScanning();
+        await _qrScanner.startScanning();
         
-        scanSubscription = _qrScanner!.scanResults.listen((scanResult) async {
+        scanSubscription = _qrScanner.scanResults.listen((scanResult) async {
           try {
             final response = await _qrComm.processScannedQR(scanResult.data);
             if (response != null && response.isSuccess) {
@@ -226,7 +226,7 @@ class KeystoneClient {
       timeoutTimer?.cancel();
       await scanSubscription?.cancel();
       if (_qrScanner != null) {
-        await _qrScanner!.stopScanning();
+        await _qrScanner.stopScanning();
       }
       _qrComm.reset();
     }

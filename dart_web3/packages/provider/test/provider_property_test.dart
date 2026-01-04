@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_provider/web3_universal_provider.dart';
 
 void main() {
   group('Provider Module Property Tests', () {

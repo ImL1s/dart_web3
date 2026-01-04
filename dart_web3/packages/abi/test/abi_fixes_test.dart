@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
 
 /// Tests for ABI module fixes:
 /// 1. Tuple/Array static size calculation (Gemini 3 Pro finding)

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   group('CurveInterface', () {
@@ -18,7 +18,9 @@ void main() {
       test('sign and verify round trip', () {
         final keyPair = Ed25519.generateKeyPair();
         final messageHash = Uint8List(32);
-        for (var i = 0; i < 32; i++) messageHash[i] = i;
+        for (var i = 0; i < 32; i++) {
+          messageHash[i] = i;
+        }
 
         final signature = keyPair.sign(messageHash);
         expect(signature.length, equals(64));
@@ -57,7 +59,9 @@ void main() {
       test('sign and verify round trip', () {
         final keyPair = Sr25519.generateKeyPair();
         final messageHash = Uint8List(32);
-        for (var i = 0; i < 32; i++) messageHash[i] = i;
+        for (var i = 0; i < 32; i++) {
+          messageHash[i] = i;
+        }
 
         final signature = keyPair.sign(messageHash);
         expect(signature.length, equals(64));

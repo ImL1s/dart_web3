@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:test/test.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_events/web3_universal_events.dart';
-import 'package:test/test.dart';
 
 import 'mock_client.dart';
 

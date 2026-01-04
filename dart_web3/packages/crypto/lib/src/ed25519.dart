@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 
-import 'sha2.dart';
-
 import 'curves.dart';
+import 'sha2.dart';
 
 /// Pure Dart implementation of Ed25519 elliptic curve.
 ///
@@ -254,8 +253,10 @@ class Ed25519 implements CurveInterface {
   // -x^2 + y^2 = 1 + d*x^2*y^2
 
   static List<BigInt> _pointAdd(List<BigInt> p1, List<BigInt> p2) {
-    final x1 = p1[0], y1 = p1[1];
-    final x2 = p2[0], y2 = p2[1];
+    final x1 = p1[0];
+    final y1 = p1[1];
+    final x2 = p2[0];
+    final y2 = p2[1];
 
     // x3 = (x1*y2 + y1*x2) / (1 + d*x1*x2*y1*y2)
     // y3 = (y1*y2 + x1*x2) / (1 - d*x1*x2*y1*y2)

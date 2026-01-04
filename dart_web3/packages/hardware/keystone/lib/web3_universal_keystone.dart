@@ -2,7 +2,7 @@
 /// 
 /// This library provides integration with Keystone hardware wallets
 /// using QR code communication via BC-UR protocol.
-library web3_universal_keystone;
+library;
 
 export 'src/keystone_client.dart';
 export 'src/keystone_signer.dart';

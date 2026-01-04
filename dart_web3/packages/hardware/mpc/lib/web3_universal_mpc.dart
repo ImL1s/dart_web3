@@ -7,7 +7,7 @@
 /// - [KeyRefresh] - Key share rotation utilities
 /// - [SigningCoordinator] - Multi-party signing coordination
 /// - [ThresholdSignature] - Threshold signature schemes
-library web3_universal_mpc;
+library;
 
 export 'src/key_generation.dart';
 export 'src/key_refresh.dart';

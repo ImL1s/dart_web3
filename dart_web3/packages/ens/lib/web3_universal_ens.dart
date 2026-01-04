@@ -1,5 +1,5 @@
 /// ENS (Ethereum Name Service) resolution.
-library web3_universal_ens;
+library;
 
 export 'src/ens_client.dart';
 export 'src/ens_records.dart';

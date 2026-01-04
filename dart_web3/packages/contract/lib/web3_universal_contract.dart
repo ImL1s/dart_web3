@@ -1,5 +1,5 @@
 /// Smart contract abstraction for Ethereum.
-library web3_universal_contract;
+library;
 
 export 'src/contract.dart';
 export 'src/contract_factory.dart';

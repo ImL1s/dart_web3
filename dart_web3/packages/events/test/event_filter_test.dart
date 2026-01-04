@@ -1,5 +1,5 @@
-import 'package:web3_universal_events/web3_universal_events.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_events/web3_universal_events.dart';
 
 void main() {
   group('EventFilter', () {

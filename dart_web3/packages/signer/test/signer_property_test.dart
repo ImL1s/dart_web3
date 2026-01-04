@@ -1,9 +1,6 @@
-import 'dart:typed_data';
 import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 import 'package:web3_universal_signer/src/private_key_signer.dart';
 import 'package:glados/glados.dart';
-import 'package:test/test.dart' as test_pkg;
 
 void main() {
   // Use testAsync for async tests
@@ -28,10 +25,14 @@ void main() {
     final signatureBytes = await signer.signMessage('test message'); 
     
     // Property 1: Signature should be 65 bytes (r, s, v)
-    expect(signatureBytes.length, equals(65));
+    if (signatureBytes.length != 65) {
+       throw Exception('Signature length mismatch');
+    }
     
     // Additional check: public address derivation consistency
     final address = signer.address;
-    expect(address.hex.length, equals(42)); // 0x + 40 hex chars
+    if (address.hex.length != 42) {
+       throw Exception('Address length mismatch');
+    }
   });
 }

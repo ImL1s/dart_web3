@@ -1,3 +1,3 @@
-library web3_universal_price;
+library;
 
 export 'src/price_service.dart';

@@ -15,7 +15,7 @@ void main() {
   print('Checksum address: ${address.hex}');
 
   // 3. Unit Conversions (Wei/Gwei/Ether)
-  final BigInt amountInWei = BigInt.from(10).pow(17); // 0.1 ETH
+  final amountInWei = BigInt.from(10).pow(17); // 0.1 ETH
   final ether = EthUnit.formatEther(amountInWei);
   print('Amount: $ether ETH');
 

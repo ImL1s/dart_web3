@@ -39,8 +39,6 @@ const int _mask32 = 0xFFFFFFFF;
 
 /// Internal Keccak implementation
 class _Keccak {
-  /// digest length
-  final int digestLength;
 
   _Keccak() : digestLength = 32 {
     final capacity = digestLength * 2;
@@ -49,6 +47,8 @@ class _Keccak {
     }
     blockSize = 200 - capacity;
   }
+  /// digest length
+  final int digestLength;
 
   /// temporary space for permutation (high bits)
   final List<int> _sh = List<int>.filled(25, 0);

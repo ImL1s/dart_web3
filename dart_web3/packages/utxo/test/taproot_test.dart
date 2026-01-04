@@ -1,8 +1,9 @@
 
 import 'dart:typed_data';
+
+import 'package:test/test.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_utxo/web3_universal_utxo.dart';
-import 'package:test/test.dart';
 
 void main() {
   group('BIP-341 Taproot', () {

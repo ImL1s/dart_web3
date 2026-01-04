@@ -2,7 +2,7 @@
 /// 
 /// This library provides integration with Ledger hardware wallets
 /// using USB and Bluetooth Low Energy (BLE) communication.
-library web3_universal_ledger;
+library;
 
 export 'src/apdu_commands.dart';
 export 'src/ledger_client.dart';

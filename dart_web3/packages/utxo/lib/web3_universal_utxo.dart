@@ -1,4 +1,4 @@
-library web3_universal_utxo;
+library;
 
 export 'src/models/address.dart';
 export 'src/models/networks.dart';

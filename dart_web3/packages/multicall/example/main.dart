@@ -1,7 +1,6 @@
-import 'package:web3_universal_multicall/web3_universal_multicall.dart';
-import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_chains/web3_universal_chains.dart';
-import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_multicall/web3_universal_multicall.dart';
 
 void main() async {
   final client = ClientFactory.createPublicClient(

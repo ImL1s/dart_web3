@@ -1,5 +1,5 @@
 /// Multicall support for batching contract calls.
-library web3_universal_multicall;
+library;
 
 export 'src/multicall.dart';
 export 'src/multicall_builder.dart';

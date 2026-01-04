@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
+import 'package:test/test.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_ledger/web3_universal_ledger.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart';
-import 'package:test/test.dart';
 
 void main() {
   group('Ledger Transport', () {

@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   group('Crypto Module Property Tests', () {

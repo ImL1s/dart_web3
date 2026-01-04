@@ -8,7 +8,7 @@
 /// - [AuthorizationVerifier] - EIP-7702 authorization verification utilities
 /// - [AuthorizationBatch] - Batch authorization management
 /// - [AuthorizationRevocation] - Authorization revocation utilities
-library web3_universal_signer;
+library;
 
 export 'src/authorization.dart';
 export 'src/authorization_batch.dart';

@@ -2,14 +2,12 @@
 import 'dart:typed_data';
 
 import 'package:convert/convert.dart'; // for hex
-import 'package:web3_universal_utxo/src/script/script.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_utxo/src/script/script.dart';
 
 void main() {
   group('Bitcoin Script Engine', () {
-    // Helper to create bytes
     Uint8List h(String text) => Uint8List.fromList(hex.decode(text));
-    String hEncode(Uint8List bytes) => hex.encode(bytes);
 
     test('P2PKH Compilation & Parsing', () {
       final pubKeyHash = h('0000000000000000000000000000000000000000');

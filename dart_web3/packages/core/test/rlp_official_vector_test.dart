@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 void main() {
   group('Official RLP Test Vectors', () {
@@ -58,7 +58,7 @@ void main() {
           final encoded = RLP.encode(processedInput);
           
           // Handle 0x prefix if present in expectedHex
-          String expected = expectedHex;
+          var expected = expectedHex;
           if (expected.startsWith('0x')) {
              expected = expected.substring(2);
           }

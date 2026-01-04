@@ -1,5 +1,5 @@
 /// Event subscription and monitoring for Ethereum.
-library web3_universal_events;
+library;
 
 export 'src/confirmation_filter.dart';
 export 'src/event_filter.dart';

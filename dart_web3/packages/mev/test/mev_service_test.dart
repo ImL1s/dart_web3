@@ -1,5 +1,5 @@
-import 'package:web3_universal_mev/web3_universal_mev.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_mev/web3_universal_mev.dart';
 
 void main() {
   group('MEV Service Tests', () {

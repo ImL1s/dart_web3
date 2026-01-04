@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
@@ -36,7 +34,7 @@ class MockTransport implements Transport {
           AbiBytes(),
         ];
         final encoded = AbiEncoder.encode(types, [sender, urls, callData, callbackFunction, extraData]);
-        final errorHex = '0x$selector${HexUtils.encode(encoded).replaceFirst('0x', '')}';
+        final errorHex = '0x$selector${HexUtils.encode(encoded, prefix: false)}';
 
         throw RpcError(3, 'execution reverted: OffchainLookup', errorHex);
       } else if (callCount == 2) {
@@ -87,20 +85,12 @@ void main() {
       final provider = RpcProvider(mockTransport);
       final client = PublicClient(
         provider: provider,
-        chain: ChainConfig(
-          chainId: 1,
-          name: 'Ethereum',
-          shortName: 'eth',
-          nativeCurrency: 'Ether',
-          symbol: 'ETH',
-          decimals: 18,
-          rpcUrls: ['http://localhost:8545'],
-          blockExplorerUrls: ['https://etherscan.io'],
-        ),
+        chain: Chains.ethereum,
       );
 
       // Inject mock HTTP client
-      client.ccipHandler = CCIPReadHandler(client, httpClient: MockHttpClient());
+      final handler = CCIPReadHandler(client, httpClient: MockHttpClient());
+      client.ccipHandler = handler;
       
       final result = await client.call(CallRequest(
         to: '0x1234567890123456789012345678901234567890',
@@ -109,31 +99,6 @@ void main() {
 
       expect(HexUtils.encode(result), equals('0x445566'));
       expect(mockTransport.callCount, equals(2));
-    });
-   group('CCIPReadHandler placeholder replacement', () {
-      test('should replace placeholders in URL', () async {
-        final mockTransport = MockTransport();
-        final provider = RpcProvider(mockTransport);
-        final client = PublicClient(
-          provider: provider,
-          chain: ChainConfig(
-            chainId: 1,
-            name: 'Ethereum',
-            shortName: 'eth',
-            nativeCurrency: 'Ether',
-            symbol: 'ETH',
-            decimals: 18,
-            rpcUrls: ['http://localhost:8545'],
-            blockExplorerUrls: ['https://etherscan.io'],
-          ),
-        );
-        
-        final mockHttpClient = MockHttpClient();
-        final handler = CCIPReadHandler(client, httpClient: mockHttpClient);
-        
-        // This is a private method test or we test it via handle if we want real integration.
-        // Let's trust the logic for now as it's straightforward.
-      });
     });
   });
 }

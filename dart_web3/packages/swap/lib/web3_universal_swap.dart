@@ -1,5 +1,5 @@
 /// DEX aggregation and swap services for Dart Web3 SDK
-library web3_universal_swap;
+library;
 
 export 'src/aggregators/aggregator_interface.dart';
 export 'src/aggregators/oneinch_aggregator.dart';

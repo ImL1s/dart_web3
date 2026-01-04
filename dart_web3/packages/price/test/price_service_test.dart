@@ -1,5 +1,5 @@
-import 'package:web3_universal_price/web3_universal_price.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_price/web3_universal_price.dart';
 
 void main() {
   group('Price Service Tests', () {

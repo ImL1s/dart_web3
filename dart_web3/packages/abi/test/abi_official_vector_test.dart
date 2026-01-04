@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:test/test.dart';
 import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:test/test.dart';
 
 // Helper to convert inputs for ABI encoder
 dynamic sanitizeValue(dynamic value) {
@@ -94,7 +94,7 @@ void main() {
         // AbiFixedBytes expects Uint8List.
         // We need a smarter sanitizer based on Type.
         
-        final preparedArgs = [];
+        final preparedArgs = <dynamic>[];
         for (var i = 0; i < types.length; i++) {
            final t = types[i];
            final val = args[i];

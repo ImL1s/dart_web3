@@ -1,8 +1,8 @@
 
 import 'dart:typed_data';
 
-import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 
 void main() {
   group('UTXO Mock Integration', () {

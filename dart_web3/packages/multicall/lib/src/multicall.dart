@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:meta/meta.dart';
 
 /// Represents a single call in a multicall batch.
 class Call {

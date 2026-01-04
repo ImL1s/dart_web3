@@ -13,7 +13,7 @@
 /// - Bech32/Bech32m encoding (SegWit/Taproot addresses)
 /// - BIP-39 mnemonic generation and validation
 /// - BIP-32/44 hierarchical deterministic key derivation
-library web3_universal_crypto;
+library;
 
 // Address encoding
 export 'src/base58.dart';

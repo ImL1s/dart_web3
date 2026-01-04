@@ -6,7 +6,7 @@
 /// - Collection querying and management
 /// - NFT transfers with approval handling
 /// - Cross-chain NFT display support
-library web3_universal_nft;
+library;
 
 export 'src/ipfs_gateway.dart';
 export 'src/nft_collection.dart';

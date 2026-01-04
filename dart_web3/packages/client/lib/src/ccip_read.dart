@@ -91,7 +91,6 @@ class CCIPReadHandler {
 
   Future<Uint8List?> _fetchOffchainData(String url, String sender, Uint8List data) async {
     final hexData = HexUtils.encode(data, prefix: false);
-    final senderHex = HexUtils.strip0x(sender);
     
     // Check if URL uses placeholders
     final hasSender = url.contains('{sender}');

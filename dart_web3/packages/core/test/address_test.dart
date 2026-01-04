@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 void main() {
   group('EthereumAddress', () {

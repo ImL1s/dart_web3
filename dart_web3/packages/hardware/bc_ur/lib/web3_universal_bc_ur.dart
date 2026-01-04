@@ -3,7 +3,7 @@
 /// This library provides encoding and decoding functionality for BC-UR format,
 /// which is used for secure data exchange via QR codes, particularly with
 /// hardware wallets like Keystone.
-library web3_universal_bc_ur;
+library;
 
 export 'src/animated_qr.dart';
 export 'src/bc_ur_decoder.dart';

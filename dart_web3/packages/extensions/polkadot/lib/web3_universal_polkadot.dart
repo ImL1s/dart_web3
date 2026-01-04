@@ -1,3 +1,3 @@
-library web3_universal_polkadot;
+library;
 
 export 'src/scale_codec.dart';

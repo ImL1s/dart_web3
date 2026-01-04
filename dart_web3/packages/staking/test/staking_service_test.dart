@@ -1,6 +1,6 @@
+import 'package:test/test.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_staking/web3_universal_staking.dart';
-import 'package:test/test.dart';
 
 void main() {
   group('Staking Service Types Tests', () {

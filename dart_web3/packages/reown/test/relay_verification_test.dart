@@ -1,7 +1,8 @@
 
 import 'dart:async';
-import 'package:web3_universal_reown/src/relay_client.dart';
+
 import 'package:test/test.dart';
+import 'package:web3_universal_reown/src/relay_client.dart';
 
 void main() {
   test('Verify connection to official Relay server', () async {

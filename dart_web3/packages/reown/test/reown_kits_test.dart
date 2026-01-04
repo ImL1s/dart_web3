@@ -1,9 +1,7 @@
 import 'dart:async';
+
 import 'package:test/test.dart';
 import 'package:web3_universal_reown/web3_universal_reown.dart';
-import 'package:web3_universal_reown/src/relay_client.dart';
-import 'package:web3_universal_reown/src/session_manager.dart';
-import 'package:web3_universal_reown/src/namespace_config.dart';
 
 class MockRelayClient extends RelayClient {
   MockRelayClient() : super(relayUrl: 'mock://host', projectId: 'test');
@@ -125,9 +123,9 @@ void main() {
               'chains': ['eip155:1'],
               'methods': ['eth_sendTransaction'],
               'events': ['chainChanged'],
-            }
-          }
-        }
+            },
+          },
+        },
       });
 
       // Verification: Does onApprove resolve?

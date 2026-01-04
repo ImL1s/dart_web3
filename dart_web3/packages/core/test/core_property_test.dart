@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:glados/glados.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 /// Custom generators for property-based testing
 extension Uint8ListGenerators on Any {

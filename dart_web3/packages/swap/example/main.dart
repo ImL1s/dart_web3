@@ -13,14 +13,5 @@ void main() async {
 
   // Initialize swap service
   final swap = SwapService(walletClient: walletClient);
-
-  // Find the best swap rate
-  // final result = await swap.getQuote(
-  //   chainId: 1,
-  //   fromToken: '0x...',
-  //   toToken: '0x...',
-  //   amount: BigInt.from(1000000),
-  // );
-
-  print('Swap service initialized');
+  print('Swap service initialized: $swap');
 }

@@ -182,8 +182,9 @@ class AbiEncoder {
       var bracketStart = -1;
       for (var i = type.length - 1; i >= 0; i--) {
         final char = type[i];
-        if (char == ')') depth++;
-        else if (char == '(') depth--;
+        if (char == ')') {
+          depth++;
+        } else if (char == '(') depth--;
         else if (char == '[' && depth == 0) {
           bracketStart = i;
           break;

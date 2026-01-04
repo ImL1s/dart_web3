@@ -17,7 +17,7 @@ analyzer:
     invalid_dependency: ignore
     
     # Treat these as warnings
-    todo: warning
+    todo: info
     deprecated_member_use: warning
     
   exclude:

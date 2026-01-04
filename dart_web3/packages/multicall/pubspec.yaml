@@ -32,5 +32,3 @@ dev_dependencies:
     path: ../provider
   web3_universal_signer:
     path: ../signer
-  web3_universal_core:
-    path: ../core

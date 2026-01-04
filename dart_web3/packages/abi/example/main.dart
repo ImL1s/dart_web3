@@ -1,6 +1,5 @@
-import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_abi/web3_universal_abi.dart';
-import 'dart:typed_data';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 void main() {
   // Define a simple function signature
@@ -30,6 +29,3 @@ void main() {
   print('Decoded Amount: ${decodedParams[1]}');
 }
 
-extension on Uint8List {
-  String toHex() => map((e) => e.toRadixString(16).padLeft(2, '0')).join('');
-}

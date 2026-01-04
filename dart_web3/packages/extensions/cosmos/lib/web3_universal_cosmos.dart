@@ -1,4 +1,4 @@
-library web3_universal_cosmos;
+library;
 
 export 'src/encoding/protobuf.dart';
 export 'src/models/address.dart';

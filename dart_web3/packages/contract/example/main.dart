@@ -1,18 +1,18 @@
 import 'dart:convert';
-import 'package:web3_universal_contract/web3_universal_contract.dart';
-import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:web3_universal_client/web3_universal_client.dart';
+
 import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_contract/web3_universal_contract.dart';
 
 void main() async {
   // ERC20 ABI snippet for balancing
   const abi = [
     {
-      "constant": true,
-      "inputs": [{"name": "_owner", "type": "address"}],
-      "name": "balanceOf",
-      "outputs": [{"name": "balance", "type": "uint256"}],
-      "type": "function"
+      'constant': true,
+      'inputs': [{'name': '_owner', 'type': 'address'}],
+      'name': 'balanceOf',
+      'outputs': [{'name': 'balance', 'type': 'uint256'}],
+      'type': 'function',
     }
   ];
 

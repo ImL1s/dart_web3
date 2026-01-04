@@ -1,8 +1,5 @@
-import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:web3_universal_client/web3_universal_client.dart'; // Ensure models are exported
-import 'package:web3_universal_signer/web3_universal_signer.dart'; // For TransactionRequest
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 import 'package:glados/glados.dart';
-import 'package:test/test.dart' as test_pkg;
 
 void main() {
   // Test TransactionRequest construction consistency
@@ -16,12 +13,17 @@ void main() {
     );
 
     // 2. Verify properties
-    expect(req.nonce, isNotNull);
-    expect(req.value, greaterThanOrEqualTo(BigInt.zero));
+    if (req.nonce == null) {
+       throw Exception('Nonce should not be null');
+    }
     
-    // 3. Verify copyWith immutability/consistency
+    // 3. Verify copyWith consistency
     final req2 = req.copyWith(value: BigInt.zero);
-    expect(req2.value, equals(BigInt.zero));
-    expect(req2.nonce, equals(req.nonce)); // Should persist
+    if (req2.value != BigInt.zero) {
+       throw Exception('Value mismatch after copyWith');
+    }
+    if (req2.nonce != req.nonce) {
+       throw Exception('Nonce mismatch after copyWith');
+    }
   });
 }

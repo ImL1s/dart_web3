@@ -1,6 +1,6 @@
+import 'package:test/test.dart';
 import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:web3_universal_ens/web3_universal_ens.dart';
-import 'package:test/test.dart';
 
 import 'mock_client.dart';
 

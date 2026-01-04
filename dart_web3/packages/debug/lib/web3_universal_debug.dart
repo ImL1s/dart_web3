@@ -1,4 +1,4 @@
-library web3_universal_debug;
+library;
 
 export 'src/debug_service.dart';
 export 'src/debug_types.dart';

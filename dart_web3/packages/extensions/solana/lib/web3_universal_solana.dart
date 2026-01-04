@@ -1,4 +1,4 @@
-library web3_universal_solana;
+library;
 
 export 'src/models/instruction.dart';
 export 'src/models/message.dart';

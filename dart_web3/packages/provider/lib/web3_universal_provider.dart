@@ -5,7 +5,7 @@
 /// - [HttpTransport] - HTTP JSON-RPC transport
 /// - [WebSocketTransport] - WebSocket transport with subscriptions
 /// - [RpcProvider] - High-level RPC provider with middleware support
-library web3_universal_provider;
+library;
 
 export 'src/http_transport.dart';
 export 'src/middleware.dart';

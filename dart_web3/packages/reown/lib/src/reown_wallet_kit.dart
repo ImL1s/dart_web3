@@ -3,7 +3,6 @@ import 'dart:async';
 
 
 import 'namespace_config.dart';
-import 'pairing_uri.dart';
 import 'reown_client.dart';
 import 'session_manager.dart';
 

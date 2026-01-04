@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:test/test.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
-import 'package:test/test.dart';
 
 void main() {
   group('Secp256k1', () {

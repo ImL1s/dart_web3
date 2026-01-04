@@ -21,10 +21,12 @@ dependencies:
   pointycastle: ^3.9.1
 
 
+  crypto: any
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.24.0
 
+  path: any
 dependency_overrides:
   web3_universal_core:
     path: ../core

@@ -1,6 +1,6 @@
-import 'package:web3_universal_ens/web3_universal_ens.dart';
-import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_ens/web3_universal_ens.dart';
 
 void main() async {
   final client = ClientFactory.createPublicClient(

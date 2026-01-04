@@ -1,5 +1,5 @@
 /// Cross-chain bridge services for Dart Web3 SDK
-library web3_universal_bridge;
+library;
 
 export 'src/bridge_quote.dart';
 export 'src/bridge_service.dart';
