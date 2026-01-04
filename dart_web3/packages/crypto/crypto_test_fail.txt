@@ -1,0 +1,20 @@
+00:00 +0: loading test/crypto_test.dart
+00:00 +0 -1: loading test/crypto_test.dart [E]
+  Failed to load "test/crypto_test.dart": Does not exist.
+00:00 +0 -1: test/ed25519_test.dart: Ed25519 RFC 8032 Test Vector 1
+00:00 +1 -1: test/ed25519_test.dart: Ed25519 RFC 8032 Test Vector 1
+00:00 +2 -1: test/ed25519_test.dart: Ed25519 RFC 8032 Test Vector 1
+00:00 +3 -1: test/ed25519_test.dart: Ed25519 RFC 8032 Test Vector 1
+00:00 +3 -2: test/ed25519_test.dart: Ed25519 RFC 8032 Test Vector 1
+00:00 +3 -2: test/crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip [E]
+  Invalid argument(s): Signature must be 64 bytes
+  package:web3_universal_crypto/src/secp256k1.dart 125:7  Secp256k1.recover
+  test\crypto_property_test.dart 47:52                    main.<fn>.<fn>
+  
+00:00 +4 -2: test/crypto_property_test.dart: Crypto Module Property Tests Property 21: Keccak-256 Hash Consistency
+00:00 +5 -2: test/crypto_property_test.dart: Crypto Module Property Tests Property 22: BIP-39 Mnemonic Validation
+00:00 +6 -2: test/crypto_property_test.dart: Crypto Module Property Tests Property 23: HD Wallet Derivation Consistency
+00:04 +7 -2: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

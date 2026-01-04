@@ -44,7 +44,11 @@ void main() {
           var recovered = false;
           for (var v = 0; v < 4; v++) {
             try {
-              final recoveredPublicKey = Secp256k1.recover(signature, messageHash, v);
+              final recoveredPublicKey = Secp256k1.recover(
+                signature.sublist(0, 64),
+                messageHash,
+                v,
+              );
               
               // Check if recovered public key matches original
               if (_uint8ListEquals(recoveredPublicKey, originalPublicKey)) {

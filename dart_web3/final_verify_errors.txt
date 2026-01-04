@@ -1,0 +1,23 @@
+--- ERRORS ---
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:467:7 - Undefined name 'AbiParser'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:470:7 - Undefined name 'AbiParser'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:495:14 - The name 'AbiType' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'AbiType'. - non_type_as_type_argument
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:496:14 - The name 'AbiType' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'AbiType'. - non_type_as_type_argument
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:506:28 - Undefined class 'AbiFunction'. Try changing the name to the name of an existing class, or creating a class with the name 'AbiFunction'. - undefined_class
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:513:48 - The property 'name' can't be unconditionally accessed because the receiver can be 'null'. Try making the access conditional (using '?.') or adding a null check to the target ('!'). - unchecked_use_of_nullable_value
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:518:7 - Undefined name 'AbiEncoder'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:521:7 - Undefined name 'AbiDecoder'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:525:9 - Undefined class 'AbiEvent'. Try changing the name to the name of an existing class, or creating a class with the name 'AbiEvent'. - undefined_class
+[dart_web3_compat]:   error - lib\dart_web3_compat.dart:534:24 - Undefined name 'AbiDecoder'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+
+--- WARNINGS ---
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:39:72 - The library 'package:web3_universal_crypto/web3_universal_crypto.dart' doesn't export a member with the hidden name 'hexToBytes'. Try removing the name from the list of hidden members. - undefined_hidden_name
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:39:84 - The library 'package:web3_universal_crypto/web3_universal_crypto.dart' doesn't export a member with the hidden name 'bytesToHex'. Try removing the name from the list of hidden members. - undefined_hidden_name
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:469:14 - The type of f can't be inferred; a type must be explicitly provided. Try specifying the type of the parameter. - inference_failure_on_untyped_parameter
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:470:40 - The type of e can't be inferred; a type must be explicitly provided. Try specifying the type of the parameter. - inference_failure_on_untyped_parameter
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:542:38 - The type of name can't be inferred; a type must be explicitly provided. Try specifying the type of the parameter. - inference_failure_on_untyped_parameter
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:562:49 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:627:21 - Unnecessary cast. Try removing the cast. - unnecessary_cast
+[dart_web3_compat]: warning - test\compat_test.dart:56:13 - The value of the local variable 'compressedKey' isn't used. Try removing the variable or using it. - unused_local_variable
+
+--- UNNECESSARY LIBRARY NAMES ---

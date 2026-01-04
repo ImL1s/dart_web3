@@ -51,17 +51,6 @@ void main() {
 
   group('Address Utils', () {
     test('publicKeyToAddress with compressed key', () {
-      // Example Public Key (Compressed): 03+x
-      // 03 + 7c0850c9581177695325603f269a98ef1f21128c7c7f8277259f97205a2e5728
-      final compressedKey = HexUtils.hexToBytes(
-        '037c0850c9581177695325603f269a98ef1f21128c7c7f8277259f97205a2e5728',
-      );
-      // Expected address: 0x933cc4605973be22955f110c735d44a726618d3b
-      // (This is a known test vector or derived from known key)
-      // Note: We need a valid pair for this test.
-      // Let's use a newly generated key for stability if we can't find a vector.
-      // But for now, let's just verify the function accepts 33 bytes.
-
       // Using a random private key for deterministic test:
       // PK: 1
       // Pub (compressed): 0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798

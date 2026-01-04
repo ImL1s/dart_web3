@@ -1,26 +1,26 @@
 import 'dart:math';
 import 'dart:typed_data';
-import 'dart:convert';
+import 'dart:typed_data';
 import 'package:decimal/decimal.dart';
-import 'package:web3_universal_abi/abi.dart' as dw3_abi;
-import 'package:web3_universal_chains/chains.dart' as dw3_chains;
-import 'package:web3_universal_client/client.dart';
-import 'package:web3_universal_contract/contract.dart' as dw3_contract;
-import 'package:web3_universal_core/core.dart' as dw3;
-import 'package:web3_universal_crypto/crypto.dart' as crypto;
-import 'package:web3_universal_provider/provider.dart';
-import 'package:web3_universal_signer/signer.dart' as dw3_signer;
+import 'package:web3_universal_abi/web3_universal_abi.dart' as dw3_abi;
+import 'package:web3_universal_chains/web3_universal_chains.dart' as dw3_chains;
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_contract/web3_universal_contract.dart' as dw3_contract;
+import 'package:web3_universal_core/web3_universal_core.dart' as dw3;
+import 'package:web3_universal_crypto/web3_universal_crypto.dart' as crypto;
+import 'package:web3_universal_provider/web3_universal_provider.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart' as dw3_signer;
 
 // Umbrella exports for convenience
-export 'package:web3_universal_core/core.dart' show EthUnit, Unit, RLP;
-export 'package:web3_universal_contract/contract.dart' hide Contract;
-export 'package:web3_universal_client/client.dart'
+export 'package:web3_universal_core/web3_universal_core.dart' show EthUnit, Unit, RLP;
+export 'package:web3_universal_contract/web3_universal_contract.dart' hide Contract;
+export 'package:web3_universal_client/web3_universal_client.dart'
     show PublicClient, WalletClient, CallRequest, Block, TransactionReceipt;
-export 'package:web3_universal_provider/provider.dart'
+export 'package:web3_universal_provider/web3_universal_provider.dart'
     show RpcProvider, HttpTransport;
-export 'package:web3_universal_chains/chains.dart' hide ChainConfig;
-export 'package:web3_universal_signer/signer.dart' hide TransactionType;
-export 'package:web3_universal_abi/abi.dart'
+export 'package:web3_universal_chains/web3_universal_chains.dart' hide ChainConfig;
+export 'package:web3_universal_signer/web3_universal_signer.dart' hide TransactionType;
+export 'package:web3_universal_abi/web3_universal_abi.dart'
     show
         AbiParser,
         AbiEncoder,
@@ -36,7 +36,7 @@ export 'package:web3_universal_abi/abi.dart'
         AbiArray,
         AbiBytes,
         AbiFixedBytes;
-export 'package:web3_universal_crypto/crypto.dart' hide hexToBytes, bytesToHex;
+export 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 // ============================================================================
 // Internal Utilities (no external dependencies)
@@ -464,10 +464,10 @@ class ContractAbi {
   factory ContractAbi.fromJson(String json, String name) {
     return ContractAbi(
       name,
-      AbiParser.parseFunctions(
+      dw3_abi.AbiParser.parseFunctions(
         json,
       ).map((f) => ContractFunction.fromAbi(f)).toList(),
-      AbiParser.parseEvents(json).map((e) => ContractEvent(e)).toList(),
+      dw3_abi.AbiParser.parseEvents(json).map((e) => ContractEvent(e)).toList(),
     );
   }
 }
@@ -492,8 +492,8 @@ class DeployedContract {
 
 class ContractFunction {
   final String name;
-  final List<AbiType> parameters;
-  final List<AbiType> outputs;
+  final List<dw3_abi.AbiType> parameters;
+  final List<dw3_abi.AbiType> outputs;
   final String stateMutability;
 
   const ContractFunction(
@@ -503,7 +503,7 @@ class ContractFunction {
     this.stateMutability = 'nonpayable',
   });
 
-  ContractFunction.fromAbi(AbiFunction abi)
+  ContractFunction.fromAbi(dw3_abi.AbiFunction abi)
       : name = abi.name,
         parameters = abi.inputs,
         outputs = abi.outputs,
@@ -515,14 +515,14 @@ class ContractFunction {
   }
 
   Uint8List encodeCall(List<dynamic> params) =>
-      AbiEncoder.encodeFunction(signature, params);
+      dw3_abi.AbiEncoder.encodeFunction(signature, params);
 
   List<dynamic> decodeReturnValues(Uint8List data) =>
-      AbiDecoder.decodeFunction(outputs, data);
+      dw3_abi.AbiDecoder.decodeFunction(outputs, data);
 }
 
 class ContractEvent {
-  final AbiEvent _abiEvent;
+  final dw3_abi.AbiEvent _abiEvent;
   ContractEvent(this._abiEvent);
   String get name => _abiEvent.name;
   String get signature => _abiEvent.signature;
@@ -531,7 +531,7 @@ class ContractEvent {
     final nonNullTopics = topics.whereType<String>().toList();
     final dataBytes = dw3.HexUtils.decode(data);
 
-    final decodedMap = AbiDecoder.decodeEvent(
+    final decodedMap = dw3_abi.AbiDecoder.decodeEvent(
       types: _abiEvent.inputs,
       indexed: _abiEvent.indexed,
       names: _abiEvent.inputNames,
@@ -559,7 +559,7 @@ class BlockNum {
         _blockNum = null;
 
   String toBlockParam() {
-    if (_blockNum != null) return '0x${_blockNum!.toRadixString(16)}';
+    if (_blockNum != null) return '0x${_blockNum.toRadixString(16)}';
     return _str ?? 'latest';
   }
 }

@@ -1,0 +1,9 @@
+--- ERRORS ---
+
+--- WARNINGS ---
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:3:8 - Unused import: 'dart:convert'. Try removing the import directive. - unused_import
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:562:49 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[dart_web3_compat]: warning - lib\dart_web3_compat.dart:627:21 - Unnecessary cast. Try removing the cast. - unnecessary_cast
+[dart_web3_compat]: warning - test\compat_test.dart:56:13 - The value of the local variable 'compressedKey' isn't used. Try removing the variable or using it. - unused_local_variable
+
+--- UNNECESSARY LIBRARY NAMES ---
