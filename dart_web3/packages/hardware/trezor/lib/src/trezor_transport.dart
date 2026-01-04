@@ -269,25 +269,22 @@ class MockTrezorTransport implements TrezorTransport {
   }
 }
 
-/// Transport factory for creating appropriate transport
-class TrezorTransportFactory {
-  /// Create WebUSB transport
-  static TrezorTransport createWebUSB() {
-    return TrezorWebUSBTransport();
-  }
+/// Create WebUSB transport
+TrezorTransport createWebUSBTransport() {
+  return TrezorWebUSBTransport();
+}
+
+/// Create mock transport for testing
+MockTrezorTransport createMockTrezorTransport() {
+  return MockTrezorTransport();
+}
+
+/// Get available transport types for current platform
+List<String> getAvailableTrezorTransports() {
+  final available = <String>[];
   
-  /// Create mock transport for testing
-  static MockTrezorTransport createMock() {
-    return MockTrezorTransport();
-  }
+  // In a real implementation, check platform capabilities
+  // For now, return empty list since pure Dart doesn't support WebUSB
   
-  /// Get available transport types for current platform
-  static List<String> getAvailableTransports() {
-    final available = <String>[];
-    
-    // In a real implementation, check platform capabilities
-    // For now, return empty list since pure Dart doesn't support WebUSB
-    
-    return available;
-  }
+  return available;
 }

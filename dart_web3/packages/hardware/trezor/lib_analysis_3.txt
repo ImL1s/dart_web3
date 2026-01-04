@@ -1,0 +1,6 @@
+Analyzing ....
+
+  error - lib\src\multi_chain_support.dart:271:24 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+   info - lib\src\trezor_types.dart:113:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+
+2 issues found.

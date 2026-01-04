@@ -27,13 +27,14 @@ class TrezorSigner implements HardwareWalletSigner {
   
   @override
   EthereumAddress get address {
-    if (_account == null) {
+    final acc = _account;
+    if (acc == null) {
       throw TrezorException(
         TrezorErrorType.deviceNotFound,
         'Account not loaded',
       );
     }
-    return EthereumAddress.fromHex(_account!.address);
+    return EthereumAddress.fromHex(acc.address);
   }
   
   @override
@@ -237,7 +238,7 @@ class TrezorSigner implements HardwareWalletSigner {
     
     while (temp > BigInt.zero) {
       bytes.insert(0, (temp & BigInt.from(0xFF)).toInt());
-      temp = temp >> 8;
+      temp >>= 8;
     }
     
     return Uint8List.fromList(bytes);

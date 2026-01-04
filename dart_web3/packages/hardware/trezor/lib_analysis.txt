@@ -1,0 +1,8 @@
+Analyzing ....
+
+   info - lib\src\multi_chain_support.dart:285:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\protobuf_messages.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\trezor_transport.dart:272:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\trezor_types.dart:138:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+
+4 issues found.

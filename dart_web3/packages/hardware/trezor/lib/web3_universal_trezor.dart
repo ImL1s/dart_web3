@@ -2,7 +2,7 @@
 /// 
 /// This library provides integration with Trezor hardware wallets
 /// using WebUSB communication protocol.
-library web3_universal_trezor;
+library;
 
 export 'src/multi_chain_support.dart';
 export 'src/protobuf_messages.dart';
