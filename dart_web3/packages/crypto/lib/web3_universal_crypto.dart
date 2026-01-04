@@ -22,6 +22,8 @@ export 'src/bip39.dart';
 export 'src/curves.dart';
 // Ed25519 (Solana, Polkadot)
 export 'src/ed25519.dart';
+// SLIP-0010 Ed25519 HD Wallet (Solana, TON)
+export 'src/ed25519_hd_wallet.dart';
 export 'src/hd_wallet.dart';
 // Message authentication
 export 'src/hmac.dart';

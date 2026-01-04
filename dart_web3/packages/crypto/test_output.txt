@@ -1,0 +1,166 @@
+00:00 +0: loading test/ed25519_hd_wallet_test.dart
+00:00 +0: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Master key (m)
+00:00 +0 -1: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Master key (m) [E]
+  Expected: '90046a93de5380a72b5e45010748567d5ea02bbf6522f979e05c0d8d8ca9fffb'
+    Actual: '0x90046a93de5380a72b5e45010748567d5ea02bbf6522f979e05c0d8d8ca9fffb'
+     Which: is different.
+            Expected: 90046a93de ...
+              Actual: 0x90046a93 ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                        expect
+  test\ed25519_hd_wallet_test.dart 17:7  main.<fn>.<fn>
+  
+00:00 +0 -1: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'
+00:00 +0 -2: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0' [E]
+  Expected: '8b59aa11380b624e81507a27fedda59fea6d0b779a778918a2fd3590e16e9c69'
+    Actual: '0x8b59aa11380b624e81507a27fedda59fea6d0b779a778918a2fd3590e16e9c69'
+     Which: is different.
+            Expected: 8b59aa1138 ...
+              Actual: 0x8b59aa11 ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                        expect
+  test\ed25519_hd_wallet_test.dart 37:7  main.<fn>.<fn>
+  
+00:00 +0 -2: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'
+00:00 +0 -3: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1' [E]
+  Expected: 'a320425f77d1b5c2505a6b1b27382b37368ee640e3557c315416801243552f14'
+    Actual: '0xa320425f77d1b5c2505a6b1b27382b37368ee640e3557c315416801243552f14'
+     Which: is different.
+            Expected: a320425f77 ...
+              Actual: 0xa320425f ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                        expect
+  test\ed25519_hd_wallet_test.dart 56:7  main.<fn>.<fn>
+  
+00:00 +0 -3: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'/2'
+00:00 +0 -4: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'/2' [E]
+  Expected: '2e69929e00b5ab250f49c3fb1c12f252de4fed2c1db88387094a0f8c4c9ccd6c'
+    Actual: '0x2e69929e00b5ab250f49c3fb1c12f252de4fed2c1db88387094a0f8c4c9ccd6c'
+     Which: is different.
+            Expected: 2e69929e00 ...
+              Actual: 0x2e69929e ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                        expect
+  test\ed25519_hd_wallet_test.dart 74:7  main.<fn>.<fn>
+  
+00:00 +0 -4: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'/2'/2'
+00:00 +0 -5: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'/2'/2' [E]
+  Expected: '8f6d87f93d750e0efccda017d662a1b31a266e4a6f5993b15f5c1f07f74dd5cc'
+    Actual: '0x8f6d87f93d750e0efccda017d662a1b31a266e4a6f5993b15f5c1f07f74dd5cc'
+     Which: is different.
+            Expected: 8f6d87f93d ...
+              Actual: 0x8f6d87f9 ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                        expect
+  test\ed25519_hd_wallet_test.dart 92:7  main.<fn>.<fn>
+  
+00:00 +0 -5: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'/2'/2'/1000000000'
+00:00 +0 -6: SLIP-0010 Ed25519 HD Wallet - Test Vector 1 Chain m/0'/1'/2'/2'/1000000000' [E]
+  Expected: '68789923a0cac2cd5a29172a475fe9e0fb14cd6adb5ad98a3fa70333e7afa230'
+    Actual: '0x68789923a0cac2cd5a29172a475fe9e0fb14cd6adb5ad98a3fa70333e7afa230'
+     Which: is different.
+            Expected: 68789923a0 ...
+              Actual: 0x68789923 ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 111:7  main.<fn>.<fn>
+  
+00:00 +0 -6: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Master key (m)
+00:00 +0 -7: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Master key (m) [E]
+  Expected: 'ef70a74db9c3a5af931b5fe73ed8e1a53464133654fd55e7a66f8570b8e33c3b'
+    Actual: '0xef70a74db9c3a5af931b5fe73ed8e1a53464133654fd55e7a66f8570b8e33c3b'
+     Which: is different.
+            Expected: ef70a74db9 ...
+              Actual: 0xef70a74d ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 136:7  main.<fn>.<fn>
+  
+00:00 +0 -7: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'
+00:00 +0 -8: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0' [E]
+  Expected: '0b78a3226f915c082bf118f83618a618ab6dec793752624cbeb622acb562862d'
+    Actual: '0x0b78a3226f915c082bf118f83618a618ab6dec793752624cbeb622acb562862d'
+     Which: is different.
+            Expected: 0b78a3226f9 ...
+              Actual: 0x0b78a3226 ...
+                       ^
+             Differ at offset 1
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 153:7  main.<fn>.<fn>
+  
+00:00 +0 -8: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'
+00:00 +0 -9: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647' [E]
+  Expected: '138f0b2551bcafeca6ff2aa88ba8ed0ed8de070841f0c4ef0165df8181eaad7f'
+    Actual: '0x138f0b2551bcafeca6ff2aa88ba8ed0ed8de070841f0c4ef0165df8181eaad7f'
+     Which: is different.
+            Expected: 138f0b2551 ...
+              Actual: 0x138f0b25 ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 170:7  main.<fn>.<fn>
+  
+00:00 +0 -9: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'/1'
+00:00 +0 -10: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'/1' [E]
+  Expected: '73bd9fff1cfbde33a1b846c27085f711c0fe2d66fd32e139d3ebc28e5a4a6b90'
+    Actual: '0x73bd9fff1cfbde33a1b846c27085f711c0fe2d66fd32e139d3ebc28e5a4a6b90'
+     Which: is different.
+            Expected: 73bd9fff1c ...
+              Actual: 0x73bd9fff ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 188:7  main.<fn>.<fn>
+  
+00:00 +0 -10: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'/1'/2147483646'
+00:00 +0 -11: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'/1'/2147483646' [E]
+  Expected: '0902fe8a29f9140480a00ef244bd183e8a13288e4412d8389d140aac1794825a'
+    Actual: '0x0902fe8a29f9140480a00ef244bd183e8a13288e4412d8389d140aac1794825a'
+     Which: is different.
+            Expected: 0902fe8a29f ...
+              Actual: 0x0902fe8a2 ...
+                       ^
+             Differ at offset 1
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 206:7  main.<fn>.<fn>
+  
+00:00 +0 -11: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'/1'/2147483646'/2'
+00:00 +0 -12: SLIP-0010 Ed25519 HD Wallet - Test Vector 2 Chain m/0'/2147483647'/1'/2147483646'/2' [E]
+  Expected: '5d70af781f3a37b829f0d060924d5e960bdc02e85423494afc0b1a41bbe196d4'
+    Actual: '0x5d70af781f3a37b829f0d060924d5e960bdc02e85423494afc0b1a41bbe196d4'
+     Which: is different.
+            Expected: 5d70af781f ...
+              Actual: 0x5d70af78 ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                         expect
+  test\ed25519_hd_wallet_test.dart 224:7  main.<fn>.<fn>
+  
+00:00 +0 -12: Ed25519 HD Wallet - Error Cases Non-hardened derivation throws
+00:00 +1 -12: Ed25519 HD Wallet - Error Cases Mixed hardened/non-hardened throws
+00:00 +2 -12: Ed25519 HD Wallet - Error Cases Invalid seed length throws
+00:00 +3 -12: Ed25519 HD Wallet - Blockchain Paths Solana path derivation
+00:00 +4 -12: Ed25519 HD Wallet - Blockchain Paths TON path derivation
+00:00 +5 -12: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

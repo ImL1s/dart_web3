@@ -177,6 +177,14 @@ class Ed25519 implements CurveInterface {
     return _pointToBytes(A);
   }
 
+  /// Derives the Ed25519 public key from a 32-byte private key.
+  ///
+  /// This is a static method for use by SLIP-0010 HD wallet derivation.
+  /// Returns a 32-byte Ed25519 public key.
+  static Uint8List derivePublicKey(Uint8List privateKey) {
+    return _getPublicKey(privateKey);
+  }
+
   @override
   Uint8List getPublicKey(Uint8List privateKey) {
     return _getPublicKey(privateKey);
