@@ -9,7 +9,6 @@ void main() {
       bundlerClient = BundlerClient(
         bundlerUrl: 'https://api.stackup.sh/v1/node/test-bundler-key',
       );
-
     });
 
     tearDown(() {
@@ -17,12 +16,14 @@ void main() {
     });
 
     test('should create BundlerClient with correct URL', () {
-      expect(bundlerClient.bundlerUrl, equals('https://api.stackup.sh/v1/node/test-bundler-key'));
+      expect(bundlerClient.bundlerUrl,
+          equals('https://api.stackup.sh/v1/node/test-bundler-key'));
     });
 
     test('should have default EntryPoint address', () {
       final entryPointAddress = bundlerClient.getEntryPointAddress();
-      expect(entryPointAddress, equals('0x0000000071727De22E5E9d8BAf0edAc6f37da032'));
+      expect(entryPointAddress,
+          equals('0x0000000071727De22E5E9d8BAf0edAc6f37da032'));
     });
 
     // Note: The following tests would require a mock RPC provider
@@ -32,10 +33,12 @@ void main() {
     group('UserOperationByHashResult', () {
       test('should create from JSON correctly', () {
         final json = {
-          'blockHash': '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
+          'blockHash':
+              '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
           'blockNumber': '0x123456',
           'entryPoint': '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-          'transactionHash': '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+          'transactionHash':
+              '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
           'userOperation': {
             'sender': '0x1234567890123456789012345678901234567890',
             'nonce': '0x1',
@@ -51,12 +54,20 @@ void main() {
 
         final result = UserOperationByHashResult.fromJson(json);
 
-        expect(result.blockHash, equals('0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'));
+        expect(
+            result.blockHash,
+            equals(
+                '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'));
         expect(result.blockNumber, equals(BigInt.parse('0x123456')));
-        expect(result.entryPoint, equals('0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'));
-        expect(result.transactionHash, equals('0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'));
+        expect(result.entryPoint,
+            equals('0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'));
+        expect(
+            result.transactionHash,
+            equals(
+                '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'));
         expect(result.userOperation, isA<UserOperation>());
-        expect(result.userOperation.sender, equals('0x1234567890123456789012345678901234567890'));
+        expect(result.userOperation.sender,
+            equals('0x1234567890123456789012345678901234567890'));
       });
 
       test('should serialize to JSON correctly', () {
@@ -73,19 +84,28 @@ void main() {
         );
 
         final result = UserOperationByHashResult(
-          blockHash: '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
+          blockHash:
+              '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
           blockNumber: BigInt.parse('0x123456'),
           entryPoint: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-          transactionHash: '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+          transactionHash:
+              '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
           userOperation: userOp,
         );
 
         final json = result.toJson();
 
-        expect(json['blockHash'], equals('0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'));
+        expect(
+            json['blockHash'],
+            equals(
+                '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'));
         expect(json['blockNumber'], equals('0x123456'));
-        expect(json['entryPoint'], equals('0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'));
-        expect(json['transactionHash'], equals('0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'));
+        expect(json['entryPoint'],
+            equals('0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'));
+        expect(
+            json['transactionHash'],
+            equals(
+                '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'));
         expect(json['userOperation'], isA<Map<String, dynamic>>());
       });
     });
@@ -166,14 +186,19 @@ void main() {
         expect(BundlerErrorCode.timeRangeValidationFailed.code, equals(-32503));
         expect(BundlerErrorCode.paymasterValidationFailed.code, equals(-32504));
         expect(BundlerErrorCode.paymasterDepositTooLow.code, equals(-32505));
-        expect(BundlerErrorCode.unsupportedSignatureAggregator.code, equals(-32506));
-        expect(BundlerErrorCode.invalidSignatureAggregator.code, equals(-32507));
+        expect(BundlerErrorCode.unsupportedSignatureAggregator.code,
+            equals(-32506));
+        expect(
+            BundlerErrorCode.invalidSignatureAggregator.code, equals(-32507));
       });
 
       test('should have correct names', () {
-        expect(BundlerErrorCode.validationFailed.name, equals('validationFailed'));
-        expect(BundlerErrorCode.simulationFailed.name, equals('simulationFailed'));
-        expect(BundlerErrorCode.paymasterRejected.name, equals('paymasterRejected'));
+        expect(
+            BundlerErrorCode.validationFailed.name, equals('validationFailed'));
+        expect(
+            BundlerErrorCode.simulationFailed.name, equals('simulationFailed'));
+        expect(BundlerErrorCode.paymasterRejected.name,
+            equals('paymasterRejected'));
       });
     });
   });

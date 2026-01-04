@@ -14,6 +14,7 @@ void main() async {
   print('vitalik.eth: $address');
 
   // Reverse resolve address to name
-  final name = await ens.resolveAddress('0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045');
+  final name =
+      await ens.resolveAddress('0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045');
   print('Name for 0xd8da...: $name');
 }

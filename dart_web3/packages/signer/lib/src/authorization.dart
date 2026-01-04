@@ -4,7 +4,6 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// EIP-7702 authorization for EOA code delegation.
 class Authorization {
-
   Authorization({
     required this.chainId,
     required this.address,
@@ -12,9 +11,9 @@ class Authorization {
     int? yParity,
     BigInt? r,
     BigInt? s,
-  }) : yParity = yParity ?? 0,
-       r = r ?? BigInt.zero,
-       s = s ?? BigInt.zero;
+  })  : yParity = yParity ?? 0,
+        r = r ?? BigInt.zero,
+        s = s ?? BigInt.zero;
 
   /// Creates an unsigned authorization.
   factory Authorization.unsigned({
@@ -68,6 +67,7 @@ class Authorization {
       s: rlpList[5] as BigInt,
     );
   }
+
   /// The chain ID.
   final int chainId;
 
@@ -121,17 +121,19 @@ class Authorization {
   bool get isRevocation => address == '0x${'0' * 40}';
 
   /// Gets the message hash for signing this authorization.
-  /// 
+  ///
   /// According to EIP-7702, the message to sign is:
   /// keccak256(MAGIC || chainId || address || nonce)
   /// where MAGIC = 0x05
   Uint8List getMessageHash() {
     final magic = Uint8List.fromList([0x05]);
-    final chainIdBytes = BytesUtils.bigIntToBytes(BigInt.from(chainId), length: 32);
+    final chainIdBytes =
+        BytesUtils.bigIntToBytes(BigInt.from(chainId), length: 32);
     final addressBytes = HexUtils.decode(address);
     final nonceBytes = BytesUtils.bigIntToBytes(nonce, length: 32);
 
-    final message = BytesUtils.concat([magic, chainIdBytes, addressBytes, nonceBytes]);
+    final message =
+        BytesUtils.concat([magic, chainIdBytes, addressBytes, nonceBytes]);
     return Keccak256.hash(message);
   }
 
@@ -157,19 +159,22 @@ class Authorization {
 
     try {
       final messageHash = getMessageHash();
-      
+
       // Reconstruct signature
       final rBytes = BytesUtils.bigIntToBytes(r, length: 32);
       final sBytes = BytesUtils.bigIntToBytes(s, length: 32);
       final signature = BytesUtils.concat([rBytes, sBytes]);
 
       // Recover public key using the yParity as recovery parameter
-      final recoveredPublicKey = Secp256k1.recover(signature, messageHash, yParity);
-      
+      final recoveredPublicKey =
+          Secp256k1.recover(signature, messageHash, yParity);
+
       // Derive address from public key
-      final recoveredAddress = EthereumAddress.fromPublicKey(recoveredPublicKey, Keccak256.hash);
-      
-      return recoveredAddress.toString().toLowerCase() == expectedSigner.toLowerCase();
+      final recoveredAddress =
+          EthereumAddress.fromPublicKey(recoveredPublicKey, Keccak256.hash);
+
+      return recoveredAddress.toString().toLowerCase() ==
+          expectedSigner.toLowerCase();
     } on Exception catch (_) {
       return false;
     }

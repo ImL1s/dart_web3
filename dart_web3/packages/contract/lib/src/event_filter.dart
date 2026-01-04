@@ -2,7 +2,6 @@ import 'package:web3_universal_abi/web3_universal_abi.dart';
 
 /// Event filter for contract event subscriptions.
 class EventFilter {
-
   EventFilter({
     this.address,
     this.topics,
@@ -10,6 +9,7 @@ class EventFilter {
     this.toBlock,
     this.event,
   });
+
   /// The contract address to filter by.
   final String? address;
 

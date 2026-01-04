@@ -10,7 +10,6 @@ import 'transaction.dart';
 
 /// Signer implementation using a private key.
 class PrivateKeySigner implements Signer {
-
   PrivateKeySigner(this.privateKey, this.chainId) {
     if (privateKey.length != 32) {
       throw ArgumentError('Private key must be 32 bytes');
@@ -47,18 +46,18 @@ class PrivateKeySigner implements Signer {
     // HDWallet has fromSeed.
     // Let's use Bip39 for simplicity/standardness or EthPrivateKey logic if I can find it.
     // web3dart used Random.secure.
-    
+
     // I will use HDWallet.fromSeed(Bip39.toSeed(Bip39.generate())) to get a valid key?
     // Or just random bytes.
     // PrivateKeySigner constructor checks length 32.
     // I need secure random.
     // I will import dart:math.
     // I need to add import 'dart:math'; to the file.
-    
+
     // Waiting, verify imports first from previous view_file.
     // File imports: dart:typed_data, abi, core, crypto, authorization, signer, transaction.
     // No dart:math.
-    
+
     return PrivateKeySigner(Secp256k1.generatePrivateKey(), chainId);
   }
 
@@ -95,7 +94,8 @@ class PrivateKeySigner implements Signer {
   Future<Uint8List> signMessage(String message) async {
     // EIP-191 personal message
     final prefix = '\x19Ethereum Signed Message:\n${message.length}';
-    final prefixedMessage = Uint8List.fromList([...prefix.codeUnits, ...message.codeUnits]);
+    final prefixedMessage =
+        Uint8List.fromList([...prefix.codeUnits, ...message.codeUnits]);
     final hash = Keccak256.hash(prefixedMessage);
 
     return Secp256k1.sign(hash, privateKey);
@@ -122,11 +122,15 @@ class PrivateKeySigner implements Signer {
     // EIP-7702 authorization signing
     // MAGIC || chainId || address || nonce
     final magic = Uint8List.fromList([0x05]);
-    final chainIdBytes = BytesUtils.bigIntToBytes(BigInt.from(authorization.chainId), length: 32);
+    final chainIdBytes = BytesUtils.bigIntToBytes(
+        BigInt.from(authorization.chainId),
+        length: 32);
     final addressBytes = HexUtils.decode(authorization.address);
-    final nonceBytes = BytesUtils.bigIntToBytes(authorization.nonce, length: 32);
+    final nonceBytes =
+        BytesUtils.bigIntToBytes(authorization.nonce, length: 32);
 
-    final message = BytesUtils.concat([magic, chainIdBytes, addressBytes, nonceBytes]);
+    final message =
+        BytesUtils.concat([magic, chainIdBytes, addressBytes, nonceBytes]);
     final hash = Keccak256.hash(message);
 
     return Secp256k1.sign(hash, privateKey);
@@ -189,7 +193,10 @@ class PrivateKeySigner implements Signer {
       accessList,
     ];
 
-    final encoded = BytesUtils.concat([Uint8List.fromList([0x01]), RLP.encode(toSign)]);
+    final encoded = BytesUtils.concat([
+      Uint8List.fromList([0x01]),
+      RLP.encode(toSign)
+    ]);
     final hash = Keccak256.hash(encoded);
     final signature = Secp256k1.sign(hash, privateKey);
 
@@ -211,7 +218,10 @@ class PrivateKeySigner implements Signer {
       BytesUtils.bytesToBigInt(s),
     ];
 
-    return BytesUtils.concat([Uint8List.fromList([0x01]), RLP.encode(signed)]);
+    return BytesUtils.concat([
+      Uint8List.fromList([0x01]),
+      RLP.encode(signed)
+    ]);
   }
 
   Uint8List _signEip1559Transaction(TransactionRequest tx) {
@@ -230,7 +240,10 @@ class PrivateKeySigner implements Signer {
       accessList,
     ];
 
-    final encoded = BytesUtils.concat([Uint8List.fromList([0x02]), RLP.encode(toSign)]);
+    final encoded = BytesUtils.concat([
+      Uint8List.fromList([0x02]),
+      RLP.encode(toSign)
+    ]);
     final hash = Keccak256.hash(encoded);
     final signature = Secp256k1.sign(hash, privateKey);
 
@@ -253,13 +266,17 @@ class PrivateKeySigner implements Signer {
       BytesUtils.bytesToBigInt(s),
     ];
 
-    return BytesUtils.concat([Uint8List.fromList([0x02]), RLP.encode(signed)]);
+    return BytesUtils.concat([
+      Uint8List.fromList([0x02]),
+      RLP.encode(signed)
+    ]);
   }
 
   Uint8List _signEip4844Transaction(TransactionRequest tx) {
     // Type 3 transaction (blob)
     final accessList = _encodeAccessList(tx.accessList ?? []);
-    final blobHashes = tx.blobVersionedHashes?.map(HexUtils.decode).toList() ?? [];
+    final blobHashes =
+        tx.blobVersionedHashes?.map(HexUtils.decode).toList() ?? [];
 
     final toSign = [
       tx.chainId ?? chainId,
@@ -275,7 +292,10 @@ class PrivateKeySigner implements Signer {
       blobHashes,
     ];
 
-    final encoded = BytesUtils.concat([Uint8List.fromList([0x03]), RLP.encode(toSign)]);
+    final encoded = BytesUtils.concat([
+      Uint8List.fromList([0x03]),
+      RLP.encode(toSign)
+    ]);
     final hash = Keccak256.hash(encoded);
     final signature = Secp256k1.sign(hash, privateKey);
 
@@ -300,7 +320,10 @@ class PrivateKeySigner implements Signer {
       BytesUtils.bytesToBigInt(s),
     ];
 
-    return BytesUtils.concat([Uint8List.fromList([0x03]), RLP.encode(signed)]);
+    return BytesUtils.concat([
+      Uint8List.fromList([0x03]),
+      RLP.encode(signed)
+    ]);
   }
 
   Uint8List _signEip7702Transaction(TransactionRequest tx) {
@@ -321,7 +344,10 @@ class PrivateKeySigner implements Signer {
       authList,
     ];
 
-    final encoded = BytesUtils.concat([Uint8List.fromList([0x04]), RLP.encode(toSign)]);
+    final encoded = BytesUtils.concat([
+      Uint8List.fromList([0x04]),
+      RLP.encode(toSign)
+    ]);
     final hash = Keccak256.hash(encoded);
     final signature = Secp256k1.sign(hash, privateKey);
 
@@ -345,7 +371,10 @@ class PrivateKeySigner implements Signer {
       BytesUtils.bytesToBigInt(s),
     ];
 
-    return BytesUtils.concat([Uint8List.fromList([0x04]), RLP.encode(signed)]);
+    return BytesUtils.concat([
+      Uint8List.fromList([0x04]),
+      RLP.encode(signed)
+    ]);
   }
 
   List<dynamic> _encodeAccessList(List<AccessListEntry> accessList) {

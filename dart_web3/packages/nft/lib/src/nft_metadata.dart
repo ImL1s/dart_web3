@@ -8,7 +8,6 @@ import 'nft_types.dart';
 
 /// NFT metadata parser and resolver
 class NftMetadataParser {
-
   NftMetadataParser({
     IpfsGateway? ipfsGateway,
     Duration timeout = const Duration(seconds: 15),
@@ -102,9 +101,9 @@ class NftMetadataParser {
 
   /// Check if URI is an IPFS URI
   bool _isIpfsUri(String uri) {
-    return uri.startsWith('ipfs://') || 
-           uri.startsWith('Qm') || 
-           uri.startsWith('baf');
+    return uri.startsWith('ipfs://') ||
+        uri.startsWith('Qm') ||
+        uri.startsWith('baf');
   }
 
   /// Check if URI is an HTTP URI
@@ -158,9 +157,9 @@ class NftMetadataParser {
   /// Validate metadata structure
   bool validateMetadata(Map<String, dynamic> metadata) {
     // Basic validation - should have at least name or image
-    return metadata.containsKey('name') || 
-           metadata.containsKey('image') ||
-           metadata.containsKey('description');
+    return metadata.containsKey('name') ||
+        metadata.containsKey('image') ||
+        metadata.containsKey('description');
   }
 
   /// Extract metadata from contract response

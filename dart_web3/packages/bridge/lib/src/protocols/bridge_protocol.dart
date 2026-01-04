@@ -19,7 +19,8 @@ abstract class BridgeProtocol {
   Future<BridgeQuote?> getQuote(BridgeParams params);
 
   /// Get supported tokens for a chain pair
-  Future<List<BridgeToken>> getSupportedTokens(int sourceChainId, int destinationChainId);
+  Future<List<BridgeToken>> getSupportedTokens(
+      int sourceChainId, int destinationChainId);
 
   /// Check if a token pair is supported for bridging
   Future<bool> isTokenPairSupported(
@@ -54,7 +55,7 @@ abstract class BridgeProtocol {
     if (!supportsChainPair(params.sourceChainId, params.destinationChainId)) {
       return false;
     }
-    
+
     return true;
   }
 
@@ -67,7 +68,6 @@ abstract class BridgeProtocol {
 
 /// Exception thrown when bridge operations fail
 class BridgeException implements Exception {
-
   const BridgeException({
     required this.protocol,
     required this.message,
@@ -88,7 +88,6 @@ class BridgeException implements Exception {
 
 /// Bridge protocol configuration
 class BridgeProtocolConfig {
-
   const BridgeProtocolConfig({
     this.apiKey,
     this.baseUrl,
@@ -105,7 +104,6 @@ class BridgeProtocolConfig {
 
 /// Bridge protocol capabilities
 class BridgeCapabilities {
-
   const BridgeCapabilities({
     required this.supportsNativeTokens,
     required this.supportsERC20Tokens,
@@ -125,7 +123,8 @@ class BridgeCapabilities {
 }
 
 /// Bridge security information
-class BridgeSecurity { // 0.0 (lowest risk) to 1.0 (highest risk)
+class BridgeSecurity {
+  // 0.0 (lowest risk) to 1.0 (highest risk)
 
   const BridgeSecurity({
     required this.securityModel,
@@ -145,7 +144,6 @@ class BridgeSecurity { // 0.0 (lowest risk) to 1.0 (highest risk)
 
 /// Bridge protocol metadata
 class BridgeProtocolMetadata {
-
   const BridgeProtocolMetadata({
     required this.name,
     required this.description,

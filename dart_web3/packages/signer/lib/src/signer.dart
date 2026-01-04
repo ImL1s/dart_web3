@@ -75,8 +75,8 @@ abstract class MpcSigner implements Signer {
 
 /// Represents an MPC signing session.
 class SigningSession {
-
   SigningSession({required this.sessionId, required this.requiredParties});
+
   /// The session ID.
   final String sessionId;
 

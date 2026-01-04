@@ -7,12 +7,12 @@ import 'transport.dart';
 
 /// WebSocket transport for JSON-RPC communication with subscription support.
 class WebSocketTransport implements Transport {
-
   WebSocketTransport(
     this.url, {
     this.reconnectDelay = const Duration(seconds: 5),
     this.maxReconnectAttempts = 3,
   });
+
   /// The WebSocket endpoint URL.
   final String url;
 
@@ -64,7 +64,8 @@ class WebSocketTransport implements Transport {
       final completer = _pendingRequests.remove(id);
       if (completer != null) {
         if (data.containsKey('error')) {
-          completer.completeError(RpcError.fromJson(data['error'] as Map<String, dynamic>));
+          completer.completeError(
+              RpcError.fromJson(data['error'] as Map<String, dynamic>));
         } else {
           completer.complete(data);
         }
@@ -91,7 +92,8 @@ class WebSocketTransport implements Transport {
   }
 
   @override
-  Future<Map<String, dynamic>> request(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>> request(
+      String method, List<dynamic> params) async {
     if (_channel == null) {
       await connect();
     }
@@ -113,7 +115,8 @@ class WebSocketTransport implements Transport {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> batchRequest(List<RpcRequest> requests) async {
+  Future<List<Map<String, dynamic>>> batchRequest(
+      List<RpcRequest> requests) async {
     // WebSocket doesn't typically support batch requests
     // Execute sequentially
     final results = <Map<String, dynamic>>[];
@@ -124,7 +127,8 @@ class WebSocketTransport implements Transport {
   }
 
   /// Subscribes to a topic and returns a stream of notifications.
-  Stream<Map<String, dynamic>> subscribe(String method, List<dynamic> params) async* {
+  Stream<Map<String, dynamic>> subscribe(
+      String method, List<dynamic> params) async* {
     final response = await request(method, params);
     final subscriptionId = response['result'] as String;
 

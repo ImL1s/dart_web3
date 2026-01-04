@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 /// Generates pairing URIs for WalletConnect v2 protocol.
 @immutable
 class PairingUri {
-
   PairingUri({
     required this.topic,
     required this.symKey,
@@ -21,16 +20,18 @@ class PairingUri {
     Duration? expiry,
   }) {
     final random = Random.secure();
-    
+
     // Generate random topic (32 bytes hex)
     final topicBytes = List.generate(32, (_) => random.nextInt(256));
-    final topic = topicBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-    
+    final topic =
+        topicBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+
     // Generate random symmetric key (32 bytes hex)
     final symKeyBytes = List.generate(32, (_) => random.nextInt(256));
-    final symKey = symKeyBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-    
-    final expiryTimestamp = expiry != null 
+    final symKey =
+        symKeyBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+
+    final expiryTimestamp = expiry != null
         ? DateTime.now().add(expiry).millisecondsSinceEpoch ~/ 1000
         : null;
 
@@ -55,7 +56,7 @@ class PairingUri {
 
     final topic = parts[0];
     final paramsPart = parts[1];
-    
+
     final queryIndex = paramsPart.indexOf('?');
     if (queryIndex == -1) {
       throw ArgumentError('Invalid WalletConnect URI: missing parameters');
@@ -73,7 +74,8 @@ class PairingUri {
     final symKey = params['symKey'];
 
     if (relay == null || symKey == null) {
-      throw ArgumentError('Missing required parameters: relay-protocol or symKey');
+      throw ArgumentError(
+          'Missing required parameters: relay-protocol or symKey');
     }
 
     final expiryStr = params['expiryTimestamp'];
@@ -103,7 +105,8 @@ class PairingUri {
     }
 
     final queryString = params.entries
-        .map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .map((e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
 
     return 'wc:$topic@2?$queryString';

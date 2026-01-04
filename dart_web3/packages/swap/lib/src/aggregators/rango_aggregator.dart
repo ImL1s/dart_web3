@@ -8,7 +8,6 @@ import 'aggregator_interface.dart';
 
 /// Rango Exchange cross-chain DEX aggregator implementation
 class RangoAggregator extends DexAggregator {
-
   RangoAggregator({
     required this.config,
     http.Client? httpClient,
@@ -21,18 +20,18 @@ class RangoAggregator extends DexAggregator {
 
   @override
   List<int> get supportedChains => [
-    1,     // Ethereum
-    56,    // BSC
-    137,   // Polygon
-    42161, // Arbitrum
-    10,    // Optimism
-    43114, // Avalanche
-    250,   // Fantom
-    25,    // Cronos
-    1285,  // Moonriver
-    1284,  // Moonbeam
-    // Rango supports many more chains including non-EVM
-  ];
+        1, // Ethereum
+        56, // BSC
+        137, // Polygon
+        42161, // Arbitrum
+        10, // Optimism
+        43114, // Avalanche
+        250, // Fantom
+        25, // Cronos
+        1285, // Moonriver
+        1284, // Moonbeam
+        // Rango supports many more chains including non-EVM
+      ];
 
   @override
   bool get supportsCrossChain => true; // Rango's main feature
@@ -40,10 +39,10 @@ class RangoAggregator extends DexAggregator {
   String get _baseUrl => config.baseUrl ?? 'https://api.rango.exchange';
 
   Map<String, String> get _headers => {
-    'Content-Type': 'application/json',
-    if (config.apiKey != null) 'API-KEY': config.apiKey!,
-    ...config.headers,
-  };
+        'Content-Type': 'application/json',
+        if (config.apiKey != null) 'API-KEY': config.apiKey!,
+        ...config.headers,
+      };
 
   @override
   Future<SwapQuote?> getQuote(SwapParams params) async {
@@ -76,7 +75,7 @@ class RangoAggregator extends DexAggregator {
     List<double> slippages = const [0.001, 0.005, 0.01, 0.03],
   }) async {
     final quotes = <SwapQuote>[];
-    
+
     for (final slippage in slippages) {
       try {
         final quote = await getQuote(params.copyWith(slippage: slippage));
@@ -88,28 +87,33 @@ class RangoAggregator extends DexAggregator {
         continue;
       }
     }
-    
+
     return quotes;
   }
 
   @override
-  Future<bool> isTokenPairSupported(SwapToken fromToken, SwapToken toToken) async {
-    if (!supportedChains.contains(fromToken.chainId) || 
+  Future<bool> isTokenPairSupported(
+      SwapToken fromToken, SwapToken toToken) async {
+    if (!supportedChains.contains(fromToken.chainId) ||
         !supportedChains.contains(toToken.chainId)) {
       return false;
     }
-    
+
     try {
       final tokens = await getSupportedTokens(fromToken.chainId);
-      final fromSupported = tokens.any((t) => t.address.toLowerCase() == fromToken.address.toLowerCase());
-      
+      final fromSupported = tokens.any(
+          (t) => t.address.toLowerCase() == fromToken.address.toLowerCase());
+
       if (fromToken.chainId == toToken.chainId) {
         // Same chain swap
-        return fromSupported && tokens.any((t) => t.address.toLowerCase() == toToken.address.toLowerCase());
+        return fromSupported &&
+            tokens.any((t) =>
+                t.address.toLowerCase() == toToken.address.toLowerCase());
       } else {
         // Cross-chain swap - check destination chain tokens
         final destTokens = await getSupportedTokens(toToken.chainId);
-        final toSupported = destTokens.any((t) => t.address.toLowerCase() == toToken.address.toLowerCase());
+        final toSupported = destTokens.any(
+            (t) => t.address.toLowerCase() == toToken.address.toLowerCase());
         return fromSupported && toSupported;
       }
     } on Exception catch (_) {
@@ -128,10 +132,12 @@ class RangoAggregator extends DexAggregator {
 
     try {
       final url = '$_baseUrl/basic/meta';
-      final response = await _httpClient.get(
-        Uri.parse(url),
-        headers: _headers,
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .get(
+            Uri.parse(url),
+            headers: _headers,
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw AggregatorException(
@@ -143,9 +149,10 @@ class RangoAggregator extends DexAggregator {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
       final tokens = data['tokens'] as List<dynamic>? ?? [];
-      
+
       return tokens
-          .where((token) => (token as Map<String, dynamic>)['chainId'] == chainId.toString())
+          .where((token) =>
+              (token as Map<String, dynamic>)['chainId'] == chainId.toString())
           .map((token) {
         final tokenData = token as Map<String, dynamic>;
         return SwapToken(
@@ -184,7 +191,7 @@ class RangoAggregator extends DexAggregator {
 
   Future<Map<String, dynamic>?> _getRoute(SwapParams params) async {
     final url = '$_baseUrl/basic/swap';
-    
+
     final body = {
       'from': {
         'blockchain': _getBlockchainName(params.fromToken.chainId),
@@ -203,11 +210,13 @@ class RangoAggregator extends DexAggregator {
       'disableEstimate': false,
     };
 
-    final response = await _httpClient.post(
-      Uri.parse(url),
-      headers: _headers,
-      body: json.encode(body),
-    ).timeout(config.timeout);
+    final response = await _httpClient
+        .post(
+          Uri.parse(url),
+          headers: _headers,
+          body: json.encode(body),
+        )
+        .timeout(config.timeout);
 
     if (response.statusCode != 200) {
       throw AggregatorException(
@@ -218,7 +227,7 @@ class RangoAggregator extends DexAggregator {
     }
 
     final data = json.decode(response.body) as Map<String, dynamic>;
-    
+
     if (data['error'] != null) {
       throw AggregatorException(
         aggregator: name,
@@ -232,11 +241,12 @@ class RangoAggregator extends DexAggregator {
   SwapQuote _buildSwapQuote(Map<String, dynamic> routeData, SwapParams params) {
     final route = routeData['route'] as Map<String, dynamic>? ?? {};
     final outputAmount = BigInt.parse(route['outputAmount'] as String? ?? '0');
-    final minimumOutputAmount = calculateMinimumOutput(outputAmount, params.slippage);
-    
+    final minimumOutputAmount =
+        calculateMinimumOutput(outputAmount, params.slippage);
+
     // Parse route information
     final swapRoute = _parseRoute(route, params);
-    
+
     // Parse transaction data
     final tx = routeData['tx'] as Map<String, dynamic>? ?? {};
     final transaction = SwapTransaction(
@@ -247,7 +257,8 @@ class RangoAggregator extends DexAggregator {
       gasPrice: BigInt.parse(tx['gasPrice'] as String? ?? '0'),
     );
 
-    final estimatedGas = BigInt.parse(route['estimatedGas'] as String? ?? '300000');
+    final estimatedGas =
+        BigInt.parse(route['estimatedGas'] as String? ?? '300000');
     final gasPrice = BigInt.parse(tx['gasPrice'] as String? ?? '0');
 
     // Check if this is cross-chain
@@ -274,7 +285,8 @@ class RangoAggregator extends DexAggregator {
       estimatedGas: estimatedGas,
       gasCost: estimatedGas * gasPrice,
       priceImpact: (route['priceImpact'] as num?)?.toDouble() ?? 0.0,
-      validUntil: const Duration(minutes: 15), // Rango quotes valid for ~15 minutes
+      validUntil:
+          const Duration(minutes: 15), // Rango quotes valid for ~15 minutes
       crossChainInfo: crossChainInfo,
       metadata: {
         'route': route,
@@ -287,21 +299,21 @@ class RangoAggregator extends DexAggregator {
     final path = <SwapToken>[params.fromToken];
     final exchanges = <String>[];
     final portions = <double>[];
-    
+
     final swaps = route['swaps'] as List<dynamic>? ?? [];
-    
+
     for (final swap in swaps) {
       if (swap is Map<String, dynamic>) {
         final swapperName = swap['swapperId'] as String? ?? 'Unknown';
         final swapperType = swap['swapperType'] as String? ?? '';
-        
+
         exchanges.add('$swapperName ($swapperType)');
         portions.add(1.0 / swaps.length); // Equal portions for simplicity
       }
     }
-    
+
     path.add(params.toToken);
-    
+
     return SwapRoute(
       path: path,
       exchanges: exchanges,
@@ -345,7 +357,7 @@ class RangoAggregator extends DexAggregator {
       hex = hex.substring(2);
     }
     if (hex.isEmpty) return Uint8List(0);
-    
+
     final bytes = <int>[];
     for (var i = 0; i < hex.length; i += 2) {
       final hexByte = hex.substring(i, i + 2);

@@ -10,13 +10,15 @@ enum TransactionType {
 
 /// Transaction history item
 class HistoryItem {
-
   const HistoryItem({
     required this.hash,
     required this.blockNumber,
     required this.timestamp,
     required this.from,
-    required this.value, required this.type, required this.rawTransaction, this.to,
+    required this.value,
+    required this.type,
+    required this.rawTransaction,
+    this.to,
     this.functionName,
   });
   final String hash;
@@ -35,7 +37,6 @@ class HistoryItem {
 
 /// Query parameters for fetching history
 class HistoryQueryParams {
-
   const HistoryQueryParams({
     required this.address,
     this.fromBlock,

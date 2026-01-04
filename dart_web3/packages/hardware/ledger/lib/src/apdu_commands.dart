@@ -5,7 +5,7 @@ import 'ledger_types.dart';
 class EthereumAPDU {
   // Class byte for Ethereum app
   static const int cla = 0xE0;
-  
+
   // Instruction codes
   static const int insGetConfiguration = 0x01;
   static const int insGetPublicKey = 0x02;
@@ -13,13 +13,13 @@ class EthereumAPDU {
   static const int insGetAppName = 0x06;
   static const int insSignPersonalMessage = 0x08;
   static const int insSignTypedData = 0x0C;
-  
+
   // Parameter values
   static const int p1Display = 0x00;
   static const int p1NoDisplay = 0x01;
   static const int p1FirstChunk = 0x00;
   static const int p1MoreChunks = 0x80;
-  
+
   /// Get Ethereum app configuration
   static APDUCommand getConfiguration() {
     return APDUCommand(
@@ -29,11 +29,12 @@ class EthereumAPDU {
       p2: 0x00,
     );
   }
-  
+
   /// Get public key for derivation path
-  static APDUCommand getPublicKey(String derivationPath, {bool display = false}) {
+  static APDUCommand getPublicKey(String derivationPath,
+      {bool display = false}) {
     final pathData = _encodeDerivationPath(derivationPath);
-    
+
     return APDUCommand(
       cla: cla,
       ins: insGetPublicKey,
@@ -42,12 +43,13 @@ class EthereumAPDU {
       data: pathData,
     );
   }
-  
+
   /// Sign transaction (first chunk)
-  static APDUCommand signTransactionFirst(String derivationPath, Uint8List transactionData) {
+  static APDUCommand signTransactionFirst(
+      String derivationPath, Uint8List transactionData) {
     final pathData = _encodeDerivationPath(derivationPath);
     final data = Uint8List.fromList([...pathData, ...transactionData]);
-    
+
     return APDUCommand(
       cla: cla,
       ins: insSignTransaction,
@@ -56,7 +58,7 @@ class EthereumAPDU {
       data: data,
     );
   }
-  
+
   /// Sign transaction (continuation chunk)
   static APDUCommand signTransactionContinue(Uint8List transactionData) {
     return APDUCommand(
@@ -67,13 +69,15 @@ class EthereumAPDU {
       data: transactionData,
     );
   }
-  
+
   /// Sign personal message
-  static APDUCommand signPersonalMessage(String derivationPath, Uint8List messageData) {
+  static APDUCommand signPersonalMessage(
+      String derivationPath, Uint8List messageData) {
     final pathData = _encodeDerivationPath(derivationPath);
     final messageLength = _encodeLength(messageData.length);
-    final data = Uint8List.fromList([...pathData, ...messageLength, ...messageData]);
-    
+    final data =
+        Uint8List.fromList([...pathData, ...messageLength, ...messageData]);
+
     return APDUCommand(
       cla: cla,
       ins: insSignPersonalMessage,
@@ -82,12 +86,14 @@ class EthereumAPDU {
       data: data,
     );
   }
-  
+
   /// Sign EIP-712 typed data
-  static APDUCommand signTypedData(String derivationPath, Uint8List domainHash, Uint8List messageHash) {
+  static APDUCommand signTypedData(
+      String derivationPath, Uint8List domainHash, Uint8List messageHash) {
     final pathData = _encodeDerivationPath(derivationPath);
-    final data = Uint8List.fromList([...pathData, ...domainHash, ...messageHash]);
-    
+    final data =
+        Uint8List.fromList([...pathData, ...domainHash, ...messageHash]);
+
     return APDUCommand(
       cla: cla,
       ins: insSignTypedData,
@@ -96,7 +102,7 @@ class EthereumAPDU {
       data: data,
     );
   }
-  
+
   /// Get app name and version
   static APDUCommand getAppName() {
     return APDUCommand(
@@ -106,31 +112,31 @@ class EthereumAPDU {
       p2: 0x00,
     );
   }
-  
+
   /// Encode derivation path to bytes
   static Uint8List _encodeDerivationPath(String path) {
     // Remove 'm/' prefix if present
     final cleanPath = path.startsWith('m/') ? path.substring(2) : path;
     final parts = cleanPath.split('/');
-    
+
     final buffer = <int>[];
     buffer.add(parts.length); // Number of path components
-    
+
     for (final part in parts) {
       int value;
       var hardened = false;
-      
+
       if (part.endsWith("'") || part.endsWith('h')) {
         hardened = true;
         value = int.parse(part.substring(0, part.length - 1));
       } else {
         value = int.parse(part);
       }
-      
+
       if (hardened) {
         value += 0x80000000;
       }
-      
+
       // Add as 4-byte big-endian
       buffer.addAll([
         (value >> 24) & 0xFF,
@@ -139,10 +145,10 @@ class EthereumAPDU {
         value & 0xFF,
       ]);
     }
-    
+
     return Uint8List.fromList(buffer);
   }
-  
+
   /// Encode length as 4-byte big-endian
   static Uint8List _encodeLength(int length) {
     return Uint8List.fromList([
@@ -165,7 +171,7 @@ class EthereumResponseParser {
         statusWord: response.statusWord,
       );
     }
-    
+
     final data = response.data;
     if (data.length < 65) {
       throw LedgerException(
@@ -173,21 +179,22 @@ class EthereumResponseParser {
         'Invalid public key response length',
       );
     }
-    
+
     final publicKeyLength = data[0];
     final publicKey = data.sublist(1, 1 + publicKeyLength);
-    
+
     var offset = 1 + publicKeyLength;
     final addressLength = data[offset];
     offset++;
     final address = data.sublist(offset, offset + addressLength);
-    
+
     return {
       'publicKey': publicKey,
-      'address': '0x${address.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+      'address':
+          '0x${address.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
     };
   }
-  
+
   /// Parse signature response
   static LedgerSignResponse parseSignature(APDUResponse response) {
     if (!response.isSuccess) {
@@ -197,7 +204,7 @@ class EthereumResponseParser {
         statusWord: response.statusWord,
       );
     }
-    
+
     final data = response.data;
     if (data.length < 65) {
       throw LedgerException(
@@ -205,12 +212,12 @@ class EthereumResponseParser {
         'Invalid signature response length',
       );
     }
-    
+
     final v = data[0];
     final r = data.sublist(1, 33);
     final s = data.sublist(33, 65);
     final signature = Uint8List.fromList([...r, ...s, v]);
-    
+
     return LedgerSignResponse(
       signature: signature,
       v: v,
@@ -218,7 +225,7 @@ class EthereumResponseParser {
       s: s,
     );
   }
-  
+
   /// Parse configuration response
   static EthereumAppConfig parseConfiguration(APDUResponse response) {
     if (!response.isSuccess) {
@@ -228,7 +235,7 @@ class EthereumResponseParser {
         statusWord: response.statusWord,
       );
     }
-    
+
     final data = response.data;
     if (data.length < 4) {
       throw LedgerException(
@@ -236,20 +243,20 @@ class EthereumResponseParser {
         'Invalid configuration response length',
       );
     }
-    
+
     final arbitraryDataEnabled = data[0] == 0x01;
     final erc20ProvisioningNecessary = data[1] == 0x01;
     final majorVersion = data[2];
     final minorVersion = data[3];
     final patchVersion = data.length > 4 ? data[4] : 0;
-    
+
     return EthereumAppConfig(
       arbitraryDataEnabled: arbitraryDataEnabled,
       erc20ProvisioningNecessary: erc20ProvisioningNecessary,
       version: '$majorVersion.$minorVersion.$patchVersion',
     );
   }
-  
+
   /// Parse app name response
   static LedgerApp parseAppName(APDUResponse response) {
     if (!response.isSuccess) {
@@ -259,7 +266,7 @@ class EthereumResponseParser {
         statusWord: response.statusWord,
       );
     }
-    
+
     final data = response.data;
     if (data.isEmpty) {
       throw LedgerException(
@@ -267,15 +274,16 @@ class EthereumResponseParser {
         'Empty app name response',
       );
     }
-    
+
     final nameLength = data[0];
     final name = String.fromCharCodes(data.sublist(1, 1 + nameLength));
-    
+
     var offset = 1 + nameLength;
     final versionLength = data[offset];
     offset++;
-    final version = String.fromCharCodes(data.sublist(offset, offset + versionLength));
-    
+    final version =
+        String.fromCharCodes(data.sublist(offset, offset + versionLength));
+
     return LedgerApp(
       name: name,
       version: version,

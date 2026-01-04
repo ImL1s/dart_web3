@@ -24,11 +24,11 @@ class MockRpcProvider implements RpcProvider {
   @override
   Future<T> call<T>(String method, List<dynamic> params) async {
     _requests.add({'method': method, 'params': params});
-    
+
     if (_responses.containsKey(method)) {
       return _responses[method] as T;
     }
-    
+
     throw Exception('No mock response for method: $method');
   }
 
@@ -47,12 +47,14 @@ class MockRpcProvider implements RpcProvider {
   }
 
   @override
-  Future<Map<String, dynamic>?> getBlockByHash(String hash, [bool fullTx = false]) async {
+  Future<Map<String, dynamic>?> getBlockByHash(String hash,
+      [bool fullTx = false]) async {
     return call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
   }
 
   @override
-  Future<Map<String, dynamic>?> getBlockByNumber(String block, [bool fullTx = false]) async {
+  Future<Map<String, dynamic>?> getBlockByNumber(String block,
+      [bool fullTx = false]) async {
     return call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
   }
 
@@ -72,12 +74,14 @@ class MockRpcProvider implements RpcProvider {
   }
 
   @override
-  Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
+  Future<BigInt> getTransactionCount(String address,
+      [String block = 'latest']) async {
     return call<BigInt>('eth_getTransactionCount', [address, block]);
   }
 
   @override
-  Future<String> ethCall(Map<String, dynamic> transaction, [String block = 'latest']) async {
+  Future<String> ethCall(Map<String, dynamic> transaction,
+      [String block = 'latest']) async {
     return call<String>('eth_call', [transaction, block]);
   }
 
@@ -87,7 +91,8 @@ class MockRpcProvider implements RpcProvider {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getLogs(Map<String, dynamic> filter) async {
+  Future<List<Map<String, dynamic>>> getLogs(
+      Map<String, dynamic> filter) async {
     return call<List<Map<String, dynamic>>>('eth_getLogs', [filter]);
   }
 
@@ -112,7 +117,8 @@ class MockRpcProvider implements RpcProvider {
   }
 
   @override
-  Future<String> getStorageAt(String address, String position, [String block = 'latest']) async {
+  Future<String> getStorageAt(String address, String position,
+      [String block = 'latest']) async {
     return call<String>('eth_getStorageAt', [address, position, block]);
   }
 
@@ -125,12 +131,14 @@ class MockRpcProvider implements RpcProvider {
 /// Mock transport for testing.
 class _MockTransport implements Transport {
   @override
-  Future<Map<String, dynamic>> request(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>> request(
+      String method, List<dynamic> params) async {
     throw UnimplementedError('Mock transport');
   }
 
   @override
-  Future<List<Map<String, dynamic>>> batchRequest(List<RpcRequest> requests) async {
+  Future<List<Map<String, dynamic>>> batchRequest(
+      List<RpcRequest> requests) async {
     throw UnimplementedError('Mock transport');
   }
 
@@ -142,7 +150,8 @@ class _MockTransport implements Transport {
 
 /// Mock WebSocket transport for testing.
 class MockWebSocketTransport implements WebSocketTransport {
-  final StreamController<Map<String, dynamic>> _subscriptionController = StreamController.broadcast();
+  final StreamController<Map<String, dynamic>> _subscriptionController =
+      StreamController.broadcast();
   final Map<String, String> _subscriptions = {};
   int _subscriptionId = 0;
 
@@ -161,24 +170,26 @@ class MockWebSocketTransport implements WebSocketTransport {
   }
 
   @override
-  Future<Map<String, dynamic>> request(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>> request(
+      String method, List<dynamic> params) async {
     if (method == 'eth_subscribe') {
       final subscriptionId = 'sub_${++_subscriptionId}';
       _subscriptions[subscriptionId] = params[0] as String;
       return {'result': subscriptionId};
     }
-    
+
     if (method == 'eth_unsubscribe') {
       final subscriptionId = params[0] as String;
       _subscriptions.remove(subscriptionId);
       return {'result': true};
     }
-    
+
     throw Exception('Unsupported method: $method');
   }
 
   @override
-  Future<List<Map<String, dynamic>>> batchRequest(List<RpcRequest> requests) async {
+  Future<List<Map<String, dynamic>>> batchRequest(
+      List<RpcRequest> requests) async {
     final results = <Map<String, dynamic>>[];
     for (final request in requests) {
       results.add(await this.request(request.method, request.params));
@@ -187,10 +198,11 @@ class MockWebSocketTransport implements WebSocketTransport {
   }
 
   @override
-  Stream<Map<String, dynamic>> subscribe(String method, List<dynamic> params) async* {
+  Stream<Map<String, dynamic>> subscribe(
+      String method, List<dynamic> params) async* {
     final response = await request(method, params);
     final subscriptionId = response['result'] as String;
-    
+
     // Create a filtered stream for this subscription
     await for (final data in _subscriptionController.stream) {
       if (data['subscription'] == subscriptionId) {
@@ -231,7 +243,6 @@ class MockWebSocketTransport implements WebSocketTransport {
 
 /// Mock public client for testing.
 class MockPublicClient extends PublicClient {
-
   MockPublicClient()
       : mockProvider = MockRpcProvider(),
         super(

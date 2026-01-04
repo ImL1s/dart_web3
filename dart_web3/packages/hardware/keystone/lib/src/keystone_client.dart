@@ -9,32 +9,31 @@ import 'qr_communication.dart';
 
 /// Keystone hardware wallet client
 class KeystoneClient {
-  
   KeystoneClient({QRScanner? qrScanner}) : _qrScanner = qrScanner;
   final QRCommunication _qrComm = QRCommunication();
   final QRScanner? _qrScanner;
   KeystoneDevice? _device;
   final List<KeystoneAccount> _accounts = [];
   final Random _random = Random.secure();
-  
+
   /// Current device information
   KeystoneDevice? get device => _device;
-  
+
   /// Available accounts
   List<KeystoneAccount> get accounts => List.unmodifiable(_accounts);
-  
+
   /// QR communication state
   QRCommunicationState get communicationState => _qrComm.state;
-  
+
   /// Stream of QR codes to display
   Stream<String> get qrDisplayStream => _qrComm.qrDisplayStream;
-  
+
   /// Stream of communication state changes
   Stream<QRCommunicationState> get stateStream => _qrComm.stateStream;
-  
+
   /// Stream of progress updates
   Stream<QRProgress> get progressStream => _qrComm.progressStream;
-  
+
   /// Connect to Keystone device (mock implementation)
   Future<void> connect() async {
     if (_device != null) {
@@ -43,31 +42,31 @@ class KeystoneClient {
         'Already connected to device',
       );
     }
-    
+
     // Mock signing with different curves
     await Future<void>.delayed(const Duration(milliseconds: 1000));
-    
+
     _device = KeystoneDevice(
       deviceId: 'keystone-${_random.nextInt(10000)}',
       name: 'Keystone Pro',
       version: '1.0.0',
       supportedCurves: ['secp256k1', 'ed25519'],
     );
-    
+
     // Load mock accounts
     await _loadAccounts();
   }
-  
+
   /// Disconnect from device
   Future<void> disconnect() async {
     _qrComm.cancel();
     _device = null;
     _accounts.clear();
   }
-  
+
   /// Check if connected to device
   bool get isConnected => _device != null;
-  
+
   /// Get accounts from device
   Future<List<KeystoneAccount>> getAccounts({
     int count = 5,
@@ -80,27 +79,29 @@ class KeystoneClient {
         'Device not connected',
       );
     }
-    
+
     final accounts = <KeystoneAccount>[];
-    
+
     for (var i = offset; i < offset + count; i++) {
       final path = '$derivationPath/$i';
-      
+
       // Generate mock account data
       final address = _generateMockAddress(i);
       final publicKey = _generateMockPublicKey(i);
-      
-      accounts.add(KeystoneAccount(
-        address: address,
-        derivationPath: path,
-        publicKey: publicKey,
-        name: 'Account ${i + 1}',
-      ),);
+
+      accounts.add(
+        KeystoneAccount(
+          address: address,
+          derivationPath: path,
+          publicKey: publicKey,
+          name: 'Account ${i + 1}',
+        ),
+      );
     }
-    
+
     return accounts;
   }
-  
+
   /// Sign transaction with Keystone device
   Future<String> signTransaction(
     Uint8List transactionData,
@@ -114,9 +115,9 @@ class KeystoneClient {
         'Device not connected',
       );
     }
-    
+
     final requestId = _generateRequestId();
-    
+
     final request = KeystoneSignRequest(
       requestId: requestId,
       data: transactionData,
@@ -124,10 +125,10 @@ class KeystoneClient {
       derivationPath: derivationPath,
       chainId: chainId,
     );
-    
+
     return _performSigning(request, timeout);
   }
-  
+
   /// Sign typed data with Keystone device
   Future<String> signTypedData(
     Uint8List typedDataHash,
@@ -141,9 +142,9 @@ class KeystoneClient {
         'Device not connected',
       );
     }
-    
+
     final requestId = _generateRequestId();
-    
+
     final request = KeystoneSignRequest(
       requestId: requestId,
       data: typedDataHash,
@@ -151,10 +152,10 @@ class KeystoneClient {
       derivationPath: derivationPath,
       chainId: chainId,
     );
-    
+
     return _performSigning(request, timeout);
   }
-  
+
   /// Sign personal message with Keystone device
   Future<String> signPersonalMessage(
     Uint8List messageHash,
@@ -167,43 +168,46 @@ class KeystoneClient {
         'Device not connected',
       );
     }
-    
+
     final requestId = _generateRequestId();
-    
+
     final request = KeystoneSignRequest(
       requestId: requestId,
       data: messageHash,
       dataType: KeystoneDataType.personalMessage,
       derivationPath: derivationPath,
     );
-    
+
     return _performSigning(request, timeout);
   }
-  
+
   /// Perform the signing process with QR communication
-  Future<String> _performSigning(KeystoneSignRequest request, Duration timeout) async {
+  Future<String> _performSigning(
+      KeystoneSignRequest request, Duration timeout) async {
     final completer = Completer<String>();
     Timer? timeoutTimer;
     StreamSubscription<dynamic>? scanSubscription;
-    
+
     try {
       // Set up timeout
       timeoutTimer = Timer(timeout, () {
         if (!completer.isCompleted) {
-          completer.completeError(KeystoneException(
-            KeystoneErrorType.communicationTimeout,
-            'Signing request timed out',
-          ),);
+          completer.completeError(
+            KeystoneException(
+              KeystoneErrorType.communicationTimeout,
+              'Signing request timed out',
+            ),
+          );
         }
       });
-      
+
       // Display signing request as QR codes
       await _qrComm.displaySignRequest(request);
-      
+
       // Set up QR scanner if available
       if (_qrScanner != null) {
         await _qrScanner.startScanning();
-        
+
         scanSubscription = _qrScanner.scanResults.listen((scanResult) async {
           try {
             final response = await _qrComm.processScannedQR(scanResult.data);
@@ -219,9 +223,8 @@ class KeystoneClient {
           }
         });
       }
-      
+
       return await completer.future;
-      
     } finally {
       timeoutTimer?.cancel();
       await scanSubscription?.cancel();
@@ -231,7 +234,7 @@ class KeystoneClient {
       _qrComm.reset();
     }
   }
-  
+
   /// Manually process a scanned QR response (when no automatic scanner is available)
   Future<String?> processQRResponse(String qrData) async {
     try {
@@ -247,15 +250,15 @@ class KeystoneClient {
       );
     }
   }
-  
+
   Future<void> _loadAccounts() async {
     _accounts.clear();
-    
+
     // Load some default accounts
     final defaultAccounts = await getAccounts(count: 3);
     _accounts.addAll(defaultAccounts);
   }
-  
+
   Uint8List _generateRequestId() {
     final bytes = Uint8List(16);
     for (var i = 0; i < bytes.length; i++) {
@@ -263,7 +266,7 @@ class KeystoneClient {
     }
     return bytes;
   }
-  
+
   String _generateMockAddress(int index) {
     // Generate deterministic mock address for testing
     final bytes = Uint8List(20);
@@ -272,7 +275,7 @@ class KeystoneClient {
     }
     return '0x${HexUtils.encode(bytes, prefix: false)}';
   }
-  
+
   Uint8List _generateMockPublicKey(int index) {
     // Generate deterministic mock public key for testing
     final bytes = Uint8List(64);
@@ -281,7 +284,7 @@ class KeystoneClient {
     }
     return bytes;
   }
-  
+
   /// Dispose resources
   void dispose() {
     _qrComm.dispose();

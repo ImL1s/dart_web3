@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 /// Ledger device information
 class LedgerDevice {
-  
   LedgerDevice({
     required this.deviceId,
     required this.name,
@@ -15,7 +14,7 @@ class LedgerDevice {
   final String version;
   final LedgerTransportType transportType;
   final bool isConnected;
-  
+
   @override
   String toString() {
     return 'LedgerDevice(id: $deviceId, name: $name, transport: $transportType)';
@@ -31,7 +30,6 @@ enum LedgerTransportType {
 
 /// Ledger application information
 class LedgerApp {
-  
   LedgerApp({
     required this.name,
     required this.version,
@@ -44,7 +42,6 @@ class LedgerApp {
 
 /// Ledger account information
 class LedgerAccount {
-  
   LedgerAccount({
     required this.address,
     required this.derivationPath,
@@ -58,8 +55,9 @@ class LedgerAccount {
 }
 
 /// APDU command structure
-class APDUCommand { // Expected response length
-  
+class APDUCommand {
+  // Expected response length
+
   APDUCommand({
     required this.cla,
     required this.ins,
@@ -70,18 +68,18 @@ class APDUCommand { // Expected response length
   });
   final int cla; // Class byte
   final int ins; // Instruction byte
-  final int p1;  // Parameter 1
-  final int p2;  // Parameter 2
+  final int p1; // Parameter 1
+  final int p2; // Parameter 2
   final Uint8List? data; // Command data
   final int? le;
-  
+
   /// Serialize APDU command to bytes
   Uint8List toBytes() {
     final buffer = <int>[];
-    
+
     // Header
     buffer.addAll([cla, ins, p1, p2]);
-    
+
     // Data length and data
     if (data != null && data!.isNotEmpty) {
       buffer.add(data!.length);
@@ -89,35 +87,34 @@ class APDUCommand { // Expected response length
     } else {
       buffer.add(0);
     }
-    
+
     // Expected response length
     if (le != null) {
       buffer.add(le!);
     }
-    
+
     return Uint8List.fromList(buffer);
   }
 }
 
 /// APDU response structure
 class APDUResponse {
-  
   APDUResponse({
     required this.data,
     required this.statusWord,
   });
   final Uint8List data;
   final int statusWord;
-  
+
   /// Check if response indicates success
   bool get isSuccess => statusWord == 0x9000;
-  
+
   /// Get status word as two bytes
   List<int> get statusBytes => [
-    (statusWord >> 8) & 0xFF,
-    statusWord & 0xFF,
-  ];
-  
+        (statusWord >> 8) & 0xFF,
+        statusWord & 0xFF,
+      ];
+
   /// Get error message for status word
   String? get errorMessage {
     switch (statusWord) {
@@ -165,7 +162,6 @@ enum LedgerErrorType {
 
 /// Ledger exception
 class LedgerException implements Exception {
-  
   LedgerException(
     this.type,
     this.message, {
@@ -176,17 +172,17 @@ class LedgerException implements Exception {
   final String message;
   final int? statusWord;
   final dynamic originalError;
-  
+
   @override
   String toString() {
-    final sw = statusWord != null ? ' (SW: 0x${statusWord!.toRadixString(16)})' : '';
+    final sw =
+        statusWord != null ? ' (SW: 0x${statusWord!.toRadixString(16)})' : '';
     return 'LedgerException: $message$sw (type: $type)';
   }
 }
 
 /// Ethereum app configuration
 class EthereumAppConfig {
-  
   EthereumAppConfig({
     required this.arbitraryDataEnabled,
     required this.erc20ProvisioningNecessary,
@@ -199,7 +195,6 @@ class EthereumAppConfig {
 
 /// Signing request for Ledger
 class LedgerSignRequest {
-  
   LedgerSignRequest({
     required this.data,
     required this.derivationPath,
@@ -219,7 +214,6 @@ enum LedgerSignType {
 
 /// Ledger signing response
 class LedgerSignResponse {
-  
   LedgerSignResponse({
     required this.signature,
     required this.v,
@@ -230,7 +224,8 @@ class LedgerSignResponse {
   final int v;
   final Uint8List r;
   final Uint8List s;
-  
+
   /// Get signature as hex string
-  String get signatureHex => '0x${signature.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';
+  String get signatureHex =>
+      '0x${signature.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';
 }

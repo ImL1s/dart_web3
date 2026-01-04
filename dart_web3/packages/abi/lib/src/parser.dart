@@ -53,7 +53,8 @@ class AbiParser {
     if (type.contains('[') && type.endsWith(']')) {
       final bracketStart = type.lastIndexOf('[');
       final elementType = parseType(type.substring(0, bracketStart));
-      final length = int.parse(type.substring(bracketStart + 1, type.length - 1));
+      final length =
+          int.parse(type.substring(bracketStart + 1, type.length - 1));
       return AbiArray(elementType, length);
     }
 
@@ -108,7 +109,6 @@ class AbiParser {
 
 /// Represents a function in an ABI.
 class AbiFunction {
-
   AbiFunction({
     required this.name,
     required this.inputs,
@@ -201,7 +201,6 @@ class AbiFunction {
 
 /// Represents an event in an ABI.
 class AbiEvent {
-
   AbiEvent({
     required this.name,
     required this.inputs,
@@ -250,7 +249,6 @@ class AbiEvent {
 
 /// Represents an error in an ABI.
 class AbiError {
-
   AbiError({
     required this.name,
     required this.inputs,

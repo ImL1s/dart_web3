@@ -29,22 +29,24 @@ void main() {
           ...List.filled(31, 0), 32,
           // First call result data (uint256: 1000)
           ...List.filled(28, 0), 3, 232, 0, 0,
-          // Second call result length  
+          // Second call result length
           ...List.filled(31, 0), 32,
           // Second call result data (uint256: 2000)
           ...List.filled(28, 0), 7, 208, 0, 0,
         ]);
-        
+
         publicClient.mockCall(mockResult);
 
         final calls = [
           Call(
             target: '0x1234567890123456789012345678901234567890',
-            callData: Uint8List.fromList([0x70, 0xa0, 0x82, 0x31]), // balanceOf selector
+            callData: Uint8List.fromList(
+                [0x70, 0xa0, 0x82, 0x31]), // balanceOf selector
           ),
           Call(
             target: '0x2345678901234567890123456789012345678901',
-            callData: Uint8List.fromList([0x70, 0xa0, 0x82, 0x31]), // balanceOf selector
+            callData: Uint8List.fromList(
+                [0x70, 0xa0, 0x82, 0x31]), // balanceOf selector
           ),
         ];
 
@@ -53,13 +55,16 @@ void main() {
         expect(results, hasLength(2));
         expect(results[0].success, isTrue);
         expect(results[1].success, isTrue);
-        expect(publicClient.lastCallRequest?.to, equals('0xcA11bde05977b3631167028862bE2a173976CA11'));
+        expect(publicClient.lastCallRequest?.to,
+            equals('0xcA11bde05977b3631167028862bE2a173976CA11'));
       });
 
       test('should handle empty calls list', () async {
-        publicClient.mockCall(Uint8List.fromList([
-          ...List.filled(31, 0), 0, // Empty array
-        ]),);
+        publicClient.mockCall(
+          Uint8List.fromList([
+            ...List.filled(31, 0), 0, // Empty array
+          ]),
+        );
 
         final results = await multicall.aggregate([]);
         expect(results, isEmpty);
@@ -207,7 +212,8 @@ void main() {
 
         // Verify that the call was made (we can't easily inspect the exact encoding)
         expect(calls, hasLength(1));
-        expect(calls[0].target, equals('0x1234567890123456789012345678901234567890'));
+        expect(calls[0].target,
+            equals('0x1234567890123456789012345678901234567890'));
       });
     });
   });

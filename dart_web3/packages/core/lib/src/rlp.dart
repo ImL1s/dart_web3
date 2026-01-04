@@ -56,7 +56,8 @@ class RLP {
       return _encodeBytes(BytesUtils.bigIntToBytes(data));
     }
 
-    throw RlpException('Unsupported type for RLP encoding: ${data.runtimeType}');
+    throw RlpException(
+        'Unsupported type for RLP encoding: ${data.runtimeType}');
   }
 
   /// Decodes RLP-encoded data.
@@ -197,7 +198,8 @@ class RLP {
 
       return (
         Uint8List.fromList(
-          data.sublist(offset + 1 + lengthOfLength, offset + 1 + lengthOfLength + length),
+          data.sublist(offset + 1 + lengthOfLength,
+              offset + 1 + lengthOfLength + length),
         ),
         1 + lengthOfLength + length,
       );
@@ -237,7 +239,8 @@ class RLP {
     return length;
   }
 
-  static List<dynamic> _decodeListItems(Uint8List data, int offset, int length) {
+  static List<dynamic> _decodeListItems(
+      Uint8List data, int offset, int length) {
     final items = <dynamic>[];
     var consumed = 0;
 

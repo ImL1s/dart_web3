@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 /// Solana address (Base58 encoded)
 class SolanaAddress {
-
   const SolanaAddress(this.bytes);
 
   factory SolanaAddress.fromBase58() {
@@ -23,7 +22,6 @@ class SolanaAddress {
 
 /// Solana Instruction
 class SolanaInstruction {
-
   const SolanaInstruction({
     required this.programId,
     required this.keys,
@@ -35,7 +33,6 @@ class SolanaInstruction {
 }
 
 class SolanaAccountMeta {
-
   const SolanaAccountMeta({
     required this.pubkey,
     required this.isSigner,

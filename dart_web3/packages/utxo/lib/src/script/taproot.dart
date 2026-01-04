@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
@@ -15,10 +14,10 @@ class TapLeaf {
     buffer.addByte(version);
     _addCompactSize(buffer, script.length);
     buffer.add(script);
-    
+
     return _taggedHash('TapLeaf', buffer.toBytes());
   }
-  
+
   void _addCompactSize(BytesBuilder buffer, int size) {
     if (size < 253) {
       buffer.addByte(size);
@@ -40,10 +39,10 @@ class TapLeaf {
 /// Represents a branch in the Taproot Merkle Tree.
 class TapBranch {
   TapBranch(this.left, this.right);
-  
+
   final Uint8List left; // Hash of left child
   final Uint8List right; // Hash of right child
-  
+
   Uint8List get hash {
     // Lexicographical sort
     Uint8List first, second;
@@ -54,14 +53,14 @@ class TapBranch {
       first = right;
       second = left;
     }
-    
+
     return _taggedHash('TapBranch', Uint8List.fromList([...first, ...second]));
   }
-  
+
   int _compare(Uint8List a, Uint8List b) {
     for (var i = 0; i < a.length && i < b.length; i++) {
-        if (a[i] < b[i]) return -1;
-        if (a[i] > b[i]) return 1;
+      if (a[i] < b[i]) return -1;
+      if (a[i] > b[i]) return 1;
     }
     return 0;
   }
@@ -69,34 +68,35 @@ class TapBranch {
 
 /// Helper for Taproot Tree construction and Tweaking.
 class TaprootKey {
-  
   /// Tweaks a public key with a script merkle root (or null for key-path only).
   /// [internalKey]: 32-byte x-only internal public key.
   /// [merkleRoot]: Root of the script tree (optional).
-  /// 
+  ///
   /// Returns a Map containing:
   /// - 'outputKey': 32-byte tweaked public key (Q)
   /// - 'parity': int (0 or 1)
   /// - 'scriptConfig': The data that was hashed to create the tweak (needed for control block)
-  static Map<String, dynamic> tweak(Uint8List internalKey, [Uint8List? merkleRoot]) {
-    if (internalKey.length != 32) throw ArgumentError('Internal key must be 32 bytes');
-    
+  static Map<String, dynamic> tweak(Uint8List internalKey,
+      [Uint8List? merkleRoot]) {
+    if (internalKey.length != 32)
+      throw ArgumentError('Internal key must be 32 bytes');
+
     // t = hash_TapTweak(P || merkleRoot)
     final buffer = BytesBuilder();
     buffer.add(internalKey);
     if (merkleRoot != null) {
       buffer.add(merkleRoot);
     }
-    
+
     final tweakHash = _taggedHash('TapTweak', buffer.toBytes());
-    
+
     // Q = P + t*G
     final tweaked = SchnorrSignature.tweakPublicKey(internalKey, tweakHash);
-    
+
     if (tweaked == null) {
       throw Exception('Taproot tweak resulted in invalid point (rare)');
     }
-    
+
     return {
       'outputKey': tweaked['x'],
       'parity': tweaked['yParity'],

@@ -2,7 +2,6 @@ import 'swap_types.dart';
 
 /// Swap quote from an aggregator
 class SwapQuote {
-
   const SwapQuote({
     required this.aggregator,
     required this.params,
@@ -22,7 +21,8 @@ class SwapQuote {
     return SwapQuote(
       aggregator: json['aggregator'] as String,
       params: SwapParams(
-        fromToken: SwapToken.fromJson(json['fromToken'] as Map<String, dynamic>),
+        fromToken:
+            SwapToken.fromJson(json['fromToken'] as Map<String, dynamic>),
         toToken: SwapToken.fromJson(json['toToken'] as Map<String, dynamic>),
         amount: BigInt.parse(json['amount'] as String),
         fromAddress: json['fromAddress'] as String,
@@ -33,13 +33,15 @@ class SwapQuote {
       outputAmount: BigInt.parse(json['outputAmount'] as String),
       minimumOutputAmount: BigInt.parse(json['minimumOutputAmount'] as String),
       route: SwapRoute.fromJson(json['route'] as Map<String, dynamic>),
-      transaction: SwapTransaction.fromJson(json['transaction'] as Map<String, dynamic>),
+      transaction:
+          SwapTransaction.fromJson(json['transaction'] as Map<String, dynamic>),
       estimatedGas: BigInt.parse(json['estimatedGas'] as String),
       gasCost: BigInt.parse(json['gasCost'] as String),
       priceImpact: (json['priceImpact'] as num).toDouble(),
       validUntil: Duration(seconds: json['validUntilSeconds'] as int),
       crossChainInfo: json['crossChainInfo'] != null
-          ? CrossChainSwapInfo.fromJson(json['crossChainInfo'] as Map<String, dynamic>)
+          ? CrossChainSwapInfo.fromJson(
+              json['crossChainInfo'] as Map<String, dynamic>)
           : null,
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
@@ -112,7 +114,6 @@ class SwapQuote {
 
 /// Comparison result between two quotes
 class QuoteComparison {
-
   const QuoteComparison({
     required this.quote1,
     required this.quote2,

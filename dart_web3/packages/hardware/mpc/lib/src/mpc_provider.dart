@@ -8,11 +8,10 @@ import 'mpc_types.dart';
 
 /// Fireblocks MPC provider implementation.
 class FireblocksMpcProvider implements MpcProvider {
-
   FireblocksMpcProvider({required this.config});
   @override
   final MpcProviderConfig config;
-  
+
   @override
   Future<void> initialize() async {
     // Validate API credentials
@@ -37,7 +36,7 @@ class FireblocksMpcProvider implements MpcProvider {
 
     // Simulate API call
     await Future<void>.delayed(const Duration(seconds: 1));
-    
+
     // Return mock wallet ID
     return 'fb_wallet_${DateTime.now().millisecondsSinceEpoch}';
   }
@@ -46,7 +45,7 @@ class FireblocksMpcProvider implements MpcProvider {
   Future<MpcWalletInfo> getWallet(String walletId) async {
     // Simulate API call
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    
+
     // Return mock wallet info
     return MpcWalletInfo(
       walletId: walletId,
@@ -65,7 +64,7 @@ class FireblocksMpcProvider implements MpcProvider {
   Future<List<MpcWalletInfo>> listWallets() async {
     // Simulate API call
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    
+
     // Return mock wallet list
     return [
       await getWallet('wallet_1'),
@@ -84,7 +83,7 @@ class FireblocksMpcProvider implements MpcProvider {
 
     // Simulate API call
     await Future<void>.delayed(const Duration(seconds: 1));
-    
+
     // Return mock request ID
     return 'fb_sign_${DateTime.now().millisecondsSinceEpoch}';
   }
@@ -93,7 +92,7 @@ class FireblocksMpcProvider implements MpcProvider {
   Future<MpcSigningStatus> getSigningStatus(String requestId) async {
     // Simulate API call
     await Future<void>.delayed(const Duration(milliseconds: 200));
-    
+
     // Return mock status
     return MpcSigningStatus.completed;
   }
@@ -102,7 +101,7 @@ class FireblocksMpcProvider implements MpcProvider {
   Future<MpcSigningResponse> getSigningResult(String requestId) async {
     // Simulate API call
     await Future<void>.delayed(const Duration(milliseconds: 300));
-    
+
     // Return mock signature
     final signature = Uint8List(65); // Mock signature
     return MpcSigningResponse(
@@ -148,11 +147,10 @@ class FireblocksMpcProvider implements MpcProvider {
 
 /// Fordefi MPC provider implementation.
 class FordefiMpcProvider implements MpcProvider {
-
   FordefiMpcProvider({required this.config});
   @override
   final MpcProviderConfig config;
-  
+
   @override
   Future<void> initialize() async {
     await _validateCredentials();
@@ -176,14 +174,14 @@ class FordefiMpcProvider implements MpcProvider {
 
     // Simulate API call
     await Future<void>.delayed(const Duration(seconds: 1));
-    
+
     return 'fd_wallet_${DateTime.now().millisecondsSinceEpoch}';
   }
 
   @override
   Future<MpcWalletInfo> getWallet(String walletId) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    
+
     return MpcWalletInfo(
       walletId: walletId,
       name: 'Fordefi Wallet',
@@ -200,7 +198,7 @@ class FordefiMpcProvider implements MpcProvider {
   @override
   Future<List<MpcWalletInfo>> listWallets() async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    
+
     return [
       await getWallet('wallet_1'),
       await getWallet('wallet_2'),
@@ -217,7 +215,7 @@ class FordefiMpcProvider implements MpcProvider {
     // };
 
     await Future<void>.delayed(const Duration(seconds: 1));
-    
+
     return 'fd_sign_${DateTime.now().millisecondsSinceEpoch}';
   }
 
@@ -230,7 +228,7 @@ class FordefiMpcProvider implements MpcProvider {
   @override
   Future<MpcSigningResponse> getSigningResult(String requestId) async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
-    
+
     final signature = Uint8List(65);
     return MpcSigningResponse(
       signature: signature,
@@ -296,12 +294,14 @@ class MpcProviderFactory {
     required String apiKey,
     Map<String, dynamic>? additionalConfig,
   }) {
-    return create(MpcProviderConfig(
-      providerName: 'fireblocks',
-      apiUrl: apiUrl,
-      apiKey: apiKey,
-      additionalConfig: additionalConfig ?? {},
-    ),);
+    return create(
+      MpcProviderConfig(
+        providerName: 'fireblocks',
+        apiUrl: apiUrl,
+        apiKey: apiKey,
+        additionalConfig: additionalConfig ?? {},
+      ),
+    );
   }
 
   /// Creates a Fordefi provider.
@@ -310,11 +310,13 @@ class MpcProviderFactory {
     required String apiKey,
     Map<String, dynamic>? additionalConfig,
   }) {
-    return create(MpcProviderConfig(
-      providerName: 'fordefi',
-      apiUrl: apiUrl,
-      apiKey: apiKey,
-      additionalConfig: additionalConfig ?? {},
-    ),);
+    return create(
+      MpcProviderConfig(
+        providerName: 'fordefi',
+        apiUrl: apiUrl,
+        apiKey: apiKey,
+        additionalConfig: additionalConfig ?? {},
+      ),
+    );
   }
 }

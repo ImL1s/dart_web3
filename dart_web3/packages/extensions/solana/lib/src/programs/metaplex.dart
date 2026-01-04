@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 import '../models/public_key.dart';
 
@@ -21,7 +20,8 @@ class MetaplexMetadata {
   final int sellerFeeBasisPoints;
   final List<MetaplexCreator>? creators;
 
-  static final programId = PublicKey.fromString('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
+  static final programId =
+      PublicKey.fromString('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
 
   /// Derives the Metadata PDA.
   static Future<PublicKey> findMetadataAddress(PublicKey mint) async {
@@ -37,16 +37,16 @@ class MetaplexMetadata {
   /// Decodes Metaplex Metadata Account data.
   static MetaplexMetadata decode(Uint8List data) {
     if (data.isEmpty) throw Exception('Empty data');
-    
+
     final buffer = ByteData.sublistView(data);
     var offset = 0;
-    
+
     // Key (u8) = 4
     final key = buffer.getUint8(offset);
     offset += 1;
     if (key != 4) {
-        // Warning: This ignores padding or other enum variants, strict check usually requires 4
-        // throw Exception('Invalid Metadata Key: $key');
+      // Warning: This ignores padding or other enum variants, strict check usually requires 4
+      // throw Exception('Invalid Metadata Key: $key');
     }
 
     // Update Authority (32 bytes)
@@ -59,7 +59,8 @@ class MetaplexMetadata {
 
     // Name (String)
     final nameRes = _readBorshString(data, offset);
-    final name = nameRes.value.replaceAll(RegExp(r'\u0000'), ''); // Strip null padding
+    final name =
+        nameRes.value.replaceAll(RegExp(r'\u0000'), ''); // Strip null padding
     offset = nameRes.nextOffset;
 
     // Symbol (String)
@@ -82,17 +83,18 @@ class MetaplexMetadata {
       final hasCreators = data[offset] == 1;
       offset += 1;
       if (hasCreators && offset < data.length) {
-          final creatorCount = buffer.getUint32(offset, Endian.little);
-          offset += 4;
-          for (var i = 0; i < creatorCount; i++) {
-              final address = PublicKey(data.sublist(offset, offset + 32));
-              offset += 32;
-              final verified = data[offset] == 1;
-              offset += 1;
-              final share = data[offset];
-              offset += 1;
-              creators.add(MetaplexCreator(address: address, verified: verified, share: share));
-          }
+        final creatorCount = buffer.getUint32(offset, Endian.little);
+        offset += 4;
+        for (var i = 0; i < creatorCount; i++) {
+          final address = PublicKey(data.sublist(offset, offset + 32));
+          offset += 32;
+          final verified = data[offset] == 1;
+          offset += 1;
+          final share = data[offset];
+          offset += 1;
+          creators.add(MetaplexCreator(
+              address: address, verified: verified, share: share));
+        }
       }
     }
 
@@ -108,29 +110,30 @@ class MetaplexMetadata {
   }
 
   static _BorshStringResult _readBorshString(Uint8List data, int offset) {
-    final len = ByteData.sublistView(data, offset, offset + 4).getUint32(0, Endian.little);
+    final len = ByteData.sublistView(data, offset, offset + 4)
+        .getUint32(0, Endian.little);
     final end = offset + 4 + len;
-    
+
     final strBytes = data.sublist(offset + 4, end);
     final str = String.fromCharCodes(strBytes); // Usually UTF-8
-    
+
     return _BorshStringResult(str, end);
   }
 }
 
 class MetaplexCreator {
-    MetaplexCreator({
-        required this.address,
-        required this.verified,
-        required this.share,
-    });
-    final PublicKey address;
-    final bool verified;
-    final int share;
+  MetaplexCreator({
+    required this.address,
+    required this.verified,
+    required this.share,
+  });
+  final PublicKey address;
+  final bool verified;
+  final int share;
 }
 
 class _BorshStringResult {
-    _BorshStringResult(this.value, this.nextOffset);
-    final String value;
-    final int nextOffset;
+  _BorshStringResult(this.value, this.nextOffset);
+  final String value;
+  final int nextOffset;
 }

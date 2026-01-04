@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 
 /// Service for fetching cryptocurrency prices
 class PriceService {
-
   PriceService({
     http.Client? httpClient,
     Duration cacheTtl = const Duration(minutes: 5),
@@ -22,7 +21,8 @@ class PriceService {
     }
 
     try {
-      final url = 'https://api.coingecko.com/api/v3/simple/price?ids=$id&vs_currencies=$vsCurrency';
+      final url =
+          'https://api.coingecko.com/api/v3/simple/price?ids=$id&vs_currencies=$vsCurrency';
       final response = await _httpClient.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -44,7 +44,8 @@ class PriceService {
   }
 
   /// Fetch multiple prices
-  Future<Map<String, double>> getPrices(List<String> ids, {String vsCurrency = 'usd'}) async {
+  Future<Map<String, double>> getPrices(List<String> ids,
+      {String vsCurrency = 'usd'}) async {
     final results = <String, double>{};
     final toFetch = <String>[];
 
@@ -61,7 +62,8 @@ class PriceService {
 
     try {
       final idsParam = toFetch.join(',');
-      final url = 'https://api.coingecko.com/api/v3/simple/price?ids=$idsParam&vs_currencies=$vsCurrency';
+      final url =
+          'https://api.coingecko.com/api/v3/simple/price?ids=$idsParam&vs_currencies=$vsCurrency';
       final response = await _httpClient.get(Uri.parse(url));
 
       if (response.statusCode == 200) {

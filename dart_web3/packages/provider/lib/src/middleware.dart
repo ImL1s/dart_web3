@@ -1,10 +1,14 @@
 /// Middleware for intercepting RPC requests and responses.
 abstract class Middleware {
   /// Called before a request is sent.
-  Future<Map<String, dynamic>?> beforeRequest(String method, List<dynamic> params) async => null;
+  Future<Map<String, dynamic>?> beforeRequest(
+          String method, List<dynamic> params) async =>
+      null;
 
   /// Called after a response is received.
-  Future<Map<String, dynamic>> afterResponse(Map<String, dynamic> response) async => response;
+  Future<Map<String, dynamic>> afterResponse(
+          Map<String, dynamic> response) async =>
+      response;
 
   /// Called when an error occurs.
   Future<void> onError(Exception error) async {}
@@ -12,12 +16,15 @@ abstract class Middleware {
 
 /// Middleware that retries failed requests.
 class RetryMiddleware extends Middleware {
-
   RetryMiddleware({
     this.maxRetries = 3,
     this.delay = const Duration(seconds: 1),
-    this.retryableCodes = const {-32000, -32603}, // Server error, internal error
+    this.retryableCodes = const {
+      -32000,
+      -32603
+    }, // Server error, internal error
   });
+
   /// Maximum number of retry attempts.
   final int maxRetries;
 
@@ -46,12 +53,12 @@ class RetryMiddleware extends Middleware {
 
 /// Middleware that logs requests and responses.
 class LoggingMiddleware extends Middleware {
-
   LoggingMiddleware({
     this.logRequests = true,
     this.logResponses = false,
     this.logger,
   });
+
   /// Whether to log requests.
   final bool logRequests;
 
@@ -70,7 +77,8 @@ class LoggingMiddleware extends Middleware {
   }
 
   @override
-  Future<Map<String, dynamic>?> beforeRequest(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>?> beforeRequest(
+      String method, List<dynamic> params) async {
     if (logRequests) {
       _log('RPC Request: $method($params)');
     }
@@ -78,7 +86,8 @@ class LoggingMiddleware extends Middleware {
   }
 
   @override
-  Future<Map<String, dynamic>> afterResponse(Map<String, dynamic> response) async {
+  Future<Map<String, dynamic>> afterResponse(
+      Map<String, dynamic> response) async {
     if (logResponses) {
       _log('RPC Response: $response');
     }
@@ -93,7 +102,6 @@ class LoggingMiddleware extends Middleware {
 
 /// Middleware that caches responses.
 class CacheMiddleware extends Middleware {
-
   CacheMiddleware({
     this.cacheDuration = const Duration(seconds: 30),
     this.cacheableMethods = const {
@@ -104,6 +112,7 @@ class CacheMiddleware extends Middleware {
       'eth_getCode',
     },
   });
+
   /// Cache duration.
   final Duration cacheDuration;
 
@@ -117,7 +126,8 @@ class CacheMiddleware extends Middleware {
   }
 
   @override
-  Future<Map<String, dynamic>?> beforeRequest(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>?> beforeRequest(
+      String method, List<dynamic> params) async {
     if (!cacheableMethods.contains(method)) return null;
 
     final key = _cacheKey(method, params);
@@ -131,13 +141,15 @@ class CacheMiddleware extends Middleware {
   }
 
   @override
-  Future<Map<String, dynamic>> afterResponse(Map<String, dynamic> response) async {
+  Future<Map<String, dynamic>> afterResponse(
+      Map<String, dynamic> response) async {
     // Cache is populated by the provider after getting the response
     return response;
   }
 
   /// Caches a response.
-  void cacheResponse(String method, List<dynamic> params, Map<String, dynamic> response) {
+  void cacheResponse(
+      String method, List<dynamic> params, Map<String, dynamic> response) {
     if (!cacheableMethods.contains(method)) return;
 
     final key = _cacheKey(method, params);
@@ -149,7 +161,6 @@ class CacheMiddleware extends Middleware {
 }
 
 class _CacheEntry {
-
   _CacheEntry(this.response, this.expiresAt);
   final Map<String, dynamic> response;
   final DateTime expiresAt;

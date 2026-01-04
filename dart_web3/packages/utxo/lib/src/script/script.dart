@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 // For BytesUtils if needed, or just dart:typed_data
 
@@ -95,14 +94,16 @@ class Script {
         i += len;
       } else if (op == OpCode.opPushData2) {
         if (i + 2 > bytes.length) throw Exception('Script truncated');
-        final len = ByteData.sublistView(bytes, i, i + 2).getUint16(0, Endian.little);
+        final len =
+            ByteData.sublistView(bytes, i, i + 2).getUint16(0, Endian.little);
         i += 2;
         if (i + len > bytes.length) throw Exception('Script truncated');
         ops.add(bytes.sublist(i, i + len));
         i += len;
       } else if (op == OpCode.opPushData4) {
         if (i + 4 > bytes.length) throw Exception('Script truncated');
-        final len = ByteData.sublistView(bytes, i, i + 4).getUint32(0, Endian.little);
+        final len =
+            ByteData.sublistView(bytes, i, i + 4).getUint32(0, Endian.little);
         i += 4;
         if (i + len > bytes.length) throw Exception('Script truncated');
         ops.add(bytes.sublist(i, i + len));
@@ -147,11 +148,13 @@ class Script {
       buffer.add(data);
     } else if (data.length <= 0xffff) {
       buffer.addByte(OpCode.opPushData2);
-      buffer.add(Uint8List(2)..buffer.asByteData().setUint16(0, data.length, Endian.little));
+      buffer.add(Uint8List(2)
+        ..buffer.asByteData().setUint16(0, data.length, Endian.little));
       buffer.add(data);
     } else {
       buffer.addByte(OpCode.opPushData4);
-      buffer.add(Uint8List(4)..buffer.asByteData().setUint32(0, data.length, Endian.little));
+      buffer.add(Uint8List(4)
+        ..buffer.asByteData().setUint32(0, data.length, Endian.little));
       buffer.add(data);
     }
   }
@@ -163,57 +166,62 @@ class Script {
     return ops.length == 5 &&
         ops[0] == OpCode.opDup &&
         ops[1] == OpCode.opHash160 &&
-        ops[2] is Uint8List && (ops[2] as Uint8List).length == 20 &&
+        ops[2] is Uint8List &&
+        (ops[2] as Uint8List).length == 20 &&
         ops[3] == OpCode.opEqualVerify &&
         ops[4] == OpCode.opCheckSig;
   }
 
   bool get isP2SH {
-     // OP_HASH160 <20 bytes> OP_EQUAL
-     return ops.length == 3 &&
-         ops[0] == OpCode.opHash160 &&
-         ops[1] is Uint8List && (ops[1] as Uint8List).length == 20 &&
-         ops[2] == OpCode.opEqual;
+    // OP_HASH160 <20 bytes> OP_EQUAL
+    return ops.length == 3 &&
+        ops[0] == OpCode.opHash160 &&
+        ops[1] is Uint8List &&
+        (ops[1] as Uint8List).length == 20 &&
+        ops[2] == OpCode.opEqual;
   }
 
   bool get isP2WPKH {
     // OP_0 <20 bytes>
     return ops.length == 2 &&
         ops[0] == OpCode.op0 &&
-        ops[1] is Uint8List && (ops[1] as Uint8List).length == 20;
+        ops[1] is Uint8List &&
+        (ops[1] as Uint8List).length == 20;
   }
 
   bool get isP2WSH {
     // OP_0 <32 bytes>
     return ops.length == 2 &&
         ops[0] == OpCode.op0 &&
-        ops[1] is Uint8List && (ops[1] as Uint8List).length == 32;
+        ops[1] is Uint8List &&
+        (ops[1] as Uint8List).length == 32;
   }
 
   bool get isP2TR {
     // OP_1 <32 bytes>
     return ops.length == 2 &&
         ops[0] == OpCode.op1 &&
-        ops[1] is Uint8List && (ops[1] as Uint8List).length == 32;
+        ops[1] is Uint8List &&
+        (ops[1] as Uint8List).length == 32;
   }
 
   // --- Static Builders (Helpers) ---
 
   static Uint8List p2pkh(Uint8List pubKeyHash) {
-     return Script([
-       OpCode.opDup,
-       OpCode.opHash160,
-       pubKeyHash,
-       OpCode.opEqualVerify,
-       OpCode.opCheckSig,
-     ]).compile();
+    return Script([
+      OpCode.opDup,
+      OpCode.opHash160,
+      pubKeyHash,
+      OpCode.opEqualVerify,
+      OpCode.opCheckSig,
+    ]).compile();
   }
 
   static Uint8List p2sh(Uint8List scriptHash) {
     return Script([
       OpCode.opHash160,
       scriptHash,
-      OpCode.opEqual, 
+      OpCode.opEqual,
     ]).compile(); // Note: Previous uses OP_EQUALVERIFY, Standard P2SH is OP_EQUAL for ScriptHash?
     // Wait, P2SH scriptPubKey is OP_HASH160 <hash> OP_EQUAL.
     // The previous implementation used OP_EQUALVERIFY. Let's verify standard.

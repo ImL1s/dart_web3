@@ -7,7 +7,7 @@ void main() async {
     rpcUrl: 'https://eth-mainnet.g.alchemy.com/v2/key',
     chain: Chains.ethereum,
   );
-  
+
   final multicall = Multicall(
     publicClient: client,
     contractAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -18,6 +18,6 @@ void main() async {
   //   contract1.function('balanceOf').call([address1]),
   //   contract2.function('totalSupply').call([]),
   // ]);
-  
+
   print('Multicall initialized: $multicall');
 }

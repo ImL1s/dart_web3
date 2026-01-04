@@ -14,7 +14,8 @@ class AbiDecoder {
   }
 
   /// Decodes function return data.
-  static List<dynamic> decodeFunction(List<AbiType> outputTypes, Uint8List data) {
+  static List<dynamic> decodeFunction(
+      List<AbiType> outputTypes, Uint8List data) {
     return decode(outputTypes, data);
   }
 
@@ -67,8 +68,9 @@ class AbiDecoder {
       final decoded = decode(nonIndexedTypes, data);
       for (var i = 0; i < decoded.length; i++) {
         final originalIndex = nonIndexedIndices[i];
-        final name =
-            names != null && originalIndex < names.length ? names[originalIndex] : 'arg$originalIndex';
+        final name = names != null && originalIndex < names.length
+            ? names[originalIndex]
+            : 'arg$originalIndex';
         result[name] = decoded[i];
       }
     }
@@ -81,7 +83,10 @@ class AbiDecoder {
     if (data.length < 4) return null;
 
     // Check for Error(string) selector: 0x08c379a0
-    if (data[0] == 0x08 && data[1] == 0xc3 && data[2] == 0x79 && data[3] == 0xa0) {
+    if (data[0] == 0x08 &&
+        data[1] == 0xc3 &&
+        data[2] == 0x79 &&
+        data[3] == 0xa0) {
       try {
         final decoded = decode([AbiString()], data.sublist(4));
         return decoded[0] as String;
@@ -91,7 +96,10 @@ class AbiDecoder {
     }
 
     // Check for Panic(uint256) selector: 0x4e487b71
-    if (data[0] == 0x4e && data[1] == 0x48 && data[2] == 0x7b && data[3] == 0x71) {
+    if (data[0] == 0x4e &&
+        data[1] == 0x48 &&
+        data[2] == 0x7b &&
+        data[3] == 0x71) {
       try {
         final decoded = decode([AbiUint(256)], data.sublist(4));
         final code = (decoded[0] as BigInt).toInt();

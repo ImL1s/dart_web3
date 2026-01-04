@@ -9,9 +9,13 @@ void main() async {
   const abi = [
     {
       'constant': true,
-      'inputs': [{'name': '_owner', 'type': 'address'}],
+      'inputs': [
+        {'name': '_owner', 'type': 'address'}
+      ],
       'name': 'balanceOf',
-      'outputs': [{'name': 'balance', 'type': 'uint256'}],
+      'outputs': [
+        {'name': 'balance', 'type': 'uint256'}
+      ],
       'type': 'function',
     }
   ];
@@ -30,7 +34,7 @@ void main() async {
   );
 
   // Prepare the call
-  // For typed call we might need TypedContract or similar, 
+  // For typed call we might need TypedContract or similar,
   // but Contract.read works with function name.
   final vitalik = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
 
@@ -38,6 +42,6 @@ void main() async {
   final result = await contract.read('balanceOf', [vitalik]);
 
   print('USDT Balance: ${result.first}');
-  
+
   client.dispose();
 }

@@ -9,7 +9,7 @@ void main() async {
   // Sign a message
   final message = 'Hello Web3!';
   final signature = await credentials.signMessage(message);
-  
+
   print('Signature: 0x${signature.toHex()}');
 
   // Recovery is not directly exposed in PrivateKeySigner API in this version

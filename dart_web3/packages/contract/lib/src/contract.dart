@@ -11,7 +11,6 @@ import 'simulate_result.dart';
 
 /// Smart contract abstraction for type-safe contract interactions.
 class Contract {
-
   Contract({
     required this.address,
     required String abi,
@@ -20,6 +19,7 @@ class Contract {
   })  : functions = AbiParser.parseFunctions(abi),
         events = AbiParser.parseEvents(abi),
         errors = AbiParser.parseErrors(abi);
+
   /// The contract address.
   final String address;
 
@@ -165,12 +165,13 @@ class Contract {
     String? toBlock,
   }) {
     final event = _getEvent(eventName);
-    
+
     // Build topics array
     final topics = <String?>[];
-    
+
     // Topic 0 is always the event signature hash
-    final eventTopic = HexUtils.encode(AbiEncoder.getEventTopic(event.signature));
+    final eventTopic =
+        HexUtils.encode(AbiEncoder.getEventTopic(event.signature));
     topics.add(eventTopic);
 
     // Add indexed parameter topics
@@ -209,10 +210,11 @@ class Contract {
     }
 
     final eventTopic = log.topics[0];
-    
+
     // Find matching event
     for (final event in events) {
-      final expectedTopic = HexUtils.encode(AbiEncoder.getEventTopic(event.signature));
+      final expectedTopic =
+          HexUtils.encode(AbiEncoder.getEventTopic(event.signature));
       if (eventTopic.toLowerCase() == expectedTopic.toLowerCase()) {
         return AbiDecoder.decodeEvent(
           types: event.inputs,
@@ -238,9 +240,10 @@ class Contract {
     // Try custom errors
     if (data.length >= 4) {
       final selector = data.sublist(0, 4);
-      
+
       for (final error in errors) {
-        final expectedSelector = AbiEncoder.getFunctionSelector(error.signature);
+        final expectedSelector =
+            AbiEncoder.getFunctionSelector(error.signature);
         if (_bytesEqual(selector, expectedSelector)) {
           try {
             final decoded = AbiDecoder.decode(error.inputs, data.sublist(4));

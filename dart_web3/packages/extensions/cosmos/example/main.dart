@@ -20,5 +20,6 @@ void main() async {
       Coin(denom: 'uatom', amount: '1000000'), // 1 ATOM
     ],
   );
-  print('Created MsgSend for ${sendMsg.amount[0].amount} ${sendMsg.amount[0].denom}');
+  print(
+      'Created MsgSend for ${sendMsg.amount[0].amount} ${sendMsg.amount[0].denom}');
 }

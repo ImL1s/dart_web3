@@ -132,13 +132,14 @@ void main() {
       test('toChecksum converts to uppercase correctly based on hash', () {
         final addr = EthereumAddress.fromHex(validAddress);
         final checksum = addr.toChecksum(mockKeccak);
-        
+
         // Since mockKeccak returns all 0xff, all letters should be uppercase
         expect(checksum, equals('0xD8DA6BF26964AF9D7EED9E03E53415D37AA96045'));
       });
 
       test('isValidChecksum returns true for all lowercase', () {
-        expect(EthereumAddress.isValidChecksum(validAddress, mockKeccak), isTrue);
+        expect(
+            EthereumAddress.isValidChecksum(validAddress, mockKeccak), isTrue);
       });
 
       test('isValidChecksum returns true for valid checksum', () {

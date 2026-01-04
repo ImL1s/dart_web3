@@ -23,7 +23,8 @@ void main() {
       expect(dynamicTuple.getStaticSize(), equals(32));
     });
 
-    test('AbiArray.getStaticSize returns correct size for fixed static array', () {
+    test('AbiArray.getStaticSize returns correct size for fixed static array',
+        () {
       // uint256[3] should be 96 bytes
       final staticArray = AbiArray(AbiUint(256), 3);
       expect(staticArray.isDynamic, isFalse);
@@ -45,7 +46,8 @@ void main() {
       expect(outerTuple.getStaticSize(), equals(96));
     });
 
-    test('encoding tuple with nested static struct calculates offset correctly', () {
+    test('encoding tuple with nested static struct calculates offset correctly',
+        () {
       // ((uint256, uint256), string)
       // Head: 64 bytes (static tuple) + 32 bytes (string offset) = 96 bytes
       // Offset should point to byte 96
@@ -100,7 +102,8 @@ void main() {
 
     test('function selector uses UTF-8 encoding', () {
       // Verify selector matches expected keccak256 of UTF-8 bytes
-      final selector = AbiEncoder.getFunctionSelector('transfer(address,uint256)');
+      final selector =
+          AbiEncoder.getFunctionSelector('transfer(address,uint256)');
       expect(selector.length, equals(4));
 
       // transfer(address,uint256) selector = 0xa9059cbb
@@ -108,7 +111,8 @@ void main() {
     });
 
     test('event topic uses UTF-8 encoding', () {
-      final topic = AbiEncoder.getEventTopic('Transfer(address,address,uint256)');
+      final topic =
+          AbiEncoder.getEventTopic('Transfer(address,address,uint256)');
       expect(topic.length, equals(32));
 
       // Transfer(address,address,uint256) topic hash

@@ -121,7 +121,8 @@ void main() {
       test('generates correct signature', () {
         final events = AbiParser.parseEvents(erc20Abi);
 
-        expect(events[0].signature, equals('Transfer(address,address,uint256)'));
+        expect(
+            events[0].signature, equals('Transfer(address,address,uint256)'));
       });
     });
 
@@ -145,7 +146,8 @@ void main() {
       test('generates correct signature', () {
         final errors = AbiParser.parseErrors(erc20Abi);
 
-        expect(errors[0].signature, equals('InsufficientBalance(uint256,uint256)'));
+        expect(errors[0].signature,
+            equals('InsufficientBalance(uint256,uint256)'));
       });
     });
 

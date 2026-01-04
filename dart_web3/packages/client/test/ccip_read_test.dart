@@ -12,9 +12,10 @@ class MockTransport implements Transport {
   int callCount = 0;
 
   @override
-  Future<Map<String, dynamic>> request(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>> request(
+      String method, List<dynamic> params) async {
     callCount++;
-    
+
     if (method == 'eth_call') {
       if (callCount == 1) {
         // Return OffchainLookup error
@@ -33,22 +34,20 @@ class MockTransport implements Transport {
           AbiFixedBytes(4),
           AbiBytes(),
         ];
-        final encoded = AbiEncoder.encode(types, [sender, urls, callData, callbackFunction, extraData]);
-        final errorHex = '0x$selector${HexUtils.encode(encoded, prefix: false)}';
+        final encoded = AbiEncoder.encode(
+            types, [sender, urls, callData, callbackFunction, extraData]);
+        final errorHex =
+            '0x$selector${HexUtils.encode(encoded, prefix: false)}';
 
         throw RpcError(3, 'execution reverted: OffchainLookup', errorHex);
       } else if (callCount == 2) {
         // Verify it's the callback call
         final callParams = params[0] as Map<String, dynamic>;
         final data = callParams['data'] as String;
-        
+
         // callbackFunction(0x906165d2) + abi.encode(gatewayResponse(0x778899), extraData(0x1122))
         if (data.startsWith('0x906165d2')) {
-          return {
-            'jsonrpc': '2.0',
-            'id': 2,
-            'result': '0x445566'
-          };
+          return {'jsonrpc': '2.0', 'id': 2, 'result': '0x445566'};
         }
       }
     }
@@ -57,7 +56,8 @@ class MockTransport implements Transport {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> batchRequest(List<RpcRequest> requests) async {
+  Future<List<Map<String, dynamic>>> batchRequest(
+      List<RpcRequest> requests) async {
     return [];
   }
 
@@ -68,7 +68,8 @@ class MockTransport implements Transport {
 class MockHttpClient extends http.BaseClient {
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
-    if (request.url.toString() == 'https://example.com/0x1234567890123456789012345678901234567890/abcdef') {
+    if (request.url.toString() ==
+        'https://example.com/0x1234567890123456789012345678901234567890/abcdef') {
       return http.StreamedResponse(
         Stream.value(utf8.encode(json.encode({'data': '0x778899'}))),
         200,
@@ -91,7 +92,7 @@ void main() {
       // Inject mock HTTP client
       final handler = CCIPReadHandler(client, httpClient: MockHttpClient());
       client.ccipHandler = handler;
-      
+
       final result = await client.call(CallRequest(
         to: '0x1234567890123456789012345678901234567890',
         data: HexUtils.decode('0xabcdef'),

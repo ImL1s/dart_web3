@@ -16,7 +16,7 @@ void main() {
       mockCoordinator = MockSigningCoordinator();
       mockKeyGeneration = MockKeyGeneration();
       mockKeyRefresh = MockKeyRefresh();
-      
+
       testKeyShare = KeyShare(
         partyId: 'party_1',
         shareData: Uint8List.fromList(List.generate(64, (i) => i % 256)),
@@ -75,7 +75,7 @@ void main() {
 
         const message = 'Hello, MPC World!';
         final signature = await signer.signMessage(message);
-        
+
         expect(signature, isA<Uint8List>());
         expect(signature.length, greaterThan(0));
       });
@@ -135,13 +135,14 @@ void main() {
         );
 
         final partyIds = ['party_1', 'party_2', 'party_3'];
-        final keyShares = await thresholdSig.generateKeyShares(partyIds: partyIds);
+        final keyShares =
+            await thresholdSig.generateKeyShares(partyIds: partyIds);
 
         expect(keyShares.length, equals(3));
         expect(keyShares[0].partyId, equals('party_1'));
         expect(keyShares[1].partyId, equals('party_2'));
         expect(keyShares[2].partyId, equals('party_3'));
-        
+
         // All shares should have the same public key
         final publicKey = keyShares[0].publicKey;
         for (final share in keyShares) {
@@ -159,9 +160,11 @@ void main() {
         );
 
         final partyIds = ['party_1', 'party_2', 'party_3'];
-        final keyShares = await thresholdSig.generateKeyShares(partyIds: partyIds);
-        
-        final messageHash = Uint8List.fromList(List.generate(32, (i) => i % 256));
+        final keyShares =
+            await thresholdSig.generateKeyShares(partyIds: partyIds);
+
+        final messageHash =
+            Uint8List.fromList(List.generate(32, (i) => i % 256));
         const sessionId = 'test_session_123';
 
         // Create signature shares from threshold number of parties
@@ -194,20 +197,24 @@ void main() {
         );
 
         final partyIds = ['party_1', 'party_2', 'party_3'];
-        final originalShares = await thresholdSig.generateKeyShares(partyIds: partyIds);
-        
-        final refreshedShares = await thresholdSig.refreshKeyShares(originalShares);
+        final originalShares =
+            await thresholdSig.generateKeyShares(partyIds: partyIds);
+
+        final refreshedShares =
+            await thresholdSig.refreshKeyShares(originalShares);
 
         expect(refreshedShares.length, equals(originalShares.length));
-        
+
         // Public keys should remain the same after refresh
         for (var i = 0; i < refreshedShares.length; i++) {
-          expect(refreshedShares[i].publicKey, equals(originalShares[i].publicKey));
+          expect(refreshedShares[i].publicKey,
+              equals(originalShares[i].publicKey));
           expect(refreshedShares[i].partyId, equals(originalShares[i].partyId));
           expect(refreshedShares[i].lastRefreshed, isNotNull);
-          
+
           // Share data should be different (refreshed)
-          expect(refreshedShares[i].shareData, isNot(equals(originalShares[i].shareData)));
+          expect(refreshedShares[i].shareData,
+              isNot(equals(originalShares[i].shareData)));
         }
       });
     });
@@ -239,11 +246,13 @@ void main() {
 
       test('should throw error for unsupported provider', () {
         expect(
-          () => MpcProviderFactory.create(MpcProviderConfig(
-            providerName: 'unsupported',
-            apiUrl: 'https://example.com',
-            apiKey: 'test_key',
-          ),),
+          () => MpcProviderFactory.create(
+            MpcProviderConfig(
+              providerName: 'unsupported',
+              apiUrl: 'https://example.com',
+              apiKey: 'test_key',
+            ),
+          ),
           throwsA(isA<MpcError>()),
         );
       });
@@ -326,9 +335,11 @@ void main() {
         );
 
         final partyIds = ['party_1', 'party_2', 'party_3'];
-        final keyShares = await thresholdSig.generateKeyShares(partyIds: partyIds);
-        
-        final messageHash = Uint8List.fromList(List.generate(32, (i) => i % 256));
+        final keyShares =
+            await thresholdSig.generateKeyShares(partyIds: partyIds);
+
+        final messageHash =
+            Uint8List.fromList(List.generate(32, (i) => i % 256));
         const sessionId = 'test_session';
 
         final share = await thresholdSig.createSignatureShare(
@@ -451,7 +462,8 @@ class MockKeyRefresh implements KeyRefresh {
     refreshKeySharesCalled = true;
     return KeyShare(
       partyId: keyShare.partyId,
-      shareData: Uint8List.fromList(List.generate(64, (i) => (i + 1) % 256)), // Different data
+      shareData: Uint8List.fromList(
+          List.generate(64, (i) => (i + 1) % 256)), // Different data
       curveType: keyShare.curveType,
       threshold: keyShare.threshold,
       totalParties: keyShare.totalParties,

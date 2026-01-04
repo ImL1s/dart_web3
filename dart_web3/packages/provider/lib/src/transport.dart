@@ -12,8 +12,8 @@ abstract class Transport {
 
 /// Represents a single RPC request.
 class RpcRequest {
-
   RpcRequest(this.method, this.params, [this.id]);
+
   /// The RPC method name.
   final String method;
 
@@ -34,7 +34,6 @@ class RpcRequest {
 
 /// RPC error response.
 class RpcError implements Exception {
-
   RpcError(this.code, this.message, [this.data]);
 
   factory RpcError.fromJson(Map<String, dynamic> json) {
@@ -44,6 +43,7 @@ class RpcError implements Exception {
       json['data'],
     );
   }
+
   /// Error code.
   final int code;
 

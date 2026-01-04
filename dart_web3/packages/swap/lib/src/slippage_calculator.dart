@@ -12,19 +12,20 @@ class SlippageCalculator {
     required BigInt amount,
     required List<SwapQuote> quotes,
     double baseSlippage = 0.005, // 0.5% base
-    double maxSlippage = 0.05,   // 5% max
+    double maxSlippage = 0.05, // 5% max
   }) {
     // Start with base slippage
     var dynamicSlippage = baseSlippage;
 
     // Adjust based on price impact
     if (quotes.isNotEmpty) {
-      final avgPriceImpact = quotes
-          .map((q) => q.priceImpact)
-          .reduce((a, b) => a + b) / quotes.length;
-      
+      final avgPriceImpact =
+          quotes.map((q) => q.priceImpact).reduce((a, b) => a + b) /
+              quotes.length;
+
       // Increase slippage for high price impact swaps
-      if (avgPriceImpact > 0.01) { // 1%
+      if (avgPriceImpact > 0.01) {
+        // 1%
         dynamicSlippage += avgPriceImpact * 0.5;
       }
     }
@@ -40,7 +41,8 @@ class SlippageCalculator {
     dynamicSlippage *= sizeMultiplier;
 
     // Adjust based on token pair liquidity
-    final liquidityMultiplier = _estimateLiquidityMultiplier(fromToken, toToken);
+    final liquidityMultiplier =
+        _estimateLiquidityMultiplier(fromToken, toToken);
     dynamicSlippage *= liquidityMultiplier;
 
     // Cap at maximum slippage
@@ -61,7 +63,7 @@ class SlippageCalculator {
 
     // Minimum slippage for any swap
     const minSlippage = 0.001; // 0.1%
-    
+
     // Maximum reasonable slippage
     const maxSlippage = 0.1; // 10%
 
@@ -75,7 +77,7 @@ class SlippageCalculator {
     required BigInt amount,
   }) {
     final baseSlippage = _getBaseSlippageForPair(fromToken, toToken);
-    
+
     return [
       SlippageTier(
         name: 'Low',
@@ -109,9 +111,11 @@ class SlippageCalculator {
     required BigInt expectedOutput,
     required double slippage,
   }) {
-    final minimumOutput = (expectedOutput.toDouble() * (1.0 - slippage)).round();
+    final minimumOutput =
+        (expectedOutput.toDouble() * (1.0 - slippage)).round();
     final potentialLoss = expectedOutput - BigInt.from(minimumOutput);
-    final lossPercentage = (potentialLoss.toDouble() / expectedOutput.toDouble()) * 100;
+    final lossPercentage =
+        (potentialLoss.toDouble() / expectedOutput.toDouble()) * 100;
 
     return SlippageImpact(
       expectedOutput: expectedOutput,
@@ -148,11 +152,12 @@ class SlippageCalculator {
 
     final outputs = quotes.map((q) => q.outputAmount.toDouble()).toList();
     final mean = outputs.reduce((a, b) => a + b) / outputs.length;
-    
+
     final variance = outputs
-        .map((output) => math.pow(output - mean, 2))
-        .reduce((a, b) => a + b) / outputs.length;
-    
+            .map((output) => math.pow(output - mean, 2))
+            .reduce((a, b) => a + b) /
+        outputs.length;
+
     final standardDeviation = math.sqrt(variance);
     return standardDeviation / mean; // Coefficient of variation
   }
@@ -160,7 +165,7 @@ class SlippageCalculator {
   /// Calculate size multiplier based on swap amount
   static double _calculateSizeMultiplier(BigInt amount, int decimals) {
     final normalizedAmount = amount.toDouble() / math.pow(10, decimals);
-    
+
     // Larger swaps need more slippage tolerance
     if (normalizedAmount > 100000) {
       return 2; // Very large swap
@@ -174,16 +179,23 @@ class SlippageCalculator {
   }
 
   /// Estimate liquidity multiplier for token pair
-  static double _estimateLiquidityMultiplier(SwapToken fromToken, SwapToken toToken) {
+  static double _estimateLiquidityMultiplier(
+      SwapToken fromToken, SwapToken toToken) {
     // This is a simplified heuristic - in practice you'd use on-chain liquidity data
-    
+
     final majorTokens = [
-      'ETH', 'WETH', 'USDC', 'USDT', 'DAI', 'WBTC', 'BTC',
+      'ETH',
+      'WETH',
+      'USDC',
+      'USDT',
+      'DAI',
+      'WBTC',
+      'BTC',
     ];
-    
+
     final fromMajor = majorTokens.contains(fromToken.symbol.toUpperCase());
     final toMajor = majorTokens.contains(toToken.symbol.toUpperCase());
-    
+
     if (fromMajor && toMajor) {
       return 1; // High liquidity pair
     } else if (fromMajor || toMajor) {
@@ -194,12 +206,13 @@ class SlippageCalculator {
   }
 
   /// Get base slippage for a token pair
-  static double _getBaseSlippageForPair(SwapToken fromToken, SwapToken toToken) {
+  static double _getBaseSlippageForPair(
+      SwapToken fromToken, SwapToken toToken) {
     // Stablecoin pairs have lower slippage
     final stablecoins = ['USDC', 'USDT', 'DAI', 'BUSD', 'FRAX'];
     final fromStable = stablecoins.contains(fromToken.symbol.toUpperCase());
     final toStable = stablecoins.contains(toToken.symbol.toUpperCase());
-    
+
     if (fromStable && toStable) {
       return 0.001; // 0.1% for stablecoin pairs
     } else if (fromStable || toStable) {
@@ -212,7 +225,6 @@ class SlippageCalculator {
 
 /// Slippage tier for UI selection
 class SlippageTier {
-
   const SlippageTier({
     required this.name,
     required this.slippage,
@@ -230,7 +242,6 @@ class SlippageTier {
 
 /// Slippage impact calculation result
 class SlippageImpact {
-
   const SlippageImpact({
     required this.expectedOutput,
     required this.minimumOutput,

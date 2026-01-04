@@ -1,4 +1,3 @@
-
 import '../encoding/protobuf.dart';
 import 'transaction.dart'; // for Coin, GoogleAny
 
@@ -33,7 +32,7 @@ class MsgTransfer {
     pb.addString(5, receiver);
     pb.addMessage(6, timeoutHeight.toProto());
     pb.addUint64(7, timeoutTimestamp);
-    
+
     return GoogleAny(typeUrl: typeUrl, value: pb.toBytes());
   }
 }
@@ -42,11 +41,11 @@ class Height {
   Height({required this.revisionNumber, required this.revisionHeight});
   final BigInt revisionNumber;
   final BigInt revisionHeight;
-  
+
   ProtobufBuilder toProto() {
-      final pb = ProtobufBuilder();
-      pb.addUint64(1, revisionNumber);
-      pb.addUint64(2, revisionHeight);
-      return pb;
+    final pb = ProtobufBuilder();
+    pb.addUint64(1, revisionNumber);
+    pb.addUint64(2, revisionHeight);
+    return pb;
   }
 }

@@ -11,7 +11,8 @@ void main() {
         toBlock: '0x10',
       );
 
-      expect(filter.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          filter.address, equals('0x1234567890123456789012345678901234567890'));
       expect(filter.topics, equals(['0xabcd']));
       expect(filter.fromBlock, equals('0x1'));
       expect(filter.toBlock, equals('0x10'));
@@ -24,7 +25,8 @@ void main() {
         fromBlock: 'latest',
       );
 
-      expect(filter.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          filter.address, equals('0x1234567890123456789012345678901234567890'));
       expect(filter.topics, equals(['0xabcd']));
       expect(filter.fromBlock, equals('latest'));
     });
@@ -36,12 +38,16 @@ void main() {
         indexedParams: ['0x5678', '0x9abc'],
       );
 
-      expect(filter.address, equals('0x1234567890123456789012345678901234567890'));
-      expect(filter.topics, equals([
-        '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-        '0x5678',
-        '0x9abc',
-      ]),);
+      expect(
+          filter.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+        filter.topics,
+        equals([
+          '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
+          '0x5678',
+          '0x9abc',
+        ]),
+      );
     });
 
     test('should create filter for block range', () {
@@ -51,7 +57,8 @@ void main() {
         address: '0x1234567890123456789012345678901234567890',
       );
 
-      expect(filter.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          filter.address, equals('0x1234567890123456789012345678901234567890'));
       expect(filter.fromBlock, equals('0x1'));
       expect(filter.toBlock, equals('0x10'));
     });
@@ -66,7 +73,8 @@ void main() {
 
       final json = filter.toJson();
 
-      expect(json['address'], equals('0x1234567890123456789012345678901234567890'));
+      expect(json['address'],
+          equals('0x1234567890123456789012345678901234567890'));
       expect(json['topics'], equals(['0xabcd', '0xefgh']));
       expect(json['fromBlock'], equals('0x1'));
       expect(json['toBlock'], equals('0x10'));
@@ -82,7 +90,8 @@ void main() {
 
       final filter = EventFilter.fromJson(json);
 
-      expect(filter.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          filter.address, equals('0x1234567890123456789012345678901234567890'));
       expect(filter.topics, equals(['0xabcd', '0xefgh']));
       expect(filter.fromBlock, equals('0x1'));
       expect(filter.toBlock, equals('0x10'));
@@ -107,7 +116,8 @@ void main() {
       final json = filter.toJson();
 
       expect(json['blockHash'], equals('0xabcdef1234567890'));
-      expect(json['address'], equals('0x1234567890123456789012345678901234567890'));
+      expect(json['address'],
+          equals('0x1234567890123456789012345678901234567890'));
       expect(json.containsKey('fromBlock'), isFalse);
       expect(json.containsKey('toBlock'), isFalse);
     });

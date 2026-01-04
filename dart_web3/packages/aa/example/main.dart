@@ -6,10 +6,10 @@ import 'package:web3_universal_chains/web3_universal_chains.dart';
 void main() async {
   final owner = PrivateKeySigner.createRandom(11155111); // Sepolia chain ID
   final client = ClientFactory.createPublicClient(
-      rpcUrl: 'https://eth-sepolia.g.alchemy.com/v2/key',
-      chain: Chains.sepolia,
+    rpcUrl: 'https://eth-sepolia.g.alchemy.com/v2/key',
+    chain: Chains.sepolia,
   );
-  
+
   // Initialize an Account Abstraction provider (e.g., Safe, Kernel)
   final smartAccount = LightAccount(
     publicClient: client, // Named parameter publicClient

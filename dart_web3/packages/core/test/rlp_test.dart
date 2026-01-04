@@ -7,8 +7,10 @@ void main() {
   group('RLP', () {
     group('encode', () {
       test('encodes single byte < 0x80', () {
-        expect(RLP.encode(Uint8List.fromList([0x00])), equals(Uint8List.fromList([0x00])));
-        expect(RLP.encode(Uint8List.fromList([0x7f])), equals(Uint8List.fromList([0x7f])));
+        expect(RLP.encode(Uint8List.fromList([0x00])),
+            equals(Uint8List.fromList([0x00])));
+        expect(RLP.encode(Uint8List.fromList([0x7f])),
+            equals(Uint8List.fromList([0x7f])));
       });
 
       test('encodes empty bytes', () {
@@ -18,7 +20,8 @@ void main() {
       test('encodes short string (1-55 bytes)', () {
         // "dog" = [0x64, 0x6f, 0x67]
         final dog = Uint8List.fromList([0x64, 0x6f, 0x67]);
-        expect(RLP.encode(dog), equals(Uint8List.fromList([0x83, 0x64, 0x6f, 0x67])));
+        expect(RLP.encode(dog),
+            equals(Uint8List.fromList([0x83, 0x64, 0x6f, 0x67])));
       });
 
       test('encodes long string (> 55 bytes)', () {
@@ -40,7 +43,8 @@ void main() {
         final encoded = RLP.encode([cat, dog]);
         expect(
           encoded,
-          equals(Uint8List.fromList([0xc8, 0x83, 0x63, 0x61, 0x74, 0x83, 0x64, 0x6f, 0x67])),
+          equals(Uint8List.fromList(
+              [0xc8, 0x83, 0x63, 0x61, 0x74, 0x83, 0x64, 0x6f, 0x67])),
         );
       });
 
@@ -56,7 +60,8 @@ void main() {
         final encoded = RLP.encode(value);
         expect(
           encoded,
-          equals(Uint8List.fromList([0xc7, 0xc0, 0xc1, 0xc0, 0xc3, 0xc0, 0xc1, 0xc0])),
+          equals(Uint8List.fromList(
+              [0xc7, 0xc0, 0xc1, 0xc0, 0xc3, 0xc0, 0xc1, 0xc0])),
         );
       });
 
@@ -69,8 +74,10 @@ void main() {
 
       test('encodes BigInt', () {
         expect(RLP.encode(BigInt.zero), equals(Uint8List.fromList([0x80])));
-        expect(RLP.encode(BigInt.from(127)), equals(Uint8List.fromList([0x7f])));
-        expect(RLP.encode(BigInt.from(256)), equals(Uint8List.fromList([0x82, 0x01, 0x00])));
+        expect(
+            RLP.encode(BigInt.from(127)), equals(Uint8List.fromList([0x7f])));
+        expect(RLP.encode(BigInt.from(256)),
+            equals(Uint8List.fromList([0x82, 0x01, 0x00])));
       });
 
       test('encodes null as empty bytes', () {
@@ -80,8 +87,10 @@ void main() {
 
     group('decode', () {
       test('decodes single byte < 0x80', () {
-        expect(RLP.decode(Uint8List.fromList([0x00])), equals(Uint8List.fromList([0x00])));
-        expect(RLP.decode(Uint8List.fromList([0x7f])), equals(Uint8List.fromList([0x7f])));
+        expect(RLP.decode(Uint8List.fromList([0x00])),
+            equals(Uint8List.fromList([0x00])));
+        expect(RLP.decode(Uint8List.fromList([0x7f])),
+            equals(Uint8List.fromList([0x7f])));
       });
 
       test('decodes empty bytes', () {
@@ -90,7 +99,8 @@ void main() {
 
       test('decodes short string', () {
         final encoded = Uint8List.fromList([0x83, 0x64, 0x6f, 0x67]);
-        expect(RLP.decode(encoded), equals(Uint8List.fromList([0x64, 0x6f, 0x67])));
+        expect(RLP.decode(encoded),
+            equals(Uint8List.fromList([0x64, 0x6f, 0x67])));
       });
 
       test('decodes empty list', () {
@@ -98,7 +108,8 @@ void main() {
       });
 
       test('decodes short list', () {
-        final encoded = Uint8List.fromList([0xc8, 0x83, 0x63, 0x61, 0x74, 0x83, 0x64, 0x6f, 0x67]);
+        final encoded = Uint8List.fromList(
+            [0xc8, 0x83, 0x63, 0x61, 0x74, 0x83, 0x64, 0x6f, 0x67]);
         final decoded = RLP.decode(encoded) as List;
         expect(decoded.length, equals(2));
         expect(decoded[0], equals(Uint8List.fromList([0x63, 0x61, 0x74])));
@@ -131,21 +142,26 @@ void main() {
       test('encode then decode list returns equivalent data', () {
         final testCases = <dynamic>[
           <dynamic>[],
-          [Uint8List.fromList([1, 2, 3])],
+          [
+            Uint8List.fromList([1, 2, 3])
+          ],
           [
             Uint8List.fromList([1]),
             Uint8List.fromList([2]),
           ],
           [
             <dynamic>[],
-            [Uint8List.fromList([1])],
+            [
+              Uint8List.fromList([1])
+            ],
           ],
         ];
 
         for (final data in testCases) {
           final encoded = RLP.encode(data);
           final decoded = RLP.decode(encoded);
-          expect(_deepEquals(decoded, data), isTrue, reason: 'Failed for: $data');
+          expect(_deepEquals(decoded, data), isTrue,
+              reason: 'Failed for: $data');
         }
       });
     });

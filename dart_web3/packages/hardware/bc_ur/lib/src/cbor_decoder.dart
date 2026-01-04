@@ -6,7 +6,7 @@ import 'dart:typed_data';
 class CBORDecoder {
   late Uint8List _data;
   int _offset = 0;
-  
+
   /// Decode CBOR bytes to a value
   static dynamic decode(Uint8List data) {
     final decoder = CBORDecoder();
@@ -14,16 +14,16 @@ class CBORDecoder {
     decoder._offset = 0;
     return decoder._decodeValue();
   }
-  
+
   dynamic _decodeValue() {
     if (_offset >= _data.length) {
       throw FormatException('Unexpected end of CBOR data');
     }
-    
+
     final byte = _data[_offset++];
     final majorType = (byte >> 5) & 0x07;
     final additionalInfo = byte & 0x1F;
-    
+
     switch (majorType) {
       case 0: // Unsigned integer
         return _decodeUnsigned(additionalInfo);
@@ -43,7 +43,7 @@ class CBORDecoder {
         throw FormatException('Unsupported CBOR major type: $majorType');
     }
   }
-  
+
   int _decodeUnsigned(int additionalInfo) {
     if (additionalInfo < 24) {
       return additionalInfo;
@@ -56,50 +56,51 @@ class CBORDecoder {
     } else if (additionalInfo == 27) {
       return _readUint64();
     } else {
-      throw FormatException('Invalid additional info for unsigned integer: $additionalInfo');
+      throw FormatException(
+          'Invalid additional info for unsigned integer: $additionalInfo');
     }
   }
-  
+
   Uint8List _decodeBytes(int additionalInfo) {
     final length = _decodeUnsigned(additionalInfo);
     if (_offset + length > _data.length) {
       throw FormatException('Not enough data for byte string');
     }
-    
+
     final result = _data.sublist(_offset, _offset + length);
     _offset += length;
     return result;
   }
-  
+
   String _decodeString(int additionalInfo) {
     final bytes = _decodeBytes(additionalInfo);
     return utf8.decode(bytes);
   }
-  
+
   List<dynamic> _decodeArray(int additionalInfo) {
     final length = _decodeUnsigned(additionalInfo);
     final result = <dynamic>[];
-    
+
     for (var i = 0; i < length; i++) {
       result.add(_decodeValue());
     }
-    
+
     return result;
   }
-  
+
   Map<dynamic, dynamic> _decodeMap(int additionalInfo) {
     final length = _decodeUnsigned(additionalInfo);
     final result = <dynamic, dynamic>{};
-    
+
     for (var i = 0; i < length; i++) {
       final key = _decodeValue();
       final value = _decodeValue();
       result[key] = value;
     }
-    
+
     return result;
   }
-  
+
   dynamic _decodePrimitive(int additionalInfo) {
     switch (additionalInfo) {
       case 20: // false
@@ -112,14 +113,14 @@ class CBORDecoder {
         throw FormatException('Unsupported primitive: $additionalInfo');
     }
   }
-  
+
   int _readUint8() {
     if (_offset >= _data.length) {
       throw FormatException('Not enough data for uint8');
     }
     return _data[_offset++];
   }
-  
+
   int _readUint16() {
     if (_offset + 2 > _data.length) {
       throw FormatException('Not enough data for uint16');
@@ -128,24 +129,24 @@ class CBORDecoder {
     _offset += 2;
     return result;
   }
-  
+
   int _readUint32() {
     if (_offset + 4 > _data.length) {
       throw FormatException('Not enough data for uint32');
     }
     final result = (_data[_offset] << 24) |
-                   (_data[_offset + 1] << 16) |
-                   (_data[_offset + 2] << 8) |
-                   _data[_offset + 3];
+        (_data[_offset + 1] << 16) |
+        (_data[_offset + 2] << 8) |
+        _data[_offset + 3];
     _offset += 4;
     return result;
   }
-  
+
   int _readUint64() {
     if (_offset + 8 > _data.length) {
       throw FormatException('Not enough data for uint64');
     }
-    
+
     var result = 0;
     for (var i = 0; i < 8; i++) {
       result = (result << 8) | _data[_offset + i];

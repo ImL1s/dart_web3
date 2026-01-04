@@ -2,7 +2,6 @@ import 'package:web3_universal_core/web3_universal_core.dart';
 
 /// Flashbots bundle transaction
 class FlashbotsBundleTransaction {
-
   FlashbotsBundleTransaction({
     this.signedTransaction,
     this.transaction,
@@ -23,7 +22,6 @@ class FlashbotsBundleTransaction {
 
 /// Flashbots bundle
 class FlashbotsBundle {
-
   FlashbotsBundle({
     required this.txs,
     required this.blockNumber,
@@ -39,7 +37,9 @@ class FlashbotsBundle {
 
   Map<String, dynamic> toJson() {
     return {
-      'txs': txs.map((tx) => tx.signedTransaction).toList(), // Simplified for signed txs
+      'txs': txs
+          .map((tx) => tx.signedTransaction)
+          .toList(), // Simplified for signed txs
       'blockNumber': HexUtils.encode(BytesUtils.bigIntToBytes(blockNumber)),
       if (minTimestamp != null) 'minTimestamp': minTimestamp,
       if (maxTimestamp != null) 'maxTimestamp': maxTimestamp,

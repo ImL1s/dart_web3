@@ -6,7 +6,6 @@ import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 /// Injected Web3 Provider following EIP-1193
 class DAppProvider {
-
   DAppProvider({
     required PublicClient publicClient,
     WalletClient? walletClient,
@@ -24,14 +23,15 @@ class DAppProvider {
       case 'eth_accounts':
       case 'eth_requestAccounts':
         return _walletClient != null ? [_walletClient.address.hex] : [];
-      
+
       case 'eth_chainId':
         return '0x${_publicClient.chain.chainId.toRadixString(16)}';
 
       case 'eth_sendTransaction':
         if (_walletClient == null) throw Exception('Wallet not connected');
         // Handle transaction sending (would involve UI confirmation)
-        return _walletClient.sendTransaction(_parseTransaction(params[0] as Map<String, dynamic>));
+        return _walletClient.sendTransaction(
+            _parseTransaction(params[0] as Map<String, dynamic>));
 
       default:
         // Forward other requests to public client (RPC)

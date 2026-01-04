@@ -7,12 +7,12 @@ import 'event_subscriber.dart';
 
 /// Handles blockchain reorganizations and manages event consistency.
 class ReorgHandler {
-
   ReorgHandler(
     this.subscriber, {
     this.maxCacheSize = 1000,
     this.confirmationDepth = 12,
   });
+
   /// The event subscriber.
   final EventSubscriber subscriber;
 
@@ -29,7 +29,7 @@ class ReorgHandler {
   final int confirmationDepth;
 
   /// Processes logs and handles potential reorganizations.
-  /// 
+  ///
   /// Returns a stream of logs that filters out removed logs and
   /// emits reorg events when chain reorganizations are detected.
   Stream<ReorgEvent> processLogs(EventFilter filter) async* {
@@ -52,7 +52,8 @@ class ReorgHandler {
     final cachedHash = _blockHashCache[log.blockNumber];
     if (cachedHash != null && cachedHash != log.blockHash) {
       // Block hash mismatch - potential reorg
-      final reorgLogs = await _handleReorganization(log.blockNumber, log.blockHash);
+      final reorgLogs =
+          await _handleReorganization(log.blockNumber, log.blockHash);
       return ReorgEvent.reorganization(log.blockNumber, reorgLogs, [log]);
     }
 
@@ -71,31 +72,33 @@ class ReorgHandler {
   }
 
   /// Handles a detected reorganization.
-  Future<List<Log>> _handleReorganization(BigInt blockNumber, String newBlockHash) async {
+  Future<List<Log>> _handleReorganization(
+      BigInt blockNumber, String newBlockHash) async {
     final removedLogs = <Log>[];
 
     // Find all cached logs from the reorganized block onwards
-    final blocksToRemove = _blockHashCache.keys
-        .where((block) => block >= blockNumber)
-        .toList();
+    final blocksToRemove =
+        _blockHashCache.keys.where((block) => block >= blockNumber).toList();
 
     for (final block in blocksToRemove) {
       final oldHash = _blockHashCache[block]!;
       final cachedLogs = _logCache[oldHash] ?? [];
-      
+
       // Mark logs as removed
       for (final log in cachedLogs) {
-        removedLogs.add(Log(
-          address: log.address,
-          topics: log.topics,
-          data: log.data,
-          blockHash: log.blockHash,
-          blockNumber: log.blockNumber,
-          transactionHash: log.transactionHash,
-          transactionIndex: log.transactionIndex,
-          logIndex: log.logIndex,
-          removed: true, // Mark as removed due to reorg
-        ),);
+        removedLogs.add(
+          Log(
+            address: log.address,
+            topics: log.topics,
+            data: log.data,
+            blockHash: log.blockHash,
+            blockNumber: log.blockNumber,
+            transactionHash: log.transactionHash,
+            transactionIndex: log.transactionIndex,
+            logIndex: log.logIndex,
+            removed: true, // Mark as removed due to reorg
+          ),
+        );
       }
 
       // Remove from caches
@@ -140,7 +143,8 @@ class ReorgHandler {
   }
 
   /// Validates the consistency of a block range.
-  Future<List<ReorgEvent>> validateBlockRange(BigInt fromBlock, BigInt toBlock) async {
+  Future<List<ReorgEvent>> validateBlockRange(
+      BigInt fromBlock, BigInt toBlock) async {
     final events = <ReorgEvent>[];
 
     for (var block = fromBlock; block <= toBlock; block += BigInt.one) {
@@ -148,10 +152,12 @@ class ReorgHandler {
       if (cachedHash != null) {
         // Verify the block hash is still valid
         try {
-          final currentBlock = await subscriber.publicClient.getBlockByNumber('0x${block.toRadixString(16)}');
+          final currentBlock = await subscriber.publicClient
+              .getBlockByNumber('0x${block.toRadixString(16)}');
           if (currentBlock != null && currentBlock.hash != cachedHash) {
             // Reorganization detected
-            final removedLogs = await _handleReorganization(block, currentBlock.hash);
+            final removedLogs =
+                await _handleReorganization(block, currentBlock.hash);
             events.add(ReorgEvent.reorganization(block, removedLogs, []));
           }
         } on Exception catch (_) {
@@ -188,14 +194,14 @@ class ReorgHandler {
     return {
       'blockHashCacheSize': _blockHashCache.length,
       'logCacheSize': _logCache.length,
-      'totalCachedLogs': _logCache.values.fold(0, (sum, logs) => sum + logs.length),
+      'totalCachedLogs':
+          _logCache.values.fold(0, (sum, logs) => sum + logs.length),
     };
   }
 }
 
 /// Represents different types of reorganization events.
 class ReorgEvent {
-
   ReorgEvent._({
     required this.type,
     this.log,
@@ -243,6 +249,7 @@ class ReorgEvent {
       newLogs: newLogs,
     );
   }
+
   /// The type of event.
   final ReorgEventType type;
 

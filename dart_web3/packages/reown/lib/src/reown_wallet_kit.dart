@@ -1,13 +1,11 @@
 import 'dart:async';
 
-
-
 import 'namespace_config.dart';
 import 'reown_client.dart';
 import 'session_manager.dart';
 
 /// Reown WalletKit for building Wallets.
-/// 
+///
 /// This kit provides a high-level API for Wallets to accept connections,
 /// manage sessions, and sign requests.
 class ReownWalletKit {
@@ -26,7 +24,7 @@ class ReownWalletKit {
   final String projectId;
   final Map<String, dynamic> metadata;
   final String relayUrl;
-  
+
   late final ReownClient _core;
 
   /// Stream of session proposals.
@@ -35,8 +33,8 @@ class ReownWalletKit {
       .map((e) => e.proposal!);
 
   /// Stream of session requests (sign/transact).
-  Stream<ReownEvent> get sessionRequests => _core.events
-      .where((e) => e.type == ReownEventType.sessionRequest);
+  Stream<ReownEvent> get sessionRequests =>
+      _core.events.where((e) => e.type == ReownEventType.sessionRequest);
 
   /// Active sessions.
   List<Session> get sessions => _core.sessions;
@@ -55,7 +53,7 @@ class ReownWalletKit {
   Future<Session> approveSession({
     required SessionProposal proposal,
     required List<NamespaceConfig> namespaces,
-    required String account, 
+    required String account,
   }) async {
     return _core.approveSession(
       proposalId: proposal.id,

@@ -7,7 +7,7 @@ import 'signer.dart';
 /// Utility class for managing EIP-7702 authorization revocations.
 class AuthorizationRevocation {
   /// Creates a single revocation authorization.
-  /// 
+  ///
   /// Setting the address to zero address revokes any existing delegation
   /// for the given nonce.
   static Authorization createRevocation({
@@ -21,7 +21,7 @@ class AuthorizationRevocation {
   }
 
   /// Creates multiple revocation authorizations.
-  /// 
+  ///
   /// This is useful for revoking multiple delegations in a single transaction.
   static AuthorizationBatch createRevocationBatch({
     required int chainId,
@@ -34,7 +34,7 @@ class AuthorizationRevocation {
   }
 
   /// Creates a revocation for a specific contract delegation.
-  /// 
+  ///
   /// This revokes the delegation to a specific contract address by setting
   /// the authorization address to zero.
   static Authorization revokeContractDelegation({
@@ -62,12 +62,12 @@ class AuthorizationRevocation {
     }
 
     final signature = await signer.signAuthorization(revocation);
-    
+
     // Extract signature components
     final r = signature.sublist(0, 32);
     final s = signature.sublist(32, 64);
     final yParity = signature[64];
-    
+
     return revocation.withSignature(
       yParity: yParity,
       r: _bytesToBigInt(r),
@@ -118,7 +118,7 @@ class AuthorizationRevocation {
   }
 
   /// Checks if an authorization is a valid revocation.
-  /// 
+  ///
   /// A valid revocation must:
   /// - Have address set to zero address
   /// - Have valid chain ID and nonce
@@ -135,8 +135,10 @@ class AuthorizationRevocation {
 
     // If signed, signature must be valid format
     if (authorization.isSigned) {
-      if (authorization.yParity != 0 && authorization.yParity != 1) return false;
-      if (authorization.r == BigInt.zero && authorization.s == BigInt.zero) return false;
+      if (authorization.yParity != 0 && authorization.yParity != 1)
+        return false;
+      if (authorization.r == BigInt.zero && authorization.s == BigInt.zero)
+        return false;
     }
 
     return true;
@@ -145,11 +147,11 @@ class AuthorizationRevocation {
   /// Validates a batch of revocation authorizations.
   static Map<int, bool> validateRevocationBatch(AuthorizationBatch batch) {
     final results = <int, bool>{};
-    
+
     for (var i = 0; i < batch.length; i++) {
       results[i] = isValidRevocation(batch.authorizations[i]);
     }
-    
+
     return results;
   }
 
@@ -159,7 +161,7 @@ class AuthorizationRevocation {
   }
 
   /// Creates a revocation that undoes a previous delegation.
-  /// 
+  ///
   /// This creates a revocation authorization that uses the same nonce
   /// as the original delegation, effectively canceling it.
   static Authorization undoDelegation({
@@ -180,16 +182,16 @@ class AuthorizationRevocation {
     required List<Authorization> originalDelegations,
   }) {
     final batch = AuthorizationBatch();
-    
+
     for (final delegation in originalDelegations) {
       if (delegation.isRevocation) {
         throw ArgumentError('Cannot undo a revocation authorization');
       }
-      
+
       final revocation = undoDelegation(originalDelegation: delegation);
       batch.add(revocation);
     }
-    
+
     return batch;
   }
 

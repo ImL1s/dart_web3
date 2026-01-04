@@ -76,7 +76,8 @@ void main() {
         expect(gas, equals(expectedGas));
       });
 
-      test('should estimate gas for deployment with constructor args', () async {
+      test('should estimate gas for deployment with constructor args',
+          () async {
         // Arrange
         const bytecode = '0x608060405234801561001057600080fd5b50';
         final expectedGas = BigInt.from(120000);

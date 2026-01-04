@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 /// Keystone device information
 class KeystoneDevice {
-  
   KeystoneDevice({
     required this.deviceId,
     required this.name,
@@ -17,7 +16,6 @@ class KeystoneDevice {
 
 /// Keystone account information
 class KeystoneAccount {
-  
   KeystoneAccount({
     required this.address,
     required this.derivationPath,
@@ -32,7 +30,6 @@ class KeystoneAccount {
 
 /// Keystone signing request
 class KeystoneSignRequest {
-  
   KeystoneSignRequest({
     required this.requestId,
     required this.data,
@@ -49,7 +46,6 @@ class KeystoneSignRequest {
 
 /// Keystone signing response
 class KeystoneSignResponse {
-  
   KeystoneSignResponse({
     required this.requestId,
     required this.signature,
@@ -58,7 +54,7 @@ class KeystoneSignResponse {
   final Uint8List requestId;
   final Uint8List signature;
   final String? error;
-  
+
   bool get isSuccess => error == null;
 }
 
@@ -67,7 +63,7 @@ enum KeystoneDataType {
   transaction(1),
   typedData(2),
   personalMessage(3);
-  
+
   const KeystoneDataType(this.value);
   final int value;
 }
@@ -84,7 +80,6 @@ enum QRCommunicationState {
 
 /// QR scan result
 class QRScanResult {
-  
   QRScanResult({
     required this.data,
     required this.timestamp,
@@ -95,7 +90,6 @@ class QRScanResult {
 
 /// Multi-part QR progress
 class QRProgress {
-  
   QRProgress({
     required this.currentPart,
     required this.totalParts,
@@ -103,7 +97,7 @@ class QRProgress {
   final int currentPart;
   final int totalParts;
   final double percentage;
-  
+
   bool get isComplete => currentPart >= totalParts;
 }
 
@@ -120,12 +114,11 @@ enum KeystoneErrorType {
 
 /// Keystone exception
 class KeystoneException implements Exception {
-  
   KeystoneException(this.type, this.message, [this.originalError]);
   final KeystoneErrorType type;
   final String message;
   final dynamic originalError;
-  
+
   @override
   String toString() {
     return 'KeystoneException: $message (type: $type)';

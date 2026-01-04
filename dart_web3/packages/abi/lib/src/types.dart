@@ -24,7 +24,6 @@ abstract class AbiType {
 
 /// Unsigned integer type (uint8 to uint256).
 class AbiUint extends AbiType {
-
   AbiUint(this.bits) {
     if (bits <= 0 || bits > 256 || bits % 8 != 0) {
       throw ArgumentError('Invalid uint bits: $bits');
@@ -79,7 +78,6 @@ class AbiUint extends AbiType {
 
 /// Signed integer type (int8 to int256).
 class AbiInt extends AbiType {
-
   AbiInt(this.bits) {
     if (bits <= 0 || bits > 256 || bits % 8 != 0) {
       throw ArgumentError('Invalid int bits: $bits');
@@ -167,7 +165,8 @@ class AbiAddress extends AbiType {
   @override
   (dynamic, int) decode(Uint8List data, int offset) {
     final addressBytes = data.sublist(offset + 12, offset + 32);
-    final hex = addressBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    final hex =
+        addressBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
     return ('0x$hex', 32);
   }
 }
@@ -195,7 +194,6 @@ class AbiBool extends AbiType {
 
 /// Fixed-size bytes type (bytes1 to bytes32).
 class AbiFixedBytes extends AbiType {
-
   AbiFixedBytes(this.length) {
     if (length <= 0 || length > 32) {
       throw ArgumentError('Invalid bytes length: $length');
@@ -211,7 +209,25 @@ class AbiFixedBytes extends AbiType {
 
   @override
   Uint8List encode(dynamic value) {
-    final bytes = value as Uint8List;
+    Uint8List bytes;
+    if (value is Uint8List) {
+      bytes = value;
+    } else if (value is String) {
+      final hex = value.startsWith('0x') || value.startsWith('0X')
+          ? value.substring(2)
+          : value;
+      if (hex.length != length * 2) {
+        throw ArgumentError(
+            'Expected $length bytes ($name), got ${hex.length ~/ 2}');
+      }
+      bytes = Uint8List(length);
+      for (var i = 0; i < length; i++) {
+        bytes[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+      }
+    } else {
+      throw ArgumentError('Unsupported type for $name: ${value.runtimeType}');
+    }
+
     if (bytes.length != length) {
       throw ArgumentError('Expected $length bytes, got ${bytes.length}');
     }
@@ -260,7 +276,10 @@ class AbiBytes extends AbiType {
     final len = (length as BigInt).toInt();
     final paddedLength = ((len + 31) ~/ 32) * 32;
 
-    return (Uint8List.fromList(data.sublist(offset + 32, offset + 32 + len)), 32 + paddedLength);
+    return (
+      Uint8List.fromList(data.sublist(offset + 32, offset + 32 + len)),
+      32 + paddedLength
+    );
   }
 }
 
@@ -289,14 +308,16 @@ class AbiString extends AbiType {
 }
 
 /// Array type (fixed or dynamic length).
-class AbiArray extends AbiType { // null for dynamic arrays
+class AbiArray extends AbiType {
+  // null for dynamic arrays
 
   AbiArray(this.elementType, [this.length]);
   final AbiType elementType;
   final int? length;
 
   @override
-  String get name => length != null ? '${elementType.name}[$length]' : '${elementType.name}[]';
+  String get name =>
+      length != null ? '${elementType.name}[$length]' : '${elementType.name}[]';
 
   @override
   bool get isDynamic => length == null || elementType.isDynamic;
@@ -330,7 +351,8 @@ class AbiArray extends AbiType { // null for dynamic arrays
       final offsets = <int>[];
       final encodedElements = <Uint8List>[];
 
-      var currentOffset = list.length * 32; // Offset pointers are always 32 bytes
+      var currentOffset =
+          list.length * 32; // Offset pointers are always 32 bytes
       for (final element in list) {
         offsets.add(currentOffset);
         final encoded = elementType.encode(element);
@@ -403,7 +425,6 @@ class AbiArray extends AbiType { // null for dynamic arrays
 
 /// Tuple type (struct).
 class AbiTuple extends AbiType {
-
   AbiTuple(this.components, [this.names]);
   final List<AbiType> components;
   final List<String>? names;
@@ -430,7 +451,8 @@ class AbiTuple extends AbiType {
     final values = value is Map ? value.values.toList() : value as List;
 
     if (values.length != components.length) {
-      throw ArgumentError('Expected ${components.length} values, got ${values.length}');
+      throw ArgumentError(
+          'Expected ${components.length} values, got ${values.length}');
     }
 
     // Similar to array encoding
@@ -503,7 +525,8 @@ class AbiTuple extends AbiType {
     for (final component in components) {
       if (component.isDynamic) {
         final (off, _) = AbiUint(256).decode(data, currentOffset);
-        final (value, _) = component.decode(data, offset + (off as BigInt).toInt());
+        final (value, _) =
+            component.decode(data, offset + (off as BigInt).toInt());
         result.add(value);
         currentOffset += 32;
       } else {

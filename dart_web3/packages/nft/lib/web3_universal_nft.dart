@@ -1,5 +1,5 @@
 /// NFT services for Dart Web3 SDK
-/// 
+///
 /// Provides comprehensive NFT functionality including:
 /// - ERC-721 and ERC-1155 token support
 /// - NFT metadata parsing and IPFS gateway resolution

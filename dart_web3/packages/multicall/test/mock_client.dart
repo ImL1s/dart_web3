@@ -9,7 +9,6 @@ import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 /// Mock PublicClient for testing multicall functionality.
 class MockPublicClient extends PublicClient {
-
   MockPublicClient()
       : super(
           provider: MockRpcProvider(),
@@ -61,7 +60,6 @@ class MockPublicClient extends PublicClient {
 
 /// Mock WalletClient for testing multicall functionality.
 class MockWalletClient extends WalletClient {
-
   MockWalletClient()
       : super(
           provider: MockRpcProvider(),
@@ -112,12 +110,14 @@ class MockRpcProvider extends RpcProvider {
   }
 
   @override
-  Future<Map<String, dynamic>?> getBlockByHash(String blockHash, [bool fullTx = false]) async {
+  Future<Map<String, dynamic>?> getBlockByHash(String blockHash,
+      [bool fullTx = false]) async {
     return null;
   }
 
   @override
-  Future<Map<String, dynamic>?> getBlockByNumber(String block, [bool fullTx = false]) async {
+  Future<Map<String, dynamic>?> getBlockByNumber(String block,
+      [bool fullTx = false]) async {
     return null;
   }
 
@@ -137,12 +137,14 @@ class MockRpcProvider extends RpcProvider {
   }
 
   @override
-  Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
+  Future<BigInt> getTransactionCount(String address,
+      [String block = 'latest']) async {
     return BigInt.zero;
   }
 
   @override
-  Future<String> ethCall(Map<String, dynamic> request, [String block = 'latest']) async {
+  Future<String> ethCall(Map<String, dynamic> request,
+      [String block = 'latest']) async {
     return '0x';
   }
 
@@ -152,7 +154,8 @@ class MockRpcProvider extends RpcProvider {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getLogs(Map<String, dynamic> filter) async {
+  Future<List<Map<String, dynamic>>> getLogs(
+      Map<String, dynamic> filter) async {
     return [];
   }
 
@@ -180,12 +183,14 @@ class MockRpcProvider extends RpcProvider {
 /// Mock Transport for testing.
 class MockTransport implements Transport {
   @override
-  Future<Map<String, dynamic>> request(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>> request(
+      String method, List<dynamic> params) async {
     return {};
   }
 
   @override
-  Future<List<Map<String, dynamic>>> batchRequest(List<RpcRequest> requests) async {
+  Future<List<Map<String, dynamic>>> batchRequest(
+      List<RpcRequest> requests) async {
     return [];
   }
 
@@ -196,7 +201,8 @@ class MockTransport implements Transport {
 /// Mock Signer for testing.
 class MockSigner implements Signer {
   @override
-  EthereumAddress get address => EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
+  EthereumAddress get address =>
+      EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
 
   @override
   Future<Uint8List> signTransaction(TransactionRequest transaction) async {

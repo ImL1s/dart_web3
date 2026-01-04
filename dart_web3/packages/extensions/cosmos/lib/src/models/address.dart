@@ -8,10 +8,10 @@ class CosmosAddress {
   factory CosmosAddress.fromString(String address) {
     if (address.isEmpty) throw Exception('Address is empty');
     try {
-        final decoded = Bech32.decodeGeneric(address);
-        return CosmosAddress(decoded.data, hrp: decoded.hrp);
+      final decoded = Bech32.decodeGeneric(address);
+      return CosmosAddress(decoded.data, hrp: decoded.hrp);
     } catch (e) {
-        throw Exception('Invalid Bech32 address: $e');
+      throw Exception('Invalid Bech32 address: $e');
     }
   }
 
@@ -19,9 +19,9 @@ class CosmosAddress {
   final String hrp;
 
   String get address => Bech32.encodeGeneric(hrp, hash);
-  // Bech32.encode usually handles the variant logic based on generic/Bech32 spec. 
+  // Bech32.encode usually handles the variant logic based on generic/Bech32 spec.
   // Standard Cosmos addresses are Bech32.
-  
+
   @override
-  String toString() => address; 
+  String toString() => address;
 }

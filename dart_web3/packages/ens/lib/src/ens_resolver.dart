@@ -7,13 +7,13 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// ENS resolver for name and address resolution
 class ENSResolver {
-
   ENSResolver({
     required PublicClient client,
     String? registryAddress,
     Duration cacheTtl = const Duration(minutes: 5),
   })  : _client = client,
-        _registryAddress = registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+        _registryAddress =
+            registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
         _cacheTtl = cacheTtl;
   final PublicClient _client;
   final String _registryAddress;
@@ -36,16 +36,17 @@ class ENSResolver {
     try {
       // Get resolver address from registry
       final resolverAddress = await _getResolver(name);
-      if (resolverAddress == null || resolverAddress == '0x0000000000000000000000000000000000000000') {
+      if (resolverAddress == null ||
+          resolverAddress == '0x0000000000000000000000000000000000000000') {
         return null;
       }
 
       // Query resolver for address
       final address = await _resolveAddress(resolverAddress, name);
-      
+
       // Cache result
       _setCache(cacheKey, address);
-      
+
       return address;
     } on Exception catch (_) {
       return null;
@@ -71,19 +72,20 @@ class ENSResolver {
       if (!EthereumAddress.isValid(normalizedAddress)) {
         throw ArgumentError('Invalid Ethereum address: $address');
       }
-      
+
       // Create reverse ENS name
       final reverseName = '${normalizedAddress.substring(2)}.addr.reverse';
-      
+
       // Get resolver for reverse name
       final resolverAddress = await _getResolver(reverseName);
-      if (resolverAddress == null || resolverAddress == '0x0000000000000000000000000000000000000000') {
+      if (resolverAddress == null ||
+          resolverAddress == '0x0000000000000000000000000000000000000000') {
         return null;
       }
 
       // Query resolver for name
       final name = await _resolveName(resolverAddress, reverseName);
-      
+
       // Verify the name resolves back to the original address
       if (name != null) {
         final verifyAddress = await resolveName(name);
@@ -91,10 +93,10 @@ class ENSResolver {
           return null;
         }
       }
-      
+
       // Cache result
       _setCache(cacheKey, name);
-      
+
       return name;
     } on Exception catch (_) {
       return null;
@@ -104,7 +106,7 @@ class ENSResolver {
   /// Get resolver address from ENS registry
   Future<String?> _getResolver(String name) async {
     final nameHash = _namehash(name);
-    
+
     final registryContract = Contract(
       address: _registryAddress,
       abi: _ensRegistryAbi,
@@ -118,7 +120,7 @@ class ENSResolver {
   /// Resolve address from resolver contract
   Future<String?> _resolveAddress(String resolverAddress, String name) async {
     final nameHash = _namehash(name);
-    
+
     final resolverContract = Contract(
       address: resolverAddress,
       abi: _ensResolverAbi,
@@ -128,11 +130,11 @@ class ENSResolver {
     try {
       final result = await resolverContract.read('addr', [nameHash]);
       final address = result[0] as String;
-      
+
       if (address == '0x0000000000000000000000000000000000000000') {
         return null;
       }
-      
+
       return address;
     } on Exception catch (_) {
       return null;
@@ -140,9 +142,10 @@ class ENSResolver {
   }
 
   /// Resolve name from resolver contract
-  Future<String?> _resolveName(String resolverAddress, String reverseName) async {
+  Future<String?> _resolveName(
+      String resolverAddress, String reverseName) async {
     final nameHash = _namehash(reverseName);
-    
+
     final resolverContract = Contract(
       address: resolverAddress,
       abi: _ensResolverAbi,
@@ -179,13 +182,13 @@ class ENSResolver {
   dynamic _getCached(String key) {
     final entry = _cache[key];
     if (entry == null) return null;
-    
+
     final timestamp = entry['timestamp'] as DateTime;
     if (DateTime.now().difference(timestamp) > _cacheTtl) {
       _cache.remove(key);
       return null;
     }
-    
+
     return entry['value'];
   }
 
@@ -205,14 +208,14 @@ class ENSResolver {
   /// Validate ENS name format
   static bool isValidENSName(String name) {
     if (name.isEmpty) return false;
-    
+
     // Must end with .eth or other valid TLD
     if (!name.contains('.')) return false;
-    
+
     // Check for invalid characters (must be lowercase)
     final validPattern = RegExp(r'^[a-z0-9\-\.]+$');
     if (!validPattern.hasMatch(name)) return false;
-    
+
     // Check each label
     final labels = name.split('.');
     for (final label in labels) {
@@ -220,7 +223,7 @@ class ENSResolver {
       if (label.startsWith('-') || label.endsWith('-')) return false;
       if (label.length > 63) return false;
     }
-    
+
     return true;
   }
 

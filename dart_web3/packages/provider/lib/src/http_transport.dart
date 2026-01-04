@@ -6,13 +6,13 @@ import 'transport.dart';
 
 /// HTTP transport for JSON-RPC communication.
 class HttpTransport implements Transport {
-
   HttpTransport(
     this.url, {
     this.headers = const {},
     this.timeout = const Duration(seconds: 30),
     http.Client? client,
   }) : _client = client ?? http.Client();
+
   /// The RPC endpoint URL.
   final String url;
 
@@ -26,7 +26,8 @@ class HttpTransport implements Transport {
   int _requestId = 0;
 
   @override
-  Future<Map<String, dynamic>> request(String method, List<dynamic> params) async {
+  Future<Map<String, dynamic>> request(
+      String method, List<dynamic> params) async {
     final requestId = ++_requestId;
     final body = json.encode({
       'jsonrpc': '2.0',
@@ -60,7 +61,8 @@ class HttpTransport implements Transport {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> batchRequest(List<RpcRequest> requests) async {
+  Future<List<Map<String, dynamic>>> batchRequest(
+      List<RpcRequest> requests) async {
     final batch = requests.map((r) => r.toJson(++_requestId)).toList();
     final body = json.encode(batch);
 

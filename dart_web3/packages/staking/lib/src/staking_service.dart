@@ -6,7 +6,6 @@ import 'staking_types.dart';
 
 /// Service for managing staking operations across different protocols
 class StakingService {
-
   StakingService({
     required PublicClient publicClient,
     WalletClient? walletClient,
@@ -24,7 +23,8 @@ class StakingService {
         id: 'eth-lido',
         name: 'Lido Staked ETH',
         protocol: StakingProtocol.lido,
-        contractAddress: EthereumAddress.fromHex('0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'),
+        contractAddress: EthereumAddress.fromHex(
+            '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'),
         tokenSymbol: 'stETH',
         description: 'Liquid staking for Ethereum',
       ),
@@ -32,7 +32,8 @@ class StakingService {
         id: 'eth-rocketpool',
         name: 'Rocket Pool ETH',
         protocol: StakingProtocol.rocketPool,
-        contractAddress: EthereumAddress.fromHex('0xae78736Cd615f374D3085123A210448E74Fc6393'),
+        contractAddress: EthereumAddress.fromHex(
+            '0xae78736Cd615f374D3085123A210448E74Fc6393'),
         tokenSymbol: 'rETH',
         description: 'Decentralized Ethereum staking',
       ),
@@ -47,11 +48,13 @@ class StakingService {
     for (final opp in opportunities) {
       final balance = await _getStakedBalance(opp, owner);
       if (balance > BigInt.zero) {
-        positions.add(StakingPosition(
-          opportunityId: opp.id,
-          owner: owner,
-          stakedAmount: balance,
-        ),);
+        positions.add(
+          StakingPosition(
+            opportunityId: opp.id,
+            owner: owner,
+            stakedAmount: balance,
+          ),
+        );
       }
     }
 
@@ -70,7 +73,8 @@ class StakingService {
       case StakingProtocol.rocketPool:
         return _stakeRocketPool(opportunity, amount);
       default:
-        throw UnimplementedError('Staking for ${opportunity.protocol} not implemented');
+        throw UnimplementedError(
+            'Staking for ${opportunity.protocol} not implemented');
     }
   }
 
@@ -80,10 +84,12 @@ class StakingService {
       throw Exception('Wallet client required for unstaking');
     }
     // Implementation varies by protocol (unstaking often involves a withdrawal request)
-    throw UnimplementedError('Unstaking for ${opportunity.protocol} not implemented');
+    throw UnimplementedError(
+        'Unstaking for ${opportunity.protocol} not implemented');
   }
 
-  Future<BigInt> _getStakedBalance(StakingOpportunity opp, EthereumAddress owner) async {
+  Future<BigInt> _getStakedBalance(
+      StakingOpportunity opp, EthereumAddress owner) async {
     try {
       final contract = Contract(
         address: opp.contractAddress.hex,
@@ -99,7 +105,8 @@ class StakingService {
   Future<String> _stakeLido(StakingOpportunity opp, BigInt amount) async {
     final contract = Contract(
       address: opp.contractAddress.hex,
-      abi: '[{"inputs":[],"name":"submit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"payable","type":"function"}]',
+      abi:
+          '[{"inputs":[],"name":"submit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"payable","type":"function"}]',
       publicClient: _publicClient,
       walletClient: _walletClient,
     );
@@ -110,8 +117,10 @@ class StakingService {
   Future<String> _stakeRocketPool(StakingOpportunity opp, BigInt amount) async {
     // Rocket Pool deposit requires interacting with the Deposit Pool contract
     // This is a simplified example
-    throw UnimplementedError('Rocket Pool staking logic pending complex contract integration');
+    throw UnimplementedError(
+        'Rocket Pool staking logic pending complex contract integration');
   }
 
-  static const _erc20BalanceOfAbi = '[{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]';
+  static const _erc20BalanceOfAbi =
+      '[{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]';
 }

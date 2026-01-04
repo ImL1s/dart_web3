@@ -1,4 +1,3 @@
-
 import 'contract.dart';
 import 'event_filter.dart';
 
@@ -209,7 +208,8 @@ class ERC721Contract extends Contract {
   }
 
   /// Safely transfers a token (checks if recipient can receive NFTs).
-  Future<String> safeTransferFrom(String from, String to, BigInt tokenId, [String? data]) async {
+  Future<String> safeTransferFrom(String from, String to, BigInt tokenId,
+      [String? data]) async {
     if (data != null) {
       return write('safeTransferFrom', [from, to, tokenId, data]);
     } else {
@@ -221,27 +221,37 @@ class ERC721Contract extends Contract {
 
   /// Creates a filter for Transfer events.
   EventFilter transferFilter({String? from, String? to, BigInt? tokenId}) {
-    return createEventFilter('Transfer', indexedArgs: {
-      if (from != null) 'from': from,
-      if (to != null) 'to': to,
-      if (tokenId != null) 'tokenId': tokenId,
-    },);
+    return createEventFilter(
+      'Transfer',
+      indexedArgs: {
+        if (from != null) 'from': from,
+        if (to != null) 'to': to,
+        if (tokenId != null) 'tokenId': tokenId,
+      },
+    );
   }
 
   /// Creates a filter for Approval events.
-  EventFilter approvalFilter({String? owner, String? approved, BigInt? tokenId}) {
-    return createEventFilter('Approval', indexedArgs: {
-      if (owner != null) 'owner': owner,
-      if (approved != null) 'approved': approved,
-      if (tokenId != null) 'tokenId': tokenId,
-    },);
+  EventFilter approvalFilter(
+      {String? owner, String? approved, BigInt? tokenId}) {
+    return createEventFilter(
+      'Approval',
+      indexedArgs: {
+        if (owner != null) 'owner': owner,
+        if (approved != null) 'approved': approved,
+        if (tokenId != null) 'tokenId': tokenId,
+      },
+    );
   }
 
   /// Creates a filter for ApprovalForAll events.
   EventFilter approvalForAllFilter({String? owner, String? operator}) {
-    return createEventFilter('ApprovalForAll', indexedArgs: {
-      if (owner != null) 'owner': owner,
-      if (operator != null) 'operator': operator,
-    },);
+    return createEventFilter(
+      'ApprovalForAll',
+      indexedArgs: {
+        if (owner != null) 'owner': owner,
+        if (operator != null) 'operator': operator,
+      },
+    );
   }
 }

@@ -19,14 +19,16 @@ void main() {
         final a = Uint8List.fromList([1, 2]);
         final b = Uint8List.fromList([3, 4]);
         final c = Uint8List.fromList([5]);
-        expect(BytesUtils.concat([a, b, c]), equals(Uint8List.fromList([1, 2, 3, 4, 5])));
+        expect(BytesUtils.concat([a, b, c]),
+            equals(Uint8List.fromList([1, 2, 3, 4, 5])));
       });
     });
 
     group('slice', () {
       test('slices from start to end', () {
         final arr = Uint8List.fromList([1, 2, 3, 4, 5]);
-        expect(BytesUtils.slice(arr, 1, 4), equals(Uint8List.fromList([2, 3, 4])));
+        expect(
+            BytesUtils.slice(arr, 1, 4), equals(Uint8List.fromList([2, 3, 4])));
       });
 
       test('slices to end when end not specified', () {
@@ -64,12 +66,14 @@ void main() {
     group('pad', () {
       test('pads on left by default', () {
         final arr = Uint8List.fromList([1, 2]);
-        expect(BytesUtils.pad(arr, 4), equals(Uint8List.fromList([0, 0, 1, 2])));
+        expect(
+            BytesUtils.pad(arr, 4), equals(Uint8List.fromList([0, 0, 1, 2])));
       });
 
       test('pads on right when specified', () {
         final arr = Uint8List.fromList([1, 2]);
-        expect(BytesUtils.pad(arr, 4, left: false), equals(Uint8List.fromList([1, 2, 0, 0])));
+        expect(BytesUtils.pad(arr, 4, left: false),
+            equals(Uint8List.fromList([1, 2, 0, 0])));
       });
 
       test('returns copy if already long enough', () {
@@ -81,7 +85,8 @@ void main() {
     group('trimLeadingZeros', () {
       test('trims leading zeros', () {
         final arr = Uint8List.fromList([0, 0, 1, 2]);
-        expect(BytesUtils.trimLeadingZeros(arr), equals(Uint8List.fromList([1, 2])));
+        expect(BytesUtils.trimLeadingZeros(arr),
+            equals(Uint8List.fromList([1, 2])));
       });
 
       test('returns empty for all zeros', () {
@@ -151,7 +156,8 @@ void main() {
       test('XORs two arrays', () {
         final a = Uint8List.fromList([0xff, 0x00, 0xaa]);
         final b = Uint8List.fromList([0x0f, 0xf0, 0x55]);
-        expect(BytesUtils.xor(a, b), equals(Uint8List.fromList([0xf0, 0xf0, 0xff])));
+        expect(BytesUtils.xor(a, b),
+            equals(Uint8List.fromList([0xf0, 0xf0, 0xff])));
       });
 
       test('throws on different lengths', () {

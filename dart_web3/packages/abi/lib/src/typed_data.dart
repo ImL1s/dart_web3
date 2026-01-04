@@ -5,7 +5,6 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// EIP-712 Typed Data for structured data signing.
 class EIP712TypedData {
-
   EIP712TypedData({
     required this.domain,
     required this.types,
@@ -21,10 +20,12 @@ class EIP712TypedData {
     for (final entry in jsonTypes.entries) {
       if (entry.key == 'EIP712Domain') continue;
       types[entry.key] = (entry.value as List)
-          .map((f) => TypedDataField(
-                name: f['name'] as String,
-                type: f['type'] as String,
-              ),)
+          .map(
+            (f) => TypedDataField(
+              name: f['name'] as String,
+              type: f['type'] as String,
+            ),
+          )
           .toList();
     }
 
@@ -35,6 +36,7 @@ class EIP712TypedData {
       message: json['message'] as Map<String, dynamic>,
     );
   }
+
   /// The domain separator parameters.
   final Map<String, dynamic> domain;
 
@@ -76,7 +78,8 @@ class EIP712TypedData {
       domainType.add(TypedDataField(name: 'chainId', type: 'uint256'));
     }
     if (domain.containsKey('verifyingContract')) {
-      domainType.add(TypedDataField(name: 'verifyingContract', type: 'address'));
+      domainType
+          .add(TypedDataField(name: 'verifyingContract', type: 'address'));
     }
     if (domain.containsKey('salt')) {
       domainType.add(TypedDataField(name: 'salt', type: 'bytes32'));
@@ -197,7 +200,8 @@ class EIP712TypedData {
 
     // Add other types
     for (final entry in types.entries) {
-      jsonTypes[entry.key] = entry.value.map((f) => {'name': f.name, 'type': f.type}).toList();
+      jsonTypes[entry.key] =
+          entry.value.map((f) => {'name': f.name, 'type': f.type}).toList();
     }
 
     return {
@@ -211,7 +215,6 @@ class EIP712TypedData {
 
 /// A field in a typed data struct.
 class TypedDataField {
-
   TypedDataField({required this.name, required this.type});
   final String name;
   final String type;

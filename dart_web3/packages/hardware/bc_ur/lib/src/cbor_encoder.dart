@@ -5,14 +5,14 @@ import 'dart:typed_data';
 /// Implements subset of CBOR needed for BC-UR communication
 class CBOREncoder {
   final BytesBuilder _buffer = BytesBuilder();
-  
+
   /// Encode a value to CBOR bytes
   static Uint8List encode(dynamic value) {
     final encoder = CBOREncoder();
     encoder._encodeValue(value);
     return encoder._buffer.toBytes();
   }
-  
+
   void _encodeValue(dynamic value) {
     if (value == null) {
       _encodeNull();
@@ -34,15 +34,15 @@ class CBOREncoder {
       throw ArgumentError('Unsupported type: ${value.runtimeType}');
     }
   }
-  
+
   void _encodeNull() {
     _buffer.addByte(0xF6); // null
   }
-  
+
   void _encodeBool(bool value) {
     _buffer.addByte(value ? 0xF5 : 0xF4); // true : false
   }
-  
+
   void _encodeInt(int value) {
     if (value >= 0) {
       _encodeUnsigned(value);
@@ -50,7 +50,7 @@ class CBOREncoder {
       _encodeNegative(value);
     }
   }
-  
+
   void _encodeUnsigned(int value) {
     if (value < 24) {
       _buffer.addByte(value);
@@ -68,7 +68,7 @@ class CBOREncoder {
       _buffer.add(_uint64Bytes(value));
     }
   }
-  
+
   void _encodeNegative(int value) {
     final positive = -1 - value;
     if (positive < 24) {
@@ -87,11 +87,11 @@ class CBOREncoder {
       _buffer.add(_uint64Bytes(positive));
     }
   }
-  
+
   void _encodeString(String value) {
     final bytes = utf8.encode(value);
     final length = bytes.length;
-    
+
     if (length < 24) {
       _buffer.addByte(0x60 | length);
     } else if (length < 256) {
@@ -104,13 +104,13 @@ class CBOREncoder {
       _buffer.addByte(0x7A);
       _buffer.add(_uint32Bytes(length));
     }
-    
+
     _buffer.add(bytes);
   }
-  
+
   void _encodeBytes(Uint8List value) {
     final length = value.length;
-    
+
     if (length < 24) {
       _buffer.addByte(0x40 | length);
     } else if (length < 256) {
@@ -123,13 +123,13 @@ class CBOREncoder {
       _buffer.addByte(0x5A);
       _buffer.add(_uint32Bytes(length));
     }
-    
+
     _buffer.add(value);
   }
-  
+
   void _encodeArray(List<dynamic> value) {
     final length = value.length;
-    
+
     if (length < 24) {
       _buffer.addByte(0x80 | length);
     } else if (length < 256) {
@@ -142,15 +142,15 @@ class CBOREncoder {
       _buffer.addByte(0x9A);
       _buffer.add(_uint32Bytes(length));
     }
-    
+
     for (final item in value) {
       _encodeValue(item);
     }
   }
-  
+
   void _encodeMap(Map<dynamic, dynamic> value) {
     final length = value.length;
-    
+
     if (length < 24) {
       _buffer.addByte(0xA0 | length);
     } else if (length < 256) {
@@ -163,20 +163,20 @@ class CBOREncoder {
       _buffer.addByte(0xBA);
       _buffer.add(_uint32Bytes(length));
     }
-    
+
     for (final entry in value.entries) {
       _encodeValue(entry.key);
       _encodeValue(entry.value);
     }
   }
-  
+
   Uint8List _uint16Bytes(int value) {
     return Uint8List.fromList([
       (value >> 8) & 0xFF,
       value & 0xFF,
     ]);
   }
-  
+
   Uint8List _uint32Bytes(int value) {
     return Uint8List.fromList([
       (value >> 24) & 0xFF,
@@ -185,7 +185,7 @@ class CBOREncoder {
       value & 0xFF,
     ]);
   }
-  
+
   Uint8List _uint64Bytes(int value) {
     return Uint8List.fromList([
       (value >> 56) & 0xFF,

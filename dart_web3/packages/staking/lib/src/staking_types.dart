@@ -10,7 +10,6 @@ enum StakingProtocol {
 
 /// Staking opportunity information
 class StakingOpportunity {
-
   const StakingOpportunity({
     required this.id,
     required this.name,
@@ -31,12 +30,12 @@ class StakingOpportunity {
   final String? description;
 
   @override
-  String toString() => 'StakingOpportunity(name: $name, protocol: $protocol, apy: $apy%)';
+  String toString() =>
+      'StakingOpportunity(name: $name, protocol: $protocol, apy: $apy%)';
 }
 
 /// Staking position information
 class StakingPosition {
-
   const StakingPosition({
     required this.opportunityId,
     required this.owner,
@@ -51,5 +50,6 @@ class StakingPosition {
   final double? currentApy;
 
   @override
-  String toString() => 'StakingPosition(opportunity: $opportunityId, amount: $stakedAmount)';
+  String toString() =>
+      'StakingPosition(opportunity: $opportunityId, amount: $stakedAmount)';
 }

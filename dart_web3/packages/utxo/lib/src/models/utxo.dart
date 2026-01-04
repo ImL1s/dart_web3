@@ -39,8 +39,8 @@ class Utxo {
     List<Uint8List>? witness,
   }) {
     return TransactionInput(
-      txId: HexUtils.decode(txHash).reversed.toList() is Uint8List 
-          ? HexUtils.decode(txHash).reversed.toList() as Uint8List 
+      txId: HexUtils.decode(txHash).reversed.toList() is Uint8List
+          ? HexUtils.decode(txHash).reversed.toList() as Uint8List
           : Uint8List.fromList(HexUtils.decode(txHash).reversed.toList()),
       vout: vout,
       scriptSig: scriptSig,

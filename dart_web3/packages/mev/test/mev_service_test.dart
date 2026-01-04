@@ -7,7 +7,7 @@ void main() {
       final tx = FlashbotsBundleTransaction(
         signedTransaction: '0x123',
       );
-      
+
       final json = tx.toJson();
       expect(json['signedTransaction'], equals('0x123'));
     });

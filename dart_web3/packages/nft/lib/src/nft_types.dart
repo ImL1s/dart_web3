@@ -9,7 +9,6 @@ enum NftStandard {
 
 /// NFT token information
 class NftToken {
-
   const NftToken({
     required this.contractAddress,
     required this.tokenId,
@@ -77,7 +76,6 @@ class NftToken {
 
 /// NFT metadata structure following OpenSea metadata standard
 class NftMetadata {
-
   const NftMetadata({
     this.name,
     this.description,
@@ -144,9 +142,9 @@ class NftMetadata {
 
 /// NFT attribute/trait
 class NftAttribute {
-
   const NftAttribute({
-    required this.value, this.traitType,
+    required this.value,
+    this.traitType,
     this.displayType,
     this.maxValue,
   });
@@ -181,10 +179,10 @@ class NftAttribute {
 
 /// NFT collection information
 class NftCollection {
-
   const NftCollection({
     required this.contractAddress,
-    required this.standard, this.name,
+    required this.standard,
+    this.name,
     this.symbol,
     this.description,
     this.image,
@@ -238,13 +236,13 @@ class NftCollection {
 
 /// NFT transfer parameters
 class NftTransferParams {
-
   const NftTransferParams({
     required this.from,
     required this.to,
     required this.contractAddress,
     required this.tokenId,
-    required this.standard, this.amount,
+    required this.standard,
+    this.amount,
     this.requireApproval = true,
   });
   final EthereumAddress from;
@@ -263,7 +261,6 @@ class NftTransferParams {
 
 /// NFT query parameters for fetching collections
 class NftQueryParams {
-
   const NftQueryParams({
     required this.owner,
     this.contractAddresses,
@@ -289,10 +286,11 @@ class NftQueryParams {
 
 /// NFT query result with pagination
 class NftQueryResult {
-
   const NftQueryResult({
     required this.tokens,
-    required this.totalCount, required this.hasMore, this.nextCursor,
+    required this.totalCount,
+    required this.hasMore,
+    this.nextCursor,
   });
   final List<NftToken> tokens;
   final String? nextCursor;

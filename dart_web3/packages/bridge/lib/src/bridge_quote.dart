@@ -2,7 +2,6 @@ import 'bridge_types.dart';
 
 /// Bridge quote from a protocol
 class BridgeQuote {
-
   BridgeQuote({
     required this.protocol,
     required this.params,
@@ -21,7 +20,8 @@ class BridgeQuote {
     return BridgeQuote(
       protocol: json['protocol'] as String,
       params: BridgeParams(
-        fromToken: BridgeToken.fromJson(json['fromToken'] as Map<String, dynamic>),
+        fromToken:
+            BridgeToken.fromJson(json['fromToken'] as Map<String, dynamic>),
         toToken: BridgeToken.fromJson(json['toToken'] as Map<String, dynamic>),
         sourceChainId: json['sourceChainId'] as int,
         destinationChainId: json['destinationChainId'] as int,
@@ -33,7 +33,8 @@ class BridgeQuote {
       outputAmount: BigInt.parse(json['outputAmount'] as String),
       minimumOutputAmount: BigInt.parse(json['minimumOutputAmount'] as String),
       route: BridgeRoute.fromJson(json['route'] as Map<String, dynamic>),
-      feeBreakdown: BridgeFeeBreakdown.fromJson(json['feeBreakdown'] as Map<String, dynamic>),
+      feeBreakdown: BridgeFeeBreakdown.fromJson(
+          json['feeBreakdown'] as Map<String, dynamic>),
       limits: BridgeLimits.fromJson(json['limits'] as Map<String, dynamic>),
       estimatedTime: Duration(seconds: json['estimatedTimeSeconds'] as int),
       confidence: (json['confidence'] as num).toDouble(),
@@ -79,7 +80,9 @@ class BridgeQuote {
     } else {
       final hours = estimatedTime.inHours;
       final remainingMinutes = minutes % 60;
-      return remainingMinutes > 0 ? '${hours}h ${remainingMinutes}m' : '${hours}h';
+      return remainingMinutes > 0
+          ? '${hours}h ${remainingMinutes}m'
+          : '${hours}h';
     }
   }
 
@@ -127,7 +130,6 @@ class BridgeQuote {
 
 /// Comparison result between two bridge quotes
 class BridgeQuoteComparison {
-
   const BridgeQuoteComparison({
     required this.quote1,
     required this.quote2,
@@ -188,7 +190,8 @@ class BridgeQuoteComparison {
       quote1: quote1,
       quote2: quote2,
       outputDifference: quote1.netOutputAmount - quote2.netOutputAmount,
-      feeDifference: quote1.feeBreakdown.totalFee - quote2.feeBreakdown.totalFee,
+      feeDifference:
+          quote1.feeBreakdown.totalFee - quote2.feeBreakdown.totalFee,
       timeDifference: quote1.estimatedTime - quote2.estimatedTime,
       confidenceDifference: quote1.confidence - quote2.confidence,
     );
@@ -197,7 +200,6 @@ class BridgeQuoteComparison {
 
 /// Bridge quote aggregation result
 class BridgeQuoteAggregation {
-
   const BridgeQuoteAggregation({
     required this.quotes,
     this.bestQuote,
@@ -215,13 +217,14 @@ class BridgeQuoteAggregation {
     // Sort quotes by different criteria
     final sortedByOutput = List<BridgeQuote>.from(quotes)
       ..sort((a, b) => b.netOutputAmount.compareTo(a.netOutputAmount));
-    
+
     final sortedByTime = List<BridgeQuote>.from(quotes)
       ..sort((a, b) => a.estimatedTime.compareTo(b.estimatedTime));
-    
+
     final sortedByFee = List<BridgeQuote>.from(quotes)
-      ..sort((a, b) => a.feeBreakdown.totalFee.compareTo(b.feeBreakdown.totalFee));
-    
+      ..sort(
+          (a, b) => a.feeBreakdown.totalFee.compareTo(b.feeBreakdown.totalFee));
+
     final sortedByConfidence = List<BridgeQuote>.from(quotes)
       ..sort((a, b) => b.confidence.compareTo(a.confidence));
 
@@ -248,7 +251,8 @@ class BridgeQuoteAggregation {
     return quotes.where((quote) {
       if (maxTime != null && quote.estimatedTime > maxTime) return false;
       if (maxFee != null && quote.feeBreakdown.totalFee > maxFee) return false;
-      if (minConfidence != null && quote.confidence < minConfidence) return false;
+      if (minConfidence != null && quote.confidence < minConfidence)
+        return false;
       return true;
     }).toList();
   }
@@ -265,22 +269,22 @@ class BridgeQuoteAggregation {
     }
 
     final totalTime = quotes.fold<int>(
-      0, 
+      0,
       (sum, quote) => sum + quote.estimatedTime.inSeconds,
     );
-    
+
     final totalFee = quotes.fold<BigInt>(
-      BigInt.zero, 
+      BigInt.zero,
       (sum, quote) => sum + quote.feeBreakdown.totalFee,
     );
-    
+
     final totalConfidence = quotes.fold<double>(
-      0, 
+      0,
       (sum, quote) => sum + quote.confidence,
     );
-    
+
     final totalOutput = quotes.fold<BigInt>(
-      BigInt.zero, 
+      BigInt.zero,
       (sum, quote) => sum + quote.netOutputAmount,
     );
 
@@ -295,7 +299,6 @@ class BridgeQuoteAggregation {
 
 /// Average metrics for bridge quotes
 class BridgeMetrics {
-
   BridgeMetrics({
     required this.averageTime,
     required this.averageFee,

@@ -20,7 +20,7 @@ void main() {
         'output': '0x123',
         'error': 'reverted',
       };
-      
+
       // Handle the case where error is a string in the mocked JSON but object in structure
       // For this test, we test output parsing
       final result = TraceResult(output: json['output']);

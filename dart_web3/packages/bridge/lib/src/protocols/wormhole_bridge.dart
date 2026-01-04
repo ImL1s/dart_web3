@@ -7,7 +7,6 @@ import 'bridge_protocol.dart';
 
 /// Wormhole bridge protocol implementation
 class WormholeBridge extends BridgeProtocol {
-
   WormholeBridge({
     required this.config,
     http.Client? httpClient,
@@ -20,18 +19,18 @@ class WormholeBridge extends BridgeProtocol {
 
   @override
   List<int> get supportedSourceChains => [
-    1,     // Ethereum
-    56,    // BSC
-    137,   // Polygon
-    42161, // Arbitrum
-    10,    // Optimism
-    43114, // Avalanche
-    250,   // Fantom
-    8453,  // Base
-    25,    // Cronos
-    1284,  // Moonbeam
-    // Wormhole also supports non-EVM chains like Solana, Terra, etc.
-  ];
+        1, // Ethereum
+        56, // BSC
+        137, // Polygon
+        42161, // Arbitrum
+        10, // Optimism
+        43114, // Avalanche
+        250, // Fantom
+        8453, // Base
+        25, // Cronos
+        1284, // Moonbeam
+        // Wormhole also supports non-EVM chains like Solana, Terra, etc.
+      ];
 
   @override
   List<int> get supportedDestinationChains => supportedSourceChains;
@@ -39,16 +38,16 @@ class WormholeBridge extends BridgeProtocol {
   String get _baseUrl => config.baseUrl ?? 'https://api.wormhole.com';
 
   Map<String, String> get _headers => {
-    'Content-Type': 'application/json',
-    if (config.apiKey != null) 'X-API-Key': config.apiKey!,
-    ...config.headers,
-  };
+        'Content-Type': 'application/json',
+        if (config.apiKey != null) 'X-API-Key': config.apiKey!,
+        ...config.headers,
+      };
 
   @override
   bool supportsChainPair(int sourceChainId, int destinationChainId) {
     return supportedSourceChains.contains(sourceChainId) &&
-           supportedDestinationChains.contains(destinationChainId) &&
-           sourceChainId != destinationChainId;
+        supportedDestinationChains.contains(destinationChainId) &&
+        sourceChainId != destinationChainId;
   }
 
   @override
@@ -62,7 +61,7 @@ class WormholeBridge extends BridgeProtocol {
 
     try {
       final url = '$_baseUrl/v1/quote';
-      
+
       final body = {
         'sourceChain': _getWormholeChainId(params.sourceChainId),
         'targetChain': _getWormholeChainId(params.destinationChainId),
@@ -74,11 +73,13 @@ class WormholeBridge extends BridgeProtocol {
         'slippage': params.slippage,
       };
 
-      final response = await _httpClient.post(
-        Uri.parse(url),
-        headers: _headers,
-        body: json.encode(body),
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .post(
+            Uri.parse(url),
+            headers: _headers,
+            body: json.encode(body),
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw BridgeException(
@@ -108,7 +109,8 @@ class WormholeBridge extends BridgeProtocol {
     if (!supportsChainPair(sourceChainId, destinationChainId)) {
       throw BridgeException(
         protocol: name,
-        message: 'Chain pair not supported: $sourceChainId -> $destinationChainId',
+        message:
+            'Chain pair not supported: $sourceChainId -> $destinationChainId',
       );
     }
 
@@ -120,8 +122,8 @@ class WormholeBridge extends BridgeProtocol {
       };
 
       final uri = Uri.parse(url).replace(queryParameters: queryParams);
-      final response = await _httpClient.get(uri, headers: _headers)
-          .timeout(config.timeout);
+      final response =
+          await _httpClient.get(uri, headers: _headers).timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw BridgeException(
@@ -133,7 +135,7 @@ class WormholeBridge extends BridgeProtocol {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
       final tokens = data['tokens'] as List<dynamic>? ?? [];
-      
+
       return tokens.map((token) {
         final tokenData = token as Map<String, dynamic>;
         return BridgeToken(
@@ -166,11 +168,13 @@ class WormholeBridge extends BridgeProtocol {
     int destinationChainId,
   ) async {
     try {
-      final tokens = await getSupportedTokens(sourceChainId, destinationChainId);
-      return tokens.any((token) => 
-        token.address.toLowerCase() == sourceToken.address.toLowerCase() &&
-        token.getAddressOnChain(destinationChainId)?.toLowerCase() == 
-        destinationToken.address.toLowerCase(),
+      final tokens =
+          await getSupportedTokens(sourceChainId, destinationChainId);
+      return tokens.any(
+        (token) =>
+            token.address.toLowerCase() == sourceToken.address.toLowerCase() &&
+            token.getAddressOnChain(destinationChainId)?.toLowerCase() ==
+                destinationToken.address.toLowerCase(),
       );
     } on Exception catch (_) {
       return false;
@@ -192,8 +196,8 @@ class WormholeBridge extends BridgeProtocol {
       };
 
       final uri = Uri.parse(url).replace(queryParameters: queryParams);
-      final response = await _httpClient.get(uri, headers: _headers)
-          .timeout(config.timeout);
+      final response =
+          await _httpClient.get(uri, headers: _headers).timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw BridgeException(
@@ -232,7 +236,7 @@ class WormholeBridge extends BridgeProtocol {
   Future<BridgeFeeBreakdown> getFeeBreakdown(BridgeParams params) async {
     try {
       final url = '$_baseUrl/v1/fees';
-      
+
       final body = {
         'sourceChain': _getWormholeChainId(params.sourceChainId),
         'targetChain': _getWormholeChainId(params.destinationChainId),
@@ -240,11 +244,13 @@ class WormholeBridge extends BridgeProtocol {
         'amount': params.amount.toString(),
       };
 
-      final response = await _httpClient.post(
-        Uri.parse(url),
-        headers: _headers,
-        body: json.encode(body),
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .post(
+            Uri.parse(url),
+            headers: _headers,
+            body: json.encode(body),
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
@@ -256,7 +262,8 @@ class WormholeBridge extends BridgeProtocol {
 
     // Estimate fees based on typical Wormhole costs
     final protocolFee = BigInt.zero; // Wormhole doesn't charge protocol fees
-    final gasFee = BigInt.from(100000000000000000); // ~0.1 ETH equivalent for both chains
+    final gasFee =
+        BigInt.from(100000000000000000); // ~0.1 ETH equivalent for both chains
     final relayerFee = BigInt.from(20000000000000000); // ~0.02 ETH equivalent
     final totalFee = protocolFee + gasFee + relayerFee;
 
@@ -270,10 +277,12 @@ class WormholeBridge extends BridgeProtocol {
     );
   }
 
-  BridgeQuote _parseQuoteResponse(Map<String, dynamic> data, BridgeParams params) {
+  BridgeQuote _parseQuoteResponse(
+      Map<String, dynamic> data, BridgeParams params) {
     final outputAmount = BigInt.parse(data['outputAmount'] as String);
-    final minimumOutputAmount = calculateMinimumOutput(outputAmount, params.slippage);
-    
+    final minimumOutputAmount =
+        calculateMinimumOutput(outputAmount, params.slippage);
+
     // Parse fee breakdown
     final feeData = data['fees'] as Map<String, dynamic>? ?? {};
     final feeBreakdown = BridgeFeeBreakdown(
@@ -315,9 +324,13 @@ class WormholeBridge extends BridgeProtocol {
     final limitsData = data['limits'] as Map<String, dynamic>? ?? {};
     final limits = BridgeLimits(
       minAmount: BigInt.parse(limitsData['minAmount'] as String? ?? '1000000'),
-      maxAmount: BigInt.parse(limitsData['maxAmount'] as String? ?? '100000000000000000000000'),
-      dailyLimit: BigInt.parse(limitsData['dailyLimit'] as String? ?? '1000000000000000000000000'),
-      remainingDailyLimit: BigInt.parse(limitsData['remainingDailyLimit'] as String? ?? '1000000000000000000000000'),
+      maxAmount: BigInt.parse(
+          limitsData['maxAmount'] as String? ?? '100000000000000000000000'),
+      dailyLimit: BigInt.parse(
+          limitsData['dailyLimit'] as String? ?? '1000000000000000000000000'),
+      remainingDailyLimit: BigInt.parse(
+          limitsData['remainingDailyLimit'] as String? ??
+              '1000000000000000000000000'),
     );
 
     return BridgeQuote(
@@ -330,7 +343,8 @@ class WormholeBridge extends BridgeProtocol {
       limits: limits,
       estimatedTime: route.estimatedTime,
       confidence: route.confidence,
-      validUntil: const Duration(minutes: 15), // Wormhole quotes valid for 15 minutes
+      validUntil:
+          const Duration(minutes: 15), // Wormhole quotes valid for 15 minutes
       metadata: {
         'wormholeData': data,
         'vaaRequired': true, // Wormhole uses VAAs (Verifiable Action Approvals)
@@ -341,16 +355,26 @@ class WormholeBridge extends BridgeProtocol {
   int _getWormholeChainId(int evmChainId) {
     // Map EVM chain IDs to Wormhole chain IDs
     switch (evmChainId) {
-      case 1: return 2;      // Ethereum
-      case 56: return 4;     // BSC
-      case 137: return 5;    // Polygon
-      case 42161: return 23; // Arbitrum
-      case 10: return 24;    // Optimism
-      case 43114: return 6;  // Avalanche
-      case 250: return 10;   // Fantom
-      case 8453: return 30;  // Base
-      case 25: return 25;    // Cronos
-      case 1284: return 16;  // Moonbeam
+      case 1:
+        return 2; // Ethereum
+      case 56:
+        return 4; // BSC
+      case 137:
+        return 5; // Polygon
+      case 42161:
+        return 23; // Arbitrum
+      case 10:
+        return 24; // Optimism
+      case 43114:
+        return 6; // Avalanche
+      case 250:
+        return 10; // Fantom
+      case 8453:
+        return 30; // Base
+      case 25:
+        return 25; // Cronos
+      case 1284:
+        return 16; // Moonbeam
       default:
         throw BridgeException(
           protocol: name,

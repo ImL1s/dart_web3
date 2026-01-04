@@ -18,7 +18,8 @@ void main() {
       test('should resolve valid ENS name to address', () async {
         // Arrange - Mock resolver address lookup
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
@@ -31,7 +32,8 @@ void main() {
       test('should return null for non-existent name', () async {
         // Arrange - Mock zero address (no resolver)
         final zeroAddress = '0x0000000000000000000000000000000000000000';
-        final zeroAddressEncoded = AbiEncoder.encode([AbiAddress()], [zeroAddress]);
+        final zeroAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [zeroAddress]);
         mockClient.mockCall(zeroAddressEncoded);
 
         // Act
@@ -55,7 +57,8 @@ void main() {
         // Arrange
         final validAddress = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
@@ -78,7 +81,8 @@ void main() {
       test('should cache resolution results', () async {
         // Arrange
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act - Call twice

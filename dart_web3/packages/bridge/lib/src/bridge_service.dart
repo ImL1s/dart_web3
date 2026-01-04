@@ -14,12 +14,11 @@ import 'protocols/wormhole_bridge.dart';
 
 /// Main bridge service that aggregates quotes from multiple bridge protocols
 class BridgeService {
-  
   BridgeService({
     required this.clients,
     List<BridgeProtocol>? protocols,
-  }) : protocols = protocols ?? _createDefaultProtocols(),
-       bridgeTracker = BridgeTracker(clients);
+  })  : protocols = protocols ?? _createDefaultProtocols(),
+        bridgeTracker = BridgeTracker(clients);
   final Map<int, PublicClient> clients;
   final List<BridgeProtocol> protocols;
   final BridgeTracker bridgeTracker;
@@ -36,14 +35,15 @@ class BridgeService {
       final scoreB = b.netOutputAmount.toDouble() * b.confidence;
       return scoreB.compareTo(scoreA);
     });
-    
+
     return quotes.first;
   }
 
   /// Get quotes from all available protocols
   Future<List<BridgeQuote>> getQuotes(BridgeParams params) async {
     final futures = protocols
-        .where((protocol) => protocol.supportsChainPair(params.sourceChainId, params.destinationChainId))
+        .where((protocol) => protocol.supportsChainPair(
+            params.sourceChainId, params.destinationChainId))
         .map((protocol) => _getQuoteFromProtocol(protocol, params));
 
     final results = await Future.wait(futures);
@@ -51,7 +51,8 @@ class BridgeService {
   }
 
   /// Get quotes aggregated with analysis
-  Future<BridgeQuoteAggregation> getQuotesAggregated(BridgeParams params) async {
+  Future<BridgeQuoteAggregation> getQuotesAggregated(
+      BridgeParams params) async {
     final quotes = await getQuotes(params);
     return BridgeQuoteAggregation.fromQuotes(quotes);
   }
@@ -117,13 +118,15 @@ class BridgeService {
   }
 
   /// Get supported tokens for a chain pair
-  Future<List<BridgeToken>> getSupportedTokens(int sourceChainId, int destinationChainId) async {
+  Future<List<BridgeToken>> getSupportedTokens(
+      int sourceChainId, int destinationChainId) async {
     final allTokens = <BridgeToken>[];
-    
+
     for (final protocol in protocols) {
       if (protocol.supportsChainPair(sourceChainId, destinationChainId)) {
         try {
-          final tokens = await protocol.getSupportedTokens(sourceChainId, destinationChainId);
+          final tokens = await protocol.getSupportedTokens(
+              sourceChainId, destinationChainId);
           allTokens.addAll(tokens);
         } on Exception catch (_) {
           // Continue with other protocols if one fails
@@ -171,11 +174,12 @@ class BridgeService {
   /// Get bridge history for an address
   List<BridgeTrackingInfo> getBridgeHistory([String? address]) {
     final allBridges = bridgeTracker.getAllTrackedBridges();
-    
+
     if (address == null) return allBridges;
-    
+
     return allBridges
-        .where((bridge) => bridge.userAddress?.toLowerCase() == address.toLowerCase())
+        .where((bridge) =>
+            bridge.userAddress?.toLowerCase() == address.toLowerCase())
         .toList();
   }
 
@@ -183,23 +187,27 @@ class BridgeService {
   List<ChainPair> getSupportedChainPairs() {
     final pairs = <ChainPair>[];
     final addedPairs = <String>{};
-    
+
     for (final protocol in protocols) {
       for (final sourceChain in protocol.supportedSourceChains) {
         for (final destChain in protocol.supportedDestinationChains) {
           if (sourceChain != destChain) {
             final pairKey = '${sourceChain}_$destChain';
             if (!addedPairs.contains(pairKey)) {
-              pairs.add(ChainPair(
-                sourceChainId: sourceChain,
-                destinationChainId: destChain,
-                supportedProtocols: [protocol.name],
-              ),);
+              pairs.add(
+                ChainPair(
+                  sourceChainId: sourceChain,
+                  destinationChainId: destChain,
+                  supportedProtocols: [protocol.name],
+                ),
+              );
               addedPairs.add(pairKey);
             } else {
               // Add protocol to existing pair
               final existingPair = pairs.firstWhere(
-                (p) => p.sourceChainId == sourceChain && p.destinationChainId == destChain,
+                (p) =>
+                    p.sourceChainId == sourceChain &&
+                    p.destinationChainId == destChain,
               );
               existingPair.supportedProtocols.add(protocol.name);
             }
@@ -207,7 +215,7 @@ class BridgeService {
         }
       }
     }
-    
+
     return pairs;
   }
 
@@ -218,11 +226,12 @@ class BridgeService {
     BigInt amount,
   ) async {
     final times = <Duration>[];
-    
+
     for (final protocol in protocols) {
       if (protocol.supportsChainPair(sourceChainId, destinationChainId)) {
         try {
-          final time = await protocol.getEstimatedTime(sourceChainId, destinationChainId, amount);
+          final time = await protocol.getEstimatedTime(
+              sourceChainId, destinationChainId, amount);
           times.add(time);
         } on Exception catch (_) {
           // Continue with other protocols
@@ -230,13 +239,14 @@ class BridgeService {
         }
       }
     }
-    
+
     if (times.isEmpty) {
       return const Duration(hours: 1); // Default estimate
     }
-    
+
     // Return average time
-    final totalSeconds = times.fold<int>(0, (sum, time) => sum + time.inSeconds);
+    final totalSeconds =
+        times.fold<int>(0, (sum, time) => sum + time.inSeconds);
     return Duration(seconds: totalSeconds ~/ times.length);
   }
 
@@ -249,7 +259,8 @@ class BridgeService {
     for (final protocol in protocols) {
       if (protocol.supportsChainPair(sourceChainId, destinationChainId)) {
         try {
-          final limits = await protocol.getBridgeLimits(token, sourceChainId, destinationChainId);
+          final limits = await protocol.getBridgeLimits(
+              token, sourceChainId, destinationChainId);
           return limits;
         } on Exception catch (_) {
           // Continue with other protocols
@@ -257,7 +268,7 @@ class BridgeService {
         }
       }
     }
-    
+
     return null;
   }
 
@@ -265,26 +276,28 @@ class BridgeService {
   Future<BridgeRoute?> findOptimalRoute(BridgeParams params) async {
     final quotes = await getQuotes(params);
     if (quotes.isEmpty) return null;
-    
+
     // Find the quote with the best balance of output, time, and confidence
     BridgeQuote? bestQuote;
     var bestScore = 0.0;
-    
+
     for (final quote in quotes) {
       // Calculate a composite score
-      final outputScore = quote.netOutputAmount.toDouble() / params.amount.toDouble();
+      final outputScore =
+          quote.netOutputAmount.toDouble() / params.amount.toDouble();
       final timeScore = 1.0 / (quote.estimatedTime.inMinutes + 1);
       final confidenceScore = quote.confidence;
-      
+
       // Weighted average (output: 50%, confidence: 30%, time: 20%)
-      final score = (outputScore * 0.5) + (confidenceScore * 0.3) + (timeScore * 0.2);
-      
+      final score =
+          (outputScore * 0.5) + (confidenceScore * 0.3) + (timeScore * 0.2);
+
       if (score > bestScore) {
         bestScore = score;
         bestQuote = quote;
       }
     }
-    
+
     return bestQuote?.route;
   }
 
@@ -319,7 +332,7 @@ class BridgeService {
 
   void dispose() {
     bridgeTracker.dispose();
-    
+
     for (final protocol in protocols) {
       if (protocol is LayerZeroBridge) {
         protocol.dispose();
@@ -336,7 +349,6 @@ class BridgeService {
 
 /// Chain pair information
 class ChainPair {
-
   ChainPair({
     required this.sourceChainId,
     required this.destinationChainId,
@@ -354,7 +366,6 @@ class ChainPair {
 
 /// Exception thrown when bridge execution fails
 class BridgeExecutionException implements Exception {
-
   const BridgeExecutionException(this.message, {this.originalError});
   final String message;
   final dynamic originalError;

@@ -1,7 +1,8 @@
 import 'dart:typed_data';
 
 /// Bridge token information
-class BridgeToken { // Token addresses on different chains
+class BridgeToken {
+  // Token addresses on different chains
 
   const BridgeToken({
     required this.address,
@@ -66,7 +67,6 @@ class BridgeToken { // Token addresses on different chains
 
 /// Bridge transfer parameters
 class BridgeParams {
-
   const BridgeParams({
     required this.fromToken,
     required this.toToken,
@@ -122,13 +122,13 @@ class BridgeParams {
 
 /// Bridge transaction data
 class BridgeTransaction {
-
   const BridgeTransaction({
     required this.to,
     required this.data,
     required this.value,
     required this.gasLimit,
-    required this.chainId, this.gasPrice,
+    required this.chainId,
+    this.gasPrice,
     this.maxFeePerGas,
     this.maxPriorityFeePerGas,
   });
@@ -139,14 +139,14 @@ class BridgeTransaction {
       data: Uint8List.fromList((json['data'] as String).codeUnits),
       value: BigInt.parse(json['value'] as String),
       gasLimit: BigInt.parse(json['gasLimit'] as String),
-      gasPrice: json['gasPrice'] != null 
-          ? BigInt.parse(json['gasPrice'] as String) 
+      gasPrice: json['gasPrice'] != null
+          ? BigInt.parse(json['gasPrice'] as String)
           : null,
-      maxFeePerGas: json['maxFeePerGas'] != null 
-          ? BigInt.parse(json['maxFeePerGas'] as String) 
+      maxFeePerGas: json['maxFeePerGas'] != null
+          ? BigInt.parse(json['maxFeePerGas'] as String)
           : null,
-      maxPriorityFeePerGas: json['maxPriorityFeePerGas'] != null 
-          ? BigInt.parse(json['maxPriorityFeePerGas'] as String) 
+      maxPriorityFeePerGas: json['maxPriorityFeePerGas'] != null
+          ? BigInt.parse(json['maxPriorityFeePerGas'] as String)
           : null,
       chainId: json['chainId'] as int,
     );
@@ -168,7 +168,7 @@ class BridgeTransaction {
       'gasLimit': gasLimit.toString(),
       if (gasPrice != null) 'gasPrice': gasPrice.toString(),
       if (maxFeePerGas != null) 'maxFeePerGas': maxFeePerGas.toString(),
-      if (maxPriorityFeePerGas != null) 
+      if (maxPriorityFeePerGas != null)
         'maxPriorityFeePerGas': maxPriorityFeePerGas.toString(),
       'chainId': chainId,
     };
@@ -177,7 +177,6 @@ class BridgeTransaction {
 
 /// Bridge route information
 class BridgeRoute {
-
   const BridgeRoute({
     required this.protocol,
     required this.steps,
@@ -226,7 +225,6 @@ class BridgeRoute {
 
 /// Individual step in a bridge route
 class BridgeStep {
-
   const BridgeStep({
     required this.fromChainId,
     required this.toChainId,
@@ -245,14 +243,16 @@ class BridgeStep {
       fromChainId: json['fromChainId'] as int,
       toChainId: json['toChainId'] as int,
       protocol: json['protocol'] as String,
-      fromToken: BridgeToken.fromJson(json['fromToken'] as Map<String, dynamic>),
+      fromToken:
+          BridgeToken.fromJson(json['fromToken'] as Map<String, dynamic>),
       toToken: BridgeToken.fromJson(json['toToken'] as Map<String, dynamic>),
       inputAmount: BigInt.parse(json['inputAmount'] as String),
       outputAmount: BigInt.parse(json['outputAmount'] as String),
       fee: BigInt.parse(json['fee'] as String),
       estimatedTime: Duration(seconds: json['estimatedTimeSeconds'] as int),
       transaction: json['transaction'] != null
-          ? BridgeTransaction.fromJson(json['transaction'] as Map<String, dynamic>)
+          ? BridgeTransaction.fromJson(
+              json['transaction'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -308,7 +308,6 @@ enum BridgeProtocolType {
 
 /// Fee breakdown for bridge operations
 class BridgeFeeBreakdown {
-
   const BridgeFeeBreakdown({
     required this.protocolFee,
     required this.gasFee,
@@ -355,7 +354,6 @@ class BridgeFeeBreakdown {
 
 /// Bridge limits for a specific route
 class BridgeLimits {
-
   const BridgeLimits({
     required this.minAmount,
     required this.maxAmount,
@@ -378,9 +376,9 @@ class BridgeLimits {
 
   /// Check if amount is within limits
   bool isAmountValid(BigInt amount) {
-    return amount >= minAmount && 
-           amount <= maxAmount && 
-           amount <= remainingDailyLimit;
+    return amount >= minAmount &&
+        amount <= maxAmount &&
+        amount <= remainingDailyLimit;
   }
 
   Map<String, dynamic> toJson() {

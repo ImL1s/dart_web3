@@ -1,7 +1,5 @@
 import 'dart:typed_data';
 
-
-
 /// Represents a UTXO transaction input (vin).
 class TransactionInput {
   TransactionInput({
@@ -84,7 +82,8 @@ class BitcoinTransaction {
     buffer.add(_int32ToBytes(version));
 
     // Check if we need extended format (SegWit)
-    final hasWitness = segwit && inputs.any((i) => i.witness != null && i.witness!.isNotEmpty);
+    final hasWitness =
+        segwit && inputs.any((i) => i.witness != null && i.witness!.isNotEmpty);
     if (hasWitness) {
       buffer.addByte(0x00); // Marker
       buffer.addByte(0x01); // Flag
@@ -134,7 +133,7 @@ class BitcoinTransaction {
   String get txId {
     // SegWit txId is hash of legacy serialization (no witness)
     // TODO: Implement proper double SHA256 when imports available
-    return ''; 
+    return '';
   }
 
   /// Checks if this transaction signals RBF (Replace-By-Fee) eligibility.
@@ -146,7 +145,7 @@ class BitcoinTransaction {
   /// Parses a transaction from raw bytes.
   static BitcoinTransaction fromBytes(Uint8List bytes) {
     if (bytes.length < 10) throw FormatException('Transaction too short');
-    
+
     var offset = 0;
     final buffer = ByteData.sublistView(bytes);
 
@@ -158,7 +157,7 @@ class BitcoinTransaction {
     final marker = bytes[offset];
     final flag = bytes[offset + 1];
     final isSegwit = marker == 0x00 && flag == 0x01;
-    
+
     if (isSegwit) {
       offset += 2;
     }
@@ -170,27 +169,29 @@ class BitcoinTransaction {
 
     final inputs = <TransactionInput>[];
     for (var i = 0; i < inputCount; i++) {
-        final txId = bytes.sublist(offset, offset + 32);
-        offset += 32;
+      final txId = bytes.sublist(offset, offset + 32);
+      offset += 32;
 
-        final vout = buffer.getUint32(offset, Endian.little);
-        offset += 4;
+      final vout = buffer.getUint32(offset, Endian.little);
+      offset += 4;
 
-        final scriptLenRes = _readVarInt(bytes, offset);
-        offset = scriptLenRes.nextOffset;
+      final scriptLenRes = _readVarInt(bytes, offset);
+      offset = scriptLenRes.nextOffset;
 
-        final scriptSig = bytes.sublist(offset, offset + scriptLenRes.value);
-        offset += scriptLenRes.value;
+      final scriptSig = bytes.sublist(offset, offset + scriptLenRes.value);
+      offset += scriptLenRes.value;
 
-        final sequence = buffer.getUint32(offset, Endian.little);
-        offset += 4;
+      final sequence = buffer.getUint32(offset, Endian.little);
+      offset += 4;
 
-        inputs.add(TransactionInput(
-            txId: txId,
-            vout: vout,
-            scriptSig: scriptSig,
-            sequence: sequence,
-        ),);
+      inputs.add(
+        TransactionInput(
+          txId: txId,
+          vout: vout,
+          scriptSig: scriptSig,
+          sequence: sequence,
+        ),
+      );
     }
 
     // 3. Outputs
@@ -200,54 +201,55 @@ class BitcoinTransaction {
 
     final outputs = <TransactionOutput>[];
     for (var i = 0; i < outputCount; i++) {
-        final amount = BigInt.from(buffer.getUint64(offset, Endian.little));
-        offset += 8;
+      final amount = BigInt.from(buffer.getUint64(offset, Endian.little));
+      offset += 8;
 
-        final scriptLenRes = _readVarInt(bytes, offset);
-        offset = scriptLenRes.nextOffset;
+      final scriptLenRes = _readVarInt(bytes, offset);
+      offset = scriptLenRes.nextOffset;
 
-        final scriptPubKey = bytes.sublist(offset, offset + scriptLenRes.value);
-        offset += scriptLenRes.value;
+      final scriptPubKey = bytes.sublist(offset, offset + scriptLenRes.value);
+      offset += scriptLenRes.value;
 
-        outputs.add(TransactionOutput(amount: amount, scriptPubKey: scriptPubKey));
+      outputs
+          .add(TransactionOutput(amount: amount, scriptPubKey: scriptPubKey));
     }
 
     // 4. Witness (if SegWit)
     if (isSegwit) {
-        for (var i = 0; i < inputCount; i++) {
-            final witnessCountRes = _readVarInt(bytes, offset);
-            final witnessCount = witnessCountRes.value;
-            offset = witnessCountRes.nextOffset;
+      for (var i = 0; i < inputCount; i++) {
+        final witnessCountRes = _readVarInt(bytes, offset);
+        final witnessCount = witnessCountRes.value;
+        offset = witnessCountRes.nextOffset;
 
-            final witnesses = <Uint8List>[];
-            for (var w = 0; w < witnessCount; w++) {
-                final itemLenRes = _readVarInt(bytes, offset);
-                offset = itemLenRes.nextOffset;
-                
-                final item = bytes.sublist(offset, offset + itemLenRes.value);
-                offset += itemLenRes.value;
-                witnesses.add(item);
-            }
-            // Can't easily mutate final fields on input, assume inputs constructed correctly 
-            // Workaround: recreate input with witness
-            inputs[i] = TransactionInput(
-                txId: inputs[i].txId,
-                vout: inputs[i].vout,
-                scriptSig: inputs[i].scriptSig,
-                sequence: inputs[i].sequence,
-                witness: witnesses,
-            );
+        final witnesses = <Uint8List>[];
+        for (var w = 0; w < witnessCount; w++) {
+          final itemLenRes = _readVarInt(bytes, offset);
+          offset = itemLenRes.nextOffset;
+
+          final item = bytes.sublist(offset, offset + itemLenRes.value);
+          offset += itemLenRes.value;
+          witnesses.add(item);
         }
+        // Can't easily mutate final fields on input, assume inputs constructed correctly
+        // Workaround: recreate input with witness
+        inputs[i] = TransactionInput(
+          txId: inputs[i].txId,
+          vout: inputs[i].vout,
+          scriptSig: inputs[i].scriptSig,
+          sequence: inputs[i].sequence,
+          witness: witnesses,
+        );
+      }
     }
 
     // 5. LockTime
     final lockTime = buffer.getUint32(offset, Endian.little);
-    
+
     return BitcoinTransaction(
-        version: version,
-        inputs: inputs,
-        outputs: outputs,
-        lockTime: lockTime,
+      version: version,
+      inputs: inputs,
+      outputs: outputs,
+      lockTime: lockTime,
     );
   }
 }
@@ -264,13 +266,16 @@ _VarIntResult _readVarInt(Uint8List bytes, int offset) {
   if (first < 0xfd) {
     return _VarIntResult(first, offset + 1);
   } else if (first == 0xfd) {
-    final val = ByteData.sublistView(bytes, offset + 1, offset + 3).getUint16(0, Endian.little);
+    final val = ByteData.sublistView(bytes, offset + 1, offset + 3)
+        .getUint16(0, Endian.little);
     return _VarIntResult(val, offset + 3);
   } else if (first == 0xfe) {
-    final val = ByteData.sublistView(bytes, offset + 1, offset + 5).getUint32(0, Endian.little);
+    final val = ByteData.sublistView(bytes, offset + 1, offset + 5)
+        .getUint32(0, Endian.little);
     return _VarIntResult(val, offset + 5);
   } else {
-    final val = ByteData.sublistView(bytes, offset + 1, offset + 9).getUint64(0, Endian.little);
+    final val = ByteData.sublistView(bytes, offset + 1, offset + 9)
+        .getUint64(0, Endian.little);
     return _VarIntResult(val, offset + 9);
   }
 }

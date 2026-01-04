@@ -12,7 +12,7 @@ void main(List<String> args) async {
   }
 
   final lines = await file.readAsLines();
-  
+
   print('--- ERRORS ---');
   for (final line in lines) {
     if (line.contains('error - ')) {

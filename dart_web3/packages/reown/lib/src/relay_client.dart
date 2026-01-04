@@ -7,7 +7,6 @@ import 'dart:io';
 
 /// Relay protocol client for WalletConnect v2.
 class RelayClient {
-
   RelayClient({
     required this.relayUrl,
     required this.projectId,
@@ -22,8 +21,9 @@ class RelayClient {
   WebSocket? _socket;
   final Map<String, Completer<Map<String, dynamic>>> _pendingRequests = {};
   final Map<String, StreamController<Map<String, dynamic>>> _subscriptions = {};
-  final StreamController<RelayEvent> _eventController = StreamController.broadcast();
-  
+  final StreamController<RelayEvent> _eventController =
+      StreamController.broadcast();
+
   Timer? _reconnectTimer;
   Timer? _heartbeatTimer;
   int _reconnectAttempts = 0;
@@ -40,14 +40,14 @@ class RelayClient {
   /// Connects to the relay server.
   Future<void> connect() async {
     if (_isConnecting || isConnected) return;
-    
+
     _isConnecting = true;
     _shouldReconnect = true;
 
     try {
       final uri = Uri.parse('$relayUrl?projectId=$projectId');
       _socket = await WebSocket.connect(uri.toString());
-      
+
       _socket!.listen(
         _handleMessage,
         onError: _handleError,
@@ -57,7 +57,7 @@ class RelayClient {
       _reconnectAttempts = 0;
       _isConnecting = false;
       _startHeartbeat();
-      
+
       _eventController.add(RelayEvent.connected());
     } on Object catch (e) {
       _isConnecting = false;
@@ -70,10 +70,10 @@ class RelayClient {
     _shouldReconnect = false;
     _reconnectTimer?.cancel();
     _heartbeatTimer?.cancel();
-    
+
     await _socket?.close();
     _socket = null;
-    
+
     // Complete all pending requests with error
     for (final completer in _pendingRequests.values) {
       if (!completer.isCompleted) {
@@ -81,13 +81,13 @@ class RelayClient {
       }
     }
     _pendingRequests.clear();
-    
+
     // Close all subscriptions
     for (final controller in _subscriptions.values) {
       await controller.close();
     }
     _subscriptions.clear();
-    
+
     _eventController.add(RelayEvent.disconnected());
   }
 
@@ -136,10 +136,11 @@ class RelayClient {
 
     final response = await _sendRequest(request);
     final subscriptionId = response['result'] as String;
-    
+
     // Create stream controller for this subscription
-    _subscriptions[subscriptionId] = StreamController<Map<String, dynamic>>.broadcast();
-    
+    _subscriptions[subscriptionId] =
+        StreamController<Map<String, dynamic>>.broadcast();
+
     return subscriptionId;
   }
 
@@ -159,7 +160,7 @@ class RelayClient {
     };
 
     await _sendRequest(request);
-    
+
     // Close and remove subscription
     await _subscriptions[subscriptionId]?.close();
     _subscriptions.remove(subscriptionId);
@@ -177,7 +178,8 @@ class RelayClient {
   }
 
   /// Sends a request and waits for response.
-  Future<Map<String, dynamic>> _sendRequest(Map<String, dynamic> request) async {
+  Future<Map<String, dynamic>> _sendRequest(
+      Map<String, dynamic> request) async {
     if (!isConnected) {
       throw Exception('Not connected to relay');
     }
@@ -191,7 +193,8 @@ class RelayClient {
     Timer(const Duration(seconds: 30), () {
       if (!completer.isCompleted) {
         _pendingRequests.remove(request['id'].toString());
-        completer.completeError(TimeoutException('Request timeout', const Duration(seconds: 30)));
+        completer.completeError(
+            TimeoutException('Request timeout', const Duration(seconds: 30)));
       }
     });
 
@@ -202,15 +205,16 @@ class RelayClient {
   void _handleMessage(dynamic data) {
     try {
       final message = jsonDecode(data as String) as Map<String, dynamic>;
-      
+
       if (message.containsKey('id')) {
         // Response to a request
         final id = message['id'].toString();
         final completer = _pendingRequests.remove(id);
-        
+
         if (completer != null && !completer.isCompleted) {
           if (message.containsKey('error')) {
-            completer.completeError(RelayError.fromJson(message['error'] as Map<String, dynamic>));
+            completer.completeError(
+                RelayError.fromJson(message['error'] as Map<String, dynamic>));
           } else {
             completer.complete(message);
           }
@@ -220,22 +224,25 @@ class RelayClient {
         final params = message['params'] as Map<String, dynamic>;
         final subscriptionId = params['id'] as String;
         final data = params['data'] as Map<String, dynamic>;
-        
+
         // Decode message
         final encodedMessage = data['message'] as String;
         final decodedBytes = base64Decode(encodedMessage);
-        final decodedMessage = jsonDecode(utf8.decode(decodedBytes)) as Map<String, dynamic>;
-        
+        final decodedMessage =
+            jsonDecode(utf8.decode(decodedBytes)) as Map<String, dynamic>;
+
         // ignore: close_sinks
         final controller = _subscriptions[subscriptionId];
         if (controller != null && !controller.isClosed) {
           controller.add(decodedMessage);
         }
-        
-        _eventController.add(RelayEvent.message(
-          topic: data['topic'] as String,
-          message: decodedMessage,
-        ),);
+
+        _eventController.add(
+          RelayEvent.message(
+            topic: data['topic'] as String,
+            message: decodedMessage,
+          ),
+        );
       }
     } on Object catch (e) {
       _eventController.add(RelayEvent.error(e));
@@ -245,7 +252,7 @@ class RelayClient {
   /// Handles connection errors.
   void _handleError(dynamic error) {
     _eventController.add(RelayEvent.error(error));
-    
+
     if (_shouldReconnect && _reconnectAttempts < maxReconnectAttempts) {
       _scheduleReconnect();
     }
@@ -255,7 +262,7 @@ class RelayClient {
   void _handleDisconnect() {
     _socket = null;
     _heartbeatTimer?.cancel();
-    
+
     if (_shouldReconnect && _reconnectAttempts < maxReconnectAttempts) {
       _scheduleReconnect();
     } else {
@@ -267,7 +274,7 @@ class RelayClient {
   void _scheduleReconnect() {
     _reconnectAttempts++;
     _reconnectTimer?.cancel();
-    
+
     _reconnectTimer = Timer(reconnectDelay, () {
       if (_shouldReconnect) {
         connect();
@@ -280,12 +287,14 @@ class RelayClient {
     _heartbeatTimer?.cancel();
     _heartbeatTimer = Timer.periodic(const Duration(seconds: 30), (_) {
       if (isConnected) {
-        _socket!.add(jsonEncode({
-          'id': ++_requestId,
-          'jsonrpc': '2.0',
-          'method': 'irn_ping',
-          'params': <String, dynamic>{},
-        }),);
+        _socket!.add(
+          jsonEncode({
+            'id': ++_requestId,
+            'jsonrpc': '2.0',
+            'method': 'irn_ping',
+            'params': <String, dynamic>{},
+          }),
+        );
       }
     });
   }
@@ -298,7 +307,7 @@ class RelayClient {
       }
     }
     _subscriptions.clear();
-    
+
     disconnect();
     _eventController.close();
   }
@@ -306,14 +315,16 @@ class RelayClient {
 
 /// Relay event types.
 class RelayEvent {
-
   RelayEvent._(this.type, {this.topic, this.message, this.error});
 
   factory RelayEvent.connected() => RelayEvent._(RelayEventType.connected);
-  factory RelayEvent.disconnected() => RelayEvent._(RelayEventType.disconnected);
-  factory RelayEvent.message({required String topic, required Map<String, dynamic> message}) =>
+  factory RelayEvent.disconnected() =>
+      RelayEvent._(RelayEventType.disconnected);
+  factory RelayEvent.message(
+          {required String topic, required Map<String, dynamic> message}) =>
       RelayEvent._(RelayEventType.message, topic: topic, message: message);
-  factory RelayEvent.error(dynamic error) => RelayEvent._(RelayEventType.error, error: error);
+  factory RelayEvent.error(dynamic error) =>
+      RelayEvent._(RelayEventType.error, error: error);
   final RelayEventType type;
   final String? topic;
   final Map<String, dynamic>? message;
@@ -329,7 +340,6 @@ enum RelayEventType {
 
 /// Relay error.
 class RelayError implements Exception {
-
   RelayError(this.code, this.message, [this.data]);
 
   factory RelayError.fromJson(Map<String, dynamic> json) {

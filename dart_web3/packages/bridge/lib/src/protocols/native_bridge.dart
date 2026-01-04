@@ -6,7 +6,6 @@ import 'bridge_protocol.dart';
 
 /// Native L2 bridge protocol implementation (for Arbitrum, Optimism, Base, etc.)
 class NativeBridge extends BridgeProtocol {
-
   NativeBridge({
     required this.config,
     http.Client? httpClient,
@@ -19,29 +18,34 @@ class NativeBridge extends BridgeProtocol {
 
   @override
   List<int> get supportedSourceChains => [
-    1,     // Ethereum (to L2s)
-    42161, // Arbitrum (to Ethereum)
-    10,    // Optimism (to Ethereum)
-    8453,  // Base (to Ethereum)
-    137,   // Polygon (to Ethereum)
-  ];
+        1, // Ethereum (to L2s)
+        42161, // Arbitrum (to Ethereum)
+        10, // Optimism (to Ethereum)
+        8453, // Base (to Ethereum)
+        137, // Polygon (to Ethereum)
+      ];
 
   @override
   List<int> get supportedDestinationChains => [
-    1,     // Ethereum (from L2s)
-    42161, // Arbitrum (from Ethereum)
-    10,    // Optimism (from Ethereum)
-    8453,  // Base (from Ethereum)
-    137,   // Polygon (from Ethereum)
-  ];
+        1, // Ethereum (from L2s)
+        42161, // Arbitrum (from Ethereum)
+        10, // Optimism (from Ethereum)
+        8453, // Base (from Ethereum)
+        137, // Polygon (from Ethereum)
+      ];
 
   @override
   bool supportsChainPair(int sourceChainId, int destinationChainId) {
     // Native bridges only work between Ethereum and specific L2s
-    final l2Chains = [42161, 10, 8453, 137]; // Arbitrum, Optimism, Base, Polygon
-    
+    final l2Chains = [
+      42161,
+      10,
+      8453,
+      137
+    ]; // Arbitrum, Optimism, Base, Polygon
+
     return (sourceChainId == 1 && l2Chains.contains(destinationChainId)) ||
-           (l2Chains.contains(sourceChainId) && destinationChainId == 1);
+        (l2Chains.contains(sourceChainId) && destinationChainId == 1);
   }
 
   @override
@@ -60,12 +64,14 @@ class NativeBridge extends BridgeProtocol {
       }
 
       final isDeposit = params.sourceChainId == 1; // Ethereum to L2
-      final bridgeInfo = _getBridgeInfo(params.sourceChainId, params.destinationChainId);
-      
+      final bridgeInfo =
+          _getBridgeInfo(params.sourceChainId, params.destinationChainId);
+
       // Calculate output amount (1:1 for native bridges, minus fees)
       final feeBreakdown = await getFeeBreakdown(params);
       final outputAmount = params.amount - feeBreakdown.totalFee;
-      final minimumOutputAmount = calculateMinimumOutput(outputAmount, params.slippage);
+      final minimumOutputAmount =
+          calculateMinimumOutput(outputAmount, params.slippage);
 
       // Create route
       final estimatedTime = await getEstimatedTime(
@@ -91,7 +97,9 @@ class NativeBridge extends BridgeProtocol {
         ],
         estimatedTime: estimatedTime,
         totalFee: feeBreakdown.totalFee,
-        confidence: isDeposit ? 0.99 : 0.95, // Deposits are more reliable than withdrawals
+        confidence: isDeposit
+            ? 0.99
+            : 0.95, // Deposits are more reliable than withdrawals
       );
 
       // Get limits
@@ -136,21 +144,24 @@ class NativeBridge extends BridgeProtocol {
     if (!supportsChainPair(sourceChainId, destinationChainId)) {
       throw BridgeException(
         protocol: name,
-        message: 'Chain pair not supported: $sourceChainId -> $destinationChainId',
+        message:
+            'Chain pair not supported: $sourceChainId -> $destinationChainId',
       );
     }
 
     // Native bridges typically support ETH and a few whitelisted tokens
     final tokens = <BridgeToken>[];
-    
+
     // ETH is always supported
-    tokens.add(BridgeToken(
-      address: '0x0000000000000000000000000000000000000000',
-      symbol: 'ETH',
-      name: 'Ethereum',
-      decimals: 18,
-      chainId: sourceChainId,
-    ),);
+    tokens.add(
+      BridgeToken(
+        address: '0x0000000000000000000000000000000000000000',
+        symbol: 'ETH',
+        name: 'Ethereum',
+        decimals: 18,
+        chainId: sourceChainId,
+      ),
+    );
 
     // Add some common ERC-20 tokens that are typically supported
     final commonTokens = _getCommonTokensForChain(sourceChainId);
@@ -167,10 +178,11 @@ class NativeBridge extends BridgeProtocol {
     int destinationChainId,
   ) async {
     if (!supportsChainPair(sourceChainId, destinationChainId)) return false;
-    
+
     // For native bridges, tokens must be the same (ETH <-> ETH, USDC <-> USDC)
-    return sourceToken.symbol.toUpperCase() == destinationToken.symbol.toUpperCase() &&
-           _isSupportedToken(sourceToken);
+    return sourceToken.symbol.toUpperCase() ==
+            destinationToken.symbol.toUpperCase() &&
+        _isSupportedToken(sourceToken);
   }
 
   @override
@@ -180,7 +192,7 @@ class NativeBridge extends BridgeProtocol {
     int destinationChainId,
   ) async {
     final isDeposit = sourceChainId == 1;
-    
+
     if (isDeposit) {
       // Deposits typically have higher limits
       return BridgeLimits(
@@ -208,7 +220,7 @@ class NativeBridge extends BridgeProtocol {
   ) async {
     final isDeposit = sourceChainId == 1;
     final bridgeInfo = _getBridgeInfo(sourceChainId, destinationChainId);
-    
+
     if (isDeposit) {
       // Deposits are typically fast (5-15 minutes)
       return const Duration(minutes: 10);
@@ -221,11 +233,11 @@ class NativeBridge extends BridgeProtocol {
   @override
   Future<BridgeFeeBreakdown> getFeeBreakdown(BridgeParams params) async {
     final isDeposit = params.sourceChainId == 1;
-    
+
     if (isDeposit) {
       // Deposit fees are typically just gas costs
       final gasFee = BigInt.from(50000000000000000); // ~0.05 ETH
-      
+
       return BridgeFeeBreakdown(
         protocolFee: BigInt.zero,
         gasFee: gasFee,
@@ -239,7 +251,7 @@ class NativeBridge extends BridgeProtocol {
       final l2GasFee = BigInt.from(5000000000000000); // ~0.005 ETH on L2
       final l1GasFee = BigInt.from(30000000000000000); // ~0.03 ETH on L1
       final totalFee = l2GasFee + l1GasFee;
-      
+
       return BridgeFeeBreakdown(
         protocolFee: BigInt.zero,
         gasFee: totalFee,
@@ -278,27 +290,37 @@ class NativeBridge extends BridgeProtocol {
 
   String _getUSDCAddress(int chainId) {
     switch (chainId) {
-      case 1: return '0xA0b86a33E6441c8C06DD2b7c94b7E6E8E8b8b8b8'; // Ethereum USDC
-      case 42161: return '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'; // Arbitrum USDC
-      case 10: return '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'; // Optimism USDC
-      case 8453: return '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // Base USDC
-      default: return '0x0000000000000000000000000000000000000000';
+      case 1:
+        return '0xA0b86a33E6441c8C06DD2b7c94b7E6E8E8b8b8b8'; // Ethereum USDC
+      case 42161:
+        return '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'; // Arbitrum USDC
+      case 10:
+        return '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'; // Optimism USDC
+      case 8453:
+        return '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // Base USDC
+      default:
+        return '0x0000000000000000000000000000000000000000';
     }
   }
 
   String _getUSDTAddress(int chainId) {
     switch (chainId) {
-      case 1: return '0xdAC17F958D2ee523a2206206994597C13D831ec7'; // Ethereum USDT
-      case 42161: return '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'; // Arbitrum USDT
-      case 10: return '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58'; // Optimism USDT
-      case 137: return '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'; // Polygon USDT
-      default: return '0x0000000000000000000000000000000000000000';
+      case 1:
+        return '0xdAC17F958D2ee523a2206206994597C13D831ec7'; // Ethereum USDT
+      case 42161:
+        return '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'; // Arbitrum USDT
+      case 10:
+        return '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58'; // Optimism USDT
+      case 137:
+        return '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'; // Polygon USDT
+      default:
+        return '0x0000000000000000000000000000000000000000';
     }
   }
 
   _NativeBridgeInfo _getBridgeInfo(int sourceChainId, int destinationChainId) {
     final l2ChainId = sourceChainId == 1 ? destinationChainId : sourceChainId;
-    
+
     switch (l2ChainId) {
       case 42161: // Arbitrum
         return _NativeBridgeInfo(
@@ -322,7 +344,8 @@ class NativeBridge extends BridgeProtocol {
         return _NativeBridgeInfo(
           name: 'Polygon',
           contractAddress: '0xA0c68C638235ee32657e8f720a23ceC1bFc77C77',
-          challengePeriod: const Duration(hours: 3), // Polygon has shorter challenge period
+          challengePeriod:
+              const Duration(hours: 3), // Polygon has shorter challenge period
         );
       default:
         throw BridgeException(
@@ -338,7 +361,6 @@ class NativeBridge extends BridgeProtocol {
 }
 
 class _NativeBridgeInfo {
-
   const _NativeBridgeInfo({
     required this.name,
     required this.contractAddress,

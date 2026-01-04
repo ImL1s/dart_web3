@@ -8,7 +8,7 @@ import 'package:web3_universal_signer/web3_universal_signer.dart';
 import 'user_operation.dart';
 
 /// EntryPoint contract interface for ERC-4337.
-/// 
+///
 /// The EntryPoint is the singleton contract that handles UserOperation validation,
 /// execution, and gas payment. Different versions have different interfaces and capabilities.
 abstract class EntryPoint {
@@ -39,14 +39,15 @@ abstract class EntryPoint {
 
 /// EntryPoint v0.6 implementation.
 class EntryPointV06 implements EntryPoint {
-
   EntryPointV06({
-    required PublicClient publicClient, String? address,
+    required PublicClient publicClient,
+    String? address,
     WalletClient? walletClient,
-  }) : _address = address ?? defaultAddress,
-       _publicClient = publicClient,
-       _walletClient = walletClient;
-  static const String defaultAddress = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
+  })  : _address = address ?? defaultAddress,
+        _publicClient = publicClient,
+        _walletClient = walletClient;
+  static const String defaultAddress =
+      '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
 
   final String _address;
   final PublicClient _publicClient;
@@ -65,7 +66,7 @@ class EntryPointV06 implements EntryPoint {
     }
 
     final callData = _encodeHandleOpsCall(ops, beneficiary);
-    
+
     final txRequest = TransactionRequest(
       to: _address,
       data: HexUtils.decode(callData),
@@ -84,8 +85,9 @@ class EntryPointV06 implements EntryPoint {
       throw StateError('WalletClient required for handleAggregatedOps');
     }
 
-    final callData = _encodeHandleAggregatedOpsCall(opsPerAggregator, beneficiary);
-    
+    final callData =
+        _encodeHandleAggregatedOpsCall(opsPerAggregator, beneficiary);
+
     final txRequest = TransactionRequest(
       to: _address,
       data: HexUtils.decode(callData),
@@ -99,25 +101,29 @@ class EntryPointV06 implements EntryPoint {
   Future<BigInt> getNonce(String sender, {BigInt? key}) async {
     final nonceKey = key ?? BigInt.zero;
     final callData = _encodeGetNonceCall(sender, nonceKey);
-    
-    final result = await _publicClient.call(CallRequest(
-      to: _address,
-      data: HexUtils.decode(callData),
-    ),);
-    
+
+    final result = await _publicClient.call(
+      CallRequest(
+        to: _address,
+        data: HexUtils.decode(callData),
+      ),
+    );
+
     return BigInt.parse(HexUtils.encode(result));
   }
 
   @override
   Future<ValidationResult> simulateValidation(UserOperation userOp) async {
     final callData = _encodeSimulateValidationCall(userOp);
-    
+
     try {
-      final result = await _publicClient.call(CallRequest(
-        to: _address,
-        data: HexUtils.decode(callData),
-      ),);
-      
+      final result = await _publicClient.call(
+        CallRequest(
+          to: _address,
+          data: HexUtils.decode(callData),
+        ),
+      );
+
       return ValidationResult.fromBytes(result);
     } catch (e) {
       // simulateValidation is expected to revert with validation data
@@ -132,12 +138,14 @@ class EntryPointV06 implements EntryPoint {
   @override
   Future<DepositInfo> getDepositInfo(String account) async {
     final callData = _encodeGetDepositInfoCall(account);
-    
-    final result = await _publicClient.call(CallRequest(
-      to: _address,
-      data: HexUtils.decode(callData),
-    ),);
-    
+
+    final result = await _publicClient.call(
+      CallRequest(
+        to: _address,
+        data: HexUtils.decode(callData),
+      ),
+    );
+
     return DepositInfo.fromBytes(result);
   }
 
@@ -162,38 +170,42 @@ class EntryPointV06 implements EntryPoint {
 
     // Define UserOperation tuple type for v0.6
     final userOpTupleType = AbiTuple([
-      AbiAddress(),      // sender
-      AbiUint(256),      // nonce
-      AbiBytes(),        // initCode
-      AbiBytes(),        // callData
-      AbiUint(256),      // callGasLimit
-      AbiUint(256),      // verificationGasLimit
-      AbiUint(256),      // preVerificationGas
-      AbiUint(256),      // maxFeePerGas
-      AbiUint(256),      // maxPriorityFeePerGas
-      AbiBytes(),        // paymasterAndData
-      AbiBytes(),        // signature
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiBytes(), // initCode
+      AbiBytes(), // callData
+      AbiUint(256), // callGasLimit
+      AbiUint(256), // verificationGasLimit
+      AbiUint(256), // preVerificationGas
+      AbiUint(256), // maxFeePerGas
+      AbiUint(256), // maxPriorityFeePerGas
+      AbiBytes(), // paymasterAndData
+      AbiBytes(), // signature
     ]);
 
     // Convert UserOperations to tuple values
-    final opsValues = ops.map((op) => [
-      op.sender,
-      op.nonce,
-      HexUtils.decode(op.initCode ?? '0x'),
-      HexUtils.decode(op.callData),
-      op.callGasLimit,
-      op.verificationGasLimit,
-      op.preVerificationGas,
-      op.maxFeePerGas,
-      op.maxPriorityFeePerGas,
-      HexUtils.decode(op.paymasterAndData ?? '0x'),
-      HexUtils.decode(op.signature),
-    ],).toList();
+    final opsValues = ops
+        .map(
+          (op) => [
+            op.sender,
+            op.nonce,
+            HexUtils.decode(op.initCode ?? '0x'),
+            HexUtils.decode(op.callData),
+            op.callGasLimit,
+            op.verificationGasLimit,
+            op.preVerificationGas,
+            op.maxFeePerGas,
+            op.maxPriorityFeePerGas,
+            HexUtils.decode(op.paymasterAndData ?? '0x'),
+            HexUtils.decode(op.signature),
+          ],
+        )
+        .toList();
 
     // Encode function call
     final types = [
-      AbiArray(userOpTupleType),  // UserOperation[]
-      AbiAddress(),               // beneficiary
+      AbiArray(userOpTupleType), // UserOperation[]
+      AbiAddress(), // beneficiary
     ];
 
     final values = [opsValues, beneficiary];
@@ -218,41 +230,45 @@ class EntryPointV06 implements EntryPoint {
 
     // Define UserOperation tuple type for v0.6
     final userOpTupleType = AbiTuple([
-      AbiAddress(),      // sender
-      AbiUint(256),      // nonce
-      AbiBytes(),        // initCode
-      AbiBytes(),        // callData
-      AbiUint(256),      // callGasLimit
-      AbiUint(256),      // verificationGasLimit
-      AbiUint(256),      // preVerificationGas
-      AbiUint(256),      // maxFeePerGas
-      AbiUint(256),      // maxPriorityFeePerGas
-      AbiBytes(),        // paymasterAndData
-      AbiBytes(),        // signature
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiBytes(), // initCode
+      AbiBytes(), // callData
+      AbiUint(256), // callGasLimit
+      AbiUint(256), // verificationGasLimit
+      AbiUint(256), // preVerificationGas
+      AbiUint(256), // maxFeePerGas
+      AbiUint(256), // maxPriorityFeePerGas
+      AbiBytes(), // paymasterAndData
+      AbiBytes(), // signature
     ]);
 
     // Define UserOpsPerAggregator tuple type
     final aggregatorTupleType = AbiTuple([
-      AbiArray(userOpTupleType),  // userOps
-      AbiAddress(),               // aggregator
-      AbiBytes(),                 // signature
+      AbiArray(userOpTupleType), // userOps
+      AbiAddress(), // aggregator
+      AbiBytes(), // signature
     ]);
 
     // Convert to tuple values
     final aggregatorValues = opsPerAggregator.map((agg) {
-      final opsValues = agg.userOps.map((op) => [
-        op.sender,
-        op.nonce,
-        HexUtils.decode(op.initCode ?? '0x'),
-        HexUtils.decode(op.callData),
-        op.callGasLimit,
-        op.verificationGasLimit,
-        op.preVerificationGas,
-        op.maxFeePerGas,
-        op.maxPriorityFeePerGas,
-        HexUtils.decode(op.paymasterAndData ?? '0x'),
-        HexUtils.decode(op.signature),
-      ],).toList();
+      final opsValues = agg.userOps
+          .map(
+            (op) => [
+              op.sender,
+              op.nonce,
+              HexUtils.decode(op.initCode ?? '0x'),
+              HexUtils.decode(op.callData),
+              op.callGasLimit,
+              op.verificationGasLimit,
+              op.preVerificationGas,
+              op.maxFeePerGas,
+              op.maxPriorityFeePerGas,
+              HexUtils.decode(op.paymasterAndData ?? '0x'),
+              HexUtils.decode(op.signature),
+            ],
+          )
+          .toList();
 
       return [
         opsValues,
@@ -263,8 +279,8 @@ class EntryPointV06 implements EntryPoint {
 
     // Encode function call
     final types = [
-      AbiArray(aggregatorTupleType),  // UserOpsPerAggregator[]
-      AbiAddress(),                   // beneficiary
+      AbiArray(aggregatorTupleType), // UserOpsPerAggregator[]
+      AbiAddress(), // beneficiary
     ];
 
     final values = [aggregatorValues, beneficiary];
@@ -279,7 +295,7 @@ class EntryPointV06 implements EntryPoint {
     final selector = '35567e1a';
     final paddedSender = sender.replaceFirst('0x', '').padLeft(64, '0');
     final paddedKey = key.toRadixString(16).padLeft(64, '0');
-    
+
     return '0x$selector$paddedSender$paddedKey';
   }
 
@@ -292,17 +308,17 @@ class EntryPointV06 implements EntryPoint {
 
     // Define UserOperation tuple type for v0.6
     final userOpTupleType = AbiTuple([
-      AbiAddress(),      // sender
-      AbiUint(256),      // nonce
-      AbiBytes(),        // initCode
-      AbiBytes(),        // callData
-      AbiUint(256),      // callGasLimit
-      AbiUint(256),      // verificationGasLimit
-      AbiUint(256),      // preVerificationGas
-      AbiUint(256),      // maxFeePerGas
-      AbiUint(256),      // maxPriorityFeePerGas
-      AbiBytes(),        // paymasterAndData
-      AbiBytes(),        // signature
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiBytes(), // initCode
+      AbiBytes(), // callData
+      AbiUint(256), // callGasLimit
+      AbiUint(256), // verificationGasLimit
+      AbiUint(256), // preVerificationGas
+      AbiUint(256), // maxFeePerGas
+      AbiUint(256), // maxPriorityFeePerGas
+      AbiBytes(), // paymasterAndData
+      AbiBytes(), // signature
     ]);
 
     // Convert UserOperation to tuple values
@@ -331,21 +347,22 @@ class EntryPointV06 implements EntryPoint {
     // getDepositInfo(address) function selector: 0x5287ce12
     final selector = '5287ce12';
     final paddedAccount = account.replaceFirst('0x', '').padLeft(64, '0');
-    
+
     return '0x$selector$paddedAccount';
   }
 }
 
 /// EntryPoint v0.7 implementation.
 class EntryPointV07 implements EntryPoint {
-
   EntryPointV07({
-    required PublicClient publicClient, String? address,
+    required PublicClient publicClient,
+    String? address,
     WalletClient? walletClient,
-  }) : _address = address ?? defaultAddress,
-       _publicClient = publicClient,
-       _walletClient = walletClient;
-  static const String defaultAddress = '0x0000000071727De22E5E9d8BAf0edAc6f37da032';
+  })  : _address = address ?? defaultAddress,
+        _publicClient = publicClient,
+        _walletClient = walletClient;
+  static const String defaultAddress =
+      '0x0000000071727De22E5E9d8BAf0edAc6f37da032';
 
   final String _address;
   final PublicClient _publicClient;
@@ -366,7 +383,7 @@ class EntryPointV07 implements EntryPoint {
     // Convert to PackedUserOperations for v0.7
     final packedOps = ops.map((op) => op.toPackedUserOperation()).toList();
     final callData = _encodeHandleOpsCall(packedOps, beneficiary);
-    
+
     final txRequest = TransactionRequest(
       to: _address,
       data: HexUtils.decode(callData),
@@ -385,8 +402,9 @@ class EntryPointV07 implements EntryPoint {
       throw StateError('WalletClient required for handleAggregatedOps');
     }
 
-    final callData = _encodeHandleAggregatedOpsCall(opsPerAggregator, beneficiary);
-    
+    final callData =
+        _encodeHandleAggregatedOpsCall(opsPerAggregator, beneficiary);
+
     final txRequest = TransactionRequest(
       to: _address,
       data: HexUtils.decode(callData),
@@ -400,12 +418,14 @@ class EntryPointV07 implements EntryPoint {
   Future<BigInt> getNonce(String sender, {BigInt? key}) async {
     final nonceKey = key ?? BigInt.zero;
     final callData = _encodeGetNonceCall(sender, nonceKey);
-    
-    final result = await _publicClient.call(CallRequest(
-      to: _address,
-      data: HexUtils.decode(callData),
-    ),);
-    
+
+    final result = await _publicClient.call(
+      CallRequest(
+        to: _address,
+        data: HexUtils.decode(callData),
+      ),
+    );
+
     return BigInt.parse(HexUtils.encode(result));
   }
 
@@ -413,13 +433,15 @@ class EntryPointV07 implements EntryPoint {
   Future<ValidationResult> simulateValidation(UserOperation userOp) async {
     final packedOp = userOp.toPackedUserOperation();
     final callData = _encodeSimulateValidationCall(packedOp);
-    
+
     try {
-      final result = await _publicClient.call(CallRequest(
-        to: _address,
-        data: HexUtils.decode(callData),
-      ),);
-      
+      final result = await _publicClient.call(
+        CallRequest(
+          to: _address,
+          data: HexUtils.decode(callData),
+        ),
+      );
+
       return ValidationResult.fromBytes(result);
     } catch (e) {
       if (e.toString().contains('ValidationResult')) {
@@ -432,12 +454,14 @@ class EntryPointV07 implements EntryPoint {
   @override
   Future<DepositInfo> getDepositInfo(String account) async {
     final callData = _encodeGetDepositInfoCall(account);
-    
-    final result = await _publicClient.call(CallRequest(
-      to: _address,
-      data: HexUtils.decode(callData),
-    ),);
-    
+
+    final result = await _publicClient.call(
+      CallRequest(
+        to: _address,
+        data: HexUtils.decode(callData),
+      ),
+    );
+
     return DepositInfo.fromBytes(result);
   }
 
@@ -454,40 +478,45 @@ class EntryPointV07 implements EntryPoint {
   ///   - bytes32 gasFees (maxPriorityFeePerGas || maxFeePerGas)
   ///   - bytes paymasterAndData
   ///   - bytes signature
-  String _encodeHandleOpsCall(List<PackedUserOperation> ops, String beneficiary) {
+  String _encodeHandleOpsCall(
+      List<PackedUserOperation> ops, String beneficiary) {
     // handleOps(PackedUserOperation[],address) function selector: 0x765e827f
     final selector = '765e827f';
 
     // Define PackedUserOperation tuple type for v0.7
     final packedOpTupleType = AbiTuple([
-      AbiAddress(),        // sender
-      AbiUint(256),        // nonce
-      AbiBytes(),          // initCode
-      AbiBytes(),          // callData
-      AbiFixedBytes(32),   // accountGasLimits
-      AbiUint(256),        // preVerificationGas
-      AbiFixedBytes(32),   // gasFees
-      AbiBytes(),          // paymasterAndData
-      AbiBytes(),          // signature
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiBytes(), // initCode
+      AbiBytes(), // callData
+      AbiFixedBytes(32), // accountGasLimits
+      AbiUint(256), // preVerificationGas
+      AbiFixedBytes(32), // gasFees
+      AbiBytes(), // paymasterAndData
+      AbiBytes(), // signature
     ]);
 
     // Convert PackedUserOperations to tuple values
-    final opsValues = ops.map((op) => [
-      op.sender,
-      op.nonce,
-      HexUtils.decode(op.initCode),
-      HexUtils.decode(op.callData),
-      HexUtils.decode(op.accountGasLimits),
-      op.preVerificationGas,
-      HexUtils.decode(op.gasFees),
-      HexUtils.decode(op.paymasterAndData),
-      HexUtils.decode(op.signature),
-    ],).toList();
+    final opsValues = ops
+        .map(
+          (op) => [
+            op.sender,
+            op.nonce,
+            HexUtils.decode(op.initCode),
+            HexUtils.decode(op.callData),
+            HexUtils.decode(op.accountGasLimits),
+            op.preVerificationGas,
+            HexUtils.decode(op.gasFees),
+            HexUtils.decode(op.paymasterAndData),
+            HexUtils.decode(op.signature),
+          ],
+        )
+        .toList();
 
     // Encode function call
     final types = [
-      AbiArray(packedOpTupleType),  // PackedUserOperation[]
-      AbiAddress(),                 // beneficiary
+      AbiArray(packedOpTupleType), // PackedUserOperation[]
+      AbiAddress(), // beneficiary
     ];
 
     final values = [opsValues, beneficiary];
@@ -512,22 +541,22 @@ class EntryPointV07 implements EntryPoint {
 
     // Define PackedUserOperation tuple type for v0.7
     final packedOpTupleType = AbiTuple([
-      AbiAddress(),        // sender
-      AbiUint(256),        // nonce
-      AbiBytes(),          // initCode
-      AbiBytes(),          // callData
-      AbiFixedBytes(32),   // accountGasLimits
-      AbiUint(256),        // preVerificationGas
-      AbiFixedBytes(32),   // gasFees
-      AbiBytes(),          // paymasterAndData
-      AbiBytes(),          // signature
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiBytes(), // initCode
+      AbiBytes(), // callData
+      AbiFixedBytes(32), // accountGasLimits
+      AbiUint(256), // preVerificationGas
+      AbiFixedBytes(32), // gasFees
+      AbiBytes(), // paymasterAndData
+      AbiBytes(), // signature
     ]);
 
     // Define UserOpsPerAggregator tuple type
     final aggregatorTupleType = AbiTuple([
-      AbiArray(packedOpTupleType),  // userOps (PackedUserOperation[])
-      AbiAddress(),                 // aggregator
-      AbiBytes(),                   // signature
+      AbiArray(packedOpTupleType), // userOps (PackedUserOperation[])
+      AbiAddress(), // aggregator
+      AbiBytes(), // signature
     ]);
 
     // Convert to tuple values
@@ -557,8 +586,8 @@ class EntryPointV07 implements EntryPoint {
 
     // Encode function call
     final types = [
-      AbiArray(aggregatorTupleType),  // UserOpsPerAggregator[]
-      AbiAddress(),                   // beneficiary
+      AbiArray(aggregatorTupleType), // UserOpsPerAggregator[]
+      AbiAddress(), // beneficiary
     ];
 
     final values = [aggregatorValues, beneficiary];
@@ -573,7 +602,7 @@ class EntryPointV07 implements EntryPoint {
     final selector = '35567e1a';
     final paddedSender = sender.replaceFirst('0x', '').padLeft(64, '0');
     final paddedKey = key.toRadixString(16).padLeft(64, '0');
-    
+
     return '0x$selector$paddedSender$paddedKey';
   }
 
@@ -586,15 +615,15 @@ class EntryPointV07 implements EntryPoint {
 
     // Define PackedUserOperation tuple type for v0.7
     final packedOpTupleType = AbiTuple([
-      AbiAddress(),        // sender
-      AbiUint(256),        // nonce
-      AbiBytes(),          // initCode
-      AbiBytes(),          // callData
-      AbiFixedBytes(32),   // accountGasLimits
-      AbiUint(256),        // preVerificationGas
-      AbiFixedBytes(32),   // gasFees
-      AbiBytes(),          // paymasterAndData
-      AbiBytes(),          // signature
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiBytes(), // initCode
+      AbiBytes(), // callData
+      AbiFixedBytes(32), // accountGasLimits
+      AbiUint(256), // preVerificationGas
+      AbiFixedBytes(32), // gasFees
+      AbiBytes(), // paymasterAndData
+      AbiBytes(), // signature
     ]);
 
     // Convert PackedUserOperation to tuple values
@@ -621,14 +650,13 @@ class EntryPointV07 implements EntryPoint {
     // getDepositInfo(address) function selector: 0x5287ce12
     final selector = '5287ce12';
     final paddedAccount = account.replaceFirst('0x', '').padLeft(64, '0');
-    
+
     return '0x$selector$paddedAccount';
   }
 }
 
 /// UserOperation with aggregation info for handleAggregatedOps.
 class UserOperationWithAggregation {
-
   UserOperationWithAggregation({
     required this.userOps,
     required this.aggregator,
@@ -641,7 +669,6 @@ class UserOperationWithAggregation {
 
 /// Result from simulateValidation.
 class ValidationResult {
-
   ValidationResult({
     required this.returnInfo,
     required this.senderInfo,
@@ -666,24 +693,25 @@ class ValidationResult {
       // Define the ValidationResult tuple type
       // ReturnInfo: (uint256 preOpGas, uint256 prefund, bool sigFailed, uint48 validAfter, uint48 validUntil, bytes paymasterContext)
       final returnInfoType = AbiTuple([
-        AbiUint(256),  // preOpGas
-        AbiUint(256),  // prefund
-        AbiUint(256),  // accountValidationData (packed: sigFailed, validUntil, validAfter)
-        AbiBytes(),    // paymasterContext
+        AbiUint(256), // preOpGas
+        AbiUint(256), // prefund
+        AbiUint(
+            256), // accountValidationData (packed: sigFailed, validUntil, validAfter)
+        AbiBytes(), // paymasterContext
       ]);
 
       // StakeInfo: (uint256 stake, uint256 unstakeDelaySec)
       final stakeInfoType = AbiTuple([
-        AbiUint(256),  // stake
-        AbiUint(256),  // unstakeDelaySec
+        AbiUint(256), // stake
+        AbiUint(256), // unstakeDelaySec
       ]);
 
       // Full ValidationResult tuple
       final validationResultType = AbiTuple([
-        returnInfoType,   // returnInfo
-        stakeInfoType,    // senderInfo
-        stakeInfoType,    // factoryInfo
-        stakeInfoType,    // paymasterInfo
+        returnInfoType, // returnInfo
+        stakeInfoType, // senderInfo
+        stakeInfoType, // factoryInfo
+        stakeInfoType, // paymasterInfo
       ]);
 
       final (decodedValue, _) = validationResultType.decode(data, 0);
@@ -697,9 +725,12 @@ class ValidationResult {
       final paymasterContext = returnInfoValues[3] as Uint8List;
 
       // Unpack accountValidationData: sigFailed (1 bit) | validUntil (48 bits) | validAfter (48 bits)
-      final sigFailed = (accountValidationData >> 160) & BigInt.one == BigInt.one;
-      final validUntil = (accountValidationData >> 48) & BigInt.parse('ffffffffffff', radix: 16);
-      final validAfter = accountValidationData & BigInt.parse('ffffffffffff', radix: 16);
+      final sigFailed =
+          (accountValidationData >> 160) & BigInt.one == BigInt.one;
+      final validUntil = (accountValidationData >> 48) &
+          BigInt.parse('ffffffffffff', radix: 16);
+      final validAfter =
+          accountValidationData & BigInt.parse('ffffffffffff', radix: 16);
 
       // Parse StakeInfo structs
       final senderInfoValues = values[1] as List<dynamic>;
@@ -778,7 +809,6 @@ class ValidationResult {
 
 /// Return info from validation.
 class ReturnInfo {
-
   ReturnInfo({
     required this.preOpGas,
     required this.prefund,
@@ -797,7 +827,6 @@ class ReturnInfo {
 
 /// Stake info for an entity.
 class StakeInfo {
-
   StakeInfo({
     required this.stake,
     required this.unstakeDelaySec,
@@ -808,7 +837,6 @@ class StakeInfo {
 
 /// Aggregator stake info.
 class AggregatorStakeInfo extends StakeInfo {
-
   AggregatorStakeInfo({
     required this.aggregator,
     required super.stake,
@@ -819,7 +847,6 @@ class AggregatorStakeInfo extends StakeInfo {
 
 /// Deposit info for an account.
 class DepositInfo {
-
   DepositInfo({
     required this.deposit,
     required this.staked,
@@ -847,11 +874,11 @@ class DepositInfo {
       // DepositInfo is returned as a tuple with 5 fields
       // In ABI encoding, each field is padded to 32 bytes
       final depositInfoType = AbiTuple([
-        AbiUint(256),  // deposit (uint112 padded)
-        AbiUint(256),  // staked (bool as uint)
-        AbiUint(256),  // stake (uint112 padded)
-        AbiUint(256),  // unstakeDelaySec (uint32 padded)
-        AbiUint(256),  // withdrawTime (uint48 padded)
+        AbiUint(256), // deposit (uint112 padded)
+        AbiUint(256), // staked (bool as uint)
+        AbiUint(256), // stake (uint112 padded)
+        AbiUint(256), // unstakeDelaySec (uint32 padded)
+        AbiUint(256), // withdrawTime (uint48 padded)
       ]);
 
       final (decodedValue, _) = depositInfoType.decode(data, 0);
@@ -892,7 +919,8 @@ class EntryPointFactory {
   /// Creates an EntryPoint instance for the specified version.
   static EntryPoint create({
     required EntryPointVersion version,
-    required PublicClient publicClient, String? address,
+    required PublicClient publicClient,
+    String? address,
     WalletClient? walletClient,
   }) {
     switch (version) {
@@ -934,7 +962,8 @@ class EntryPointFactory {
   }
 
   /// Gets all supported EntryPoint versions.
-  static List<EntryPointVersion> get supportedVersions => EntryPointVersion.values;
+  static List<EntryPointVersion> get supportedVersions =>
+      EntryPointVersion.values;
 
   /// Gets the latest EntryPoint version.
   static EntryPointVersion get latestVersion => EntryPointVersion.v09;

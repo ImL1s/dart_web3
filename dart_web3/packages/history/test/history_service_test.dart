@@ -6,9 +6,11 @@ void main() {
   group('History Service Types Tests', () {
     test('should create HistoryItem with correct values', () {
       final now = DateTime.now();
-      final from = EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
-      final to = EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
-      
+      final from =
+          EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
+      final to =
+          EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
+
       final item = HistoryItem(
         hash: '0xabc',
         blockNumber: BigInt.from(100),

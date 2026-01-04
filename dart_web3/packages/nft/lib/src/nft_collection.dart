@@ -9,7 +9,6 @@ import 'nft_types.dart';
 
 /// NFT collection manager for querying and managing NFT collections
 class NftCollectionManager {
-
   NftCollectionManager({
     required PublicClient client,
     NftMetadataParser? metadataParser,
@@ -115,7 +114,7 @@ class NftCollectionManager {
 
       // Get token URI
       final tokenUri = await _getTokenUri(contractAddress, tokenId, standard);
-      
+
       // Get owner
       final owner = await _getTokenOwner(contractAddress, tokenId, standard);
 
@@ -146,7 +145,8 @@ class NftCollectionManager {
   }
 
   /// Detect NFT standard (ERC-721 or ERC-1155)
-  Future<NftStandard?> _detectNftStandard(EthereumAddress contractAddress) async {
+  Future<NftStandard?> _detectNftStandard(
+      EthereumAddress contractAddress) async {
     try {
       // Check for ERC-165 interface support
       final contract = Contract(

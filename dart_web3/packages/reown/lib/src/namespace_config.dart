@@ -4,11 +4,10 @@ library;
 import 'package:meta/meta.dart';
 
 /// Represents a namespace configuration for WalletConnect v2.
-/// 
+///
 /// Namespaces define which chains and methods are supported in a session.
 @immutable
 class NamespaceConfig {
-
   NamespaceConfig({
     required this.namespace,
     required this.chains,
@@ -19,7 +18,8 @@ class NamespaceConfig {
   });
 
   /// Creates a namespace config from JSON.
-  factory NamespaceConfig.fromJson(String namespace, Map<String, dynamic> json) {
+  factory NamespaceConfig.fromJson(
+      String namespace, Map<String, dynamic> json) {
     return NamespaceConfig(
       namespace: namespace,
       chains: (json['chains'] as List?)?.cast<String>() ?? [],
@@ -29,21 +29,22 @@ class NamespaceConfig {
       extension: json['extension'] as Map<String, dynamic>?,
     );
   }
+
   /// The namespace identifier (e.g., 'eip155' for Ethereum).
   final String namespace;
-  
+
   /// List of supported chains in CAIP-2 format (e.g., 'eip155:1' for Ethereum mainnet).
   final List<String> chains;
-  
+
   /// List of supported methods (e.g., 'eth_sendTransaction', 'personal_sign').
   final List<String> methods;
-  
+
   /// List of supported events (e.g., 'chainChanged', 'accountsChanged').
   final List<String> events;
-  
+
   /// List of accounts in CAIP-10 format (e.g., 'eip155:1:0x123...').
   final List<String> accounts;
-  
+
   /// Optional extension data.
   final Map<String, dynamic>? extension;
 
@@ -54,15 +55,15 @@ class NamespaceConfig {
       'methods': methods,
       'events': events,
     };
-    
+
     if (accounts.isNotEmpty) {
       json['accounts'] = accounts;
     }
-    
+
     if (extension != null) {
       json['extension'] = extension;
     }
-    
+
     return json;
   }
 
@@ -170,29 +171,32 @@ class NamespaceConfigs {
   }) {
     return NamespaceConfig(
       namespace: 'eip155',
-      chains: chains ?? [
-        'eip155:1',    // Ethereum Mainnet
-        'eip155:5',    // Goerli
-        'eip155:11155111', // Sepolia
-      ],
-      methods: methods ?? [
-        'eth_sendTransaction',
-        'eth_signTransaction',
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData',
-        'eth_signTypedData_v3',
-        'eth_signTypedData_v4',
-        'wallet_switchEthereumChain',
-        'wallet_addEthereumChain',
-        'wallet_watchAsset',
-      ],
-      events: events ?? [
-        'chainChanged',
-        'accountsChanged',
-        'connect',
-        'disconnect',
-      ],
+      chains: chains ??
+          [
+            'eip155:1', // Ethereum Mainnet
+            'eip155:5', // Goerli
+            'eip155:11155111', // Sepolia
+          ],
+      methods: methods ??
+          [
+            'eth_sendTransaction',
+            'eth_signTransaction',
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData',
+            'eth_signTypedData_v3',
+            'eth_signTypedData_v4',
+            'wallet_switchEthereumChain',
+            'wallet_addEthereumChain',
+            'wallet_watchAsset',
+          ],
+      events: events ??
+          [
+            'chainChanged',
+            'accountsChanged',
+            'connect',
+            'disconnect',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -206,22 +210,25 @@ class NamespaceConfigs {
   }) {
     return NamespaceConfig(
       namespace: 'eip155',
-      chains: chains ?? [
-        'eip155:137',   // Polygon Mainnet
-        'eip155:80001', // Mumbai Testnet
-      ],
-      methods: methods ?? [
-        'eth_sendTransaction',
-        'eth_signTransaction',
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData',
-        'eth_signTypedData_v4',
-      ],
-      events: events ?? [
-        'chainChanged',
-        'accountsChanged',
-      ],
+      chains: chains ??
+          [
+            'eip155:137', // Polygon Mainnet
+            'eip155:80001', // Mumbai Testnet
+          ],
+      methods: methods ??
+          [
+            'eth_sendTransaction',
+            'eth_signTransaction',
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData',
+            'eth_signTypedData_v4',
+          ],
+      events: events ??
+          [
+            'chainChanged',
+            'accountsChanged',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -235,21 +242,24 @@ class NamespaceConfigs {
   }) {
     return NamespaceConfig(
       namespace: 'eip155',
-      chains: chains ?? [
-        'eip155:42161', // Arbitrum One
-        'eip155:421613', // Arbitrum Goerli
-      ],
-      methods: methods ?? [
-        'eth_sendTransaction',
-        'eth_signTransaction',
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData_v4',
-      ],
-      events: events ?? [
-        'chainChanged',
-        'accountsChanged',
-      ],
+      chains: chains ??
+          [
+            'eip155:42161', // Arbitrum One
+            'eip155:421613', // Arbitrum Goerli
+          ],
+      methods: methods ??
+          [
+            'eth_sendTransaction',
+            'eth_signTransaction',
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData_v4',
+          ],
+      events: events ??
+          [
+            'chainChanged',
+            'accountsChanged',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -263,21 +273,24 @@ class NamespaceConfigs {
   }) {
     return NamespaceConfig(
       namespace: 'eip155',
-      chains: chains ?? [
-        'eip155:10',    // Optimism Mainnet
-        'eip155:420',   // Optimism Goerli
-      ],
-      methods: methods ?? [
-        'eth_sendTransaction',
-        'eth_signTransaction',
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData_v4',
-      ],
-      events: events ?? [
-        'chainChanged',
-        'accountsChanged',
-      ],
+      chains: chains ??
+          [
+            'eip155:10', // Optimism Mainnet
+            'eip155:420', // Optimism Goerli
+          ],
+      methods: methods ??
+          [
+            'eth_sendTransaction',
+            'eth_signTransaction',
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData_v4',
+          ],
+      events: events ??
+          [
+            'chainChanged',
+            'accountsChanged',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -291,21 +304,24 @@ class NamespaceConfigs {
   }) {
     return NamespaceConfig(
       namespace: 'eip155',
-      chains: chains ?? [
-        'eip155:56',  // BSC Mainnet
-        'eip155:97',  // BSC Testnet
-      ],
-      methods: methods ?? [
-        'eth_sendTransaction',
-        'eth_signTransaction',
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData_v4',
-      ],
-      events: events ?? [
-        'chainChanged',
-        'accountsChanged',
-      ],
+      chains: chains ??
+          [
+            'eip155:56', // BSC Mainnet
+            'eip155:97', // BSC Testnet
+          ],
+      methods: methods ??
+          [
+            'eth_sendTransaction',
+            'eth_signTransaction',
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData_v4',
+          ],
+      events: events ??
+          [
+            'chainChanged',
+            'accountsChanged',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -319,19 +335,22 @@ class NamespaceConfigs {
   }) {
     return NamespaceConfig(
       namespace: 'solana',
-      chains: chains ?? [
-        'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Mainnet
-        'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1', // Devnet
-      ],
-      methods: methods ?? [
-        'solana_signTransaction',
-        'solana_signMessage',
-        'solana_signAndSendTransaction',
-      ],
-      events: events ?? [
-        'accountsChanged',
-        'chainChanged',
-      ],
+      chains: chains ??
+          [
+            'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Mainnet
+            'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1', // Devnet
+          ],
+      methods: methods ??
+          [
+            'solana_signTransaction',
+            'solana_signMessage',
+            'solana_signAndSendTransaction',
+          ],
+      events: events ??
+          [
+            'accountsChanged',
+            'chainChanged',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -380,17 +399,19 @@ class NamespaceConfigs {
     return NamespaceConfig(
       namespace: 'eip155',
       chains: chainIds.map((id) => 'eip155:$id').toList(),
-      methods: methods ?? [
-        'eth_sendTransaction',
-        'eth_signTransaction',
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData_v4',
-      ],
-      events: events ?? [
-        'chainChanged',
-        'accountsChanged',
-      ],
+      methods: methods ??
+          [
+            'eth_sendTransaction',
+            'eth_signTransaction',
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData_v4',
+          ],
+      events: events ??
+          [
+            'chainChanged',
+            'accountsChanged',
+          ],
       accounts: accounts ?? [],
     );
   }
@@ -414,7 +435,8 @@ class CaipUtils {
   /// Parses a CAIP-10 account identifier.
   /// Format: namespace:reference:account_address
   /// Example: eip155:1:0x1234567890123456789012345678901234567890
-  static (String namespace, String reference, String address) parseAccountId(String accountId) {
+  static (String namespace, String reference, String address) parseAccountId(
+      String accountId) {
     final parts = accountId.split(':');
     if (parts.length != 3) {
       throw ArgumentError('Invalid CAIP-10 account ID format: $accountId');
@@ -428,7 +450,8 @@ class CaipUtils {
   }
 
   /// Creates a CAIP-10 account identifier.
-  static String createAccountId(String namespace, String reference, String address) {
+  static String createAccountId(
+      String namespace, String reference, String address) {
     return '$namespace:$reference:$address';
   }
 

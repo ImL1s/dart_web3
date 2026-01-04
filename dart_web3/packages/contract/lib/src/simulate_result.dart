@@ -1,12 +1,12 @@
 /// Result of a contract function simulation.
 class SimulateResult {
-
   SimulateResult({
     required this.result,
     required this.gasUsed,
     required this.success,
     this.revertReason,
   });
+
   /// The decoded return values.
   final List<dynamic> result;
 

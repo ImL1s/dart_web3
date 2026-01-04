@@ -45,8 +45,10 @@ void main() {
       );
 
       expect(config.testnet, isTrue);
-      expect(config.multicallAddress, equals('0x1234567890123456789012345678901234567890'));
-      expect(config.ensRegistryAddress, equals('0x0987654321098765432109876543210987654321'));
+      expect(config.multicallAddress,
+          equals('0x1234567890123456789012345678901234567890'));
+      expect(config.ensRegistryAddress,
+          equals('0x0987654321098765432109876543210987654321'));
     });
 
     test('should create a copy with updated fields', () {

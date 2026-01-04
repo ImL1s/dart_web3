@@ -3,8 +3,8 @@ import 'transport.dart';
 
 /// High-level RPC provider with middleware support.
 class RpcProvider {
-
   RpcProvider(this.transport, {this.middlewares = const []});
+
   /// The underlying transport.
   final Transport transport;
 
@@ -73,12 +73,14 @@ class RpcProvider {
   }
 
   /// Gets a block by hash.
-  Future<Map<String, dynamic>?> getBlockByHash(String hash, [bool fullTx = false]) async {
+  Future<Map<String, dynamic>?> getBlockByHash(String hash,
+      [bool fullTx = false]) async {
     return call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
   }
 
   /// Gets a block by number.
-  Future<Map<String, dynamic>?> getBlockByNumber(String block, [bool fullTx = false]) async {
+  Future<Map<String, dynamic>?> getBlockByNumber(String block,
+      [bool fullTx = false]) async {
     return call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
   }
 
@@ -93,8 +95,10 @@ class RpcProvider {
   }
 
   /// Gets the transaction count (nonce) for an address.
-  Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
-    final result = await call<String>('eth_getTransactionCount', [address, block]);
+  Future<BigInt> getTransactionCount(String address,
+      [String block = 'latest']) async {
+    final result =
+        await call<String>('eth_getTransactionCount', [address, block]);
     return BigInt.parse(result.substring(2), radix: 16);
   }
 
@@ -111,7 +115,8 @@ class RpcProvider {
   }
 
   /// Executes a call without creating a transaction.
-  Future<String> ethCall(Map<String, dynamic> tx, [String block = 'latest']) async {
+  Future<String> ethCall(Map<String, dynamic> tx,
+      [String block = 'latest']) async {
     return call<String>('eth_call', [tx, block]);
   }
 
@@ -121,7 +126,8 @@ class RpcProvider {
   }
 
   /// Gets logs matching a filter.
-  Future<List<Map<String, dynamic>>> getLogs(Map<String, dynamic> filter) async {
+  Future<List<Map<String, dynamic>>> getLogs(
+      Map<String, dynamic> filter) async {
     final result = await call<List<dynamic>>('eth_getLogs', [filter]);
     return result.cast<Map<String, dynamic>>();
   }
@@ -132,7 +138,8 @@ class RpcProvider {
   }
 
   /// Gets storage at a position.
-  Future<String> getStorageAt(String address, String position, [String block = 'latest']) async {
+  Future<String> getStorageAt(String address, String position,
+      [String block = 'latest']) async {
     return call<String>('eth_getStorageAt', [address, position, block]);
   }
 

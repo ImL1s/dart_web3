@@ -7,8 +7,8 @@ import 'event_filter.dart';
 
 /// Event subscriber for blockchain events.
 class EventSubscriber {
-
   EventSubscriber(this.publicClient, [this.wsTransport]);
+
   /// The public client for blockchain queries.
   final PublicClient publicClient;
 
@@ -16,7 +16,7 @@ class EventSubscriber {
   final WebSocketTransport? wsTransport;
 
   /// Subscribes to events using WebSocket.
-  /// 
+  ///
   /// Requires a WebSocket transport to be configured.
   /// Returns a stream of logs matching the filter.
   Stream<Log> subscribe(EventFilter filter) {
@@ -24,13 +24,12 @@ class EventSubscriber {
       throw StateError('WebSocket transport required for subscriptions');
     }
 
-    return wsTransport!
-        .subscribe('eth_subscribe', ['logs', filter.toJson()])
-        .map(Log.fromJson);
+    return wsTransport!.subscribe(
+        'eth_subscribe', ['logs', filter.toJson()]).map(Log.fromJson);
   }
 
   /// Polls for events using HTTP transport.
-  /// 
+  ///
   /// This method periodically queries for new events matching the filter.
   /// Returns a stream of logs with the specified polling interval.
   Stream<Log> poll(
@@ -38,7 +37,7 @@ class EventSubscriber {
     Duration interval = const Duration(seconds: 5),
   }) async* {
     String? lastBlock;
-    
+
     while (true) {
       try {
         // Get current block number
@@ -55,12 +54,14 @@ class EventSubscriber {
         );
 
         // Get logs
-        final logs = await publicClient.getLogs(LogFilter(
-          address: pollFilter.address,
-          topics: pollFilter.topics?.cast<String?>(),
-          fromBlock: pollFilter.fromBlock,
-          toBlock: pollFilter.toBlock,
-        ),);
+        final logs = await publicClient.getLogs(
+          LogFilter(
+            address: pollFilter.address,
+            topics: pollFilter.topics?.cast<String?>(),
+            fromBlock: pollFilter.fromBlock,
+            toBlock: pollFilter.toBlock,
+          ),
+        );
 
         // Emit logs
         for (final log in logs) {
@@ -80,20 +81,19 @@ class EventSubscriber {
   }
 
   /// Watches for new block numbers.
-  /// 
+  ///
   /// If WebSocket is available, uses subscription. Otherwise, polls.
   Stream<BigInt> watchBlockNumber({
     Duration interval = const Duration(seconds: 12),
   }) {
     if (wsTransport != null) {
-      return wsTransport!
-          .subscribe('eth_subscribe', ['newHeads'])
-          .map((data) {
-            final numberStr = data['number'] as String;
-            // Remove 0x prefix if present and parse as hex
-            final cleanHex = numberStr.startsWith('0x') ? numberStr.substring(2) : numberStr;
-            return BigInt.parse(cleanHex, radix: 16);
-          });
+      return wsTransport!.subscribe('eth_subscribe', ['newHeads']).map((data) {
+        final numberStr = data['number'] as String;
+        // Remove 0x prefix if present and parse as hex
+        final cleanHex =
+            numberStr.startsWith('0x') ? numberStr.substring(2) : numberStr;
+        return BigInt.parse(cleanHex, radix: 16);
+      });
     } else {
       return Stream<void>.periodic(interval)
           .asyncMap((_) => publicClient.getBlockNumber());
@@ -101,7 +101,7 @@ class EventSubscriber {
   }
 
   /// Watches for pending transactions.
-  /// 
+  ///
   /// Requires WebSocket transport.
   Stream<String> watchPendingTransactions() {
     if (wsTransport == null) {
@@ -109,16 +109,15 @@ class EventSubscriber {
     }
 
     return wsTransport!
-        .subscribe('eth_subscribe', ['newPendingTransactions'])
-        .map((data) {
-          // Handle both string and map responses
-          if (data.containsKey('txHash')) {
-            return data['txHash'] as String;
-          } else {
-            // Assume the data itself is the transaction hash
-            return data.toString();
-          }
-        });
+        .subscribe('eth_subscribe', ['newPendingTransactions']).map((data) {
+      // Handle both string and map responses
+      if (data.containsKey('txHash')) {
+        return data['txHash'] as String;
+      } else {
+        // Assume the data itself is the transaction hash
+        return data.toString();
+      }
+    });
   }
 
   /// Gets historical events matching the filter.
@@ -127,12 +126,14 @@ class EventSubscriber {
     int? limit,
     bool ascending = true,
   }) async {
-    final logs = await publicClient.getLogs(LogFilter(
-      address: filter.address,
-      topics: filter.topics?.cast<String?>(),
-      fromBlock: filter.fromBlock,
-      toBlock: filter.toBlock,
-    ),);
+    final logs = await publicClient.getLogs(
+      LogFilter(
+        address: filter.address,
+        topics: filter.topics?.cast<String?>(),
+        fromBlock: filter.fromBlock,
+        toBlock: filter.toBlock,
+      ),
+    );
 
     // Sort logs
     if (!ascending) {
@@ -169,13 +170,17 @@ class EventSubscriber {
 
   /// Creates a filter ID for use with eth_getFilterChanges.
   Future<String> createFilter(EventFilter filter) async {
-    return publicClient.provider.call<String>('eth_newFilter', [filter.toJson()]);
+    return publicClient.provider
+        .call<String>('eth_newFilter', [filter.toJson()]);
   }
 
   /// Gets changes for a filter ID.
   Future<List<Log>> getFilterChanges(String filterId) async {
-    final logs = await publicClient.provider.call<List<dynamic>>('eth_getFilterChanges', [filterId]);
-    return logs.map((log) => Log.fromJson(log as Map<String, dynamic>)).toList();
+    final logs = await publicClient.provider
+        .call<List<dynamic>>('eth_getFilterChanges', [filterId]);
+    return logs
+        .map((log) => Log.fromJson(log as Map<String, dynamic>))
+        .toList();
   }
 
   /// Uninstalls a filter.

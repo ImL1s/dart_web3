@@ -25,7 +25,8 @@ void main() {
       });
 
       test('preserves leading zeros', () {
-        expect(HexUtils.encode(Uint8List.fromList([0x00, 0x01])), equals('0x0001'));
+        expect(HexUtils.encode(Uint8List.fromList([0x00, 0x01])),
+            equals('0x0001'));
       });
     });
 

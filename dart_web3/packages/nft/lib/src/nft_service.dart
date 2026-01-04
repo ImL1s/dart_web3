@@ -11,7 +11,6 @@ import 'nft_types.dart';
 
 /// Main NFT service providing comprehensive NFT functionality
 class NftService {
-
   NftService({
     required PublicClient publicClient,
     WalletClient? walletClient,
@@ -20,10 +19,12 @@ class NftService {
   })  : _publicClient = publicClient,
         _walletClient = walletClient,
         _ipfsGateway = ipfsGateway ?? IpfsGateway(),
-        _metadataParser = metadataParser ?? NftMetadataParser(ipfsGateway: ipfsGateway),
+        _metadataParser =
+            metadataParser ?? NftMetadataParser(ipfsGateway: ipfsGateway),
         _collectionManager = NftCollectionManager(
           client: publicClient,
-          metadataParser: metadataParser ?? NftMetadataParser(ipfsGateway: ipfsGateway),
+          metadataParser:
+              metadataParser ?? NftMetadataParser(ipfsGateway: ipfsGateway),
         ),
         _transferManager = walletClient != null
             ? NftTransferManager(client: walletClient)
@@ -162,7 +163,8 @@ class NftService {
   }
 
   /// Batch transfer multiple NFTs
-  Future<List<String>> batchTransferNfts(List<NftTransferParams> transfers) async {
+  Future<List<String>> batchTransferNfts(
+      List<NftTransferParams> transfers) async {
     final transferManager = _transferManager;
     if (transferManager == null) {
       throw Exception('Wallet client required for NFT transfers');

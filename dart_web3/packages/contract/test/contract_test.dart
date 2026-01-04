@@ -60,11 +60,13 @@ void main() {
       test('should call read-only function', () async {
         // Arrange
         final expectedBalance = BigInt.from(1000);
-        final encodedBalance = AbiEncoder.encode([AbiUint(256)], [expectedBalance]);
+        final encodedBalance =
+            AbiEncoder.encode([AbiUint(256)], [expectedBalance]);
         mockPublicClient.mockCall(encodedBalance);
 
         // Act
-        final result = await contract.read('balanceOf', ['0x000000000000000000000000000000000000abcd']);
+        final result = await contract
+            .read('balanceOf', ['0x000000000000000000000000000000000000abcd']);
 
         // Assert
         expect(result, hasLength(1));
@@ -88,11 +90,13 @@ void main() {
         mockWalletClient.mockSendTransaction(expectedTxHash);
 
         // Act
-        final txHash = await contract.write('transfer', ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
+        final txHash = await contract.write('transfer',
+            ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
 
         // Assert
         expect(txHash, equals(expectedTxHash));
-        expect(mockWalletClient.lastTransactionRequest?.to, equals(contractAddress));
+        expect(mockWalletClient.lastTransactionRequest?.to,
+            equals(contractAddress));
       });
 
       test('should throw when no wallet client provided', () async {
@@ -105,7 +109,8 @@ void main() {
 
         // Act & Assert
         expect(
-          () => contractWithoutWallet.write('transfer', ['0xabcd', BigInt.from(100)]),
+          () => contractWithoutWallet
+              .write('transfer', ['0xabcd', BigInt.from(100)]),
           throwsA(isA<StateError>()),
         );
       });
@@ -118,7 +123,8 @@ void main() {
         mockPublicClient.mockEstimateGas(expectedGas);
 
         // Act
-        final gas = await contract.estimateGas('transfer', ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
+        final gas = await contract.estimateGas('transfer',
+            ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
 
         // Assert
         expect(gas, equals(expectedGas));
@@ -134,7 +140,8 @@ void main() {
         mockPublicClient.mockEstimateGas(expectedGas);
 
         // Act
-        final result = await contract.simulate('transfer', ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
+        final result = await contract.simulate('transfer',
+            ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
 
         // Assert
         expect(result.success, isTrue);
@@ -146,10 +153,12 @@ void main() {
 
       test('should handle simulation failure', () async {
         // Arrange
-        mockPublicClient.mockCallThrow('execution reverted: insufficient balance');
+        mockPublicClient
+            .mockCallThrow('execution reverted: insufficient balance');
 
         // Act
-        final result = await contract.simulate('transfer', ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
+        final result = await contract.simulate('transfer',
+            ['0x000000000000000000000000000000000000abcd', BigInt.from(100)]);
 
         // Assert
         expect(result.success, isFalse);
@@ -162,10 +171,13 @@ void main() {
     group('event handling', () {
       test('should create event filter', () {
         // Act
-        final filter = contract.createEventFilter('Transfer', indexedArgs: {
-          'from': '0x0000000000000000000000000000000000001111',
-          'to': '0x0000000000000000000000000000000000002222',
-        },);
+        final filter = contract.createEventFilter(
+          'Transfer',
+          indexedArgs: {
+            'from': '0x0000000000000000000000000000000000001111',
+            'to': '0x0000000000000000000000000000000000002222',
+          },
+        );
 
         // Assert
         expect(filter.address, equals(contractAddress));
@@ -176,7 +188,8 @@ void main() {
 
       test('should decode event log', () {
         // Arrange
-        final eventTopic = HexUtils.encode(AbiEncoder.getEventTopic('Transfer(address,address,uint256)'));
+        final eventTopic = HexUtils.encode(
+            AbiEncoder.getEventTopic('Transfer(address,address,uint256)'));
         final log = Log(
           address: contractAddress,
           topics: [
@@ -229,7 +242,8 @@ void main() {
       test('should decode standard Error(string)', () {
         // Arrange - Error(string) selector + encoded string
         final errorData = BytesUtils.concat([
-          Uint8List.fromList([0x08, 0xc3, 0x79, 0xa0]), // Error(string) selector
+          Uint8List.fromList(
+              [0x08, 0xc3, 0x79, 0xa0]), // Error(string) selector
           AbiEncoder.encode([AbiString()], ['insufficient balance']),
         ]);
 

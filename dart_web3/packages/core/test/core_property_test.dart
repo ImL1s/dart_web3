@@ -16,7 +16,8 @@ extension Uint8ListGenerators on Any {
 
   /// Generator for Uint8List with length in range
   /// Uses the list length modulo to determine actual length deterministically
-  Generator<Uint8List> uint8ListWithLengthInRange(int minLength, int maxLength) {
+  Generator<Uint8List> uint8ListWithLengthInRange(
+      int minLength, int maxLength) {
     return any.list(any.intInRange(0, 256)).map((list) {
       // Use list content to determine length deterministically
       final range = maxLength - minLength + 1;
@@ -145,10 +146,13 @@ void main() {
           final bigValue = BigInt.from(value);
 
           // ether -> gwei -> wei -> gwei -> ether should preserve value
-          final inGwei = EthUnit.convert(bigValue, from: Unit.ether, to: Unit.gwei);
+          final inGwei =
+              EthUnit.convert(bigValue, from: Unit.ether, to: Unit.gwei);
           final inWei = EthUnit.convert(inGwei, from: Unit.gwei, to: Unit.wei);
-          final backToGwei = EthUnit.convert(inWei, from: Unit.wei, to: Unit.gwei);
-          final backToEther = EthUnit.convert(backToGwei, from: Unit.gwei, to: Unit.ether);
+          final backToGwei =
+              EthUnit.convert(inWei, from: Unit.wei, to: Unit.gwei);
+          final backToEther =
+              EthUnit.convert(backToGwei, from: Unit.gwei, to: Unit.ether);
 
           expect(backToEther, equals(bigValue));
         },
@@ -279,8 +283,9 @@ void main() {
 
           // Decoded value is Uint8List, convert back to BigInt
           final decodedBytes = decoded as Uint8List;
-          final decodedValue =
-              decodedBytes.isEmpty ? BigInt.zero : BytesUtils.bytesToBigInt(decodedBytes);
+          final decodedValue = decodedBytes.isEmpty
+              ? BigInt.zero
+              : BytesUtils.bytesToBigInt(decodedBytes);
 
           expect(decodedValue, equals(bigValue));
         },
@@ -298,7 +303,8 @@ void main() {
           expect(decodedList.length, equals(list.length));
 
           for (var i = 0; i < list.length; i++) {
-            expect(BytesUtils.equals(decodedList[i] as Uint8List, list[i]), isTrue);
+            expect(BytesUtils.equals(decodedList[i] as Uint8List, list[i]),
+                isTrue);
           }
         },
       );
@@ -343,7 +349,9 @@ void main() {
         },
       );
 
-      Glados2(any.uint8ListWithLengthInRange(0, 50), any.uint8ListWithLengthInRange(0, 50)).test(
+      Glados2(any.uint8ListWithLengthInRange(0, 50),
+              any.uint8ListWithLengthInRange(0, 50))
+          .test(
         'For any two byte arrays, concat then slice should recover originals',
         (a, b) {
           // **Feature: dart-web3-sdk, Property 28: Core Encoding Round Trip**
@@ -356,7 +364,8 @@ void main() {
         },
       );
 
-      Glados2(any.uint8ListWithLengthInRange(0, 32), any.intInRange(0, 64)).test(
+      Glados2(any.uint8ListWithLengthInRange(0, 32), any.intInRange(0, 64))
+          .test(
         'For any byte array and padding length, pad should increase or maintain length',
         (bytes, extraPadding) {
           // **Feature: dart-web3-sdk, Property 28: Core Encoding Round Trip**
@@ -366,7 +375,8 @@ void main() {
           expect(padded.length, equals(targetLength));
 
           // Original bytes should be preserved (at the end for left padding)
-          final recovered = BytesUtils.slice(padded, targetLength - bytes.length);
+          final recovered =
+              BytesUtils.slice(padded, targetLength - bytes.length);
           expect(BytesUtils.equals(recovered, bytes), isTrue);
         },
       );
@@ -384,13 +394,16 @@ void main() {
 
           // Trimmed should be suffix of original
           if (trimmed.isNotEmpty) {
-            final suffix = BytesUtils.slice(bytes, bytes.length - trimmed.length);
+            final suffix =
+                BytesUtils.slice(bytes, bytes.length - trimmed.length);
             expect(BytesUtils.equals(suffix, trimmed), isTrue);
           }
         },
       );
 
-      Glados2(any.uint8ListWithLengthInRange(1, 32), any.uint8ListWithLengthInRange(1, 32)).test(
+      Glados2(any.uint8ListWithLengthInRange(1, 32),
+              any.uint8ListWithLengthInRange(1, 32))
+          .test(
         'For any two equal-length byte arrays, xor should be self-inverse',
         (a, b) {
           // **Feature: dart-web3-sdk, Property 28: Core Encoding Round Trip**

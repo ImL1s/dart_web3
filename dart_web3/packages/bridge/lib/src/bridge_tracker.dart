@@ -8,11 +8,11 @@ import 'bridge_types.dart';
 
 /// Bridge transaction tracker
 class BridgeTracker {
-
   BridgeTracker(this._clients);
   final Map<int, PublicClient> _clients;
   final Map<String, BridgeTrackingInfo> _trackingMap = {};
-  final StreamController<BridgeStatusUpdate> _statusController = StreamController.broadcast();
+  final StreamController<BridgeStatusUpdate> _statusController =
+      StreamController.broadcast();
 
   /// Stream of bridge status updates
   Stream<BridgeStatusUpdate> get statusUpdates => _statusController.stream;
@@ -34,10 +34,10 @@ class BridgeTracker {
     );
 
     _trackingMap[sourceTransactionHash] = trackingInfo;
-    
+
     // Start monitoring the bridge
     _monitorBridge(sourceTransactionHash);
-    
+
     // Emit initial status
     _emitStatusUpdate(trackingInfo);
   }
@@ -69,13 +69,12 @@ class BridgeTracker {
     try {
       // Step 1: Wait for source transaction confirmation
       await _waitForSourceConfirmation(sourceTransactionHash);
-      
+
       // Step 2: Monitor bridge processing
       await _monitorBridgeProcessing(sourceTransactionHash);
-      
+
       // Step 3: Wait for destination transaction
       await _waitForDestinationTransaction(sourceTransactionHash);
-      
     } on Exception catch (e) {
       // Handle monitoring error
       final errorInfo = trackingInfo.copyWith(
@@ -94,26 +93,28 @@ class BridgeTracker {
 
     final sourceClient = _clients[trackingInfo.quote.params.sourceChainId];
     if (sourceClient == null) {
-      throw Exception('No client for source chain ${trackingInfo.quote.params.sourceChainId}');
+      throw Exception(
+          'No client for source chain ${trackingInfo.quote.params.sourceChainId}');
     }
 
     // Poll for source transaction receipt
     TransactionReceipt? receipt;
     var attempts = 0;
     const maxAttempts = 60; // 5 minutes with 5-second intervals
-    
+
     while (receipt == null && attempts < maxAttempts) {
       await Future<void>.delayed(const Duration(seconds: 5));
-      
+
       try {
-        final receiptData = await sourceClient.getTransactionReceipt(sourceTransactionHash);
+        final receiptData =
+            await sourceClient.getTransactionReceipt(sourceTransactionHash);
         if (receiptData != null) {
           receipt = receiptData;
         }
       } on Exception catch (_) {
         // Transaction not yet mined, continue polling
       }
-      
+
       attempts++;
     }
 
@@ -129,7 +130,9 @@ class BridgeTracker {
       // Source transaction failed or timed out
       final failedInfo = trackingInfo.copyWith(
         status: BridgeStatus.failed,
-        error: receipt?.status == 0 ? 'Source transaction failed' : 'Source transaction timeout',
+        error: receipt?.status == 0
+            ? 'Source transaction failed'
+            : 'Source transaction timeout',
         endTime: DateTime.now(),
       );
       _trackingMap[sourceTransactionHash] = failedInfo;
@@ -150,13 +153,16 @@ class BridgeTracker {
     _emitStatusUpdate(bridgingInfo);
 
     // Wait for the estimated bridge time
-    await Future<void>.delayed(Duration(milliseconds: (trackingInfo.quote.estimatedTime.inMilliseconds * 0.8).toInt())); // Wait for 80% of estimated time
+    await Future<void>.delayed(Duration(
+        milliseconds: (trackingInfo.quote.estimatedTime.inMilliseconds * 0.8)
+            .toInt())); // Wait for 80% of estimated time
 
     // Check if we can find the destination transaction
     await _checkForDestinationTransaction(sourceTransactionHash);
   }
 
-  Future<void> _waitForDestinationTransaction(String sourceTransactionHash) async {
+  Future<void> _waitForDestinationTransaction(
+      String sourceTransactionHash) async {
     final trackingInfo = _trackingMap[sourceTransactionHash];
     if (trackingInfo == null) return;
 
@@ -170,13 +176,14 @@ class BridgeTracker {
     // Continue checking for destination transaction
     var attempts = 0;
     const maxAttempts = 240; // 20 minutes with 5-second intervals
-    
+
     while (attempts < maxAttempts) {
       await Future<void>.delayed(const Duration(seconds: 5));
-      
-      final found = await _checkForDestinationTransaction(sourceTransactionHash);
+
+      final found =
+          await _checkForDestinationTransaction(sourceTransactionHash);
       if (found) return;
-      
+
       attempts++;
     }
 
@@ -190,11 +197,13 @@ class BridgeTracker {
     _emitStatusUpdate(timeoutInfo);
   }
 
-  Future<bool> _checkForDestinationTransaction(String sourceTransactionHash) async {
+  Future<bool> _checkForDestinationTransaction(
+      String sourceTransactionHash) async {
     final trackingInfo = _trackingMap[sourceTransactionHash];
     if (trackingInfo == null) return false;
 
-    final destinationClient = _clients[trackingInfo.quote.params.destinationChainId];
+    final destinationClient =
+        _clients[trackingInfo.quote.params.destinationChainId];
     if (destinationClient == null) return false;
 
     try {
@@ -203,7 +212,7 @@ class BridgeTracker {
       // 1. Parse the source transaction logs to get bridge-specific identifiers
       // 2. Query the destination chain for transactions with those identifiers
       // 3. Different bridges have different ways to track cross-chain transactions
-      
+
       // For now, we'll simulate finding the destination transaction
       // after a certain time has passed
       final elapsed = DateTime.now().difference(trackingInfo.startTime);
@@ -211,7 +220,8 @@ class BridgeTracker {
         // Simulate successful completion
         final completedInfo = trackingInfo.copyWith(
           status: BridgeStatus.completed,
-          destinationTransactionHash: '0x${DateTime.now().millisecondsSinceEpoch.toRadixString(16)}',
+          destinationTransactionHash:
+              '0x${DateTime.now().millisecondsSinceEpoch.toRadixString(16)}',
           endTime: DateTime.now(),
         );
         _trackingMap[sourceTransactionHash] = completedInfo;
@@ -232,7 +242,7 @@ class BridgeTracker {
       trackingInfo: trackingInfo,
       timestamp: DateTime.now(),
     );
-    
+
     _statusController.add(update);
   }
 
@@ -244,10 +254,12 @@ class BridgeTracker {
 
 /// Bridge tracking information
 class BridgeTrackingInfo {
-
   const BridgeTrackingInfo({
     required this.sourceTransactionHash,
-    required this.quote, required this.startTime, required this.status, this.destinationTransactionHash,
+    required this.quote,
+    required this.startTime,
+    required this.status,
+    this.destinationTransactionHash,
     this.userAddress,
     this.endTime,
     this.sourceReceipt,
@@ -275,11 +287,11 @@ class BridgeTrackingInfo {
 
   /// Whether the bridge is still in progress
   bool get isInProgress => [
-    BridgeStatus.pending,
-    BridgeStatus.sourceConfirmed,
-    BridgeStatus.bridging,
-    BridgeStatus.destinationPending,
-  ].contains(status);
+        BridgeStatus.pending,
+        BridgeStatus.sourceConfirmed,
+        BridgeStatus.bridging,
+        BridgeStatus.destinationPending,
+      ].contains(status);
 
   /// Whether the bridge completed successfully
   bool get isCompleted => status == BridgeStatus.completed;
@@ -340,8 +352,10 @@ class BridgeTrackingInfo {
     Map<String, dynamic>? metadata,
   }) {
     return BridgeTrackingInfo(
-      sourceTransactionHash: sourceTransactionHash ?? this.sourceTransactionHash,
-      destinationTransactionHash: destinationTransactionHash ?? this.destinationTransactionHash,
+      sourceTransactionHash:
+          sourceTransactionHash ?? this.sourceTransactionHash,
+      destinationTransactionHash:
+          destinationTransactionHash ?? this.destinationTransactionHash,
       quote: quote ?? this.quote,
       userAddress: userAddress ?? this.userAddress,
       startTime: startTime ?? this.startTime,
@@ -357,15 +371,17 @@ class BridgeTrackingInfo {
   Map<String, dynamic> toJson() {
     return {
       'sourceTransactionHash': sourceTransactionHash,
-      if (destinationTransactionHash != null) 
+      if (destinationTransactionHash != null)
         'destinationTransactionHash': destinationTransactionHash,
       'quote': quote.toJson(),
       if (userAddress != null) 'userAddress': userAddress,
       'startTime': startTime.toIso8601String(),
       if (endTime != null) 'endTime': endTime!.toIso8601String(),
       'status': status.toString().split('.').last,
-      if (sourceReceipt != null) 'sourceReceipt': _receiptToJson(sourceReceipt!),
-      if (destinationReceipt != null) 'destinationReceipt': _receiptToJson(destinationReceipt!),
+      if (sourceReceipt != null)
+        'sourceReceipt': _receiptToJson(sourceReceipt!),
+      if (destinationReceipt != null)
+        'destinationReceipt': _receiptToJson(destinationReceipt!),
       if (error != null) 'error': error,
       if (metadata != null) 'metadata': metadata,
     };
@@ -378,19 +394,23 @@ class BridgeTrackingInfo {
       'status': '0x${receipt.status.toRadixString(16)}',
       'gasUsed': '0x${receipt.gasUsed.toRadixString(16)}',
       if (receipt.effectiveGasPrice != null)
-        'effectiveGasPrice': '0x${receipt.effectiveGasPrice!.toRadixString(16)}',
-      'logs': receipt.logs.map((log) => {
-            'address': log.address,
-            'topics': log.topics,
-            'data': HexUtils.encode(log.data),
-          },).toList(),
+        'effectiveGasPrice':
+            '0x${receipt.effectiveGasPrice!.toRadixString(16)}',
+      'logs': receipt.logs
+          .map(
+            (log) => {
+              'address': log.address,
+              'topics': log.topics,
+              'data': HexUtils.encode(log.data),
+            },
+          )
+          .toList(),
     };
   }
 }
 
 /// Bridge status update event
 class BridgeStatusUpdate {
-
   const BridgeStatusUpdate({
     required this.sourceTransactionHash,
     required this.status,
@@ -402,4 +422,3 @@ class BridgeStatusUpdate {
   final BridgeTrackingInfo trackingInfo;
   final DateTime timestamp;
 }
-

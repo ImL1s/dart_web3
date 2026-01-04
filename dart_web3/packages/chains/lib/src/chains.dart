@@ -42,7 +42,10 @@ class Chains {
     nativeCurrency: 'Goerli Ether',
     symbol: 'ETH',
     decimals: 18,
-    rpcUrls: ['https://rpc.ankr.com/eth_goerli', 'https://goerli.infura.io/v3/'],
+    rpcUrls: [
+      'https://rpc.ankr.com/eth_goerli',
+      'https://goerli.infura.io/v3/'
+    ],
     blockExplorerUrls: ['https://goerli.etherscan.io'],
     testnet: true,
     multicallAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
@@ -121,7 +124,10 @@ class Chains {
     nativeCurrency: 'Avalanche',
     symbol: 'AVAX',
     decimals: 18,
-    rpcUrls: ['https://avalanche.llamarpc.com', 'https://rpc.ankr.com/avalanche'],
+    rpcUrls: [
+      'https://avalanche.llamarpc.com',
+      'https://rpc.ankr.com/avalanche'
+    ],
     blockExplorerUrls: ['https://snowtrace.io'],
     multicallAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
   );

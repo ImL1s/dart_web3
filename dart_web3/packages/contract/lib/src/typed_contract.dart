@@ -1,4 +1,3 @@
-
 import 'contract.dart';
 
 /// Base class for type-safe contract implementations.

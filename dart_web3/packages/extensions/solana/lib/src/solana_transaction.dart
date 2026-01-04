@@ -3,7 +3,6 @@ import 'solana_types.dart';
 
 /// Solana Transaction
 class SolanaTransaction {
-
   const SolanaTransaction({
     required this.signatures,
     required this.message,
@@ -18,7 +17,6 @@ class SolanaTransaction {
 }
 
 class Message {
-
   const Message({
     required this.accountKeys,
     required this.recentBlockhash,

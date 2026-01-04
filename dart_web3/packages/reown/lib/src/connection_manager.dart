@@ -8,7 +8,6 @@ import 'relay_client.dart';
 
 /// Manages connection state and implements advanced reconnection strategies.
 class ConnectionManager {
-
   ConnectionManager({
     required this.relayClient,
     ReconnectionConfig? config,
@@ -17,17 +16,18 @@ class ConnectionManager {
   }
   final RelayClient relayClient;
   final ReconnectionConfig config;
-  
+
   Timer? _reconnectTimer;
   Timer? _healthCheckTimer;
   int _reconnectAttempts = 0;
   DateTime? _lastSuccessfulConnection;
   DateTime? _lastConnectionAttempt;
   bool _isManuallyDisconnected = false;
-  
-  final StreamController<ConnectionState> _stateController = StreamController.broadcast();
+
+  final StreamController<ConnectionState> _stateController =
+      StreamController.broadcast();
   ConnectionState _currentState = ConnectionState.disconnected;
-  
+
   late StreamSubscription<RelayEvent> _relaySubscription;
 
   /// Stream of connection state changes.
@@ -49,7 +49,7 @@ class ConnectionManager {
   Future<void> connect() async {
     _isManuallyDisconnected = false;
     _setState(ConnectionState.connecting);
-    
+
     try {
       await relayClient.connect();
       _onConnectionSuccess();
@@ -63,7 +63,7 @@ class ConnectionManager {
     _isManuallyDisconnected = true;
     _stopReconnection();
     _stopHealthCheck();
-    
+
     await relayClient.disconnect();
     _setState(ConnectionState.disconnected);
   }
@@ -71,9 +71,9 @@ class ConnectionManager {
   /// Forces a reconnection attempt.
   Future<void> reconnect() async {
     if (_currentState == ConnectionState.connecting) return;
-    
+
     _setState(ConnectionState.reconnecting);
-    
+
     try {
       await relayClient.disconnect();
       await Future<void>.delayed(const Duration(milliseconds: 500));
@@ -116,7 +116,7 @@ class ConnectionManager {
   /// Handles connection failure.
   void _onConnectionFailure(dynamic error) {
     _lastConnectionAttempt = DateTime.now();
-    
+
     if (_isManuallyDisconnected) {
       _setState(ConnectionState.disconnected);
       return;
@@ -129,7 +129,7 @@ class ConnectionManager {
   /// Handles disconnection.
   void _onDisconnection() {
     _stopHealthCheck();
-    
+
     if (_isManuallyDisconnected) {
       _setState(ConnectionState.disconnected);
       return;
@@ -163,9 +163,9 @@ class ConnectionManager {
 
     _reconnectAttempts++;
     final delay = _calculateReconnectDelay();
-    
+
     _setState(ConnectionState.waitingToReconnect);
-    
+
     _reconnectTimer?.cancel();
     _reconnectTimer = Timer(delay, () {
       if (!_isManuallyDisconnected) {
@@ -177,9 +177,9 @@ class ConnectionManager {
   /// Attempts reconnection.
   Future<void> _attemptReconnection() async {
     if (_isManuallyDisconnected) return;
-    
+
     _setState(ConnectionState.reconnecting);
-    
+
     try {
       await relayClient.connect();
       _onConnectionSuccess();
@@ -193,29 +193,34 @@ class ConnectionManager {
     switch (config.strategy) {
       case ReconnectionStrategy.fixed:
         return config.baseDelay;
-      
+
       case ReconnectionStrategy.exponential:
-        final delay = config.baseDelay.inMilliseconds * 
-                     pow(config.backoffMultiplier, _reconnectAttempts - 1);
-        return Duration(milliseconds: min(delay.toInt(), config.maxDelay.inMilliseconds));
-      
+        final delay = config.baseDelay.inMilliseconds *
+            pow(config.backoffMultiplier, _reconnectAttempts - 1);
+        return Duration(
+            milliseconds: min(delay.toInt(), config.maxDelay.inMilliseconds));
+
       case ReconnectionStrategy.linear:
         final delay = config.baseDelay.inMilliseconds * _reconnectAttempts;
-        return Duration(milliseconds: min(delay, config.maxDelay.inMilliseconds));
-      
+        return Duration(
+            milliseconds: min(delay, config.maxDelay.inMilliseconds));
+
       case ReconnectionStrategy.jittered:
-        final baseDelay = config.baseDelay.inMilliseconds * 
-                         pow(config.backoffMultiplier, _reconnectAttempts - 1);
-        final jitter = Random().nextDouble() * config.jitterRange.inMilliseconds;
+        final baseDelay = config.baseDelay.inMilliseconds *
+            pow(config.backoffMultiplier, _reconnectAttempts - 1);
+        final jitter =
+            Random().nextDouble() * config.jitterRange.inMilliseconds;
         final totalDelay = baseDelay + jitter;
-        return Duration(milliseconds: min(totalDelay.toInt(), config.maxDelay.inMilliseconds));
+        return Duration(
+            milliseconds:
+                min(totalDelay.toInt(), config.maxDelay.inMilliseconds));
     }
   }
 
   /// Starts health check timer.
   void _startHealthCheck() {
     if (!config.enableHealthCheck) return;
-    
+
     _stopHealthCheck();
     _healthCheckTimer = Timer.periodic(config.healthCheckInterval, (_) {
       _performHealthCheck();
@@ -237,10 +242,10 @@ class ConnectionManager {
 
     // Check if we haven't received any messages recently
     final timeSinceLastMessage = timeSinceLastConnection;
-    if (timeSinceLastMessage != null && 
+    if (timeSinceLastMessage != null &&
         timeSinceLastMessage > config.healthCheckTimeout) {
       _setState(ConnectionState.unstable);
-      
+
       // Trigger a ping to test connectivity
       _sendPing();
     }
@@ -264,7 +269,7 @@ class ConnectionManager {
       final oldState = _currentState;
       _currentState = newState;
       _stateController.add(newState);
-      
+
       // Log state changes for debugging
       print('Connection state changed: $oldState -> $newState');
     }
@@ -295,22 +300,22 @@ class ConnectionManager {
 enum ConnectionState {
   /// Not connected and not attempting to connect.
   disconnected,
-  
+
   /// Attempting initial connection.
   connecting,
-  
+
   /// Successfully connected and healthy.
   connected,
-  
+
   /// Connected but experiencing issues.
   unstable,
-  
+
   /// Waiting before attempting reconnection.
   waitingToReconnect,
-  
+
   /// Attempting to reconnect.
   reconnecting,
-  
+
   /// Connection failed and no more attempts will be made.
   failed,
 }
@@ -319,20 +324,19 @@ enum ConnectionState {
 enum ReconnectionStrategy {
   /// Fixed delay between attempts.
   fixed,
-  
+
   /// Exponentially increasing delay.
   exponential,
-  
+
   /// Linearly increasing delay.
   linear,
-  
+
   /// Exponential with random jitter.
   jittered,
 }
 
 /// Configuration for reconnection behavior.
 class ReconnectionConfig {
-
   ReconnectionConfig({
     required this.maxAttempts,
     required this.baseDelay,
@@ -389,37 +393,37 @@ class ReconnectionConfig {
       healthCheckTimeout: const Duration(minutes: 2),
     );
   }
+
   /// Maximum number of reconnection attempts.
   final int maxAttempts;
-  
+
   /// Base delay between attempts.
   final Duration baseDelay;
-  
+
   /// Maximum delay between attempts.
   final Duration maxDelay;
-  
+
   /// Backoff multiplier for exponential strategy.
   final double backoffMultiplier;
-  
+
   /// Reconnection strategy to use.
   final ReconnectionStrategy strategy;
-  
+
   /// Random jitter range for jittered strategy.
   final Duration jitterRange;
-  
+
   /// Whether to enable health checks.
   final bool enableHealthCheck;
-  
+
   /// Interval between health checks.
   final Duration healthCheckInterval;
-  
+
   /// Timeout for health check responses.
   final Duration healthCheckTimeout;
 }
 
 /// Connection statistics.
 class ConnectionStats {
-
   ConnectionStats({
     required this.currentState,
     required this.reconnectAttempts,
@@ -438,10 +442,10 @@ class ConnectionStats {
   @override
   String toString() {
     return 'ConnectionStats('
-           'state: $currentState, '
-           'attempts: $reconnectAttempts, '
-           'lastConnection: $lastSuccessfulConnection, '
-           'timeSince: $timeSinceLastConnection, '
-           'healthy: $isHealthy)';
+        'state: $currentState, '
+        'attempts: $reconnectAttempts, '
+        'lastConnection: $lastSuccessfulConnection, '
+        'timeSince: $timeSinceLastConnection, '
+        'healthy: $isHealthy)';
   }
 }

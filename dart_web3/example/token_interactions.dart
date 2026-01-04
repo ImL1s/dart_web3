@@ -11,7 +11,8 @@ void main() async {
 
   // Example: USDC on Polygon
   const usdcAddress = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174';
-  const myAddress = '0x0000000000000000000000000000000000000000'; // Replace with real address
+  const myAddress =
+      '0x0000000000000000000000000000000000000000'; // Replace with real address
 
   // 1. Initialize Contract Instance
   final usdc = ERC20Contract(
@@ -48,9 +49,8 @@ void main() async {
     );
     print('Transfer TX: $txHash');
     */
-    
-    print('\nUse a WalletClient to execute transfers on-chain.');
 
+    print('\nUse a WalletClient to execute transfers on-chain.');
   } catch (e) {
     print('Error: $e');
   }

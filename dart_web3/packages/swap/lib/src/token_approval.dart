@@ -8,7 +8,6 @@ import 'swap_types.dart';
 
 /// Token approval manager for swap operations
 class TokenApprovalManager {
-
   TokenApprovalManager(this.walletClient);
   final WalletClient walletClient;
   final Map<String, ERC20Contract> _contractCache = {};
@@ -41,7 +40,8 @@ class TokenApprovalManager {
     required String spender,
   }) async {
     if (_isNativeToken(token)) {
-      return BigInt.from(double.maxFinite.toInt()); // Native tokens have unlimited allowance
+      return BigInt.from(
+          double.maxFinite.toInt()); // Native tokens have unlimited allowance
     }
 
     try {
@@ -69,9 +69,7 @@ class TokenApprovalManager {
 
     try {
       final contract = await _getERC20Contract(token);
-      final approvalAmount = useMaxApproval 
-          ? _getMaxUint256() 
-          : amount;
+      final approvalAmount = useMaxApproval ? _getMaxUint256() : amount;
 
       final txHash = await contract.approve(spender, approvalAmount);
       return txHash;
@@ -96,7 +94,7 @@ class TokenApprovalManager {
 
     try {
       final contract = await _getERC20Contract(token);
-      
+
       // Check if token supports permit
       final supportsPermit = await _supportsPermit(contract);
       if (!supportsPermit) {
@@ -105,7 +103,7 @@ class TokenApprovalManager {
 
       // Get nonce for permit
       final nonce = await _getPermitNonce(contract, walletClient.address.hex);
-      
+
       // Create permit signature
       final signature = await _createPermitSignature(
         token: token,
@@ -136,19 +134,21 @@ class TokenApprovalManager {
     }
 
     final contract = await _getERC20Contract(token);
-    final approvalAmount = useMaxApproval 
-        ? _getMaxUint256() 
-        : amount;
+    final approvalAmount = useMaxApproval ? _getMaxUint256() : amount;
 
     // Encode approval function call
-    final approvalFunc = contract.functions.firstWhere((f) => f.name == 'approve');
-    final data = AbiEncoder.encodeFunction(approvalFunc.signature, [spender, approvalAmount]);
-    
+    final approvalFunc =
+        contract.functions.firstWhere((f) => f.name == 'approve');
+    final data = AbiEncoder.encodeFunction(
+        approvalFunc.signature, [spender, approvalAmount]);
+
     // Estimate gas
-    final gasEstimate = await walletClient.estimateGas(CallRequest(
-      to: token.address,
-      data: data,
-    ),);
+    final gasEstimate = await walletClient.estimateGas(
+      CallRequest(
+        to: token.address,
+        data: data,
+      ),
+    );
 
     return ApprovalTransaction(
       to: token.address,
@@ -189,7 +189,7 @@ class TokenApprovalManager {
     for (var i = 0; i < tokens.length; i++) {
       final token = tokens[i];
       final amount = amounts[i];
-      
+
       try {
         final needsApproval = await isApprovalNeeded(
           token: token,
@@ -209,7 +209,7 @@ class TokenApprovalManager {
 
   Future<ERC20Contract> _getERC20Contract(SwapToken token) async {
     final cacheKey = '${token.chainId}_${token.address}';
-    
+
     if (_contractCache.containsKey(cacheKey)) {
       return _contractCache[cacheKey]!;
     }
@@ -233,7 +233,8 @@ class TokenApprovalManager {
   }
 
   BigInt _getMaxUint256() {
-    return BigInt.parse('115792089237316195423570985008687907853269984665640564039457584007913129639935');
+    return BigInt.parse(
+        '115792089237316195423570985008687907853269984665640564039457584007913129639935');
   }
 
   Future<bool> _supportsPermit(ERC20Contract contract) async {
@@ -265,9 +266,10 @@ class TokenApprovalManager {
     // This is a simplified implementation
     // In a real implementation, you would create the EIP-712 typed data
     // and sign it using the wallet client
-    
-    final deadlineTimestamp = DateTime.now().add(deadline).millisecondsSinceEpoch ~/ 1000;
-    
+
+    final deadlineTimestamp =
+        DateTime.now().add(deadline).millisecondsSinceEpoch ~/ 1000;
+
     // For now, return a placeholder signature
     // In practice, this would involve creating EIP-712 typed data and signing
     return ApprovalSignature(
@@ -286,7 +288,6 @@ class TokenApprovalManager {
 
 /// Token approval transaction data
 class ApprovalTransaction {
-
   const ApprovalTransaction({
     required this.to,
     required this.data,
@@ -305,7 +306,6 @@ class ApprovalTransaction {
 
 /// EIP-2612 permit signature
 class ApprovalSignature {
-
   const ApprovalSignature({
     required this.v,
     required this.r,
@@ -322,7 +322,6 @@ class ApprovalSignature {
 
 /// Exception thrown when token approval operations fail
 class TokenApprovalException implements Exception {
-
   const TokenApprovalException(this.message, {this.originalError});
   final String message;
   final dynamic originalError;

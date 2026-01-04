@@ -8,7 +8,6 @@ import 'aggregator_interface.dart';
 
 /// 0x Protocol DEX aggregator implementation
 class ZeroXAggregator extends DexAggregator {
-
   ZeroXAggregator({
     required this.config,
     http.Client? httpClient,
@@ -21,14 +20,14 @@ class ZeroXAggregator extends DexAggregator {
 
   @override
   List<int> get supportedChains => [
-    1,     // Ethereum
-    56,    // BSC
-    137,   // Polygon
-    42161, // Arbitrum
-    10,    // Optimism
-    43114, // Avalanche
-    8453,  // Base
-  ];
+        1, // Ethereum
+        56, // BSC
+        137, // Polygon
+        42161, // Arbitrum
+        10, // Optimism
+        43114, // Avalanche
+        8453, // Base
+      ];
 
   @override
   bool get supportsCrossChain => false;
@@ -36,10 +35,10 @@ class ZeroXAggregator extends DexAggregator {
   String get _baseUrl => config.baseUrl ?? 'https://api.0x.org';
 
   Map<String, String> get _headers => {
-    'Content-Type': 'application/json',
-    if (config.apiKey != null) '0x-api-key': config.apiKey!,
-    ...config.headers,
-  };
+        'Content-Type': 'application/json',
+        if (config.apiKey != null) '0x-api-key': config.apiKey!,
+        ...config.headers,
+      };
 
   @override
   Future<SwapQuote?> getQuote(SwapParams params) async {
@@ -54,7 +53,7 @@ class ZeroXAggregator extends DexAggregator {
       final chainId = params.fromToken.chainId;
       final networkPath = _getNetworkPath(chainId);
       final url = '$_baseUrl$networkPath/swap/v1/quote';
-      
+
       final queryParams = {
         'sellToken': params.fromToken.address,
         'buyToken': params.toToken.address,
@@ -65,8 +64,8 @@ class ZeroXAggregator extends DexAggregator {
       };
 
       final uri = Uri.parse(url).replace(queryParameters: queryParams);
-      final response = await _httpClient.get(uri, headers: _headers)
-          .timeout(config.timeout);
+      final response =
+          await _httpClient.get(uri, headers: _headers).timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw AggregatorException(
@@ -94,7 +93,7 @@ class ZeroXAggregator extends DexAggregator {
     List<double> slippages = const [0.001, 0.005, 0.01, 0.03],
   }) async {
     final quotes = <SwapQuote>[];
-    
+
     for (final slippage in slippages) {
       try {
         final quote = await getQuote(params.copyWith(slippage: slippage));
@@ -106,24 +105,27 @@ class ZeroXAggregator extends DexAggregator {
         continue;
       }
     }
-    
+
     return quotes;
   }
 
   @override
-  Future<bool> isTokenPairSupported(SwapToken fromToken, SwapToken toToken) async {
+  Future<bool> isTokenPairSupported(
+      SwapToken fromToken, SwapToken toToken) async {
     if (fromToken.chainId != toToken.chainId) return false;
     if (!supportedChains.contains(fromToken.chainId)) return false;
-    
+
     try {
       // 0x supports most ERC-20 tokens, so we'll do a basic check
       final networkPath = _getNetworkPath(fromToken.chainId);
       final url = '$_baseUrl$networkPath/swap/v1/sources';
-      
-      final response = await _httpClient.get(
-        Uri.parse(url),
-        headers: _headers,
-      ).timeout(config.timeout);
+
+      final response = await _httpClient
+          .get(
+            Uri.parse(url),
+            headers: _headers,
+          )
+          .timeout(config.timeout);
 
       return response.statusCode == 200;
     } on Exception catch (_) {
@@ -143,11 +145,13 @@ class ZeroXAggregator extends DexAggregator {
     try {
       final networkPath = _getNetworkPath(chainId);
       final url = '$_baseUrl$networkPath/swap/v1/tokens';
-      
-      final response = await _httpClient.get(
-        Uri.parse(url),
-        headers: _headers,
-      ).timeout(config.timeout);
+
+      final response = await _httpClient
+          .get(
+            Uri.parse(url),
+            headers: _headers,
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw AggregatorException(
@@ -159,7 +163,7 @@ class ZeroXAggregator extends DexAggregator {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
       final records = data['records'] as List<dynamic>? ?? [];
-      
+
       return records.map((record) {
         final tokenData = record as Map<String, dynamic>;
         return SwapToken(
@@ -185,11 +189,13 @@ class ZeroXAggregator extends DexAggregator {
     try {
       final networkPath = _getNetworkPath(chainId);
       final url = '$_baseUrl$networkPath/gas/price';
-      
-      final response = await _httpClient.get(
-        Uri.parse(url),
-        headers: _headers,
-      ).timeout(config.timeout);
+
+      final response = await _httpClient
+          .get(
+            Uri.parse(url),
+            headers: _headers,
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
@@ -238,13 +244,15 @@ class ZeroXAggregator extends DexAggregator {
 
   SwapQuote _parseQuoteResponse(Map<String, dynamic> data, SwapParams params) {
     final outputAmount = BigInt.parse(data['buyAmount'] as String);
-    final minimumOutputAmount = BigInt.parse(data['guaranteedBuyAmount'] as String? ?? 
-                                           calculateMinimumOutput(outputAmount, params.slippage).toString(),);
-    
+    final minimumOutputAmount = BigInt.parse(
+      data['guaranteedBuyAmount'] as String? ??
+          calculateMinimumOutput(outputAmount, params.slippage).toString(),
+    );
+
     // Parse sources (route information)
     final sources = data['sources'] as List<dynamic>? ?? [];
     final route = _parseRoute(sources, params);
-    
+
     // Parse transaction data
     final transaction = SwapTransaction(
       to: data['to'] as String,
@@ -254,7 +262,8 @@ class ZeroXAggregator extends DexAggregator {
       gasPrice: BigInt.parse(data['gasPrice'] as String),
     );
 
-    final estimatedGas = BigInt.parse(data['estimatedGas'] as String? ?? data['gas'] as String);
+    final estimatedGas =
+        BigInt.parse(data['estimatedGas'] as String? ?? data['gas'] as String);
     final gasPrice = BigInt.parse(data['gasPrice'] as String);
 
     return SwapQuote(
@@ -267,7 +276,8 @@ class ZeroXAggregator extends DexAggregator {
       estimatedGas: estimatedGas,
       gasCost: estimatedGas * gasPrice,
       priceImpact: (data['estimatedPriceImpact'] as num?)?.toDouble() ?? 0.0,
-      validUntil: const Duration(minutes: 3), // 0x quotes are valid for ~3 minutes
+      validUntil:
+          const Duration(minutes: 3), // 0x quotes are valid for ~3 minutes
       metadata: {
         'sources': sources,
         'sellTokenToEthRate': data['sellTokenToEthRate'],
@@ -280,21 +290,21 @@ class ZeroXAggregator extends DexAggregator {
     final path = <SwapToken>[params.fromToken];
     final exchanges = <String>[];
     final portions = <double>[];
-    
+
     for (final source in sources) {
       if (source is Map<String, dynamic>) {
         final name = source['name'] as String? ?? 'Unknown';
         final proportion = (source['proportion'] as num?)?.toDouble() ?? 0.0;
-        
+
         if (proportion > 0) {
           exchanges.add(name);
           portions.add(proportion);
         }
       }
     }
-    
+
     path.add(params.toToken);
-    
+
     return SwapRoute(
       path: path,
       exchanges: exchanges,
@@ -308,7 +318,7 @@ class ZeroXAggregator extends DexAggregator {
       hex = hex.substring(2);
     }
     if (hex.isEmpty) return Uint8List(0);
-    
+
     final bytes = <int>[];
     for (var i = 0; i < hex.length; i += 2) {
       final hexByte = hex.substring(i, i + 2);

@@ -10,12 +10,12 @@ import 'public_client.dart';
 
 /// Wallet client for signing and sending transactions.
 class WalletClient extends PublicClient {
-
   WalletClient({
     required super.provider,
     required super.chain,
     required this.signer,
   });
+
   /// The signer.
   Signer signer;
 
@@ -72,12 +72,12 @@ class WalletClient extends PublicClient {
     );
 
     final signature = await signAuthorization(authorization);
-    
+
     // Extract signature components
     final r = signature.sublist(0, 32);
     final s = signature.sublist(32, 64);
     final yParity = signature[64];
-    
+
     return authorization.withSignature(
       yParity: yParity,
       r: _bytesToBigInt(r),
@@ -91,7 +91,7 @@ class WalletClient extends PublicClient {
     required BigInt startingNonce,
   }) async {
     final authorizations = <Authorization>[];
-    
+
     for (var i = 0; i < contractAddresses.length; i++) {
       final authorization = await createAuthorization(
         contractAddress: contractAddresses[i],
@@ -99,7 +99,7 @@ class WalletClient extends PublicClient {
       );
       authorizations.add(authorization);
     }
-    
+
     return authorizations;
   }
 
@@ -113,12 +113,12 @@ class WalletClient extends PublicClient {
     );
 
     final signature = await signAuthorization(revocation);
-    
+
     // Extract signature components
     final r = signature.sublist(0, 32);
     final s = signature.sublist(32, 64);
     final yParity = signature[64];
-    
+
     return revocation.withSignature(
       yParity: yParity,
       r: _bytesToBigInt(r),
@@ -128,7 +128,8 @@ class WalletClient extends PublicClient {
 
   /// Sends an EIP-7702 transaction with authorization list.
   Future<String> sendEip7702Transaction({
-    required List<Authorization> authorizationList, String? to,
+    required List<Authorization> authorizationList,
+    String? to,
     BigInt? value,
     Uint8List? data,
     BigInt? gasLimit,
@@ -152,7 +153,7 @@ class WalletClient extends PublicClient {
   }
 
   /// Calls a method on a delegated contract.
-  /// 
+  ///
   /// This allows calling contract methods as if the EOA has the contract's code.
   Future<String> callDelegatedContract({
     required String contractAddress,
@@ -210,7 +211,7 @@ class WalletClient extends PublicClient {
     BigInt? maxPriorityFeePerGas,
   }) async {
     final revocations = <Authorization>[];
-    
+
     for (final nonce in nonces) {
       final revocation = await createRevocation(nonce: nonce);
       revocations.add(revocation);
@@ -226,7 +227,8 @@ class WalletClient extends PublicClient {
 
   /// Estimates gas for an EIP-7702 transaction.
   Future<BigInt> estimateEip7702Gas({
-    required List<Authorization> authorizationList, String? to,
+    required List<Authorization> authorizationList,
+    String? to,
     BigInt? value,
     Uint8List? data,
   }) async {
@@ -238,23 +240,26 @@ class WalletClient extends PublicClient {
     );
 
     final baseGas = await estimateGas(request);
-    
+
     // Add gas cost for each authorization (approximately 2,300 gas each)
     final authGas = BigInt.from(authorizationList.length * 2300);
-    
+
     return baseGas + authGas;
   }
 
   /// Transfers native currency.
   Future<String> transfer(String to, BigInt amount) async {
-    return sendTransaction(TransactionRequest(
-      to: to,
-      value: amount,
-    ),);
+    return sendTransaction(
+      TransactionRequest(
+        to: to,
+        value: amount,
+      ),
+    );
   }
 
   /// Prepares a transaction by filling in missing fields.
-  Future<TransactionRequest> prepareTransaction(TransactionRequest request) async {
+  Future<TransactionRequest> prepareTransaction(
+      TransactionRequest request) async {
     var tx = request;
 
     // Set chain ID
@@ -272,7 +277,8 @@ class WalletClient extends PublicClient {
     if (tx.gasLimit == null) {
       final gasLimit = await estimateGas(_toCallRequest(tx));
       // Add 20% buffer
-      tx = tx.copyWith(gasLimit: gasLimit * BigInt.from(120) ~/ BigInt.from(100));
+      tx = tx.copyWith(
+          gasLimit: gasLimit * BigInt.from(120) ~/ BigInt.from(100));
     }
 
     // Set gas price / fee
@@ -285,7 +291,8 @@ class WalletClient extends PublicClient {
         final feeData = await getFeeData();
         tx = tx.copyWith(
           maxFeePerGas: tx.maxFeePerGas ?? feeData.maxFeePerGas,
-          maxPriorityFeePerGas: tx.maxPriorityFeePerGas ?? feeData.maxPriorityFeePerGas,
+          maxPriorityFeePerGas:
+              tx.maxPriorityFeePerGas ?? feeData.maxPriorityFeePerGas,
         );
       }
     }
@@ -322,18 +329,19 @@ class WalletClient extends PublicClient {
   Uint8List _encodeFunctionCall(String signature, List<dynamic> args) {
     // Simple function encoding - in a real implementation, this would use ABI encoding
     // For now, we'll create a basic implementation
-    final selector = Keccak256.hash(Uint8List.fromList(signature.codeUnits)).sublist(0, 4);
-    
+    final selector =
+        Keccak256.hash(Uint8List.fromList(signature.codeUnits)).sublist(0, 4);
+
     if (args.isEmpty) {
       return selector;
     }
-    
+
     // This is a simplified encoding - real implementation would use proper ABI encoding
     final encoded = BytesUtils.concat([
       selector,
       Uint8List(32 * args.length), // Placeholder for encoded args
     ]);
-    
+
     return encoded;
   }
 }

@@ -1,5 +1,5 @@
 /// BC-UR (Blockchain Commons Uniform Resources) library for QR code communication
-/// 
+///
 /// This library provides encoding and decoding functionality for BC-UR format,
 /// which is used for secure data exchange via QR codes, particularly with
 /// hardware wallets like Keystone.

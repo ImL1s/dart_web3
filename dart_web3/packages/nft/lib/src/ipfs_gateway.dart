@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 
 /// IPFS gateway manager with fallback support
 class IpfsGateway {
-
   IpfsGateway({
     List<String>? gateways,
     Duration timeout = const Duration(seconds: 10),
@@ -102,9 +101,9 @@ class IpfsGateway {
 
   /// Check if URI is an IPFS URI
   bool _isIpfsUri(String uri) {
-    return uri.startsWith('ipfs://') || 
-           uri.startsWith('Qm') || 
-           uri.startsWith('baf');
+    return uri.startsWith('ipfs://') ||
+        uri.startsWith('Qm') ||
+        uri.startsWith('baf');
   }
 
   /// Extract IPFS hash from URI

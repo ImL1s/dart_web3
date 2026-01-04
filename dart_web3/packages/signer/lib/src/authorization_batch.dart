@@ -5,12 +5,11 @@ import 'signer.dart';
 
 /// Utility class for creating and managing batch authorizations.
 class AuthorizationBatch {
-
   /// Creates an empty authorization batch.
   AuthorizationBatch();
 
   /// Creates a batch authorization for multiple contracts.
-  /// 
+  ///
   /// This allows delegating to multiple contracts in a single transaction.
   factory AuthorizationBatch.forContracts({
     required int chainId,
@@ -18,7 +17,7 @@ class AuthorizationBatch {
     required BigInt startingNonce,
   }) {
     final batch = AuthorizationBatch();
-    
+
     for (var i = 0; i < contractAddresses.length; i++) {
       final authorization = Authorization.unsigned(
         chainId: chainId,
@@ -27,19 +26,19 @@ class AuthorizationBatch {
       );
       batch.add(authorization);
     }
-    
+
     return batch;
   }
 
   /// Creates a batch with revocation authorizations.
-  /// 
+  ///
   /// This creates authorizations that revoke existing delegations.
   factory AuthorizationBatch.revocations({
     required int chainId,
     required List<BigInt> nonces,
   }) {
     final batch = AuthorizationBatch();
-    
+
     for (final nonce in nonces) {
       final revocation = Authorization.revocation(
         chainId: chainId,
@@ -47,19 +46,19 @@ class AuthorizationBatch {
       );
       batch.add(revocation);
     }
-    
+
     return batch;
   }
 
   /// Creates a batch from RLP list.
   factory AuthorizationBatch.fromRlpList(List<List<dynamic>> rlpList) {
     final batch = AuthorizationBatch();
-    
+
     for (final authRlp in rlpList) {
       final authorization = Authorization.fromRlpList(authRlp);
       batch.add(authorization);
     }
-    
+
     return batch;
   }
   final List<Authorization> _authorizations = [];
@@ -102,42 +101,42 @@ class AuthorizationBatch {
   }
 
   /// Signs all authorizations in the batch with the given signer.
-  /// 
+  ///
   /// Returns a new batch with all authorizations signed.
   Future<AuthorizationBatch> signAll(Signer signer) async {
     final signedBatch = AuthorizationBatch();
-    
+
     for (final authorization in _authorizations) {
       final signature = await signer.signAuthorization(authorization);
-      
+
       // Extract signature components
       final r = signature.sublist(0, 32);
       final s = signature.sublist(32, 64);
       final yParity = signature[64];
-      
+
       final signedAuth = authorization.withSignature(
         yParity: yParity,
         r: _bytesToBigInt(r),
         s: _bytesToBigInt(s),
       );
-      
+
       signedBatch.add(signedAuth);
     }
-    
+
     return signedBatch;
   }
 
   /// Signs all authorizations in the batch with a private key.
-  /// 
+  ///
   /// Returns a new batch with all authorizations signed.
   AuthorizationBatch signAllWithPrivateKey(Uint8List privateKey) {
     final signedBatch = AuthorizationBatch();
-    
+
     for (final authorization in _authorizations) {
       final signedAuth = authorization.sign(privateKey);
       signedBatch.add(signedAuth);
     }
-    
+
     return signedBatch;
   }
 
@@ -147,7 +146,7 @@ class AuthorizationBatch {
   }
 
   /// Gets the total gas cost estimate for this batch.
-  /// 
+  ///
   /// Each authorization adds approximately 2,300 gas to the transaction.
   BigInt estimateGasCost() {
     return BigInt.from(_authorizations.length * 2300);
@@ -193,11 +192,11 @@ class AuthorizationBatch {
   bool get hasRevocations => _authorizations.any((auth) => auth.isRevocation);
 
   /// Gets only the revocation authorizations.
-  List<Authorization> get revocations => 
+  List<Authorization> get revocations =>
       _authorizations.where((auth) => auth.isRevocation).toList();
 
   /// Gets only the non-revocation authorizations.
-  List<Authorization> get delegations => 
+  List<Authorization> get delegations =>
       _authorizations.where((auth) => !auth.isRevocation).toList();
 
   @override
@@ -216,7 +215,8 @@ class AuthorizationBatch {
       if (authorization.nonce < BigInt.zero) return false;
 
       // Check address format (basic hex check)
-      if (!authorization.address.startsWith('0x') || authorization.address.length != 42) {
+      if (!authorization.address.startsWith('0x') ||
+          authorization.address.length != 42) {
         return false;
       }
 

@@ -184,7 +184,8 @@ class AbiEncoder {
         final char = type[i];
         if (char == ')') {
           depth++;
-        } else if (char == '(') depth--;
+        } else if (char == '(')
+          depth--;
         else if (char == '[' && depth == 0) {
           bracketStart = i;
           break;

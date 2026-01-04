@@ -5,28 +5,26 @@ import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 
 class MockPublicClient implements PublicClient {
-  Map<String, dynamic>? _mockCallResult;
-  Exception? _mockCallException;
-  
+  final List<Uint8List> _mockCallResults = [];
+  final List<Exception> _mockCallExceptions = [];
+
   void mockCall(Uint8List result) {
-    _mockCallResult = {'result': result};
-    _mockCallException = null;
+    _mockCallResults.add(result);
   }
-  
+
   void mockCallThrow(String message) {
-    _mockCallResult = null;
-    _mockCallException = Exception(message);
+    _mockCallExceptions.add(Exception(message));
   }
 
   @override
   Future<Uint8List> call(CallRequest request, [String block = 'latest']) async {
-    if (_mockCallException != null) {
-      throw _mockCallException!;
+    if (_mockCallExceptions.isNotEmpty) {
+      throw _mockCallExceptions.removeAt(0);
     }
-    if (_mockCallResult != null) {
-      return _mockCallResult!['result'] as Uint8List;
+    if (_mockCallResults.isNotEmpty) {
+      return _mockCallResults.removeAt(0);
     }
-    throw Exception('No mock result set');
+    throw Exception('No mock result set for request to ${request.to}');
   }
 
   // Implement other required methods with minimal functionality
@@ -61,7 +59,8 @@ class MockPublicClient implements PublicClient {
   }
 
   @override
-  Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
+  Future<BigInt> getTransactionCount(String address,
+      [String block = 'latest']) async {
     return BigInt.zero;
   }
 

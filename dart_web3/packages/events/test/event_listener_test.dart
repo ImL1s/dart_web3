@@ -26,7 +26,7 @@ void main() {
 
     test('should listen to contract events', () async {
       final completer = Completer<Log>();
-      
+
       final key = listener.listenToContract(
         '0x1234567890123456789012345678901234567890',
         '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
@@ -39,7 +39,9 @@ void main() {
       // Emit mock event
       mockWsTransport.emitSubscriptionEvent('sub_1', {
         'address': '0x1234567890123456789012345678901234567890',
-        'topics': ['0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'],
+        'topics': [
+          '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+        ],
         'data': '0x',
         'blockHash': '0xblock1',
         'blockNumber': '0x1',
@@ -51,12 +53,15 @@ void main() {
 
       final log = await completer.future.timeout(const Duration(seconds: 1));
       expect(log.address, equals('0x1234567890123456789012345678901234567890'));
-      expect(log.topics[0], equals('0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'));
+      expect(
+          log.topics[0],
+          equals(
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'));
     });
 
     test('should listen to contract events with indexed args', () async {
       final completer = Completer<Log>();
-      
+
       final key = listener.listenToContract(
         '0x1234567890123456789012345678901234567890',
         '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
@@ -94,7 +99,7 @@ void main() {
 
     test('should listen to custom filter', () async {
       final completer = Completer<Log>();
-      
+
       final filter = EventFilter(
         address: '0x1234567890123456789012345678901234567890',
         topics: ['0xabcd'],
@@ -128,7 +133,7 @@ void main() {
 
     test('should listen to all contract events', () async {
       final completer = Completer<Log>();
-      
+
       final key = listener.listenToAllContractEvents(
         '0x1234567890123456789012345678901234567890',
         onEvent: completer.complete,
@@ -155,7 +160,7 @@ void main() {
 
     test('should listen to pending transactions', () async {
       final completer = Completer<String>();
-      
+
       final key = listener.listenToPendingTransactions(
         onTransaction: completer.complete,
       );
@@ -169,7 +174,9 @@ void main() {
       expect(txHash, equals('0xtx123'));
     });
 
-    test('should throw error when listening to pending transactions without WebSocket', () {
+    test(
+        'should throw error when listening to pending transactions without WebSocket',
+        () {
       final subscriberWithoutWs = EventSubscriber(mockClient);
       final listenerWithoutWs = EventListener(subscriberWithoutWs);
 
@@ -202,7 +209,7 @@ void main() {
       ]);
 
       final completer = Completer<Log>();
-      
+
       final key = listenerWithoutWs.listenToContract(
         '0x1234567890123456789012345678901234567890',
         '0xabcd',

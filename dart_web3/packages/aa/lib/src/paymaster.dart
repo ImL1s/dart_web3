@@ -1,16 +1,15 @@
-
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 
 import 'user_operation.dart';
 
 /// Abstract base class for Paymaster implementations.
-/// 
+///
 /// A Paymaster is a contract that can sponsor UserOperations by paying
 /// the gas fees on behalf of users. This enables gasless transactions
 /// and other advanced payment models.
 abstract class Paymaster {
   /// Gets paymaster data for a UserOperation.
-  /// 
+  ///
   /// Returns null if this paymaster cannot or will not sponsor the operation.
   Future<PaymasterData?> getPaymasterData(
     UserOperation userOp, {
@@ -27,7 +26,6 @@ abstract class Paymaster {
 
 /// Paymaster data to be included in a UserOperation.
 class PaymasterData {
-
   PaymasterData({
     required this.paymaster,
     required this.paymasterData,
@@ -41,15 +39,17 @@ class PaymasterData {
     return PaymasterData(
       paymaster: json['paymaster'] as String,
       paymasterData: json['paymasterData'] as String,
-      paymasterVerificationGasLimit: json['paymasterVerificationGasLimit'] != null
-          ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
-          : null,
+      paymasterVerificationGasLimit:
+          json['paymasterVerificationGasLimit'] != null
+              ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
+              : null,
       paymasterPostOpGasLimit: json['paymasterPostOpGasLimit'] != null
           ? BigInt.parse(json['paymasterPostOpGasLimit'] as String)
           : null,
       paymasterSignature: json['paymasterSignature'] as String?,
     );
   }
+
   /// The paymaster contract address.
   final String paymaster;
 
@@ -73,10 +73,12 @@ class PaymasterData {
     };
 
     if (paymasterVerificationGasLimit != null) {
-      json['paymasterVerificationGasLimit'] = '0x${paymasterVerificationGasLimit!.toRadixString(16)}';
+      json['paymasterVerificationGasLimit'] =
+          '0x${paymasterVerificationGasLimit!.toRadixString(16)}';
     }
     if (paymasterPostOpGasLimit != null) {
-      json['paymasterPostOpGasLimit'] = '0x${paymasterPostOpGasLimit!.toRadixString(16)}';
+      json['paymasterPostOpGasLimit'] =
+          '0x${paymasterPostOpGasLimit!.toRadixString(16)}';
     }
     if (paymasterSignature != null) {
       json['paymasterSignature'] = paymasterSignature;
@@ -107,13 +109,12 @@ class PaymasterData {
 
 /// HTTP-based paymaster that communicates with a paymaster service.
 class HttpPaymaster implements Paymaster {
-
   HttpPaymaster({
     required String paymasterUrl,
     required String paymasterAddress,
     Map<String, String> headers = const {},
-  }) : _paymasterAddress = paymasterAddress,
-       _provider = RpcProvider(HttpTransport(paymasterUrl, headers: headers));
+  })  : _paymasterAddress = paymasterAddress,
+        _provider = RpcProvider(HttpTransport(paymasterUrl, headers: headers));
   final String _paymasterAddress;
   final RpcProvider _provider;
 
@@ -177,12 +178,11 @@ class HttpPaymaster implements Paymaster {
 
 /// Verifying paymaster that requires users to deposit tokens.
 class VerifyingPaymaster implements Paymaster {
-
   VerifyingPaymaster({
     required String paymasterAddress,
     required RpcProvider provider,
-  }) : _paymasterAddress = paymasterAddress,
-       _provider = provider;
+  })  : _paymasterAddress = paymasterAddress,
+        _provider = provider;
   final String _paymasterAddress;
   final RpcProvider _provider;
 
@@ -201,7 +201,7 @@ class VerifyingPaymaster implements Paymaster {
 
     // Generate paymaster data
     final paymasterData = await _generatePaymasterData(userOp);
-    
+
     return PaymasterData(
       paymaster: _paymasterAddress,
       paymasterData: paymasterData,
@@ -243,7 +243,7 @@ class VerifyingPaymaster implements Paymaster {
     // - Validation timestamp
     // - Signature from paymaster
     // - Any additional data required by the paymaster contract
-    
+
     // For now, return empty data
     return '0x';
   }
@@ -258,17 +258,18 @@ class VerifyingPaymaster implements Paymaster {
 }
 
 /// ERC-20 token paymaster that accepts specific tokens as payment.
-class TokenPaymaster implements Paymaster { // Token units per gas unit
+class TokenPaymaster implements Paymaster {
+  // Token units per gas unit
 
   TokenPaymaster({
     required String paymasterAddress,
     required String tokenAddress,
     required RpcProvider provider,
     required BigInt exchangeRate,
-  }) : _paymasterAddress = paymasterAddress,
-       _tokenAddress = tokenAddress,
-       _provider = provider,
-       _exchangeRate = exchangeRate;
+  })  : _paymasterAddress = paymasterAddress,
+        _tokenAddress = tokenAddress,
+        _provider = provider,
+        _exchangeRate = exchangeRate;
   final String _paymasterAddress;
   final String _tokenAddress;
   final RpcProvider _provider;
@@ -289,7 +290,7 @@ class TokenPaymaster implements Paymaster { // Token units per gas unit
 
     // Calculate required token amount
     final tokenAmount = _calculateTokenAmount(userOp);
-    
+
     // Encode paymaster data with token information
     final paymasterData = _encodeTokenPaymasterData(tokenAmount);
 
@@ -307,7 +308,8 @@ class TokenPaymaster implements Paymaster { // Token units per gas unit
   }
 
   /// Checks if the user has sufficient token balance.
-  Future<bool> _checkTokenBalance(String userAddress, UserOperation userOp) async {
+  Future<bool> _checkTokenBalance(
+      String userAddress, UserOperation userOp) async {
     try {
       // Get user's token balance
       final result = await _provider.call<String>(
@@ -323,7 +325,7 @@ class TokenPaymaster implements Paymaster { // Token units per gas unit
 
       final balance = BigInt.parse(result);
       final requiredAmount = _calculateTokenAmount(userOp);
-      
+
       return balance >= requiredAmount;
     } on Exception catch (_) {
       return false;
@@ -332,19 +334,23 @@ class TokenPaymaster implements Paymaster { // Token units per gas unit
 
   /// Calculates the required token amount for the UserOperation.
   BigInt _calculateTokenAmount(UserOperation userOp) {
-    final totalGas = userOp.callGasLimit + 
-                    userOp.verificationGasLimit + 
-                    userOp.preVerificationGas;
-    
-    return totalGas * userOp.maxFeePerGas * _exchangeRate ~/ BigInt.from(10).pow(18);
+    final totalGas = userOp.callGasLimit +
+        userOp.verificationGasLimit +
+        userOp.preVerificationGas;
+
+    return totalGas *
+        userOp.maxFeePerGas *
+        _exchangeRate ~/
+        BigInt.from(10).pow(18);
   }
 
   /// Encodes paymaster data with token amount.
   String _encodeTokenPaymasterData(BigInt tokenAmount) {
     // Encode token address and amount
-    final tokenAddressHex = _tokenAddress.replaceFirst('0x', '').padLeft(64, '0');
+    final tokenAddressHex =
+        _tokenAddress.replaceFirst('0x', '').padLeft(64, '0');
     final tokenAmountHex = tokenAmount.toRadixString(16).padLeft(64, '0');
-    
+
     return '0x$tokenAddressHex$tokenAmountHex';
   }
 
@@ -359,12 +365,11 @@ class TokenPaymaster implements Paymaster { // Token units per gas unit
 
 /// Paymaster manager that handles multiple paymaster options.
 class PaymasterManager {
-
   PaymasterManager(this._paymasters);
   final List<Paymaster> _paymasters;
 
   /// Finds the best paymaster for a UserOperation.
-  /// 
+  ///
   /// Returns null if no paymaster can sponsor the operation.
   Future<PaymasterData?> getBestPaymaster(
     UserOperation userOp, {

@@ -1,5 +1,5 @@
 /// Reown/WalletConnect v2 integration for connecting to mobile wallets.
-/// 
+///
 /// This library provides WalletConnect v2 protocol implementation for Dart/Flutter
 /// applications, allowing users to connect their mobile wallets for transaction signing.
 library;

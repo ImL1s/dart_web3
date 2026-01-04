@@ -15,7 +15,7 @@ class BCURRegistry {
   static const int ethSignRequest = 401;
   static const int ethSignature = 402;
   static const int ethSignTypedData = 403;
-  
+
   // Type names mapping
   static const Map<int, String> typeNames = {
     cryptoPsbt: 'crypto-psbt',
@@ -30,7 +30,7 @@ class BCURRegistry {
     ethSignature: 'eth-signature',
     ethSignTypedData: 'eth-sign-typed-data',
   };
-  
+
   static const Map<String, int> nameToType = {
     'crypto-psbt': cryptoPsbt,
     'crypto-account': cryptoAccount,
@@ -44,12 +44,12 @@ class BCURRegistry {
     'eth-signature': ethSignature,
     'eth-sign-typed-data': ethSignTypedData,
   };
-  
+
   /// Get type name from type code
   static String? getTypeName(int type) {
     return typeNames[type];
   }
-  
+
   /// Get type code from type name
   static int? getTypeCode(String name) {
     return nameToType[name];
@@ -58,7 +58,6 @@ class BCURRegistry {
 
 /// Ethereum Sign Request structure
 class EthSignRequest {
-  
   EthSignRequest({
     required this.requestId,
     required this.signData,
@@ -73,21 +72,21 @@ class EthSignRequest {
   final int? chainId;
   final String? derivationPath;
   final Uint8List? address;
-  
+
   Map<int, dynamic> toCbor() {
     final cbor = <int, dynamic>{
       1: requestId, // request-id
       2: signData, // sign-data
       3: dataType, // data-type
     };
-    
+
     if (chainId != null) cbor[4] = chainId; // chain-id
     if (derivationPath != null) cbor[5] = derivationPath; // derivation-path
     if (address != null) cbor[6] = address; // address
-    
+
     return cbor;
   }
-  
+
   static EthSignRequest fromCbor(Map<int, dynamic> cbor) {
     return EthSignRequest(
       requestId: cbor[1] as Uint8List,
@@ -102,21 +101,20 @@ class EthSignRequest {
 
 /// Ethereum Signature structure
 class EthSignature {
-  
   EthSignature({
     required this.requestId,
     required this.signature,
   });
   final Uint8List requestId;
   final Uint8List signature;
-  
+
   Map<int, dynamic> toCbor() {
     return {
       1: requestId, // request-id
       2: signature, // signature
     };
   }
-  
+
   static EthSignature fromCbor(Map<int, dynamic> cbor) {
     return EthSignature(
       requestId: cbor[1] as Uint8List,

@@ -5,7 +5,7 @@ void main() {
   group('PairingUri', () {
     test('should generate valid pairing URI', () {
       final uri = PairingUri.generate();
-      
+
       expect(uri.topic, hasLength(64)); // 32 bytes hex = 64 chars
       expect(uri.symKey, hasLength(64)); // 32 bytes hex = 64 chars
       expect(uri.relay, equals('wss://relay.walletconnect.com'));
@@ -15,7 +15,7 @@ void main() {
     test('should generate pairing URI with expiry', () {
       final expiry = Duration(minutes: 5);
       final uri = PairingUri.generate(expiry: expiry);
-      
+
       expect(uri.expiryTimestamp, isNotNull);
       expect(uri.timeUntilExpiry, isNotNull);
       expect(uri.timeUntilExpiry!.inMinutes, lessThanOrEqualTo(5));
@@ -27,9 +27,9 @@ void main() {
         symKey: 'b' * 64,
         relay: 'wss://relay.walletconnect.com',
       );
-      
+
       final uriString = uri.toUri();
-      
+
       expect(uriString, startsWith('wc:'));
       expect(uriString, contains('@2?'));
       expect(uriString, contains('relay-protocol='));
@@ -40,7 +40,7 @@ void main() {
       final originalUri = PairingUri.generate();
       final uriString = originalUri.toUri();
       final parsedUri = PairingUri.parse(uriString);
-      
+
       expect(parsedUri.topic, equals(originalUri.topic));
       expect(parsedUri.symKey, equals(originalUri.symKey));
       expect(parsedUri.relay, equals(originalUri.relay));
@@ -57,9 +57,12 @@ void main() {
         topic: 'topic',
         symKey: 'symkey',
         relay: 'relay',
-        expiryTimestamp: DateTime.now().subtract(Duration(minutes: 1)).millisecondsSinceEpoch ~/ 1000,
+        expiryTimestamp: DateTime.now()
+                .subtract(Duration(minutes: 1))
+                .millisecondsSinceEpoch ~/
+            1000,
       );
-      
+
       expect(expiredUri.isExpired, isTrue);
       expect(expiredUri.timeUntilExpiry, equals(Duration.zero));
     });
@@ -70,7 +73,7 @@ void main() {
         symKey: 'symkey',
         relay: 'relay',
       );
-      
+
       expect(uri.isExpired, isFalse);
       expect(uri.timeUntilExpiry, isNull);
     });

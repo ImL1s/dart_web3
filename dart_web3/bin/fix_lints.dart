@@ -17,7 +17,8 @@ void main() async {
 
       // 1. Fix unnecessary_library_name
       // library web3_universal_xxx; -> library;
-      final libraryRegex = RegExp(r'^library web3_universal_\w+;', multiLine: true);
+      final libraryRegex =
+          RegExp(r'^library web3_universal_\w+;', multiLine: true);
       if (libraryRegex.hasMatch(newContent)) {
         newContent = newContent.replaceAll(libraryRegex, 'library;');
         fixedLibraryNames++;
@@ -28,7 +29,7 @@ void main() async {
       // Or just 'catch (e)' to 'catch (e)' is OK if it's on Object.
       // Actually, the lint wants 'on Exception' or 'on Object'.
       // For now, let's focus on library names and directives as they are safer.
-      
+
       if (newContent != content) {
         await entity.writeAsString(newContent);
         print('Fixed ${entity.path}');

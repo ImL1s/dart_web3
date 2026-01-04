@@ -29,7 +29,8 @@ void main() {
     test('decodes Error(string) revert', () {
       // Error(string) selector: 0x08c379a0
       final selector = Uint8List.fromList([0x08, 0xc3, 0x79, 0xa0]);
-      final errorMessage = AbiEncoder.encode([AbiString()], ['Insufficient balance']);
+      final errorMessage =
+          AbiEncoder.encode([AbiString()], ['Insufficient balance']);
       final revertData = BytesUtils.concat([selector, errorMessage]);
 
       final decoded = AbiDecoder.decodeError(revertData);
@@ -54,8 +55,10 @@ void main() {
       final names = ['from', 'to', 'value'];
 
       // Simulate Transfer event
-      final fromAddress = '0x0000000000000000000000001111111111111111111111111111111111111111';
-      final toAddress = '0x0000000000000000000000002222222222222222222222222222222222222222';
+      final fromAddress =
+          '0x0000000000000000000000001111111111111111111111111111111111111111';
+      final toAddress =
+          '0x0000000000000000000000002222222222222222222222222222222222222222';
       final topics = [
         '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef', // event signature
         fromAddress,

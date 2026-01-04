@@ -1,5 +1,5 @@
 /// Trezor hardware wallet integration for Dart Web3 SDK
-/// 
+///
 /// This library provides integration with Trezor hardware wallets
 /// using WebUSB communication protocol.
 library;

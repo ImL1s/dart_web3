@@ -7,11 +7,11 @@ import 'swap_types.dart';
 
 /// Swap transaction tracker
 class SwapTracker {
-
   SwapTracker(this.publicClient);
   final PublicClient publicClient;
   final Map<String, SwapTrackingInfo> _trackingMap = {};
-  final StreamController<SwapStatusUpdate> _statusController = StreamController.broadcast();
+  final StreamController<SwapStatusUpdate> _statusController =
+      StreamController.broadcast();
 
   /// Stream of swap status updates
   Stream<SwapStatusUpdate> get statusUpdates => _statusController.stream;
@@ -33,10 +33,10 @@ class SwapTracker {
     );
 
     _trackingMap[transactionHash] = trackingInfo;
-    
+
     // Start monitoring the transaction
     _monitorTransaction(transactionHash);
-    
+
     // Emit initial status
     _emitStatusUpdate(trackingInfo);
   }
@@ -70,21 +70,22 @@ class SwapTracker {
       TransactionReceipt? receipt;
       var attempts = 0;
       const maxAttempts = 60; // 5 minutes with 5-second intervals
-      
+
       while (receipt == null && attempts < maxAttempts) {
         await Future<void>.delayed(const Duration(seconds: 5));
-        
+
         try {
-          final receiptData = await publicClient.getTransactionReceipt(transactionHash);
+          final receiptData =
+              await publicClient.getTransactionReceipt(transactionHash);
           if (receiptData != null) {
             receipt = receiptData;
           }
         } on Exception catch (_) {
           // Transaction not yet mined, continue polling
         }
-        
+
         attempts++;
-        
+
         // Update tracking info with attempt count
         final updatedInfo = trackingInfo.copyWith(
           attempts: attempts,
@@ -134,8 +135,9 @@ class SwapTracker {
 
       if (success) {
         // Analyze the swap results
-        final swapResult = await _analyzeSwapResult(receipt, trackingInfo.quote);
-        
+        final swapResult =
+            await _analyzeSwapResult(receipt, trackingInfo.quote);
+
         updatedInfo = trackingInfo.copyWith(
           status: SwapStatus.confirmed,
           receipt: receipt,
@@ -146,7 +148,7 @@ class SwapTracker {
       } else {
         // Transaction failed
         final revertReason = await _getRevertReason(transactionHash);
-        
+
         updatedInfo = trackingInfo.copyWith(
           status: SwapStatus.failed,
           receipt: receipt,
@@ -176,10 +178,10 @@ class SwapTracker {
     try {
       // Analyze logs to extract actual swap amounts
       // This is a simplified implementation - in practice you'd decode specific DEX logs
-      
+
       BigInt? actualOutputAmount;
       double? actualPriceImpact;
-      
+
       // Look for Transfer events to determine actual amounts
       for (final _ in receipt.logs) {
         // This would involve decoding Transfer events and matching them to the swap
@@ -217,7 +219,7 @@ class SwapTracker {
       trackingInfo: trackingInfo,
       timestamp: DateTime.now(),
     );
-    
+
     _statusController.add(update);
   }
 
@@ -229,11 +231,12 @@ class SwapTracker {
 
 /// Swap tracking information
 class SwapTrackingInfo {
-
   const SwapTrackingInfo({
     required this.transactionHash,
     required this.quote,
-    required this.startTime, required this.status, this.userAddress,
+    required this.startTime,
+    required this.status,
+    this.userAddress,
     this.endTime,
     this.receipt,
     this.actualGasCost,
@@ -325,7 +328,6 @@ class SwapTrackingInfo {
 
 /// Swap result analysis
 class SwapResult {
-
   const SwapResult({
     required this.actualOutputAmount,
     required this.expectedOutputAmount,
@@ -349,7 +351,8 @@ class SwapResult {
   /// Percentage difference in output
   double get outputDifferencePercentage {
     if (expectedOutputAmount == BigInt.zero) return 0;
-    return (outputDifference.toDouble() / expectedOutputAmount.toDouble()) * 100;
+    return (outputDifference.toDouble() / expectedOutputAmount.toDouble()) *
+        100;
   }
 
   /// Whether the swap performed better than expected
@@ -358,7 +361,8 @@ class SwapResult {
   /// Actual slippage experienced
   double get actualSlippage {
     if (expectedOutputAmount == BigInt.zero) return 0;
-    return 1.0 - (actualOutputAmount.toDouble() / expectedOutputAmount.toDouble());
+    return 1.0 -
+        (actualOutputAmount.toDouble() / expectedOutputAmount.toDouble());
   }
 
   Map<String, dynamic> toJson() {
@@ -376,7 +380,6 @@ class SwapResult {
 
 /// Swap status update event
 class SwapStatusUpdate {
-
   const SwapStatusUpdate({
     required this.transactionHash,
     required this.status,

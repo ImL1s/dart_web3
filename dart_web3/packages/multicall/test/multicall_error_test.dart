@@ -14,8 +14,10 @@ void main() {
 
         expect(error.chainId, equals(999));
         expect(error.operation, equals('tryAggregate'));
-        expect(error.message, equals('tryAggregate is not supported on chain 999'));
-        expect(error.toString(), contains('tryAggregate is not supported on chain 999'));
+        expect(error.message,
+            equals('tryAggregate is not supported on chain 999'));
+        expect(error.toString(),
+            contains('tryAggregate is not supported on chain 999'));
       });
     });
 
@@ -42,7 +44,8 @@ void main() {
 
         expect(error.failures, equals(failures));
         expect(error.message, equals('2 call(s) failed in multicall batch'));
-        expect(error.toString(), contains('2 call(s) failed in multicall batch'));
+        expect(
+            error.toString(), contains('2 call(s) failed in multicall batch'));
       });
     });
 
@@ -57,9 +60,12 @@ void main() {
         );
 
         expect(failure.index, equals(1));
-        expect(failure.target, equals('0x1234567890123456789012345678901234567890'));
-        expect(failure.callData, equals(Uint8List.fromList([0x70, 0xa0, 0x82, 0x31])));
-        expect(failure.errorData, equals(Uint8List.fromList([0x08, 0xc3, 0x79, 0xa0])));
+        expect(failure.target,
+            equals('0x1234567890123456789012345678901234567890'));
+        expect(failure.callData,
+            equals(Uint8List.fromList([0x70, 0xa0, 0x82, 0x31])));
+        expect(failure.errorData,
+            equals(Uint8List.fromList([0x08, 0xc3, 0x79, 0xa0])));
         expect(failure.errorMessage, equals('Execution reverted'));
       });
 
@@ -124,9 +130,11 @@ void main() {
         );
 
         expect(error.chainId, equals(1337));
-        expect(error.contractAddress, equals('0x1234567890123456789012345678901234567890'));
+        expect(error.contractAddress,
+            equals('0x1234567890123456789012345678901234567890'));
         expect(error.message, contains('Multicall contract not found'));
-        expect(error.message, contains('0x1234567890123456789012345678901234567890'));
+        expect(error.message,
+            contains('0x1234567890123456789012345678901234567890'));
         expect(error.message, contains('chain 1337'));
       });
     });

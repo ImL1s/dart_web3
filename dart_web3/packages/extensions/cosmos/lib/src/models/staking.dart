@@ -1,4 +1,3 @@
-
 import '../encoding/protobuf.dart';
 import 'transaction.dart'; // for Coin, GoogleAny
 

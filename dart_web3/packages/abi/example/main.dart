@@ -6,7 +6,7 @@ void main() {
   final abi = 'transfer(address,uint256)';
   // Define types
   final types = [AbiUint(256), AbiString()];
-  
+
   // Define values
   final values = [BigInt.from(123), 'Hello World'];
 
@@ -22,10 +22,9 @@ void main() {
   // Parse parameter types from signature
   final paramsStr = abi.substring(abi.indexOf('(') + 1, abi.lastIndexOf(')'));
   final tuple = AbiParser.parseType('($paramsStr)') as AbiTuple;
-  
+
   // Skip 4-byte selector when decoding arguments
   final decodedParams = AbiDecoder.decode(tuple.components, encoded.sublist(4));
   print('Decoded Address: ${decodedParams[0]}');
   print('Decoded Amount: ${decodedParams[1]}');
 }
-

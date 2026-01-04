@@ -13,7 +13,6 @@ import 'siwe_auth.dart';
 
 /// Main client for Reown/WalletConnect v2 integration.
 class ReownClient {
-
   ReownClient({
     required this.projectId,
     this.relayUrl = 'wss://relay.walletconnect.com',
@@ -24,14 +23,15 @@ class ReownClient {
   final String projectId;
   final String relayUrl;
   final ReconnectionConfig? reconnectionConfig;
-  
+
   late final RelayClient _relayClient;
   late final ConnectionManager _connectionManager;
   late final SessionManager _sessionManager;
   late final SiweAuth _siweAuth;
-  
-  final StreamController<ReownEvent> _eventController = StreamController.broadcast();
-  
+
+  final StreamController<ReownEvent> _eventController =
+      StreamController.broadcast();
+
   late StreamSubscription<SessionEvent> _sessionSubscription;
   late StreamSubscription<ConnectionState> _connectionSubscription;
 
@@ -56,19 +56,20 @@ class ReownClient {
       relayUrl: relayUrl,
       projectId: projectId,
     );
-    
+
     _connectionManager = ConnectionManager(
       relayClient: _relayClient,
       config: reconnectionConfig,
     );
-    
+
     _sessionManager = SessionManager(_relayClient);
-    
+
     _siweAuth = SiweAuth(sessionManager: _sessionManager);
-    
+
     // Subscribe to events
     _sessionSubscription = _sessionManager.events.listen(_handleSessionEvent);
-    _connectionSubscription = _connectionManager.stateChanges.listen(_handleConnectionEvent);
+    _connectionSubscription =
+        _connectionManager.stateChanges.listen(_handleConnectionEvent);
   }
 
   /// Connects to the Reown relay.
@@ -248,13 +249,16 @@ class ReownClient {
         _eventController.add(ReownEvent.sessionProposalSent(event.proposal!));
         break;
       case SessionEventType.proposalReceived:
-        _eventController.add(ReownEvent.sessionProposalReceived(event.proposal!));
+        _eventController
+            .add(ReownEvent.sessionProposalReceived(event.proposal!));
         break;
       case SessionEventType.proposalRejected:
-        _eventController.add(ReownEvent.sessionProposalRejected(
-          event.proposalId!,
-          event.reason,
-        ),);
+        _eventController.add(
+          ReownEvent.sessionProposalRejected(
+            event.proposalId!,
+            event.reason,
+          ),
+        );
         break;
       case SessionEventType.established:
         _eventController.add(ReownEvent.sessionEstablished(event.session!));
@@ -266,16 +270,20 @@ class ReownClient {
         _eventController.add(ReownEvent.sessionExtended(event.session!));
         break;
       case SessionEventType.disconnected:
-        _eventController.add(ReownEvent.sessionDisconnected(
-          event.session!,
-          event.reason,
-        ),);
+        _eventController.add(
+          ReownEvent.sessionDisconnected(
+            event.session!,
+            event.reason,
+          ),
+        );
         break;
       case SessionEventType.request:
-        _eventController.add(ReownEvent.sessionRequest(
-          event.session!,
-          event.request!,
-        ),);
+        _eventController.add(
+          ReownEvent.sessionRequest(
+            event.session!,
+            event.request!,
+          ),
+        );
         break;
     }
   }
@@ -298,8 +306,8 @@ class ReownClient {
 
 /// Reown client events.
 class ReownEvent {
-
-  ReownEvent._(this.type, {
+  ReownEvent._(
+    this.type, {
     this.proposal,
     this.session,
     this.proposalId,
@@ -314,8 +322,10 @@ class ReownEvent {
   factory ReownEvent.sessionProposalReceived(SessionProposal proposal) =>
       ReownEvent._(ReownEventType.sessionProposalReceived, proposal: proposal);
 
-  factory ReownEvent.sessionProposalRejected(String proposalId, String? reason) =>
-      ReownEvent._(ReownEventType.sessionProposalRejected, proposalId: proposalId, reason: reason);
+  factory ReownEvent.sessionProposalRejected(
+          String proposalId, String? reason) =>
+      ReownEvent._(ReownEventType.sessionProposalRejected,
+          proposalId: proposalId, reason: reason);
 
   factory ReownEvent.sessionEstablished(Session session) =>
       ReownEvent._(ReownEventType.sessionEstablished, session: session);
@@ -327,13 +337,17 @@ class ReownEvent {
       ReownEvent._(ReownEventType.sessionExtended, session: session);
 
   factory ReownEvent.sessionDisconnected(Session session, String? reason) =>
-      ReownEvent._(ReownEventType.sessionDisconnected, session: session, reason: reason);
+      ReownEvent._(ReownEventType.sessionDisconnected,
+          session: session, reason: reason);
 
-  factory ReownEvent.sessionRequest(Session session, Map<String, dynamic> request) =>
-      ReownEvent._(ReownEventType.sessionRequest, session: session, request: request);
+  factory ReownEvent.sessionRequest(
+          Session session, Map<String, dynamic> request) =>
+      ReownEvent._(ReownEventType.sessionRequest,
+          session: session, request: request);
 
   factory ReownEvent.connectionStateChanged(ConnectionState state) =>
-      ReownEvent._(ReownEventType.connectionStateChanged, connectionState: state);
+      ReownEvent._(ReownEventType.connectionStateChanged,
+          connectionState: state);
   final ReownEventType type;
   final SessionProposal? proposal;
   final Session? session;
@@ -368,7 +382,8 @@ class ReownClientFactory {
     return ReownClient(
       projectId: projectId,
       relayUrl: relayUrl ?? 'wss://relay.walletconnect.com',
-      reconnectionConfig: reconnectionConfig ?? ReconnectionConfig.defaultConfig(),
+      reconnectionConfig:
+          reconnectionConfig ?? ReconnectionConfig.defaultConfig(),
     );
   }
 

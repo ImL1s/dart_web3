@@ -14,7 +14,8 @@ class Psbt {
   });
 
   /// Magic bytes for PSBT (hex: 70736274ff).
-  static final Uint8List magic = Uint8List.fromList([0x70, 0x73, 0x62, 0x74, 0xff]);
+  static final Uint8List magic =
+      Uint8List.fromList([0x70, 0x73, 0x62, 0x74, 0xff]);
 
   /// The global unsigned transaction.
   final BitcoinTransaction unsignedTx;
@@ -35,23 +36,23 @@ class Psbt {
     }
 
     var offset = 5;
-    
+
     // 1. Read Global Map
     final globalMap = _readMap(bytes, offset);
     offset = globalMap.endOffset;
-    
+
     // Parse global transaction (Key 0x00)
     final txBytes = globalMap.data['00'];
     if (txBytes == null) {
       throw FormatException('PSBT missing global transaction');
     }
-    
-    final unsignedTx = BitcoinTransaction.fromBytes(txBytes); 
+
+    final unsignedTx = BitcoinTransaction.fromBytes(txBytes);
 
     // 2. Read Inputs/Outputs
     // The number of inputs/outputs must match the unsignedTx
     // TODO: Implement proper reading loop based on tx input/output count
-    
+
     return Psbt(unsignedTx: unsignedTx);
   }
 }
@@ -143,13 +144,16 @@ _VarIntResult _readVarInt(Uint8List bytes, int offset) {
   if (first < 0xfd) {
     return _VarIntResult(first, offset + 1);
   } else if (first == 0xfd) {
-    final val = ByteData.sublistView(bytes, offset + 1, offset + 3).getUint16(0, Endian.little);
+    final val = ByteData.sublistView(bytes, offset + 1, offset + 3)
+        .getUint16(0, Endian.little);
     return _VarIntResult(val, offset + 3);
   } else if (first == 0xfe) {
-    final val = ByteData.sublistView(bytes, offset + 1, offset + 5).getUint32(0, Endian.little);
+    final val = ByteData.sublistView(bytes, offset + 1, offset + 5)
+        .getUint32(0, Endian.little);
     return _VarIntResult(val, offset + 5);
   } else {
-    final val = ByteData.sublistView(bytes, offset + 1, offset + 9).getUint64(0, Endian.little);
+    final val = ByteData.sublistView(bytes, offset + 1, offset + 9)
+        .getUint64(0, Endian.little);
     return _VarIntResult(val, offset + 9);
   }
 }

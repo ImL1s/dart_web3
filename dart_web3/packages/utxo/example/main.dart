@@ -7,9 +7,10 @@ void main() {
   print('--- Web3 Universal UTXO Example ---');
 
   // 1. Bitcoin Address Generation (P2WPKH)
-  final pk = Uint8List.fromList(List.generate(33, (i) => i + 1)); // Dummy public key
+  final pk =
+      Uint8List.fromList(List.generate(33, (i) => i + 1)); // Dummy public key
   final pkHash = Ripemd160.hash(Sha256.hash(pk));
-  
+
   final address = P2WPKHAddress(pkHash, NetworkType.bitcoinMainnet);
   print('Derived SegWit Address: ${address.address}');
 

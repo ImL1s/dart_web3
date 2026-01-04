@@ -1,5 +1,5 @@
 /// Keystone hardware wallet integration for Dart Web3 SDK
-/// 
+///
 /// This library provides integration with Keystone hardware wallets
 /// using QR code communication via BC-UR protocol.
 library;

@@ -11,7 +11,7 @@ void main() {
         events: ['chainChanged', 'accountsChanged'],
         accounts: ['eip155:1:0x123'],
       );
-      
+
       expect(config.namespace, equals('eip155'));
       expect(config.chains, hasLength(2));
       expect(config.methods, hasLength(2));
@@ -27,10 +27,10 @@ void main() {
         events: ['chainChanged'],
         accounts: ['eip155:1:0x123'],
       );
-      
+
       final json = config.toJson();
       final restored = NamespaceConfig.fromJson('eip155', json);
-      
+
       expect(restored.namespace, equals(config.namespace));
       expect(restored.chains, equals(config.chains));
       expect(restored.methods, equals(config.methods));
@@ -45,7 +45,7 @@ void main() {
         methods: [],
         events: [],
       );
-      
+
       expect(config.supportsChain('1'), isTrue);
       expect(config.supportsChain('137'), isTrue);
       expect(config.supportsChain('56'), isFalse);
@@ -58,7 +58,7 @@ void main() {
         methods: ['eth_sendTransaction', 'personal_sign'],
         events: [],
       );
-      
+
       expect(config.supportsMethod('eth_sendTransaction'), isTrue);
       expect(config.supportsMethod('personal_sign'), isTrue);
       expect(config.supportsMethod('eth_signTypedData'), isFalse);
@@ -72,11 +72,11 @@ void main() {
         events: [],
         accounts: ['eip155:1:0x123'],
       );
-      
+
       final withNewAccount = config.addAccount('eip155:1:0x456');
       expect(withNewAccount.accounts, hasLength(2));
       expect(withNewAccount.accounts, contains('eip155:1:0x456'));
-      
+
       final withRemovedAccount = withNewAccount.removeAccount('eip155:1:0x123');
       expect(withRemovedAccount.accounts, hasLength(1));
       expect(withRemovedAccount.accounts, isNot(contains('eip155:1:0x123')));
@@ -86,7 +86,7 @@ void main() {
   group('NamespaceConfigs', () {
     test('should create Ethereum namespace config', () {
       final config = NamespaceConfigs.ethereum();
-      
+
       expect(config.namespace, equals('eip155'));
       expect(config.chains, contains('eip155:1'));
       expect(config.methods, contains('eth_sendTransaction'));
@@ -98,7 +98,7 @@ void main() {
         includePolygon: true,
         includeSolana: true,
       );
-      
+
       expect(configs, hasLength(3));
       expect(configs.any((c) => c.namespace == 'eip155'), isTrue);
       expect(configs.any((c) => c.namespace == 'solana'), isTrue);
@@ -108,7 +108,7 @@ void main() {
       final config = NamespaceConfigs.customEvm(
         chainIds: ['1', '137', '56'],
       );
-      
+
       expect(config.namespace, equals('eip155'));
       expect(config.chains, hasLength(3));
       expect(config.chains, contains('eip155:1'));
@@ -120,14 +120,15 @@ void main() {
   group('CaipUtils', () {
     test('should parse chain ID correctly', () {
       final (namespace, reference) = CaipUtils.parseChainId('eip155:1');
-      
+
       expect(namespace, equals('eip155'));
       expect(reference, equals('1'));
     });
 
     test('should parse account ID correctly', () {
-      final (namespace, reference, address) = CaipUtils.parseAccountId('eip155:1:0x123');
-      
+      final (namespace, reference, address) =
+          CaipUtils.parseAccountId('eip155:1:0x123');
+
       expect(namespace, equals('eip155'));
       expect(reference, equals('1'));
       expect(address, equals('0x123'));
@@ -156,7 +157,7 @@ void main() {
     test('should validate CAIP formats', () {
       expect(CaipUtils.isValidChainId('eip155:1'), isTrue);
       expect(CaipUtils.isValidChainId('invalid'), isFalse);
-      
+
       expect(CaipUtils.isValidAccountId('eip155:1:0x123'), isTrue);
       expect(CaipUtils.isValidAccountId('invalid'), isFalse);
     });

@@ -23,18 +23,23 @@ void main() {
 
     test('getFunctionSelector returns correct selector', () {
       // transfer(address,uint256) selector is 0xa9059cbb
-      final selector = AbiEncoder.getFunctionSelector('transfer(address,uint256)');
-      
+      final selector =
+          AbiEncoder.getFunctionSelector('transfer(address,uint256)');
+
       expect(selector.length, equals(4));
       expect(HexUtils.encode(selector), equals('0xa9059cbb'));
     });
 
     test('getEventTopic returns correct topic', () {
       // Transfer(address,address,uint256) topic
-      final topic = AbiEncoder.getEventTopic('Transfer(address,address,uint256)');
-      
+      final topic =
+          AbiEncoder.getEventTopic('Transfer(address,address,uint256)');
+
       expect(topic.length, equals(32));
-      expect(HexUtils.encode(topic), equals('0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'));
+      expect(
+          HexUtils.encode(topic),
+          equals(
+              '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'));
     });
 
     test('encodePacked works correctly', () {

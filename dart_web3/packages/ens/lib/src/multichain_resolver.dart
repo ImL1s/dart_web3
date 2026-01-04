@@ -6,13 +6,13 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Multi-chain address resolver implementing ENSIP-9
 class MultichainResolver {
-
   MultichainResolver({
     required PublicClient client,
     String? registryAddress,
     Duration cacheTtl = const Duration(minutes: 5),
   })  : _client = client,
-        _registryAddress = registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+        _registryAddress =
+            registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
         _cacheTtl = cacheTtl;
   final PublicClient _client;
   final String _registryAddress;
@@ -33,24 +33,36 @@ class MultichainResolver {
     }
 
     try {
-      // Get resolver address
-      final resolverAddress = await _getResolver(name);
-      if (resolverAddress == null || resolverAddress == '0x0000000000000000000000000000000000000000') {
+      // Check for cached resolver address first
+      final resolverCacheKey = 'resolver_$name';
+      var resolverAddress = _getCached(resolverCacheKey) as String?;
+
+      if (resolverAddress == null) {
+        // Get resolver address from registry
+        resolverAddress = await _getResolver(name);
+        if (resolverAddress != null) {
+          _setCache(resolverCacheKey, resolverAddress);
+        }
+      }
+
+      if (resolverAddress == null ||
+          resolverAddress == '0x0000000000000000000000000000000000000000') {
         return null;
       }
 
       // Query multi-chain address
-      final addressBytes = await _getAddressFromResolver(resolverAddress, name, coinType);
+      final addressBytes =
+          await _getAddressFromResolver(resolverAddress, name, coinType);
       if (addressBytes == null || addressBytes.isEmpty) {
         return null;
       }
 
       // Format address based on coin type
       final formattedAddress = _formatAddress(addressBytes, coinType);
-      
+
       // Cache result
       _setCache(cacheKey, formattedAddress);
-      
+
       return formattedAddress;
     } on Exception catch (_) {
       return null;
@@ -85,7 +97,7 @@ class MultichainResolver {
   /// Get all supported addresses for a name
   Future<Map<String, String?>> getAllAddresses(String name) async {
     final results = <String, String?>{};
-    
+
     final supportedCoins = [
       CoinType.bitcoin,
       CoinType.litecoin,
@@ -98,14 +110,14 @@ class MultichainResolver {
       final coinName = _getCoinName(coinType);
       results[coinName] = await resolveAddress(name, coinType);
     }
-    
+
     return results;
   }
 
   /// Get resolver address from ENS registry
   Future<String?> _getResolver(String name) async {
     final nameHash = _namehash(name);
-    
+
     final registryContract = Contract(
       address: _registryAddress,
       abi: _ensRegistryAbi,
@@ -117,9 +129,10 @@ class MultichainResolver {
   }
 
   /// Get address bytes from resolver contract
-  Future<Uint8List?> _getAddressFromResolver(String resolverAddress, String name, int coinType) async {
+  Future<Uint8List?> _getAddressFromResolver(
+      String resolverAddress, String name, int coinType) async {
     final nameHash = _namehash(name);
-    
+
     final resolverContract = Contract(
       address: resolverAddress,
       abi: _ensResolverAbi,
@@ -127,9 +140,10 @@ class MultichainResolver {
     );
 
     try {
-      final result = await resolverContract.read('addr', [nameHash, BigInt.from(coinType)]);
+      final result = await resolverContract
+          .read('addr', [nameHash, BigInt.from(coinType)]);
       final addressBytes = result[0] as Uint8List?;
-      
+
       return addressBytes;
     } on Exception catch (_) {
       return null;
@@ -145,17 +159,17 @@ class MultichainResolver {
         // Ethereum addresses are 20 bytes
         if (addressBytes.length != 20) return null;
         return '0x${addressBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';
-      
+
       case CoinType.bitcoin:
       case CoinType.litecoin:
       case CoinType.dogecoin:
         // Bitcoin-like addresses need base58 encoding
         return _encodeBase58Check(addressBytes, coinType);
-      
+
       case CoinType.monero:
         // Monero addresses use base58 encoding
         return _encodeMoneroAddress(addressBytes);
-      
+
       default:
         // For unknown coin types, return hex representation
         return '0x${addressBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}';
@@ -215,14 +229,14 @@ class MultichainResolver {
   /// Validate ENS name format
   bool _isValidENSName(String name) {
     if (name.isEmpty) return false;
-    
+
     // Must end with .eth or other valid TLD
     if (!name.contains('.')) return false;
-    
+
     // Check for invalid characters
     final validPattern = RegExp(r'^[a-z0-9\-\.]+$');
     if (!validPattern.hasMatch(name.toLowerCase())) return false;
-    
+
     // Check each label
     final labels = name.split('.');
     for (final label in labels) {
@@ -230,7 +244,7 @@ class MultichainResolver {
       if (label.startsWith('-') || label.endsWith('-')) return false;
       if (label.length > 63) return false;
     }
-    
+
     return true;
   }
 
@@ -238,13 +252,13 @@ class MultichainResolver {
   dynamic _getCached(String key) {
     final entry = _cache[key];
     if (entry == null) return null;
-    
+
     final timestamp = entry['timestamp'] as DateTime;
     if (DateTime.now().difference(timestamp) > _cacheTtl) {
       _cache.remove(key);
       return null;
     }
-    
+
     return entry['value'];
   }
 

@@ -15,7 +15,7 @@ void main() {
     setUp(() {
       builder = MulticallBuilder();
       contract = MockContract();
-      
+
       final publicClient = MockPublicClient();
       multicall = Multicall(
         publicClient: publicClient,
@@ -61,21 +61,22 @@ void main() {
     group('addRawCall', () {
       test('should add raw call to builder', () {
         final callData = Uint8List.fromList([0x70, 0xa0, 0x82, 0x31]);
-        
+
         builder.addRawCall(
           target: '0x1234567890123456789012345678901234567890',
           callData: callData,
         );
 
         expect(builder.length, equals(1));
-        expect(builder.calls[0].target, equals('0x1234567890123456789012345678901234567890'));
+        expect(builder.calls[0].target,
+            equals('0x1234567890123456789012345678901234567890'));
         expect(builder.calls[0].callData, equals(callData));
         expect(builder.calls[0].allowFailure, isFalse);
       });
 
       test('should add raw call with allowFailure flag', () {
         final callData = Uint8List.fromList([0x70, 0xa0, 0x82, 0x31]);
-        
+
         builder.addRawCall(
           target: '0x1234567890123456789012345678901234567890',
           callData: callData,
@@ -101,8 +102,10 @@ void main() {
         builder.addAll(otherBuilder);
 
         expect(builder.length, equals(2));
-        expect(builder.calls[0].target, equals('0x1234567890123456789012345678901234567890'));
-        expect(builder.calls[1].target, equals('0x2345678901234567890123456789012345678901'));
+        expect(builder.calls[0].target,
+            equals('0x1234567890123456789012345678901234567890'));
+        expect(builder.calls[1].target,
+            equals('0x2345678901234567890123456789012345678901'));
       });
     });
 
@@ -131,11 +134,13 @@ void main() {
 
         // Mock the multicall result
         final publicClient = multicall.publicClient as MockPublicClient;
-        publicClient.mockCall(Uint8List.fromList([
-          ...List.filled(31, 0), 1, // Array length (1 result)
-          ...List.filled(31, 0), 32, // Result data length
-          ...List.filled(32, 0), // Result data
-        ]),);
+        publicClient.mockCall(
+          Uint8List.fromList([
+            ...List.filled(31, 0), 1, // Array length (1 result)
+            ...List.filled(31, 0), 32, // Result data length
+            ...List.filled(32, 0), // Result data
+          ]),
+        );
 
         final results = await builder.execute(multicall);
 
@@ -159,12 +164,14 @@ void main() {
 
         // Mock the tryAggregate result
         final publicClient = multicall.publicClient as MockPublicClient;
-        publicClient.mockCall(Uint8List.fromList([
-          ...List.filled(31, 0), 1, // Array length (1 result)
-          ...List.filled(31, 0), 0, // Success = false
-          ...List.filled(31, 0), 4, // Error data length
-          0x08, 0xc3, 0x79, 0xa0, // Error selector
-        ]),);
+        publicClient.mockCall(
+          Uint8List.fromList([
+            ...List.filled(31, 0), 1, // Array length (1 result)
+            ...List.filled(31, 0), 0, // Success = false
+            ...List.filled(31, 0), 4, // Error data length
+            0x08, 0xc3, 0x79, 0xa0, // Error selector
+          ]),
+        );
 
         final results = await builder.tryExecute(multicall);
 
@@ -180,12 +187,14 @@ void main() {
 
         // Mock successful result
         final publicClient = multicall.publicClient as MockPublicClient;
-        publicClient.mockCall(Uint8List.fromList([
-          ...List.filled(31, 0), 1, // Array length (1 result)
-          ...List.filled(31, 0), 1, // Success = true
-          ...List.filled(31, 0), 32, // Result data length
-          ...List.filled(32, 0), // Result data
-        ]),);
+        publicClient.mockCall(
+          Uint8List.fromList([
+            ...List.filled(31, 0), 1, // Array length (1 result)
+            ...List.filled(31, 0), 1, // Success = true
+            ...List.filled(31, 0), 32, // Result data length
+            ...List.filled(32, 0), // Result data
+          ]),
+        );
 
         await builder.tryExecute(multicall, requireSuccess: true);
 
@@ -204,20 +213,22 @@ void main() {
 
         // Mock aggregateWithBlock result
         final publicClient = multicall.publicClient as MockPublicClient;
-        publicClient.mockCall(Uint8List.fromList([
-          // Block number (1234 = 0x4d2)
-          ...List.filled(30, 0), 0x04, 0xd2, // 1234 in big-endian
-          // Block hash (32 bytes)
-          ...List.filled(32, 0xab),
-          // Results array length (1)
-          ...List.filled(31, 0), 1,
-          // First result: success = true
-          ...List.filled(31, 0), 1,
-          // First result data length
-          ...List.filled(31, 0), 32,
-          // First result data
-          ...List.filled(32, 0),
-        ]),);
+        publicClient.mockCall(
+          Uint8List.fromList([
+            // Block number (1234 = 0x4d2)
+            ...List.filled(30, 0), 0x04, 0xd2, // 1234 in big-endian
+            // Block hash (32 bytes)
+            ...List.filled(32, 0xab),
+            // Results array length (1)
+            ...List.filled(31, 0), 1,
+            // First result: success = true
+            ...List.filled(31, 0), 1,
+            // First result data length
+            ...List.filled(31, 0), 32,
+            // First result data
+            ...List.filled(32, 0),
+          ]),
+        );
 
         final result = await builder.executeWithBlock(multicall);
 
@@ -228,7 +239,7 @@ void main() {
 
       test('should return empty result for empty builder', () async {
         final result = await builder.executeWithBlock(multicall);
-        
+
         expect(result.blockNumber, equals(BigInt.zero));
         expect(result.blockHash, equals('0x'));
         expect(result.results, isEmpty);
@@ -279,10 +290,15 @@ void main() {
         );
 
         final calls = builder.calls;
-        expect(() => calls.add(Call(
-          target: '0x2345678901234567890123456789012345678901',
-          callData: Uint8List(4),
-        ),), throwsUnsupportedError,);
+        expect(
+          () => calls.add(
+            Call(
+              target: '0x2345678901234567890123456789012345678901',
+              callData: Uint8List(4),
+            ),
+          ),
+          throwsUnsupportedError,
+        );
       });
     });
   });
@@ -306,7 +322,7 @@ void main() {
         expect(builder.calls[1].target, equals(tokens[1]));
         expect(builder.calls[0].allowFailure, isTrue);
         expect(builder.calls[1].allowFailure, isTrue);
-        
+
         // Check that call data starts with balanceOf selector (0x70a08231)
         expect(builder.calls[0].callData[0], equals(0x70));
         expect(builder.calls[0].callData[1], equals(0xa0));
@@ -335,7 +351,7 @@ void main() {
         expect(builder.calls[1].target, equals(tokens[1]));
         expect(builder.calls[0].allowFailure, isTrue);
         expect(builder.calls[1].allowFailure, isTrue);
-        
+
         // Check that call data starts with allowance selector (0xdd62ed3e)
         expect(builder.calls[0].callData[0], equals(0xdd));
         expect(builder.calls[0].callData[1], equals(0x62));

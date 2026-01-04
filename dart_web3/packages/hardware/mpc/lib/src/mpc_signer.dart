@@ -11,26 +11,26 @@ import 'mpc_types.dart';
 import 'signing_coordinator.dart';
 
 /// MPC (Multi-Party Computation) signer implementation.
-/// 
+///
 /// Supports threshold signature schemes (t-of-n) where t parties out of n total
 /// parties must collaborate to create a signature.
 class MpcSignerImpl extends MpcSigner {
-
   MpcSignerImpl({
     required this.keyShare,
     required this.coordinator,
     required this.keyGeneration,
     required this.keyRefresh,
   });
+
   /// The key share for this party.
   final KeyShare keyShare;
-  
+
   /// The signing coordinator for managing multi-party operations.
   final SigningCoordinator coordinator;
-  
+
   /// The key generation manager.
   final KeyGeneration keyGeneration;
-  
+
   /// The key refresh manager.
   final KeyRefresh keyRefresh;
 
@@ -49,14 +49,17 @@ class MpcSignerImpl extends MpcSigner {
     switch (keyShare.curveType) {
       case CurveType.secp256k1:
         // For secp256k1, derive address from public key
-        final publicKeyHash = Keccak256.hash(keyShare.publicKey.sublist(1)); // Remove 0x04 prefix
+        final publicKeyHash =
+            Keccak256.hash(keyShare.publicKey.sublist(1)); // Remove 0x04 prefix
         final addressBytes = publicKeyHash.sublist(12); // Take last 20 bytes
         return EthereumAddress(addressBytes);
       case CurveType.ed25519:
         // For ed25519, use the public key directly as address (Solana style)
-        return EthereumAddress(keyShare.publicKey.length >= 20 
-            ? keyShare.publicKey.sublist(0, 20) 
-            : keyShare.publicKey,);
+        return EthereumAddress(
+          keyShare.publicKey.length >= 20
+              ? keyShare.publicKey.sublist(0, 20)
+              : keyShare.publicKey,
+        );
     }
   }
 
@@ -65,14 +68,14 @@ class MpcSignerImpl extends MpcSigner {
     // Encode the transaction for signing
     final encodedTx = _encodeTransaction(transaction);
     final messageHash = Keccak256.hash(encodedTx);
-    
+
     // Start MPC signing session
     final session = await startSigning(messageHash);
-    
+
     try {
       // Wait for signature completion
       final signature = await session.waitForCompletion();
-      
+
       // For transactions, we need to encode the signature with the transaction
       return _encodeSignedTransaction(transaction, signature);
     } catch (e) {
@@ -89,10 +92,10 @@ class MpcSignerImpl extends MpcSigner {
     final prefixBytes = Uint8List.fromList(prefix.codeUnits);
     final fullMessage = Uint8List.fromList([...prefixBytes, ...messageBytes]);
     final messageHash = Keccak256.hash(fullMessage);
-    
+
     // Start MPC signing session
     final session = await startSigning(messageHash);
-    
+
     try {
       return await session.waitForCompletion();
     } catch (e) {
@@ -105,10 +108,10 @@ class MpcSignerImpl extends MpcSigner {
   Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     // Get the EIP-712 hash
     final messageHash = typedData.hash();
-    
+
     // Start MPC signing session
     final session = await startSigning(messageHash);
-    
+
     try {
       return await session.waitForCompletion();
     } catch (e) {
@@ -121,7 +124,7 @@ class MpcSignerImpl extends MpcSigner {
   Future<Uint8List> signHash(Uint8List hash) async {
     // Start MPC signing session
     final session = await startSigning(hash);
-    
+
     try {
       return await session.waitForCompletion();
     } catch (e) {
@@ -135,10 +138,10 @@ class MpcSignerImpl extends MpcSigner {
     // Encode authorization for EIP-7702
     final encoded = _encodeAuthorization(authorization);
     final messageHash = Keccak256.hash(encoded);
-    
+
     // Start MPC signing session
     final session = await startSigning(messageHash);
-    
+
     try {
       return await session.waitForCompletion();
     } catch (e) {
@@ -166,16 +169,17 @@ class MpcSignerImpl extends MpcSigner {
     final request = MpcSigningRequest(
       messageHash: messageHash,
       curveType: keyShare.curveType,
-      keyShareId: '${keyShare.partyId}_${keyShare.createdAt.millisecondsSinceEpoch}',
+      keyShareId:
+          '${keyShare.partyId}_${keyShare.createdAt.millisecondsSinceEpoch}',
     );
-    
+
     return coordinator.startSigningSession(request, keyShare);
   }
 
   /// Encodes a transaction for signing.
   Uint8List _encodeTransaction(TransactionRequest transaction) {
     final List<dynamic> txData;
-    
+
     switch (transaction.type) {
       case TransactionType.legacy:
         txData = [
@@ -187,7 +191,7 @@ class MpcSignerImpl extends MpcSigner {
           transaction.data ?? Uint8List(0),
         ];
         break;
-        
+
       case TransactionType.eip1559:
         txData = [
           transaction.chainId ?? 1,
@@ -198,13 +202,18 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => <dynamic>[
-            entry.address,
-            entry.storageKeys,
-          ],).toList() ?? <List<dynamic>>[],
+          transaction.accessList
+                  ?.map(
+                    (entry) => <dynamic>[
+                      entry.address,
+                      entry.storageKeys,
+                    ],
+                  )
+                  .toList() ??
+              <List<dynamic>>[],
         ];
         break;
-        
+
       case TransactionType.eip2930:
         txData = [
           transaction.chainId ?? 1,
@@ -214,13 +223,18 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => <dynamic>[
-            entry.address,
-            entry.storageKeys,
-          ],).toList() ?? <List<dynamic>>[],
+          transaction.accessList
+                  ?.map(
+                    (entry) => <dynamic>[
+                      entry.address,
+                      entry.storageKeys,
+                    ],
+                  )
+                  .toList() ??
+              <List<dynamic>>[],
         ];
         break;
-        
+
       case TransactionType.eip4844:
         txData = [
           transaction.chainId ?? 1,
@@ -231,15 +245,20 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => <dynamic>[
-            entry.address,
-            entry.storageKeys,
-          ],).toList() ?? <List<dynamic>>[],
+          transaction.accessList
+                  ?.map(
+                    (entry) => <dynamic>[
+                      entry.address,
+                      entry.storageKeys,
+                    ],
+                  )
+                  .toList() ??
+              <List<dynamic>>[],
           transaction.maxFeePerBlobGas ?? BigInt.zero,
           transaction.blobVersionedHashes ?? <String>[],
         ];
         break;
-        
+
       case TransactionType.eip7702:
         txData = [
           transaction.chainId ?? 1,
@@ -250,44 +269,55 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => <dynamic>[
-            entry.address,
-            entry.storageKeys,
-          ],).toList() ?? <List<dynamic>>[],
-          transaction.authorizationList?.map((auth) => <dynamic>[
-            auth.chainId,
-            auth.address,
-            auth.nonce,
-            auth.yParity,
-            auth.r,
-            auth.s,
-          ],).toList() ?? <List<dynamic>>[],
+          transaction.accessList
+                  ?.map(
+                    (entry) => <dynamic>[
+                      entry.address,
+                      entry.storageKeys,
+                    ],
+                  )
+                  .toList() ??
+              <List<dynamic>>[],
+          transaction.authorizationList
+                  ?.map(
+                    (auth) => <dynamic>[
+                      auth.chainId,
+                      auth.address,
+                      auth.nonce,
+                      auth.yParity,
+                      auth.r,
+                      auth.s,
+                    ],
+                  )
+                  .toList() ??
+              <List<dynamic>>[],
         ];
         break;
     }
-    
+
     return RLP.encode(txData);
   }
 
   /// Encodes a signed transaction with the signature.
-  Uint8List _encodeSignedTransaction(TransactionRequest transaction, Uint8List signature) {
+  Uint8List _encodeSignedTransaction(
+      TransactionRequest transaction, Uint8List signature) {
     // Parse signature (assuming 65-byte ECDSA signature: r(32) + s(32) + v(1))
     if (signature.length != 65) {
       throw ArgumentError('Invalid signature length: ${signature.length}');
     }
-    
+
     final r = signature.sublist(0, 32);
     final s = signature.sublist(32, 64);
     final v = signature[64];
-    
+
     final List<dynamic> txData;
-    
+
     switch (transaction.type) {
       case TransactionType.legacy:
         // For legacy transactions, v includes chain ID
         final chainId = transaction.chainId ?? 1;
         final vWithChainId = v + (chainId * 2) + 35;
-        
+
         txData = [
           transaction.nonce ?? BigInt.zero,
           transaction.gasPrice ?? BigInt.zero,
@@ -300,7 +330,7 @@ class MpcSignerImpl extends MpcSigner {
           BigInt.parse(HexUtils.strip0x(HexUtils.encode(s)), radix: 16),
         ];
         break;
-        
+
       default:
         // For typed transactions, prepend the type byte
         final encodedTx = _encodeTransaction(transaction);
@@ -310,11 +340,11 @@ class MpcSignerImpl extends MpcSigner {
           BigInt.parse(HexUtils.strip0x(HexUtils.encode(r)), radix: 16),
           BigInt.parse(HexUtils.strip0x(HexUtils.encode(s)), radix: 16),
         ];
-        
+
         final encoded = RLP.encode(txData);
         return Uint8List.fromList([transaction.type.index, ...encoded]);
     }
-    
+
     return RLP.encode(txData);
   }
 
@@ -329,7 +359,7 @@ class MpcSignerImpl extends MpcSigner {
       authorization.address,
       authorization.nonce,
     ]);
-    
+
     return encoded;
   }
 }
@@ -367,7 +397,7 @@ class MpcSignerFactory {
       totalParties: totalParties,
       curveType: CurveType.secp256k1,
     );
-    
+
     return create(
       keyShare: keyShare,
       coordinator: coordinator,
@@ -392,7 +422,7 @@ class MpcSignerFactory {
       totalParties: totalParties,
       curveType: CurveType.ed25519,
     );
-    
+
     return create(
       keyShare: keyShare,
       coordinator: coordinator,

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/transaction.dart';
 
 class CosmosClient {
-  CosmosClient(this.baseUrl, {http.Client? httpClient}) 
+  CosmosClient(this.baseUrl, {http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
   final String baseUrl;
@@ -21,10 +21,14 @@ class CosmosClient {
 
     final data = json.decode(response.body);
     final balances = data['balances'] as List;
-    return balances.map((b) => Coin(
-        denom: b['denom'] as String,
-        amount: b['amount'] as String,
-    ),).toList();
+    return balances
+        .map(
+          (b) => Coin(
+            denom: b['denom'] as String,
+            amount: b['amount'] as String,
+          ),
+        )
+        .toList();
   }
 
   /// Gets account details (account number, sequence).
@@ -39,10 +43,10 @@ class CosmosClient {
 
     final data = json.decode(response.body);
     final account = data['account'];
-    
+
     // Cosmos supports different account types, usually BaseAccount
     if (account['@type'] != '/cosmos.auth.v1beta1.BaseAccount') {
-         // handle other types if needed, for now assume base
+      // handle other types if needed, for now assume base
     }
 
     return CosmosAccount(
@@ -57,8 +61,8 @@ class CosmosClient {
     // Cosmos REST API expects tx_bytes as base64 in a wrapper
     final txBytes = tx.serialize();
     final body = {
-        'tx_bytes': base64.encode(txBytes),
-        'mode': 'BROADCAST_MODE_SYNC',
+      'tx_bytes': base64.encode(txBytes),
+      'mode': 'BROADCAST_MODE_SYNC',
     };
 
     final response = await _httpClient.post(
@@ -77,12 +81,12 @@ class CosmosClient {
 }
 
 class CosmosAccount {
-    CosmosAccount({
-        required this.address,
-        required this.accountNumber,
-        required this.sequence,
-    });
-    final String address;
-    final int accountNumber;
-    final int sequence;
+  CosmosAccount({
+    required this.address,
+    required this.accountNumber,
+    required this.sequence,
+  });
+  final String address;
+  final int accountNumber;
+  final int sequence;
 }

@@ -49,7 +49,8 @@ void main() {
 
       test('should get token decimals', () async {
         // Arrange
-        final encodedDecimals = AbiEncoder.encode([AbiUint(8)], [BigInt.from(18)]);
+        final encodedDecimals =
+            AbiEncoder.encode([AbiUint(8)], [BigInt.from(18)]);
         mockPublicClient.mockCall(encodedDecimals);
 
         // Act
@@ -61,7 +62,8 @@ void main() {
 
       test('should get total supply', () async {
         // Arrange
-        final totalSupply = BigInt.parse('1000000000000000000000000'); // 1M tokens
+        final totalSupply =
+            BigInt.parse('1000000000000000000000000'); // 1M tokens
         final encodedSupply = AbiEncoder.encode([AbiUint(256)], [totalSupply]);
         mockPublicClient.mockCall(encodedSupply);
 
@@ -79,7 +81,8 @@ void main() {
         mockPublicClient.mockCall(encodedBalance);
 
         // Act
-        final result = await contract.balanceOf('0x1111111111111111111111111111111111111111');
+        final result = await contract
+            .balanceOf('0x1111111111111111111111111111111111111111');
 
         // Assert
         expect(result, equals(balance));
@@ -92,7 +95,9 @@ void main() {
         mockPublicClient.mockCall(encodedAllowance);
 
         // Act
-        final result = await contract.allowance('0x1111111111111111111111111111111111111111', '0x2222222222222222222222222222222222222222');
+        final result = await contract.allowance(
+            '0x1111111111111111111111111111111111111111',
+            '0x2222222222222222222222222222222222222222');
 
         // Assert
         expect(result, equals(allowance));
@@ -106,11 +111,13 @@ void main() {
         mockWalletClient.mockSendTransaction(expectedTxHash);
 
         // Act
-        final txHash = await contract.transfer('0x1111111111111111111111111111111111111111', BigInt.from(1000));
+        final txHash = await contract.transfer(
+            '0x1111111111111111111111111111111111111111', BigInt.from(1000));
 
         // Assert
         expect(txHash, equals(expectedTxHash));
-        expect(mockWalletClient.lastTransactionRequest?.to, equals(contractAddress));
+        expect(mockWalletClient.lastTransactionRequest?.to,
+            equals(contractAddress));
       });
 
       test('should approve spender', () async {
@@ -119,7 +126,8 @@ void main() {
         mockWalletClient.mockSendTransaction(expectedTxHash);
 
         // Act
-        final txHash = await contract.approve('0x2222222222222222222222222222222222222222', BigInt.from(1000));
+        final txHash = await contract.approve(
+            '0x2222222222222222222222222222222222222222', BigInt.from(1000));
 
         // Assert
         expect(txHash, equals(expectedTxHash));
@@ -131,7 +139,10 @@ void main() {
         mockWalletClient.mockSendTransaction(expectedTxHash);
 
         // Act
-        final txHash = await contract.transferFrom('0x1111111111111111111111111111111111111111', '0x2222222222222222222222222222222222222222', BigInt.from(1000));
+        final txHash = await contract.transferFrom(
+            '0x1111111111111111111111111111111111111111',
+            '0x2222222222222222222222222222222222222222',
+            BigInt.from(1000));
 
         // Assert
         expect(txHash, equals(expectedTxHash));
@@ -141,7 +152,9 @@ void main() {
     group('event filters', () {
       test('should create transfer filter', () {
         // Act
-        final filter = contract.transferFilter(from: '0x1111111111111111111111111111111111111111', to: '0x2222222222222222222222222222222222222222');
+        final filter = contract.transferFilter(
+            from: '0x1111111111111111111111111111111111111111',
+            to: '0x2222222222222222222222222222222222222222');
 
         // Assert
         expect(filter.address, equals(contractAddress));
@@ -150,7 +163,9 @@ void main() {
 
       test('should create approval filter', () {
         // Act
-        final filter = contract.approvalFilter(owner: '0x1111111111111111111111111111111111111111', spender: '0x2222222222222222222222222222222222222222');
+        final filter = contract.approvalFilter(
+            owner: '0x1111111111111111111111111111111111111111',
+            spender: '0x2222222222222222222222222222222222222222');
 
         // Assert
         expect(filter.address, equals(contractAddress));

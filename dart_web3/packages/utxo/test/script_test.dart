@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:convert/convert.dart'; // for hex
@@ -12,7 +11,7 @@ void main() {
     test('P2PKH Compilation & Parsing', () {
       final pubKeyHash = h('0000000000000000000000000000000000000000');
       final scriptBytes = Script.p2pkh(pubKeyHash);
-      
+
       // OP_DUP OP_HASH160 <20> <hash> OP_EQUALVERIFY OP_CHECKSIG
       // 76     a9         14   ...    88             ac
       expect(scriptBytes.length, 25);
@@ -29,7 +28,7 @@ void main() {
     test('P2SH Compilation & Parsing', () {
       final scriptHash = h('1111111111111111111111111111111111111111');
       final scriptBytes = Script.p2sh(scriptHash);
-      
+
       // OP_HASH160 <20> <hash> OP_EQUAL
       // a9         14   ...    87
       expect(scriptBytes.length, 23);
@@ -44,7 +43,7 @@ void main() {
     test('P2WPKH Compilation & Parsing', () {
       final pubKeyHash = h('2222222222222222222222222222222222222222');
       final scriptBytes = Script.p2wpkh(pubKeyHash);
-      
+
       // OP_0 <20> <hash>
       // 00   14   ...
       expect(scriptBytes.length, 22);
@@ -56,18 +55,19 @@ void main() {
     });
 
     test('P2TR Compilation & Parsing', () {
-      // Manual construction for P2TR as helper not strictly in script.dart yet? 
+      // Manual construction for P2TR as helper not strictly in script.dart yet?
       // Ah, implementation plan said "Script Type Matching (isP2TR)".
       // Let's check constructor.
-      final witnessProgram = h('3333333333333333333333333333333333333333333333333333333333333333');
+      final witnessProgram =
+          h('3333333333333333333333333333333333333333333333333333333333333333');
       final script = Script([OpCode.op1, witnessProgram]);
       final scriptBytes = script.compile();
-      
+
       // OP_1 <32> <program>
       // 51   20   ...
       expect(scriptBytes.length, 34);
       expect(scriptBytes[0], OpCode.op1);
-      
+
       final parsed = Script.fromBytes(scriptBytes);
       expect(parsed.isP2TR, isTrue);
       expect(parsed.ops[1], equals(witnessProgram));
@@ -89,7 +89,7 @@ void main() {
       final data256 = Uint8List(256);
       final s256 = Script([data256]);
       expect(s256.compile()[0], OpCode.opPushData2);
-      
+
       // Helper check
       final parsed = Script.fromBytes(s256.compile());
       expect(parsed.ops[0], equals(data256));

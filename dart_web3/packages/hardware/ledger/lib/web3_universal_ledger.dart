@@ -1,5 +1,5 @@
 /// Ledger hardware wallet integration for Dart Web3 SDK
-/// 
+///
 /// This library provides integration with Ledger hardware wallets
 /// using USB and Bluetooth Low Energy (BLE) communication.
 library;

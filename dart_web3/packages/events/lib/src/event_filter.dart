@@ -1,8 +1,5 @@
-
-
 /// Event filter for subscribing to blockchain events.
 class EventFilter {
-
   EventFilter({
     this.address,
     this.topics,
@@ -53,6 +50,7 @@ class EventFilter {
       blockHash: json['blockHash'] as String?,
     );
   }
+
   /// Contract address to filter by (optional).
   final String? address;
 

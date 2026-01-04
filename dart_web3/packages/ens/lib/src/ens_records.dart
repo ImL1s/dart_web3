@@ -6,13 +6,13 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// ENS records resolver for text records and avatar resolution
 class ENSRecords {
-
   ENSRecords({
     required PublicClient client,
     String? registryAddress,
     Duration cacheTtl = const Duration(minutes: 5),
   })  : _client = client,
-        _registryAddress = registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+        _registryAddress =
+            registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
         _cacheTtl = cacheTtl;
   final PublicClient _client;
   final String _registryAddress;
@@ -33,18 +33,29 @@ class ENSRecords {
     }
 
     try {
-      // Get resolver address
-      final resolverAddress = await _getResolver(name);
-      if (resolverAddress == null || resolverAddress == '0x0000000000000000000000000000000000000000') {
+      // Check for cached resolver address first
+      final resolverCacheKey = 'resolver_$name';
+      var resolverAddress = _getCached(resolverCacheKey) as String?;
+
+      if (resolverAddress == null) {
+        // Get resolver address from registry
+        resolverAddress = await _getResolver(name);
+        if (resolverAddress != null) {
+          _setCache(resolverCacheKey, resolverAddress);
+        }
+      }
+
+      if (resolverAddress == null ||
+          resolverAddress == '0x0000000000000000000000000000000000000000') {
         return null;
       }
 
       // Query text record
       final textValue = await _getTextFromResolver(resolverAddress, name, key);
-      
+
       // Cache result
       _setCache(cacheKey, textValue);
-      
+
       return textValue;
     } on Exception catch (_) {
       return null;
@@ -77,13 +88,14 @@ class ENSRecords {
   }
 
   /// Get multiple text records at once
-  Future<Map<String, String?>> getTextRecords(String name, List<String> keys) async {
+  Future<Map<String, String?>> getTextRecords(
+      String name, List<String> keys) async {
     final results = <String, String?>{};
-    
+
     for (final key in keys) {
       results[key] = await getTextRecord(name, key);
     }
-    
+
     return results;
   }
 
@@ -125,7 +137,7 @@ class ENSRecords {
   /// Get resolver address from ENS registry
   Future<String?> _getResolver(String name) async {
     final nameHash = _namehash(name);
-    
+
     final registryContract = Contract(
       address: _registryAddress,
       abi: _ensRegistryAbi,
@@ -137,9 +149,10 @@ class ENSRecords {
   }
 
   /// Get text record from resolver contract
-  Future<String?> _getTextFromResolver(String resolverAddress, String name, String key) async {
+  Future<String?> _getTextFromResolver(
+      String resolverAddress, String name, String key) async {
     final nameHash = _namehash(name);
-    
+
     final resolverContract = Contract(
       address: resolverAddress,
       abi: _ensResolverAbi,
@@ -149,11 +162,11 @@ class ENSRecords {
     try {
       final result = await resolverContract.read('text', [nameHash, key]);
       final textValue = result[0] as String?;
-      
+
       if (textValue == null || textValue.isEmpty) {
         return null;
       }
-      
+
       return textValue;
     } on Exception catch (_) {
       return null;
@@ -179,12 +192,13 @@ class ENSRecords {
     final contractPart = parts[1]; // erc721:0xcontract
     final tokenId = parts[2];
 
-    if (!chainPart.startsWith('eip155:') || !contractPart.startsWith('erc721:')) {
+    if (!chainPart.startsWith('eip155:') ||
+        !contractPart.startsWith('erc721:')) {
       return null;
     }
 
     final contractAddress = contractPart.substring(7); // Remove 'erc721:'
-    
+
     try {
       // Query NFT metadata
       final nftContract = Contract(
@@ -193,16 +207,17 @@ class ENSRecords {
         publicClient: _client,
       );
 
-      final result = await nftContract.read('tokenURI', [BigInt.parse(tokenId)]);
+      final result =
+          await nftContract.read('tokenURI', [BigInt.parse(tokenId)]);
       final tokenUri = result[0] as String?;
-      
+
       if (tokenUri == null) return null;
-      
+
       // Convert IPFS URLs
       if (tokenUri.startsWith('ipfs://')) {
         return _convertIpfsUrl(tokenUri);
       }
-      
+
       return tokenUri;
     } on Exception catch (_) {
       return null;
@@ -230,14 +245,14 @@ class ENSRecords {
   /// Validate ENS name format
   bool _isValidENSName(String name) {
     if (name.isEmpty) return false;
-    
+
     // Must end with .eth or other valid TLD
     if (!name.contains('.')) return false;
-    
+
     // Check for invalid characters
     final validPattern = RegExp(r'^[a-z0-9\-\.]+$');
     if (!validPattern.hasMatch(name.toLowerCase())) return false;
-    
+
     // Check each label
     final labels = name.split('.');
     for (final label in labels) {
@@ -245,7 +260,7 @@ class ENSRecords {
       if (label.startsWith('-') || label.endsWith('-')) return false;
       if (label.length > 63) return false;
     }
-    
+
     return true;
   }
 
@@ -253,13 +268,13 @@ class ENSRecords {
   dynamic _getCached(String key) {
     final entry = _cache[key];
     if (entry == null) return null;
-    
+
     final timestamp = entry['timestamp'] as DateTime;
     if (DateTime.now().difference(timestamp) > _cacheTtl) {
       _cache.remove(key);
       return null;
     }
-    
+
     return entry['value'];
   }
 
@@ -318,7 +333,6 @@ class ENSRecords {
 
 /// ENS profile data structure
 class ENSProfile {
-
   ENSProfile({
     required this.name,
     this.avatar,

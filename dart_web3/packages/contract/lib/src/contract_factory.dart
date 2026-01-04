@@ -1,4 +1,3 @@
-
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart';
@@ -115,12 +114,12 @@ class ContractFactory {
 
 /// Result of a contract deployment.
 class DeployResult {
-
   DeployResult({
     required this.contract,
     required this.transactionHash,
     required this.receipt,
   });
+
   /// The deployed contract instance.
   final Contract contract;
 

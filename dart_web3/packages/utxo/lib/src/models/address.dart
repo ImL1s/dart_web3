@@ -16,7 +16,8 @@ abstract class BitcoinAddress {
   AddressType get type;
   Uint8List get scriptPubKey;
 
-  static BitcoinAddress fromString(String address, {NetworkType network = NetworkType.bitcoinMainnet}) {
+  static BitcoinAddress fromString(String address,
+      {NetworkType network = NetworkType.bitcoinMainnet}) {
     // TODO: Implement decoding logic
     throw UnimplementedError();
   }
@@ -94,4 +95,3 @@ class P2TRAddress extends BitcoinAddress {
     ...hash,
   ]);
 }
-

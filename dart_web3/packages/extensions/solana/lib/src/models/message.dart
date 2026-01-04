@@ -64,7 +64,7 @@ class Message {
   /// Serialization of the message (the data that gets signed).
   Uint8List serialize() {
     final buffer = BytesBuilder();
-    
+
     // 1. Header
     buffer.add(header.toBytes());
 
@@ -94,22 +94,24 @@ class Message {
   }) {
     // 1. Gather all unique accounts
     final accountMap = <PublicKey, AccountMeta>{};
-    
+
     // Payer is always first, signer, writable
-    accountMap[payer] = AccountMeta(publicKey: payer, isSigner: true, isWritable: true);
+    accountMap[payer] =
+        AccountMeta(publicKey: payer, isSigner: true, isWritable: true);
 
     for (final ix in instructions) {
       // Program ID is readonly unsigned (usually)
       if (!accountMap.containsKey(ix.programId)) {
-        accountMap[ix.programId] = AccountMeta(publicKey: ix.programId, isSigner: false, isWritable: false);
+        accountMap[ix.programId] = AccountMeta(
+            publicKey: ix.programId, isSigner: false, isWritable: false);
       }
       for (final acc in ix.keys) {
         if (accountMap.containsKey(acc.publicKey)) {
           // Merge flags
           final existing = accountMap[acc.publicKey]!;
           accountMap[acc.publicKey] = AccountMeta(
-            publicKey: acc.publicKey, 
-            isSigner: existing.isSigner || acc.isSigner, 
+            publicKey: acc.publicKey,
+            isSigner: existing.isSigner || acc.isSigner,
             isWritable: existing.isWritable || acc.isWritable,
           );
         } else {
@@ -129,73 +131,75 @@ class Message {
     final readonlyNonSigners = <PublicKey>[];
 
     for (final entry in accountMap.values) {
-        if (entry.isSigner) {
-            if (entry.isWritable) {
-              writableSigners.add(entry.publicKey);
-            } else {
-              readonlySigners.add(entry.publicKey);
-            }
+      if (entry.isSigner) {
+        if (entry.isWritable) {
+          writableSigners.add(entry.publicKey);
         } else {
-            if (entry.isWritable) {
-              writableNonSigners.add(entry.publicKey);
-            } else {
-              readonlyNonSigners.add(entry.publicKey);
-            }
+          readonlySigners.add(entry.publicKey);
         }
+      } else {
+        if (entry.isWritable) {
+          writableNonSigners.add(entry.publicKey);
+        } else {
+          readonlyNonSigners.add(entry.publicKey);
+        }
+      }
     }
 
-    // Ensure payer is first in writableSigners? 
-    // It should be by virtue of being added first if we preserve order, 
-    // but standard sort order is by address or just defined by this bucketing? 
+    // Ensure payer is first in writableSigners?
+    // It should be by virtue of being added first if we preserve order,
+    // but standard sort order is by address or just defined by this bucketing?
     // Solana requires payer to be the first account in the list.
     // Since we added payer first to accountMap, and if we iterate keys...
     // But we are bucketing. Payer is Writable+Signer.
     // We should ensure payer is at index 0.
     if (!writableSigners.contains(payer)) {
-        // Should not happen as we added it
-        throw Exception('Payer not present');
+      // Should not happen as we added it
+      throw Exception('Payer not present');
     }
     // Move payer to front if needed
     writableSigners.remove(payer);
     writableSigners.insert(0, payer);
 
     final accountKeys = [
-        ...writableSigners,
-        ...readonlySigners,
-        ...writableNonSigners,
-        ...readonlyNonSigners,
+      ...writableSigners,
+      ...readonlySigners,
+      ...writableNonSigners,
+      ...readonlyNonSigners,
     ];
 
     final header = MessageHeader(
-        numRequiredSignatures: writableSigners.length + readonlySigners.length,
-        numReadonlySignedAccounts: readonlySigners.length,
-        numReadonlyUnsignedAccounts: readonlyNonSigners.length,
+      numRequiredSignatures: writableSigners.length + readonlySigners.length,
+      numReadonlySignedAccounts: readonlySigners.length,
+      numReadonlyUnsignedAccounts: readonlyNonSigners.length,
     );
 
     // 3. Compile instructions
     final compiledInstructions = instructions.map((ix) {
-        final programIdIndex = accountKeys.indexOf(ix.programId); // use indexWhere if == not working on object identity
-        // But PublicKey has properly implemented ==
-        if (programIdIndex == -1) throw Exception('Program ID not found in account keys');
+      final programIdIndex = accountKeys.indexOf(
+          ix.programId); // use indexWhere if == not working on object identity
+      // But PublicKey has properly implemented ==
+      if (programIdIndex == -1)
+        throw Exception('Program ID not found in account keys');
 
-        final accountIndices = ix.keys.map((acc) {
-            final idx = accountKeys.indexOf(acc.publicKey);
-            if (idx == -1) throw Exception('Account not found in account keys');
-            return idx;
-        }).toList();
+      final accountIndices = ix.keys.map((acc) {
+        final idx = accountKeys.indexOf(acc.publicKey);
+        if (idx == -1) throw Exception('Account not found in account keys');
+        return idx;
+      }).toList();
 
-        return CompiledInstruction(
-            programIdIndex: programIdIndex,
-            accounts: accountIndices,
-            data: ix.data,
-        );
+      return CompiledInstruction(
+        programIdIndex: programIdIndex,
+        accounts: accountIndices,
+        data: ix.data,
+      );
     }).toList();
 
     return Message(
-        header: header, 
-        accountKeys: accountKeys, 
-        recentBlockhash: recentBlockhash, 
-        instructions: compiledInstructions,
+      header: header,
+      accountKeys: accountKeys,
+      recentBlockhash: recentBlockhash,
+      instructions: compiledInstructions,
     );
   }
 }

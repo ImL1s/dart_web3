@@ -25,7 +25,6 @@ enum TransactionType {
 
 /// Represents a transaction request.
 class TransactionRequest {
-
   TransactionRequest({
     this.to,
     this.value,
@@ -42,6 +41,7 @@ class TransactionRequest {
     this.maxFeePerBlobGas,
     this.authorizationList,
   });
+
   /// The recipient address (null for contract creation).
   final String? to;
 
@@ -122,8 +122,8 @@ class TransactionRequest {
 
 /// An entry in an access list.
 class AccessListEntry {
-
   AccessListEntry({required this.address, required this.storageKeys});
+
   /// The address.
   final String address;
 

@@ -6,7 +6,6 @@ import 'multichain_resolver.dart';
 
 /// Main ENS client that provides all ENS functionality
 class ENSClient {
-
   ENSClient({
     required PublicClient client,
     String? registryAddress,
@@ -31,7 +30,7 @@ class ENSClient {
   final MultichainResolver _multichainResolver;
 
   // Basic resolution methods
-  
+
   /// Resolve ENS name to Ethereum address
   Future<String?> resolveName(String name) async {
     return _resolver.resolveName(name);
@@ -43,7 +42,7 @@ class ENSClient {
   }
 
   // Records methods
-  
+
   /// Get text record for ENS name
   Future<String?> getTextRecord(String name, String key) async {
     return _records.getTextRecord(name, key);
@@ -55,7 +54,8 @@ class ENSClient {
   }
 
   /// Get multiple text records at once
-  Future<Map<String, String?>> getTextRecords(String name, List<String> keys) async {
+  Future<Map<String, String?>> getTextRecords(
+      String name, List<String> keys) async {
     return _records.getTextRecords(name, keys);
   }
 
@@ -65,7 +65,7 @@ class ENSClient {
   }
 
   // Multi-chain methods
-  
+
   /// Resolve address for specific coin type (ENSIP-9)
   Future<String?> resolveAddressForCoin(String name, int coinType) async {
     return _multichainResolver.resolveAddress(name, coinType);
@@ -102,7 +102,7 @@ class ENSClient {
   }
 
   // Utility methods
-  
+
   /// Validate ENS name format
   static bool isValidENSName(String name) {
     return ENSResolver.isValidENSName(name);
@@ -119,7 +119,7 @@ class ENSClient {
   Future<ENSInfo> getENSInfo(String name) async {
     final profile = await getProfile(name);
     final addresses = await getAllAddresses(name);
-    
+
     return ENSInfo(
       name: name,
       profile: profile,
@@ -130,7 +130,6 @@ class ENSClient {
 
 /// Comprehensive ENS information
 class ENSInfo {
-
   ENSInfo({
     required this.name,
     required this.profile,

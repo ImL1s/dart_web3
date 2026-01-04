@@ -6,16 +6,16 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 import 'mpc_types.dart';
 
 /// Abstract threshold signature scheme interface.
-/// 
+///
 /// Defines the interface for threshold signature schemes that support
 /// both ECDSA (secp256k1) and EdDSA (ed25519) curves.
 abstract class ThresholdSignature {
   /// The curve type for this signature scheme.
   CurveType get curveType;
-  
+
   /// The threshold (minimum number of parties required).
   int get threshold;
-  
+
   /// The total number of parties.
   int get totalParties;
 
@@ -52,7 +52,6 @@ abstract class ThresholdSignature {
 
 /// Signature share created by a party in threshold signing.
 class SignatureShare {
-
   SignatureShare({
     required this.partyId,
     required this.shareData,
@@ -71,18 +70,19 @@ class SignatureShare {
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }
+
   /// The party ID that created this share.
   final String partyId;
-  
+
   /// The signature share data.
   final Uint8List shareData;
-  
+
   /// The session ID this share belongs to.
   final String sessionId;
-  
+
   /// Additional metadata for the share.
   final Map<String, dynamic> metadata;
-  
+
   /// Timestamp when the share was created.
   final DateTime createdAt;
 
@@ -100,7 +100,6 @@ class SignatureShare {
 
 /// ECDSA threshold signature implementation for secp256k1.
 class EcdsaThresholdSignature implements ThresholdSignature {
-
   EcdsaThresholdSignature({
     required this.threshold,
     required this.totalParties,
@@ -114,13 +113,13 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   }
   @override
   final CurveType curveType = CurveType.secp256k1;
-  
+
   @override
   final int threshold;
-  
+
   @override
   final int totalParties;
-  
+
   /// Random number generator.
   final Random _random = Random.secure();
 
@@ -141,7 +140,8 @@ class EcdsaThresholdSignature implements ThresholdSignature {
     final masterPublicKey = Secp256k1.getPublicKey(masterPrivateKey);
 
     // Use Shamir's Secret Sharing to split the private key
-    final shares = _shamirSecretShare(masterPrivateKey, threshold, totalParties);
+    final shares =
+        _shamirSecretShare(masterPrivateKey, threshold, totalParties);
 
     // Create KeyShare objects for each party
     final keyShares = <KeyShare>[];
@@ -272,15 +272,17 @@ class EcdsaThresholdSignature implements ThresholdSignature {
 
     // Generate new random polynomials for proactive refresh
     final refreshedShares = <KeyShare>[];
-    
+
     for (final oldShare in oldShares) {
       // Decrypt old share
-      final oldPrivateKeyShare = _decryptShare(oldShare.shareData, oldShare.partyId);
-      
+      final oldPrivateKeyShare =
+          _decryptShare(oldShare.shareData, oldShare.partyId);
+
       // Add random value for proactive security (simplified)
       final refreshValue = _generateRandomPrivateKey();
-      final newPrivateKeyShare = _addPrivateKeys(oldPrivateKeyShare, refreshValue);
-      
+      final newPrivateKeyShare =
+          _addPrivateKeys(oldPrivateKeyShare, refreshValue);
+
       // Create new key share
       final newShare = KeyShare(
         partyId: oldShare.partyId,
@@ -292,7 +294,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
         createdAt: oldShare.createdAt,
         lastRefreshed: DateTime.now(),
       );
-      
+
       refreshedShares.add(newShare);
     }
 
@@ -309,30 +311,31 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   }
 
   /// Implements Shamir's Secret Sharing for the private key.
-  List<Uint8List> _shamirSecretShare(Uint8List secret, int threshold, int totalShares) {
+  List<Uint8List> _shamirSecretShare(
+      Uint8List secret, int threshold, int totalShares) {
     // This is a simplified implementation of Shamir's Secret Sharing
     // In a real implementation, you would use proper finite field arithmetic
-    
+
     final shares = <Uint8List>[];
-    
+
     for (var i = 1; i <= totalShares; i++) {
       final share = Uint8List(32);
-      
+
       // Generate polynomial coefficients (simplified)
       for (var j = 0; j < 32; j++) {
         var value = secret[j];
-        
+
         // Add polynomial terms (simplified)
         for (var k = 1; k < threshold; k++) {
           value = (value + _random.nextInt(256) * pow(i, k).toInt()) % 256;
         }
-        
+
         share[j] = value;
       }
-      
+
       shares.add(share);
     }
-    
+
     return shares;
   }
 
@@ -340,14 +343,14 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   Uint8List _encryptShare(Uint8List share, String partyId) {
     // This is a mock encryption implementation
     // In a real implementation, you would use proper encryption
-    
+
     final encrypted = Uint8List(share.length);
     final keyBytes = partyId.codeUnits;
-    
+
     for (var i = 0; i < share.length; i++) {
       encrypted[i] = share[i] ^ keyBytes[i % keyBytes.length];
     }
-    
+
     return encrypted;
   }
 
@@ -355,7 +358,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   Uint8List _decryptShare(Uint8List encryptedShare, String partyId) {
     // This is a mock decryption implementation
     // In a real implementation, you would use proper decryption
-    
+
     return _encryptShare(encryptedShare, partyId); // XOR is its own inverse
   }
 
@@ -368,25 +371,25 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   ) {
     // This is a simplified signature share creation
     // In a real implementation, you would use proper threshold ECDSA protocols
-    
+
     final signatureShare = Uint8List(32);
-    
+
     for (var i = 0; i < 32; i++) {
-      signatureShare[i] = (messageHash[i] ^ 
-                          privateKeyShare[i] ^ 
-                          ephemeralKey[i]) % 256;
+      signatureShare[i] =
+          (messageHash[i] ^ privateKeyShare[i] ^ ephemeralKey[i]) % 256;
     }
-    
+
     return signatureShare;
   }
 
   /// Combines ECDSA signature shares using Lagrange interpolation.
-  Uint8List _combineEcdsaShares(List<SignatureShare> shares, Uint8List messageHash) {
+  Uint8List _combineEcdsaShares(
+      List<SignatureShare> shares, Uint8List messageHash) {
     // This is a simplified signature combination
     // In a real implementation, you would use proper Lagrange interpolation
-    
+
     final combinedSignature = Uint8List(65); // r(32) + s(32) + v(1)
-    
+
     // Combine the shares (simplified)
     for (var i = 0; i < 64; i++) {
       var combined = 0;
@@ -395,10 +398,10 @@ class EcdsaThresholdSignature implements ThresholdSignature {
       }
       combinedSignature[i] = combined % 256;
     }
-    
+
     // Set recovery ID
     combinedSignature[64] = 0;
-    
+
     return combinedSignature;
   }
 
@@ -406,20 +409,19 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   Uint8List _addPrivateKeys(Uint8List key1, Uint8List key2) {
     final result = Uint8List(32);
     var carry = 0;
-    
+
     for (var i = 31; i >= 0; i--) {
       final sum = key1[i] + key2[i] + carry;
       result[i] = sum % 256;
       carry = sum ~/ 256;
     }
-    
+
     return result;
   }
 }
 
 /// EdDSA threshold signature implementation for ed25519.
 class EddsaThresholdSignature implements ThresholdSignature {
-
   EddsaThresholdSignature({
     required this.threshold,
     required this.totalParties,
@@ -433,13 +435,13 @@ class EddsaThresholdSignature implements ThresholdSignature {
   }
   @override
   final CurveType curveType = CurveType.ed25519;
-  
+
   @override
   final int threshold;
-  
+
   @override
   final int totalParties;
-  
+
   /// Random number generator.
   final Random _random = Random.secure();
 
@@ -464,7 +466,8 @@ class EddsaThresholdSignature implements ThresholdSignature {
     }
 
     // Use Shamir's Secret Sharing for ed25519
-    final shares = _shamirSecretShareEd25519(masterPrivateKey, threshold, totalParties);
+    final shares =
+        _shamirSecretShareEd25519(masterPrivateKey, threshold, totalParties);
 
     // Create KeyShare objects for each party
     final keyShares = <KeyShare>[];
@@ -560,7 +563,9 @@ class EddsaThresholdSignature implements ThresholdSignature {
   }) async {
     try {
       // For ed25519, we'll use a mock verification since we don't have the actual implementation
-      return signature.length == 64 && messageHash.length == 32 && publicKey.length == 32;
+      return signature.length == 64 &&
+          messageHash.length == 32 &&
+          publicKey.length == 32;
     } catch (e) {
       return false;
     }
@@ -577,12 +582,14 @@ class EddsaThresholdSignature implements ThresholdSignature {
     }
 
     final refreshedShares = <KeyShare>[];
-    
+
     for (final oldShare in oldShares) {
-      final oldPrivateKeyShare = _decryptShare(oldShare.shareData, oldShare.partyId);
+      final oldPrivateKeyShare =
+          _decryptShare(oldShare.shareData, oldShare.partyId);
       final refreshValue = _generateRandomEd25519PrivateKey();
-      final newPrivateKeyShare = _addEd25519PrivateKeys(oldPrivateKeyShare, refreshValue);
-      
+      final newPrivateKeyShare =
+          _addEd25519PrivateKeys(oldPrivateKeyShare, refreshValue);
+
       final newShare = KeyShare(
         partyId: oldShare.partyId,
         shareData: _encryptShare(newPrivateKeyShare, oldShare.partyId),
@@ -593,7 +600,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
         createdAt: oldShare.createdAt,
         lastRefreshed: DateTime.now(),
       );
-      
+
       refreshedShares.add(newShare);
     }
 
@@ -610,26 +617,27 @@ class EddsaThresholdSignature implements ThresholdSignature {
   }
 
   /// Implements Shamir's Secret Sharing for ed25519.
-  List<Uint8List> _shamirSecretShareEd25519(Uint8List secret, int threshold, int totalShares) {
+  List<Uint8List> _shamirSecretShareEd25519(
+      Uint8List secret, int threshold, int totalShares) {
     // Similar to secp256k1 but adapted for ed25519 field arithmetic
     final shares = <Uint8List>[];
-    
+
     for (var i = 1; i <= totalShares; i++) {
       final share = Uint8List(32);
-      
+
       for (var j = 0; j < 32; j++) {
         var value = secret[j];
-        
+
         for (var k = 1; k < threshold; k++) {
           value = (value + _random.nextInt(256) * pow(i, k).toInt()) % 256;
         }
-        
+
         share[j] = value;
       }
-      
+
       shares.add(share);
     }
-    
+
     return shares;
   }
 
@@ -637,11 +645,11 @@ class EddsaThresholdSignature implements ThresholdSignature {
   Uint8List _encryptShare(Uint8List share, String partyId) {
     final encrypted = Uint8List(share.length);
     final keyBytes = partyId.codeUnits;
-    
+
     for (var i = 0; i < share.length; i++) {
       encrypted[i] = share[i] ^ keyBytes[i % keyBytes.length];
     }
-    
+
     return encrypted;
   }
 
@@ -658,19 +666,20 @@ class EddsaThresholdSignature implements ThresholdSignature {
   ) {
     // Simplified EdDSA signature share creation
     final signatureShare = Uint8List(32);
-    
+
     for (var i = 0; i < 32; i++) {
       signatureShare[i] = (messageHash[i] ^ privateKeyShare[i]) % 256;
     }
-    
+
     return signatureShare;
   }
 
   /// Combines EdDSA signature shares.
-  Uint8List _combineEddsaShares(List<SignatureShare> shares, Uint8List messageHash) {
+  Uint8List _combineEddsaShares(
+      List<SignatureShare> shares, Uint8List messageHash) {
     // Simplified EdDSA signature combination
     final combinedSignature = Uint8List(64); // EdDSA signatures are 64 bytes
-    
+
     for (var i = 0; i < 64; i++) {
       var combined = 0;
       for (final share in shares.take(threshold)) {
@@ -678,7 +687,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
       }
       combinedSignature[i] = combined % 256;
     }
-    
+
     return combinedSignature;
   }
 
@@ -686,13 +695,13 @@ class EddsaThresholdSignature implements ThresholdSignature {
   Uint8List _addEd25519PrivateKeys(Uint8List key1, Uint8List key2) {
     final result = Uint8List(32);
     var carry = 0;
-    
+
     for (var i = 31; i >= 0; i--) {
       final sum = key1[i] + key2[i] + carry;
       result[i] = sum % 256;
       carry = sum ~/ 256;
     }
-    
+
     return result;
   }
 }

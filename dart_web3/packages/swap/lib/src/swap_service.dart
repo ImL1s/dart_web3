@@ -18,15 +18,14 @@ import 'token_approval.dart';
 
 /// Main swap service that aggregates quotes from multiple DEX aggregators
 class SwapService {
-  
   SwapService({
     required this.walletClient,
     List<DexAggregator>? aggregators,
     MevProtectionService? mevProtectionService,
-  }) : aggregators = aggregators ?? _createDefaultAggregators(),
-       approvalManager = TokenApprovalManager(walletClient),
-       mevProtectionService = mevProtectionService,
-       swapTracker = SwapTracker(walletClient);
+  })  : aggregators = aggregators ?? _createDefaultAggregators(),
+        approvalManager = TokenApprovalManager(walletClient),
+        mevProtectionService = mevProtectionService,
+        swapTracker = SwapTracker(walletClient);
   final WalletClient walletClient;
   final List<DexAggregator> aggregators;
   final TokenApprovalManager approvalManager;
@@ -54,7 +53,8 @@ class SwapService {
   }
 
   /// Get quotes with dynamic slippage calculation
-  Future<List<SwapQuote>> getQuotesWithDynamicSlippage(SwapParams params) async {
+  Future<List<SwapQuote>> getQuotesWithDynamicSlippage(
+      SwapParams params) async {
     // First get quotes with base slippage
     final baseQuotes = await getQuotes(params);
     if (baseQuotes.isEmpty) return [];
@@ -106,8 +106,8 @@ class SwapService {
       String txHash;
 
       // Submit with MEV protection if requested
-      if (mevProtection != null && 
-          mevProtection != MevProtectionType.none && 
+      if (mevProtection != null &&
+          mevProtection != MevProtectionType.none &&
           mevProtectionService != null) {
         final result = await mevProtectionService!.submitProtectedTransaction(
           signedTransaction: HexUtils.encode(signedTx),
@@ -116,7 +116,8 @@ class SwapService {
         txHash = result.transactionHash;
       } else {
         // Submit normally
-        txHash = await walletClient.sendRawTransaction(HexUtils.encode(signedTx));
+        txHash =
+            await walletClient.sendRawTransaction(HexUtils.encode(signedTx));
       }
 
       // Start tracking the swap
@@ -140,7 +141,7 @@ class SwapService {
     try {
       final result = await walletClient.call(
         CallRequest(
-        from: walletClient.address.hex,
+          from: walletClient.address.hex,
           to: quote.transaction.to,
           data: quote.transaction.data,
           value: quote.transaction.value,
@@ -164,7 +165,7 @@ class SwapService {
   /// Get supported tokens for a chain
   Future<List<SwapToken>> getSupportedTokens(int chainId) async {
     final allTokens = <SwapToken>[];
-    
+
     for (final aggregator in aggregators) {
       if (aggregator.supportedChains.contains(chainId)) {
         try {
@@ -190,10 +191,12 @@ class SwapService {
   }
 
   /// Check if a token pair is supported
-  Future<bool> isTokenPairSupported(SwapToken fromToken, SwapToken toToken) async {
+  Future<bool> isTokenPairSupported(
+      SwapToken fromToken, SwapToken toToken) async {
     for (final aggregator in aggregators) {
       try {
-        final supported = await aggregator.isTokenPairSupported(fromToken, toToken);
+        final supported =
+            await aggregator.isTokenPairSupported(fromToken, toToken);
         if (supported) return true;
       } on Exception catch (_) {
         // Continue checking other aggregators
@@ -206,11 +209,12 @@ class SwapService {
   /// Get swap history for an address
   List<SwapTrackingInfo> getSwapHistory([String? address]) {
     final allSwaps = swapTracker.getAllTrackedSwaps();
-    
+
     if (address == null) return allSwaps;
-    
+
     return allSwaps
-        .where((swap) => swap.userAddress?.toLowerCase() == address.toLowerCase())
+        .where(
+            (swap) => swap.userAddress?.toLowerCase() == address.toLowerCase())
         .toList();
   }
 
@@ -236,7 +240,7 @@ class SwapService {
       toToken: toToken,
       amount: amount,
     );
-    
+
     return tiers.firstWhere((tier) => tier.recommended).slippage;
   }
 
@@ -337,7 +341,7 @@ class SwapService {
     approvalManager.dispose();
     swapTracker.dispose();
     mevProtectionService?.dispose();
-    
+
     for (final aggregator in aggregators) {
       if (aggregator is OneInchAggregator) {
         aggregator.dispose();
@@ -354,7 +358,6 @@ class SwapService {
 
 /// Swap simulation result
 class SwapSimulationResult {
-
   const SwapSimulationResult({
     required this.success,
     this.gasUsed,
@@ -369,7 +372,6 @@ class SwapSimulationResult {
 
 /// Exception thrown when swap execution fails
 class SwapExecutionException implements Exception {
-
   const SwapExecutionException(this.message, {this.originalError});
   final String message;
   final dynamic originalError;

@@ -1,4 +1,3 @@
-
 import 'package:test/test.dart';
 import 'package:web3_universal_reown/web3_universal_reown.dart';
 
@@ -6,7 +5,7 @@ void main() {
   group('ReconnectionConfig', () {
     test('should create default config', () {
       final config = ReconnectionConfig.defaultConfig();
-      
+
       expect(config.maxAttempts, equals(5));
       expect(config.baseDelay, equals(Duration(seconds: 1)));
       expect(config.strategy, equals(ReconnectionStrategy.exponential));
@@ -15,7 +14,7 @@ void main() {
 
     test('should create aggressive config', () {
       final config = ReconnectionConfig.aggressive();
-      
+
       expect(config.maxAttempts, equals(10));
       expect(config.baseDelay, equals(Duration(milliseconds: 500)));
       expect(config.strategy, equals(ReconnectionStrategy.jittered));
@@ -23,7 +22,7 @@ void main() {
 
     test('should create conservative config', () {
       final config = ReconnectionConfig.conservative();
-      
+
       expect(config.maxAttempts, equals(3));
       expect(config.baseDelay, equals(Duration(seconds: 5)));
       expect(config.enableHealthCheck, isFalse);
@@ -37,7 +36,8 @@ void main() {
       expect(ConnectionState.values, contains(ConnectionState.connecting));
       expect(ConnectionState.values, contains(ConnectionState.connected));
       expect(ConnectionState.values, contains(ConnectionState.unstable));
-      expect(ConnectionState.values, contains(ConnectionState.waitingToReconnect));
+      expect(
+          ConnectionState.values, contains(ConnectionState.waitingToReconnect));
       expect(ConnectionState.values, contains(ConnectionState.reconnecting));
       expect(ConnectionState.values, contains(ConnectionState.failed));
     });
@@ -47,9 +47,12 @@ void main() {
     test('should have all expected strategies', () {
       expect(ReconnectionStrategy.values, hasLength(4));
       expect(ReconnectionStrategy.values, contains(ReconnectionStrategy.fixed));
-      expect(ReconnectionStrategy.values, contains(ReconnectionStrategy.exponential));
-      expect(ReconnectionStrategy.values, contains(ReconnectionStrategy.linear));
-      expect(ReconnectionStrategy.values, contains(ReconnectionStrategy.jittered));
+      expect(ReconnectionStrategy.values,
+          contains(ReconnectionStrategy.exponential));
+      expect(
+          ReconnectionStrategy.values, contains(ReconnectionStrategy.linear));
+      expect(
+          ReconnectionStrategy.values, contains(ReconnectionStrategy.jittered));
     });
   });
 
@@ -64,7 +67,7 @@ void main() {
         timeSinceLastConnection: Duration(minutes: 5),
         isHealthy: true,
       );
-      
+
       expect(stats.currentState, equals(ConnectionState.connected));
       expect(stats.reconnectAttempts, equals(2));
       expect(stats.lastSuccessfulConnection, equals(now));
@@ -80,7 +83,7 @@ void main() {
         timeSinceLastConnection: null,
         isHealthy: true,
       );
-      
+
       final string = stats.toString();
       expect(string, contains('ConnectionStats'));
       expect(string, contains('connected'));
@@ -96,7 +99,7 @@ void main() {
       // For now, we test that the classes can be instantiated
       final config = ReconnectionConfig.defaultConfig();
       expect(config, isNotNull);
-      
+
       // In a real test, we would:
       // 1. Create a mock RelayClient
       // 2. Create a ConnectionManager with the mock

@@ -5,7 +5,6 @@ import 'swap_types.dart';
 
 /// MEV protection service for swap transactions
 class MevProtectionService {
-
   MevProtectionService({
     required this.config,
     http.Client? httpClient,
@@ -98,7 +97,7 @@ class MevProtectionService {
   ) async {
     try {
       const url = 'https://protect.flashbots.net';
-      
+
       final body = {
         'jsonrpc': '2.0',
         'method': 'eth_sendRawTransaction',
@@ -106,14 +105,16 @@ class MevProtectionService {
         'id': 1,
       };
 
-      final response = await _httpClient.post(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Flashbots-Origin': config.origin ?? 'web3_universal_swap',
-        },
-        body: json.encode(body),
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .post(
+            Uri.parse(url),
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Flashbots-Origin': config.origin ?? 'web3_universal_swap',
+            },
+            body: json.encode(body),
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw MevProtectionException(
@@ -122,7 +123,7 @@ class MevProtectionService {
       }
 
       final data = json.decode(response.body) as Map<String, dynamic>;
-      
+
       if (data['error'] != null) {
         throw MevProtectionException(
           'Flashbots error: ${data['error']['message']}',
@@ -130,13 +131,14 @@ class MevProtectionService {
       }
 
       final txHash = data['result'] as String;
-      
+
       return MevProtectionResult(
         transactionHash: txHash,
         protectionType: MevProtectionType.flashbots,
         status: MevProtectionStatus.submitted,
         protectionId: txHash,
-        estimatedSavings: BigInt.zero, // Flashbots doesn't provide this directly
+        estimatedSavings:
+            BigInt.zero, // Flashbots doesn't provide this directly
       );
     } catch (e) {
       if (e is MevProtectionException) rethrow;
@@ -153,7 +155,7 @@ class MevProtectionService {
   ) async {
     try {
       const url = 'https://rpc.mevblocker.io';
-      
+
       final body = {
         'jsonrpc': '2.0',
         'method': 'eth_sendRawTransaction',
@@ -161,13 +163,15 @@ class MevProtectionService {
         'id': 1,
       };
 
-      final response = await _httpClient.post(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: json.encode(body),
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .post(
+            Uri.parse(url),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: json.encode(body),
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw MevProtectionException(
@@ -176,7 +180,7 @@ class MevProtectionService {
       }
 
       final data = json.decode(response.body) as Map<String, dynamic>;
-      
+
       if (data['error'] != null) {
         throw MevProtectionException(
           'MEV Blocker error: ${data['error']['message']}',
@@ -184,7 +188,7 @@ class MevProtectionService {
       }
 
       final txHash = data['result'] as String;
-      
+
       return MevProtectionResult(
         transactionHash: txHash,
         protectionType: MevProtectionType.mevBlocker,
@@ -207,7 +211,7 @@ class MevProtectionService {
   ) async {
     try {
       const url = 'https://api.edennetwork.io/v1/rpc';
-      
+
       final body = {
         'jsonrpc': '2.0',
         'method': 'eth_sendRawTransaction',
@@ -215,14 +219,17 @@ class MevProtectionService {
         'id': 1,
       };
 
-      final response = await _httpClient.post(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          if (config.apiKey != null) 'Authorization': 'Bearer ${config.apiKey}',
-        },
-        body: json.encode(body),
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .post(
+            Uri.parse(url),
+            headers: {
+              'Content-Type': 'application/json',
+              if (config.apiKey != null)
+                'Authorization': 'Bearer ${config.apiKey}',
+            },
+            body: json.encode(body),
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw MevProtectionException(
@@ -231,7 +238,7 @@ class MevProtectionService {
       }
 
       final data = json.decode(response.body) as Map<String, dynamic>;
-      
+
       if (data['error'] != null) {
         throw MevProtectionException(
           'Eden Network error: ${data['error']['message']}',
@@ -239,7 +246,7 @@ class MevProtectionService {
       }
 
       final txHash = data['result'] as String;
-      
+
       return MevProtectionResult(
         transactionHash: txHash,
         protectionType: MevProtectionType.eden,
@@ -263,7 +270,7 @@ class MevProtectionService {
   }) async {
     // This would typically involve checking the transaction status
     // and any protection-specific APIs
-    
+
     // For now, return a simplified status
     return MevProtectionStatus.confirmed;
   }
@@ -275,7 +282,6 @@ class MevProtectionService {
 
 /// MEV protection configuration
 class MevProtectionConfig {
-
   const MevProtectionConfig({
     this.apiKey,
     this.origin,
@@ -290,7 +296,6 @@ class MevProtectionConfig {
 
 /// MEV protection result
 class MevProtectionResult {
-
   const MevProtectionResult({
     required this.transactionHash,
     required this.protectionType,
@@ -344,7 +349,6 @@ enum MevProtectionStatus {
 
 /// Exception thrown when MEV protection operations fail
 class MevProtectionException implements Exception {
-
   const MevProtectionException(this.message, {this.originalError});
   final String message;
   final dynamic originalError;

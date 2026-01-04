@@ -13,7 +13,8 @@ class AbiPrettyPrinter {
   /// Formats ABI-encoded data according to the given types.
   ///
   /// Returns a human-readable string representation.
-  static String format(List<AbiType> types, List<dynamic> values, {int indent = 0}) {
+  static String format(List<AbiType> types, List<dynamic> values,
+      {int indent = 0}) {
     if (types.length != values.length) {
       throw ArgumentError('Types and values length mismatch');
     }
@@ -54,7 +55,7 @@ class AbiPrettyPrinter {
     final buffer = StringBuffer();
     buffer.writeln('Function: $functionName');
     buffer.writeln('Selector: ${HexUtils.encode(selector)}');
-    
+
     if (inputTypes.isNotEmpty) {
       buffer.writeln('Arguments:');
       buffer.write(format(inputTypes, inputValues, indent: 1));
@@ -77,7 +78,8 @@ class AbiPrettyPrinter {
     for (var i = 0; i < types.length; i++) {
       final name = i < names.length ? names[i] : 'arg$i';
       final value = decodedValues[name];
-      buffer.writeln('  $name [${types[i].name}]: ${_formatValue(types[i], value, 1)}');
+      buffer.writeln(
+          '  $name [${types[i].name}]: ${_formatValue(types[i], value, 1)}');
     }
 
     return buffer.toString();
@@ -131,21 +133,23 @@ class AbiPrettyPrinter {
 
   static String _formatBigInt(dynamic value) {
     final bigValue = value is BigInt ? value : BigInt.from(value as int);
-    
+
     // Show both decimal and hex for large numbers
     if (bigValue > BigInt.from(1000000)) {
       return '$bigValue (${HexUtils.encode(BytesUtils.bigIntToBytes(bigValue))})';
     }
-    
+
     return bigValue.toString();
   }
 
   static String _formatArray(AbiArray type, List<dynamic> values, int indent) {
     if (values.isEmpty) return '[]';
-    
+
     if (values.length <= 3 && !type.elementType.isDynamic) {
       // Compact format for small arrays
-      final items = values.map((v) => _formatValue(type.elementType, v, indent)).join(', ');
+      final items = values
+          .map((v) => _formatValue(type.elementType, v, indent))
+          .join(', ');
       return '[$items]';
     }
 
@@ -153,24 +157,27 @@ class AbiPrettyPrinter {
     final buffer = StringBuffer();
     buffer.writeln('[');
     final indentStr = '  ' * (indent + 1);
-    
+
     for (var i = 0; i < values.length; i++) {
-      buffer.write('$indentStr[$i] ${_formatValue(type.elementType, values[i], indent + 1)}');
+      buffer.write(
+          '$indentStr[$i] ${_formatValue(type.elementType, values[i], indent + 1)}');
       if (i < values.length - 1) buffer.writeln(',');
     }
-    
+
     buffer.write('\n${'  ' * indent}]');
     return buffer.toString();
   }
 
   static String _formatTuple(AbiTuple type, dynamic value, int indent) {
     final values = value is Map ? value.values.toList() : value as List;
-    
+
     if (type.components.length <= 2) {
       // Compact format for small tuples
       final items = <String>[];
       for (var i = 0; i < type.components.length; i++) {
-        final name = type.names != null && i < type.names!.length ? type.names![i] : null;
+        final name = type.names != null && i < type.names!.length
+            ? type.names![i]
+            : null;
         final formatted = _formatValue(type.components[i], values[i], indent);
         items.add(name != null ? '$name: $formatted' : formatted);
       }
@@ -181,13 +188,16 @@ class AbiPrettyPrinter {
     final buffer = StringBuffer();
     buffer.writeln('(');
     final indentStr = '  ' * (indent + 1);
-    
+
     for (var i = 0; i < type.components.length; i++) {
-      final name = type.names != null && i < type.names!.length ? type.names![i] : 'field$i';
-      buffer.write('$indentStr$name: ${_formatValue(type.components[i], values[i], indent + 1)}');
+      final name = type.names != null && i < type.names!.length
+          ? type.names![i]
+          : 'field$i';
+      buffer.write(
+          '$indentStr$name: ${_formatValue(type.components[i], values[i], indent + 1)}');
       if (i < type.components.length - 1) buffer.writeln(',');
     }
-    
+
     buffer.write('\n${'  ' * indent})');
     return buffer.toString();
   }

@@ -9,10 +9,10 @@ import 'models.dart';
 
 /// Public client for read-only blockchain operations.
 class PublicClient {
-
   PublicClient({required this.provider, required this.chain}) {
     ccipHandler = CCIPReadHandler(this);
   }
+
   /// The RPC provider.
   final RpcProvider provider;
 
@@ -57,12 +57,13 @@ class PublicClient {
   }
 
   /// Gets the transaction count (nonce) for an address.
-  Future<BigInt> getTransactionCount(String address, [String block = 'latest']) async {
+  Future<BigInt> getTransactionCount(String address,
+      [String block = 'latest']) async {
     return provider.getTransactionCount(address, block);
   }
 
   /// Executes a call without creating a transaction.
-  /// 
+  ///
   /// Supports EIP-3668 (CCIP-Read) off-chain lookups.
   Future<Uint8List> call(CallRequest request, [String block = 'latest']) async {
     try {
@@ -71,8 +72,9 @@ class PublicClient {
     } on RpcError catch (e) {
       if (e.data != null && e.data is String) {
         final errorData = HexUtils.decode(e.data as String);
-        if (errorData.length >= 4 && 
-            BytesUtils.equals(errorData.sublist(0, 4), CCIPReadHandler.offchainLookupSelector)) {
+        if (errorData.length >= 4 &&
+            BytesUtils.equals(errorData.sublist(0, 4),
+                CCIPReadHandler.offchainLookupSelector)) {
           return await ccipHandler.handle(request.to ?? '', errorData, block);
         }
       }

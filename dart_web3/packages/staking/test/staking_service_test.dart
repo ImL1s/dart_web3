@@ -5,7 +5,8 @@ import 'package:web3_universal_staking/web3_universal_staking.dart';
 void main() {
   group('Staking Service Types Tests', () {
     test('should create StakingOpportunity with correct values', () {
-      final contractAddress = EthereumAddress.fromHex('0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84');
+      final contractAddress =
+          EthereumAddress.fromHex('0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84');
       final opportunity = StakingOpportunity(
         id: 'eth-lido',
         name: 'Lido Staked ETH',
@@ -24,7 +25,8 @@ void main() {
     });
 
     test('should create StakingPosition with correct values', () {
-      final owner = EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
+      final owner =
+          EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
       final position = StakingPosition(
         opportunityId: 'eth-lido',
         owner: owner,

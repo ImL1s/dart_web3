@@ -6,7 +6,6 @@ import 'nft_types.dart';
 
 /// NFT transfer manager for handling NFT transfers with approval management
 class NftTransferManager {
-
   NftTransferManager({
     required WalletClient client,
   }) : _client = client;
@@ -70,7 +69,7 @@ class NftTransferManager {
         abi: _erc721AbiJson,
         publicClient: _client,
       );
-      
+
       return contract.estimateGas(
         'safeTransferFrom',
         [params.from.hex, params.to.hex, params.tokenId],
@@ -82,7 +81,7 @@ class NftTransferManager {
         abi: _erc1155AbiJson,
         publicClient: _client,
       );
-      
+
       final amount = params.amount ?? BigInt.one;
       return contract.estimateGas(
         'safeTransferFrom',
@@ -95,7 +94,8 @@ class NftTransferManager {
   }
 
   /// Batch transfer multiple NFTs
-  Future<List<String>> batchTransferNfts(List<NftTransferParams> transfers) async {
+  Future<List<String>> batchTransferNfts(
+      List<NftTransferParams> transfers) async {
     final results = <String>[];
 
     for (final transfer in transfers) {

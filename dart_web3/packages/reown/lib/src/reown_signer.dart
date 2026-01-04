@@ -14,7 +14,6 @@ import 'session_manager.dart';
 
 /// Signer implementation that uses Reown/WalletConnect v2 for signing.
 class ReownSigner implements Signer {
-
   ReownSigner({
     required this.sessionManager,
     required this.sessionTopic,
@@ -35,9 +34,10 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports eth_sign
-    final hasSigningMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('eth_sign'),);
-    
+    final hasSigningMethod = session.namespaces.any(
+      (ns) => ns.supportsMethod('eth_sign'),
+    );
+
     if (!hasSigningMethod) {
       throw Exception('Session does not support raw hash signing (eth_sign)');
     }
@@ -69,17 +69,19 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports transaction signing
-    final hasSigningMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('eth_signTransaction') || 
-        ns.supportsMethod('eth_sendTransaction'),);
-    
+    final hasSigningMethod = session.namespaces.any(
+      (ns) =>
+          ns.supportsMethod('eth_signTransaction') ||
+          ns.supportsMethod('eth_sendTransaction'),
+    );
+
     if (!hasSigningMethod) {
       throw Exception('Session does not support transaction signing');
     }
 
     // Prepare transaction parameters
     final params = _prepareTransactionParams(transaction);
-    
+
     try {
       // Send signing request to wallet
       final response = await sessionManager.sendRequest(
@@ -104,10 +106,11 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports message signing
-    final hasSigningMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('personal_sign') || 
-        ns.supportsMethod('eth_sign'),);
-    
+    final hasSigningMethod = session.namespaces.any(
+      (ns) =>
+          ns.supportsMethod('personal_sign') || ns.supportsMethod('eth_sign'),
+    );
+
     if (!hasSigningMethod) {
       throw Exception('Session does not support message signing');
     }
@@ -139,11 +142,13 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports typed data signing
-    final hasSigningMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('eth_signTypedData') ||
-        ns.supportsMethod('eth_signTypedData_v3') ||
-        ns.supportsMethod('eth_signTypedData_v4'),);
-    
+    final hasSigningMethod = session.namespaces.any(
+      (ns) =>
+          ns.supportsMethod('eth_signTypedData') ||
+          ns.supportsMethod('eth_signTypedData_v3') ||
+          ns.supportsMethod('eth_signTypedData_v4'),
+    );
+
     if (!hasSigningMethod) {
       throw Exception('Session does not support typed data signing');
     }
@@ -175,17 +180,20 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports EIP-7702 authorization signing
-    final hasSigningMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('eth_signAuthorization') ||
-        ns.supportsMethod('eth_signTypedData_v4'),); // Fallback to typed data
-    
+    final hasSigningMethod = session.namespaces.any(
+      (ns) =>
+          ns.supportsMethod('eth_signAuthorization') ||
+          ns.supportsMethod('eth_signTypedData_v4'),
+    ); // Fallback to typed data
+
     if (!hasSigningMethod) {
       throw Exception('Session does not support authorization signing');
     }
 
     try {
       // Try EIP-7702 specific method first
-      if (session.namespaces.any((ns) => ns.supportsMethod('eth_signAuthorization'))) {
+      if (session.namespaces
+          .any((ns) => ns.supportsMethod('eth_signAuthorization'))) {
         final response = await sessionManager.sendRequest(
           topic: sessionTopic,
           method: 'eth_signAuthorization',
@@ -232,16 +240,17 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports sending transactions
-    final hasMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('eth_sendTransaction'),);
-    
+    final hasMethod = session.namespaces.any(
+      (ns) => ns.supportsMethod('eth_sendTransaction'),
+    );
+
     if (!hasMethod) {
       throw Exception('Session does not support sending transactions');
     }
 
     // Prepare transaction parameters
     final params = _prepareTransactionParams(transaction);
-    
+
     try {
       // Send transaction request to wallet
       final response = await sessionManager.sendRequest(
@@ -286,9 +295,10 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports chain switching
-    final hasMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('wallet_switchEthereumChain'),);
-    
+    final hasMethod = session.namespaces.any(
+      (ns) => ns.supportsMethod('wallet_switchEthereumChain'),
+    );
+
     if (!hasMethod) {
       throw Exception('Session does not support chain switching');
     }
@@ -320,9 +330,10 @@ class ReownSigner implements Signer {
     }
 
     // Check if the session supports adding assets
-    final hasMethod = session.namespaces.any((ns) => 
-        ns.supportsMethod('wallet_watchAsset'),);
-    
+    final hasMethod = session.namespaces.any(
+      (ns) => ns.supportsMethod('wallet_watchAsset'),
+    );
+
     if (!hasMethod) {
       throw Exception('Session does not support adding assets');
     }
@@ -357,7 +368,8 @@ class ReownSigner implements Signer {
   Session? get session => sessionManager.getSession(sessionTopic);
 
   /// Prepares transaction parameters for RPC calls.
-  Map<String, dynamic> _prepareTransactionParams(TransactionRequest transaction) {
+  Map<String, dynamic> _prepareTransactionParams(
+      TransactionRequest transaction) {
     final params = <String, dynamic>{
       'from': _address,
     };
@@ -385,27 +397,33 @@ class ReownSigner implements Signer {
           params['gasPrice'] = '0x${transaction.gasPrice!.toRadixString(16)}';
         }
         break;
-      
+
       case TransactionType.eip1559:
       case TransactionType.eip4844:
       case TransactionType.eip7702:
         if (transaction.maxFeePerGas != null) {
-          params['maxFeePerGas'] = '0x${transaction.maxFeePerGas!.toRadixString(16)}';
+          params['maxFeePerGas'] =
+              '0x${transaction.maxFeePerGas!.toRadixString(16)}';
         }
         if (transaction.maxPriorityFeePerGas != null) {
-          params['maxPriorityFeePerGas'] = '0x${transaction.maxPriorityFeePerGas!.toRadixString(16)}';
+          params['maxPriorityFeePerGas'] =
+              '0x${transaction.maxPriorityFeePerGas!.toRadixString(16)}';
         }
         break;
-      
+
       case TransactionType.eip2930:
         if (transaction.gasPrice != null) {
           params['gasPrice'] = '0x${transaction.gasPrice!.toRadixString(16)}';
         }
         if (transaction.accessList != null) {
-          params['accessList'] = transaction.accessList!.map((entry) => {
-            'address': entry.address,
-            'storageKeys': entry.storageKeys,
-          },).toList();
+          params['accessList'] = transaction.accessList!
+              .map(
+                (entry) => {
+                  'address': entry.address,
+                  'storageKeys': entry.storageKeys,
+                },
+              )
+              .toList();
         }
         break;
     }
@@ -425,10 +443,9 @@ class ReownSigner implements Signer {
 
 /// Exception thrown when signing operations fail.
 class SigningException implements Exception {
-  
   SigningException(this.message);
   final String message;
-  
+
   @override
   String toString() => 'SigningException: $message';
 }
@@ -438,14 +455,15 @@ class ReownSignerFactory {
   ReownSignerFactory._();
 
   /// Creates a signer from an active session.
-  static ReownSigner fromSession(SessionManager sessionManager, Session session) {
+  static ReownSigner fromSession(
+      SessionManager sessionManager, Session session) {
     if (session.account.isEmpty) {
       throw ArgumentError('Session must have at least one account');
     }
 
     // Extract address from CAIP-10 account format
     final address = CaipUtils.getAddressFromAccount(session.account);
-    
+
     return ReownSigner(
       sessionManager: sessionManager,
       sessionTopic: session.topic,
@@ -454,22 +472,25 @@ class ReownSignerFactory {
   }
 
   /// Creates signers for all accounts in a session.
-  static List<ReownSigner> fromSessionAccounts(SessionManager sessionManager, Session session) {
+  static List<ReownSigner> fromSessionAccounts(
+      SessionManager sessionManager, Session session) {
     if (session.namespaces.isEmpty) {
       return [];
     }
 
     final signers = <ReownSigner>[];
-    
+
     // Get all accounts from all namespaces
     for (final namespace in session.namespaces) {
       for (final account in namespace.accounts) {
         final address = CaipUtils.getAddressFromAccount(account);
-        signers.add(ReownSigner(
-          sessionManager: sessionManager,
-          sessionTopic: session.topic,
-          address: address,
-        ),);
+        signers.add(
+          ReownSigner(
+            sessionManager: sessionManager,
+            sessionTopic: session.topic,
+            address: address,
+          ),
+        );
       }
     }
 

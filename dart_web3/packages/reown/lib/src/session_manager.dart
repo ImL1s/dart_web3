@@ -9,14 +9,14 @@ import 'relay_client.dart';
 
 /// Manages WalletConnect v2 sessions.
 class SessionManager {
-
   SessionManager(this.relayClient) {
     _relaySubscription = relayClient.events.listen(_handleRelayEvent);
   }
   final RelayClient relayClient;
   final Map<String, Session> _sessions = {};
-  final StreamController<SessionEvent> _eventController = StreamController.broadcast();
-  
+  final StreamController<SessionEvent> _eventController =
+      StreamController.broadcast();
+
   late StreamSubscription<RelayEvent> _relaySubscription;
 
   /// Stream of session events.
@@ -39,10 +39,10 @@ class SessionManager {
   }) async {
     final proposalId = _generateId();
     final pairingTopic = _generateTopic();
-    
+
     // Subscribe to pairing topic
     await relayClient.subscribe(pairingTopic);
-    
+
     final completer = Completer<Session>();
     _pendingProposals[pairingTopic] = completer;
 
@@ -94,7 +94,7 @@ class SessionManager {
 
     // Subscribe to session topic
     await relayClient.subscribe(sessionTopic);
-    
+
     // Send session approval
     await relayClient.publish(
       topic: topic,
@@ -115,7 +115,7 @@ class SessionManager {
 
     _sessions[sessionTopic] = session;
     _eventController.add(SessionEvent.established(session));
-    
+
     return session;
   }
 
@@ -160,7 +160,7 @@ class SessionManager {
 
     await relayClient.unsubscribe(topic);
     _sessions.remove(topic);
-    
+
     _eventController.add(SessionEvent.disconnected(session, reason));
   }
 
@@ -182,8 +182,7 @@ class SessionManager {
         'method': 'wc_sessionUpdate',
         'params': {
           'namespaces': {
-            for (final ns in namespaces)
-              ns.namespace: ns.toJson(),
+            for (final ns in namespaces) ns.namespace: ns.toJson(),
           },
         },
       },
@@ -192,7 +191,7 @@ class SessionManager {
     // Update local session
     final updatedSession = session.copyWith(namespaces: namespaces);
     _sessions[topic] = updatedSession;
-    
+
     _eventController.add(SessionEvent.updated(updatedSession));
   }
 
@@ -204,7 +203,7 @@ class SessionManager {
     }
 
     final newExpiry = DateTime.now().add(extension);
-    
+
     await relayClient.publish(
       topic: topic,
       message: {
@@ -220,7 +219,7 @@ class SessionManager {
     // Update local session
     final updatedSession = session.copyWith(expiry: newExpiry);
     _sessions[topic] = updatedSession;
-    
+
     _eventController.add(SessionEvent.extended(updatedSession));
   }
 
@@ -238,7 +237,7 @@ class SessionManager {
 
     final requestId = _generateId();
     final completer = Completer<Map<String, dynamic>>();
-    
+
     // Store pending request
     _pendingRequests[requestId] = completer;
 
@@ -315,7 +314,8 @@ class SessionManager {
       final completer = _pendingRequests.remove(id.toString());
       if (completer != null && !completer.isCompleted) {
         if (message.containsKey('error')) {
-          completer.completeError(Exception((message['error'] as Map<String, dynamic>)['message']));
+          completer.completeError(
+              Exception((message['error'] as Map<String, dynamic>)['message']));
         } else {
           completer.complete(message['result'] ?? message);
         }
@@ -333,7 +333,7 @@ class SessionManager {
     final params = message['params'] as Map<String, dynamic>;
     final session = Session.fromSettleParams(topic, params);
     _sessions[topic] = session;
-    
+
     // Resolve pending proposal if matches pairing topic
     final completer = _pendingProposals.remove(session.pairingTopic);
     if (completer != null && !completer.isCompleted) {
@@ -349,9 +349,10 @@ class SessionManager {
       final params = message['params'] as Map<String, dynamic>;
       final namespaces = (params['namespaces'] as Map<String, dynamic>)
           .entries
-          .map((e) => NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
+          .map((e) =>
+              NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
           .toList();
-      
+
       final updatedSession = session.copyWith(namespaces: namespaces);
       _sessions[topic] = updatedSession;
       _eventController.add(SessionEvent.updated(updatedSession));
@@ -365,7 +366,7 @@ class SessionManager {
       final expiry = DateTime.fromMillisecondsSinceEpoch(
         (params['expiry'] as int) * 1000,
       );
-      
+
       final updatedSession = session.copyWith(expiry: expiry);
       _sessions[topic] = updatedSession;
       _eventController.add(SessionEvent.extended(updatedSession));
@@ -384,7 +385,8 @@ class SessionManager {
   void _handleDisconnect() {
     // Mark all sessions as disconnected
     for (final session in _sessions.values) {
-      _eventController.add(SessionEvent.disconnected(session, 'Relay disconnected'));
+      _eventController
+          .add(SessionEvent.disconnected(session, 'Relay disconnected'));
     }
     _sessions.clear();
   }
@@ -419,7 +421,7 @@ class SessionManager {
   void dispose() {
     _relaySubscription.cancel();
     _eventController.close();
-    
+
     // Complete all pending requests
     for (final completer in _pendingRequests.values) {
       if (!completer.isCompleted) {
@@ -432,7 +434,6 @@ class SessionManager {
 
 /// Represents a WalletConnect session.
 class Session {
-
   Session({
     required this.topic,
     required this.pairingTopic,
@@ -448,7 +449,8 @@ class Session {
     final accounts = (state['accounts'] as List).cast<String>();
     final namespaces = (params['namespaces'] as Map<String, dynamic>)
         .entries
-        .map((e) => NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
+        .map((e) =>
+            NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
         .toList();
 
     return Session(
@@ -499,8 +501,7 @@ class Session {
       'pairingTopic': pairingTopic,
       'account': account,
       'namespaces': {
-        for (final ns in namespaces)
-          ns.namespace: ns.toJson(),
+        for (final ns in namespaces) ns.namespace: ns.toJson(),
       },
       'metadata': metadata,
       'createdAt': createdAt.millisecondsSinceEpoch,
@@ -511,7 +512,6 @@ class Session {
 
 /// Represents a session proposal.
 class SessionProposal {
-
   SessionProposal({
     required this.id,
     required this.topic,
@@ -523,23 +523,30 @@ class SessionProposal {
     required this.onApprove,
   });
 
-  factory SessionProposal.fromJson(Map<String, dynamic> json, String topic, {Future<Session>? onApprove}) {
-    final requiredNamespaces = (json['requiredNamespaces'] as Map<String, dynamic>)
+  factory SessionProposal.fromJson(Map<String, dynamic> json, String topic,
+      {Future<Session>? onApprove}) {
+    final requiredNamespaces = (json['requiredNamespaces']
+            as Map<String, dynamic>)
         .entries
-        .map((e) => NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
+        .map((e) =>
+            NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
         .toList();
-    
-    final optionalNamespaces = (json['optionalNamespaces'] as Map<String, dynamic>?)
-        ?.entries
-        .map((e) => NamespaceConfig.fromJson(e.key, e.value as Map<String, dynamic>))
-        .toList() ?? [];
+
+    final optionalNamespaces =
+        (json['optionalNamespaces'] as Map<String, dynamic>?)
+                ?.entries
+                .map((e) => NamespaceConfig.fromJson(
+                    e.key, e.value as Map<String, dynamic>))
+                .toList() ??
+            [];
 
     return SessionProposal(
       id: json['id'] as String,
       topic: topic,
       requiredNamespaces: requiredNamespaces,
       optionalNamespaces: optionalNamespaces,
-      metadata: (json['proposer'] as Map<String, dynamic>)['metadata'] as Map<String, dynamic>,
+      metadata: (json['proposer'] as Map<String, dynamic>)['metadata']
+          as Map<String, dynamic>,
       expiry: Duration(seconds: json['expiry'] as int? ?? 300),
       createdAt: DateTime.now(),
       onApprove: onApprove ?? Completer<Session>().future,
@@ -560,12 +567,10 @@ class SessionProposal {
     return {
       'id': id,
       'requiredNamespaces': {
-        for (final ns in requiredNamespaces)
-          ns.namespace: ns.toJson(),
+        for (final ns in requiredNamespaces) ns.namespace: ns.toJson(),
       },
       'optionalNamespaces': {
-        for (final ns in optionalNamespaces)
-          ns.namespace: ns.toJson(),
+        for (final ns in optionalNamespaces) ns.namespace: ns.toJson(),
       },
       'proposer': {
         'publicKey': 'placeholder', // Would be actual public key
@@ -578,8 +583,8 @@ class SessionProposal {
 
 /// Session events.
 class SessionEvent {
-
-  SessionEvent._(this.type, {
+  SessionEvent._(
+    this.type, {
     this.session,
     this.proposal,
     this.proposalId,
@@ -589,27 +594,30 @@ class SessionEvent {
 
   factory SessionEvent.proposalSent(SessionProposal proposal) =>
       SessionEvent._(SessionEventType.proposalSent, proposal: proposal);
-  
+
   factory SessionEvent.proposalReceived(SessionProposal proposal) =>
       SessionEvent._(SessionEventType.proposalReceived, proposal: proposal);
-  
+
   factory SessionEvent.proposalRejected(String proposalId, String? reason) =>
-      SessionEvent._(SessionEventType.proposalRejected, proposalId: proposalId, reason: reason);
-  
+      SessionEvent._(SessionEventType.proposalRejected,
+          proposalId: proposalId, reason: reason);
+
   factory SessionEvent.established(Session session) =>
       SessionEvent._(SessionEventType.established, session: session);
-  
+
   factory SessionEvent.updated(Session session) =>
       SessionEvent._(SessionEventType.updated, session: session);
-  
+
   factory SessionEvent.extended(Session session) =>
       SessionEvent._(SessionEventType.extended, session: session);
-  
+
   factory SessionEvent.disconnected(Session session, String? reason) =>
-      SessionEvent._(SessionEventType.disconnected, session: session, reason: reason);
-  
+      SessionEvent._(SessionEventType.disconnected,
+          session: session, reason: reason);
+
   factory SessionEvent.request(Session session, Map<String, dynamic> request) =>
-      SessionEvent._(SessionEventType.request, session: session, request: request);
+      SessionEvent._(SessionEventType.request,
+          session: session, request: request);
   final SessionEventType type;
   final Session? session;
   final SessionProposal? proposal;

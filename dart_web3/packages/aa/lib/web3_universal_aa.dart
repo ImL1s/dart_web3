@@ -1,9 +1,8 @@
 /// ERC-4337 Account Abstraction support for Dart Web3 SDK.
-/// 
+///
 /// This library provides comprehensive support for ERC-4337 Account Abstraction,
 /// including UserOperation construction, Bundler communication, Paymaster integration,
 /// and Smart Account implementations.
-
 
 export 'src/accounts/light_account.dart';
 // Smart Account implementations

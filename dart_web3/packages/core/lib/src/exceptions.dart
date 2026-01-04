@@ -12,8 +12,8 @@ abstract class Web3Exception implements Exception {
 
 /// Exception thrown when an invalid address is encountered.
 class InvalidAddressException extends Web3Exception {
-
   InvalidAddressException(this.address, [this.reason]);
+
   /// The invalid address string.
   final String address;
 
@@ -21,8 +21,9 @@ class InvalidAddressException extends Web3Exception {
   final String? reason;
 
   @override
-  String get message =>
-      reason != null ? 'Invalid address "$address": $reason' : 'Invalid address: $address';
+  String get message => reason != null
+      ? 'Invalid address "$address": $reason'
+      : 'Invalid address: $address';
 
   @override
   String get code => 'INVALID_ADDRESS';
@@ -30,7 +31,6 @@ class InvalidAddressException extends Web3Exception {
 
 /// Exception thrown when hex encoding/decoding fails.
 class HexException extends Web3Exception {
-
   HexException(this.message);
   @override
   final String message;
@@ -41,7 +41,6 @@ class HexException extends Web3Exception {
 
 /// Exception thrown when RLP encoding/decoding fails.
 class RlpException extends Web3Exception {
-
   RlpException(this.message);
   @override
   final String message;
@@ -52,7 +51,6 @@ class RlpException extends Web3Exception {
 
 /// Exception thrown when unit conversion fails.
 class UnitConversionException extends Web3Exception {
-
   UnitConversionException(this.message);
   @override
   final String message;

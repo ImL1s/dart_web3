@@ -11,7 +11,8 @@ class SelectionResult {
   });
 
   final List<Utxo> inputs;
-  final List<Utxo> outputs; // Changed from TransactionOutput model for simplicity in this abstract, but usually should be TxOutput
+  final List<Utxo>
+      outputs; // Changed from TransactionOutput model for simplicity in this abstract, but usually should be TxOutput
   final BigInt fee;
   final BigInt change;
 }

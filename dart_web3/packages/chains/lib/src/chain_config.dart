@@ -1,6 +1,5 @@
 /// Configuration for a blockchain network.
 class ChainConfig {
-
   ChainConfig({
     required this.chainId,
     required this.name,
@@ -15,6 +14,7 @@ class ChainConfig {
     this.multicallAddress,
     this.ensRegistryAddress,
   });
+
   /// The chain ID.
   final int chainId;
 

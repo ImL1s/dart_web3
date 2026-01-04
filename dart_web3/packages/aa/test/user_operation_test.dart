@@ -16,7 +16,8 @@ void main() {
         signature: '0x1234',
       );
 
-      expect(userOp.sender, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          userOp.sender, equals('0x1234567890123456789012345678901234567890'));
       expect(userOp.nonce, equals(BigInt.from(1)));
       expect(userOp.callData, equals('0xabcdef'));
       expect(userOp.callGasLimit, equals(BigInt.from(100000)));
@@ -42,7 +43,8 @@ void main() {
 
       final json = userOp.toJson(EntryPointVersion.v06);
 
-      expect(json['sender'], equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          json['sender'], equals('0x1234567890123456789012345678901234567890'));
       expect(json['nonce'], equals('0x1'));
       expect(json['callData'], equals('0xabcdef'));
       expect(json['callGasLimit'], equals('0x186a0'));
@@ -68,14 +70,15 @@ void main() {
 
       final json = userOp.toJson(EntryPointVersion.v07);
 
-      expect(json['sender'], equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          json['sender'], equals('0x1234567890123456789012345678901234567890'));
       expect(json['nonce'], equals('0x1'));
       expect(json['callData'], equals('0xabcdef'));
       expect(json['accountGasLimits'], isNotNull);
       expect(json['gasFees'], isNotNull);
       expect(json['preVerificationGas'], equals('0x5208'));
       expect(json['signature'], equals('0x1234'));
-      
+
       // Check packed values (verificationGasLimit 50000=0xc350, callGasLimit 100000=0x186a0)
       // accountGasLimits = 0x0000000000000000000000000000c350000000000000000000000000000186a0
       expect(json['accountGasLimits'], contains('c350'));
@@ -97,7 +100,8 @@ void main() {
 
       final userOp = UserOperation.fromJson(json);
 
-      expect(userOp.sender, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          userOp.sender, equals('0x1234567890123456789012345678901234567890'));
       expect(userOp.nonce, equals(BigInt.from(1)));
       expect(userOp.callData, equals('0xabcdef'));
       expect(userOp.callGasLimit, equals(BigInt.from(100000)));
@@ -148,9 +152,11 @@ void main() {
         paymasterPostOpGasLimit: BigInt.from(20000),
       );
 
-      expect(userOp.factory, equals('0x5678901234567890123456789012345678901234'));
+      expect(
+          userOp.factory, equals('0x5678901234567890123456789012345678901234'));
       expect(userOp.factoryData, equals('0xdef0'));
-      expect(userOp.paymaster, equals('0xabcdef0123456789012345678901234567890123'));
+      expect(userOp.paymaster,
+          equals('0xabcdef0123456789012345678901234567890123'));
       expect(userOp.paymasterData, equals('0x4567'));
       expect(userOp.paymasterVerificationGasLimit, equals(BigInt.from(30000)));
       expect(userOp.paymasterPostOpGasLimit, equals(BigInt.from(20000)));
@@ -180,7 +186,7 @@ void main() {
       expect(updatedUserOp.nonce, equals(BigInt.from(2)));
       expect(updatedUserOp.callData, equals(originalUserOp.callData));
       expect(updatedUserOp.signature, equals('0x5678'));
-      
+
       // Original should be unchanged
       expect(originalUserOp.nonce, equals(BigInt.from(1)));
       expect(originalUserOp.signature, equals('0x1234'));
@@ -312,7 +318,8 @@ void main() {
       expect(estimate.preVerificationGas, equals(BigInt.from(21000)));
       expect(estimate.verificationGasLimit, equals(BigInt.from(50000)));
       expect(estimate.callGasLimit, equals(BigInt.from(100000)));
-      expect(estimate.paymasterVerificationGasLimit, equals(BigInt.from(30000)));
+      expect(
+          estimate.paymasterVerificationGasLimit, equals(BigInt.from(30000)));
       expect(estimate.paymasterPostOpGasLimit, equals(BigInt.from(20000)));
     });
 
@@ -336,7 +343,8 @@ void main() {
   group('UserOperationReceipt', () {
     test('should create from JSON correctly', () {
       final json = {
-        'userOpHash': '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
+        'userOpHash':
+            '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
         'sender': '0x1234567890123456789012345678901234567890',
         'nonce': '0x1',
         'paymaster': '0xabcdef0123456789012345678901234567890123',
@@ -345,27 +353,35 @@ void main() {
         'success': true,
         'entryPoint': '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
         'receipt': {
-          'transactionHash': '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+          'transactionHash':
+              '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
           'blockNumber': '0x123456',
         },
       };
 
       final receipt = UserOperationReceipt.fromJson(json);
 
-      expect(receipt.userOpHash, equals('0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'));
-      expect(receipt.sender, equals('0x1234567890123456789012345678901234567890'));
+      expect(
+          receipt.userOpHash,
+          equals(
+              '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'));
+      expect(
+          receipt.sender, equals('0x1234567890123456789012345678901234567890'));
       expect(receipt.nonce, equals(BigInt.from(1)));
-      expect(receipt.paymaster, equals('0xabcdef0123456789012345678901234567890123'));
+      expect(receipt.paymaster,
+          equals('0xabcdef0123456789012345678901234567890123'));
       expect(receipt.actualGasCost, equals(BigInt.from(21000)));
       expect(receipt.actualGasUsed, equals(BigInt.from(50000)));
       expect(receipt.success, isTrue);
-      expect(receipt.entryPoint, equals('0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'));
+      expect(receipt.entryPoint,
+          equals('0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'));
       expect(receipt.receipt, isA<Map<String, dynamic>>());
     });
 
     test('should handle optional fields', () {
       final json = {
-        'userOpHash': '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
+        'userOpHash':
+            '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
         'sender': '0x1234567890123456789012345678901234567890',
         'nonce': '0x1',
         'actualGasCost': '0x5208',

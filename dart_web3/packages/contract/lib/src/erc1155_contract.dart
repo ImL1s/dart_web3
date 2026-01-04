@@ -1,4 +1,3 @@
-
 import 'contract.dart';
 import 'event_filter.dart';
 
@@ -143,7 +142,8 @@ class ERC1155Contract extends Contract {
   }
 
   /// Gets the balances of multiple token types for multiple accounts.
-  Future<List<BigInt>> balanceOfBatch(List<String> accounts, List<BigInt> ids) async {
+  Future<List<BigInt>> balanceOfBatch(
+      List<String> accounts, List<BigInt> ids) async {
     final result = await read('balanceOfBatch', [accounts, ids]);
     return (result[0] as List).cast<BigInt>();
   }
@@ -189,11 +189,14 @@ class ERC1155Contract extends Contract {
     String? from,
     String? to,
   }) {
-    return createEventFilter('TransferSingle', indexedArgs: {
-      if (operator != null) 'operator': operator,
-      if (from != null) 'from': from,
-      if (to != null) 'to': to,
-    },);
+    return createEventFilter(
+      'TransferSingle',
+      indexedArgs: {
+        if (operator != null) 'operator': operator,
+        if (from != null) 'from': from,
+        if (to != null) 'to': to,
+      },
+    );
   }
 
   /// Creates a filter for TransferBatch events.
@@ -202,25 +205,34 @@ class ERC1155Contract extends Contract {
     String? from,
     String? to,
   }) {
-    return createEventFilter('TransferBatch', indexedArgs: {
-      if (operator != null) 'operator': operator,
-      if (from != null) 'from': from,
-      if (to != null) 'to': to,
-    },);
+    return createEventFilter(
+      'TransferBatch',
+      indexedArgs: {
+        if (operator != null) 'operator': operator,
+        if (from != null) 'from': from,
+        if (to != null) 'to': to,
+      },
+    );
   }
 
   /// Creates a filter for ApprovalForAll events.
   EventFilter approvalForAllFilter({String? account, String? operator}) {
-    return createEventFilter('ApprovalForAll', indexedArgs: {
-      if (account != null) 'account': account,
-      if (operator != null) 'operator': operator,
-    },);
+    return createEventFilter(
+      'ApprovalForAll',
+      indexedArgs: {
+        if (account != null) 'account': account,
+        if (operator != null) 'operator': operator,
+      },
+    );
   }
 
   /// Creates a filter for URI events.
   EventFilter uriFilter({BigInt? id}) {
-    return createEventFilter('URI', indexedArgs: {
-      if (id != null) 'id': id,
-    },);
+    return createEventFilter(
+      'URI',
+      indexedArgs: {
+        if (id != null) 'id': id,
+      },
+    );
   }
 }

@@ -31,14 +31,14 @@ class ShortVec {
     }
     return len;
   }
-  
+
   static int encodeLengthSize(int len) {
-     var size = 1;
-     var remLen = len;
-     while (remLen >= 0x80) {
-         remLen >>= 7;
-         size += 1;
-     }
-     return size;
+    var size = 1;
+    var remLen = len;
+    while (remLen >= 0x80) {
+      remLen >>= 7;
+      size += 1;
+    }
+    return size;
   }
 }

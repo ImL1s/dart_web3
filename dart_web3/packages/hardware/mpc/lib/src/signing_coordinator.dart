@@ -7,7 +7,7 @@ import 'package:web3_universal_signer/web3_universal_signer.dart';
 import 'mpc_types.dart';
 
 /// Coordinates multi-party signing sessions.
-/// 
+///
 /// Manages the communication and coordination between multiple parties
 /// to create threshold signatures.
 abstract class SigningCoordinator {
@@ -31,18 +31,18 @@ abstract class SigningCoordinator {
 }
 
 /// Default implementation of SigningCoordinator.
-/// 
+///
 /// This implementation uses a simple coordination protocol where parties
 /// communicate through a central coordinator service.
 class DefaultSigningCoordinator implements SigningCoordinator {
-
   DefaultSigningCoordinator({required this.communicationChannel});
+
   /// The communication channel for coordinating with other parties.
   final SigningCommunicationChannel communicationChannel;
-  
+
   /// Active signing sessions.
   final Map<String, MpcSigningSession> _activeSessions = {};
-  
+
   /// Random number generator for session IDs.
   final Random _random = Random.secure();
 
@@ -53,7 +53,7 @@ class DefaultSigningCoordinator implements SigningCoordinator {
   ) async {
     // Generate unique session ID
     final sessionId = _generateSessionId();
-    
+
     // Create signing session
     final session = MpcSigningSession(
       sessionId: sessionId,
@@ -62,14 +62,14 @@ class DefaultSigningCoordinator implements SigningCoordinator {
       coordinator: this,
       communicationChannel: communicationChannel,
     );
-    
+
     // Store session
     _activeSessions[sessionId] = session;
-    
+
     try {
       // Initialize the session
       await session._initialize();
-      
+
       // Return the session interface
       return SigningSession(
         sessionId: sessionId,
@@ -91,7 +91,7 @@ class DefaultSigningCoordinator implements SigningCoordinator {
         message: 'Session not found: $sessionId',
       );
     }
-    
+
     await session._addParty(keyShare.partyId);
   }
 
@@ -101,7 +101,7 @@ class DefaultSigningCoordinator implements SigningCoordinator {
     if (session == null) {
       return SigningSessionState.failed;
     }
-    
+
     return session._state;
   }
 
@@ -123,7 +123,8 @@ class DefaultSigningCoordinator implements SigningCoordinator {
   String _generateSessionId() {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     final randomBytes = List.generate(8, (_) => _random.nextInt(256));
-    final randomHex = randomBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    final randomHex =
+        randomBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
     return '${timestamp}_$randomHex';
   }
 
@@ -153,23 +154,23 @@ abstract class SigningCommunicationChannel {
 
 /// HTTP-based communication channel implementation.
 class HttpSigningCommunicationChannel implements SigningCommunicationChannel {
-
   HttpSigningCommunicationChannel({
     required this.baseUrl,
     required this.partyId,
   });
+
   /// The base URL for the coordination service.
   final String baseUrl;
-  
+
   /// The party ID for this instance.
   final String partyId;
-  
+
   /// HTTP client for making requests.
   // Note: In a real implementation, you would use http package
   // final http.Client _httpClient = http.Client();
-  
+
   /// Message stream controller.
-  final StreamController<Map<String, dynamic>> _messageController = 
+  final StreamController<Map<String, dynamic>> _messageController =
       StreamController<Map<String, dynamic>>.broadcast();
 
   @override
@@ -177,17 +178,18 @@ class HttpSigningCommunicationChannel implements SigningCommunicationChannel {
     // Implementation would send HTTP POST to coordination service
     // POST /api/sessions/{sessionId}/messages
     // Body: { "to": partyId, "from": this.partyId, "message": message }
-    
+
     // For now, simulate the operation
     await Future<void>.delayed(const Duration(milliseconds: 100));
   }
 
   @override
-  Future<void> broadcastMessage(String sessionId, Map<String, dynamic> message) async {
+  Future<void> broadcastMessage(
+      String sessionId, Map<String, dynamic> message) async {
     // Implementation would send HTTP POST to coordination service
     // POST /api/sessions/{sessionId}/broadcast
     // Body: { "from": this.partyId, "message": message }
-    
+
     // For now, simulate the operation
     await Future<void>.delayed(const Duration(milliseconds: 100));
   }
@@ -196,7 +198,7 @@ class HttpSigningCommunicationChannel implements SigningCommunicationChannel {
   Stream<Map<String, dynamic>> receiveMessages() {
     // Implementation would poll or use WebSocket to receive messages
     // GET /api/parties/{partyId}/messages or WebSocket connection
-    
+
     return _messageController.stream;
   }
 
@@ -205,7 +207,7 @@ class HttpSigningCommunicationChannel implements SigningCommunicationChannel {
     // Implementation would join the session channel
     // POST /api/sessions/{sessionId}/join
     // Body: { "partyId": this.partyId }
-    
+
     // For now, simulate the operation
     await Future<void>.delayed(const Duration(milliseconds: 50));
   }
@@ -215,7 +217,7 @@ class HttpSigningCommunicationChannel implements SigningCommunicationChannel {
     // Implementation would leave the session channel
     // POST /api/sessions/{sessionId}/leave
     // Body: { "partyId": this.partyId }
-    
+
     // For now, simulate the operation
     await Future<void>.delayed(const Duration(milliseconds: 50));
   }
@@ -229,7 +231,6 @@ class HttpSigningCommunicationChannel implements SigningCommunicationChannel {
 
 /// Internal MPC signing session implementation.
 class MpcSigningSession {
-
   MpcSigningSession({
     required this.sessionId,
     required this.request,
@@ -237,59 +238,62 @@ class MpcSigningSession {
     required this.coordinator,
     required this.communicationChannel,
   });
+
   /// The session ID.
   final String sessionId;
-  
+
   /// The signing request.
   final MpcSigningRequest request;
-  
+
   /// The key share for this party.
   final KeyShare keyShare;
-  
+
   /// The coordinator managing this session.
   final DefaultSigningCoordinator coordinator;
-  
+
   /// The communication channel.
   final SigningCommunicationChannel communicationChannel;
-  
+
   /// Current session state.
   SigningSessionState _state = SigningSessionState.initializing;
-  
+
   /// Parties that have joined the session.
   final Set<String> _joinedParties = {};
-  
+
   /// The final signature (when completed).
-  
+
   /// Completer for waiting on signature completion.
   final Completer<Uint8List> _signatureCompleter = Completer<Uint8List>();
-  
+
   /// Session timeout timer.
   Timer? _timeoutTimer;
 
   /// Initializes the signing session.
   Future<void> _initialize() async {
     _state = SigningSessionState.waitingForParties;
-    
+
     // Join the communication channel
     await communicationChannel.joinChannel(sessionId);
-    
+
     // Add this party to the session
     _joinedParties.add(keyShare.partyId);
-    
+
     // Set up timeout (5 minutes default)
     _timeoutTimer = Timer(Duration(minutes: 5), () {
       if (!_signatureCompleter.isCompleted) {
-        _signatureCompleter.completeError(MpcError(
-          type: MpcErrorType.sessionTimeout,
-          message: 'Signing session timed out',
-        ),);
+        _signatureCompleter.completeError(
+          MpcError(
+            type: MpcErrorType.sessionTimeout,
+            message: 'Signing session timed out',
+          ),
+        );
         _state = SigningSessionState.failed;
       }
     });
-    
+
     // Start listening for messages
     _listenForMessages();
-    
+
     // Check if we have enough parties to start signing
     _checkReadyToSign();
   }
@@ -302,7 +306,7 @@ class MpcSigningSession {
         message: 'Cannot add party in current state: $_state',
       );
     }
-    
+
     _joinedParties.add(partyId);
     _checkReadyToSign();
   }
@@ -317,17 +321,17 @@ class MpcSigningSession {
   /// Starts the actual signing process.
   Future<void> _startSigning() async {
     _state = SigningSessionState.signing;
-    
+
     try {
       // Simulate threshold signature generation
       // In a real implementation, this would involve:
       // 1. Each party generates their signature share
       // 2. Parties exchange signature shares
       // 3. Signature shares are combined to create the final signature
-      
+
       final signature = await _generateThresholdSignature();
       _state = SigningSessionState.completed;
-      
+
       if (!_signatureCompleter.isCompleted) {
         _signatureCompleter.complete(signature);
       }
@@ -345,17 +349,17 @@ class MpcSigningSession {
   Future<Uint8List> _generateThresholdSignature() async {
     // This is a simplified simulation of threshold signature generation
     // In a real implementation, this would involve complex cryptographic operations
-    
+
     // Simulate some processing time
     await Future<void>.delayed(const Duration(seconds: 1));
-    
+
     // Generate a mock signature (65 bytes for ECDSA)
     final random = Random.secure();
     final signature = Uint8List(65);
     for (var i = 0; i < 65; i++) {
       signature[i] = random.nextInt(256);
     }
-    
+
     return signature;
   }
 
@@ -367,26 +371,28 @@ class MpcSigningSession {
   /// Handles incoming messages.
   void _handleMessage(Map<String, dynamic> message) {
     final messageType = message['type'] as String?;
-    
+
     switch (messageType) {
       case 'party_joined':
         final partyId = message['partyId'] as String;
         _joinedParties.add(partyId);
         _checkReadyToSign();
         break;
-        
+
       case 'signature_share':
         // Handle signature share from another party
         _handleSignatureShare(message);
         break;
-        
+
       case 'session_cancelled':
         _state = SigningSessionState.cancelled;
         if (!_signatureCompleter.isCompleted) {
-          _signatureCompleter.completeError(MpcError(
-            type: MpcErrorType.signingFailed,
-            message: 'Session was cancelled',
-          ),);
+          _signatureCompleter.completeError(
+            MpcError(
+              type: MpcErrorType.signingFailed,
+              message: 'Session was cancelled',
+            ),
+          );
         }
         break;
     }
@@ -401,20 +407,22 @@ class MpcSigningSession {
   /// Cancels the session.
   Future<void> _cancel() async {
     _state = SigningSessionState.cancelled;
-    
+
     // Notify other parties
     await communicationChannel.broadcastMessage(sessionId, {
       'type': 'session_cancelled',
       'partyId': keyShare.partyId,
     });
-    
+
     if (!_signatureCompleter.isCompleted) {
-      _signatureCompleter.completeError(MpcError(
-        type: MpcErrorType.signingFailed,
-        message: 'Session was cancelled',
-      ),);
+      _signatureCompleter.completeError(
+        MpcError(
+          type: MpcErrorType.signingFailed,
+          message: 'Session was cancelled',
+        ),
+      );
     }
-    
+
     _cleanup();
   }
 

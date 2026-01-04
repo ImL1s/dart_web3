@@ -4,7 +4,8 @@ void main() async {
   print('--- Dart Web3 SDK Comprehensive Example ---');
 
   // 1. Core Utilities
-  final address = EthereumAddress.fromHex('0xd8da6bf26964af9d7eed9e03e53415d37aa96045');
+  final address =
+      EthereumAddress.fromHex('0xd8da6bf26964af9d7eed9e03e53415d37aa96045');
   print('Address: ${address.toChecksum(Keccak256.hash)}');
 
   // 2. Crypto & Wallets
@@ -12,8 +13,9 @@ void main() async {
   // final mnemonic = Bip39.generate();
   // print('Mnemonic: ${mnemonic.join(" ")}');
   // final wallet = HDWallet.fromMnemonic(mnemonic);
-  
-  final privateKeyHex = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
+
+  final privateKeyHex =
+      '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
   final signer = PrivateKeySigner.fromHex(privateKeyHex, 1);
   print('Wallet Address: ${signer.address}');
 
@@ -22,7 +24,7 @@ void main() async {
     rpcUrl: 'https://eth.llamarpc.com',
     chain: Chains.ethereum,
   );
-  
+
   try {
     final blockNumber = await publicClient.getBlockNumber();
     print('Current Block: $blockNumber');
@@ -45,14 +47,17 @@ void main() async {
   // final signer = PrivateKeySigner(wallet.getPrivateKey(), 1); // Already created above
   final smartAccount = SimpleAccount(
     owner: signer,
-    factoryAddress: '0x9406Cc6185a346906296840746125a0E44976454', // SimpleAccountFactory
+    factoryAddress:
+        '0x9406Cc6185a346906296840746125a0E44976454', // SimpleAccountFactory
     publicClient: publicClient,
-    entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789', // EntryPoint v0.6
+    entryPointAddress:
+        '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789', // EntryPoint v0.6
   );
   print('Smart Account Address: ${await smartAccount.getAddress()}');
 
   // 6. Multi-chain (Solana)
-  final solAddress = SolanaAddress.fromBase58('vines1vzrYbzLMRdu58GRt1zx9S6SBBZLRCCmWW9ZSP');
+  final solAddress =
+      SolanaAddress.fromBase58('vines1vzrYbzLMRdu58GRt1zx9S6SBBZLRCCmWW9ZSP');
   print('Solana Address: $solAddress');
 
   print('--- Example Execution Finished ---');

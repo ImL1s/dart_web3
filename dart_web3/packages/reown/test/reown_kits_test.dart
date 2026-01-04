@@ -5,7 +5,7 @@ import 'package:web3_universal_reown/web3_universal_reown.dart';
 
 class MockRelayClient extends RelayClient {
   MockRelayClient() : super(relayUrl: 'mock://host', projectId: 'test');
-  
+
   final List<Map<String, dynamic>> sentMessages = [];
   final _eventController = StreamController<RelayEvent>.broadcast();
 
@@ -77,13 +77,13 @@ void main() {
       expect(mockRelay.sentMessages.length, 1);
       final sentProposal = mockRelay.sentMessages.first;
       expect(sentProposal['message']['method'], 'wc_sessionPropose');
-      
+
       final pairingTopic = proposal.topic;
 
       // 2. WalletKit (Wallet) receives proposal
       // In a real flow, the wallet pairs via URI, then receives the proposal
       // on the pairing topic.
-      
+
       // Simulate receiving the proposal on the wallet side
       // (Using the same sessionManager for simplicity in this unit test)
       final receivedProposal = SessionProposal.fromJson(
@@ -114,7 +114,10 @@ void main() {
         'params': {
           'pairingTopic': pairingTopic,
           'metadata': {'name': 'Wallet'},
-          'expiry': (DateTime.now().add(const Duration(days: 7)).millisecondsSinceEpoch ~/ 1000),
+          'expiry': (DateTime.now()
+                  .add(const Duration(days: 7))
+                  .millisecondsSinceEpoch ~/
+              1000),
           'state': {
             'accounts': ['0x123'],
           },
@@ -132,9 +135,9 @@ void main() {
       final settledSessionByApp = await proposal.onApprove;
       expect(settledSessionByApp.account, '0x123');
       expect(settledSessionByApp.topic, sessionTopic);
-      
+
       expect(settledSessionByWallet.account, '0x123');
     });
-  group('Reown Kits Wrapper', () {});
+    group('Reown Kits Wrapper', () {});
   });
 }

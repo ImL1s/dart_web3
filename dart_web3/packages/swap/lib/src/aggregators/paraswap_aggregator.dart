@@ -8,7 +8,6 @@ import 'aggregator_interface.dart';
 
 /// ParaSwap DEX aggregator implementation
 class ParaSwapAggregator extends DexAggregator {
-
   ParaSwapAggregator({
     required this.config,
     http.Client? httpClient,
@@ -21,14 +20,14 @@ class ParaSwapAggregator extends DexAggregator {
 
   @override
   List<int> get supportedChains => [
-    1,     // Ethereum
-    56,    // BSC
-    137,   // Polygon
-    42161, // Arbitrum
-    10,    // Optimism
-    43114, // Avalanche
-    250,   // Fantom
-  ];
+        1, // Ethereum
+        56, // BSC
+        137, // Polygon
+        42161, // Arbitrum
+        10, // Optimism
+        43114, // Avalanche
+        250, // Fantom
+      ];
 
   @override
   bool get supportsCrossChain => false;
@@ -36,10 +35,10 @@ class ParaSwapAggregator extends DexAggregator {
   String get _baseUrl => config.baseUrl ?? 'https://apiv5.paraswap.io';
 
   Map<String, String> get _headers => {
-    'Content-Type': 'application/json',
-    if (config.apiKey != null) 'X-API-KEY': config.apiKey!,
-    ...config.headers,
-  };
+        'Content-Type': 'application/json',
+        if (config.apiKey != null) 'X-API-KEY': config.apiKey!,
+        ...config.headers,
+      };
 
   @override
   Future<SwapQuote?> getQuote(SwapParams params) async {
@@ -76,7 +75,7 @@ class ParaSwapAggregator extends DexAggregator {
     List<double> slippages = const [0.001, 0.005, 0.01, 0.03],
   }) async {
     final quotes = <SwapQuote>[];
-    
+
     for (final slippage in slippages) {
       try {
         final quote = await getQuote(params.copyWith(slippage: slippage));
@@ -88,19 +87,22 @@ class ParaSwapAggregator extends DexAggregator {
         continue;
       }
     }
-    
+
     return quotes;
   }
 
   @override
-  Future<bool> isTokenPairSupported(SwapToken fromToken, SwapToken toToken) async {
+  Future<bool> isTokenPairSupported(
+      SwapToken fromToken, SwapToken toToken) async {
     if (fromToken.chainId != toToken.chainId) return false;
     if (!supportedChains.contains(fromToken.chainId)) return false;
-    
+
     try {
       final tokens = await getSupportedTokens(fromToken.chainId);
-      final fromSupported = tokens.any((t) => t.address.toLowerCase() == fromToken.address.toLowerCase());
-      final toSupported = tokens.any((t) => t.address.toLowerCase() == toToken.address.toLowerCase());
+      final fromSupported = tokens.any(
+          (t) => t.address.toLowerCase() == fromToken.address.toLowerCase());
+      final toSupported = tokens
+          .any((t) => t.address.toLowerCase() == toToken.address.toLowerCase());
       return fromSupported && toSupported;
     } on Exception catch (_) {
       return false;
@@ -118,10 +120,12 @@ class ParaSwapAggregator extends DexAggregator {
 
     try {
       final url = '$_baseUrl/tokens/$chainId';
-      final response = await _httpClient.get(
-        Uri.parse(url),
-        headers: _headers,
-      ).timeout(config.timeout);
+      final response = await _httpClient
+          .get(
+            Uri.parse(url),
+            headers: _headers,
+          )
+          .timeout(config.timeout);
 
       if (response.statusCode != 200) {
         throw AggregatorException(
@@ -133,7 +137,7 @@ class ParaSwapAggregator extends DexAggregator {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
       final tokens = data['tokens'] as List<dynamic>;
-      
+
       return tokens.map((token) {
         final tokenData = token as Map<String, dynamic>;
         return SwapToken(
@@ -173,7 +177,7 @@ class ParaSwapAggregator extends DexAggregator {
   Future<Map<String, dynamic>?> _getPriceRoute(SwapParams params) async {
     final chainId = params.fromToken.chainId;
     final url = '$_baseUrl/prices';
-    
+
     final queryParams = {
       'srcToken': params.fromToken.address,
       'destToken': params.toToken.address,
@@ -186,8 +190,8 @@ class ParaSwapAggregator extends DexAggregator {
     };
 
     final uri = Uri.parse(url).replace(queryParameters: queryParams);
-    final response = await _httpClient.get(uri, headers: _headers)
-        .timeout(config.timeout);
+    final response =
+        await _httpClient.get(uri, headers: _headers).timeout(config.timeout);
 
     if (response.statusCode != 200) {
       throw AggregatorException(
@@ -206,7 +210,7 @@ class ParaSwapAggregator extends DexAggregator {
     SwapParams params,
   ) async {
     final url = '$_baseUrl/transactions/${params.fromToken.chainId}';
-    
+
     final body = {
       'srcToken': params.fromToken.address,
       'destToken': params.toToken.address,
@@ -214,16 +218,22 @@ class ParaSwapAggregator extends DexAggregator {
       'destAmount': priceRoute['destAmount'] as String,
       'priceRoute': priceRoute,
       'userAddress': params.fromAddress,
-      'slippage': (params.slippage * 10000).round(), // ParaSwap uses basis points
-      'deadline': params.deadline?.inSeconds ?? 
-                  (DateTime.now().add(const Duration(minutes: 20)).millisecondsSinceEpoch ~/ 1000),
+      'slippage':
+          (params.slippage * 10000).round(), // ParaSwap uses basis points
+      'deadline': params.deadline?.inSeconds ??
+          (DateTime.now()
+                  .add(const Duration(minutes: 20))
+                  .millisecondsSinceEpoch ~/
+              1000),
     };
 
-    final response = await _httpClient.post(
-      Uri.parse(url),
-      headers: _headers,
-      body: json.encode(body),
-    ).timeout(config.timeout);
+    final response = await _httpClient
+        .post(
+          Uri.parse(url),
+          headers: _headers,
+          body: json.encode(body),
+        )
+        .timeout(config.timeout);
 
     if (response.statusCode != 200) {
       throw AggregatorException(
@@ -242,11 +252,12 @@ class ParaSwapAggregator extends DexAggregator {
     SwapParams params,
   ) async {
     final outputAmount = BigInt.parse(priceRoute['destAmount'] as String);
-    final minimumOutputAmount = calculateMinimumOutput(outputAmount, params.slippage);
-    
+    final minimumOutputAmount =
+        calculateMinimumOutput(outputAmount, params.slippage);
+
     // Parse route information
     final route = _parseRoute(priceRoute, params);
-    
+
     // Parse transaction data
     final transaction = SwapTransaction(
       to: transactionData['to'] as String,
@@ -256,7 +267,8 @@ class ParaSwapAggregator extends DexAggregator {
       gasPrice: BigInt.parse(transactionData['gasPrice'] as String? ?? '0'),
     );
 
-    final estimatedGas = BigInt.parse(priceRoute['gasCost'] as String? ?? '200000');
+    final estimatedGas =
+        BigInt.parse(priceRoute['gasCost'] as String? ?? '200000');
     final gasPrice = await getGasPrice(params.fromToken.chainId);
 
     return SwapQuote(
@@ -269,7 +281,8 @@ class ParaSwapAggregator extends DexAggregator {
       estimatedGas: estimatedGas,
       gasCost: estimatedGas * gasPrice,
       priceImpact: (priceRoute['priceImpact'] as num?)?.toDouble() ?? 0.0,
-      validUntil: const Duration(minutes: 10), // ParaSwap quotes valid for ~10 minutes
+      validUntil:
+          const Duration(minutes: 10), // ParaSwap quotes valid for ~10 minutes
       metadata: {
         'priceRoute': priceRoute,
         'bestRoute': priceRoute['bestRoute'],
@@ -281,22 +294,24 @@ class ParaSwapAggregator extends DexAggregator {
     final path = <SwapToken>[params.fromToken];
     final exchanges = <String>[];
     final portions = <double>[];
-    
+
     final bestRoute = priceRoute['bestRoute'] as List<dynamic>? ?? [];
-    
+
     for (final route in bestRoute) {
       if (route is Map<String, dynamic>) {
         final swaps = route['swaps'] as List<dynamic>? ?? [];
-        
+
         for (final swap in swaps) {
           if (swap is Map<String, dynamic>) {
             final swapExchanges = swap['swapExchanges'] as List<dynamic>? ?? [];
-            
+
             for (final exchange in swapExchanges) {
               if (exchange is Map<String, dynamic>) {
-                final exchangeName = exchange['exchange'] as String? ?? 'Unknown';
-                final percent = (exchange['percent'] as num?)?.toDouble() ?? 0.0;
-                
+                final exchangeName =
+                    exchange['exchange'] as String? ?? 'Unknown';
+                final percent =
+                    (exchange['percent'] as num?)?.toDouble() ?? 0.0;
+
                 exchanges.add(exchangeName);
                 portions.add(percent / 100.0);
               }
@@ -305,9 +320,9 @@ class ParaSwapAggregator extends DexAggregator {
         }
       }
     }
-    
+
     path.add(params.toToken);
-    
+
     return SwapRoute(
       path: path,
       exchanges: exchanges,
@@ -321,7 +336,7 @@ class ParaSwapAggregator extends DexAggregator {
       hex = hex.substring(2);
     }
     if (hex.isEmpty) return Uint8List(0);
-    
+
     final bytes = <int>[];
     for (var i = 0; i < hex.length; i += 2) {
       final hexByte = hex.substring(i, i + 2);

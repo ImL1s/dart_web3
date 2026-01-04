@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 /// Token information for swaps
 class SwapToken {
-
   const SwapToken({
     required this.address,
     required this.symbol,
@@ -54,7 +53,6 @@ class SwapToken {
 
 /// Swap parameters
 class SwapParams {
-
   const SwapParams({
     required this.fromToken,
     required this.toToken,
@@ -103,7 +101,6 @@ class SwapParams {
 
 /// Swap route information
 class SwapRoute {
-
   const SwapRoute({
     required this.path,
     required this.exchanges,
@@ -142,7 +139,6 @@ class SwapRoute {
 
 /// Swap transaction data
 class SwapTransaction {
-
   const SwapTransaction({
     required this.to,
     required this.data,
@@ -159,14 +155,14 @@ class SwapTransaction {
       data: Uint8List.fromList((json['data'] as String).codeUnits),
       value: BigInt.parse(json['value'] as String),
       gasLimit: BigInt.parse(json['gasLimit'] as String),
-      gasPrice: json['gasPrice'] != null 
-          ? BigInt.parse(json['gasPrice'] as String) 
+      gasPrice: json['gasPrice'] != null
+          ? BigInt.parse(json['gasPrice'] as String)
           : null,
-      maxFeePerGas: json['maxFeePerGas'] != null 
-          ? BigInt.parse(json['maxFeePerGas'] as String) 
+      maxFeePerGas: json['maxFeePerGas'] != null
+          ? BigInt.parse(json['maxFeePerGas'] as String)
           : null,
-      maxPriorityFeePerGas: json['maxPriorityFeePerGas'] != null 
-          ? BigInt.parse(json['maxPriorityFeePerGas'] as String) 
+      maxPriorityFeePerGas: json['maxPriorityFeePerGas'] != null
+          ? BigInt.parse(json['maxPriorityFeePerGas'] as String)
           : null,
     );
   }
@@ -186,7 +182,7 @@ class SwapTransaction {
       'gasLimit': gasLimit.toString(),
       if (gasPrice != null) 'gasPrice': gasPrice.toString(),
       if (maxFeePerGas != null) 'maxFeePerGas': maxFeePerGas.toString(),
-      if (maxPriorityFeePerGas != null) 
+      if (maxPriorityFeePerGas != null)
         'maxPriorityFeePerGas': maxPriorityFeePerGas.toString(),
     };
   }
@@ -210,7 +206,6 @@ enum MevProtectionType {
 
 /// Cross-chain swap information
 class CrossChainSwapInfo {
-
   const CrossChainSwapInfo({
     required this.sourceChainId,
     required this.destinationChainId,

@@ -26,7 +26,8 @@ void main() {
     });
 
     test('should create NFT token with required fields', () {
-      final contractAddress = EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
+      final contractAddress =
+          EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
       final tokenId = BigInt.from(1);
 
       final token = NftToken(
@@ -41,7 +42,8 @@ void main() {
     });
 
     test('should create NFT collection with basic info', () {
-      final contractAddress = EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
+      final contractAddress =
+          EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
 
       final collection = NftCollection(
         contractAddress: contractAddress,
@@ -57,9 +59,12 @@ void main() {
     });
 
     test('should create NFT transfer parameters', () {
-      final from = EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
-      final to = EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
-      final contractAddress = EthereumAddress.fromHex('0x3333333333333333333333333333333333333333');
+      final from =
+          EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
+      final to =
+          EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
+      final contractAddress =
+          EthereumAddress.fromHex('0x3333333333333333333333333333333333333333');
       final tokenId = BigInt.from(123);
 
       final params = NftTransferParams(
@@ -79,7 +84,8 @@ void main() {
     });
 
     test('should create NFT query parameters', () {
-      final owner = EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
+      final owner =
+          EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
 
       final params = NftQueryParams(
         owner: owner,
@@ -125,7 +131,8 @@ void main() {
     test('should handle NFT query result', () {
       final tokens = [
         NftToken(
-          contractAddress: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
+          contractAddress: EthereumAddress.fromHex(
+              '0x1234567890123456789012345678901234567890'),
           tokenId: BigInt.from(1),
           standard: NftStandard.erc721,
         ),
@@ -141,7 +148,6 @@ void main() {
       expect(result.totalCount, equals(1));
       expect(result.hasMore, isFalse);
     });
-
   });
 
   group('IPFS Gateway Tests', () {
@@ -149,8 +155,10 @@ void main() {
       final gateway = IpfsGateway();
 
       // Test resolveUri with non-IPFS URI (should return as-is)
-      expect(gateway.resolveUri('https://example.com/image.png'), 
-             completion(equals('https://example.com/image.png')),);
+      expect(
+        gateway.resolveUri('https://example.com/image.png'),
+        completion(equals('https://example.com/image.png')),
+      );
     });
 
     test('should handle gateway management', () {
@@ -159,11 +167,13 @@ void main() {
 
       gateway.addGateway('https://custom-gateway.com/ipfs/');
       expect(gateway.gateways.length, equals(initialCount + 1));
-      expect(gateway.gateways.contains('https://custom-gateway.com/ipfs/'), isTrue);
+      expect(gateway.gateways.contains('https://custom-gateway.com/ipfs/'),
+          isTrue);
 
       gateway.removeGateway('https://custom-gateway.com/ipfs/');
       expect(gateway.gateways.length, equals(initialCount));
-      expect(gateway.gateways.contains('https://custom-gateway.com/ipfs/'), isFalse);
+      expect(gateway.gateways.contains('https://custom-gateway.com/ipfs/'),
+          isFalse);
     });
 
     test('should manage cache', () {

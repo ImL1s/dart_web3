@@ -1,0 +1,43 @@
+00:00 +0: loading test/ens_client_test.dart
+00:00 +0: ENSClient basic resolution should resolve ENS name to address
+00:00 +1: ENSClient basic resolution should reverse resolve address to name
+00:00 +2: ENSClient text records should get text record
+00:00 +3: ENSClient text records should get avatar
+00:00 +4: ENSClient text records should get multiple text records
+00:00 +5: ENSClient text records should get complete profile
+00:00 +6: ENSClient multi-chain addresses should resolve address for specific coin type
+00:00 +6 -1: ENSClient multi-chain addresses should resolve address for specific coin type [E]
+  Expected: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+    Actual: '0x3141317a5031655035514765666932444d505466544c35534c6d7637446976664e61'
+     Which: is different.
+            Expected: 1A1zP1eP5Q ...
+              Actual: 0x3141317a ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                  expect
+  test\ens_client_test.dart 152:9  main.<fn>.<fn>.<fn>
+  
+00:00 +6 -1: ENSClient multi-chain addresses should get Ethereum address
+00:00 +7 -1: ENSClient multi-chain addresses should get Bitcoin address
+00:00 +7 -2: ENSClient multi-chain addresses should get Bitcoin address [E]
+  Expected: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+    Actual: '0x3141317a5031655035514765666932444d505466544c35534c6d7637446976664e61'
+     Which: is different.
+            Expected: 1A1zP1eP5Q ...
+              Actual: 0x3141317a ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                  expect
+  test\ens_client_test.dart 191:9  main.<fn>.<fn>.<fn>
+  
+00:00 +7 -2: ENSClient multi-chain addresses should get all supported addresses
+00:00 +8 -2: ENSClient comprehensive info should get complete ENS information
+00:00 +9 -2: ENSClient utility methods should validate ENS names
+00:00 +10 -2: ENSClient utility methods should clear all caches
+00:00 +11 -2: ENSClient error handling should handle RPC errors gracefully
+00:00 +12 -2: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

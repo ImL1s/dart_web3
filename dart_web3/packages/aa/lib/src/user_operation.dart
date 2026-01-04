@@ -17,11 +17,10 @@ enum EntryPointVersion {
 }
 
 /// UserOperation data structure according to ERC-4337 specification
-/// 
+///
 /// Supports multiple EntryPoint versions (0.6, 0.7, 0.8, 0.9) with
 /// version-specific fields and validation.
 class UserOperation {
-
   UserOperation({
     required this.sender,
     required this.nonce,
@@ -63,10 +62,12 @@ class UserOperation {
       nonce: BigInt.parse(json['nonce'] as String),
       callData: json['callData'] as String,
       callGasLimit: BigInt.parse(json['callGasLimit'] as String),
-      verificationGasLimit: BigInt.parse(json['verificationGasLimit'] as String),
+      verificationGasLimit:
+          BigInt.parse(json['verificationGasLimit'] as String),
       preVerificationGas: BigInt.parse(json['preVerificationGas'] as String),
       maxFeePerGas: BigInt.parse(json['maxFeePerGas'] as String),
-      maxPriorityFeePerGas: BigInt.parse(json['maxPriorityFeePerGas'] as String),
+      maxPriorityFeePerGas:
+          BigInt.parse(json['maxPriorityFeePerGas'] as String),
       signature: json['signature'] as String,
       initCode: initCode,
       paymasterAndData: json['paymasterAndData'] as String?,
@@ -74,83 +75,87 @@ class UserOperation {
       factoryData: factoryData,
       paymaster: json['paymaster'] as String?,
       paymasterData: json['paymasterData'] as String?,
-      paymasterVerificationGasLimit: json['paymasterVerificationGasLimit'] != null
-          ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
-          : null,
+      paymasterVerificationGasLimit:
+          json['paymasterVerificationGasLimit'] != null
+              ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
+              : null,
       paymasterPostOpGasLimit: json['paymasterPostOpGasLimit'] != null
           ? BigInt.parse(json['paymasterPostOpGasLimit'] as String)
           : null,
       paymasterSignature: json['paymasterSignature'] as String?,
       authorization: json['authorization'] != null
-          ? Authorization.fromJson(json['authorization'] as Map<String, dynamic>)
+          ? Authorization.fromJson(
+              json['authorization'] as Map<String, dynamic>)
           : null,
     );
   }
+
   /// The account making the operation
   final String sender;
-  
+
   /// Anti-replay parameter
   final BigInt nonce;
-  
+
   /// The data to pass to the sender during the main execution call
   final String callData;
-  
+
   /// The amount of gas to allocate the main execution call
   final BigInt callGasLimit;
-  
+
   /// The amount of gas to allocate for the verification step
   final BigInt verificationGasLimit;
-  
+
   /// Extra gas to pay the Bundler
   final BigInt preVerificationGas;
-  
+
   /// Maximum fee per gas
   final BigInt maxFeePerGas;
-  
+
   /// Maximum priority fee per gas
   final BigInt maxPriorityFeePerGas;
-  
+
   /// Data passed into the account to verify authorization
   final String signature;
-  
+
   // EntryPoint v0.6 specific fields
   /// Account init code. Only for new accounts (v0.6 only)
   final String? initCode;
-  
+
   /// Paymaster address with calldata (v0.6 only)
   final String? paymasterAndData;
-  
+
   // EntryPoint v0.7+ specific fields
   /// Account factory. Only for new accounts (v0.7+)
   final String? factory;
-  
+
   /// Data for account factory (v0.7+)
   final String? factoryData;
-  
+
   /// Address of paymaster contract (v0.7+)
   final String? paymaster;
-  
+
   /// Data for paymaster (v0.7+)
   final String? paymasterData;
-  
+
   /// The amount of gas to allocate for the paymaster validation code (v0.7+)
   final BigInt? paymasterVerificationGasLimit;
-  
+
   /// The amount of gas to allocate for the paymaster post-operation code (v0.7+)
   final BigInt? paymasterPostOpGasLimit;
-  
+
   // EntryPoint v0.9 specific fields
   /// Paymaster signature. Can be provided separately for parallelizable signing (v0.9 only)
   final String? paymasterSignature;
-  
+
   /// Authorization data for EIP-7702 (v0.7+)
   final Authorization? authorization;
 
   /// Convert UserOperation to JSON
-  /// 
+  ///
   /// [version] specifies the EntryPoint version to target.
   /// If not provided, it defaults to v0.7 formatting including packed fields where required.
-  Map<String, dynamic> toJson([EntryPointVersion version = EntryPointVersion.v07]) {
+  Map<String, dynamic> toJson(
+      [EntryPointVersion version = EntryPointVersion.v07]) {
     final json = <String, dynamic>{
       'sender': sender,
       'nonce': '0x${nonce.toRadixString(16)}',
@@ -160,21 +165,24 @@ class UserOperation {
 
     if (version == EntryPointVersion.v06) {
       json['callGasLimit'] = '0x${callGasLimit.toRadixString(16)}';
-      json['verificationGasLimit'] = '0x${verificationGasLimit.toRadixString(16)}';
+      json['verificationGasLimit'] =
+          '0x${verificationGasLimit.toRadixString(16)}';
       json['preVerificationGas'] = '0x${preVerificationGas.toRadixString(16)}';
       json['maxFeePerGas'] = '0x${maxFeePerGas.toRadixString(16)}';
-      json['maxPriorityFeePerGas'] = '0x${maxPriorityFeePerGas.toRadixString(16)}';
-      
+      json['maxPriorityFeePerGas'] =
+          '0x${maxPriorityFeePerGas.toRadixString(16)}';
+
       if (initCode != null) json['initCode'] = initCode;
       if (paymasterAndData != null) json['paymasterAndData'] = paymasterAndData;
     } else {
       // v0.7+ uses packed fields
-      json['accountGasLimits'] = _packGasLimits(verificationGasLimit, callGasLimit);
+      json['accountGasLimits'] =
+          _packGasLimits(verificationGasLimit, callGasLimit);
       json['preVerificationGas'] = '0x${preVerificationGas.toRadixString(16)}';
       json['gasFees'] = _packGasLimits(maxPriorityFeePerGas, maxFeePerGas);
-      
+
       // Combined initCode (factory + factoryData)
-      final packedInitCode = factory != null 
+      final packedInitCode = factory != null
           ? factory! + (factoryData ?? '').replaceFirst('0x', '')
           : '0x';
       json['initCode'] = packedInitCode;
@@ -183,8 +191,11 @@ class UserOperation {
       var packedPmData = '0x';
       if (paymaster != null) {
         packedPmData = paymaster!;
-        if (paymasterVerificationGasLimit != null && paymasterPostOpGasLimit != null) {
-          packedPmData += _packGasLimits(paymasterVerificationGasLimit!, paymasterPostOpGasLimit!).replaceFirst('0x', '');
+        if (paymasterVerificationGasLimit != null &&
+            paymasterPostOpGasLimit != null) {
+          packedPmData += _packGasLimits(
+                  paymasterVerificationGasLimit!, paymasterPostOpGasLimit!)
+              .replaceFirst('0x', '');
         }
         if (paymasterData != null) {
           packedPmData += paymasterData!.replaceFirst('0x', '');
@@ -193,14 +204,15 @@ class UserOperation {
       json['paymasterAndData'] = packedPmData;
     }
 
-    if (paymasterSignature != null) json['paymasterSignature'] = paymasterSignature;
+    if (paymasterSignature != null)
+      json['paymasterSignature'] = paymasterSignature;
     if (authorization != null) json['authorization'] = authorization!.toJson();
 
     return json;
   }
 
   /// Calculate the userOpHash according to ERC-4337 specification
-  /// 
+  ///
   /// The hash calculation varies by EntryPoint version:
   /// - v0.6: Uses ABI encoding with keccak256
   /// - v0.7: Uses packed UserOperation with keccak256
@@ -214,10 +226,10 @@ class UserOperation {
       case EntryPointVersion.v08:
       case EntryPointVersion.v09:
         return _getTypedDataHash(chainId, entryPointAddress);
-      
+
       case EntryPointVersion.v06:
         return _getV06Hash(chainId, entryPointAddress);
-      
+
       case EntryPointVersion.v07:
         return _getV07Hash(chainId, entryPointAddress);
     }
@@ -235,7 +247,9 @@ class UserOperation {
     // EIP-712 Domain Separator
     // keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
     final domainTypeHash = Keccak256.hash(
-      Uint8List.fromList('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'.codeUnits),
+      Uint8List.fromList(
+          'EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'
+              .codeUnits),
     );
 
     // Domain name and version for EntryPoint
@@ -248,11 +262,11 @@ class UserOperation {
 
     // Encode domain separator: keccak256(abi.encode(typeHash, nameHash, versionHash, chainId, address))
     final domainEncoded = AbiEncoder.encode([
-      AbiFixedBytes(32),  // typeHash
-      AbiFixedBytes(32),  // nameHash
-      AbiFixedBytes(32),  // versionHash
-      AbiUint(256),       // chainId
-      AbiAddress(),       // verifyingContract
+      AbiFixedBytes(32), // typeHash
+      AbiFixedBytes(32), // nameHash
+      AbiFixedBytes(32), // versionHash
+      AbiUint(256), // chainId
+      AbiAddress(), // verifyingContract
     ], [
       domainTypeHash,
       nameHash,
@@ -265,25 +279,28 @@ class UserOperation {
     // PackedUserOperation type hash (signature excluded)
     // keccak256("PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)")
     final userOpTypeHash = Keccak256.hash(
-      Uint8List.fromList('PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)'.codeUnits),
+      Uint8List.fromList(
+          'PackedUserOperation(address sender,uint256 nonce,bytes initCode,bytes callData,bytes32 accountGasLimits,uint256 preVerificationGas,bytes32 gasFees,bytes paymasterAndData)'
+              .codeUnits),
     );
 
     // Hash dynamic fields (bytes -> keccak256)
     final initCodeHash = Keccak256.hash(HexUtils.decode(packedOp.initCode));
     final callDataHash = Keccak256.hash(HexUtils.decode(packedOp.callData));
-    final paymasterAndDataHash = Keccak256.hash(HexUtils.decode(packedOp.paymasterAndData));
+    final paymasterAndDataHash =
+        Keccak256.hash(HexUtils.decode(packedOp.paymasterAndData));
 
     // Encode struct hash: keccak256(abi.encode(typeHash, fields...))
     final structEncoded = AbiEncoder.encode([
-      AbiFixedBytes(32),  // typeHash
-      AbiAddress(),       // sender
-      AbiUint(256),       // nonce
-      AbiFixedBytes(32),  // initCodeHash
-      AbiFixedBytes(32),  // callDataHash
-      AbiFixedBytes(32),  // accountGasLimits
-      AbiUint(256),       // preVerificationGas
-      AbiFixedBytes(32),  // gasFees
-      AbiFixedBytes(32),  // paymasterAndDataHash
+      AbiFixedBytes(32), // typeHash
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiFixedBytes(32), // initCodeHash
+      AbiFixedBytes(32), // callDataHash
+      AbiFixedBytes(32), // accountGasLimits
+      AbiUint(256), // preVerificationGas
+      AbiFixedBytes(32), // gasFees
+      AbiFixedBytes(32), // paymasterAndDataHash
     ], [
       userOpTypeHash,
       packedOp.sender,
@@ -334,7 +351,8 @@ class UserOperation {
     final initCodeToHash = _getInitCode(factory, factoryData, authorization);
     final initCodeHash = Keccak256.hash(HexUtils.decode(initCodeToHash));
     final callDataHash = Keccak256.hash(HexUtils.decode(callData));
-    final paymasterAndDataHash = Keccak256.hash(HexUtils.decode(paymasterAndData ?? '0x'));
+    final paymasterAndDataHash =
+        Keccak256.hash(HexUtils.decode(paymasterAndData ?? '0x'));
 
     // 2. ABI encode the UserOperation fields
     final packedUserOp = _encodeUserOpV06(
@@ -354,7 +372,8 @@ class UserOperation {
     final userOpHash = Keccak256.hash(packedUserOp);
 
     // 4. ABI encode with entryPointAddress and chainId
-    final finalEncoded = _encodeFinalHash(userOpHash, entryPointAddress, chainId);
+    final finalEncoded =
+        _encodeFinalHash(userOpHash, entryPointAddress, chainId);
 
     // 5. Final hash
     return HexUtils.encode(Keccak256.hash(finalEncoded));
@@ -375,7 +394,8 @@ class UserOperation {
     // 1. Hash variable-length fields
     final initCodeHash = Keccak256.hash(HexUtils.decode(packedUserOp.initCode));
     final callDataHash = Keccak256.hash(HexUtils.decode(packedUserOp.callData));
-    final paymasterAndDataHash = Keccak256.hash(HexUtils.decode(packedUserOp.paymasterAndData));
+    final paymasterAndDataHash =
+        Keccak256.hash(HexUtils.decode(packedUserOp.paymasterAndData));
 
     // 2. ABI encode the packed UserOperation fields
     final encoded = _encodeUserOpV07(
@@ -393,20 +413,22 @@ class UserOperation {
     final userOpHash = Keccak256.hash(encoded);
 
     // 4. ABI encode with entryPointAddress and chainId
-    final finalEncoded = _encodeFinalHash(userOpHash, entryPointAddress, chainId);
+    final finalEncoded =
+        _encodeFinalHash(userOpHash, entryPointAddress, chainId);
 
     // 5. Final hash
     return HexUtils.encode(Keccak256.hash(finalEncoded));
   }
 
   /// Get initCode for hashing (handles authorization for EIP-7702)
-  String _getInitCode(String? factory, String? factoryData, Authorization? authorization) {
+  String _getInitCode(
+      String? factory, String? factoryData, Authorization? authorization) {
     if (authorization != null) {
       // For EIP-7702, encode authorization data
       // Note: Implement proper authorization encoding
       return '0x';
     }
-    
+
     if (factory == null) return '0x';
     return factory + (factoryData ?? '').replaceFirst('0x', '');
   }
@@ -415,21 +437,24 @@ class UserOperation {
   PackedUserOperation toPackedUserOperation() {
     // Concatenate verificationGasLimit (16 bytes) and callGasLimit (16 bytes)
     final accountGasLimits = _packGasLimits(verificationGasLimit, callGasLimit);
-    
+
     // Concatenate maxPriorityFeePerGas (16 bytes) and maxFeePerGas (16 bytes)
     final gasFees = _packGasLimits(maxPriorityFeePerGas, maxFeePerGas);
-    
+
     // Concatenate factory and factoryData
-    final initCode = factory != null 
+    final initCode = factory != null
         ? factory! + (factoryData ?? '').replaceFirst('0x', '')
         : '0x';
-    
+
     // Concatenate paymaster fields
     var paymasterAndData = '0x';
     if (paymaster != null) {
       paymasterAndData = paymaster!;
-      if (paymasterVerificationGasLimit != null && paymasterPostOpGasLimit != null) {
-        paymasterAndData += _packGasLimits(paymasterVerificationGasLimit!, paymasterPostOpGasLimit!).replaceFirst('0x', '');
+      if (paymasterVerificationGasLimit != null &&
+          paymasterPostOpGasLimit != null) {
+        paymasterAndData += _packGasLimits(
+                paymasterVerificationGasLimit!, paymasterPostOpGasLimit!)
+            .replaceFirst('0x', '');
       }
       if (this.paymasterData != null) {
         paymasterAndData += this.paymasterData!.replaceFirst('0x', '');
@@ -453,25 +478,27 @@ class UserOperation {
   String _packGasLimits(BigInt value1, BigInt value2) {
     final bytes1 = _bigIntToBytes16(value1);
     final bytes2 = _bigIntToBytes16(value2);
-    return '0x' + HexUtils.encode(Uint8List.fromList([...bytes1, ...bytes2])).replaceFirst('0x', '');
+    return '0x' +
+        HexUtils.encode(Uint8List.fromList([...bytes1, ...bytes2]))
+            .replaceFirst('0x', '');
   }
 
   /// Convert BigInt to 16-byte array
   List<int> _bigIntToBytes16(BigInt value) {
     final bytes = <int>[];
     var temp = value;
-    
+
     // Convert to bytes (little endian)
     while (temp > BigInt.zero) {
       bytes.add((temp & BigInt.from(0xff)).toInt());
       temp = temp >> 8;
     }
-    
+
     // Pad to 16 bytes and reverse to big endian
     while (bytes.length < 16) {
       bytes.add(0);
     }
-    
+
     return bytes.reversed.toList();
   }
 
@@ -493,16 +520,16 @@ class UserOperation {
     String paymasterAndDataHash,
   ) {
     final types = [
-      AbiAddress(),        // sender
-      AbiUint(256),        // nonce
-      AbiFixedBytes(32),   // initCodeHash
-      AbiFixedBytes(32),   // callDataHash
-      AbiUint(256),        // callGasLimit
-      AbiUint(256),        // verificationGasLimit
-      AbiUint(256),        // preVerificationGas
-      AbiUint(256),        // maxFeePerGas
-      AbiUint(256),        // maxPriorityFeePerGas
-      AbiFixedBytes(32),   // paymasterAndDataHash
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiFixedBytes(32), // initCodeHash
+      AbiFixedBytes(32), // callDataHash
+      AbiUint(256), // callGasLimit
+      AbiUint(256), // verificationGasLimit
+      AbiUint(256), // preVerificationGas
+      AbiUint(256), // maxFeePerGas
+      AbiUint(256), // maxPriorityFeePerGas
+      AbiFixedBytes(32), // paymasterAndDataHash
     ];
 
     final values = [
@@ -537,14 +564,14 @@ class UserOperation {
     String paymasterAndDataHash,
   ) {
     final types = [
-      AbiAddress(),        // sender
-      AbiUint(256),        // nonce
-      AbiFixedBytes(32),   // initCodeHash
-      AbiFixedBytes(32),   // callDataHash
-      AbiFixedBytes(32),   // accountGasLimits (packed)
-      AbiUint(256),        // preVerificationGas
-      AbiFixedBytes(32),   // gasFees (packed)
-      AbiFixedBytes(32),   // paymasterAndDataHash
+      AbiAddress(), // sender
+      AbiUint(256), // nonce
+      AbiFixedBytes(32), // initCodeHash
+      AbiFixedBytes(32), // callDataHash
+      AbiFixedBytes(32), // accountGasLimits (packed)
+      AbiUint(256), // preVerificationGas
+      AbiFixedBytes(32), // gasFees (packed)
+      AbiFixedBytes(32), // paymasterAndDataHash
     ];
 
     final values = [
@@ -564,11 +591,12 @@ class UserOperation {
   /// Encode final hash with entryPoint and chainId according to ERC-4337.
   ///
   /// Final hash = keccak256(abi.encode(userOpHash, entryPointAddress, chainId))
-  Uint8List _encodeFinalHash(Uint8List userOpHash, String entryPointAddress, int chainId) {
+  Uint8List _encodeFinalHash(
+      Uint8List userOpHash, String entryPointAddress, int chainId) {
     final types = [
-      AbiFixedBytes(32),   // userOpHash
-      AbiAddress(),        // entryPointAddress
-      AbiUint(256),        // chainId
+      AbiFixedBytes(32), // userOpHash
+      AbiAddress(), // entryPointAddress
+      AbiUint(256), // chainId
     ];
 
     final values = [
@@ -618,8 +646,10 @@ class UserOperation {
       factoryData: factoryData ?? this.factoryData,
       paymaster: paymaster ?? this.paymaster,
       paymasterData: paymasterData ?? this.paymasterData,
-      paymasterVerificationGasLimit: paymasterVerificationGasLimit ?? this.paymasterVerificationGasLimit,
-      paymasterPostOpGasLimit: paymasterPostOpGasLimit ?? this.paymasterPostOpGasLimit,
+      paymasterVerificationGasLimit:
+          paymasterVerificationGasLimit ?? this.paymasterVerificationGasLimit,
+      paymasterPostOpGasLimit:
+          paymasterPostOpGasLimit ?? this.paymasterPostOpGasLimit,
       paymasterSignature: paymasterSignature ?? this.paymasterSignature,
       authorization: authorization ?? this.authorization,
     );
@@ -663,7 +693,6 @@ class UserOperation {
 
 /// Packed UserOperation for EntryPoint v0.7+
 class PackedUserOperation {
-
   PackedUserOperation({
     required this.sender,
     required this.nonce,
@@ -688,7 +717,6 @@ class PackedUserOperation {
 
 /// UserOperation request for building operations
 class UserOperationRequest {
-
   UserOperationRequest({
     this.sender,
     this.nonce,
@@ -733,7 +761,6 @@ class UserOperationRequest {
 
 /// Gas estimation result for UserOperation
 class UserOperationGasEstimate {
-
   UserOperationGasEstimate({
     required this.preVerificationGas,
     required this.verificationGasLimit,
@@ -745,11 +772,13 @@ class UserOperationGasEstimate {
   factory UserOperationGasEstimate.fromJson(Map<String, dynamic> json) {
     return UserOperationGasEstimate(
       preVerificationGas: BigInt.parse(json['preVerificationGas'] as String),
-      verificationGasLimit: BigInt.parse(json['verificationGasLimit'] as String),
+      verificationGasLimit:
+          BigInt.parse(json['verificationGasLimit'] as String),
       callGasLimit: BigInt.parse(json['callGasLimit'] as String),
-      paymasterVerificationGasLimit: json['paymasterVerificationGasLimit'] != null
-          ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
-          : null,
+      paymasterVerificationGasLimit:
+          json['paymasterVerificationGasLimit'] != null
+              ? BigInt.parse(json['paymasterVerificationGasLimit'] as String)
+              : null,
       paymasterPostOpGasLimit: json['paymasterPostOpGasLimit'] != null
           ? BigInt.parse(json['paymasterPostOpGasLimit'] as String)
           : null,
@@ -764,12 +793,16 @@ class UserOperationGasEstimate {
 
 /// UserOperation receipt from bundler
 class UserOperationReceipt {
-
   UserOperationReceipt({
     required this.userOpHash,
     required this.sender,
     required this.nonce,
-    required this.actualGasCost, required this.actualGasUsed, required this.success, required this.entryPoint, required this.receipt, this.paymaster,
+    required this.actualGasCost,
+    required this.actualGasUsed,
+    required this.success,
+    required this.entryPoint,
+    required this.receipt,
+    this.paymaster,
     this.reason,
   });
 

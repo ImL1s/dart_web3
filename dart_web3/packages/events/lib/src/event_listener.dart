@@ -7,8 +7,8 @@ import 'event_subscriber.dart';
 
 /// Event listener for managing contract event subscriptions.
 class EventListener {
-
   EventListener(this.subscriber);
+
   /// The event subscriber.
   final EventSubscriber subscriber;
 
@@ -22,7 +22,7 @@ class EventListener {
   final Map<String, StreamSubscription<dynamic>> _otherSubscriptions = {};
 
   /// Listens to contract events.
-  /// 
+  ///
   /// [contractAddress] - The contract address to listen to
   /// [eventSignature] - The event signature (topic0)
   /// [indexedArgs] - Optional indexed parameters for filtering
@@ -30,12 +30,13 @@ class EventListener {
   /// [onError] - Optional error callback
   /// [useWebSocket] - Whether to use WebSocket subscription (true) or polling (false)
   /// [pollingInterval] - Polling interval when not using WebSocket
-  /// 
+  ///
   /// Returns a subscription key that can be used to stop listening.
   String listenToContract(
     String contractAddress,
     String eventSignature, {
-    required void Function(Log) onEvent, Map<String, dynamic>? indexedArgs,
+    required void Function(Log) onEvent,
+    Map<String, dynamic>? indexedArgs,
     void Function(Object)? onError,
     bool useWebSocket = true,
     Duration pollingInterval = const Duration(seconds: 5),
@@ -54,19 +55,20 @@ class EventListener {
       topics: topics,
     );
 
-    final key = '${contractAddress}_${eventSignature}_${DateTime.now().millisecondsSinceEpoch}';
+    final key =
+        '${contractAddress}_${eventSignature}_${DateTime.now().millisecondsSinceEpoch}';
 
     StreamSubscription<Log> subscription;
     if (useWebSocket && subscriber.wsTransport != null) {
       subscription = subscriber.subscribe(filter).listen(
-        onEvent,
-        onError: onError,
-      );
+            onEvent,
+            onError: onError,
+          );
     } else {
       subscription = subscriber.poll(filter, interval: pollingInterval).listen(
-        onEvent,
-        onError: onError,
-      );
+            onEvent,
+            onError: onError,
+          );
     }
 
     _subscriptions[key] = subscription;
@@ -74,13 +76,13 @@ class EventListener {
   }
 
   /// Listens to events matching a custom filter.
-  /// 
+  ///
   /// [filter] - The event filter
   /// [onEvent] - Callback when an event is received
   /// [onError] - Optional error callback
   /// [useWebSocket] - Whether to use WebSocket subscription (true) or polling (false)
   /// [pollingInterval] - Polling interval when not using WebSocket
-  /// 
+  ///
   /// Returns a subscription key that can be used to stop listening.
   String listenToFilter(
     EventFilter filter, {
@@ -94,14 +96,14 @@ class EventListener {
     StreamSubscription<Log> subscription;
     if (useWebSocket && subscriber.wsTransport != null) {
       subscription = subscriber.subscribe(filter).listen(
-        onEvent,
-        onError: onError,
-      );
+            onEvent,
+            onError: onError,
+          );
     } else {
       subscription = subscriber.poll(filter, interval: pollingInterval).listen(
-        onEvent,
-        onError: onError,
-      );
+            onEvent,
+            onError: onError,
+          );
     }
 
     _filterSubscriptions[key] = subscription;
@@ -109,13 +111,13 @@ class EventListener {
   }
 
   /// Listens to all events from a contract.
-  /// 
+  ///
   /// [contractAddress] - The contract address to listen to
   /// [onEvent] - Callback when an event is received
   /// [onError] - Optional error callback
   /// [useWebSocket] - Whether to use WebSocket subscription (true) or polling (false)
   /// [pollingInterval] - Polling interval when not using WebSocket
-  /// 
+  ///
   /// Returns a subscription key that can be used to stop listening.
   String listenToAllContractEvents(
     String contractAddress, {
@@ -135,11 +137,11 @@ class EventListener {
   }
 
   /// Listens to new blocks.
-  /// 
+  ///
   /// [onBlock] - Callback when a new block is detected
   /// [onError] - Optional error callback
   /// [pollingInterval] - Polling interval when not using WebSocket
-  /// 
+  ///
   /// Returns a subscription key that can be used to stop listening.
   String listenToBlocks({
     required void Function(BigInt blockNumber) onBlock,
@@ -148,22 +150,23 @@ class EventListener {
   }) {
     final key = 'blocks_${DateTime.now().millisecondsSinceEpoch}';
 
-    final subscription = subscriber.watchBlockNumber(interval: pollingInterval).listen(
-      onBlock,
-      onError: onError,
-    );
+    final subscription =
+        subscriber.watchBlockNumber(interval: pollingInterval).listen(
+              onBlock,
+              onError: onError,
+            );
 
     _otherSubscriptions[key] = subscription;
     return key;
   }
 
   /// Listens to pending transactions.
-  /// 
+  ///
   /// Requires WebSocket transport.
-  /// 
+  ///
   /// [onTransaction] - Callback when a pending transaction is detected
   /// [onError] - Optional error callback
-  /// 
+  ///
   /// Returns a subscription key that can be used to stop listening.
   String listenToPendingTransactions({
     required void Function(String txHash) onTransaction,
@@ -176,9 +179,9 @@ class EventListener {
     final key = 'pending_${DateTime.now().millisecondsSinceEpoch}';
 
     final subscription = subscriber.watchPendingTransactions().listen(
-      onTransaction,
-      onError: onError,
-    );
+          onTransaction,
+          onError: onError,
+        );
 
     _otherSubscriptions[key] = subscription;
     return key;
@@ -188,7 +191,7 @@ class EventListener {
   void stopListening(String key) {
     _subscriptions[key]?.cancel();
     _subscriptions.remove(key);
-    
+
     _filterSubscriptions[key]?.cancel();
     _filterSubscriptions.remove(key);
 
@@ -215,7 +218,10 @@ class EventListener {
   }
 
   /// Gets the number of active subscriptions.
-  int get activeSubscriptions => _subscriptions.length + _filterSubscriptions.length + _otherSubscriptions.length;
+  int get activeSubscriptions =>
+      _subscriptions.length +
+      _filterSubscriptions.length +
+      _otherSubscriptions.length;
 
   /// Gets all active subscription keys.
   List<String> get subscriptionKeys => [
@@ -226,9 +232,9 @@ class EventListener {
 
   /// Checks if a subscription is active.
   bool isListening(String key) {
-    return _subscriptions.containsKey(key) || 
-           _filterSubscriptions.containsKey(key) ||
-           _otherSubscriptions.containsKey(key);
+    return _subscriptions.containsKey(key) ||
+        _filterSubscriptions.containsKey(key) ||
+        _otherSubscriptions.containsKey(key);
   }
 
   /// Disposes of the listener and stops all subscriptions.

@@ -18,11 +18,13 @@ void main() {
       test('should get text record for valid name', () async {
         // Arrange - Mock resolver address
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
-        final result = await records.getTextRecord('vitalik.eth', 'description');
+        final result =
+            await records.getTextRecord('vitalik.eth', 'description');
 
         // Assert - Should not throw
         expect(result, isA<String?>());
@@ -31,7 +33,8 @@ void main() {
       test('should return null for non-existent record', () async {
         // Arrange - Mock zero resolver address
         final zeroAddress = '0x0000000000000000000000000000000000000000';
-        final zeroAddressEncoded = AbiEncoder.encode([AbiAddress()], [zeroAddress]);
+        final zeroAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [zeroAddress]);
         mockClient.mockCall(zeroAddressEncoded);
 
         // Act
@@ -44,11 +47,13 @@ void main() {
       test('should get multiple text records', () async {
         // Arrange
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
-        final result = await records.getTextRecords('test.eth', ['description', 'url', 'avatar']);
+        final result = await records
+            .getTextRecords('test.eth', ['description', 'url', 'avatar']);
 
         // Assert
         expect(result, isA<Map<String, String?>>());
@@ -60,10 +65,11 @@ void main() {
       test('should return HTTP URL as-is', () async {
         // Arrange - Mock text record returning HTTP URL
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
-        
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+
         // Mock text record call returning HTTP URL
-        
+
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
@@ -77,7 +83,8 @@ void main() {
         // This test would require more complex mocking to simulate the full flow
         // For now, we just test that the method doesn't throw
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         final result = await records.getAvatar('test.eth');
@@ -89,7 +96,8 @@ void main() {
       test('should get complete ENS profile', () async {
         // Arrange
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
@@ -103,7 +111,8 @@ void main() {
       test('should handle profile with all fields', () async {
         // Arrange
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act
@@ -120,7 +129,8 @@ void main() {
       test('should cache text record results', () async {
         // Arrange
         final resolverAddress = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-        final resolverAddressEncoded = AbiEncoder.encode([AbiAddress()], [resolverAddress]);
+        final resolverAddressEncoded =
+            AbiEncoder.encode([AbiAddress()], [resolverAddress]);
         mockClient.mockCall(resolverAddressEncoded);
 
         // Act - Call twice

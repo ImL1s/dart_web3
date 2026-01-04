@@ -12,7 +12,8 @@ void main() {
     });
 
     group('create', () {
-      test('should create multicall with default address for supported chain', () {
+      test('should create multicall with default address for supported chain',
+          () {
         final multicall = MulticallFactory.create(
           publicClient: publicClient,
         );
@@ -22,7 +23,7 @@ void main() {
 
       test('should use provided contract address', () {
         const customAddress = '0x1234567890123456789012345678901234567890';
-        
+
         final multicall = MulticallFactory.create(
           publicClient: publicClient,
           contractAddress: customAddress,
@@ -39,8 +40,6 @@ void main() {
 
         expect(multicall, isA<Multicall>());
       });
-
-
     });
 
     group('isSupported', () {
@@ -80,20 +79,26 @@ void main() {
     group('getSupportedVersions', () {
       test('should return all versions for Ethereum mainnet', () {
         final versions = MulticallFactory.getSupportedVersions(1);
-        expect(versions, containsAll([
-          MulticallVersion.v1,
-          MulticallVersion.v2,
-          MulticallVersion.v3,
-        ]),);
+        expect(
+          versions,
+          containsAll([
+            MulticallVersion.v1,
+            MulticallVersion.v2,
+            MulticallVersion.v3,
+          ]),
+        );
       });
 
       test('should return all versions for Polygon', () {
         final versions = MulticallFactory.getSupportedVersions(137);
-        expect(versions, containsAll([
-          MulticallVersion.v1,
-          MulticallVersion.v2,
-          MulticallVersion.v3,
-        ]),);
+        expect(
+          versions,
+          containsAll([
+            MulticallVersion.v1,
+            MulticallVersion.v2,
+            MulticallVersion.v3,
+          ]),
+        );
       });
 
       test('should return only v3 for most chains', () {
@@ -124,12 +129,12 @@ void main() {
 
     test('should pass custom parameters to factory', () {
       const customAddress = '0x1234567890123456789012345678901234567890';
-      
+
       final multicall = publicClient.multicall(
         contractAddress: customAddress,
         version: MulticallVersion.v2,
       );
-      
+
       expect(multicall, isA<Multicall>());
     });
   });

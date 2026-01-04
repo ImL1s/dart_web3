@@ -9,11 +9,12 @@ void main() {
     late Uint8List privateKey;
     late PrivateKeySigner signer;
     late String contractAddress;
-    
+
     setUp(() {
       privateKey = _generateValidPrivateKey();
       signer = PrivateKeySigner(privateKey, 1);
-      contractAddress = '0x${List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join()}';
+      contractAddress =
+          '0x${List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join()}';
     });
 
     group('Authorization Creation', () {
@@ -109,7 +110,7 @@ void main() {
         // but they should both be valid for the same signer
         expect(signedAuth1.verifySignature(signer.address.hex), isTrue);
         expect(signedAuth2.verifySignature(signer.address.hex), isTrue);
-        
+
         // Both should have the same authorization data
         expect(signedAuth1.chainId, equals(signedAuth2.chainId));
         expect(signedAuth1.address, equals(signedAuth2.address));
@@ -139,7 +140,8 @@ void main() {
         );
 
         final signedAuth = auth.sign(privateKey);
-        final wrongAddress = '0x${List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join()}';
+        final wrongAddress =
+            '0x${List.generate(40, (_) => Random().nextInt(16).toRadixString(16)).join()}';
         final isValid = signedAuth.verifySignature(wrongAddress);
 
         expect(isValid, isFalse);
@@ -167,21 +169,25 @@ void main() {
         );
 
         final signedAuth = auth.sign(privateKey);
-        final isValid = AuthorizationVerifier.verifyAuthorization(signedAuth, signer.address.hex);
+        final isValid = AuthorizationVerifier.verifyAuthorization(
+            signedAuth, signer.address.hex);
 
         expect(isValid, isTrue);
       });
 
       test('should verify authorization list', () {
         final auths = [
-          Authorization.unsigned(chainId: 1, address: contractAddress, nonce: BigInt.from(1)),
-          Authorization.unsigned(chainId: 1, address: contractAddress, nonce: BigInt.from(2)),
+          Authorization.unsigned(
+              chainId: 1, address: contractAddress, nonce: BigInt.from(1)),
+          Authorization.unsigned(
+              chainId: 1, address: contractAddress, nonce: BigInt.from(2)),
         ];
 
         final signedAuths = auths.map((auth) => auth.sign(privateKey)).toList();
         final signers = [signer.address.hex, signer.address.hex];
 
-        final results = AuthorizationVerifier.verifyAuthorizationList(signedAuths, signers);
+        final results =
+            AuthorizationVerifier.verifyAuthorizationList(signedAuths, signers);
 
         expect(results[0], isTrue);
         expect(results[1], isTrue);
@@ -200,8 +206,10 @@ void main() {
           nonce: BigInt.from(42),
         );
 
-        expect(AuthorizationVerifier.isValidAuthorizationFormat(validAuth), isTrue);
-        expect(AuthorizationVerifier.isValidAuthorizationFormat(invalidAuth), isFalse);
+        expect(AuthorizationVerifier.isValidAuthorizationFormat(validAuth),
+            isTrue);
+        expect(AuthorizationVerifier.isValidAuthorizationFormat(invalidAuth),
+            isFalse);
       });
 
       test('should recover signer address', () {
@@ -212,15 +220,20 @@ void main() {
         );
 
         final signedAuth = auth.sign(privateKey);
-        final recoveredAddress = AuthorizationVerifier.recoverSigner(signedAuth);
+        final recoveredAddress =
+            AuthorizationVerifier.recoverSigner(signedAuth);
 
-        expect(recoveredAddress?.toLowerCase(), equals(signer.address.hex.toLowerCase()));
+        expect(recoveredAddress?.toLowerCase(),
+            equals(signer.address.hex.toLowerCase()));
       });
     });
 
     group('Authorization Batch', () {
       test('should create batch for multiple contracts', () {
-        final contracts = [contractAddress, contractAddress.replaceFirst('1', '2')];
+        final contracts = [
+          contractAddress,
+          contractAddress.replaceFirst('1', '2')
+        ];
         final batch = AuthorizationBatch.forContracts(
           chainId: 1,
           contractAddresses: contracts,
@@ -262,25 +275,33 @@ void main() {
       test('should estimate gas cost for batch', () {
         final batch = AuthorizationBatch.forContracts(
           chainId: 1,
-          contractAddresses: [contractAddress, contractAddress.replaceFirst('1', '2')],
+          contractAddresses: [
+            contractAddress,
+            contractAddress.replaceFirst('1', '2')
+          ],
           startingNonce: BigInt.from(1),
         );
 
         final estimatedGas = batch.estimateGasCost();
 
-        expect(estimatedGas, equals(BigInt.from(2 * 2300))); // 2 authorizations * 2300 gas each
+        expect(estimatedGas,
+            equals(BigInt.from(2 * 2300))); // 2 authorizations * 2300 gas each
       });
 
       test('should filter batch by chain ID', () {
         final batch = AuthorizationBatch();
-        batch.add(Authorization.unsigned(chainId: 1, address: contractAddress, nonce: BigInt.from(1)));
-        batch.add(Authorization.unsigned(chainId: 2, address: contractAddress, nonce: BigInt.from(2)));
-        batch.add(Authorization.unsigned(chainId: 1, address: contractAddress, nonce: BigInt.from(3)));
+        batch.add(Authorization.unsigned(
+            chainId: 1, address: contractAddress, nonce: BigInt.from(1)));
+        batch.add(Authorization.unsigned(
+            chainId: 2, address: contractAddress, nonce: BigInt.from(2)));
+        batch.add(Authorization.unsigned(
+            chainId: 1, address: contractAddress, nonce: BigInt.from(3)));
 
         final filtered = batch.filterByChainId(1);
 
         expect(filtered.length, equals(2));
-        expect(filtered.authorizations.every((auth) => auth.chainId == 1), isTrue);
+        expect(
+            filtered.authorizations.every((auth) => auth.chainId == 1), isTrue);
       });
     });
 
@@ -319,8 +340,10 @@ void main() {
           nonce: BigInt.from(42),
         );
 
-        expect(AuthorizationRevocation.isValidRevocation(validRevocation), isTrue);
-        expect(AuthorizationRevocation.isValidRevocation(invalidRevocation), isFalse);
+        expect(
+            AuthorizationRevocation.isValidRevocation(validRevocation), isTrue);
+        expect(AuthorizationRevocation.isValidRevocation(invalidRevocation),
+            isFalse);
       });
 
       test('should undo delegation', () {
@@ -386,14 +409,16 @@ void main() {
 // Helper function to generate a valid private key
 Uint8List _generateValidPrivateKey() {
   final random = Random.secure();
-  final secp256k1Order = BigInt.parse('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141', radix: 16);
-  
+  final secp256k1Order = BigInt.parse(
+      'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141',
+      radix: 16);
+
   while (true) {
     final privateKey = Uint8List(32);
     for (var i = 0; i < 32; i++) {
       privateKey[i] = random.nextInt(256);
     }
-    
+
     final privateKeyInt = _bytesToBigInt(privateKey);
     if (privateKeyInt < secp256k1Order && privateKeyInt != BigInt.zero) {
       return privateKey;

@@ -33,7 +33,7 @@ class ProtobufBuilder {
     _writeTag(fieldNumber, wireVarint);
     _writeVarintBigInt(value);
   }
-  
+
   // Note: Protobuf varints are unsigned by default encoding logic here (base 128)
   void _writeVarint(int value) {
     var v = value;
@@ -48,7 +48,7 @@ class ProtobufBuilder {
     var v = value;
     final wrap = BigInt.from(0x80);
     final mask = BigInt.from(0x7f);
-    
+
     while (v >= wrap) {
       _buffer.addByte((v & mask).toInt() | 0x80);
       v >>= 7;
@@ -64,10 +64,10 @@ class ProtobufBuilder {
     final bytes = message.toBytes();
     addBytes(fieldNumber, bytes);
   }
-  
+
   // Add direct bytes (for embedded messages already serialized)
   void addRawMessage(int fieldNumber, Uint8List rawBytes) {
-      addBytes(fieldNumber, rawBytes);
+    addBytes(fieldNumber, rawBytes);
   }
 
   Uint8List toBytes() => _buffer.toBytes();

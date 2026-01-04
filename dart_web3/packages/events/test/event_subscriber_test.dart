@@ -1,4 +1,3 @@
-
 import 'package:test/test.dart';
 import 'package:web3_universal_events/web3_universal_events.dart';
 
@@ -43,13 +42,15 @@ void main() {
       final logs = await stream.take(1).toList();
 
       expect(logs, hasLength(1));
-      expect(logs[0].address, equals('0x1234567890123456789012345678901234567890'));
+      expect(logs[0].address,
+          equals('0x1234567890123456789012345678901234567890'));
       expect(logs[0].topics, equals(['0xabcd']));
     });
 
     test('should throw error when subscribing without WebSocket', () {
       final subscriberWithoutWs = EventSubscriber(mockClient);
-      final filter = EventFilter(address: '0x1234567890123456789012345678901234567890');
+      final filter =
+          EventFilter(address: '0x1234567890123456789012345678901234567890');
 
       expect(
         () => subscriberWithoutWs.subscribe(filter),
@@ -79,11 +80,13 @@ void main() {
         }
       ]);
 
-      final stream = subscriber.poll(filter, interval: const Duration(milliseconds: 100));
+      final stream =
+          subscriber.poll(filter, interval: const Duration(milliseconds: 100));
       final logs = await stream.take(1).toList();
 
       expect(logs, hasLength(1));
-      expect(logs[0].address, equals('0x1234567890123456789012345678901234567890'));
+      expect(logs[0].address,
+          equals('0x1234567890123456789012345678901234567890'));
     });
 
     test('should watch block numbers via WebSocket', () async {
@@ -101,7 +104,7 @@ void main() {
 
     test('should watch block numbers via polling', () async {
       final subscriberWithoutWs = EventSubscriber(mockClient);
-      
+
       // Mock block number response
       mockClient.mockProvider.setResponse('eth_blockNumber', BigInt.from(100));
 
@@ -125,7 +128,9 @@ void main() {
       expect(txHashes[0], equals('0xtx123'));
     });
 
-    test('should throw error when watching pending transactions without WebSocket', () {
+    test(
+        'should throw error when watching pending transactions without WebSocket',
+        () {
       final subscriberWithoutWs = EventSubscriber(mockClient);
 
       expect(
@@ -227,17 +232,20 @@ void main() {
       );
 
       // Mock logs response with 5 logs
-      final mockLogs = List.generate(5, (i) => {
-        'address': '0x1234567890123456789012345678901234567890',
-        'topics': ['0xabcd'],
-        'data': '0x',
-        'blockHash': '0xblock${i + 1}',
-        'blockNumber': '0x${(i + 1).toRadixString(16)}',
-        'transactionHash': '0xtx${i + 1}',
-        'transactionIndex': '0x0',
-        'logIndex': '0x0',
-        'removed': false,
-      },);
+      final mockLogs = List.generate(
+        5,
+        (i) => {
+          'address': '0x1234567890123456789012345678901234567890',
+          'topics': ['0xabcd'],
+          'data': '0x',
+          'blockHash': '0xblock${i + 1}',
+          'blockNumber': '0x${(i + 1).toRadixString(16)}',
+          'transactionHash': '0xtx${i + 1}',
+          'transactionIndex': '0x0',
+          'logIndex': '0x0',
+          'removed': false,
+        },
+      );
 
       mockClient.mockProvider.setResponse('eth_getLogs', mockLogs);
 

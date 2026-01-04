@@ -4,7 +4,6 @@ import 'history_types.dart';
 
 /// Service for fetching transaction history
 class HistoryService {
-
   HistoryService();
 
   /// Fetch transaction history for an address
@@ -18,7 +17,8 @@ class HistoryService {
   /// Decode raw transaction into history item
   HistoryItem decodeTransaction(Map<String, dynamic> tx, DateTime timestamp) {
     final from = EthereumAddress.fromHex(tx['from'] as String);
-    final to = tx['to'] != null ? EthereumAddress.fromHex(tx['to'] as String) : null;
+    final to =
+        tx['to'] != null ? EthereumAddress.fromHex(tx['to'] as String) : null;
     final value = BigInt.parse(tx['value'] as String);
     final input = tx['input'] as String;
 

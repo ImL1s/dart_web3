@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
@@ -12,7 +11,7 @@ void main() {
         vout: 0,
         sequence: 0xfffffffd, // RBF signaling
       );
-      
+
       final txRbf = BitcoinTransaction(inputs: [inputRbf]);
       expect(txRbf.isRbf, isTrue);
     });
@@ -22,10 +21,10 @@ void main() {
         txId: Uint8List(32),
         vout: 0,
       );
-      
+
       final txFinal = BitcoinTransaction(inputs: [inputFinal]);
       expect(txFinal.isRbf, isFalse);
-       
+
       final inputOptOut = TransactionInput(
         txId: Uint8List(32),
         vout: 0,
@@ -34,7 +33,7 @@ void main() {
       // Wait, 0xfffffffe is NOT RBF signaling according to BIP-125
       // "inheriting sequences of less than (0xffffffff - 1)"
       // So < 0xfffffffe.
-      
+
       final txOptOut = BitcoinTransaction(inputs: [inputOptOut]);
       expect(txOptOut.isRbf, isFalse);
     });

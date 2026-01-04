@@ -35,11 +35,12 @@ abstract class DexAggregator {
     // Basic validation
     if (params.amount <= BigInt.zero) return false;
     if (params.slippage < 0 || params.slippage > 1) return false;
-    if (params.fromToken.chainId != params.toToken.chainId && !supportsCrossChain) {
+    if (params.fromToken.chainId != params.toToken.chainId &&
+        !supportsCrossChain) {
       return false;
     }
     if (!supportedChains.contains(params.fromToken.chainId)) return false;
-    
+
     return true;
   }
 
@@ -52,7 +53,6 @@ abstract class DexAggregator {
 
 /// Exception thrown when aggregator operations fail
 class AggregatorException implements Exception {
-
   const AggregatorException({
     required this.aggregator,
     required this.message,
@@ -73,7 +73,6 @@ class AggregatorException implements Exception {
 
 /// Rate limiting information for aggregators
 class RateLimit {
-
   const RateLimit({
     required this.requestsPerMinute,
     required this.requestsPerHour,
@@ -86,7 +85,6 @@ class RateLimit {
 
 /// Aggregator configuration
 class AggregatorConfig {
-
   const AggregatorConfig({
     this.apiKey,
     this.baseUrl,

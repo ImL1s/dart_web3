@@ -8,7 +8,6 @@ import 'hex.dart';
 ///
 /// Supports EIP-55 checksum encoding for mixed-case addresses.
 class EthereumAddress {
-
   /// Creates an EthereumAddress from raw bytes.
   ///
   /// Throws [InvalidAddressException] if bytes length is not 20.
@@ -69,6 +68,7 @@ class EthereumAddress {
     final hash = keccak256(key);
     return EthereumAddress(BytesUtils.slice(hash, 12));
   }
+
   /// The raw 20-byte address.
   final Uint8List bytes;
 
@@ -114,13 +114,15 @@ class EthereumAddress {
   ///
   /// Returns true if the address is all lowercase, all uppercase,
   /// or has a valid EIP-55 checksum.
-  static bool isValidChecksum(String address, Uint8List Function(Uint8List) keccak256) {
+  static bool isValidChecksum(
+      String address, Uint8List Function(Uint8List) keccak256) {
     if (!isValid(address)) return false;
 
     final stripped = HexUtils.strip0x(address);
 
     // All lowercase or all uppercase is valid
-    if (stripped == stripped.toLowerCase() || stripped == stripped.toUpperCase()) {
+    if (stripped == stripped.toLowerCase() ||
+        stripped == stripped.toUpperCase()) {
       return true;
     }
 

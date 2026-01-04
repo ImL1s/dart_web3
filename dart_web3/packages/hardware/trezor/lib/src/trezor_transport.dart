@@ -6,22 +6,22 @@ import 'trezor_types.dart';
 abstract class TrezorTransport {
   /// Check if transport is supported on current platform
   bool get isSupported;
-  
+
   /// Check if currently connected
   bool get isConnected;
-  
+
   /// Connect to device
   Future<void> connect();
-  
+
   /// Disconnect from device
   Future<void> disconnect();
-  
+
   /// Send message and receive response
   Future<TrezorMessage> exchange(TrezorMessage message);
-  
+
   /// Discover available devices
   Future<List<TrezorDevice>> discoverDevices();
-  
+
   /// Dispose resources
   void dispose();
 }
@@ -29,13 +29,13 @@ abstract class TrezorTransport {
 /// WebUSB transport implementation (mock for pure Dart)
 class TrezorWebUSBTransport implements TrezorTransport {
   bool _isConnected = false;
-  
+
   @override
   bool get isSupported => false; // WebUSB requires browser environment
-  
+
   @override
   bool get isConnected => _isConnected;
-  
+
   @override
   Future<void> connect() async {
     if (!isSupported) {
@@ -44,17 +44,17 @@ class TrezorWebUSBTransport implements TrezorTransport {
         'WebUSB transport not supported in pure Dart implementation',
       );
     }
-    
+
     // Mock connection
     await Future<void>.delayed(const Duration(milliseconds: 500));
     _isConnected = true;
   }
-  
+
   @override
   Future<void> disconnect() async {
     _isConnected = false;
   }
-  
+
   @override
   Future<TrezorMessage> exchange(TrezorMessage message) async {
     if (!_isConnected) {
@@ -63,10 +63,10 @@ class TrezorWebUSBTransport implements TrezorTransport {
         'Device not connected',
       );
     }
-    
+
     // Mock message exchange
     await Future<void>.delayed(const Duration(milliseconds: 100));
-    
+
     // Return mock response based on message type
     switch (message.type) {
       case TrezorMessageType.initialize:
@@ -74,13 +74,13 @@ class TrezorWebUSBTransport implements TrezorTransport {
           type: TrezorMessageType.features,
           data: Uint8List.fromList([0x08, 0x01]), // Mock features data
         );
-        
+
       case TrezorMessageType.getFeatures:
         return TrezorMessage(
           type: TrezorMessageType.features,
           data: Uint8List.fromList([0x08, 0x01]),
         );
-        
+
       default:
         return TrezorMessage(
           type: TrezorMessageType.success,
@@ -88,16 +88,16 @@ class TrezorWebUSBTransport implements TrezorTransport {
         );
     }
   }
-  
+
   @override
   Future<List<TrezorDevice>> discoverDevices() async {
     if (!isSupported) {
       return [];
     }
-    
+
     // Mock device discovery
     await Future<void>.delayed(const Duration(milliseconds: 1000));
-    
+
     return [
       TrezorDevice(
         deviceId: 'webusb-trezor-1',
@@ -107,7 +107,7 @@ class TrezorWebUSBTransport implements TrezorTransport {
       ),
     ];
   }
-  
+
   @override
   void dispose() {
     disconnect();
@@ -118,38 +118,39 @@ class TrezorWebUSBTransport implements TrezorTransport {
 class MockTrezorTransport implements TrezorTransport {
   bool _isConnected = false;
   final Map<TrezorMessageType, TrezorMessage> _mockResponses = {};
-  final StreamController<TrezorMessage> _messageController = StreamController.broadcast();
-  
+  final StreamController<TrezorMessage> _messageController =
+      StreamController.broadcast();
+
   @override
   bool get isSupported => true;
-  
+
   @override
   bool get isConnected => _isConnected;
-  
+
   /// Stream of received messages (for testing)
   Stream<TrezorMessage> get messageStream => _messageController.stream;
-  
+
   /// Set mock response for specific message type
   void setMockResponse(TrezorMessageType requestType, TrezorMessage response) {
     _mockResponses[requestType] = response;
   }
-  
+
   /// Simulate user interaction (button press, PIN entry, etc.)
   void simulateUserInteraction(TrezorMessage response) {
     _messageController.add(response);
   }
-  
+
   @override
   Future<void> connect() async {
     await Future<void>.delayed(const Duration(milliseconds: 100));
     _isConnected = true;
   }
-  
+
   @override
   Future<void> disconnect() async {
     _isConnected = false;
   }
-  
+
   @override
   Future<TrezorMessage> exchange(TrezorMessage message) async {
     if (!_isConnected) {
@@ -158,15 +159,15 @@ class MockTrezorTransport implements TrezorTransport {
         'Device not connected',
       );
     }
-    
+
     await Future<void>.delayed(const Duration(milliseconds: 50));
-    
+
     // Check for mock response
     final mockResponse = _mockResponses[message.type];
     if (mockResponse != null) {
       return mockResponse;
     }
-    
+
     // Default responses based on message type
     switch (message.type) {
       case TrezorMessageType.initialize:
@@ -175,13 +176,13 @@ class MockTrezorTransport implements TrezorTransport {
           type: TrezorMessageType.features,
           data: _createMockFeaturesData(),
         );
-        
+
       case TrezorMessageType.ethereumGetAddress:
         return TrezorMessage(
           type: TrezorMessageType.ethereumAddress,
           data: _createMockAddressData(),
         );
-        
+
       case TrezorMessageType.ethereumSignTx:
       case TrezorMessageType.ethereumSignMessage:
         // Simulate button request first
@@ -189,13 +190,13 @@ class MockTrezorTransport implements TrezorTransport {
           type: TrezorMessageType.buttonRequest,
           data: _createMockButtonRequestData(),
         );
-        
+
       case TrezorMessageType.buttonAck:
         return TrezorMessage(
           type: TrezorMessageType.ethereumMessageSignature,
           data: _createMockSignatureData(),
         );
-        
+
       default:
         return TrezorMessage(
           type: TrezorMessageType.success,
@@ -203,11 +204,11 @@ class MockTrezorTransport implements TrezorTransport {
         );
     }
   }
-  
+
   @override
   Future<List<TrezorDevice>> discoverDevices() async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    
+
     return [
       TrezorDevice(
         deviceId: 'mock-trezor-1',
@@ -217,18 +218,19 @@ class MockTrezorTransport implements TrezorTransport {
       ),
     ];
   }
-  
+
   @override
   void dispose() {
     disconnect();
     _mockResponses.clear();
     _messageController.close();
   }
-  
+
   Uint8List _createMockFeaturesData() {
     // Mock protobuf-encoded Features message
     return Uint8List.fromList([
-      0x0A, 0x09, 0x74, 0x72, 0x65, 0x7A, 0x6F, 0x72, 0x2E, 0x69, 0x6F, // vendor
+      0x0A, 0x09, 0x74, 0x72, 0x65, 0x7A, 0x6F, 0x72, 0x2E, 0x69,
+      0x6F, // vendor
       0x10, 0x02, // major_version
       0x18, 0x01, // minor_version
       0x20, 0x00, // patch_version
@@ -238,7 +240,7 @@ class MockTrezorTransport implements TrezorTransport {
       0x48, 0x01, // initialized
     ]);
   }
-  
+
   Uint8List _createMockAddressData() {
     // Mock protobuf-encoded EthereumAddress message
     return Uint8List.fromList([
@@ -247,14 +249,14 @@ class MockTrezorTransport implements TrezorTransport {
       0xa3, 0xb8, 0xD0, 0xC9, 0xe3, 0xe0, 0xC8, 0xb8, 0xc8, 0xc8,
     ]);
   }
-  
+
   Uint8List _createMockButtonRequestData() {
     // Mock protobuf-encoded ButtonRequest message
     return Uint8List.fromList([
       0x08, 0x0E, // code (ButtonRequestType.confirmAction)
     ]);
   }
-  
+
   Uint8List _createMockSignatureData() {
     // Mock protobuf-encoded EthereumMessageSignature message
     return Uint8List.fromList([
@@ -282,9 +284,9 @@ MockTrezorTransport createMockTrezorTransport() {
 /// Get available transport types for current platform
 List<String> getAvailableTrezorTransports() {
   final available = <String>[];
-  
+
   // In a real implementation, check platform capabilities
   // For now, return empty list since pure Dart doesn't support WebUSB
-  
+
   return available;
 }

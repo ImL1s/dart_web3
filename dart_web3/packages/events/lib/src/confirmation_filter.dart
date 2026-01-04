@@ -7,12 +7,12 @@ import 'event_subscriber.dart';
 
 /// Filters events based on block confirmations.
 class ConfirmationFilter {
-
   ConfirmationFilter(
     this.subscriber, {
     this.requiredConfirmations = 12,
     this.checkInterval = const Duration(seconds: 30),
   });
+
   /// The event subscriber.
   final EventSubscriber subscriber;
 
@@ -29,7 +29,7 @@ class ConfirmationFilter {
   final Duration checkInterval;
 
   /// Filters events to only emit those with sufficient confirmations.
-  /// 
+  ///
   /// Returns a stream of logs that have at least [requiredConfirmations] confirmations.
   Stream<Log> filterByConfirmations(EventFilter filter) async* {
     final controller = StreamController<Log>();
@@ -53,16 +53,17 @@ class ConfirmationFilter {
   }
 
   /// Filters events with custom confirmation requirements.
-  /// 
+  ///
   /// [filter] - The event filter
   /// [confirmations] - Required confirmations for this specific filter
   /// [onConfirmed] - Callback when a log is confirmed
   /// [onPending] - Optional callback for pending logs with confirmation count
-  /// 
+  ///
   /// Returns a subscription that can be cancelled.
   StreamSubscription<Log> filterWithCallback(
     EventFilter filter, {
-    required void Function(Log) onConfirmed, int? confirmations,
+    required void Function(Log) onConfirmed,
+    int? confirmations,
     void Function(Log, int)? onPending,
   }) {
     final requiredConf = confirmations ?? requiredConfirmations;
@@ -81,7 +82,8 @@ class ConfirmationFilter {
         for (final entry in pendingLogs.entries) {
           final key = entry.key;
           final pendingLog = entry.value;
-          final confirmationCount = (currentBlock - pendingLog.log.blockNumber).toInt();
+          final confirmationCount =
+              (currentBlock - pendingLog.log.blockNumber).toInt();
 
           if (confirmationCount >= requiredConf) {
             // Log is confirmed
@@ -140,7 +142,8 @@ class ConfirmationFilter {
     final currentBlock = await subscriber.publicClient.getBlockNumber();
 
     for (final pendingLog in _pendingLogs.values) {
-      final confirmationCount = (currentBlock - pendingLog.log.blockNumber).toInt();
+      final confirmationCount =
+          (currentBlock - pendingLog.log.blockNumber).toInt();
       result[pendingLog.log] = confirmationCount;
     }
 
@@ -186,7 +189,8 @@ class ConfirmationFilter {
       for (final entry in _pendingLogs.entries) {
         final key = entry.key;
         final pendingLog = entry.value;
-        final confirmationCount = (currentBlock - pendingLog.log.blockNumber).toInt();
+        final confirmationCount =
+            (currentBlock - pendingLog.log.blockNumber).toInt();
 
         if (confirmationCount >= requiredConfirmations) {
           // Log is confirmed
@@ -213,8 +217,8 @@ class ConfirmationFilter {
 
 /// Represents a log waiting for confirmations.
 class _PendingLog {
-
   _PendingLog(this.log, this.timestamp);
+
   /// The log.
   final Log log;
 
@@ -224,12 +228,12 @@ class _PendingLog {
 
 /// Configuration for confirmation filtering.
 class ConfirmationConfig {
-
   const ConfirmationConfig({
     this.confirmations = 12,
     this.checkInterval = const Duration(seconds: 30),
     this.timeout,
   });
+
   /// Required number of confirmations.
   final int confirmations;
 
@@ -246,9 +250,7 @@ class ConfirmationConfig {
   );
 
   /// Configuration for standard confirmations (mainnet).
-  static const standard = ConfirmationConfig(
-    
-  );
+  static const standard = ConfirmationConfig();
 
   /// Configuration for high security confirmations.
   static const secure = ConfirmationConfig(
@@ -259,8 +261,8 @@ class ConfirmationConfig {
 
 /// Custom subscription implementation for confirmation filtering.
 class _CustomSubscription<T> implements StreamSubscription<T> {
-
-  _CustomSubscription({Future<void> Function()? onCancel}) : _onCancel = onCancel;
+  _CustomSubscription({Future<void> Function()? onCancel})
+      : _onCancel = onCancel;
   final Future<void> Function()? _onCancel;
   bool _isPaused = false;
   bool _isCanceled = false;

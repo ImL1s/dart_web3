@@ -14,9 +14,10 @@ void main() {
         nonce: 'randomnonce',
         issuedAt: DateTime.parse('2023-01-01T00:00:00Z'),
       );
-      
+
       expect(message.domain, equals('example.com'));
-      expect(message.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(message.address,
+          equals('0x1234567890123456789012345678901234567890'));
       expect(message.statement, equals('Sign in to the application'));
       expect(message.chainId, equals(1));
     });
@@ -32,11 +33,12 @@ void main() {
         nonce: 'randomnonce',
         issuedAt: DateTime.parse('2023-01-01T00:00:00Z'),
       );
-      
+
       final messageString = message.toMessage();
-      
+
       expect(messageString, contains('example.com wants you to sign in'));
-      expect(messageString, contains('0x1234567890123456789012345678901234567890'));
+      expect(messageString,
+          contains('0x1234567890123456789012345678901234567890'));
       expect(messageString, contains('Sign in to the application'));
       expect(messageString, contains('URI: https://example.com'));
       expect(messageString, contains('Version: 1'));
@@ -56,11 +58,12 @@ Version: 1
 Chain ID: 1
 Nonce: randomnonce
 Issued At: 2023-01-01T00:00:00.000Z''';
-      
+
       final message = SiweMessage.parse(messageString);
-      
+
       expect(message.domain, equals('example.com'));
-      expect(message.address, equals('0x1234567890123456789012345678901234567890'));
+      expect(message.address,
+          equals('0x1234567890123456789012345678901234567890'));
       expect(message.statement, equals('Sign in to the application'));
       expect(message.uri, equals('https://example.com'));
       expect(message.version, equals('1'));
@@ -79,10 +82,10 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         nonce: 'randomnonce',
         issuedAt: DateTime.parse('2023-01-01T00:00:00Z'),
       );
-      
+
       final json = message.toJson();
       final restored = SiweMessage.fromJson(json);
-      
+
       expect(restored.domain, equals(message.domain));
       expect(restored.address, equals(message.address));
       expect(restored.statement, equals(message.statement));
@@ -92,7 +95,7 @@ Issued At: 2023-01-01T00:00:00.000Z''';
 
     test('should validate message timing correctly', () {
       final now = DateTime.now();
-      
+
       // Valid message
       final validMessage = SiweMessage(
         domain: 'example.com',
@@ -104,9 +107,9 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         issuedAt: now,
         expirationTime: now.add(Duration(hours: 1)),
       );
-      
+
       expect(validMessage.isValid, isTrue);
-      
+
       // Expired message
       final expiredMessage = SiweMessage(
         domain: 'example.com',
@@ -118,9 +121,9 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         issuedAt: now,
         expirationTime: now.subtract(Duration(hours: 1)),
       );
-      
+
       expect(expiredMessage.isValid, isFalse);
-      
+
       // Not yet valid message
       final futureMessage = SiweMessage(
         domain: 'example.com',
@@ -132,7 +135,7 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         issuedAt: now,
         notBefore: now.add(Duration(hours: 1)),
       );
-      
+
       expect(futureMessage.isValid, isFalse);
     });
 
@@ -146,23 +149,24 @@ Version: 1
 Chain ID: 1
 Nonce: randomnonce
 Issued At: 2023-01-01T00:00:00.000Z''';
-      
+
       final message = SiweMessage.parse(messageString);
-      
+
       expect(message.domain, equals('example.com'));
       expect(message.statement, isNull);
     });
 
     test('should throw on invalid message format', () {
       expect(() => SiweMessage.parse('invalid message'), throwsArgumentError);
-      expect(() => SiweMessage.parse('not a siwe message\nformat'), throwsArgumentError);
+      expect(() => SiweMessage.parse('not a siwe message\nformat'),
+          throwsArgumentError);
     });
   });
 
   group('SiweConfig', () {
     test('should create default config', () {
       final config = SiweConfig.defaultConfig();
-      
+
       expect(config.domain, equals('localhost:3000'));
       expect(config.uri, equals('http://localhost:3000'));
       expect(config.chainId, equals(1));
@@ -177,7 +181,7 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         chainId: 137,
         expirationTime: Duration(hours: 12),
       );
-      
+
       expect(config.domain, equals('myapp.com'));
       expect(config.statement, equals('Custom statement'));
       expect(config.chainId, equals(137));
@@ -196,13 +200,13 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         nonce: 'nonce',
         issuedAt: DateTime.now(),
       );
-      
+
       final result = SiweAuthResult(
         siweMessage: siweMessage,
         signature: '0xsignature',
         isAuthenticated: true,
       );
-      
+
       expect(result.siweMessage, equals(siweMessage));
       expect(result.signature, equals('0xsignature'));
       expect(result.isAuthenticated, isTrue);
@@ -219,21 +223,21 @@ Issued At: 2023-01-01T00:00:00.000Z''';
         nonce: 'nonce',
         issuedAt: DateTime.now(),
       );
-      
+
       // Incomplete result
       final incompleteResult = SiweAuthResult(
         siweMessage: siweMessage,
       );
-      
+
       expect(incompleteResult.isComplete, isFalse);
-      
+
       // Complete result
       final completeResult = SiweAuthResult(
         siweMessage: siweMessage,
         signature: '0xsignature',
         isAuthenticated: true,
       );
-      
+
       expect(completeResult.isComplete, isTrue);
     });
   });

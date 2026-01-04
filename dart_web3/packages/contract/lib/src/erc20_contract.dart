@@ -1,4 +1,3 @@
-
 import 'contract.dart';
 import 'event_filter.dart';
 
@@ -167,17 +166,23 @@ class ERC20Contract extends Contract {
 
   /// Creates a filter for Transfer events.
   EventFilter transferFilter({String? from, String? to}) {
-    return createEventFilter('Transfer', indexedArgs: {
-      if (from != null) 'from': from,
-      if (to != null) 'to': to,
-    },);
+    return createEventFilter(
+      'Transfer',
+      indexedArgs: {
+        if (from != null) 'from': from,
+        if (to != null) 'to': to,
+      },
+    );
   }
 
   /// Creates a filter for Approval events.
   EventFilter approvalFilter({String? owner, String? spender}) {
-    return createEventFilter('Approval', indexedArgs: {
-      if (owner != null) 'owner': owner,
-      if (spender != null) 'spender': spender,
-    },);
+    return createEventFilter(
+      'Approval',
+      indexedArgs: {
+        if (owner != null) 'owner': owner,
+        if (spender != null) 'spender': spender,
+      },
+    );
   }
 }

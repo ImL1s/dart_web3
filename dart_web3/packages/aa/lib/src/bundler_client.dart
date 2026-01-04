@@ -3,7 +3,7 @@ import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'user_operation.dart';
 
 /// Bundler client for ERC-4337 UserOperation submission and management.
-/// 
+///
 /// The Bundler is responsible for:
 /// - Accepting UserOperations from users
 /// - Validating UserOperations
@@ -11,13 +11,12 @@ import 'user_operation.dart';
 /// - Bundling UserOperations into transactions
 /// - Submitting bundles to the EntryPoint contract
 class BundlerClient {
-
   BundlerClient({
     required String bundlerUrl,
     RpcProvider? provider,
     this.entryPointVersion = EntryPointVersion.v07,
-  }) : _bundlerUrl = bundlerUrl,
-       _provider = provider ?? RpcProvider(HttpTransport(bundlerUrl));
+  })  : _bundlerUrl = bundlerUrl,
+        _provider = provider ?? RpcProvider(HttpTransport(bundlerUrl));
   final RpcProvider _provider;
   final String _bundlerUrl;
   final EntryPointVersion entryPointVersion;
@@ -26,7 +25,7 @@ class BundlerClient {
   String get bundlerUrl => _bundlerUrl;
 
   /// Sends a UserOperation to the bundler.
-  /// 
+  ///
   /// Returns the userOpHash that can be used to track the operation.
   Future<String> sendUserOperation(UserOperation userOp) async {
     final result = await _provider.call<String>(
@@ -37,7 +36,7 @@ class BundlerClient {
   }
 
   /// Estimates gas for a UserOperation.
-  /// 
+  ///
   /// Returns gas estimates for different parts of the operation:
   /// - preVerificationGas: Gas for pre-verification
   /// - verificationGasLimit: Gas for verification
@@ -56,15 +55,16 @@ class BundlerClient {
   }
 
   /// Gets a UserOperation by its hash.
-  /// 
+  ///
   /// Returns null if the UserOperation is not found.
-  Future<UserOperationByHashResult?> getUserOperationByHash(String userOpHash) async {
+  Future<UserOperationByHashResult?> getUserOperationByHash(
+      String userOpHash) async {
     try {
       final result = await _provider.call<Map<String, dynamic>?>(
         'eth_getUserOperationByHash',
         [userOpHash],
       );
-      
+
       if (result == null) return null;
       return UserOperationByHashResult.fromJson(result);
     } on Exception catch (_) {
@@ -74,15 +74,16 @@ class BundlerClient {
   }
 
   /// Gets the receipt for a UserOperation.
-  /// 
+  ///
   /// Returns null if the UserOperation has not been included in a block yet.
-  Future<UserOperationReceipt?> getUserOperationReceipt(String userOpHash) async {
+  Future<UserOperationReceipt?> getUserOperationReceipt(
+      String userOpHash) async {
     try {
       final result = await _provider.call<Map<String, dynamic>?>(
         'eth_getUserOperationReceipt',
         [userOpHash],
       );
-      
+
       if (result == null) return null;
       return UserOperationReceipt.fromJson(result);
     } on Exception catch (_) {
@@ -92,7 +93,7 @@ class BundlerClient {
   }
 
   /// Waits for a UserOperation receipt.
-  /// 
+  ///
   /// Polls the bundler until the UserOperation is included in a block.
   /// Throws a [TimeoutException] if the timeout is reached.
   Future<UserOperationReceipt> waitForUserOperationReceipt(
@@ -101,16 +102,16 @@ class BundlerClient {
     Duration pollInterval = const Duration(seconds: 3),
   }) async {
     final startTime = DateTime.now();
-    
+
     while (DateTime.now().difference(startTime) < timeout) {
       final receipt = await getUserOperationReceipt(userOpHash);
       if (receipt != null) {
         return receipt;
       }
-      
+
       await Future<void>.delayed(pollInterval);
     }
-    
+
     throw TimeoutException(
       'UserOperation receipt not received within timeout',
       timeout,
@@ -133,36 +134,45 @@ class BundlerClient {
   }
 
   /// Estimates gas for multiple UserOperations in a batch.
-  /// 
+  ///
   /// This is useful for optimizing gas costs when submitting multiple operations.
   Future<List<UserOperationGasEstimate>> batchEstimateUserOperationGas(
     List<UserOperation> userOps, {
     String? entryPoint,
   }) async {
-    final requests = userOps.map((userOp) => RpcRequest(
-      'eth_estimateUserOperationGas',
-      [userOp.toJson(), entryPoint ?? _getEntryPointAddress()],
-    ),).toList();
+    final requests = userOps
+        .map(
+          (userOp) => RpcRequest(
+            'eth_estimateUserOperationGas',
+            [userOp.toJson(), entryPoint ?? _getEntryPointAddress()],
+          ),
+        )
+        .toList();
 
     final results = await _provider.batchCall<Map<String, dynamic>>(requests);
     return results.map(UserOperationGasEstimate.fromJson).toList();
   }
 
   /// Sends multiple UserOperations in a batch.
-  /// 
+  ///
   /// Returns a list of userOpHashes for tracking the operations.
-  Future<List<String>> batchSendUserOperation(List<UserOperation> userOps) async {
-    final requests = userOps.map((userOp) => RpcRequest(
-      'eth_sendUserOperation',
-      [userOp.toJson(), _getEntryPointAddress()],
-    ),).toList();
+  Future<List<String>> batchSendUserOperation(
+      List<UserOperation> userOps) async {
+    final requests = userOps
+        .map(
+          (userOp) => RpcRequest(
+            'eth_sendUserOperation',
+            [userOp.toJson(), _getEntryPointAddress()],
+          ),
+        )
+        .toList();
 
     final results = await _provider.batchCall<String>(requests);
     return results;
   }
 
   /// Gets the default EntryPoint address for this bundler.
-  /// 
+  ///
   /// This is typically the latest EntryPoint version supported.
   String getEntryPointAddress() {
     // Note: This should be configurable or fetched from the bundler
@@ -181,7 +191,6 @@ class BundlerClient {
 
 /// Result from getUserOperationByHash
 class UserOperationByHashResult {
-
   UserOperationByHashResult({
     required this.blockHash,
     required this.blockNumber,
@@ -196,7 +205,8 @@ class UserOperationByHashResult {
       blockNumber: BigInt.parse(json['blockNumber'] as String),
       entryPoint: json['entryPoint'] as String,
       transactionHash: json['transactionHash'] as String,
-      userOperation: UserOperation.fromJson(json['userOperation'] as Map<String, dynamic>),
+      userOperation:
+          UserOperation.fromJson(json['userOperation'] as Map<String, dynamic>),
     );
   }
   final String blockHash;
@@ -218,7 +228,6 @@ class UserOperationByHashResult {
 
 /// Exception thrown when a bundler operation times out.
 class TimeoutException implements Exception {
-
   TimeoutException(this.message, this.timeout);
   final String message;
   final Duration timeout;
@@ -231,28 +240,28 @@ class TimeoutException implements Exception {
 enum BundlerErrorCode {
   /// UserOperation validation failed
   validationFailed(-32602),
-  
+
   /// UserOperation simulation failed
   simulationFailed(-32500),
-  
+
   /// UserOperation rejected by paymaster
   paymasterRejected(-32501),
-  
+
   /// UserOperation rejected due to opcode validation
   opcodeValidationFailed(-32502),
-  
+
   /// UserOperation rejected due to time range validation
   timeRangeValidationFailed(-32503),
-  
+
   /// UserOperation rejected due to paymaster validation
   paymasterValidationFailed(-32504),
-  
+
   /// UserOperation rejected due to paymaster deposit too low
   paymasterDepositTooLow(-32505),
-  
+
   /// UserOperation rejected due to unsupported signature aggregator
   unsupportedSignatureAggregator(-32506),
-  
+
   /// UserOperation rejected due to invalid signature aggregator
   invalidSignatureAggregator(-32507);
 
@@ -262,7 +271,6 @@ enum BundlerErrorCode {
 
 /// Exception thrown by bundler operations
 class BundlerException implements Exception {
-
   BundlerException({
     required this.errorCode,
     required this.message,
@@ -295,7 +303,8 @@ class BundlerException implements Exception {
 
   @override
   String toString() {
-    final buffer = StringBuffer('BundlerException: ${errorCode.name} ($message)');
+    final buffer =
+        StringBuffer('BundlerException: ${errorCode.name} ($message)');
     if (data != null) {
       buffer.write(' - Data: $data');
     }

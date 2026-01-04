@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
@@ -30,10 +29,10 @@ void main() {
         outputs: [output],
       );
 
-      // Verify structure (we can't really "sign" without a key/signer setup, 
+      // Verify structure (we can't really "sign" without a key/signer setup,
       // but verifying the transaction builder produced valid serialization is the "integration" here)
       // For a "Mock Integration" we assert the builder constructed what we expect.
-      
+
       final serialized = tx.toBytes();
       expect(serialized.length, greaterThan(0));
       expect(tx.inputs.length, 1);

@@ -1,0 +1,173 @@
+00:00 +0: loading test/ens_client_test.dart
+00:00 +0: ENSClient basic resolution should resolve ENS name to address
+00:00 +0 -1: ENSClient basic resolution should resolve ENS name to address [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_resolver.dart 114:43  ENSResolver._getResolver
+  package:web3_universal_ens/src/ens_resolver.dart 38:37   ENSResolver.resolveName
+  package:web3_universal_ens/src/ens_client.dart 37:22     ENSClient.resolveName
+  test\ens_client_test.dart 25:40                          main.<fn>.<fn>.<fn>
+  
+00:00 +0 -1: ENSClient basic resolution should reverse resolve address to name
+00:00 +0 -2: ENSClient basic resolution should reverse resolve address to name [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_resolver.dart 114:43  ENSResolver._getResolver
+  package:web3_universal_ens/src/ens_resolver.dart 79:37   ENSResolver.resolveAddress
+  package:web3_universal_ens/src/ens_client.dart 42:22     ENSClient.resolveAddress
+  test\ens_client_test.dart 39:40                          main.<fn>.<fn>.<fn>
+  
+00:00 +0 -2: ENSClient text records should get text record
+00:00 +0 -3: ENSClient text records should get text record [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_records.dart 135:43   ENSRecords._getResolver
+  package:web3_universal_ens/src/ens_records.dart 37:37    ENSRecords.getTextRecord
+  package:web3_universal_ens/src/ens_client.dart 49:21     ENSClient.getTextRecord
+  test\ens_client_test.dart 54:40                          main.<fn>.<fn>.<fn>
+  
+00:00 +0 -3: ENSClient text records should get avatar
+00:00 +0 -4: ENSClient text records should get avatar [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_records.dart 135:43   ENSRecords._getResolver
+  package:web3_universal_ens/src/ens_records.dart 37:37    ENSRecords.getTextRecord
+  package:web3_universal_ens/src/ens_records.dart 56:26    ENSRecords.getAvatar
+  package:web3_universal_ens/src/ens_client.dart 54:21     ENSClient.getAvatar
+  test\ens_client_test.dart 67:40                          main.<fn>.<fn>.<fn>
+  
+00:00 +0 -4: ENSClient text records should get multiple text records
+00:00 +0 -5: ENSClient text records should get multiple text records [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_records.dart 135:43   ENSRecords._getResolver
+  package:web3_universal_ens/src/ens_records.dart 37:37    ENSRecords.getTextRecord
+  package:web3_universal_ens/src/ens_records.dart 84:28    ENSRecords.getTextRecords
+  package:web3_universal_ens/src/ens_client.dart 59:21     ENSClient.getTextRecords
+  test\ens_client_test.dart 80:40                          main.<fn>.<fn>.<fn>
+  
+00:00 +0 -5: ENSClient text records should get complete profile
+00:00 +0 -6: ENSClient text records should get complete profile [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_records.dart 135:43   ENSRecords._getResolver
+  package:web3_universal_ens/src/ens_records.dart 37:37    ENSRecords.getTextRecord
+  package:web3_universal_ens/src/ens_records.dart 84:28    ENSRecords.getTextRecords
+  package:web3_universal_ens/src/ens_records.dart 92:27    ENSRecords.getProfile
+  package:web3_universal_ens/src/ens_client.dart 64:21     ENSClient.getProfile
+  test\ens_client_test.dart 94:41                          main.<fn>.<fn>.<fn>
+  
+00:00 +0 -6: ENSClient multi-chain addresses should resolve address for specific coin type
+00:00 +0 -7: ENSClient multi-chain addresses should resolve address for specific coin type [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25                AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33                AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18               AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25               AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33         Contract.read
+  package:web3_universal_ens/src/multichain_resolver.dart 115:43  MultichainResolver._getResolver
+  package:web3_universal_ens/src/multichain_resolver.dart 37:37   MultichainResolver.resolveAddress
+  package:web3_universal_ens/src/ens_client.dart 71:32            ENSClient.resolveAddressForCoin
+  test\ens_client_test.dart 110:40                                main.<fn>.<fn>.<fn>
+  
+00:00 +0 -7: ENSClient multi-chain addresses should get Ethereum address
+00:00 +0 -8: ENSClient multi-chain addresses should get Ethereum address [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25                AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33                AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18               AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25               AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33         Contract.read
+  package:web3_universal_ens/src/multichain_resolver.dart 115:43  MultichainResolver._getResolver
+  package:web3_universal_ens/src/multichain_resolver.dart 37:37   MultichainResolver.resolveAddress
+  package:web3_universal_ens/src/multichain_resolver.dart 62:12   MultichainResolver.getEthereumAddress
+  package:web3_universal_ens/src/ens_client.dart 76:32            ENSClient.getEthereumAddress
+  test\ens_client_test.dart 123:40                                main.<fn>.<fn>.<fn>
+  
+00:00 +0 -8: ENSClient multi-chain addresses should get Bitcoin address
+00:00 +0 -9: ENSClient multi-chain addresses should get Bitcoin address [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25                AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33                AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18               AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25               AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33         Contract.read
+  package:web3_universal_ens/src/multichain_resolver.dart 115:43  MultichainResolver._getResolver
+  package:web3_universal_ens/src/multichain_resolver.dart 37:37   MultichainResolver.resolveAddress
+  package:web3_universal_ens/src/multichain_resolver.dart 67:12   MultichainResolver.getBitcoinAddress
+  package:web3_universal_ens/src/ens_client.dart 81:32            ENSClient.getBitcoinAddress
+  test\ens_client_test.dart 136:40                                main.<fn>.<fn>.<fn>
+  
+00:00 +0 -9: ENSClient multi-chain addresses should get all supported addresses
+00:00 +0 -10: ENSClient multi-chain addresses should get all supported addresses [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25                AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33                AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18               AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25               AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33         Contract.read
+  package:web3_universal_ens/src/multichain_resolver.dart 115:43  MultichainResolver._getResolver
+  package:web3_universal_ens/src/multichain_resolver.dart 37:37   MultichainResolver.resolveAddress
+  package:web3_universal_ens/src/multichain_resolver.dart 99:33   MultichainResolver.getAllAddresses
+  package:web3_universal_ens/src/ens_client.dart 101:32           ENSClient.getAllAddresses
+  test\ens_client_test.dart 149:40                                main.<fn>.<fn>.<fn>
+  
+00:00 +0 -10: ENSClient comprehensive info should get complete ENS information
+00:00 +0 -11: ENSClient comprehensive info should get complete ENS information [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_records.dart 135:43   ENSRecords._getResolver
+  package:web3_universal_ens/src/ens_records.dart 37:37    ENSRecords.getTextRecord
+  package:web3_universal_ens/src/ens_records.dart 84:28    ENSRecords.getTextRecords
+  package:web3_universal_ens/src/ens_records.dart 92:27    ENSRecords.getProfile
+  package:web3_universal_ens/src/ens_client.dart 64:21     ENSClient.getProfile
+  package:web3_universal_ens/src/ens_client.dart 120:27    ENSClient.getENSInfo
+  test\ens_client_test.dart 166:38                         main.<fn>.<fn>.<fn>
+  
+00:00 +0 -11: ENSClient utility methods should validate ENS names
+00:00 +1 -11: ENSClient utility methods should clear all caches
+00:00 +2 -11: ENSClient error handling should handle RPC errors gracefully
+00:00 +2 -12: ENSClient error handling should handle RPC errors gracefully [E]
+  type 'String' is not a subtype of type 'Uint8List' in type cast
+  package:web3_universal_abi/src/types.dart 214:25         AbiFixedBytes.encode
+  package:web3_universal_abi/src/types.dart 483:33         AbiTuple.encode
+  package:web3_universal_abi/src/encoder.dart 20:18        AbiEncoder.encode
+  package:web3_universal_abi/src/encoder.dart 46:25        AbiEncoder.encodeFunction
+  package:web3_universal_contract/src/contract.dart 52:33  Contract.read
+  package:web3_universal_ens/src/ens_resolver.dart 114:43  ENSResolver._getResolver
+  package:web3_universal_ens/src/ens_resolver.dart 38:37   ENSResolver.resolveName
+  package:web3_universal_ens/src/ens_client.dart 37:22     ENSClient.resolveName
+  test\ens_client_test.dart 199:40                         main.<fn>.<fn>.<fn>
+  
+00:00 +2 -12: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

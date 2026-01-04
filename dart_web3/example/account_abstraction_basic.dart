@@ -13,7 +13,7 @@ void main() async {
   // 2. Define Smart Account Configuration
   // Using a standard SimpleAccount factory (e.g., from Alchemy or Stackup)
   const factoryAddress = '0x9406Cc6185a346906296840746125a0E44976454';
-  
+
   // 3. Initialize the Smart Account
   // This calculates the counterfactual address (address before deployment)
   final smartAccount = SimpleAccount(
@@ -21,7 +21,7 @@ void main() async {
     factoryAddress: factoryAddress,
     index: BigInt.zero,
   );
-  
+
   print('Smart Account Address (Counterfactual): ${smartAccount.address}');
 
   // 4. Setup Bundler Client

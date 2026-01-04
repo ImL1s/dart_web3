@@ -9,7 +9,7 @@ void main() {
       test('encodes uint256 correctly', () {
         final type = AbiUint(256);
         final encoded = type.encode(BigInt.from(42));
-        
+
         expect(encoded.length, equals(32));
         expect(encoded[31], equals(42));
         expect(encoded.sublist(0, 31).every((b) => b == 0), isTrue);
@@ -17,9 +17,11 @@ void main() {
 
       test('encodes large uint256 correctly', () {
         final type = AbiUint(256);
-        final value = BigInt.parse('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', radix: 16);
+        final value = BigInt.parse(
+            'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+            radix: 16);
         final encoded = type.encode(value);
-        
+
         expect(encoded.length, equals(32));
         expect(encoded.every((b) => b == 255), isTrue);
       });
@@ -28,7 +30,7 @@ void main() {
         final type = AbiUint(256);
         final data = Uint8List(32);
         data[31] = 42;
-        
+
         final (decoded, consumed) = type.decode(data, 0);
         expect(decoded, equals(BigInt.from(42)));
         expect(consumed, equals(32));
@@ -39,7 +41,7 @@ void main() {
       test('encodes positive int256 correctly', () {
         final type = AbiInt(256);
         final encoded = type.encode(BigInt.from(42));
-        
+
         expect(encoded.length, equals(32));
         expect(encoded[31], equals(42));
       });
@@ -47,7 +49,7 @@ void main() {
       test('encodes negative int256 correctly', () {
         final type = AbiInt(256);
         final encoded = type.encode(BigInt.from(-1));
-        
+
         expect(encoded.length, equals(32));
         expect(encoded.every((b) => b == 255), isTrue);
       });
@@ -58,7 +60,7 @@ void main() {
         for (var i = 0; i < 32; i++) {
           data[i] = 255;
         }
-        
+
         final (decoded, _) = type.decode(data, 0);
         expect(decoded, equals(BigInt.from(-1)));
       });
@@ -67,8 +69,9 @@ void main() {
     group('AbiAddress', () {
       test('encodes address correctly', () {
         final type = AbiAddress();
-        final encoded = type.encode('0xdead000000000000000000000000000000000000');
-        
+        final encoded =
+            type.encode('0xdead000000000000000000000000000000000000');
+
         expect(encoded.length, equals(32));
         expect(encoded[12], equals(0xde));
         expect(encoded[13], equals(0xad));
@@ -79,7 +82,7 @@ void main() {
         final data = Uint8List(32);
         data[12] = 0xde;
         data[13] = 0xad;
-        
+
         final (decoded, _) = type.decode(data, 0);
         expect(decoded.toString().toLowerCase(), contains('dead'));
       });
@@ -89,7 +92,7 @@ void main() {
       test('encodes true correctly', () {
         final type = AbiBool();
         final encoded = type.encode(true);
-        
+
         expect(encoded.length, equals(32));
         expect(encoded[31], equals(1));
       });
@@ -97,7 +100,7 @@ void main() {
       test('encodes false correctly', () {
         final type = AbiBool();
         final encoded = type.encode(false);
-        
+
         expect(encoded.length, equals(32));
         expect(encoded[31], equals(0));
       });
@@ -107,13 +110,13 @@ void main() {
       test('encodes string correctly', () {
         final type = AbiString();
         final encoded = type.encode('hello');
-        
+
         // Length (32 bytes) + padded data (32 bytes)
         expect(encoded.length, equals(64));
-        
+
         // First 32 bytes should be length (5)
         expect(encoded[31], equals(5));
-        
+
         // Next bytes should be 'hello'
         expect(encoded[32], equals('h'.codeUnitAt(0)));
         expect(encoded[33], equals('e'.codeUnitAt(0)));
@@ -125,7 +128,7 @@ void main() {
       test('decodes string correctly', () {
         final type = AbiString();
         final encoded = type.encode('hello world');
-        
+
         final (decoded, _) = type.decode(encoded, 0);
         expect(decoded, equals('hello world'));
       });
@@ -136,7 +139,7 @@ void main() {
         final type = AbiBytes();
         final data = Uint8List.fromList([1, 2, 3, 4, 5]);
         final encoded = type.encode(data);
-        
+
         // Length (32 bytes) + padded data (32 bytes)
         expect(encoded.length, equals(64));
         expect(encoded[31], equals(5));
@@ -148,7 +151,7 @@ void main() {
         final type = AbiBytes();
         final data = Uint8List.fromList([1, 2, 3, 4, 5]);
         final encoded = type.encode(data);
-        
+
         final (decoded, _) = type.decode(encoded, 0);
         expect(decoded, equals(data));
       });
@@ -160,7 +163,7 @@ void main() {
         final data = Uint8List(32);
         data[0] = 0xde;
         data[1] = 0xad;
-        
+
         final encoded = type.encode(data);
         expect(encoded.length, equals(32));
         expect(encoded[0], equals(0xde));
@@ -173,7 +176,7 @@ void main() {
         final type = AbiArray(AbiUint(256));
         final values = [BigInt.from(1), BigInt.from(2), BigInt.from(3)];
         final encoded = type.encode(values);
-        
+
         // Length (32) + 3 elements (32 each) = 128 bytes
         expect(encoded.length, equals(128));
         expect(encoded[31], equals(3)); // length
@@ -183,7 +186,7 @@ void main() {
         final type = AbiArray(AbiUint(256), 3);
         final values = [BigInt.from(1), BigInt.from(2), BigInt.from(3)];
         final encoded = type.encode(values);
-        
+
         // 3 elements (32 each) = 96 bytes (no length prefix)
         expect(encoded.length, equals(96));
       });
@@ -192,7 +195,7 @@ void main() {
         final type = AbiArray(AbiUint(256));
         final values = [BigInt.from(1), BigInt.from(2), BigInt.from(3)];
         final encoded = type.encode(values);
-        
+
         final (decoded, _) = type.decode(encoded, 0);
         expect(decoded, equals(values));
       });
@@ -201,9 +204,12 @@ void main() {
     group('AbiTuple', () {
       test('encodes tuple correctly', () {
         final type = AbiTuple([AbiUint(256), AbiAddress()]);
-        final values = [BigInt.from(42), '0xdead000000000000000000000000000000000000'];
+        final values = [
+          BigInt.from(42),
+          '0xdead000000000000000000000000000000000000'
+        ];
         final encoded = type.encode(values);
-        
+
         expect(encoded.length, equals(64));
       });
 
@@ -211,7 +217,7 @@ void main() {
         final type = AbiTuple([AbiUint(256), AbiBool()]);
         final values = [BigInt.from(42), true];
         final encoded = type.encode(values);
-        
+
         final (decoded, _) = type.decode(encoded, 0);
         expect((decoded as List)[0], equals(BigInt.from(42)));
         expect(decoded[1], equals(true));

@@ -8,7 +8,7 @@ import 'package:web3_universal_signer/web3_universal_signer.dart';
 import 'user_operation.dart';
 
 /// Abstract base class for smart contract accounts.
-/// 
+///
 /// A SmartAccount represents an account that is controlled by smart contract code
 /// rather than a private key. This enables advanced features like:
 /// - Multi-signature wallets
@@ -66,7 +66,6 @@ abstract class SmartAccount {
 
 /// Represents a function call to be executed by a smart account.
 class Call {
-
   Call({
     required this.to,
     required this.data,
@@ -81,13 +80,14 @@ class Call {
     // Use ABI encoder to encode the function call
     // For now, this is a placeholder
     final data = '0x'; // Encoded function call
-    
+
     return Call(
       to: contractAddress,
       value: value ?? BigInt.zero,
       data: data,
     );
   }
+
   /// The target contract address.
   final String to;
 
@@ -108,7 +108,6 @@ class Call {
 
 /// Base implementation of SmartAccount with common functionality.
 abstract class BaseSmartAccount implements SmartAccount {
-
   BaseSmartAccount({
     required Signer owner,
     required PublicClient publicClient,
@@ -116,11 +115,11 @@ abstract class BaseSmartAccount implements SmartAccount {
     required String implementationAddress,
     this.entryPointVersion = EntryPointVersion.v07,
     String? factoryAddress,
-  }) : _owner = owner,
-       _publicClient = publicClient,
-       _entryPointAddress = entryPointAddress,
-       _factoryAddress = factoryAddress,
-       _implementationAddress = implementationAddress;
+  })  : _owner = owner,
+        _publicClient = publicClient,
+        _entryPointAddress = entryPointAddress,
+        _factoryAddress = factoryAddress,
+        _implementationAddress = implementationAddress;
   final Signer _owner;
   final PublicClient _publicClient;
   final String _entryPointAddress;
@@ -146,27 +145,31 @@ abstract class BaseSmartAccount implements SmartAccount {
   @override
   Future<BigInt> getNonce({String? key}) async {
     final address = await getAddress();
-    
+
     // Call EntryPoint.getNonce(sender, key)
     final nonceKey = key != null ? BigInt.parse(key) : BigInt.zero;
     final callData = _encodeGetNonceCall(address, nonceKey);
-    
-    final result = await _publicClient.call(CallRequest(
-      to: _entryPointAddress,
-      data: HexUtils.decode(callData),
-    ),);
-    
+
+    final result = await _publicClient.call(
+      CallRequest(
+        to: _entryPointAddress,
+        data: HexUtils.decode(callData),
+      ),
+    );
+
     return BigInt.parse(HexUtils.encode(result));
   }
 
   @override
   Future<bool> isDeployed() async {
     final address = await getAddress();
-    final code = await _publicClient.call(CallRequest(
-      to: address,
-      data: Uint8List(0),
-    ),);
-    
+    final code = await _publicClient.call(
+      CallRequest(
+        to: address,
+        data: Uint8List(0),
+      ),
+    );
+
     return code.isNotEmpty;
   }
 
@@ -195,7 +198,7 @@ abstract class BaseSmartAccount implements SmartAccount {
     final sender = await getAddress();
     final callData = encodeCallData(call.to, call.value, call.data);
     final opNonce = nonce ?? await getNonce();
-    
+
     // Init factory fields
     String? factory;
     String? factoryData;
@@ -230,7 +233,7 @@ abstract class BaseSmartAccount implements SmartAccount {
     final selector = '35567e1a';
     final paddedSender = sender.replaceFirst('0x', '').padLeft(64, '0');
     final paddedKey = key.toRadixString(16).padLeft(64, '0');
-    
+
     return '0x$selector$paddedSender$paddedKey';
   }
 
@@ -249,22 +252,24 @@ abstract class BaseSmartAccount implements SmartAccount {
   @override
   Future<String> getInitCode() async {
     if (await isDeployed()) return '0x';
-    
+
     final factory = await getFactory();
     final factoryData = await getFactoryData();
-    
+
     if (factory == null) return '0x';
     return factory + (factoryData ?? '').replaceFirst('0x', '');
   }
+
   @override
   Future<String> getAddress() async {
     if (_factoryAddress == null) {
-      throw StateError('Factory address is required to calculate account address');
+      throw StateError(
+          'Factory address is required to calculate account address');
     }
 
     final initCode = await getInitCode();
     final salt = await getSalt();
-    
+
     // Use CREATE2 to calculate the address
     return _calculateCreate2Address(_factoryAddress, salt, initCode);
   }
@@ -280,7 +285,8 @@ abstract class BaseSmartAccount implements SmartAccount {
   /// address = keccak256(0xff ++ factory ++ salt ++ keccak256(initCode))[12:]
   ///
   /// Reference: https://eips.ethereum.org/EIPS/eip-1014
-  String _calculateCreate2Address(String factory, String salt, String initCode) {
+  String _calculateCreate2Address(
+      String factory, String salt, String initCode) {
     // 1. Prepare factory address (20 bytes)
     final factoryBytes = HexUtils.decode(factory.replaceFirst('0x', ''));
     if (factoryBytes.length != 20) {
@@ -288,7 +294,8 @@ abstract class BaseSmartAccount implements SmartAccount {
     }
 
     // 2. Prepare salt (32 bytes)
-    final saltBytes = HexUtils.decode(salt.replaceFirst('0x', '').padLeft(64, '0'));
+    final saltBytes =
+        HexUtils.decode(salt.replaceFirst('0x', '').padLeft(64, '0'));
     if (saltBytes.length != 32) {
       throw ArgumentError('Salt must be 32 bytes');
     }

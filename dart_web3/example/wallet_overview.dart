@@ -9,7 +9,7 @@ void main() async {
 
   // 2. Create an HD Wallet from the mnemonic
   final hdWallet = HDWallet.fromMnemonic(mnemonic);
-  
+
   // 3. Derive multiple accounts (BIP-44)
   // Path: m/44'/60'/0'/0/index
   for (var i = 0; i < 3; i++) {
@@ -22,9 +22,10 @@ void main() async {
   // 4. Create a Signer from a private key for a specific chain
   final privateKey = hdWallet.privateKey;
   final signer = PrivateKeySigner(privateKey, Chains.ethereum.chainId);
-  
+
   // 5. Sign a personal message
-  final message = "I am signing this message to prove ownership of this wallet.";
+  final message =
+      "I am signing this message to prove ownership of this wallet.";
   final signature = await signer.signMessage(message);
   print('\nMessage: $message');
   print('Signature: $signature');
@@ -35,5 +36,6 @@ void main() async {
     signature,
   );
   print('Recovered Address: $recoveredAddress');
-  print('Verified: ${recoveredAddress.toLowerCase() == signer.address.toLowerCase()}');
+  print(
+      'Verified: ${recoveredAddress.toLowerCase() == signer.address.toLowerCase()}');
 }

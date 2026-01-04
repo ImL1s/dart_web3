@@ -25,12 +25,19 @@ void main() {
           final decoded = AbiDecoder.decode(types, encoded);
 
           // Verify round-trip consistency
-          expect(decoded.length, equals(values.length),
-              reason: 'Decoded values count should match original',);
+          expect(
+            decoded.length,
+            equals(values.length),
+            reason: 'Decoded values count should match original',
+          );
 
           for (var j = 0; j < values.length; j++) {
-            _expectValuesEqual(decoded[j], values[j], types[j],
-                reason: 'Decoded value at index $j should match original',);
+            _expectValuesEqual(
+              decoded[j],
+              values[j],
+              types[j],
+              reason: 'Decoded value at index $j should match original',
+            );
           }
         } on Exception catch (_) {
           // Some edge cases might fail, but most should succeed
@@ -48,7 +55,8 @@ void main() {
       for (var i = 0; i < 100; i++) {
         // Generate random function signature and arguments
         final functionName = _generateRandomFunctionName(random);
-        final (types, values) = _generateRandomTypesAndValues(random, maxTypes: 4);
+        final (types, values) =
+            _generateRandomTypesAndValues(random, maxTypes: 4);
 
         final signature = _buildSignature(functionName, types);
 
@@ -57,8 +65,12 @@ void main() {
           final encoded = AbiEncoder.encodeFunction(signature, values);
 
           // Verify selector is 4 bytes
-          expect(encoded.length >= 4, isTrue,
-              reason: 'Function call data should have at least 4 bytes for selector',);
+          expect(
+            encoded.length >= 4,
+            isTrue,
+            reason:
+                'Function call data should have at least 4 bytes for selector',
+          );
 
           // Verify total length is 4 + (32 * n) for static types
           // For dynamic types, the length will be larger
@@ -66,20 +78,30 @@ void main() {
           if (hasOnlyStaticTypes && types.isNotEmpty) {
             // For static types only, data should be 4 + 32*n bytes
             final expectedMinLength = 4 + (types.length * 32);
-            expect(encoded.length, greaterThanOrEqualTo(expectedMinLength),
-                reason: 'Static function call data should be properly padded',);
+            expect(
+              encoded.length,
+              greaterThanOrEqualTo(expectedMinLength),
+              reason: 'Static function call data should be properly padded',
+            );
           }
 
           // Verify data is 32-byte aligned (after selector)
           if (encoded.length > 4) {
-            expect((encoded.length - 4) % 32, equals(0),
-                reason: 'Function call data should be 32-byte aligned',);
+            expect(
+              (encoded.length - 4) % 32,
+              equals(0),
+              reason: 'Function call data should be 32-byte aligned',
+            );
           }
 
           // Verify selector matches expected
           final expectedSelector = AbiEncoder.getFunctionSelector(signature);
-          expect(BytesUtils.equals(BytesUtils.slice(encoded, 0, 4), expectedSelector), isTrue,
-              reason: 'Function selector should match',);
+          expect(
+            BytesUtils.equals(
+                BytesUtils.slice(encoded, 0, 4), expectedSelector),
+            isTrue,
+            reason: 'Function selector should match',
+          );
         } on Exception catch (_) {
           // Some edge cases might fail
         }
@@ -129,13 +151,20 @@ void main() {
 
           // Verify all values match
           for (var j = 0; j < values.length; j++) {
-            _expectValuesEqual(decoded[j], values[j], types[j],
-                reason: 'Dynamic type offset calculation should be correct',);
+            _expectValuesEqual(
+              decoded[j],
+              values[j],
+              types[j],
+              reason: 'Dynamic type offset calculation should be correct',
+            );
           }
 
           // Verify encoding is 32-byte aligned
-          expect(encoded.length % 32, equals(0),
-              reason: 'Encoded data should be 32-byte aligned',);
+          expect(
+            encoded.length % 32,
+            equals(0),
+            reason: 'Encoded data should be 32-byte aligned',
+          );
         } on Exception catch (_) {
           // Some edge cases might fail
         }
@@ -193,8 +222,10 @@ void main() {
           final decodedInner = decodedOuter[1] as List;
           expect(decodedInner.length, equals(2));
           expect(decodedInner[0], equals(innerValue[0]));
-          expect(decodedInner[1].toString().toLowerCase(),
-              equals(innerValue[1].toString().toLowerCase()),);
+          expect(
+            decodedInner[1].toString().toLowerCase(),
+            equals(innerValue[1].toString().toLowerCase()),
+          );
         } on Exception catch (_) {
           // Some edge cases might fail
         }
@@ -211,7 +242,8 @@ void main() {
         try {
           // Generate random domain parameters
           final name = _generateRandomString(random, random.nextInt(20) + 1);
-          final version = '${random.nextInt(10)}.${random.nextInt(10)}.${random.nextInt(10)}';
+          final version =
+              '${random.nextInt(10)}.${random.nextInt(10)}.${random.nextInt(10)}';
           final chainId = random.nextInt(1000000) + 1;
           final verifyingContract = _generateRandomAddress(random);
 
@@ -241,12 +273,18 @@ void main() {
           final hash2 = typedData.hash();
 
           // Hash should be deterministic
-          expect(BytesUtils.equals(hash1, hash2), isTrue,
-              reason: 'EIP-712 hash should be deterministic',);
+          expect(
+            BytesUtils.equals(hash1, hash2),
+            isTrue,
+            reason: 'EIP-712 hash should be deterministic',
+          );
 
           // Hash should be 32 bytes
-          expect(hash1.length, equals(32),
-              reason: 'EIP-712 hash should be 32 bytes',);
+          expect(
+            hash1.length,
+            equals(32),
+            reason: 'EIP-712 hash should be 32 bytes',
+          );
 
           // Different domain should produce different hash
           final differentTypedData = EIP712TypedData(
@@ -262,8 +300,11 @@ void main() {
           );
 
           final differentHash = differentTypedData.hash();
-          expect(BytesUtils.equals(hash1, differentHash), isFalse,
-              reason: 'Different domain should produce different hash',);
+          expect(
+            BytesUtils.equals(hash1, differentHash),
+            isFalse,
+            reason: 'Different domain should produce different hash',
+          );
 
           // Different message should produce different hash
           final differentMessageTypedData = EIP712TypedData(
@@ -277,8 +318,11 @@ void main() {
           );
 
           final differentMessageHash = differentMessageTypedData.hash();
-          expect(BytesUtils.equals(hash1, differentMessageHash), isFalse,
-              reason: 'Different message should produce different hash',);
+          expect(
+            BytesUtils.equals(hash1, differentMessageHash),
+            isFalse,
+            reason: 'Different message should produce different hash',
+          );
         } on Exception catch (_) {
           // Some edge cases might fail
         }
@@ -289,7 +333,8 @@ void main() {
 
 // Helper functions
 
-(List<AbiType>, List<dynamic>) _generateRandomTypesAndValues(Random random, {int maxTypes = 5}) {
+(List<AbiType>, List<dynamic>) _generateRandomTypesAndValues(Random random,
+    {int maxTypes = 5}) {
   final types = <AbiType>[];
   final values = <dynamic>[];
 
@@ -333,7 +378,8 @@ String _generateRandomFunctionName(Random random) {
   const chars = 'abcdefghijklmnopqrstuvwxyz';
   final length = random.nextInt(10) + 3;
   return String.fromCharCodes(
-    List.generate(length, (_) => chars.codeUnitAt(random.nextInt(chars.length))),
+    List.generate(
+        length, (_) => chars.codeUnitAt(random.nextInt(chars.length))),
   );
 }
 
@@ -356,30 +402,39 @@ Uint8List _generateRandomBytes(Random random, int length) {
 }
 
 String _generateRandomString(Random random, int length) {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ';
+  const chars =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ';
   return String.fromCharCodes(
-    List.generate(length, (_) => chars.codeUnitAt(random.nextInt(chars.length))),
+    List.generate(
+        length, (_) => chars.codeUnitAt(random.nextInt(chars.length))),
   );
 }
 
-void _expectValuesEqual(dynamic actual, dynamic expected, AbiType type, {String? reason}) {
+void _expectValuesEqual(dynamic actual, dynamic expected, AbiType type,
+    {String? reason}) {
   if (type is AbiAddress) {
-    expect(actual.toString().toLowerCase(), equals(expected.toString().toLowerCase()), reason: reason);
+    expect(actual.toString().toLowerCase(),
+        equals(expected.toString().toLowerCase()),
+        reason: reason);
   } else if (type is AbiBytes || type is AbiFixedBytes) {
-    expect(BytesUtils.equals(actual as Uint8List, expected as Uint8List), isTrue, reason: reason);
+    expect(
+        BytesUtils.equals(actual as Uint8List, expected as Uint8List), isTrue,
+        reason: reason);
   } else if (type is AbiArray) {
     final actualList = actual as List;
     final expectedList = expected as List;
     expect(actualList.length, equals(expectedList.length), reason: reason);
     for (var i = 0; i < actualList.length; i++) {
-      _expectValuesEqual(actualList[i], expectedList[i], type.elementType, reason: reason);
+      _expectValuesEqual(actualList[i], expectedList[i], type.elementType,
+          reason: reason);
     }
   } else if (type is AbiTuple) {
     final actualList = actual as List;
     final expectedList = expected as List;
     expect(actualList.length, equals(expectedList.length), reason: reason);
     for (var i = 0; i < actualList.length; i++) {
-      _expectValuesEqual(actualList[i], expectedList[i], type.components[i], reason: reason);
+      _expectValuesEqual(actualList[i], expectedList[i], type.components[i],
+          reason: reason);
     }
   } else {
     expect(actual, equals(expected), reason: reason);

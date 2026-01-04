@@ -5,7 +5,8 @@ void main() {
   group('EthUnit', () {
     group('wei', () {
       test('parses wei string', () {
-        expect(EthUnit.wei('1000000000000000000'), equals(BigInt.parse('1000000000000000000')));
+        expect(EthUnit.wei('1000000000000000000'),
+            equals(BigInt.parse('1000000000000000000')));
         expect(EthUnit.wei('0'), equals(BigInt.zero));
       });
     });
@@ -21,8 +22,10 @@ void main() {
     group('ether', () {
       test('converts ether to wei', () {
         expect(EthUnit.ether('1'), equals(BigInt.parse('1000000000000000000')));
-        expect(EthUnit.ether('0.5'), equals(BigInt.parse('500000000000000000')));
-        expect(EthUnit.ether('1.5'), equals(BigInt.parse('1500000000000000000')));
+        expect(
+            EthUnit.ether('0.5'), equals(BigInt.parse('500000000000000000')));
+        expect(
+            EthUnit.ether('1.5'), equals(BigInt.parse('1500000000000000000')));
       });
 
       test('handles small decimals', () {
@@ -30,7 +33,8 @@ void main() {
       });
 
       test('handles large values', () {
-        expect(EthUnit.ether('1000000'), equals(BigInt.parse('1000000000000000000000000')));
+        expect(EthUnit.ether('1000000'),
+            equals(BigInt.parse('1000000000000000000000000')));
       });
     });
 
@@ -56,11 +60,13 @@ void main() {
 
     group('formatEther', () {
       test('formats whole ether', () {
-        expect(EthUnit.formatEther(BigInt.parse('1000000000000000000')), equals('1'));
+        expect(EthUnit.formatEther(BigInt.parse('1000000000000000000')),
+            equals('1'));
       });
 
       test('formats fractional ether', () {
-        expect(EthUnit.formatEther(BigInt.parse('1500000000000000000')), equals('1.5'));
+        expect(EthUnit.formatEther(BigInt.parse('1500000000000000000')),
+            equals('1.5'));
       });
 
       test('formats small amounts', () {
@@ -85,7 +91,8 @@ void main() {
 
       test('converts wei to ether', () {
         expect(
-          EthUnit.convert(BigInt.parse('1000000000000000000'), from: Unit.wei, to: Unit.ether),
+          EthUnit.convert(BigInt.parse('1000000000000000000'),
+              from: Unit.wei, to: Unit.ether),
           equals(BigInt.one),
         );
       });
@@ -93,7 +100,14 @@ void main() {
 
     group('round-trip property', () {
       test('ether to wei and back', () {
-        final testCases = ['0', '1', '0.5', '1.5', '100', '0.000000000000000001'];
+        final testCases = [
+          '0',
+          '1',
+          '0.5',
+          '1.5',
+          '100',
+          '0.000000000000000001'
+        ];
 
         for (final value in testCases) {
           final wei = EthUnit.ether(value);
@@ -117,13 +131,17 @@ void main() {
 
     group('error handling', () {
       test('throws on empty value', () {
-        expect(() => EthUnit.ether(''), throwsA(isA<UnitConversionException>()));
-        expect(() => EthUnit.ether('  '), throwsA(isA<UnitConversionException>()));
+        expect(
+            () => EthUnit.ether(''), throwsA(isA<UnitConversionException>()));
+        expect(
+            () => EthUnit.ether('  '), throwsA(isA<UnitConversionException>()));
       });
 
       test('throws on invalid format', () {
-        expect(() => EthUnit.ether('1.2.3'), throwsA(isA<UnitConversionException>()));
-        expect(() => EthUnit.ether('abc'), throwsA(isA<UnitConversionException>()));
+        expect(() => EthUnit.ether('1.2.3'),
+            throwsA(isA<UnitConversionException>()));
+        expect(() => EthUnit.ether('abc'),
+            throwsA(isA<UnitConversionException>()));
       });
     });
   });
