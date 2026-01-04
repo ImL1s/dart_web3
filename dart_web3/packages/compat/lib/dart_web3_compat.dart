@@ -14,8 +14,7 @@ import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart' as dw3_signer;
 
 // Umbrella exports for convenience
-export 'package:web3_universal_crypto/web3_universal_crypto.dart'
-    hide hexToBytes, bytesToHex;
+export 'package:web3_universal_crypto/web3_universal_crypto.dart';
 export 'package:web3_universal_core/web3_universal_core.dart'
     show EthereumAddress, EthUnit, Unit, RLP;
 export 'package:web3_universal_contract/web3_universal_contract.dart'
@@ -51,13 +50,9 @@ export 'package:web3_universal_abi/web3_universal_abi.dart'
         AbiArray,
         AbiBytes,
         AbiFixedBytes;
-<<<<<<< HEAD
-export 'package:web3_universal_crypto/web3_universal_crypto.dart';
-=======
 
 typedef AddressType = dw3_abi.AbiAddress;
 typedef UintType = dw3_abi.AbiUint;
->>>>>>> d961268 (chore(compat): Update compat layer and tests)
 
 // ============================================================================
 // Internal Utilities (no external dependencies)
