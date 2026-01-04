@@ -1,4 +1,4 @@
-name: dart_web3_compat
+name: web3_universal_compat
 description: Compatibility layer for web3dart users migrating to dart_web3.
 version: 0.1.0
 homepage: https://github.com/example/dart_web3

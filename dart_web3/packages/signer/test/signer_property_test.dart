@@ -13,7 +13,7 @@ void main() {
 
     // Note: Since PrivateKeySigner needs 32 bytes, we pad/hash the input
     final seedBytesStr = BigInt.from(seed.abs()).toRadixString(16).padLeft(64, '0');
-    final privateKeyBytes = HexUtils.decode(seedBytesStr);
+    final privateKeyBytes = dw3.HexUtils.decode(seedBytesStr);
     
     // Ensure valid private key range (simple check for this fuzz test)
     if (BigInt.parse(seedBytesStr, radix: 16) == BigInt.zero) return;
