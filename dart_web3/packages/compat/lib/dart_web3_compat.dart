@@ -7,18 +7,28 @@ import 'package:web3_universal_chains/web3_universal_chains.dart' as dw3_chains;
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_contract/web3_universal_contract.dart'
     as dw3_contract;
-import 'package:web3_universal_core/web3_universal_core.dart' as dw3;
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_core/web3_universal_core.dart' as dw3_core;
 import 'package:web3_universal_crypto/web3_universal_crypto.dart' as crypto;
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart' as dw3_signer;
 
 // Umbrella exports for convenience
+export 'package:web3_universal_crypto/web3_universal_crypto.dart'
+    hide hexToBytes, bytesToHex;
 export 'package:web3_universal_core/web3_universal_core.dart'
-    show EthUnit, Unit, RLP;
+    show EthereumAddress, EthUnit, Unit, RLP;
 export 'package:web3_universal_contract/web3_universal_contract.dart'
     hide Contract;
 export 'package:web3_universal_client/web3_universal_client.dart'
-    show PublicClient, WalletClient, CallRequest, Block, TransactionReceipt;
+    show
+        PublicClient,
+        WalletClient,
+        CallRequest,
+        Block,
+        TransactionReceipt,
+        Log,
+        LogFilter;
 export 'package:web3_universal_provider/web3_universal_provider.dart'
     show RpcProvider, HttpTransport;
 export 'package:web3_universal_chains/web3_universal_chains.dart'
@@ -41,7 +51,13 @@ export 'package:web3_universal_abi/web3_universal_abi.dart'
         AbiArray,
         AbiBytes,
         AbiFixedBytes;
+<<<<<<< HEAD
 export 'package:web3_universal_crypto/web3_universal_crypto.dart';
+=======
+
+typedef AddressType = dw3_abi.AbiAddress;
+typedef UintType = dw3_abi.AbiUint;
+>>>>>>> d961268 (chore(compat): Update compat layer and tests)
 
 // ============================================================================
 // Internal Utilities (no external dependencies)
@@ -53,27 +69,31 @@ Uint8List keccak256(Uint8List input) => crypto.Keccak256.hash(input);
 /// Hex encoding/decoding utilities
 class HexUtils {
   static String bytesToHex(List<int> bytes, {bool include0x = false}) {
-    return dw3.HexUtils.encode(Uint8List.fromList(bytes), prefix: include0x);
+    return encode(Uint8List.fromList(bytes), prefix: include0x);
   }
 
   static Uint8List hexToBytes(String hex) {
-    return dw3.HexUtils.decode(hex);
+    return decode(hex);
   }
 
+  static String encode(List<int> bytes, {bool prefix = false}) =>
+      dw3_core.HexUtils.encode(Uint8List.fromList(bytes), prefix: prefix);
+  static Uint8List decode(String hex) => dw3_core.HexUtils.decode(hex);
+
   static String addHexPrefix(String hex) {
-    return dw3.HexUtils.add0x(hex);
+    return dw3_core.HexUtils.add0x(hex);
   }
 
   static String removeHexPrefix(String hex) {
-    return dw3.HexUtils.strip0x(hex);
+    return dw3_core.HexUtils.strip0x(hex);
   }
 
   static bool isValidHex(String hex) {
-    return dw3.HexUtils.isValid(hex);
+    return dw3_core.HexUtils.isValid(hex);
   }
 
   static String padHex(String hex, int byteLength) {
-    return dw3.HexUtils.pad(hex, byteLength);
+    return dw3_core.HexUtils.pad(hex, byteLength);
   }
 
   static String intToHex(int value, {int? padding}) {
@@ -85,7 +105,7 @@ class HexUtils {
   }
 
   static int hexToInt(String hex) {
-    return int.parse(dw3.HexUtils.strip0x(hex), radix: 16);
+    return int.parse(dw3_core.HexUtils.strip0x(hex), radix: 16);
   }
 
   static String bigIntToHex(BigInt value, {int? padding}) {
@@ -97,27 +117,27 @@ class HexUtils {
   }
 
   static BigInt hexToBigInt(String hex) {
-    return BigInt.parse(dw3.HexUtils.strip0x(hex), radix: 16);
+    return BigInt.parse(dw3_core.HexUtils.strip0x(hex), radix: 16);
   }
 }
 
 /// Address validation and normalization
 class AddressUtils {
   static bool isValidEthereumAddress(String address) {
-    return dw3.EthereumAddress.isValid(address);
+    return EthereumAddress.isValid(address);
   }
 
   static String normalizeAddress(String address) {
     if (!isValidEthereumAddress(address)) {
       throw ArgumentError('Invalid Ethereum address: $address');
     }
-    return dw3.EthereumAddress.fromHex(address).hex;
+    return EthereumAddress.fromHex(address).hex;
   }
 
   static bool addressEquals(String a, String b) {
     try {
-      final addrA = dw3.EthereumAddress.fromHex(a);
-      final addrB = dw3.EthereumAddress.fromHex(b);
+      final addrA = EthereumAddress.fromHex(a);
+      final addrB = EthereumAddress.fromHex(b);
       return addrA == addrB;
     } catch (_) {
       return false;
@@ -125,12 +145,21 @@ class AddressUtils {
   }
 }
 
+// ============================================================================
+// EthereumAddress Extensions
+// ============================================================================
+
+extension EthereumAddressCompat on EthereumAddress {
+  Uint8List get addressBytes => bytes;
+  String get hexEip55 => toChecksum((bytes) => keccak256(bytes));
+}
+
 /// Unit conversion utilities
 class UnitUtils {
-  static BigInt etherToWei(String ether) => dw3.EthUnit.ether(ether);
-  static BigInt gweiToWei(String gwei) => dw3.EthUnit.gwei(gwei);
-  static String weiToEther(BigInt wei) => dw3.EthUnit.formatEther(wei);
-  static String weiToGwei(BigInt wei) => dw3.EthUnit.formatGwei(wei);
+  static BigInt etherToWei(String ether) => EthUnit.ether(ether);
+  static BigInt gweiToWei(String gwei) => EthUnit.gwei(gwei);
+  static String weiToEther(BigInt wei) => EthUnit.formatEther(wei);
+  static String weiToGwei(BigInt wei) => EthUnit.formatGwei(wei);
 
   static BigInt toTokenUnit(Decimal amount, int decimals) {
     final multiplier = Decimal.parse('10').pow(decimals).toDecimal();
@@ -148,23 +177,23 @@ class UnitUtils {
 // web3dart Compatibility Layer
 // ============================================================================
 
-typedef EthereumAddress = dw3.EthereumAddress;
-typedef Web3Address = dw3.EthereumAddress;
+// typedef EthereumAddress = EthereumAddress; // Already exported
+// typedef Web3Address = EthereumAddress; // Already exported
 typedef Web3Contract = dw3_contract.Contract;
 typedef Web3ChainConfig = dw3_chains.ChainConfig;
 typedef Web3TransactionType = dw3_signer.TransactionType;
 
 /// Legacy bytesToUnsignedInt compatibility
 BigInt bytesToUnsignedInt(Uint8List bytes) {
-  return dw3.BytesUtils.bytesToBigInt(bytes);
+  return BytesUtils.bytesToBigInt(bytes);
 }
 
 /// Legacy ecRecover compatibility
 Uint8List ecRecover(Uint8List hash, MsgSignature sig) {
   final v = sig.v >= 27 ? sig.v - 27 : sig.v;
   final signature = Uint8List(64);
-  final rBytes = dw3.BytesUtils.bigIntToBytes(sig.r, length: 32);
-  final sBytes = dw3.BytesUtils.bigIntToBytes(sig.s, length: 32);
+  final rBytes = BytesUtils.bigIntToBytes(sig.r, length: 32);
+  final sBytes = BytesUtils.bigIntToBytes(sig.s, length: 32);
   signature.setRange(0, 32, rBytes);
   signature.setRange(32, 64, sBytes);
   return crypto.Secp256k1.recover(signature, hash, v);
@@ -175,7 +204,7 @@ Uint8List publicKeyToAddress(Uint8List publicKey) {
   final uncompressed = crypto.Secp256k1.decompressPublicKey(publicKey);
   // Use core's EthereumAddress to generate address from public key
   // This ensures consistent logic with the rest of the ecosystem
-  return dw3.EthereumAddress.fromPublicKey(uncompressed, keccak256).bytes;
+  return EthereumAddress.fromPublicKey(uncompressed, keccak256).bytes;
 }
 
 /// Legacy bytesToHex compatibility
@@ -185,7 +214,7 @@ String bytesToHex(
   int? forcePadLength,
   bool padToEven = false,
 }) {
-  var encoded = dw3.HexUtils.encode(Uint8List.fromList(bytes));
+  var encoded = HexUtils.encode(Uint8List.fromList(bytes));
   if (encoded.startsWith('0x')) encoded = encoded.substring(2);
   if (padToEven && encoded.length % 2 != 0) encoded = '0$encoded';
   if (forcePadLength != null) encoded = encoded.padLeft(forcePadLength, '0');
@@ -193,10 +222,10 @@ String bytesToHex(
 }
 
 /// Legacy hexToBytes compatibility
-Uint8List hexToBytes(String hexString) => dw3.HexUtils.decode(hexString);
+Uint8List hexToBytes(String hexString) => HexUtils.decode(hexString);
 
 /// Legacy intToBytes compatibility
-Uint8List intToBytes(BigInt number) => dw3.BytesUtils.bigIntToBytes(number);
+Uint8List intToBytes(BigInt number) => BytesUtils.bigIntToBytes(number);
 
 /// Compatibility alias for web3dart's MsgSignature
 class MsgSignature {
@@ -215,15 +244,16 @@ class Web3PrivateKey {
       : _signer = dw3_signer.PrivateKeySigner(privateKey, 1);
 
   factory Web3PrivateKey.fromHex(String hex) {
-    return Web3PrivateKey(dw3.HexUtils.decode(hex));
+    return Web3PrivateKey(HexUtils.decode(hex));
   }
 
-  dw3.EthereumAddress get address => _signer.address;
-  Future<dw3.EthereumAddress> extractAddress() async => address;
+  EthereumAddress get address => _signer.address;
+  Future<EthereumAddress> extractAddress() async => address;
   dw3_signer.Signer get signer => _signer;
-  Uint8List get publicKey =>
-      crypto.Secp256k1.getPublicKey(privateKey, compressed: false);
+  Uint8List get publicKey => crypto.Secp256k1.getPublicKey(privateKey);
   Uint8List get encodedPublicKey => publicKey;
+
+  BigInt get privateKeyInt => BytesUtils.bytesToBigInt(privateKey);
 
   Future<Uint8List> signTransaction(Transaction transaction, {int? chainId}) {
     final dw3Tx = dw3_signer.TransactionRequest(
@@ -250,10 +280,31 @@ class Web3PrivateKey {
 
   MsgSignature signToEcSignature(Uint8List hash) {
     final sig = crypto.Secp256k1.sign(hash, privateKey);
-    final r = BigInt.parse(dw3.HexUtils.encode(sig.sublist(0, 32)), radix: 16);
-    final s = BigInt.parse(dw3.HexUtils.encode(sig.sublist(32, 64)), radix: 16);
+    final r = BigInt.parse(HexUtils.encode(sig.sublist(0, 32)), radix: 16);
+    final s = BigInt.parse(HexUtils.encode(sig.sublist(32, 64)), radix: 16);
     final v = sig[64];
     return MsgSignature(r, s, v);
+  }
+}
+
+class FilterOptions {
+  final LogFilter filter;
+  FilterOptions({required this.filter});
+
+  factory FilterOptions.events({
+    required DeployedContract contract,
+    required ContractEvent event,
+    BlockNum? fromBlock,
+    BlockNum? toBlock,
+  }) {
+    return FilterOptions(
+      filter: LogFilter(
+        address: contract.address.hex,
+        topics: [event.signature],
+        fromBlock: fromBlock?.toBlockParam(),
+        toBlock: toBlock?.toBlockParam(),
+      ),
+    );
   }
 }
 
@@ -264,7 +315,12 @@ typedef Credentials = Web3PrivateKey;
 class EtherAmount {
   final BigInt inWei;
   EtherAmount._({required this.inWei});
-  factory EtherAmount.inWei(BigInt wei) => EtherAmount._(inWei: wei);
+  factory EtherAmount.inWei(dynamic wei) {
+    if (wei is int) return EtherAmount._(inWei: BigInt.from(wei));
+    if (wei is BigInt) return EtherAmount._(inWei: wei);
+    if (wei == null) return EtherAmount._(inWei: BigInt.zero);
+    throw ArgumentError('wei must be int or BigInt');
+  }
   factory EtherAmount.fromBigInt(EtherUnit unit, BigInt value) =>
       EtherAmount._(inWei: value * unit.weiValue);
   factory EtherAmount.fromUnitAndValue(EtherUnit unit, BigInt value) =>
@@ -390,6 +446,19 @@ class Web3Client {
     );
   }
 
+  Future<Uint8List> getCode(EthereumAddress address,
+      {BlockNum? atBlock}) async {
+    final code = await _client.getCode(
+      address.hex,
+      atBlock?.toBlockParam() ?? 'latest',
+    );
+    return code;
+  }
+
+  Stream<Log> events(FilterOptions options) {
+    return _client.getLogs(options.filter).asStream().expand((logs) => logs);
+  }
+
   void dispose() => _client.dispose();
 
   Future<String> sendTransaction(
@@ -416,7 +485,7 @@ class Web3Client {
   }
 
   Future<String> sendRawTransaction(Uint8List signedTransaction) async {
-    final hexTx = dw3.HexUtils.encode(signedTransaction);
+    final hexTx = dw3_core.HexUtils.encode(signedTransaction);
     return await _client.provider.sendRawTransaction(hexTx);
   }
 
@@ -429,7 +498,7 @@ class Web3Client {
   }
 
   Future<List<FilterEvent>> getLogs(FilterOptions options) async {
-    final logs = await _client.getLogs(options);
+    final logs = await _client.getLogs(options.filter);
     return logs.map((l) => Web3Log(l)).toList();
   }
 
@@ -443,14 +512,14 @@ class Web3Client {
   }
 }
 
-typedef FilterOptions = LogFilter;
+// typedef FilterOptions = LogFilter; // Already defined as a class above
 
 class Web3Log {
   final Log _log;
   Web3Log(this._log);
   EthereumAddress get address => EthereumAddress.fromHex(_log.address);
   List<String>? get topics => _log.topics;
-  String? get data => dw3.HexUtils.encode(_log.data);
+  String? get data => dw3_core.HexUtils.encode(_log.data);
   String? get transactionHash => _log.transactionHash;
   BigInt? get blockNum => _log.blockNumber;
   int? get transactionIndex => _log.transactionIndex;
@@ -534,7 +603,7 @@ class ContractEvent {
 
   List<dynamic> decodeResults(List<String?> topics, String data) {
     final nonNullTopics = topics.whereType<String>().toList();
-    final dataBytes = dw3.HexUtils.decode(data);
+    final dataBytes = dw3_core.HexUtils.decode(data);
 
     final decodedMap = dw3_abi.AbiDecoder.decodeEvent(
       types: _abiEvent.inputs,
@@ -580,24 +649,50 @@ class Transaction {
   final EtherAmount? maxFeePerGas;
   final EtherAmount? maxPriorityFeePerGas;
 
-  const Transaction({
+  Transaction({
     this.from,
     this.to,
-    this.maxGas,
+    dynamic maxGas,
     this.gasPrice,
     this.value,
     this.data,
     this.nonce,
     this.maxFeePerGas,
     this.maxPriorityFeePerGas,
-  });
+  }) : maxGas = maxGas == null
+            ? null
+            : (maxGas is int ? BigInt.from(maxGas) : maxGas as BigInt);
+
+  Transaction copyWith({
+    EthereumAddress? from,
+    EthereumAddress? to,
+    dynamic maxGas,
+    EtherAmount? gasPrice,
+    EtherAmount? value,
+    Uint8List? data,
+    int? nonce,
+    EtherAmount? maxFeePerGas,
+    EtherAmount? maxPriorityFeePerGas,
+  }) {
+    return Transaction(
+      from: from ?? this.from,
+      to: to ?? this.to,
+      maxGas: maxGas ?? this.maxGas,
+      gasPrice: gasPrice ?? this.gasPrice,
+      value: value ?? this.value,
+      data: data ?? this.data,
+      nonce: nonce ?? this.nonce,
+      maxFeePerGas: maxFeePerGas ?? this.maxFeePerGas,
+      maxPriorityFeePerGas: maxPriorityFeePerGas ?? this.maxPriorityFeePerGas,
+    );
+  }
 
   factory Transaction.callContract({
     required DeployedContract contract,
     required ContractFunction function,
     required List<dynamic> parameters,
     EthereumAddress? from,
-    BigInt? maxGas,
+    dynamic maxGas,
     EtherAmount? gasPrice,
     EtherAmount? value,
     int? nonce,

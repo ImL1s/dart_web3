@@ -1,4 +1,4 @@
-import 'package:dart_web3_compat/dart_web3_compat.dart';
+import 'package:web3_universal_compat/dart_web3_compat.dart';
 import 'package:test/test.dart';
 import 'dart:math';
 import 'dart:typed_data';

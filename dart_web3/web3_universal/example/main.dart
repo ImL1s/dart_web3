@@ -1,11 +1,12 @@
-import 'package:dart_web3/dart_web3.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 void main() async {
   print('--- Dart Web3 SDK Comprehensive Example ---');
 
   // 1. Core Utilities
-  final address =
-      EthereumAddress.fromHex('0xd8da6bf26964af9d7eed9e03e53415d37aa96045');
+  final address = EthereumAddress.fromHex(
+    '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+  );
   print('Address: ${address.toChecksum(Keccak256.hash)}');
 
   // 2. Crypto & Wallets
@@ -56,8 +57,9 @@ void main() async {
   print('Smart Account Address: ${await smartAccount.getAddress()}');
 
   // 6. Multi-chain (Solana)
-  final solAddress =
-      SolanaAddress.fromBase58('vines1vzrYbzLMRdu58GRt1zx9S6SBBZLRCCmWW9ZSP');
+  final solAddress = SolanaAddress.fromBase58(
+    'vines1vzrYbzLMRdu58GRt1zx9S6SBBZLRCCmWW9ZSP',
+  );
   print('Solana Address: $solAddress');
 
   print('--- Example Execution Finished ---');
