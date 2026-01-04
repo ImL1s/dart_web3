@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
 
 void main() {
   group('AbiType Tests', () {

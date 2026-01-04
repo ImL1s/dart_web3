@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_web3_cosmos/dart_web3_cosmos.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_cosmos/web3_universal_cosmos.dart';
 import 'package:test/test.dart';
 
 void main() {

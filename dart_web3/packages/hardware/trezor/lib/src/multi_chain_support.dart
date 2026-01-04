@@ -157,19 +157,21 @@ class TrezorMultiChainSigner {
     required Uint8List transactionData,
   }) {
     // Simplified Bitcoin transaction signing encoding
-    final pathComponents = ProtobufMessages.parseDerivationPath(derivationPath);
+    final pathComponents = parseDerivationPath(derivationPath);
     final buffer = <int>[];
     
     // Add derivation path
     for (final component in pathComponents) {
-      buffer.addAll([0x08]);
-      buffer.addAll(ProtobufMessages.encodeVarint(component));
+      buffer
+        ..addAll([0x08])
+        ..addAll(encodeVarint(component));
     }
     
     // Add transaction data
-    buffer.addAll([0x12]);
-    buffer.addAll(ProtobufMessages.encodeVarint(transactionData.length));
-    buffer.addAll(transactionData);
+    buffer
+      ..addAll([0x12])
+      ..addAll(encodeVarint(transactionData.length))
+      ..addAll(transactionData);
     
     return Uint8List.fromList(buffer);
   }
@@ -179,19 +181,21 @@ class TrezorMultiChainSigner {
     required Uint8List transactionData,
   }) {
     // Simplified Solana transaction signing encoding
-    final pathComponents = ProtobufMessages.parseDerivationPath(derivationPath);
+    final pathComponents = parseDerivationPath(derivationPath);
     final buffer = <int>[];
     
     // Add derivation path
     for (final component in pathComponents) {
-      buffer.addAll([0x08]);
-      buffer.addAll(ProtobufMessages.encodeVarint(component));
+      buffer
+        ..addAll([0x08])
+        ..addAll(encodeVarint(component));
     }
     
     // Add transaction data
-    buffer.addAll([0x12]);
-    buffer.addAll(ProtobufMessages.encodeVarint(transactionData.length));
-    buffer.addAll(transactionData);
+    buffer
+      ..addAll([0x12])
+      ..addAll(encodeVarint(transactionData.length))
+      ..addAll(transactionData);
     
     return Uint8List.fromList(buffer);
   }
@@ -201,37 +205,39 @@ class TrezorMultiChainSigner {
     required Uint8List transactionData,
   }) {
     // Simplified Polkadot transaction signing encoding
-    final pathComponents = ProtobufMessages.parseDerivationPath(derivationPath);
+    final pathComponents = parseDerivationPath(derivationPath);
     final buffer = <int>[];
     
     // Add derivation path
     for (final component in pathComponents) {
-      buffer.addAll([0x08]);
-      buffer.addAll(ProtobufMessages.encodeVarint(component));
+      buffer
+        ..addAll([0x08])
+        ..addAll(encodeVarint(component));
     }
     
     // Add transaction data
-    buffer.addAll([0x12]);
-    buffer.addAll(ProtobufMessages.encodeVarint(transactionData.length));
-    buffer.addAll(transactionData);
+    buffer
+      ..addAll([0x12])
+      ..addAll(encodeVarint(transactionData.length))
+      ..addAll(transactionData);
     
     return Uint8List.fromList(buffer);
   }
   
   Uint8List _encodeBitcoinGetAddress(String derivationPath) {
-    return ProtobufMessages.encodeEthereumGetAddress(
+    return encodeEthereumGetAddress(
       derivationPath: derivationPath,
     );
   }
   
   Uint8List _encodeSolanaGetAddress(String derivationPath) {
-    return ProtobufMessages.encodeEthereumGetAddress(
+    return encodeEthereumGetAddress(
       derivationPath: derivationPath,
     );
   }
   
   Uint8List _encodePolkadotGetAddress(String derivationPath) {
-    return ProtobufMessages.encodeEthereumGetAddress(
+    return encodeEthereumGetAddress(
       derivationPath: derivationPath,
     );
   }
@@ -262,7 +268,7 @@ class TrezorMultiChainSigner {
         return '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'; // Mock Polkadot address
       case ChainType.ethereum:
         // Use existing Ethereum parsing
-        final result = ProtobufMessages.decodeEthereumAddress(data);
+        final result = decodeEthereumAddress(data);
         return result['address'] as String;
     }
   }
@@ -276,26 +282,23 @@ enum ChainType {
   polkadot,
 }
 
-/// Multi-chain derivation path utilities
-class MultiChainDerivationPaths {
-  /// Standard Ethereum path
-  static String ethereum(int account, int index) => "m/44'/60'/$account'/0/$index";
-  
-  /// Standard Bitcoin path (BIP-84 native segwit)
-  static String bitcoin(int account, int index) => "m/84'/0'/$account'/0/$index";
-  
-  /// Standard Solana path
-  static String solana(int account, int index) => "m/44'/501'/$account'/$index'";
-  
-  /// Standard Polkadot path
-  static String polkadot(int account, int index) => "m/44'/354'/$account'/0'/$index'";
-  
-  /// Get chain type from derivation path
-  static ChainType? getChainType(String path) {
-    if (path.contains("44'/60'")) return ChainType.ethereum;
-    if (path.contains("44'/0'") || path.contains("84'/0'")) return ChainType.bitcoin;
-    if (path.contains("44'/501'")) return ChainType.solana;
-    if (path.contains("44'/354'")) return ChainType.polkadot;
-    return null;
-  }
+/// Standard Ethereum derivation path
+String getEthereumDerivationPath(int account, int index) => "m/44'/60'/$account'/0/$index";
+
+/// Standard Bitcoin derivation path (BIP-84 native segwit)
+String getBitcoinDerivationPath(int account, int index) => "m/84'/0'/$account'/0/$index";
+
+/// Standard Solana derivation path
+String getSolanaDerivationPath(int account, int index) => "m/44'/501'/$account'/$index'";
+
+/// Standard Polkadot derivation path
+String getPolkadotDerivationPath(int account, int index) => "m/44'/354'/$account'/0'/$index'";
+
+/// Get chain type from derivation path
+ChainType? getChainTypeFromPath(String path) {
+  if (path.contains("44'/60'")) return ChainType.ethereum;
+  if (path.contains("44'/0'") || path.contains("84'/0'")) return ChainType.bitcoin;
+  if (path.contains("44'/501'")) return ChainType.solana;
+  if (path.contains("44'/354'")) return ChainType.polkadot;
+  return null;
 }

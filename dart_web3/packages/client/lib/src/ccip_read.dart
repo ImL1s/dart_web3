@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:http/http.dart' as http;
 
 import 'models.dart';
@@ -91,7 +91,6 @@ class CCIPReadHandler {
 
   Future<Uint8List?> _fetchOffchainData(String url, String sender, Uint8List data) async {
     final hexData = HexUtils.encode(data, prefix: false);
-    final senderHex = HexUtils.strip0x(sender);
     
     // Check if URL uses placeholders
     final hasSender = url.contains('{sender}');

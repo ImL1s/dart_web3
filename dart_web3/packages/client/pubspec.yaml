@@ -1,27 +1,30 @@
-name: dart_web3_client
-description: PublicClient and WalletClient for Ethereum blockchain interaction
-publish_to: none
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/client
+name: web3_universal_client
+description: PublicClient and WalletClient for Ethereum interaction in Web3 Universal SDK.
+version: 0.1.1+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/client
+topics:
+  - web3
+  - ethereum
+  - client
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../abi
-  dart_web3_provider:
+  web3_universal_provider:
     path: ../provider
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../signer
-  dart_web3_chains:
+  web3_universal_chains:
     path: ../chains
 
   http: ^1.2.0
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../crypto
 dev_dependencies:
   lints: ^5.0.0

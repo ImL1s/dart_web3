@@ -1,15 +1,23 @@
-name: dart_web3_debug
-description: Debug and trace API support
-publish_to: none
-version: 0.1.0
+name: web3_universal_debug
+description: Debug and trace API support for Web3 Universal SDK. Includes standard Ethereum trace calls and Geth debug methods.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/debug
+topics:
+  - web3
+  - ethereum
+  - debug
+  - tracing
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_provider:
+  web3_universal_provider:
     path: ../provider
 
 dev_dependencies:
   test: ^1.25.0
-  lints: ^5.0.0
+  lints: ^5.1.1

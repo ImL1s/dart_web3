@@ -1,4 +1,4 @@
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 /// Trace configuration
 class TraceConfig {

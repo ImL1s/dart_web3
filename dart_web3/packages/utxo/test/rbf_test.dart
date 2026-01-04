@@ -1,7 +1,8 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_utxo/dart_web3_utxo.dart';
+
 import 'package:test/test.dart';
+import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 
 void main() {
   group('RBF (Replace-By-Fee)', () {
@@ -20,7 +21,6 @@ void main() {
       final inputFinal = TransactionInput(
         txId: Uint8List(32),
         vout: 0,
-        sequence: 0xffffffff, // Final
       );
       
       final txFinal = BitcoinTransaction(inputs: [inputFinal]);

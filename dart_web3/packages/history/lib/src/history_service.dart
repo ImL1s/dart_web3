@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'history_types.dart';
 
 /// Service for fetching transaction history

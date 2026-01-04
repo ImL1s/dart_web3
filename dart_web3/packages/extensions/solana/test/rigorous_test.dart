@@ -1,6 +1,5 @@
 import 'dart:typed_data';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_solana/dart_web3_solana.dart';
+import 'package:web3_universal_solana/web3_universal_solana.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -25,14 +24,14 @@ void main() {
         wallet.bytes,
         tokenProgramId.bytes,
         mint.bytes,
-      ], ataProgramId);
+      ], ataProgramId,);
 
       // Verified via SPL Token command: 
       // spl-token address --token 2wmVewK9WCRBJBdy6S4Prti4eF567SWhGq47Jpx8CNoM --owner 4u68Abtp6YF34T8uKktS9kFidQByx2hTFYJb5yF8KPBn
       // Result: D7H1k6k6vF1Nf4mD6h6... (Simulation result)
       // Let's check if the address matches a deterministic derivation.
       expect(result.address.toBase58(), isNotEmpty);
-      expect(result.nonce, inInclusiveRange(0, 255));
+      expect(result.bump, inInclusiveRange(0, 255));
     });
 
     test('System Program Transfer Instruction Serialization', () {

@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import '../encoding/protobuf.dart';
-import 'address.dart';
 
 /// Represents a Cosmos Transaction (wrapper).
 class CosmosTx {

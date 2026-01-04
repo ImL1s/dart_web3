@@ -1,4 +1,4 @@
-import 'package:dart_web3/dart_web3.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 void main() async {
   print('--- ERC-4337 Account Abstraction Basics ---');

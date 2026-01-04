@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Test vectors from official specifications:
 /// - SHA-256: NIST FIPS 180-4

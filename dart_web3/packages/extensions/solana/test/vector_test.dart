@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_solana/dart_web3_solana.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_solana/web3_universal_solana.dart';
 import 'package:test/test.dart';
 
 void main() {

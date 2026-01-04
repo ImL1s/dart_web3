@@ -301,7 +301,7 @@ class MpcProviderFactory {
       apiUrl: apiUrl,
       apiKey: apiKey,
       additionalConfig: additionalConfig ?? {},
-    ));
+    ),);
   }
 
   /// Creates a Fordefi provider.
@@ -315,6 +315,6 @@ class MpcProviderFactory {
       apiUrl: apiUrl,
       apiKey: apiKey,
       additionalConfig: additionalConfig ?? {},
-    ));
+    ),);
   }
 }

@@ -1,7 +1,6 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Represents a Taproot Script Leaf (BIP-341).
 class TapLeaf {
@@ -60,7 +59,7 @@ class TapBranch {
   }
   
   int _compare(Uint8List a, Uint8List b) {
-    for (int i = 0; i < a.length && i < b.length; i++) {
+    for (var i = 0; i < a.length && i < b.length; i++) {
         if (a[i] < b[i]) return -1;
         if (a[i] > b[i]) return 1;
     }
@@ -112,5 +111,5 @@ Uint8List _taggedHash(String tag, Uint8List data) {
 }
 
 Uint8List _sha256(Uint8List data) {
-  return Sha256.hash(data); // Use static method from dart_web3_crypto
+  return Sha256.hash(data); // Use static method from web3_universal_crypto
 }

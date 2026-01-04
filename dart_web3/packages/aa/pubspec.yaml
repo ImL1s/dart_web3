@@ -1,25 +1,35 @@
-name: dart_web3_aa
-description: ERC-4337 Account Abstraction support for Dart Web3 SDK
-version: 0.1.0
-publish_to: none
+name: web3_universal_aa
+description: ERC-4337 Account Abstraction support for Web3 Universal SDK.
+version: 0.1.1+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/aa
+topics:
+  - web3
+  - ethereum
+  - account-abstraction
+  - erc-4337
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../signer
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../crypto
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../abi
 
-  dart_web3_provider: any
+  web3_universal_provider:
+    path: ../provider
 dev_dependencies:
+  lints: ^5.1.1
   test: ^1.24.0
+  web3_universal_chains:
+    path: ../chains

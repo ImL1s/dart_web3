@@ -1,0 +1,273 @@
+build	Set up job	﻿2026-01-03T15:12:33.1341671Z Current runner version: '2.330.0'
+build	Set up job	2026-01-03T15:12:33.1365125Z ##[group]Runner Image Provisioner
+build	Set up job	2026-01-03T15:12:33.1365872Z Hosted Compute Agent
+build	Set up job	2026-01-03T15:12:33.1366389Z Version: 20251211.462
+build	Set up job	2026-01-03T15:12:33.1366922Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+build	Set up job	2026-01-03T15:12:33.1367583Z Build Date: 2025-12-11T16:28:49Z
+build	Set up job	2026-01-03T15:12:33.1368169Z Worker ID: {188d33d9-49ec-48b2-8744-a6883b4dd4c4}
+build	Set up job	2026-01-03T15:12:33.1368799Z ##[endgroup]
+build	Set up job	2026-01-03T15:12:33.1369304Z ##[group]Operating System
+build	Set up job	2026-01-03T15:12:33.1369908Z Ubuntu
+build	Set up job	2026-01-03T15:12:33.1370353Z 24.04.3
+build	Set up job	2026-01-03T15:12:33.1370725Z LTS
+build	Set up job	2026-01-03T15:12:33.1371191Z ##[endgroup]
+build	Set up job	2026-01-03T15:12:33.1371619Z ##[group]Runner Image
+build	Set up job	2026-01-03T15:12:33.1372085Z Image: ubuntu-24.04
+build	Set up job	2026-01-03T15:12:33.1372551Z Version: 20251215.174.1
+build	Set up job	2026-01-03T15:12:33.1373461Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+build	Set up job	2026-01-03T15:12:33.1374798Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+build	Set up job	2026-01-03T15:12:33.1375938Z ##[endgroup]
+build	Set up job	2026-01-03T15:12:33.1376913Z ##[group]GITHUB_TOKEN Permissions
+build	Set up job	2026-01-03T15:12:33.1378889Z Contents: read
+build	Set up job	2026-01-03T15:12:33.1379397Z Metadata: read
+build	Set up job	2026-01-03T15:12:33.1379895Z Packages: read
+build	Set up job	2026-01-03T15:12:33.1380307Z ##[endgroup]
+build	Set up job	2026-01-03T15:12:33.1382222Z Secret source: Actions
+build	Set up job	2026-01-03T15:12:33.1383133Z Prepare workflow directory
+build	Set up job	2026-01-03T15:12:33.1686505Z Prepare all required actions
+build	Set up job	2026-01-03T15:12:33.1725153Z Getting action download info
+build	Set up job	2026-01-03T15:12:33.4870871Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+build	Set up job	2026-01-03T15:12:33.5619756Z Download action repository 'dart-lang/setup-dart@v1' (SHA:e51d8e571e22473a2ddebf0ef8a2123f0ab2c02c)
+build	Set up job	2026-01-03T15:12:34.0499123Z Complete job name: build
+build	Run actions/checkout@v4	﻿2026-01-03T15:12:34.1152300Z ##[group]Run actions/checkout@v4
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1153294Z with:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1153879Z   repository: ImL1s/dart_web3
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1154897Z   token: ***
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1155381Z   ssh-strict: true
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1155926Z   ssh-user: git
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1156432Z   persist-credentials: true
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1156975Z   clean: true
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1157572Z   sparse-checkout-cone-mode: true
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1158136Z   fetch-depth: 1
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1158639Z   fetch-tags: false
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1159122Z   show-progress: true
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1159686Z   lfs: false
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1160162Z   submodules: false
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1160655Z   set-safe-directory: true
+build	Run actions/checkout@v4	2026-01-03T15:12:34.1161493Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2187516Z Syncing repository: ImL1s/dart_web3
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2189661Z ##[group]Getting Git version info
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2190599Z Working directory is '/home/runner/work/dart_web3/dart_web3'
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2191765Z [command]/usr/bin/git version
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2251368Z git version 2.52.0
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2275399Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2290243Z Temporarily overriding HOME='/home/runner/work/_temp/0845d999-aab3-48db-8bf5-e4e7e11243a1' before making global git config changes
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2293590Z Adding repository directory to the temporary git global config as a safe directory
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2304383Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dart_web3/dart_web3
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2340686Z Deleting the contents of '/home/runner/work/dart_web3/dart_web3'
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2343286Z ##[group]Initializing the repository
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2348146Z [command]/usr/bin/git init /home/runner/work/dart_web3/dart_web3
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2451146Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2452771Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2454963Z hint: to use in all of your new repositories, which will suppress this warning,
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2456712Z hint: call:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2458041Z hint:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2459420Z hint: 	git config --global init.defaultBranch <name>
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2460830Z hint:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2462219Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2464227Z hint: 'development'. The just-created branch can be renamed via this command:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2466096Z hint:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2467165Z hint: 	git branch -m <name>
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2468292Z hint:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2469625Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2471595Z Initialized empty Git repository in /home/runner/work/dart_web3/dart_web3/.git/
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2473448Z [command]/usr/bin/git remote add origin https://github.com/ImL1s/dart_web3
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2494813Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2496602Z ##[group]Disabling automatic garbage collection
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2498695Z [command]/usr/bin/git config --local gc.auto 0
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2522004Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2523763Z ##[group]Setting up auth
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2529247Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2555146Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2854779Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Run actions/checkout@v4	2026-01-03T15:12:34.2879811Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Run actions/checkout@v4	2026-01-03T15:12:34.3043932Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Run actions/checkout@v4	2026-01-03T15:12:34.3068752Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Run actions/checkout@v4	2026-01-03T15:12:34.3242277Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	Run actions/checkout@v4	2026-01-03T15:12:34.3269383Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.3270310Z ##[group]Fetching the repository
+build	Run actions/checkout@v4	2026-01-03T15:12:34.3276810Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +fe779c3e48f6955730b6af86343d7b1bb3d454d1:refs/remotes/origin/master
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7362039Z From https://github.com/ImL1s/dart_web3
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7364850Z  * [new ref]         fe779c3e48f6955730b6af86343d7b1bb3d454d1 -> origin/master
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7388217Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7389905Z ##[group]Determining the checkout info
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7391456Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7394343Z [command]/usr/bin/git sparse-checkout disable
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7427172Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7547072Z ##[group]Checking out the ref
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7549493Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7766661Z Reset branch 'master'
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7767951Z branch 'master' set up to track 'origin/master'.
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7774032Z ##[endgroup]
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7805110Z [command]/usr/bin/git log -1 --format=%H
+build	Run actions/checkout@v4	2026-01-03T15:12:34.7823394Z fe779c3e48f6955730b6af86343d7b1bb3d454d1
+build	Run dart-lang/setup-dart@v1	﻿2026-01-03T15:12:34.8045124Z ##[group]Run dart-lang/setup-dart@v1
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:34.8046304Z with:
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:34.8047079Z   sdk: stable
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:34.8047898Z ##[endgroup]
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:35.0322725Z Installing the linux-x64 Dart SDK version 3.10.7 from the stable (release) channel.
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:35.0338561Z https://storage.googleapis.com/dart-archive/channels/stable/release/3.10.7/sdk/dartsdk-linux-x64-release.zip ...
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:36.3950223Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/dartsdk-linux-x64-release.zip
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:41.7319608Z [command]/opt/hostedtoolcache/dart/3.10.7/x64/bin/dart --version
+build	Run dart-lang/setup-dart@v1	2026-01-03T15:12:41.7347674Z Dart SDK version: 3.10.7 (stable) (Tue Dec 23 00:01:57 2025 -0800) on "linux_x64"
+build	Install Melos	﻿2026-01-03T15:12:41.7461581Z ##[group]Run dart pub global activate melos
+build	Install Melos	2026-01-03T15:12:41.7462007Z [36;1mdart pub global activate melos[0m
+build	Install Melos	2026-01-03T15:12:41.7488705Z shell: /usr/bin/bash -e {0}
+build	Install Melos	2026-01-03T15:12:41.7488970Z env:
+build	Install Melos	2026-01-03T15:12:41.7489194Z   DART_HOME: /opt/hostedtoolcache/dart/3.10.7/x64
+build	Install Melos	2026-01-03T15:12:41.7489482Z   PUB_CACHE: /home/runner/.pub-cache
+build	Install Melos	2026-01-03T15:12:41.7489717Z ##[endgroup]
+build	Install Melos	2026-01-03T15:12:41.7689929Z Resolving dependencies...
+build	Install Melos	2026-01-03T15:12:42.0565116Z Downloading packages...
+build	Install Melos	2026-01-03T15:12:42.5908233Z + ansi_styles 0.3.2+1
+build	Install Melos	2026-01-03T15:12:42.5908688Z + args 2.7.0
+build	Install Melos	2026-01-03T15:12:42.5908972Z + async 2.13.0
+build	Install Melos	2026-01-03T15:12:42.5909256Z + charcode 1.4.0
+build	Install Melos	2026-01-03T15:12:42.5909470Z + checked_yaml 2.0.4
+build	Install Melos	2026-01-03T15:12:42.5909909Z + cli_launcher 0.3.2+1
+build	Install Melos	2026-01-03T15:12:42.5910198Z + cli_util 0.4.2
+build	Install Melos	2026-01-03T15:12:42.5910529Z + collection 1.19.1
+build	Install Melos	2026-01-03T15:12:42.5910861Z + conventional_commit 0.6.1+1
+build	Install Melos	2026-01-03T15:12:42.5911235Z + file 7.0.1
+build	Install Melos	2026-01-03T15:12:42.5911520Z + glob 2.1.3
+build	Install Melos	2026-01-03T15:12:42.5911878Z + graphs 2.3.2
+build	Install Melos	2026-01-03T15:12:42.5912177Z + http 1.6.0
+build	Install Melos	2026-01-03T15:12:42.5912364Z + http_parser 4.1.2
+build	Install Melos	2026-01-03T15:12:42.5912560Z + io 1.0.5
+build	Install Melos	2026-01-03T15:12:42.5912735Z + json_annotation 4.9.0
+build	Install Melos	2026-01-03T15:12:42.5912934Z + melos 7.3.0
+build	Install Melos	2026-01-03T15:12:42.5913123Z + meta 1.17.0
+build	Install Melos	2026-01-03T15:12:42.5913358Z + mustache_template 2.0.2
+build	Install Melos	2026-01-03T15:12:42.5913605Z + path 1.9.1
+build	Install Melos	2026-01-03T15:12:42.5913786Z + petitparser 7.0.1
+build	Install Melos	2026-01-03T15:12:42.5913990Z + platform 3.1.6
+build	Install Melos	2026-01-03T15:12:42.5914177Z + pool 1.5.2
+build	Install Melos	2026-01-03T15:12:42.5914360Z + process 5.0.5
+build	Install Melos	2026-01-03T15:12:42.5914907Z + prompts 2.0.0
+build	Install Melos	2026-01-03T15:12:42.5915111Z + pub_semver 2.2.0
+build	Install Melos	2026-01-03T15:12:42.5915304Z + pub_updater 0.5.0
+build	Install Melos	2026-01-03T15:12:42.5915508Z + pubspec_parse 1.5.0
+build	Install Melos	2026-01-03T15:12:42.5915704Z + source_span 1.10.1
+build	Install Melos	2026-01-03T15:12:42.5915918Z + stack_trace 1.12.1
+build	Install Melos	2026-01-03T15:12:42.5916108Z + string_scanner 1.4.1
+build	Install Melos	2026-01-03T15:12:42.5916315Z + term_glyph 1.2.2
+build	Install Melos	2026-01-03T15:12:42.5916503Z + typed_data 1.4.0
+build	Install Melos	2026-01-03T15:12:42.5916685Z + web 1.1.1
+build	Install Melos	2026-01-03T15:12:42.5916855Z + xml 6.6.1
+build	Install Melos	2026-01-03T15:12:42.5917019Z + yaml 3.1.3
+build	Install Melos	2026-01-03T15:12:42.5917200Z + yaml_edit 2.2.3
+build	Install Melos	2026-01-03T15:12:42.5931457Z Building package executables...
+build	Install Melos	2026-01-03T15:12:43.4775415Z Built melos:melos.
+build	Install Melos	2026-01-03T15:12:43.4816755Z Installed executable melos.
+build	Install Melos	2026-01-03T15:12:43.4843575Z Activated melos 7.3.0.
+build	Bootstrap Workspace	﻿2026-01-03T15:12:43.4958210Z ##[group]Run cd dart_web3
+build	Bootstrap Workspace	2026-01-03T15:12:43.4958492Z [36;1mcd dart_web3[0m
+build	Bootstrap Workspace	2026-01-03T15:12:43.4958687Z [36;1mmelos bootstrap[0m
+build	Bootstrap Workspace	2026-01-03T15:12:43.4977517Z shell: /usr/bin/bash -e {0}
+build	Bootstrap Workspace	2026-01-03T15:12:43.4977752Z env:
+build	Bootstrap Workspace	2026-01-03T15:12:43.4977960Z   DART_HOME: /opt/hostedtoolcache/dart/3.10.7/x64
+build	Bootstrap Workspace	2026-01-03T15:12:43.4978249Z   PUB_CACHE: /home/runner/.pub-cache
+build	Bootstrap Workspace	2026-01-03T15:12:43.4978471Z ##[endgroup]
+build	Bootstrap Workspace	2026-01-03T15:12:43.6123667Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T15:12:43.8956393Z Downloading packages...
+build	Bootstrap Workspace	2026-01-03T15:12:44.7815017Z + _fe_analyzer_shared 92.0.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7815417Z + analyzer 9.0.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7815721Z + ansi_styles 0.3.2+1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7815975Z + args 2.7.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7816209Z + async 2.13.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7816446Z + boolean_selector 2.1.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7816718Z + charcode 1.4.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7816974Z + checked_yaml 2.0.4
+build	Bootstrap Workspace	2026-01-03T15:12:44.7817254Z + cli_config 0.2.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7817514Z + cli_launcher 0.3.2+1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7817868Z + cli_util 0.4.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7818118Z + collection 1.19.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7818390Z + conventional_commit 0.6.1+1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7818691Z + convert 3.1.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7818933Z + coverage 1.15.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7819176Z + crypto 3.0.7
+build	Bootstrap Workspace	2026-01-03T15:12:44.7819419Z + file 7.0.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7819680Z + frontend_server_client 4.0.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7819982Z + glob 2.1.3
+build	Bootstrap Workspace	2026-01-03T15:12:44.7820522Z + graphs 2.3.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7820777Z + http 1.6.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7821038Z + http_multi_server 3.2.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7821357Z + http_parser 4.1.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7821659Z + io 1.0.5
+build	Bootstrap Workspace	2026-01-03T15:12:44.7821913Z + json_annotation 4.9.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7822224Z + lints 5.1.1 (6.0.0 available)
+build	Bootstrap Workspace	2026-01-03T15:12:44.7822563Z + logging 1.3.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7822820Z + matcher 0.12.18
+build	Bootstrap Workspace	2026-01-03T15:12:44.7823085Z + melos 6.3.3 (7.3.0 available)
+build	Bootstrap Workspace	2026-01-03T15:12:44.7823385Z + meta 1.17.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7823623Z + mime 2.0.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7823931Z + mustache_template 2.0.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7824234Z + node_preamble 2.0.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7824712Z + package_config 2.2.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7825098Z + path 1.9.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7825375Z + platform 3.1.6
+build	Bootstrap Workspace	2026-01-03T15:12:44.7825649Z + pool 1.5.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7825910Z + process 5.0.5
+build	Bootstrap Workspace	2026-01-03T15:12:44.7826197Z + prompts 2.0.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7826469Z + pub_semver 2.2.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7826786Z + pub_updater 0.5.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7827069Z + pubspec_parse 1.5.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7827368Z + shelf 1.4.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7827640Z + shelf_packages_handler 3.0.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7827965Z + shelf_static 1.1.3
+build	Bootstrap Workspace	2026-01-03T15:12:44.7828255Z + shelf_web_socket 3.0.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7828594Z + source_map_stack_trace 2.1.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7828930Z + source_maps 0.10.13
+build	Bootstrap Workspace	2026-01-03T15:12:44.7829231Z + source_span 1.10.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7829519Z + stack_trace 1.12.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7829840Z + stream_channel 2.1.4
+build	Bootstrap Workspace	2026-01-03T15:12:44.7830162Z + string_scanner 1.4.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7830510Z + term_glyph 1.2.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7830828Z + test 1.28.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7831110Z + test_api 0.7.8
+build	Bootstrap Workspace	2026-01-03T15:12:44.7831395Z + test_core 0.6.14
+build	Bootstrap Workspace	2026-01-03T15:12:44.7831679Z + typed_data 1.4.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7831971Z + vm_service 15.0.2
+build	Bootstrap Workspace	2026-01-03T15:12:44.7832258Z + watcher 1.2.0
+build	Bootstrap Workspace	2026-01-03T15:12:44.7832577Z + web 1.1.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7832848Z + web_socket 1.0.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7833180Z + web_socket_channel 3.0.3
+build	Bootstrap Workspace	2026-01-03T15:12:44.7833561Z + webkit_inspection_protocol 1.2.1
+build	Bootstrap Workspace	2026-01-03T15:12:44.7833948Z + yaml 3.1.3
+build	Bootstrap Workspace	2026-01-03T15:12:44.7834236Z + yaml_edit 2.2.3
+build	Bootstrap Workspace	2026-01-03T15:12:44.7834858Z Changed 65 dependencies!
+build	Bootstrap Workspace	2026-01-03T15:12:44.7835421Z 2 packages have newer versions incompatible with dependency constraints.
+build	Bootstrap Workspace	2026-01-03T15:12:44.7836061Z Try `dart pub outdated` for more information.
+build	Bootstrap Workspace	2026-01-03T15:12:45.7910910Z melos bootstrap
+build	Bootstrap Workspace	2026-01-03T15:12:45.7926456Z   └> /home/runner/work/dart_web3/dart_web3/dart_web3
+build	Bootstrap Workspace	2026-01-03T15:12:45.7926822Z 
+build	Bootstrap Workspace	2026-01-03T15:12:45.7929348Z Running "dart pub get" in workspace packages...
+build	Bootstrap Workspace	2026-01-03T15:12:46.1893413Z   ✓ web3_universal_bc_ur
+build	Bootstrap Workspace	2026-01-03T15:12:46.1894339Z     └> packages/hardware/bc_ur
+build	Bootstrap Workspace	2026-01-03T15:12:46.3815868Z   - web3_universal
+build	Bootstrap Workspace	2026-01-03T15:12:46.3817555Z     └> web3_universal
+build	Bootstrap Workspace	2026-01-03T15:12:46.3845080Z 
+build	Bootstrap Workspace	2026-01-03T15:12:46.3845447Z Resolving dependencies...
+build	Bootstrap Workspace	2026-01-03T15:12:46.3846263Z        └> Failed to install.
+build	Bootstrap Workspace	2026-01-03T15:12:46.3847426Z Because every version of web3_universal_ledger from path depends on ledger_flutter any which requires the Flutter SDK, web3_universal_ledger from path is forbidden.
+build	Bootstrap Workspace	2026-01-03T15:12:46.3848840Z So, because web3_universal depends on web3_universal_ledger from path, version solving failed.
+build	Bootstrap Workspace	2026-01-03T15:12:46.3849723Z Flutter users should use `flutter pub` instead of `dart pub`.
+build	Bootstrap Workspace	2026-01-03T15:12:46.3858306Z BootstrapException: Failed to install.: web3_universal at /home/runner/work/dart_web3/dart_web3/dart_web3/web3_universal.
+build	Bootstrap Workspace	2026-01-03T15:12:46.6443270Z   ✓ web3_universal_abi
+build	Bootstrap Workspace	2026-01-03T15:12:46.6445690Z     └> packages/abi
+build	Bootstrap Workspace	2026-01-03T15:12:46.6568997Z   ✓ web3_universal_aa
+build	Bootstrap Workspace	2026-01-03T15:12:46.6569423Z     └> packages/aa
+build	Bootstrap Workspace	2026-01-03T15:12:46.8087575Z   ✓ web3_universal_bitcoin
+build	Bootstrap Workspace	2026-01-03T15:12:46.8088119Z     └> packages/extensions/bitcoin
+build	Bootstrap Workspace	2026-01-03T15:12:46.8463240Z ##[error]Process completed with exit code 1.
+build	Post Run actions/checkout@v4	﻿2026-01-03T15:12:46.8562786Z Post job cleanup.
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9421261Z [command]/usr/bin/git version
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9453137Z git version 2.52.0
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9492321Z Temporarily overriding HOME='/home/runner/work/_temp/bb171cc4-aab6-436b-95df-bdeaa05f9567' before making global git config changes
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9493509Z Adding repository directory to the temporary git global config as a safe directory
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9498466Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dart_web3/dart_web3
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9529925Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9557399Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9721512Z fatal: No url found for submodule path 'references/dart/bitcoin_base' in .gitmodules
+build	Post Run actions/checkout@v4	2026-01-03T15:12:46.9760065Z ##[warning]The process '/usr/bin/git' failed with exit code 128
+build	Complete job	﻿2026-01-03T15:12:46.9823157Z Cleaning up orphan processes

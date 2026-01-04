@@ -1,8 +1,9 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_utxo/dart_web3_utxo.dart';
+
 import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 
 void main() {
   group('BIP-341 Taproot', () {
@@ -32,7 +33,7 @@ void main() {
         final result = TaprootKey.tweak(internalKey);
         
         expect(result['outputKey'], isNotNull);
-        expect(result['outputKey'].length, 32);
+        expect((result['outputKey'] as Uint8List).length, 32);
         expect(result['parity'], isA<int>());
         // Parity should be 0 or 1
         expect(result['parity'] == 0 || result['parity'] == 1, isTrue);
@@ -47,10 +48,10 @@ void main() {
         final result = TaprootKey.tweak(internalKey, leaf.hash);
         
         expect(result['outputKey'], isNotNull);
-        expect(result['outputKey'].length, 32);
+        expect((result['outputKey'] as Uint8List).length, 32);
         
         // Output key should differ from internal key
-        expect(HexUtils.encode(result['outputKey']), isNot(equals(HexUtils.encode(internalKey))));
+        expect(HexUtils.encode(result['outputKey'] as Uint8List), isNot(equals(HexUtils.encode(internalKey))));
     });
   });
 }

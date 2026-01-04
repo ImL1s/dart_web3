@@ -1,0 +1,870 @@
+melos run analyze
+  └> melos exec -- dart analyze --fatal-infos
+     └> RUNNING
+
+$ melos exec
+  └> dart analyze --fatal-infos
+     └> RUNNING (in 34 packages)
+
+--------------------------------------------------------------------------------
+[web3_universal_aa]: Analyzing aa...
+[web3_universal_dapp]: Analyzing dapp...
+[web3_universal_bc_ur]: Analyzing bc_ur...
+[web3_universal_price]: Analyzing price...
+[web3_universal_polkadot]: Analyzing polkadot...
+[web3_universal_trezor]: Analyzing trezor...
+[web3_universal_aa]: 
+[web3_universal_aa]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_aa]:    info - example\main.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_aa]:    info - lib\src\accounts\simple_account.dart:43:12 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_aa]:    info - lib\src\bundler_client.dart:70:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\bundler_client.dart:88:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\entry_point.dart:731:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\entry_point.dart:867:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\entry_point.dart:890:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_aa]:    info - lib\src\paymaster.dart:140:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\paymaster.dart:154:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\paymaster.dart:167:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\paymaster.dart:235:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\paymaster.dart:328:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_aa]:    info - lib\src\smart_account.dart:304:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_aa]:    info - lib\src\smart_account.dart:305:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_aa]:    info - lib\src\user_operation.dart:434:11 - Unnecessary 'this.' qualifier. Try removing 'this.'. - unnecessary_this
+[web3_universal_aa]:    info - lib\src\user_operation.dart:435:29 - Unnecessary 'this.' qualifier. Try removing 'this.'. - unnecessary_this
+[web3_universal_aa]:    info - lib\src\user_operation.dart:456:12 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_aa]:    info - lib\src\user_operation.dart:634:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_aa]:    info - lib\src\user_operation.dart:649:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_aa]:    info - lib\web3_universal_aa.dart:1:1 - Dangling library doc comment. Add a 'library' directive after the library comment. - dangling_library_doc_comments
+[web3_universal_aa]:    info - test\bundler_client_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_aa]:    info - test\user_operation_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_aa]:    info - test\user_operation_test.dart:69:34 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_aa]: 
+[web3_universal_aa]: 24 issues found.
+[web3_universal_history]: Analyzing history...
+[web3_universal_dapp]: 
+[web3_universal_dapp]:    info - lib\web3_universal_dapp.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_dapp]: 
+[web3_universal_dapp]: 1 issue found.
+[web3_universal_bc_ur]: 
+[web3_universal_bc_ur]:    info - lib\src\animated_qr.dart:89:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_bc_ur]:    info - lib\src\animated_qr.dart:94:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_bc_ur]:    info - lib\src\bc_ur_encoder.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_bc_ur]:    info - lib\src\bc_ur_registry.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_bc_ur]:    info - lib\src\bc_ur_registry.dart:91:25 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_bc_ur]:    info - lib\src\bc_ur_registry.dart:120:23 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_bc_ur]:    info - lib\src\cbor_decoder.dart:13:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_decoder.dart:14:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:12:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:59:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:62:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:65:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:68:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:78:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:81:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:84:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:87:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:102:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:105:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:118:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:121:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:124:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:137:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:140:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:143:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:158:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:161:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\src\cbor_encoder.dart:164:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bc_ur]:    info - lib\web3_universal_bc_ur.dart:6:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_bc_ur]:    info - test\bc_ur_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_bc_ur]: 
+[web3_universal_bc_ur]: 31 issues found.
+[web3_universal_solana]: Analyzing solana...
+[web3_universal_price]: 
+[web3_universal_price]:    info - lib\src\price_service.dart:21:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_price]:    info - lib\src\price_service.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_price]:    info - lib\src\price_service.dart:36:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_price]:    info - lib\src\price_service.dart:39:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_price]:    info - lib\src\price_service.dart:54:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_price]:    info - lib\src\price_service.dart:71:28 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_price]:    info - lib\src\price_service.dart:77:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_price]:    info - lib\src\price_service.dart:86:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_price]:    info - lib\web3_universal_price.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_price]:    info - test\price_service_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_price]:    info - test\price_service_test.dart:8:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_price]: 
+[web3_universal_price]: 11 issues found.
+[web3_universal_chains]: Analyzing chains...
+[web3_universal_polkadot]: 
+[web3_universal_polkadot]:    info - lib\src\scale_codec.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_polkadot]:    info - lib\web3_universal_polkadot.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_polkadot]:    info - test\polkadot_property_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_polkadot]: 
+[web3_universal_polkadot]: 3 issues found.
+[web3_universal_keystone]: Analyzing keystone...
+[web3_universal_trezor]: No issues found!
+[web3_universal_contract]: Analyzing contract...
+[web3_universal_history]: 
+[web3_universal_history]:    info - lib\web3_universal_history.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_history]:    info - test\history_service_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_history]: 
+[web3_universal_history]: 2 issues found.
+[web3_universal_client]: Analyzing client...
+[web3_universal_cosmos]: Analyzing cosmos...
+[web3_universal_chains]: 
+[web3_universal_chains]:    info - lib\web3_universal_chains.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_chains]:    info - test\chain_config_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_chains]:    info - test\chains_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_chains]: 
+[web3_universal_chains]: 3 issues found.
+[web3_universal_solana]: 
+[web3_universal_solana]: warning - lib\src\models\public_key.dart:74:11 - TODO: Expose `isOnCurve` in Ed25519 low-level or attempt to decode. - todo
+[web3_universal_solana]: warning - test\address_lookup_table_test.dart:27:8 - TODO: Verify against official solana-web3.js vector if available - todo
+[web3_universal_solana]:    info - lib\src\encoding\short_vec.dart:3:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_solana]:    info - lib\src\models\instruction.dart:12:22 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_solana]:    info - lib\src\models\instruction.dart:16:22 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_solana]:    info - lib\src\models\message.dart:42:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:43:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:44:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:45:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:46:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:69:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:72:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:81:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\message.dart:90:18 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_solana]:    info - lib\src\models\message.dart:160:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:36:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:43:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:49:20 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:55:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:82:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:95:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_solana]:    info - lib\src\models\transaction.dart:113:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\address_lookup_table.dart:8:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_staking]: Analyzing staking...
+[web3_universal_solana]:    info - lib\src\programs\address_lookup_table.dart:20:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\address_lookup_table.dart:26:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\address_lookup_table.dart:72:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\metaplex.dart:38:27 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_solana]:    info - lib\src\programs\system.dart:17:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\system.dart:18:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\token.dart:19:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\token.dart:20:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\token.dart:41:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\programs\token.dart:42:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - lib\src\rpc\client.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - lib\web3_universal_solana.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_solana]:    info - test\address_lookup_table_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - test\basic_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - test\integration_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - test\integration_test.dart:14:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_solana]:    info - test\integration_test.dart:19:17 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_solana]:    info - test\integration_test.dart:33:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_solana]:    info - test\integration_test.dart:47:17 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_solana]:    info - test\metaplex_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - test\metaplex_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - test\metaplex_test.dart:20:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\metaplex_test.dart:41:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\metaplex_test.dart:62:3 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\metaplex_test.dart:63:3 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\metaplex_test.dart:64:3 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\metaplex_test.dart:65:3 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\rigorous_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]:    info - test\rigorous_test.dart:44:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\rigorous_test.dart:45:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_solana]:    info - test\vector_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_solana]: 
+[web3_universal_solana]: 54 issues found.
+[web3_universal_tron]: Analyzing tron...
+[web3_universal_keystone]: 
+[web3_universal_keystone]: warning - lib\src\keystone_client.dart:205:25 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_keystone]: warning - lib\src\keystone_client.dart:207:38 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_keystone]: warning - lib\src\keystone_client.dart:229:25 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_keystone]:    info - lib\src\keystone_client.dart:227:7 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+[web3_universal_keystone]:    info - lib\src\multi_chain_support.dart:27:12 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_keystone]:    info - lib\src\multi_chain_support.dart:108:16 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_keystone]:    info - lib\src\multi_chain_support.dart:110:16 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_keystone]:    info - lib\src\multi_chain_support.dart:112:16 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_keystone]:    info - lib\src\multi_chain_support.dart:141:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_keystone]:    info - lib\src\qr_communication.dart:56:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_keystone]:    info - lib\src\qr_communication.dart:63:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_keystone]:    info - lib\src\qr_communication.dart:113:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_keystone]:    info - lib\web3_universal_keystone.dart:5:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_keystone]:    info - test\keystone_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_keystone]: 
+[web3_universal_keystone]: 14 issues found.
+[web3_universal_mev]: Analyzing mev...
+[web3_universal_contract]: 
+[web3_universal_contract]: warning - example\main.dart:3:8 - Unused import: 'package:web3_universal_core/web3_universal_core.dart'. Try removing the import directive. - unused_import
+[web3_universal_contract]:    info - example\main.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_contract]:    info - example\main.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_contract]:    info - example\main.dart:11:7 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:12:7 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:12:19 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:12:27 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:12:37 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:12:45 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:13:7 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:13:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:14:7 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:14:20 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:14:28 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:14:39 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:14:47 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:15:7 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:15:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_contract]:    info - example\main.dart:16:5 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_contract]:    info - lib\src\contract.dart:122:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_contract]:    info - lib\src\contract.dart:249:13 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_contract]:    info - lib\src\erc1155_contract.dart:158:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_contract]:    info - lib\src\erc721_contract.dart:202:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_contract]:    info - lib\web3_universal_contract.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_contract]:    info - test\contract_factory_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_contract]:    info - test\contract_test.dart:7:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_contract]:    info - test\contract_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_contract]:    info - test\erc20_contract_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_contract]:    info - test\mock_client.dart:42:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_contract]:    info - test\mock_client.dart:82:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_contract]: 
+[web3_universal_contract]: 30 issues found.
+[web3_universal_utxo]: Analyzing utxo...
+[web3_universal_client]: 
+[web3_universal_client]: warning - lib\src\ccip_read.dart:94:11 - The value of the local variable 'senderHex' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_client]: warning - test\ccip_read_test.dart:2:8 - Unused import: 'dart:typed_data'. Try removing the import directive. - unused_import
+[web3_universal_client]: warning - test\ccip_read_test.dart:132:15 - The value of the local variable 'handler' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_client]: warning - test\client_property_test.dart:1:8 - Unused import: 'package:web3_universal_core/web3_universal_core.dart'. Try removing the import directive. - unused_import
+[web3_universal_client]: warning - test\client_property_test.dart:2:8 - Unused import: 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unused_import
+[web3_universal_client]: warning - test\client_property_test.dart:5:8 - Unused import: 'package:test/test.dart'. Try removing the import directive. - unused_import
+[web3_universal_client]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_client]:    info - lib\src\ccip_read.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_client]:    info - lib\src\ccip_read.dart:76:9 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_client]:    info - lib\src\ccip_read.dart:81:17 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_client]:    info - lib\src\ccip_read.dart:82:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_client]:    info - lib\src\models.dart:33:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_client]:    info - lib\src\public_client.dart:76:18 - Unnecessary 'await'. Try removing the 'await'. - unnecessary_await_in_return
+[web3_universal_client]:    info - lib\src\wallet_client.dart:297:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_client]:    info - lib\web3_universal_client.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_client]:    info - lib\web3_universal_client.dart:8:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_client]:    info - test\ccip_read_test.dart:9:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]: Analyzing reown...
+[web3_universal_client]:    info - test\ccip_read_test.dart:53:11 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_client]:    info - test\ccip_read_test.dart:108:8 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_client]:    info - test\client_property_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_client]:    info - test\client_property_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_client]: 
+[web3_universal_client]: 21 issues found.
+[web3_universal_crypto]: Analyzing crypto...
+[web3_universal_cosmos]: 
+[web3_universal_cosmos]: warning - example\main.dart:12:9 - The value of the local variable 'client' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:29:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:30:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:31:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:32:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:33:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:34:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:35:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:48:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\ibc.dart:49:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\staking.dart:21:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\staking.dart:22:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\staking.dart:23:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\staking.dart:44:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\staking.dart:45:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\staking.dart:46:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:20:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:21:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:46:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:61:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:62:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:102:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:103:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:104:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:118:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:148:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:149:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:170:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:171:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:195:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:196:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:197:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\models\transaction.dart:198:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:23:22 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:25:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:26:17 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:41:21 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:44:9 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:49:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:50:32 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:51:27 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:75:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\src\rpc\client.dart:75:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - lib\web3_universal_cosmos.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_cosmos]:    info - test\advanced_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_cosmos]:    info - test\advanced_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_cosmos]:    info - test\cosmos_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_cosmos]:    info - test\integration_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_cosmos]:    info - test\integration_test.dart:37:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - test\integration_test.dart:38:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_cosmos]:    info - test\transaction_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_cosmos]:    info - test\vector_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_cosmos]: 
+[web3_universal_cosmos]: 52 issues found.
+[web3_universal_tron]: 
+[web3_universal_staking]: 
+[web3_universal_tron]:    info - lib\web3_universal_tron.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_tron]: 
+[web3_universal_tron]: 1 issue found.
+[web3_universal_staking]: warning - example\main.dart:12:9 - The value of the local variable 'staking' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_staking]:    info - example\main.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_staking]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_staking]:    info - example\main.dart:3:8 - The imported package 'web3_universal_chains' isn't a dependency of the importing package. Try adding a dependency for 'web3_universal_chains' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+[web3_universal_staking]:    info - lib\src\staking_service.dart:94:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_staking]:    info - lib\web3_universal_staking.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_staking]:    info - test\staking_service_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_staking]: 
+[web3_universal_staking]: 7 issues found.
+[web3_universal_mpc]: Analyzing mpc...
+[web3_universal_signer]: Analyzing signer...
+[web3_universal_mev]: 
+[web3_universal_mev]:    info - lib\web3_universal_mev.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_mev]:    info - test\mev_service_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_mev]: 
+[web3_universal_mev]: 2 issues found.
+[web3_universal_ens]: Analyzing ens...
+[web3_universal_ledger]: Analyzing ledger...
+[web3_universal_utxo]: 
+[web3_universal_utxo]: warning - lib\src\models\address.dart:20:8 - TODO: Implement decoding logic - todo
+[web3_universal_utxo]: warning - lib\src\models\networks.dart:79:6 - TODO: Add Dash, Zcash etc if requested - todo
+[web3_universal_utxo]: warning - lib\src\models\psbt.dart:53:8 - TODO: Implement proper reading loop based on tx input/output count - todo
+[web3_universal_utxo]: warning - lib\src\models\transaction.dart:136:8 - TODO: Implement proper double SHA256 when imports available - todo
+[web3_universal_utxo]: warning - test\script_test.dart:12:12 - The declaration 'hEncode' isn't referenced. Try removing the declaration of 'hEncode'. - unused_element
+[web3_universal_utxo]:    info - lib\src\models\address.dart:96:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+[web3_universal_utxo]:    info - lib\src\models\psbt.dart:32:15 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:84:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:90:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:100:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:101:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:102:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:111:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:112:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:122:11 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:147:29 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_utxo]:    info - lib\src\models\transaction.dart:281:3 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:143:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:146:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:147:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:150:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:151:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:154:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\script.dart:155:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:15:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:28:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:32:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:33:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:34:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:35:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:49:22 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:70:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:86:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_utxo]:    info - lib\src\selection\coin_selector.dart:19:16 - Unnecessary use of an abstract class. Try making 'select' a top-level function and removing the class. - one_member_abstracts
+[web3_universal_utxo]:    info - lib\web3_universal_utxo.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_utxo]:    info - test\integration_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_utxo]:    info - test\rbf_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_utxo]:    info - test\script_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_utxo]:    info - test\taproot_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_utxo]:    info - test\transaction_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_utxo]:    info - test\vector_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_utxo]: 
+[web3_universal_utxo]: 43 issues found.
+[web3_universal_core]: Analyzing core...
+[web3_universal_ton]: Analyzing ton...
+[web3_universal_crypto]: 
+[web3_universal_crypto]: warning - test\sha512_test.dart:1:8 - Unused import: 'dart:convert'. Try removing the import directive. - unused_import
+[web3_universal_crypto]:    info - lib\src\base58.dart:163:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\base58.dart:179:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\bip39.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_crypto]:    info - lib\src\bip39.dart:85:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - lib\src\bip39.dart:101:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\bip39.dart:102:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\curves.dart:142:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:34:23 - The variable name '_L' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:44:23 - The variable name '_By' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:47:23 - The variable name '_Bx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:90:11 - The variable name 'RBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:94:11 - The variable name 'ABytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:102:11 - The variable name 'SBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:122:13 - The variable name 'RBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:123:13 - The variable name 'SBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:144:13 - The variable name 'RkA' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:148:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:249:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:250:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:276:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:117:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:218:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:221:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:224:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:229:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:256:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:288:18 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_crypto]:    info - lib\src\hmac.dart:2:8 - The imported package 'crypto' isn't a dependency of the importing package. Try adding a dependency for 'crypto' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+[web3_universal_crypto]:    info - lib\src\keccak.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_crypto]:    info - lib\src\keccak.dart:45:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+[web3_universal_crypto]:    info - lib\src\keccak.dart:78:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_crypto]:    info - lib\src\keccak.dart:96:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_crypto]:    info - lib\src\mnemonic.dart:74:44 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - lib\src\pbkdf2.dart:66:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\ripemd160.dart:19:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_crypto]:    info - lib\src\ripemd160.dart:108:25 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:21:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:24:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:25:23 - The variable name '_Gx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:27:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:28:23 - The variable name '_Gy' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:30:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:50:5 - Local variables should be final. Try making the variable final. - prefer_final_locals
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:65:63 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:73:5 - Local variables should be final. Try making the variable final. - prefer_final_locals
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:83:68 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:117:90 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:134:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:252:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:253:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:269:13 - Use an 'if' element to conditionally add elements. Try using an 'if' element rather than a conditional expression. - prefer_if_elements_to_conditional_expressions
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:269:46 - Use an 'if' element to conditionally add elements. Try using an 'if' element rather than a conditional expression. - prefer_if_elements_to_conditional_expressions
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:281:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:88:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:139:16 - Use 'isEven' rather than '% 2'. Try using 'isEven'. - use_is_even_rather_than_modulo
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:202:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:221:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:278:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:358:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:366:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_crypto]:    info - lib\src\sha2.dart:2:8 - The imported package 'crypto' isn't a dependency of the importing package. Try adding a dependency for 'crypto' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+[web3_universal_crypto]:    info - lib\web3_universal_crypto.dart:16:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:7:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:7:8 - The imported package 'path' isn't a dependency of the importing package. Try adding a dependency for 'path' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:14:13 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:18:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:19:28 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_crypto]:    info - test\crypto_official_vector_test.dart:20:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_crypto]:    info - test\crypto_primitives_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\crypto_property_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\crypto_property_test.dart:54:15 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - test\crypto_property_test.dart:64:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - test\crypto_property_test.dart:149:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - test\crypto_property_test.dart:210:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_crypto]:    info - test\curves_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\curves_test.dart:21:38 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_crypto]:    info - test\curves_test.dart:60:38 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_crypto]:    info - test\ed25519_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\hd_wallet_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\keccak_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\mnemonic_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\secp256k1_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]:    info - test\sha512_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_crypto]: 
+[web3_universal_crypto]: 88 issues found.
+[web3_universal_reown]: 
+[web3_universal_reown]: warning - lib\src\reown_wallet_kit.dart:6:8 - Unused import: 'pairing_uri.dart'. Try removing the import directive. - unused_import
+[web3_universal_reown]:    info - lib\web3_universal_reown.dart:5:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_reown]:    info - lib\web3_universal_reown.dart:13:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\connection_manager_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\namespace_config_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\pairing_uri_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\relay_verification_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\reown_kits_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\reown_kits_test.dart:4:8 - The import of 'package:web3_universal_reown/src/relay_client.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_reown/web3_universal_reown.dart'. Try removing the import directive. - unnecessary_import
+[web3_universal_reown]:    info - test\reown_kits_test.dart:5:8 - The import of 'package:web3_universal_reown/src/session_manager.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_reown/web3_universal_reown.dart'. Try removing the import directive. - unnecessary_import
+[web3_universal_reown]:    info - test\reown_kits_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]:    info - test\reown_kits_test.dart:6:8 - The import of 'package:web3_universal_reown/src/namespace_config.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_reown/web3_universal_reown.dart'. Try removing the import directive. - unnecessary_import
+[web3_universal_reown]:    info - test\reown_kits_test.dart:81:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_reown]:    info - test\reown_kits_test.dart:92:9 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_reown]:    info - test\reown_kits_test.dart:107:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_reown]:    info - test\reown_kits_test.dart:108:28 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_reown]:    info - test\reown_kits_test.dart:108:28 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_reown]:    info - test\reown_kits_test.dart:129:11 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_reown]:    info - test\reown_kits_test.dart:130:9 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_reown]:    info - test\reown_kits_test.dart:131:7 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_reown]:    info - test\siwe_auth_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_reown]: 
+[web3_universal_reown]: 21 issues found.
+[web3_universal_multicall]: Analyzing multicall...
+[web3_universal_mpc]: 
+[web3_universal_mpc]:    info - lib\src\key_generation.dart:499:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_mpc]:    info - lib\src\key_refresh.dart:464:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_mpc]:    info - lib\src\mpc_provider.dart:304:6 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_mpc]:    info - lib\src\mpc_provider.dart:318:6 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
+[web3_universal_mpc]:    info - lib\src\mpc_signer.dart:337:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_mpc]:    info - lib\src\threshold_signature.dart:246:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_mpc]:    info - lib\src\threshold_signature.dart:564:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_mpc]:    info - lib\src\threshold_signature.dart:700:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_mpc]:    info - lib\web3_universal_mpc.dart:10:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_mpc]:    info - test\mpc_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_mpc]: 
+[web3_universal_mpc]: 10 issues found.
+[web3_universal_nft]: Analyzing nft...
+[web3_universal_signer]: 
+[web3_universal_signer]: warning - test\signer_property_test.dart:1:8 - Unused import: 'dart:typed_data'. Try removing the import directive. - unused_import
+[web3_universal_signer]: warning - test\signer_property_test.dart:3:8 - Unused import: 'package:web3_universal_crypto/web3_universal_crypto.dart'. Try removing the import directive. - unused_import
+[web3_universal_signer]: warning - test\signer_property_test.dart:6:8 - Unused import: 'package:test/test.dart'. Try removing the import directive. - unused_import
+[web3_universal_signer]:    info - example\main.dart:2:1 - Place 'dart:' imports before other imports. Try sorting the directives. - directives_ordering
+[web3_universal_signer]:    info - example\main.dart:19:74 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_signer]:    info - lib\src\authorization.dart:173:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_signer]:    info - lib\src\authorization_batch.dart:164:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_signer]:    info - lib\src\authorization_batch.dart:224:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_signer]:    info - lib\src\authorization_revocation.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_signer]:    info - lib\src\authorization_verifier.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_signer]:    info - lib\src\authorization_verifier.dart:80:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_signer]:    info - lib\src\authorization_verifier.dart:123:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_signer]:    info - lib\src\transaction.dart:23:9 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+[web3_universal_signer]:    info - lib\web3_universal_signer.dart:11:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_signer]:    info - test\eip7702_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_signer]:    info - test\eip7702_test.dart:276:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_signer]:    info - test\eip7702_test.dart:277:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_signer]:    info - test\eip7702_test.dart:278:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_signer]:    info - test\signer_property_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_signer]: 
+[web3_universal_signer]: 19 issues found.
+[web3_universal_provider]: Analyzing provider...
+[web3_universal_events]: Analyzing events...
+[web3_universal_ens]: 
+[web3_universal_ens]:    info - example\main.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_ens]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_ens]:    info - lib\src\ens_records.dart:49:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_records.dart:158:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_records.dart:207:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_records.dart:257:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_ens]:    info - lib\src\ens_records.dart:263:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_ens]:    info - lib\src\ens_resolver.dart:50:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_resolver.dart:99:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_resolver.dart:137:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_resolver.dart:155:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\ens_resolver.dart:183:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_ens]:    info - lib\src\ens_resolver.dart:189:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_ens]:    info - lib\src\multichain_resolver.dart:55:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\multichain_resolver.dart:134:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_ens]:    info - lib\src\multichain_resolver.dart:242:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_ens]:    info - lib\src\multichain_resolver.dart:248:12 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_ens]:    info - lib\src\multichain_resolver.dart:320:20 - The constant name 'bitcoin_cash' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - constant_identifier_names
+[web3_universal_ens]:    info - lib\web3_universal_ens.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_ens]:    info - test\ens_client_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_ens]:    info - test\ens_records_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_ens]:    info - test\ens_resolver_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_ens]: 
+[web3_universal_ens]: 22 issues found.
+[web3_universal_bitcoin]: Analyzing bitcoin...
+[web3_universal_core]: 
+[web3_universal_core]:    info - example\main.dart:18:9 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_core]:    info - lib\src\address.dart:133:30 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_core]:    info - lib\src\address.dart:139:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_core]:    info - lib\src\address.dart:146:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_core]:    info - lib\src\hex.dart:26:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_core]:    info - lib\src\rlp.dart:103:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_core]:    info - test\address_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_core]:    info - test\bytes_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_core]:    info - test\core_property_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_core]:    info - test\hex_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_core]:    info - test\rlp_official_vector_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_core]:    info - test\rlp_official_vector_test.dart:31:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_core]:    info - test\rlp_official_vector_test.dart:61:11 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_core]:    info - test\rlp_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_core]: 
+[web3_universal_core]: 14 issues found.
+[web3_universal_abi]: Analyzing abi...
+[web3_universal_ton]: 
+[web3_universal_ton]:    info - lib\web3_universal_ton.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_ton]: 
+[web3_universal_ton]: 1 issue found.
+[web3_universal_bridge]: Analyzing bridge...
+[web3_universal_debug]: Analyzing debug...
+[web3_universal_ledger]: 
+[web3_universal_ledger]:    info - lib\src\apdu_commands.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_ledger]:    info - lib\src\apdu_commands.dart:117:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_ledger]:    info - lib\src\apdu_commands.dart:157:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_ledger]:    info - lib\src\ledger_transport.dart:276:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_ledger]:    info - lib\src\ledger_types.dart:83:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_ledger]:    info - lib\src\ledger_types.dart:88:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_ledger]:    info - lib\src\multi_chain_support.dart:244:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_ledger]:    info - lib\src\multi_chain_support.dart:281:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_ledger]:    info - lib\web3_universal_ledger.dart:5:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_ledger]:    info - test\ledger_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_ledger]: 
+[web3_universal_ledger]: 10 issues found.
+[web3_universal_multicall]: 
+[web3_universal_multicall]: warning - example\main.dart:4:8 - Unused import: 'package:web3_universal_core/web3_universal_core.dart'. Try removing the import directive. - unused_import
+[web3_universal_multicall]: warning - pubspec.yaml:35:3 - The dev dependency on web3_universal_core is unnecessary because there is also a normal dependency on that package. Try removing the dev dependency. - unnecessary_dev_dependency
+[web3_universal_multicall]:    info - example\main.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]:    info - lib\src\multicall.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:27:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:42:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:48:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:54:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:140:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_multicall]:    info - lib\src\multicall_factory.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_multicall]:    info - lib\web3_universal_multicall.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_multicall]:    info - test\mock_client.dart:43:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_client.dart:84:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:118:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:122:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:126:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:130:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:92:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:96:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:162:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:183:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:207:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_builder_test.dart:246:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_multicall]:    info - test\multicall_error_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]:    info - test\multicall_factory_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]:    info - test\multicall_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_multicall]: 
+[web3_universal_multicall]: 29 issues found.
+[web3_universal_swap]: Analyzing swap...
+[web3_universal_nft]: 
+[web3_universal_nft]: warning - example\main.dart:13:9 - The value of the local variable 'nftService' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_nft]: warning - lib\src\nft_service.dart:124:28 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_nft]: warning - lib\src\nft_service.dart:132:28 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_nft]: warning - lib\src\nft_service.dart:140:28 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_nft]: warning - lib\src\nft_service.dart:148:28 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_nft]: warning - lib\src\nft_service.dart:156:28 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_nft]: warning - lib\src\nft_service.dart:164:28 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+[web3_universal_nft]:    info - example\main.dart:1:8 - The imported package 'web3_universal_chains' isn't a dependency of the importing package. Try adding a dependency for 'web3_universal_chains' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:52:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:75:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:96:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:123:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:133:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:67:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:143:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:173:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:178:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:197:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:215:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:233:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:277:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_collection.dart:296:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_metadata.dart:44:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_metadata.dart:54:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_metadata.dart:132:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_metadata.dart:151:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_metadata.dart:184:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_transfer.dart:35:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_transfer.dart:60:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_nft]:    info - lib\src\nft_types.dart:64:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_nft]:    info - lib\src\nft_types.dart:73:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_nft]:    info - lib\web3_universal_nft.dart:9:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_nft]:    info - test\nft_service_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_nft]: 
+[web3_universal_nft]: 34 issues found.
+[web3_universal_provider]: 
+[web3_universal_provider]:    info - lib\src\provider.dart:76:62 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_provider]:    info - lib\src\provider.dart:81:65 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_provider]:    info - lib\src\websocket_transport.dart:53:13 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+[web3_universal_provider]:    info - lib\src\websocket_transport.dart:130:11 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+[web3_universal_provider]:    info - lib\src\websocket_transport.dart:144:5 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+[web3_universal_provider]:    info - lib\web3_universal_provider.dart:8:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_provider]:    info - test\provider_property_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_provider]:    info - test\provider_property_test.dart:88:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_provider]:    info - test\provider_property_test.dart:118:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_provider]: 
+[web3_universal_provider]: 9 issues found.
+[web3_universal_bitcoin]: 
+[web3_universal_bitcoin]:    info - lib\web3_universal_bitcoin.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_bitcoin]:    info - test\bitcoin_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_bitcoin]: 
+[web3_universal_bitcoin]: 2 issues found.
+[web3_universal_events]: 
+[web3_universal_events]:    info - lib\src\confirmation_filter.dart:100:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_events]:    info - lib\src\confirmation_filter.dart:202:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_events]:    info - lib\src\event_filter.dart:104:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_events]:    info - lib\src\event_filter.dart:115:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_events]:    info - lib\src\event_listener.dart:59:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_listener.dart:94:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_listener.dart:151:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_listener.dart:178:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_subscriber.dart:75:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_events]:    info - lib\src\reorg_handler.dart:119:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_events]:    info - lib\src\reorg_handler.dart:157:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_events]:    info - lib\web3_universal_events.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_events]:    info - test\event_filter_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_events]:    info - test\event_listener_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_events]:    info - test\event_subscriber_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_events]: 
+[web3_universal_events]: 15 issues found.
+[web3_universal_abi]: 
+[web3_universal_abi]: warning - example\main.dart:34:10 - The declaration 'toHex' isn't referenced. Try removing the declaration of 'toHex'. - unused_element
+[web3_universal_abi]: warning - test\abi_official_vector_test.dart:97:30 - The type argument(s) of 'List' can't be inferred. Use explicit type argument(s) for 'List'. - inference_failure_on_collection_literal
+[web3_universal_abi]:    info - example\main.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - example\main.dart:3:1 - Place 'dart:' imports before other imports. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - example\main.dart:34:74 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_abi]:    info - lib\src\encoder.dart:185:26 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_abi]:    info - lib\src\encoder.dart:186:31 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_abi]:    info - lib\src\parser.dart:15:14 - Closure should be a tearoff. Try using a tearoff rather than a closure. - unnecessary_lambdas
+[web3_universal_abi]:    info - lib\src\parser.dart:25:14 - Closure should be a tearoff. Try using a tearoff rather than a closure. - unnecessary_lambdas
+[web3_universal_abi]:    info - lib\src\parser.dart:35:14 - Closure should be a tearoff. Try using a tearoff rather than a closure. - unnecessary_lambdas
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:55:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:56:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:60:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:74:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:75:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:154:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\pretty_printer.dart:182:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\typed_data.dart:25:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - lib\src\typed_data.dart:26:23 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - lib\src\typed_data.dart:163:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\types.dart:220:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\src\types.dart:251:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - lib\web3_universal_abi.dart:10:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_abi]:    info - test\abi_fixes_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\abi_fixes_test.dart:235:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\abi_fixes_test.dart:236:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\abi_fixes_test.dart:237:15 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\abi_official_vector_test.dart:7:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\abi_official_vector_test.dart:79:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_abi]:    info - test\abi_official_vector_test.dart:81:44 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\abi_official_vector_test.dart:82:25 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\abi_official_vector_test.dart:83:29 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\abi_property_test.dart:6:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\abi_property_test.dart:35:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_abi]:    info - test\abi_property_test.dart:83:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_abi]:    info - test\abi_property_test.dart:139:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_abi]:    info - test\abi_property_test.dart:198:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_abi]:    info - test\abi_property_test.dart:282:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_abi]:    info - test\decoder_test.dart:5:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\encoder_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\parser_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\pretty_printer_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\typed_data_test.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]:    info - test\typed_data_test.dart:158:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_abi]:    info - test\types_test.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_abi]: 
+[web3_universal_abi]: 46 issues found.
+[web3_universal_bridge]: 
+[web3_universal_bridge]: warning - example\main.dart:5:9 - The value of the local variable 'bridge' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_bridge]:    info - lib\src\bridge_quote.dart:186:32 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_bridge]:    info - lib\src\bridge_service.dart:128:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_service.dart:163:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_service.dart:227:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_service.dart:254:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_service.dart:297:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_tracker.dart:79:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_tracker.dart:113:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_tracker.dart:221:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\bridge_tracker.dart:404:2 - Missing a newline at the end of the file. Try adding a newline at the end of the file. - eol_at_end_of_file
+[web3_universal_bridge]:    info - lib\src\bridge_types.dart:56:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_bridge]:    info - lib\src\bridge_types.dart:64:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_bridge]:    info - lib\src\protocols\layerzero_bridge.dart:172:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\protocols\layerzero_bridge.dart:258:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\protocols\native_bridge.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+[web3_universal_bridge]:    info - lib\src\protocols\stargate_bridge.dart:169:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\protocols\stargate_bridge.dart:249:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\protocols\wormhole_bridge.dart:175:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\src\protocols\wormhole_bridge.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_bridge]:    info - lib\web3_universal_bridge.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_bridge]: 
+[web3_universal_bridge]: 21 issues found.
+[web3_universal_debug]: 
+[web3_universal_debug]:    info - lib\web3_universal_debug.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_debug]:    info - test\debug_service_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_debug]: 
+[web3_universal_debug]: 2 issues found.
+[web3_universal_swap]: 
+[web3_universal_swap]: warning - example\main.dart:15:9 - The value of the local variable 'swap' isn't used. Try removing the variable or using it. - unused_local_variable
+[web3_universal_swap]:    info - example\main.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_swap]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+[web3_universal_swap]:    info - lib\src\aggregators\oneinch_aggregator.dart:104:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\oneinch_aggregator.dart:123:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\oneinch_aggregator.dart:263:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_swap]:    info - lib\src\aggregators\paraswap_aggregator.dart:86:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\paraswap_aggregator.dart:105:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\paraswap_aggregator.dart:321:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_swap]:    info - lib\src\aggregators\rango_aggregator.dart:86:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\rango_aggregator.dart:115:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\rango_aggregator.dart:345:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_swap]:    info - lib\src\aggregators\zerox_aggregator.dart:104:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\zerox_aggregator.dart:129:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\zerox_aggregator.dart:198:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\aggregators\zerox_aggregator.dart:308:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_swap]:    info - lib\src\mev_protection.dart:128:31 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_swap]:    info - lib\src\mev_protection.dart:182:33 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_swap]:    info - lib\src\mev_protection.dart:237:34 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+[web3_universal_swap]:    info - lib\src\slippage_calculator.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+[web3_universal_swap]:    info - lib\src\swap_quote.dart:135:26 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+[web3_universal_swap]:    info - lib\src\swap_service.dart:28:8 - Use an initializing formal to assign a parameter to a field. Try using an initialing formal ('this.mevProtectionService') to initialize the field. - prefer_initializing_formals
+[web3_universal_swap]:    info - lib\src\swap_service.dart:102:17 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_swap]:    info - lib\src\swap_service.dart:156:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_service.dart:173:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_service.dart:198:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_service.dart:249:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_service.dart:261:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_service.dart:308:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_tracker.dart:82:11 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_tracker.dart:108:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_tracker.dart:161:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_tracker.dart:198:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_tracker.dart:208:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\swap_types.dart:44:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_swap]:    info - lib\src\swap_types.dart:52:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_swap]:    info - lib\src\token_approval.dart:3:8 - The imported package 'web3_universal_abi' isn't a dependency of the importing package. Try adding a dependency for 'web3_universal_abi' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+[web3_universal_swap]:    info - lib\src\token_approval.dart:51:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\token_approval.dart:119:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\token_approval.dart:201:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\token_approval.dart:244:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\src\token_approval.dart:253:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_swap]:    info - lib\web3_universal_swap.dart:2:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+[web3_universal_swap]: 
+[web3_universal_swap]: 43 issues found.
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart analyze --fatal-infos
+     └> FAILED (in 33 packages)
+        └> web3_universal_aa (with exit code 1)
+        └> web3_universal_dapp (with exit code 1)
+        └> web3_universal_bc_ur (with exit code 1)
+        └> web3_universal_price (with exit code 1)
+        └> web3_universal_polkadot (with exit code 1)
+        └> web3_universal_history (with exit code 1)
+        └> web3_universal_chains (with exit code 1)
+        └> web3_universal_solana (with exit code 2)
+        └> web3_universal_keystone (with exit code 2)
+        └> web3_universal_contract (with exit code 2)
+        └> web3_universal_client (with exit code 2)
+        └> web3_universal_cosmos (with exit code 2)
+        └> web3_universal_tron (with exit code 1)
+        └> web3_universal_staking (with exit code 2)
+        └> web3_universal_mev (with exit code 1)
+        └> web3_universal_utxo (with exit code 2)
+        └> web3_universal_reown (with exit code 2)
+        └> web3_universal_crypto (with exit code 2)
+        └> web3_universal_mpc (with exit code 1)
+        └> web3_universal_signer (with exit code 2)
+        └> web3_universal_ens (with exit code 1)
+        └> web3_universal_core (with exit code 1)
+        └> web3_universal_ton (with exit code 1)
+        └> web3_universal_ledger (with exit code 1)
+        └> web3_universal_multicall (with exit code 2)
+        └> web3_universal_nft (with exit code 2)
+        └> web3_universal_provider (with exit code 1)
+        └> web3_universal_bitcoin (with exit code 1)
+        └> web3_universal_events (with exit code 1)
+        └> web3_universal_abi (with exit code 2)
+        └> web3_universal_bridge (with exit code 2)
+        └> web3_universal_debug (with exit code 1)
+        └> web3_universal_swap (with exit code 2)
+
+melos run analyze
+  └> melos exec -- dart analyze --fatal-infos
+     └> FAILED

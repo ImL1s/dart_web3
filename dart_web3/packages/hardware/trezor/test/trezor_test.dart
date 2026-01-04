@@ -1,17 +1,17 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart' as abi;
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
-import 'package:dart_web3_trezor/dart_web3_trezor.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart' as abi;
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
+import 'package:web3_universal_trezor/web3_universal_trezor.dart';
 
 void main() {
   group('Trezor Transport', () {
     late MockTrezorTransport transport;
     
     setUp(() {
-      transport = TrezorTransportFactory.createMock();
+      transport = createMockTrezorTransport();
     });
     
     tearDown(() {
@@ -114,7 +114,7 @@ void main() {
   
   group('Protobuf Messages', () {
     test('should encode EthereumGetAddress', () {
-      final encoded = ProtobufMessages.encodeEthereumGetAddress(
+      final encoded = encodeEthereumGetAddress(
         derivationPath: "m/44'/60'/0'/0/0",
         showDisplay: true,
       );
@@ -124,7 +124,7 @@ void main() {
     });
     
     test('should encode EthereumSignTx', () {
-      final encoded = ProtobufMessages.encodeEthereumSignTx(
+      final encoded = encodeEthereumSignTx(
         derivationPath: "m/44'/60'/0'/0/0",
         nonce: Uint8List.fromList([0x01]),
         gasPrice: Uint8List.fromList([0x02]),
@@ -139,7 +139,7 @@ void main() {
     
     test('should decode Features', () {
       final mockData = Uint8List.fromList([0x08, 0x01]);
-      final features = ProtobufMessages.decodeFeatures(mockData);
+      final features = decodeFeatures(mockData);
       
       expect(features.vendor, equals('trezor.io'));
       expect(features.majorVersion, equals(2));
@@ -152,7 +152,7 @@ void main() {
     late TrezorClient client;
     
     setUp(() {
-      transport = TrezorTransportFactory.createMock();
+      transport = createMockTrezorTransport();
       client = TrezorClient(transport);
     });
     
@@ -212,7 +212,7 @@ void main() {
     late TrezorSigner signer;
     
     setUp(() async {
-      transport = TrezorTransportFactory.createMock();
+      transport = createMockTrezorTransport();
       client = TrezorClient(transport);
       await client.connect();
       signer = await TrezorSigner.create(client: client);
@@ -279,7 +279,7 @@ void main() {
     });
     
     test('should throw for unsupported operations', () async {
-      final typedData = abi.TypedData(
+      final typedData = abi.EIP712TypedData(
         domain: {'name': 'Test'},
         types: {
           'Test': [

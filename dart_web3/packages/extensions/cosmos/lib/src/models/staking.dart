@@ -1,6 +1,4 @@
 
-import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import '../encoding/protobuf.dart';
 import 'transaction.dart'; // for Coin, GoogleAny
 

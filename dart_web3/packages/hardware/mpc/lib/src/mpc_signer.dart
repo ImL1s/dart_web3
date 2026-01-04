@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import 'key_generation.dart';
 import 'key_refresh.dart';
@@ -102,7 +102,7 @@ class MpcSignerImpl extends MpcSigner {
   }
 
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     // Get the EIP-712 hash
     final messageHash = typedData.hash();
     
@@ -198,10 +198,10 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
         ];
         break;
         
@@ -214,10 +214,10 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
         ];
         break;
         
@@ -231,12 +231,12 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
           transaction.maxFeePerBlobGas ?? BigInt.zero,
-          transaction.blobVersionedHashes ?? [],
+          transaction.blobVersionedHashes ?? <String>[],
         ];
         break;
         
@@ -250,18 +250,18 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
-          transaction.authorizationList?.map((auth) => [
+          ],).toList() ?? <List<dynamic>>[],
+          transaction.authorizationList?.map((auth) => <dynamic>[
             auth.chainId,
             auth.address,
             auth.nonce,
             auth.yParity,
             auth.r,
             auth.s,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
         ];
         break;
     }

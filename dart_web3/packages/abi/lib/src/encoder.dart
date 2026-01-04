@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 import 'types.dart';
 
@@ -182,8 +182,9 @@ class AbiEncoder {
       var bracketStart = -1;
       for (var i = type.length - 1; i >= 0; i--) {
         final char = type[i];
-        if (char == ')') depth++;
-        else if (char == '(') depth--;
+        if (char == ')') {
+          depth++;
+        } else if (char == '(') depth--;
         else if (char == '[' && depth == 0) {
           bracketStart = i;
           break;

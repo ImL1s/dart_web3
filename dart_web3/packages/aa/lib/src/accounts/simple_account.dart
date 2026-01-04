@@ -1,6 +1,6 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import '../smart_account.dart';
 
@@ -103,7 +103,7 @@ class SimpleAccount extends BaseSmartAccount {
     final selector = '18dfb3c7';
     
     // This is a complex ABI encoding for arrays
-    // Use proper ABI encoder from dart_web3_abi
+    // Use proper ABI encoder from web3_universal_abi
     // For now, return a placeholder
     return '0x$selector';
   }

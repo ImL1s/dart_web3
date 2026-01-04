@@ -1,11 +1,11 @@
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 void main() {
-  group('TypedData Tests', () {
-    test('creates TypedData from constructor', () {
-      final typedData = TypedData(
+  group('EIP712TypedData Tests', () {
+    test('creates EIP712TypedData from constructor', () {
+      final typedData = EIP712TypedData(
         domain: {
           'name': 'Test App',
           'version': '1',
@@ -29,7 +29,7 @@ void main() {
       expect(typedData.domain['name'], equals('Test App'));
     });
 
-    test('creates TypedData from JSON', () {
+    test('creates EIP712TypedData from JSON', () {
       final json = {
         'types': {
           'EIP712Domain': [
@@ -56,14 +56,14 @@ void main() {
         },
       };
 
-      final typedData = TypedData.fromJson(json);
+      final typedData = EIP712TypedData.fromJson(json);
 
       expect(typedData.primaryType, equals('Mail'));
       expect(typedData.types['Mail']!.length, equals(3));
     });
 
     test('computes hash correctly', () {
-      final typedData = TypedData(
+      final typedData = EIP712TypedData(
         domain: {
           'name': 'Test',
           'version': '1',
@@ -86,7 +86,7 @@ void main() {
     });
 
     test('hash is deterministic', () {
-      final typedData = TypedData(
+      final typedData = EIP712TypedData(
         domain: {
           'name': 'Test',
           'version': '1',
@@ -110,7 +110,7 @@ void main() {
     });
 
     test('different messages produce different hashes', () {
-      final typedData1 = TypedData(
+      final typedData1 = EIP712TypedData(
         domain: {'name': 'Test', 'version': '1', 'chainId': 1},
         types: {
           'Message': [TypedDataField(name: 'content', type: 'string')],
@@ -119,7 +119,7 @@ void main() {
         message: {'content': 'Hello'},
       );
 
-      final typedData2 = TypedData(
+      final typedData2 = EIP712TypedData(
         domain: {'name': 'Test', 'version': '1', 'chainId': 1},
         types: {
           'Message': [TypedDataField(name: 'content', type: 'string')],
@@ -135,7 +135,7 @@ void main() {
     });
 
     test('converts to JSON correctly', () {
-      final typedData = TypedData(
+      final typedData = EIP712TypedData(
         domain: {
           'name': 'Test',
           'version': '1',

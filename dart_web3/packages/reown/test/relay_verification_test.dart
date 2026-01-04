@@ -1,7 +1,8 @@
 
 import 'dart:async';
-import 'package:dart_web3_reown/src/relay_client.dart';
+
 import 'package:test/test.dart';
+import 'package:web3_universal_reown/src/relay_client.dart';
 
 void main() {
   test('Verify connection to official Relay server', () async {
@@ -24,7 +25,7 @@ void main() {
       if (event.type == RelayEventType.connected) {
         if (!completer.isCompleted) completer.complete();
       } else if (event.type == RelayEventType.error) {
-        if (!completer.isCompleted) completer.completeError(event.error);
+        if (!completer.isCompleted) completer.completeError((event.error ?? 'Unknown error') as Object);
       }
     });
 

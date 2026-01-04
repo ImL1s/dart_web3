@@ -140,7 +140,7 @@ class NftMetadataParser {
       final response = await http.get(
         Uri.parse(uri),
         headers: {
-          'User-Agent': 'dart_web3_nft/1.0',
+          'User-Agent': 'web3_universal_nft/1.0',
           'Accept': 'application/json',
         },
       ).timeout(_timeout);

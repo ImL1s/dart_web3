@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_utxo/dart_web3_utxo.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 
 void main() {
   group('BitcoinTransaction', () {
@@ -51,7 +50,7 @@ void main() {
         ],
       );
 
-      final bytes = tx.toBytes(segwit: true);
+      final bytes = tx.toBytes();
       // Marker 2 + Version 4 + inputCount 1 + input (32+4+1+0+4) + outputCount 1 + output (8+1+22) + witnesses + lockTime 4
       // witness count 1 + witness item len 1 + witness item 2 => 4 bytes
       // 2 + 4 + 1 + 41 + 1 + 31 + 4 + 4 = 88

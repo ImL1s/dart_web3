@@ -22,8 +22,8 @@ class TokenProgram {
         return TransactionInstruction(
             programId: programId,
             keys: [
-                AccountMeta.writable(source, isSigner: false),
-                AccountMeta.writable(destination, isSigner: false),
+                AccountMeta.writable(source),
+                AccountMeta.writable(destination),
                 AccountMeta.readonly(owner, isSigner: true),
             ],
             data: data.buffer.asUint8List(),
@@ -44,8 +44,8 @@ class TokenProgram {
         return TransactionInstruction(
             programId: programId,
             keys: [
-                AccountMeta.writable(mint, isSigner: false),
-                AccountMeta.writable(destination, isSigner: false),
+                AccountMeta.writable(mint),
+                AccountMeta.writable(destination),
                 AccountMeta.readonly(authority, isSigner: true),
             ],
             data: data.buffer.asUint8List(),
@@ -69,12 +69,12 @@ class AssociatedTokenProgram {
             programId: programId,
             keys: [
                 AccountMeta.writable(payer, isSigner: true),
-                AccountMeta.writable(associatedToken, isSigner: false),
-                AccountMeta.readonly(owner, isSigner: false),
-                AccountMeta.readonly(mint, isSigner: false),
-                AccountMeta.readonly(SystemProgram.programId, isSigner: false),
-                AccountMeta.readonly(TokenProgram.programId, isSigner: false),
-                AccountMeta.readonly(PublicKey.fromString('SysvarRent111111111111111111111111111111111'), isSigner: false),
+                AccountMeta.writable(associatedToken),
+                AccountMeta.readonly(owner),
+                AccountMeta.readonly(mint),
+                AccountMeta.readonly(SystemProgram.programId),
+                AccountMeta.readonly(TokenProgram.programId),
+                AccountMeta.readonly(PublicKey.fromString('SysvarRent111111111111111111111111111111111')),
             ],
             data: Uint8List(0),
         );

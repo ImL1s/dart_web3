@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dart_web3_bc_ur/dart_web3_bc_ur.dart';
+import 'package:web3_universal_bc_ur/web3_universal_bc_ur.dart';
 import 'keystone_types.dart';
 
 /// QR code communication manager for Keystone devices

@@ -1,19 +1,27 @@
-name: dart_web3_nft
-description: NFT services for Dart Web3 SDK - ERC-721/ERC-1155 support, metadata parsing, and IPFS gateway resolution
-version: 0.1.0
-publish_to: none
+name: web3_universal_nft
+description: NFT services for Web3 Universal SDK - ERC-721/ERC-1155, metadata, and IPFS support.
+version: 0.1.1+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/nft
+topics:
+  - web3
+  - ethereum
+  - nft
+  - erc721
+  - erc1155
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
   http: ^1.1.0
 
 dev_dependencies:
+  lints: ^5.0.0
   test: ^1.24.0

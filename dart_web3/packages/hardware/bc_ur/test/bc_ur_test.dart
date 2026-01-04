@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_bc_ur/dart_web3_bc_ur.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_bc_ur/web3_universal_bc_ur.dart';
 
 void main() {
   group('BC-UR Encoding/Decoding', () {

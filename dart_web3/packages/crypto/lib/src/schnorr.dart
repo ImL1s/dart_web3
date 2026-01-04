@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'keccak.dart';
@@ -17,16 +18,16 @@ class SchnorrSignature {
   // secp256k1 curve parameters
   static final BigInt _p = BigInt.parse(
       'fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f',
-      radix: 16);
+      radix: 16,);
   static final BigInt _n = BigInt.parse(
       'fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141',
-      radix: 16);
+      radix: 16,);
   static final BigInt _Gx = BigInt.parse(
       '79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798',
-      radix: 16);
+      radix: 16,);
   static final BigInt _Gy = BigInt.parse(
       '483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8',
-      radix: 16);
+      radix: 16,);
 
   /// Signs a 32-byte message hash with BIP-340 Schnorr signature.
   ///
@@ -46,7 +47,7 @@ class SchnorrSignature {
 
     // 1. Compute public key P = d * G
     final P = _scalarMult(d, [_Gx, _Gy]);
-    var pk = P[0]; // x-only public key
+    final pk = P[0]; // x-only public key
 
     // 2. Negate d if P.y is odd (BIP-340 requires even y)
     var dNeg = d;
@@ -61,7 +62,7 @@ class SchnorrSignature {
     final t = _xorBytes(_bigIntToBytes(dNeg, 32), _taggedHash('BIP0340/aux', aux));
     final pkBytes = _bigIntToBytes(pk, 32);
     final kHash = _taggedHash('BIP0340/nonce', 
-        Uint8List.fromList([...t, ...pkBytes, ...messageHash]));
+        Uint8List.fromList([...t, ...pkBytes, ...messageHash]),);
     var k = _bytesToBigInt(kHash) % _n;
 
     if (k == BigInt.zero) {
@@ -69,7 +70,7 @@ class SchnorrSignature {
     }
 
     // 4. Compute R = k * G
-    var R = _scalarMult(k, [_Gx, _Gy]);
+    final R = _scalarMult(k, [_Gx, _Gy]);
 
     // 5. Negate k if R.y is odd
     if (_hasOddY(R)) {
@@ -79,7 +80,7 @@ class SchnorrSignature {
     // 6. Compute e = tagged_hash("BIP0340/challenge", r || P || m) mod n
     final rBytes = _bigIntToBytes(R[0], 32);
     final eHash = _taggedHash('BIP0340/challenge',
-        Uint8List.fromList([...rBytes, ...pkBytes, ...messageHash]));
+        Uint8List.fromList([...rBytes, ...pkBytes, ...messageHash]),);
     final e = _bytesToBigInt(eHash) % _n;
 
     // 7. Compute s = (k + e * d) mod n
@@ -113,7 +114,7 @@ class SchnorrSignature {
 
       // 3. Compute e = tagged_hash("BIP0340/challenge", r || P || m) mod n
       final eHash = _taggedHash('BIP0340/challenge',
-          Uint8List.fromList([...signature.sublist(0, 32), ...publicKey, ...messageHash]));
+          Uint8List.fromList([...signature.sublist(0, 32), ...publicKey, ...messageHash]),);
       final e = _bytesToBigInt(eHash) % _n;
 
       // 4. Compute R' = s * G - e * P
@@ -248,8 +249,10 @@ class SchnorrSignature {
     if (p1[0] == BigInt.zero && p1[1] == BigInt.zero) return p2;
     if (p2[0] == BigInt.zero && p2[1] == BigInt.zero) return p1;
 
-    final x1 = p1[0], y1 = p1[1];
-    final x2 = p2[0], y2 = p2[1];
+    final x1 = p1[0];
+    final y1 = p1[1];
+    final x2 = p2[0];
+    final y2 = p2[1];
 
     BigInt s;
     if (x1 == x2 && y1 == y2) {
@@ -265,7 +268,7 @@ class SchnorrSignature {
     final x3 = (s * s - x1 - x2) % _p;
     final y3 = (s * (x1 - x3) - y1) % _p;
 
-    return [x3 < BigInt.zero ? x3 + _p : x3, y3 < BigInt.zero ? y3 + _p : y3];
+    return [if (x3 < BigInt.zero) x3 + _p else x3, if (y3 < BigInt.zero) y3 + _p else y3];
   }
 
   static List<BigInt> _scalarMult(BigInt k, List<BigInt> point) {
@@ -286,5 +289,41 @@ class SchnorrSignature {
   static BigInt _modInverse(BigInt a, BigInt m) {
     final normalized = a % m;
     return normalized.modPow(m - BigInt.two, m);
+  }
+
+  /// Generates a new Schnorr key pair.
+  static SchnorrKeyPair generateKeyPair() {
+    final random = Random.secure();
+    final privateKey = Uint8List(32);
+    for (var i = 0; i < 32; i++) {
+      privateKey[i] = random.nextInt(256);
+    }
+    final publicKey = getPublicKey(privateKey);
+    return SchnorrKeyPair(privateKey, publicKey);
+  }
+}
+
+/// Represents a Schnorr key pair (BIP-340).
+class SchnorrKeyPair {
+  SchnorrKeyPair(this.privateKey, this.publicKey);
+
+  final Uint8List privateKey;
+  final Uint8List publicKey;
+
+  /// Signs a message using this key pair.
+  Uint8List sign(Uint8List message) {
+    return SchnorrSignature.sign(message, privateKey);
+  }
+
+  /// Verifies a signature using this key pair's public key.
+  bool verify(Uint8List signature, Uint8List message) {
+    return SchnorrSignature.verify(signature, message, publicKey);
+  }
+  
+  /// Generates a new key pair.
+  static SchnorrKeyPair generate() {
+     // We need to implement generation.
+     // See below for full implementation including imports.
+     return SchnorrSignature.generateKeyPair();
   }
 }

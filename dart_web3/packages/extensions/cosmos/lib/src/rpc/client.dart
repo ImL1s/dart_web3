@@ -24,7 +24,7 @@ class CosmosClient {
     return balances.map((b) => Coin(
         denom: b['denom'] as String,
         amount: b['amount'] as String,
-    )).toList();
+    ),).toList();
   }
 
   /// Gets account details (account number, sequence).

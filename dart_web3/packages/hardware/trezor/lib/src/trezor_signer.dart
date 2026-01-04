@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import 'trezor_client.dart';
 import 'trezor_types.dart';
@@ -27,13 +27,14 @@ class TrezorSigner implements HardwareWalletSigner {
   
   @override
   EthereumAddress get address {
-    if (_account == null) {
+    final acc = _account;
+    if (acc == null) {
       throw TrezorException(
         TrezorErrorType.deviceNotFound,
         'Account not loaded',
       );
     }
-    return EthereumAddress.fromHex(_account!.address);
+    return EthereumAddress.fromHex(acc.address);
   }
   
   @override
@@ -179,7 +180,7 @@ class TrezorSigner implements HardwareWalletSigner {
   }
   
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     if (!_client.isReady) {
       throw TrezorException(
         TrezorErrorType.deviceNotFound,
@@ -237,7 +238,7 @@ class TrezorSigner implements HardwareWalletSigner {
     
     while (temp > BigInt.zero) {
       bytes.insert(0, (temp & BigInt.from(0xFF)).toInt());
-      temp = temp >> 8;
+      temp >>= 8;
     }
     
     return Uint8List.fromList(bytes);

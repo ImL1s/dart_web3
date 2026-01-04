@@ -1,9 +1,7 @@
 import 'dart:async';
+
 import 'package:test/test.dart';
-import 'package:dart_web3_reown/dart_web3_reown.dart';
-import 'package:dart_web3_reown/src/relay_client.dart';
-import 'package:dart_web3_reown/src/session_manager.dart';
-import 'package:dart_web3_reown/src/namespace_config.dart';
+import 'package:web3_universal_reown/web3_universal_reown.dart';
 
 class MockRelayClient extends RelayClient {
   MockRelayClient() : super(relayUrl: 'mock://host', projectId: 'test');
@@ -89,7 +87,7 @@ void main() {
       // Simulate receiving the proposal on the wallet side
       // (Using the same sessionManager for simplicity in this unit test)
       final receivedProposal = SessionProposal.fromJson(
-        sentProposal['message']['params'],
+        sentProposal['message']['params'] as Map<String, dynamic>,
         pairingTopic,
       );
 
@@ -109,7 +107,7 @@ void main() {
 
       // 3. AppKit receives settlement
       // Simulate settlement message from relay
-      mockRelay.receiveMessage(sessionTopic, {
+      mockRelay.receiveMessage(sessionTopic as String, {
         'id': '999',
         'jsonrpc': '2.0',
         'method': 'wc_sessionSettle',
@@ -125,9 +123,9 @@ void main() {
               'chains': ['eip155:1'],
               'methods': ['eth_sendTransaction'],
               'events': ['chainChanged'],
-            }
-          }
-        }
+            },
+          },
+        },
       });
 
       // Verification: Does onApprove resolve?

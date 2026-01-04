@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   group('Ed25519', () {
@@ -12,13 +12,14 @@ void main() {
       final msg = Uint8List(0);
       final expectedSig = HexUtils.decode('e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b');
 
-      final pk = Ed25519.getPublicKey(sk);
+      final ed = Ed25519();
+      final pk = ed.getPublicKey(sk);
       expect(HexUtils.encode(pk), equals(HexUtils.encode(expectedPk)));
 
-      final sig = Ed25519.sign(msg, sk);
+      final sig = ed.sign(msg, sk);
       expect(HexUtils.encode(sig), equals(HexUtils.encode(expectedSig)));
 
-      final valid = Ed25519.verify(sig, msg, pk);
+      final valid = ed.verify(sig, msg, pk);
       expect(valid, isTrue);
     });
   });

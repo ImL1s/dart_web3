@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'bip39.dart';
 import 'hmac.dart';
 import 'keccak.dart';
@@ -285,7 +285,7 @@ class HDWallet {
     // Add leading zeros
     for (final byte in data) {
       if (byte == 0) {
-        result = '1' + result;
+        result = '1$result';
       } else {
         break;
       }

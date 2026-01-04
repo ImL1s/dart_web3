@@ -1,0 +1,66 @@
+# melos_managed_dependency_overrides: web3_universal_aa,web3_universal_abi,web3_universal_bc_ur,web3_universal_bitcoin,web3_universal_bridge,web3_universal_chains,web3_universal_client,web3_universal_contract,web3_universal_core,web3_universal_crypto,web3_universal_dapp,web3_universal_debug,web3_universal_ens,web3_universal_events,web3_universal_history,web3_universal_keystone,web3_universal_ledger,web3_universal_mev,web3_universal_mpc,web3_universal_multicall,web3_universal_nft,web3_universal_polkadot,web3_universal_price,web3_universal_provider,web3_universal_reown,web3_universal_signer,web3_universal_solana,web3_universal_staking,web3_universal_swap,web3_universal_ton,web3_universal_trezor,web3_universal_tron
+dependency_overrides:
+  web3_universal_aa:
+    path: ..\\packages\\aa
+  web3_universal_abi:
+    path: ..\\packages\\abi
+  web3_universal_bc_ur:
+    path: ..\\packages\\hardware\\bc_ur
+  web3_universal_bitcoin:
+    path: ..\\packages\\extensions\\bitcoin
+  web3_universal_bridge:
+    path: ..\\packages\\bridge
+  web3_universal_chains:
+    path: ..\\packages\\chains
+  web3_universal_client:
+    path: ..\\packages\\client
+  web3_universal_contract:
+    path: ..\\packages\\contract
+  web3_universal_core:
+    path: ..\\packages\\core
+  web3_universal_crypto:
+    path: ..\\packages\\crypto
+  web3_universal_dapp:
+    path: ..\\packages\\dapp
+  web3_universal_debug:
+    path: ..\\packages\\debug
+  web3_universal_ens:
+    path: ..\\packages\\ens
+  web3_universal_events:
+    path: ..\\packages\\events
+  web3_universal_history:
+    path: ..\\packages\\history
+  web3_universal_keystone:
+    path: ..\\packages\\hardware\\keystone
+  web3_universal_ledger:
+    path: ..\\packages\\hardware\\ledger
+  web3_universal_mev:
+    path: ..\\packages\\mev
+  web3_universal_mpc:
+    path: ..\\packages\\hardware\\mpc
+  web3_universal_multicall:
+    path: ..\\packages\\multicall
+  web3_universal_nft:
+    path: ..\\packages\\nft
+  web3_universal_polkadot:
+    path: ..\\packages\\extensions\\polkadot
+  web3_universal_price:
+    path: ..\\packages\\price
+  web3_universal_provider:
+    path: ..\\packages\\provider
+  web3_universal_reown:
+    path: ..\\packages\\reown
+  web3_universal_signer:
+    path: ..\\packages\\signer
+  web3_universal_solana:
+    path: ..\\packages\\extensions\\solana
+  web3_universal_staking:
+    path: ..\\packages\\staking
+  web3_universal_swap:
+    path: ..\\packages\\swap
+  web3_universal_ton:
+    path: ..\\packages\\extensions\\ton
+  web3_universal_trezor:
+    path: ..\\packages\\hardware\\trezor
+  web3_universal_tron:
+    path: ..\\packages\\extensions\\tron

@@ -1,39 +1,64 @@
-name: dart_web3_workspace
+name: web3_universal_workspace
+repository: https://github.com/ImL1s/dart_web3
 
 packages:
   - packages/**
-  - packages/hardware/**
-  - packages/extensions/**
-  - dart_web3
+  # - web3_universal
+
+command:
+  version:
+    # Generate commit messages for version updates
+    message: 'chore(release): publish packages [skip ci]'
+    # Link to the hosted repository for commit links in changelogs
+    linkToCommits: true
+    # Only allow versioning on the main branch
+    branch: master
+    # Use conventional commits
+    workspaceChangelog: true
+
+  bootstrap:
+    # It seems dependencies are linked, but good to be explicit if needed
+    usePubspecOverrides: true
 
 scripts:
   analyze:
     run: melos exec -- dart analyze --fatal-infos
     description: Run static analysis on all packages
-  
+
   format:
     run: dart format --set-exit-if-changed .
     description: Check formatting of all packages
-  
+
   test:
     run: melos exec --concurrency=1 -- dart test
     description: Run tests in all packages
     packageFilters:
       dirExists: test
     select-package: false
-  
+
   test:coverage:
     run: melos exec -- dart test --coverage=coverage
     description: Run tests with coverage
     packageFilters:
       dirExists: test
-  
+
+  # Versioning and Publishing
+  version:
+    run: melos version
+    description: Version packages based on conventional commits
+
   publish:dry:
-    run: melos exec -- dart pub publish --dry-run
+    run: melos publish --dry-run
     description: Dry run publish for all packages
     packageFilters:
       noPrivate: true
-  
+
+  publish:
+    run: melos publish --no-dry-run
+    description: Publish all packages to pub.dev
+    packageFilters:
+      noPrivate: true
+
   clean:
     run: melos clean
     description: Clean all packages

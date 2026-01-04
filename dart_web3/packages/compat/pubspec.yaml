@@ -8,21 +8,21 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../crypto
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../abi
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../signer
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_provider:
+  web3_universal_provider:
     path: ../provider
-  dart_web3_chains:
+  web3_universal_chains:
     path: ../chains
-  dart_web3_contract:
+  web3_universal_contract:
     path: ../contract
   http: ^1.1.0
   decimal: ^2.3.3

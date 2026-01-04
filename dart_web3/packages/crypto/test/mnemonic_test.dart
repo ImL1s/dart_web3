@@ -1,6 +1,6 @@
 
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   group('Bip39', () {

@@ -106,9 +106,56 @@ class TrezorMessage {
     required this.type,
     required this.data,
   });
+
+  /// Parse message from wire format
+  factory TrezorMessage.fromWireFormat(Uint8List wireData) {
+    if (wireData.length < 9) {
+      throw TrezorException(
+        TrezorErrorType.protocolError,
+        'Invalid wire format: too short',
+      );
+    }
+    
+    // Check magic bytes
+    if (wireData[0] != 0x23 || wireData[1] != 0x23) {
+      throw TrezorException(
+        TrezorErrorType.protocolError,
+        'Invalid magic bytes',
+      );
+    }
+    
+    // Message type (2 bytes, big endian)
+    final typeValue = (wireData[2] << 8) | wireData[3];
+    final type = TrezorMessageType.fromValue(typeValue);
+    
+    if (type == null) {
+      throw TrezorException(
+        TrezorErrorType.protocolError,
+        'Unknown message type: $typeValue',
+      );
+    }
+    
+    // Data length (4 bytes, big endian)
+    final length = (wireData[4] << 24) | (wireData[5] << 16) | (wireData[6] << 8) | wireData[7];
+    
+    if (wireData.length < 9 + length) {
+      throw TrezorException(
+        TrezorErrorType.protocolError,
+        'Invalid data length: expected $length, got ${wireData.length - 9}',
+      );
+    }
+    
+    final data = wireData.sublist(9, 9 + length);
+    
+    return TrezorMessage(
+      type: type,
+      data: data,
+    );
+  }
+
   final TrezorMessageType type;
   final Uint8List data;
-  
+
   /// Serialize message to wire format
   Uint8List toWireFormat() {
     final header = Uint8List(9);
@@ -132,51 +179,6 @@ class TrezorMessage {
     header[8] = 0x00;
     
     return Uint8List.fromList([...header, ...data]);
-  }
-  
-  /// Parse message from wire format
-  static TrezorMessage fromWireFormat(Uint8List wireData) {
-    if (wireData.length < 9) {
-      throw TrezorException(
-        TrezorErrorType.protocolError,
-        'Invalid wire format: too short',
-      );
-    }
-    
-    // Check magic bytes
-    if (wireData[0] != 0x23 || wireData[1] != 0x23) {
-      throw TrezorException(
-        TrezorErrorType.protocolError,
-        'Invalid magic bytes',
-      );
-    }
-    
-    // Parse message type
-    final typeValue = (wireData[2] << 8) | wireData[3];
-    final type = TrezorMessageType.fromValue(typeValue);
-    if (type == null) {
-      throw TrezorException(
-        TrezorErrorType.protocolError,
-        'Unknown message type: $typeValue',
-      );
-    }
-    
-    // Parse data length
-    final length = (wireData[4] << 24) | 
-                   (wireData[5] << 16) | 
-                   (wireData[6] << 8) | 
-                   wireData[7];
-    
-    if (wireData.length < 9 + length) {
-      throw TrezorException(
-        TrezorErrorType.protocolError,
-        'Invalid wire format: data too short',
-      );
-    }
-    
-    final data = wireData.sublist(9, 9 + length);
-    
-    return TrezorMessage(type: type, data: data);
   }
 }
 

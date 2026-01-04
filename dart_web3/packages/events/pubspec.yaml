@@ -1,22 +1,28 @@
-name: dart_web3_events
-description: Event subscription and monitoring for Ethereum
-publish_to: none
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/events
+name: web3_universal_events
+description: Event subscription and monitoring for Ethereum in Web3 Universal SDK.
+version: 0.1.0+2
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/events
+topics:
+  - web3
+  - ethereum
+  - events
+  - monitoring
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
 
-  dart_web3_provider: any
+  web3_universal_provider:
+    path: ../provider
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  dart_web3_chains: any
+  web3_universal_chains:
+    path: ../chains

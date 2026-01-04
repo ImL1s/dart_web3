@@ -1,6 +1,6 @@
-import 'package:dart_web3_chains/dart_web3_chains.dart';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_provider/web3_universal_provider.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import 'public_client.dart';
 import 'wallet_client.dart';

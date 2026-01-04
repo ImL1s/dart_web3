@@ -110,7 +110,7 @@ class MevProtectionService {
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'X-Flashbots-Origin': config.origin ?? 'dart_web3_swap',
+          'X-Flashbots-Origin': config.origin ?? 'web3_universal_swap',
         },
         body: json.encode(body),
       ).timeout(config.timeout);

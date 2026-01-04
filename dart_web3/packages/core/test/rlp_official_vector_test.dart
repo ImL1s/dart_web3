@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 void main() {
   group('Official RLP Test Vectors', () {
@@ -11,7 +11,7 @@ void main() {
     final possiblePaths = [
       'test/vectors/rlp_vectors.json',
       'packages/core/test/vectors/rlp_vectors.json',
-      'dart_web3/packages/core/test/vectors/rlp_vectors.json',
+      'web3_universal/packages/core/test/vectors/rlp_vectors.json',
     ];
 
     for (final path in possiblePaths) {
@@ -28,9 +28,10 @@ void main() {
 
     final vectors = json.decode(file.readAsStringSync()) as Map<String, dynamic>;
 
-    vectors.forEach((name, data) {
+    vectors.forEach((name, rawData) {
+      final data = rawData as Map<String, dynamic>;
       test('Vector: $name', () {
-        final expectedHex = data['out'];
+        final expectedHex = data['out'] as String;
         final rawInput = data['in'];
 
         dynamic parseInput(dynamic input) {
@@ -57,7 +58,7 @@ void main() {
           final encoded = RLP.encode(processedInput);
           
           // Handle 0x prefix if present in expectedHex
-          String expected = expectedHex;
+          var expected = expectedHex;
           if (expected.startsWith('0x')) {
              expected = expected.substring(2);
           }

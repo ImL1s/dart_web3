@@ -1,5 +1,5 @@
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:typed_data';
 
 class ProtobufBuilder {
   final BytesBuilder _buffer = BytesBuilder();

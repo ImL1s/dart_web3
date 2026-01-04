@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
+import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'flashbots_types.dart';
 
 /// Service for MEV protection and Flashbots

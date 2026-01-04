@@ -1,8 +1,8 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_solana/dart_web3_solana.dart'; // Ensure exported or import src
-import 'package:dart_web3_solana/src/programs/metaplex.dart'; // Import directly if needed
-import 'package:dart_web3_solana/src/encoding/short_vec.dart'; // Actually shortvec is not used for u32 here, standard le
+
+import 'package:web3_universal_solana/web3_universal_solana.dart'; // Ensure exported or import src
+import 'package:web3_universal_solana/src/programs/metaplex.dart'; // Import directly if needed
 import 'package:test/test.dart';
 
 void main() {

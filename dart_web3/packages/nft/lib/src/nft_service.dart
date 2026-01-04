@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 import 'ipfs_gateway.dart';
 import 'nft_collection.dart';
@@ -118,50 +118,56 @@ class NftService {
 
   /// Transfer NFT (requires wallet client)
   Future<String> transferNft(NftTransferParams params) async {
-    if (_transferManager == null) {
+    final transferManager = _transferManager;
+    if (transferManager == null) {
       throw Exception('Wallet client required for NFT transfers');
     }
-    return _transferManager!.transferNft(params);
+    return transferManager.transferNft(params);
   }
 
   /// Check if approval is needed for NFT transfer
   Future<bool> needsApproval(NftTransferParams params) async {
-    if (_transferManager == null) {
+    final transferManager = _transferManager;
+    if (transferManager == null) {
       throw Exception('Wallet client required for approval checks');
     }
-    return _transferManager!.needsApproval(params);
+    return transferManager.needsApproval(params);
   }
 
   /// Approve NFT for transfer
   Future<String> approveNft(NftTransferParams params) async {
-    if (_transferManager == null) {
+    final transferManager = _transferManager;
+    if (transferManager == null) {
       throw Exception('Wallet client required for NFT approvals');
     }
-    return _transferManager!.approveNft(params);
+    return transferManager.approveNft(params);
   }
 
   /// Get approval status for NFT
   Future<bool> isApproved(NftTransferParams params) async {
-    if (_transferManager == null) {
+    final transferManager = _transferManager;
+    if (transferManager == null) {
       throw Exception('Wallet client required for approval status');
     }
-    return _transferManager!.isApproved(params);
+    return transferManager.isApproved(params);
   }
 
   /// Estimate gas for NFT transfer
   Future<BigInt> estimateTransferGas(NftTransferParams params) async {
-    if (_transferManager == null) {
+    final transferManager = _transferManager;
+    if (transferManager == null) {
       throw Exception('Wallet client required for gas estimation');
     }
-    return _transferManager!.estimateTransferGas(params);
+    return transferManager.estimateTransferGas(params);
   }
 
   /// Batch transfer multiple NFTs
   Future<List<String>> batchTransferNfts(List<NftTransferParams> transfers) async {
-    if (_transferManager == null) {
+    final transferManager = _transferManager;
+    if (transferManager == null) {
       throw Exception('Wallet client required for NFT transfers');
     }
-    return _transferManager!.batchTransferNfts(transfers);
+    return transferManager.batchTransferNfts(transfers);
   }
 
   /// Search NFTs by metadata attributes

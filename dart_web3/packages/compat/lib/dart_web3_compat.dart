@@ -1,26 +1,26 @@
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:convert';
-import 'package:dart_web3_core/dart_web3_core.dart' as dw3;
-import 'package:dart_web3_contract/dart_web3_contract.dart' as dw3_contract;
-import 'package:dart_web3_chains/dart_web3_chains.dart' as dw3_chains;
-import 'package:dart_web3_crypto/dart_web3_crypto.dart' as crypto;
-import 'package:dart_web3_signer/dart_web3_signer.dart' as dw3_signer;
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_provider/dart_web3_provider.dart';
-import 'package:dart_web3_abi/dart_web3_abi.dart';
 import 'package:decimal/decimal.dart';
+import 'package:web3_universal_abi/abi.dart' as dw3_abi;
+import 'package:web3_universal_chains/chains.dart' as dw3_chains;
+import 'package:web3_universal_client/client.dart';
+import 'package:web3_universal_contract/contract.dart' as dw3_contract;
+import 'package:web3_universal_core/core.dart' as dw3;
+import 'package:web3_universal_crypto/crypto.dart' as crypto;
+import 'package:web3_universal_provider/provider.dart';
+import 'package:web3_universal_signer/signer.dart' as dw3_signer;
 
 // Umbrella exports for convenience
-export 'package:dart_web3_core/dart_web3_core.dart' show EthUnit, Unit, RLP;
-export 'package:dart_web3_contract/dart_web3_contract.dart' hide Contract;
-export 'package:dart_web3_client/dart_web3_client.dart'
+export 'package:web3_universal_core/core.dart' show EthUnit, Unit, RLP;
+export 'package:web3_universal_contract/contract.dart' hide Contract;
+export 'package:web3_universal_client/client.dart'
     show PublicClient, WalletClient, CallRequest, Block, TransactionReceipt;
-export 'package:dart_web3_provider/dart_web3_provider.dart'
+export 'package:web3_universal_provider/provider.dart'
     show RpcProvider, HttpTransport;
-export 'package:dart_web3_chains/dart_web3_chains.dart' hide ChainConfig;
-export 'package:dart_web3_signer/dart_web3_signer.dart' hide TransactionType;
-export 'package:dart_web3_abi/dart_web3_abi.dart'
+export 'package:web3_universal_chains/chains.dart' hide ChainConfig;
+export 'package:web3_universal_signer/signer.dart' hide TransactionType;
+export 'package:web3_universal_abi/abi.dart'
     show
         AbiParser,
         AbiEncoder,
@@ -36,8 +36,7 @@ export 'package:dart_web3_abi/dart_web3_abi.dart'
         AbiArray,
         AbiBytes,
         AbiFixedBytes;
-export 'package:dart_web3_crypto/dart_web3_crypto.dart'
-    hide hexToBytes, bytesToHex;
+export 'package:web3_universal_crypto/crypto.dart' hide hexToBytes, bytesToHex;
 
 // ============================================================================
 // Internal Utilities (no external dependencies)

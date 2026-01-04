@@ -1,0 +1,56 @@
+Analyzing ....
+
+  error - lib\src\multi_chain_support.dart:160:28 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:167:18 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:173:16 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:184:28 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:191:18 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:197:16 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:208:28 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:215:18 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:221:16 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:228:12 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:234:12 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:240:12 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\multi_chain_support.dart:271:24 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:106:19 - 'type' is final and was given a value when it was declared, so it can't be set to a new value. Try removing one of the initializations. - final_initialized_in_declaration_and_constructor
+  error - lib\src\trezor_types.dart:107:19 - 'data' is final and was given a value when it was declared, so it can't be set to a new value. Try removing one of the initializations. - final_initialized_in_declaration_and_constructor
+  error - lib\src\trezor_types.dart:184:24 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:184:44 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:185:11 - The name 'type' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at lib\src\trezor_types.dart:109:27.
+  error - lib\src\trezor_types.dart:185:46 - The instance member 'typeValue' can't be accessed in an initializer. Try replacing the reference to the instance member with a different expression - implicit_this_reference_in_initializer
+  error - lib\src\trezor_types.dart:186:5 - Expected a class member. Try placing this code inside a class member. - expected_class_member
+  error - lib\src\trezor_types.dart:186:8 - Expected an identifier. - missing_identifier
+  error - lib\src\trezor_types.dart:186:14 - Expected to find ')'. - expected_token
+  error - lib\src\trezor_types.dart:194:21 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:195:21 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:196:21 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:197:20 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:199:5 - Expected a class member. Try placing this code inside a class member. - expected_class_member
+  error - lib\src\trezor_types.dart:199:8 - Expected an identifier. - missing_identifier
+  error - lib\src\trezor_types.dart:199:9 - Undefined class 'length'. Try changing the name to the name of an existing class, or creating a class with the name 'length'. - undefined_class
+  error - lib\src\trezor_types.dart:199:25 - Expected an identifier. - missing_identifier
+  error - lib\src\trezor_types.dart:199:27 - Expected to find ')'. - expected_token
+  error - lib\src\trezor_types.dart:206:11 - The name 'data' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at lib\src\trezor_types.dart:110:19.
+  error - lib\src\trezor_types.dart:206:18 - Undefined name 'wireData'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_types.dart:206:42 - The instance member 'length' can't be accessed in an initializer. Try replacing the reference to the instance member with a different expression - implicit_this_reference_in_initializer
+  error - lib\src\trezor_types.dart:208:5 - Expected a class member. Try placing this code inside a class member. - expected_class_member
+  error - lib\src\trezor_types.dart:208:12 - The unnamed constructor is already defined. Try giving one of the constructors a name. - duplicate_constructor
+  error - lib\src\trezor_types.dart:208:30 - Named parameters must be enclosed in curly braces ('{' and '}'). Try surrounding the named parameters in curly braces. - named_parameter_outside_group
+  error - lib\src\trezor_types.dart:208:30 - Using a colon as the separator before a default value is no longer supported. Try replacing the colon with an equal sign. - obsolete_colon_for_default_value
+  error - lib\src\trezor_types.dart:208:32 - The default value of an optional parameter must be constant. - non_constant_default_value
+  error - lib\src\trezor_types.dart:208:42 - Named parameters must be enclosed in curly braces ('{' and '}'). Try surrounding the named parameters in curly braces. - named_parameter_outside_group
+  error - lib\src\trezor_types.dart:208:42 - Using a colon as the separator before a default value is no longer supported. Try replacing the colon with an equal sign. - obsolete_colon_for_default_value
+  error - lib\src\trezor_types.dart:208:44 - The default value of an optional parameter must be constant. - non_constant_default_value
+  error - lib\src\trezor_types.dart:210:1 - Expected a method, getter, setter or operator declaration. This appears to be incomplete code. Try removing it or completing it. - expected_executable
+warning - lib\src\trezor_types.dart:186:8 - The return type of '' cannot be inferred. Declare the return type of ''. - inference_failure_on_function_return_type
+warning - lib\src\trezor_types.dart:199:8 - The return type of '' cannot be inferred. Declare the return type of ''. - inference_failure_on_function_return_type
+   info - lib\src\trezor_types.dart:113:11 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\trezor_types.dart:208:12 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
+   info - lib\src\trezor_types.dart:208:12 - Invalid location for the unnamed constructor. Try moving the unnamed constructor before all other constructors. - sort_unnamed_constructors_first
+   info - lib\src\trezor_types.dart:208:26 - The parameter 'type' is not used in the constructor. Try using the parameter or removing it. - avoid_unused_constructor_parameters
+   info - lib\src\trezor_types.dart:208:38 - The parameter 'data' is not used in the constructor. Try using the parameter or removing it. - avoid_unused_constructor_parameters
+
+50 issues found.

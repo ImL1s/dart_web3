@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_cosmos/dart_web3_cosmos.dart';
+import 'package:web3_universal_cosmos/web3_universal_cosmos.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('Cosmos Address', () {
     test('Encode and Decode', () {
       final hash = Uint8List(20);
-      for (var i=0; i<20; i++) hash[i] = i; 
+      for (var i=0; i<20; i++) {
+        hash[i] = i;
+      } 
       // 000102...13
 
       final addr = CosmosAddress(hash);

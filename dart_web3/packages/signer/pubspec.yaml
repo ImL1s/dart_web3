@@ -1,19 +1,23 @@
-name: dart_web3_signer
-description: Ethereum signer and wallet management for Dart
-version: 0.1.0
-publish_to: none
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/signer
+name: web3_universal_signer
+description: Signer and wallet management for Web3 Universal SDK. Supports private key, mnemonic, and hardware wallet signing.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/signer
+topics:
+  - web3
+  - ethereum
+  - signer
+  - wallet
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../crypto
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../abi
 
 dev_dependencies:

@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 /// Entry Point version enumeration for ERC-4337
 enum EntryPointVersion {

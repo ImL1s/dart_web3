@@ -1,15 +1,19 @@
-name: dart_web3_chains
-description: Chain configurations for Ethereum and EVM-compatible networks
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/chains
-publish_to: none
+name: web3_universal_chains
+description: Chain configurations and metadata for Web3 Universal SDK. Includes pre-configured settings for Ethereum, Polygon, BSC, and more.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/chains
+topics:
+  - web3
+  - ethereum
+  - networks
+
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
 
 dev_dependencies:

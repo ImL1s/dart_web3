@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:test/test.dart';
 import 'package:path/path.dart' as p;
+import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   group('Official Crypto Test Vectors', () {
     
     group('BIP39 (Mnemonic to Seed)', () {
       final vectorsJson = File(p.join('test', 'vectors', 'bip39_vectors.json')).readAsStringSync();
-      final List<dynamic> vectors = jsonDecode(vectorsJson);
+      final vectors = jsonDecode(vectorsJson) as List<dynamic>;
 
       for (var i = 0; i < vectors.length; i++) {
         final vector = vectors[i];

@@ -1,4 +1,4 @@
-import 'package:dart_web3_utxo/src/models/utxo.dart';
+import 'package:web3_universal_utxo/src/models/utxo.dart';
 
 import '../models/address.dart';
 

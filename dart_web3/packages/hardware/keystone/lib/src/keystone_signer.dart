@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_abi/dart_web3_abi.dart';
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 import 'keystone_client.dart';
 import 'keystone_types.dart';
@@ -120,7 +120,7 @@ class KeystoneSigner implements HardwareWalletSigner {
   }
   
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     if (!_client.isConnected) {
       throw KeystoneException(
         KeystoneErrorType.deviceNotFound,

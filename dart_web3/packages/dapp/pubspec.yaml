@@ -1,15 +1,23 @@
-name: dart_web3_dapp
-description: dApp provider and EIP-1193 support
-publish_to: none
-version: 0.1.0
+name: web3_universal_dapp
+description: dApp provider and EIP-1193 ecosystem support for Web3 Universal SDK. Facilitates wallet connection and interaction.
+version: 0.1.1+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/dapp
+topics:
+  - web3
+  - ethereum
+  - dapp
+  - eip-1193
+
 environment:
   sdk: ^3.6.0
+
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_client:
+  web3_universal_client:
     path: ../client
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../signer
 
 dev_dependencies:

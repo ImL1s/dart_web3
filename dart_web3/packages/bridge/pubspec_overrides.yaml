@@ -1,18 +1,18 @@
-# melos_managed_dependency_overrides: dart_web3_core,dart_web3_abi,dart_web3_chains,dart_web3_client,dart_web3_contract,dart_web3_crypto,dart_web3_provider,dart_web3_signer
+# melos_managed_dependency_overrides: web3_universal_abi,web3_universal_chains,web3_universal_client,web3_universal_contract,web3_universal_core,web3_universal_crypto,web3_universal_provider,web3_universal_signer
 dependency_overrides:
-  dart_web3_abi:
+  web3_universal_abi:
     path: ..\\abi
-  dart_web3_chains:
+  web3_universal_chains:
     path: ..\\chains
-  dart_web3_client:
+  web3_universal_client:
     path: ..\\client
-  dart_web3_contract:
+  web3_universal_contract:
     path: ..\\contract
-  dart_web3_core:
+  web3_universal_core:
     path: ..\\core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ..\\crypto
-  dart_web3_provider:
+  web3_universal_provider:
     path: ..\\provider
-  dart_web3_signer:
+  web3_universal_signer:
     path: ..\\signer

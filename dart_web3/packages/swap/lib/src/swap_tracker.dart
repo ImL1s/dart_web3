@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
 
 import 'swap_quote.dart';
 import 'swap_types.dart';

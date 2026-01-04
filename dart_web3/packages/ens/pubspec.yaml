@@ -1,21 +1,33 @@
-name: dart_web3_ens
-description: ENS (Ethereum Name Service) resolution
-version: 0.1.0
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/ens
+name: web3_universal_ens
+description: ENS (Ethereum Name Service) resolution for Web3 Universal SDK.
+version: 0.1.1+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/ens
+topics:
+  - web3
+  - ethereum
+  - ens
+  - dns
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
-  dart_web3_crypto:
-  dart_web3_client:
-  dart_web3_contract:
+  web3_universal_core:
+    path: ../core
+  web3_universal_crypto:
+    path: ../crypto
+  web3_universal_client:
+    path: ../client
+  web3_universal_contract:
+    path: ../contract
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  dart_web3_abi: any
-  dart_web3_chains: any
-  dart_web3_provider: any
+  web3_universal_abi:
+    path: ../abi
+  web3_universal_chains:
+    path: ../chains
+  web3_universal_provider:
+    path: ../provider

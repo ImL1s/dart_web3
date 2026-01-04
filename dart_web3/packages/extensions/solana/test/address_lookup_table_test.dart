@@ -1,7 +1,7 @@
 
 import 'dart:typed_data';
-import 'package:dart_web3_solana/src/models/public_key.dart';
-import 'package:dart_web3_solana/src/programs/address_lookup_table.dart';
+import 'package:web3_universal_solana/src/models/public_key.dart';
+import 'package:web3_universal_solana/src/programs/address_lookup_table.dart';
 import 'package:test/test.dart';
 
 void main() {

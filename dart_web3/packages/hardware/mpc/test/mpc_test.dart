@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
-import 'package:dart_web3_mpc/dart_web3_mpc.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
 import 'package:test/test.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_mpc/web3_universal_mpc.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 void main() {
   group('MPC Module Tests', () {

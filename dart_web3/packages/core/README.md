@@ -57,27 +57,6 @@ graph TD
 | `EthAddress` | Represents an Ethereum address with checksum validation. |
 | `RLP` | Handles serialization of arbitrary data for Ethereum transactions. |
 | `EthUnit` | Provides precise big-integer based unit conversions. |
-| `HexUtils` | Low-level byte-to-hex and hex-to-byte conversion engine. |
-
-## 🛡️ Security Considerations
-
-- **Address Checksums**: Always use `EthAddress.fromHex(str)` which enforces EIP-55 checksum validation by default.
-- **BigInt Safety**: When dealing with 256-bit unsigned integers (Ethereum standard), avoid casting to `double` or `int` to prevent precision loss.
-- **Byte Cleansing**: Ensure `Uint8List` buffers containing sensitive data are cleared after use (though Dart GC handles most memory, minimize exposure).
-
-## 💻 Usage
-
-### Precision Unit Conversion
-```dart
-import 'package:dart_web3_core/dart_web3_core.dart';
-
-void main() {
-  // Parsing human input
-  final BigInt amountInWei = EthUnit.parseUnit('0.15', 18);
-  
-  // Formatting for UI
-  final String displayValue = EthUnit.formatUnit(amountInWei, 18);
-  print('Sending $displayValue ETH');
 }
 ```
 

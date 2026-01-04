@@ -24,7 +24,7 @@ class KeystoneMultiChainSigner {
     // In real implementation, requestId and PSBT encoding would be used
     // For now, return mock signature
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    return '0x' + List.filled(130, 'a').join(); // Mock signature
+    return '0x${List.filled(130, 'a').join()}'; // Mock signature
   }
   
   /// Sign Solana transaction
@@ -105,11 +105,11 @@ class KeystoneMultiChainSigner {
     
     switch (curveType) {
       case CurveType.secp256k1:
-        return '0x' + List.filled(130, 'a').join(); // 65 bytes * 2 hex chars
+        return '0x${List.filled(130, 'a').join()}'; // 65 bytes * 2 hex chars
       case CurveType.ed25519:
-        return '0x' + List.filled(128, 'b').join(); // 64 bytes * 2 hex chars
+        return '0x${List.filled(128, 'b').join()}'; // 64 bytes * 2 hex chars
       case CurveType.sr25519:
-        return '0x' + List.filled(128, 'c').join(); // 64 bytes * 2 hex chars
+        return '0x${List.filled(128, 'c').join()}'; // 64 bytes * 2 hex chars
     }
   }
   

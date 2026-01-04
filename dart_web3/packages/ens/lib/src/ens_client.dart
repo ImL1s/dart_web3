@@ -1,4 +1,4 @@
-import 'package:dart_web3_client/dart_web3_client.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
 
 import 'ens_records.dart';
 import 'ens_resolver.dart';

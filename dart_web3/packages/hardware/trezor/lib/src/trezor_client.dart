@@ -73,7 +73,7 @@ class TrezorClient {
     _ensureConnected();
     
     try {
-      final requestData = ProtobufMessages.encodeEthereumGetAddress(
+      final requestData = encodeEthereumGetAddress(
         derivationPath: derivationPath,
         showDisplay: showDisplay,
       );
@@ -92,7 +92,7 @@ class TrezorClient {
         );
       }
       
-      final result = ProtobufMessages.decodeEthereumAddress(response.data);
+      final result = decodeEthereumAddress(response.data);
       
       return TrezorAccount(
         address: result['address'] as String,
@@ -144,7 +144,7 @@ class TrezorClient {
     _ensureConnected();
     
     try {
-      final requestData = ProtobufMessages.encodeEthereumSignTx(
+      final requestData = encodeEthereumSignTx(
         derivationPath: derivationPath,
         nonce: nonce,
         gasPrice: gasPrice,
@@ -169,7 +169,7 @@ class TrezorClient {
         );
       }
       
-      return ProtobufMessages.decodeEthereumMessageSignature(response.data);
+      return decodeEthereumMessageSignature(response.data);
       
     } catch (e) {
       if (e is TrezorException) {
@@ -191,7 +191,7 @@ class TrezorClient {
     _ensureConnected();
     
     try {
-      final requestData = ProtobufMessages.encodeEthereumSignMessage(
+      final requestData = encodeEthereumSignMessage(
         derivationPath: derivationPath,
         message: message,
       );
@@ -210,7 +210,7 @@ class TrezorClient {
         );
       }
       
-      return ProtobufMessages.decodeEthereumMessageSignature(response.data);
+      return decodeEthereumMessageSignature(response.data);
       
     } catch (e) {
       if (e is TrezorException) {
@@ -229,7 +229,7 @@ class TrezorClient {
     // Send Initialize message
     final initMessage = TrezorMessage(
       type: TrezorMessageType.initialize,
-      data: ProtobufMessages.encodeInitialize(),
+      data: encodeInitialize(),
     );
     
     final response = await _transport.exchange(initMessage);
@@ -241,7 +241,7 @@ class TrezorClient {
       );
     }
     
-    _features = ProtobufMessages.decodeFeatures(response.data);
+    _features = decodeFeatures(response.data);
     
     // Create device info
     _device = TrezorDevice(
@@ -279,7 +279,7 @@ class TrezorClient {
           // User needs to confirm on device
           final buttonAck = TrezorMessage(
             type: TrezorMessageType.buttonAck,
-            data: ProtobufMessages.encodeButtonAck(),
+            data: encodeButtonAck(),
           );
           response = await _transport.exchange(buttonAck);
           break;
@@ -299,7 +299,7 @@ class TrezorClient {
           );
           
         case TrezorMessageType.failure:
-          final errorMessage = ProtobufMessages.decodeFailure(response.data);
+          final errorMessage = decodeFailure(response.data);
           throw TrezorException(
             TrezorErrorType.firmwareError,
             errorMessage,

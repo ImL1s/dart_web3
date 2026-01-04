@@ -1,19 +1,22 @@
-name: dart_web3_reown
-description: Reown/WalletConnect v2 integration for connecting to mobile wallets
-version: 0.0.1
-publish_to: none
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/reown
+name: web3_universal_reown
+description: Reown/WalletConnect v2 integration for Web3 Universal SDK. Official Reown partnership implementation.
+version: 0.1.1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/reown
+topics:
+  - web3
+  - walletconnect
+  - reown
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../signer
-  dart_web3_abi:
+  web3_universal_abi:
     path: ../abi
   meta: ^1.11.0
 

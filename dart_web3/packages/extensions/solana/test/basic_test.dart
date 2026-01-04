@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
-import 'package:dart_web3_solana/dart_web3_solana.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+import 'package:web3_universal_solana/web3_universal_solana.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -56,7 +56,7 @@ void main() {
       expect(signedTx.signatures.length, equals(1));
       
       // Verify signature
-      final isValid = Ed25519.verify(signedTx.signatures[0], message.serialize(), kp.publicKey);
+      final isValid = Ed25519().verify(signedTx.signatures[0], message.serialize(), kp.publicKey);
       expect(isValid, isTrue);
     });
   });

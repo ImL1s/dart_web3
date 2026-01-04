@@ -1,16 +1,20 @@
-name: dart_web3_provider
-description: RPC Provider for Ethereum - HTTP and WebSocket transports
-version: 0.1.0
-publish_to: none
-
-homepage: https://github.com/example/dart_web3
-repository: https://github.com/example/dart_web3/tree/main/packages/provider
+name: web3_universal_provider
+description: RPC Provider for Web3 Universal SDK - HTTP and WebSocket transports.
+version: 0.1.0+1
+homepage: https://github.com/ImL1s/dart_web3
+repository: https://github.com/ImL1s/dart_web3/tree/master/packages/provider
+topics:
+  - web3
+  - ethereum
+  - rpc
+  - http
+  - websocket
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../core
   http: ^1.2.0
   web_socket_channel: ">=2.4.0 <4.0.0"
@@ -18,3 +22,5 @@ dependencies:
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
+  web3_universal_client:
+    path: ../client

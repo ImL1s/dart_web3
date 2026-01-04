@@ -14,9 +14,10 @@ analyzer:
     missing_return: error
     missing_required_param: error
     must_be_immutable: error
+    invalid_dependency: ignore
     
     # Treat these as warnings
-    todo: warning
+    todo: info
     deprecated_member_use: warning
     
   exclude:

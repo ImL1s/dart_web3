@@ -12,7 +12,7 @@ class AbiParser {
     return abi
         .cast<Map<String, dynamic>>()
         .where((item) => item['type'] == 'function')
-        .map((item) => AbiFunction.fromJson(item))
+        .map(AbiFunction.fromJson)
         .toList();
   }
 
@@ -22,7 +22,7 @@ class AbiParser {
     return abi
         .cast<Map<String, dynamic>>()
         .where((item) => item['type'] == 'event')
-        .map((item) => AbiEvent.fromJson(item))
+        .map(AbiEvent.fromJson)
         .toList();
   }
 
@@ -32,7 +32,7 @@ class AbiParser {
     return abi
         .cast<Map<String, dynamic>>()
         .where((item) => item['type'] == 'error')
-        .map((item) => AbiError.fromJson(item))
+        .map(AbiError.fromJson)
         .toList();
   }
 

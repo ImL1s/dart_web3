@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 import '../encoding/short_vec.dart';
 import 'message.dart';
@@ -65,8 +65,10 @@ class SolanaTransaction {
       for (var i = 0; i < signatures.length && i < newSignatures.length; i++) {
         // Only keep if new one is empty (all zeros)? 
         // Or if we didn't provide a signer for it.
-        bool isNewEmpty = true;
-        for (var b in newSignatures[i]) if (b != 0) isNewEmpty = false;
+        var isNewEmpty = true;
+        for (final b in newSignatures[i]) {
+          if (b != 0) isNewEmpty = false;
+        }
         
         if (isNewEmpty) {
             newSignatures[i] = signatures[i];

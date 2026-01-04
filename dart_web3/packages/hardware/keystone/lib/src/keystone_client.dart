@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:dart_web3_core/dart_web3_core.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 
 import 'keystone_types.dart';
 import 'qr_communication.dart';
@@ -202,9 +202,9 @@ class KeystoneClient {
       
       // Set up QR scanner if available
       if (_qrScanner != null) {
-        await _qrScanner!.startScanning();
+        await _qrScanner.startScanning();
         
-        scanSubscription = _qrScanner!.scanResults.listen((scanResult) async {
+        scanSubscription = _qrScanner.scanResults.listen((scanResult) async {
           try {
             final response = await _qrComm.processScannedQR(scanResult.data);
             if (response != null && response.isSuccess) {
@@ -224,9 +224,9 @@ class KeystoneClient {
       
     } finally {
       timeoutTimer?.cancel();
-      scanSubscription?.cancel();
+      await scanSubscription?.cancel();
       if (_qrScanner != null) {
-        await _qrScanner!.stopScanning();
+        await _qrScanner.stopScanning();
       }
       _qrComm.reset();
     }
