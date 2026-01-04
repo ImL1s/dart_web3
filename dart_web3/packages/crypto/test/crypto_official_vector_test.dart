@@ -8,9 +8,9 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   group('Official Crypto Test Vectors', () {
-    
     group('BIP39 (Mnemonic to Seed)', () {
-      final vectorsJson = File(p.join('test', 'vectors', 'bip39_vectors.json')).readAsStringSync();
+      final vectorsJson = File(p.join('test', 'vectors', 'bip39_vectors.json'))
+          .readAsStringSync();
       final vectors = jsonDecode(vectorsJson) as List<dynamic>;
 
       for (var i = 0; i < vectors.length; i++) {
@@ -20,7 +20,8 @@ void main() {
         final expectedSeedHex = vector['seed'] as String;
 
         test('Vector #$i', () {
-          final seed = Bip39.toSeed(mnemonic.split(' '), passphrase: passphrase);
+          final seed =
+              Bip39.toSeed(mnemonic.split(' '), passphrase: passphrase);
           expect(HexUtils.encode(seed, prefix: false), equals(expectedSeedHex));
         });
       }

@@ -31,11 +31,13 @@ void main() {
       });
 
       test('throws on seed too short', () {
-        expect(() => HDWallet.fromSeed(Uint8List(15)), throwsA(isA<ArgumentError>()));
+        expect(() => HDWallet.fromSeed(Uint8List(15)),
+            throwsA(isA<ArgumentError>()));
       });
 
       test('throws on seed too long', () {
-        expect(() => HDWallet.fromSeed(Uint8List(65)), throwsA(isA<ArgumentError>()));
+        expect(() => HDWallet.fromSeed(Uint8List(65)),
+            throwsA(isA<ArgumentError>()));
       });
 
       test('produces consistent wallet from same seed', () {
@@ -55,7 +57,7 @@ void main() {
 
     group('derive', () {
       late Uint8List testSeed;
-      
+
       setUp(() {
         testSeed = Uint8List(64);
         for (var i = 0; i < testSeed.length; i++) {
@@ -98,7 +100,7 @@ void main() {
 
     group('deriveChild', () {
       late Uint8List testSeed;
-      
+
       setUp(() {
         testSeed = Uint8List(64);
         for (var i = 0; i < testSeed.length; i++) {

@@ -6,8 +6,11 @@ import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Test vectors from official specifications:
 /// - SHA-256: NIST FIPS 180-4
+/// - Keccak-256: NIST FIPS 202 / Ethereum
 /// - HMAC-SHA512: RFC 4231
 /// - PBKDF2: RFC 6070
+/// - Scrypt: RFC 7914
+/// - AES-128-CTR: NIST SP 800-38A
 /// - RIPEMD-160: Official specification
 /// - BIP-39/32: Official BIP test vectors
 void main() {
@@ -16,7 +19,8 @@ void main() {
       final result = Sha256.hash(Uint8List(0));
       expect(
         _toHex(result),
-        equals('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'),
+        equals(
+            'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'),
       );
     });
 
@@ -24,24 +28,48 @@ void main() {
       final result = Sha256.hash(Uint8List.fromList(utf8.encode('abc')));
       expect(
         _toHex(result),
-        equals('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+        equals(
+            'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
       );
     });
 
     test('448 bits message', () {
       final result = Sha256.hash(
-        Uint8List.fromList(utf8.encode('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq')),
+        Uint8List.fromList(utf8.encode(
+            'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq')),
       );
       expect(
         _toHex(result),
-        equals('248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1'),
+        equals(
+            '248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1'),
       );
     });
 
     test('double SHA-256', () {
       // Used in Bitcoin for checksums
-      final result = Sha256.doubleHash(Uint8List.fromList(utf8.encode('hello')));
+      final result =
+          Sha256.doubleHash(Uint8List.fromList(utf8.encode('hello')));
       expect(result.length, equals(32));
+    });
+  });
+
+  group('Keccak-256 (NIST FIPS 202 / Ethereum)', () {
+    test('empty string', () {
+      final result = Keccak256.hash(Uint8List(0));
+      expect(
+        _toHex(result),
+        equals(
+            'c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470'),
+      );
+    });
+
+    test('abc', () {
+      final result = Keccak256.hash(Uint8List.fromList(utf8.encode('abc')));
+      expect(
+        _toHex(result),
+        equals(
+            '4e03657aea45a94fc7d47ba826c8d667c0d1e6e33a64a036ec44f58fa12d6c45'),
+      );
     });
   });
 
@@ -51,7 +79,8 @@ void main() {
       expect(result.length, equals(64));
       expect(
         _toHex(result),
-        equals('cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce'
+        equals(
+            'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce'
             '47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e'),
       );
     });
@@ -60,7 +89,8 @@ void main() {
       final result = Sha512.hash(Uint8List.fromList(utf8.encode('abc')));
       expect(
         _toHex(result),
-        equals('ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a'
+        equals(
+            'ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a'
             '2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f'),
       );
     });
@@ -74,18 +104,21 @@ void main() {
       final result = HmacSha512.compute(key, data);
       expect(
         _toHex(result),
-        equals('87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cde'
+        equals(
+            '87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cde'
             'daa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854'),
       );
     });
 
     test('Test Case 2 - Key = "Jefe"', () {
       final key = Uint8List.fromList(utf8.encode('Jefe'));
-      final data = Uint8List.fromList(utf8.encode('what do ya want for nothing?'));
+      final data =
+          Uint8List.fromList(utf8.encode('what do ya want for nothing?'));
       final result = HmacSha512.compute(key, data);
       expect(
         _toHex(result),
-        equals('164b7a7bfcf819e2e395fbe73b56e0a387bd64222e831fd610270cd7ea250554'
+        equals(
+            '164b7a7bfcf819e2e395fbe73b56e0a387bd64222e831fd610270cd7ea250554'
             '9758bf75c05a994a6d034f65f8f0e6fdcaeab1a34d4a6b4b636e070a38bce737'),
       );
     });
@@ -98,7 +131,8 @@ void main() {
       final result = HmacSha512.compute(key, data);
       expect(
         _toHex(result),
-        equals('fa73b0089d56a284efb0f0756c890be9b1b5dbdd8ee81a3655f83e33b2279d39'
+        equals(
+            'fa73b0089d56a284efb0f0756c890be9b1b5dbdd8ee81a3655f83e33b2279d39'
             'bf3e848279a722c806b485a47e67c807b946a337bee8942674278859e13292fb'),
       );
     });
@@ -111,7 +145,37 @@ void main() {
       final result = HmacSha256.compute(key, data);
       expect(
         _toHex(result),
-        equals('b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7'),
+        equals(
+            'b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7'),
+      );
+    });
+  });
+
+  group('AES-128-CTR (NIST SP 800-38A)', () {
+    test('NIST Vector 1', () {
+      final key = _fromHex('2b7e151628aed2a6abf7158809cf4f3c');
+      final iv = _fromHex('f0f1f2f3f4f5f6f7f8f9fafbfcfdfeff');
+      final plaintext = _fromHex('6bc1bee22e409f96e93d7e117393172a');
+      final expected = '874d6191b620e3261bef6864990db6ce';
+
+      final aes = AES(key);
+      final ciphertext = aes.ctr(plaintext, iv);
+      expect(_toHex(ciphertext), equals(expected));
+
+      final decrypted = aes.ctr(ciphertext, iv);
+      expect(decrypted, equals(plaintext));
+    });
+  });
+
+  group('Scrypt (RFC 7914)', () {
+    test('RFC 7914 Vector 1 (P="", S="", N=16, r=1, p=1)', () {
+      final password = Uint8List(0);
+      final salt = Uint8List(0);
+      final dk = Scrypt.derive(password, salt, 16, 1, 1, 64);
+      expect(
+        _toHex(dk),
+        equals(
+            '77d6576238657b203b19ca42c18a0497f16b4844e3074ae8dfdffa3fede21442fcd0069ded0948f8326a753a0fc81f17e8d3e0fb2e0d3628cf35e20c38d18906'),
       );
     });
   });
@@ -178,7 +242,8 @@ void main() {
     });
 
     test('message digest', () {
-      final result = Ripemd160.hash(Uint8List.fromList(utf8.encode('message digest')));
+      final result =
+          Ripemd160.hash(Uint8List.fromList(utf8.encode('message digest')));
       expect(
         _toHex(result),
         equals('5d0689ef49d2fae572b881b123a85ffa21595f36'),
@@ -186,7 +251,8 @@ void main() {
     });
 
     test('a-z', () {
-      final result = Ripemd160.hash(Uint8List.fromList(utf8.encode('abcdefghijklmnopqrstuvwxyz')));
+      final result = Ripemd160.hash(
+          Uint8List.fromList(utf8.encode('abcdefghijklmnopqrstuvwxyz')));
       expect(
         _toHex(result),
         equals('f71c27109c692c1b56bbdceb5b9d2865b3708dbc'),
@@ -203,6 +269,24 @@ void main() {
       final sha256 = Sha256.hash(data);
       final manual = Ripemd160.hash(sha256);
       expect(_toHex(hash160), equals(_toHex(manual)));
+    });
+  });
+
+  group('PBKDF2-HMAC-SHA256 (RFC 6070)', () {
+    test('Test Case 1', () {
+      final password = Uint8List.fromList(utf8.encode('password'));
+      final salt = Uint8List.fromList(utf8.encode('salt'));
+      final dk = Pbkdf2.deriveSha256(
+        password: password,
+        salt: salt,
+        iterations: 1,
+        keyLength: 32,
+      );
+      expect(
+        _toHex(dk),
+        equals(
+            '120fb6cffcf8b32c43e7225256c4f837a86548c92ccc35480805987cb70be17b'),
+      );
     });
   });
 
@@ -235,7 +319,8 @@ void main() {
       expect(child.path, equals('m/0'));
 
       // Child should be different from parent
-      expect(_toHex(child.privateKey), isNot(equals(_toHex(master.privateKey))));
+      expect(
+          _toHex(child.privateKey), isNot(equals(_toHex(master.privateKey))));
     });
 
     test('hardened derivation works', () {
@@ -310,4 +395,12 @@ void main() {
 
 String _toHex(Uint8List bytes) {
   return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+}
+
+Uint8List _fromHex(String hex) {
+  final bytes = Uint8List(hex.length ~/ 2);
+  for (var i = 0; i < bytes.length; i++) {
+    bytes[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+  }
+  return bytes;
 }

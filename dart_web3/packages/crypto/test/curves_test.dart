@@ -37,12 +37,12 @@ void main() {
 
         final signature = keyPair.sign(messageHash1);
         final isValid = keyPair.verify(signature, messageHash2);
-        
+
         // Note: With the simplified implementation, this might pass if not careful
         // but let's test the interface contract
         // In a real implementation this MUST be false
         // For the simplified version, we just check it runs without error
-        expect(isValid, isFalse); 
+        expect(isValid, isFalse);
       });
     });
 
@@ -83,7 +83,8 @@ void main() {
       });
 
       test('throws on unknown curve', () {
-        expect(() => CurveFactory.createCurve('unknown'), throwsA(isA<ArgumentError>()));
+        expect(() => CurveFactory.createCurve('unknown'),
+            throwsA(isA<ArgumentError>()));
       });
     });
   });

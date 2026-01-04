@@ -20,7 +20,8 @@ void main() {
       });
 
       test('derives compressed public key', () {
-        final publicKey = Secp256k1.getPublicKey(testPrivateKey, compressed: true);
+        final publicKey =
+            Secp256k1.getPublicKey(testPrivateKey, compressed: true);
         // Compressed public key: 0x02 or 0x03 + 32 bytes x = 33 bytes
         expect(publicKey.length, equals(33));
         expect(publicKey[0], anyOf(equals(0x02), equals(0x03)));
@@ -64,7 +65,8 @@ void main() {
 
     group('sign', () {
       test('signs a message hash', () {
-        final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
+        final messageHash =
+            Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
         final signature = Secp256k1.sign(messageHash, testPrivateKey);
         expect(signature.length, equals(65));
       });
@@ -98,7 +100,8 @@ void main() {
 
     group('recover', () {
       test('recover recovers public key from signature with correct v', () {
-        final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
+        final messageHash =
+            Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
         final signature = Secp256k1.sign(messageHash, testPrivateKey);
         final rAndS = signature.sublist(0, 64);
         final v = signature[64];
@@ -135,17 +138,20 @@ void main() {
     });
 
     group('verify', () {
-            test('verifies valid signature', () {
-              final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
-              final publicKey = Secp256k1.getPublicKey(testPrivateKey);
-              final signature = Secp256k1.sign(messageHash, testPrivateKey);
-              final rAndS = signature.sublist(0, 64);
-              expect(Secp256k1.verify(rAndS, messageHash, publicKey), isTrue);
-            });
+      test('verifies valid signature', () {
+        final messageHash =
+            Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
+        final publicKey = Secp256k1.getPublicKey(testPrivateKey);
+        final signature = Secp256k1.sign(messageHash, testPrivateKey);
+        final rAndS = signature.sublist(0, 64);
+        expect(Secp256k1.verify(rAndS, messageHash, publicKey), isTrue);
+      });
 
       test('rejects signature with wrong message', () {
-        final messageHash1 = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
-        final messageHash2 = Keccak256.hash(Uint8List.fromList('world'.codeUnits));
+        final messageHash1 =
+            Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
+        final messageHash2 =
+            Keccak256.hash(Uint8List.fromList('world'.codeUnits));
         final publicKey = Secp256k1.getPublicKey(testPrivateKey);
         final signature = Secp256k1.sign(messageHash1, testPrivateKey);
 
@@ -153,7 +159,8 @@ void main() {
       });
 
       test('verifies valid signature with wrong public key', () {
-        final messageHash = Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
+        final messageHash =
+            Keccak256.hash(Uint8List.fromList('hello'.codeUnits));
         final signature = Secp256k1.sign(messageHash, testPrivateKey);
         final rAndS = signature.sublist(0, 64);
         final otherPrivateKey = Uint8List(32)..fillRange(0, 32, 1); // Mock key
@@ -176,12 +183,16 @@ void main() {
         final publicKey = Secp256k1.getPublicKey(testPrivateKey);
 
         for (final message in messages) {
-          final messageHash = Keccak256.hash(Uint8List.fromList(message.codeUnits));
+          final messageHash =
+              Keccak256.hash(Uint8List.fromList(message.codeUnits));
           final signature = Secp256k1.sign(messageHash, testPrivateKey);
           final rAndS = signature.sublist(0, 64);
-          
-          expect(Secp256k1.verify(rAndS, messageHash, publicKey), isTrue,
-            reason: 'Failed for message: $message',);
+
+          expect(
+            Secp256k1.verify(rAndS, messageHash, publicKey),
+            isTrue,
+            reason: 'Failed for message: $message',
+          );
         }
       });
     });

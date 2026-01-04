@@ -144,9 +144,7 @@ class Ed25519HdWallet {
 
     // Build child path
     final childIndex = index - _hardenedOffset;
-    final childPath = path == 'm'
-        ? "m/$childIndex'"
-        : "$path/$childIndex'";
+    final childPath = path == 'm' ? "m/$childIndex'" : "$path/$childIndex'";
 
     return Ed25519HdWallet._(
       privateKey: childPrivateKey,

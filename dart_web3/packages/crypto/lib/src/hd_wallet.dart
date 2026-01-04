@@ -9,10 +9,9 @@ import 'secp256k1.dart';
 import 'sha2.dart';
 
 /// Pure Dart implementation of BIP-32/44 Hierarchical Deterministic (HD) wallet.
-/// 
+///
 /// Supports deriving child keys from a master seed using standard derivation paths.
 class HDWallet {
-
   HDWallet._({
     required this.privateKey,
     required this.publicKey,
@@ -43,7 +42,8 @@ class HDWallet {
       throw StateError('Invalid master private key generated');
     }
 
-    final publicKey = Secp256k1.getPublicKey(masterPrivateKey, compressed: true);
+    final publicKey =
+        Secp256k1.getPublicKey(masterPrivateKey, compressed: true);
 
     return HDWallet._(
       privateKey: masterPrivateKey,
@@ -57,7 +57,8 @@ class HDWallet {
   }
 
   /// Creates an HD wallet from a BIP-39 mnemonic phrase.
-  factory HDWallet.fromMnemonic(List<String> mnemonic, {String passphrase = ''}) {
+  factory HDWallet.fromMnemonic(List<String> mnemonic,
+      {String passphrase = ''}) {
     final seed = Bip39.toSeed(mnemonic, passphrase: passphrase);
     return HDWallet.fromSeed(seed);
   }
@@ -70,7 +71,7 @@ class HDWallet {
   final Uint8List parentFingerprint;
 
   /// Derives a child wallet using the specified derivation path.
-  /// 
+  ///
   /// Path format: "m/44'/60'/0'/0/0" (BIP-44 Ethereum path)
   /// Use apostrophe (') to indicate hardened derivation.
   HDWallet derive(String derivationPath) {
@@ -101,7 +102,7 @@ class HDWallet {
   }
 
   /// Derives a direct child wallet with the specified index.
-  /// 
+  ///
   /// Use index >= 2^31 for hardened derivation.
   HDWallet deriveChild(int index) {
     if (index < 0) {
@@ -136,14 +137,16 @@ class HDWallet {
 
     // Calculate final child private key
     final parentPrivateKeyInt = _bytesToBigInt(privateKey);
-    final finalChildPrivateKeyInt = (childPrivateKeyInt + parentPrivateKeyInt) % _secp256k1Order;
+    final finalChildPrivateKeyInt =
+        (childPrivateKeyInt + parentPrivateKeyInt) % _secp256k1Order;
 
     if (finalChildPrivateKeyInt == BigInt.zero) {
       throw StateError('Invalid child private key (zero)');
     }
 
     final finalChildPrivateKey = _bigIntToBytes(finalChildPrivateKeyInt, 32);
-    final childPublicKey = Secp256k1.getPublicKey(finalChildPrivateKey, compressed: true);
+    final childPublicKey =
+        Secp256k1.getPublicKey(finalChildPrivateKey, compressed: true);
 
     // BIP-32: Parent fingerprint = first 4 bytes of HASH160(parent public key)
     // HASH160 = RIPEMD160(SHA256(data))
@@ -151,7 +154,7 @@ class HDWallet {
     final parentFingerprint = Uint8List.sublistView(parentHash160, 0, 4);
 
     // Build child path
-    final childPath = path == 'm' 
+    final childPath = path == 'm'
         ? 'm/${isHardened ? "${index - (1 << 31)}'" : index.toString()}'
         : '$path/${isHardened ? "${index - (1 << 31)}'" : index.toString()}';
 
@@ -170,12 +173,13 @@ class HDWallet {
   EthereumAddress getAddress() {
     // Get uncompressed public key (remove 0x04 prefix)
     final uncompressedPublicKey = Secp256k1.getPublicKey(privateKey);
-    final publicKeyBytes = uncompressedPublicKey.sublist(1); // Remove 0x04 prefix
-    
+    final publicKeyBytes =
+        uncompressedPublicKey.sublist(1); // Remove 0x04 prefix
+
     // Hash the public key and take last 20 bytes
     final hash = Keccak256.hash(publicKeyBytes);
     final addressBytes = hash.sublist(12, 32);
-    
+
     return EthereumAddress.fromHex(HexUtils.encode(addressBytes));
   }
 
@@ -203,26 +207,26 @@ class HDWallet {
 
   String _serializeKey({required bool isPrivate}) {
     final data = <int>[];
-    
+
     // Version bytes (mainnet)
     if (isPrivate) {
       data.addAll([0x04, 0x88, 0xAD, 0xE4]); // xprv
     } else {
       data.addAll([0x04, 0x88, 0xB2, 0x1E]); // xpub
     }
-    
+
     // Depth
     data.add(depth);
-    
+
     // Parent fingerprint
     data.addAll(parentFingerprint);
-    
+
     // Child index
     data.addAll(_intToBytes(index, 4));
-    
+
     // Chain code
     data.addAll(chainCode);
-    
+
     // Key data
     if (isPrivate) {
       data.add(0x00);
@@ -235,11 +239,13 @@ class HDWallet {
     final checksum = Sha256.doubleHash(Uint8List.fromList(data)).sublist(0, 4);
 
     data.addAll(checksum);
-    
+
     return _base58Encode(Uint8List.fromList(data));
   }
 
-  static final BigInt _secp256k1Order = BigInt.parse('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141', radix: 16);
+  static final BigInt _secp256k1Order = BigInt.parse(
+      'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141',
+      radix: 16);
 
   static BigInt _bytesToBigInt(Uint8List bytes) {
     var result = BigInt.zero;
@@ -268,20 +274,21 @@ class HDWallet {
 
   static String _base58Encode(Uint8List data) {
     // Simplified Base58 encoding
-    const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-    
+    const alphabet =
+        '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
     var num = BigInt.zero;
     for (final byte in data) {
       num = num * BigInt.from(256) + BigInt.from(byte);
     }
-    
+
     var result = '';
     while (num > BigInt.zero) {
       final remainder = num % BigInt.from(58);
       result = alphabet[remainder.toInt()] + result;
       num = num ~/ BigInt.from(58);
     }
-    
+
     // Add leading zeros
     for (final byte in data) {
       if (byte == 0) {
@@ -290,7 +297,7 @@ class HDWallet {
         break;
       }
     }
-    
+
     return result;
   }
 }

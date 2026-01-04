@@ -5,34 +5,126 @@ import 'pbkdf2.dart';
 import 'sha2.dart';
 
 /// Pure Dart implementation of BIP-39 mnemonic phrase generation and validation.
-/// 
+///
 /// Supports generating, validating, and converting mnemonic phrases to seeds
 /// for hierarchical deterministic wallet generation.
 class Bip39 {
   // BIP-39 English wordlist (first 100 words for brevity - in production use full 2048 words)
   static const List<String> _englishWordlist = [
-    'abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb', 'abstract',
-    'absurd', 'abuse', 'access', 'accident', 'account', 'accuse', 'achieve', 'acid',
-    'acoustic', 'acquire', 'across', 'act', 'action', 'actor', 'actress', 'actual',
-    'adapt', 'add', 'addict', 'address', 'adjust', 'admit', 'adult', 'advance',
-    'advice', 'aerobic', 'affair', 'afford', 'afraid', 'again', 'age', 'agent',
-    'agree', 'ahead', 'aim', 'air', 'airport', 'aisle', 'alarm', 'album',
-    'alcohol', 'alert', 'alien', 'all', 'alley', 'allow', 'almost', 'alone',
-    'alpha', 'already', 'also', 'alter', 'always', 'amateur', 'amazing', 'among',
-    'amount', 'amused', 'analyst', 'anchor', 'ancient', 'anger', 'angle', 'angry',
-    'animal', 'ankle', 'announce', 'annual', 'another', 'answer', 'antenna', 'antique',
-    'anxiety', 'any', 'apart', 'apology', 'appear', 'apple', 'approve', 'april',
-    'arch', 'arctic', 'area', 'arena', 'argue', 'arm', 'armed', 'armor',
-    'army', 'around', 'arrange', 'arrest', 'arrive', 'arrow', 'art', 'article',
+    'abandon',
+    'ability',
+    'able',
+    'about',
+    'above',
+    'absent',
+    'absorb',
+    'abstract',
+    'absurd',
+    'abuse',
+    'access',
+    'accident',
+    'account',
+    'accuse',
+    'achieve',
+    'acid',
+    'acoustic',
+    'acquire',
+    'across',
+    'act',
+    'action',
+    'actor',
+    'actress',
+    'actual',
+    'adapt',
+    'add',
+    'addict',
+    'address',
+    'adjust',
+    'admit',
+    'adult',
+    'advance',
+    'advice',
+    'aerobic',
+    'affair',
+    'afford',
+    'afraid',
+    'again',
+    'age',
+    'agent',
+    'agree',
+    'ahead',
+    'aim',
+    'air',
+    'airport',
+    'aisle',
+    'alarm',
+    'album',
+    'alcohol',
+    'alert',
+    'alien',
+    'all',
+    'alley',
+    'allow',
+    'almost',
+    'alone',
+    'alpha',
+    'already',
+    'also',
+    'alter',
+    'always',
+    'amateur',
+    'amazing',
+    'among',
+    'amount',
+    'amused',
+    'analyst',
+    'anchor',
+    'ancient',
+    'anger',
+    'angle',
+    'angry',
+    'animal',
+    'ankle',
+    'announce',
+    'annual',
+    'another',
+    'answer',
+    'antenna',
+    'antique',
+    'anxiety',
+    'any',
+    'apart',
+    'apology',
+    'appear',
+    'apple',
+    'approve',
+    'april',
+    'arch',
+    'arctic',
+    'area',
+    'arena',
+    'argue',
+    'arm',
+    'armed',
+    'armor',
+    'army',
+    'around',
+    'arrange',
+    'arrest',
+    'arrive',
+    'arrow',
+    'art',
+    'article',
   ];
 
   /// Generates a new mnemonic phrase with the specified entropy strength.
-  /// 
+  ///
   /// [strength] must be a multiple of 32 between 128 and 256 bits.
   /// Common values: 128 (12 words), 160 (15 words), 192 (18 words), 224 (21 words), 256 (24 words)
   static List<String> generate({int strength = 128}) {
     if (strength % 32 != 0 || strength < 128 || strength > 256) {
-      throw ArgumentError('Strength must be a multiple of 32 between 128 and 256');
+      throw ArgumentError(
+          'Strength must be a multiple of 32 between 128 and 256');
     }
 
     final entropyBytes = strength ~/ 8;
@@ -41,7 +133,7 @@ class Bip39 {
   }
 
   /// Converts a mnemonic phrase to a seed using PBKDF2.
-  /// 
+  ///
   /// The seed can be used for BIP-32 hierarchical deterministic key derivation.
   /// [passphrase] is an optional additional passphrase for extra security.
   static Uint8List toSeed(List<String> mnemonic, {String passphrase = ''}) {
@@ -62,11 +154,13 @@ class Bip39 {
   }
 
   /// Validates a mnemonic phrase according to BIP-39 specification.
-  /// 
+  ///
   /// Returns true if the mnemonic is valid (correct length, valid words, valid checksum).
   static bool validate(List<String> mnemonic) {
     try {
-      if (mnemonic.length % 3 != 0 || mnemonic.length < 12 || mnemonic.length > 24) {
+      if (mnemonic.length % 3 != 0 ||
+          mnemonic.length < 12 ||
+          mnemonic.length > 24) {
         return false;
       }
 
@@ -80,7 +174,7 @@ class Bip39 {
       // Convert mnemonic to entropy and validate checksum
       final entropy = _mnemonicToEntropy(mnemonic);
       final regeneratedMnemonic = _entropyToMnemonic(entropy);
-      
+
       return _listEquals(mnemonic, regeneratedMnemonic);
     } on Exception catch (_) {
       return false;
@@ -95,16 +189,16 @@ class Bip39 {
     // BIP-39: Checksum = first (entropy_bits / 32) bits of SHA-256(entropy)
     final hash = Sha256.hash(entropy);
     final checksum = hash[0];
-    
+
     // Combine entropy and checksum
     final combined = <int>[];
     combined.addAll(entropy);
     combined.add(checksum);
-    
+
     // Convert to 11-bit indices
     final indices = <int>[];
     final totalBits = entropyBits + checksumBits;
-    
+
     for (var i = 0; i < totalBits; i += 11) {
       var index = 0;
       for (var j = 0; j < 11 && i + j < totalBits; j++) {
@@ -119,7 +213,7 @@ class Bip39 {
         indices.add(index % _englishWordlist.length);
       }
     }
-    
+
     return indices.map((i) => _englishWordlist[i]).toList();
   }
 
@@ -135,7 +229,7 @@ class Bip39 {
 
     final totalBits = indices.length * 11;
     final entropyBits = (totalBits * 32) ~/ 33;
-    
+
     // Convert indices to bit array
     final bits = <int>[];
     for (final index in indices) {
@@ -143,7 +237,7 @@ class Bip39 {
         bits.add((index >> i) & 1);
       }
     }
-    
+
     // Extract entropy and checksum
     final entropyBytes = Uint8List(entropyBits ~/ 8);
     for (var i = 0; i < entropyBits; i++) {
@@ -153,7 +247,7 @@ class Bip39 {
         entropyBytes[byteIndex] |= 1 << (7 - bitIndex);
       }
     }
-    
+
     return entropyBytes;
   }
 

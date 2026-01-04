@@ -34,14 +34,14 @@ class Ed25519 implements CurveInterface {
       BigInt.parse('27742317777372353535851937790883648493');
 
   // d = -121665/121666 mod p
-  static final BigInt _d = (BigInt.from(-121665) *
-          _modInverse(BigInt.from(121666), _p)) %
-      _p;
+  static final BigInt _d =
+      (BigInt.from(-121665) * _modInverse(BigInt.from(121666), _p)) % _p;
 
   // Base point B
   // y = 4/5 mod p
-  static final BigInt _By = (BigInt.from(4) * _modInverse(BigInt.from(5), _p)) % _p;
-  
+  static final BigInt _By =
+      (BigInt.from(4) * _modInverse(BigInt.from(5), _p)) % _p;
+
   // x = recover_x(y)
   static final BigInt _Bx = _recoverX(_By);
 
@@ -49,20 +49,21 @@ class Ed25519 implements CurveInterface {
     final y2 = (y * y) % _p;
     final u = (y2 - BigInt.one) % _p;
     final v = (BigInt.one + _d * y2) % _p;
-    
+
     // x2 = u/v
     final x2 = (u * _modInverse(v, _p)) % _p;
-    
+
     // x = sqrt(x2)
     var x = _modPow(x2, (_p + BigInt.from(3)) ~/ BigInt.from(8), _p);
-    
+
     if ((x * x - x2) % _p != BigInt.zero) {
-        x = (x * _modPow(BigInt.two, (_p - BigInt.one) ~/ BigInt.from(4), _p)) % _p;
+      x = (x * _modPow(BigInt.two, (_p - BigInt.one) ~/ BigInt.from(4), _p)) %
+          _p;
     }
-    
+
     if (x % BigInt.two != BigInt.zero) {
-        // Force x to be even
-        x = _p - x;
+      // Force x to be even
+      x = _p - x;
     }
     return x;
   }
@@ -93,7 +94,8 @@ class Ed25519 implements CurveInterface {
     final ABytes = _pointToBytes(A);
 
     // 5. Compute k = SHA512(R || A || message) mod L
-    final kHash = _sha512(Uint8List.fromList([...RBytes, ...ABytes, ...message]));
+    final kHash =
+        _sha512(Uint8List.fromList([...RBytes, ...ABytes, ...message]));
     final k = _bytesToBigInt(kHash) % _L;
 
     // 6. Compute S = (r + k * a) mod L
@@ -112,7 +114,8 @@ class Ed25519 implements CurveInterface {
   /// Verifies a signature against a message and public key.
   ///
   /// Returns true if the signature is valid.
-  static bool _verify(Uint8List signature, Uint8List message, Uint8List publicKey) {
+  static bool _verify(
+      Uint8List signature, Uint8List message, Uint8List publicKey) {
     if (signature.length != 64) return false;
     if (publicKey.length != 32) return false;
 
@@ -132,7 +135,8 @@ class Ed25519 implements CurveInterface {
       if (A == null) return false;
 
       // 3. Compute k = SHA512(R || A || message) mod L
-      final kHash = _sha512(Uint8List.fromList([...RBytes, ...publicKey, ...message]));
+      final kHash =
+          _sha512(Uint8List.fromList([...RBytes, ...publicKey, ...message]));
       final k = _bytesToBigInt(kHash) % _L;
 
       // 4. Compute S * B

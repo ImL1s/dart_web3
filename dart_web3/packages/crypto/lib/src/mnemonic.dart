@@ -65,13 +65,19 @@ class Mnemonic {
     return _pbkdf2(
       Uint8List.fromList(mnemonic.codeUnits),
       Uint8List.fromList(salt.codeUnits),
-      2048, 64,
+      2048,
+      64,
     );
   }
 
   /// Validates a mnemonic phrase.
   static bool validate(List<String> words) {
-    try { toEntropy(words); return true; } on Exception catch (_) { return false; }
+    try {
+      toEntropy(words);
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
   }
 
   static List<String> _entropyToMnemonic(Uint8List entropy) {
@@ -95,14 +101,18 @@ class Mnemonic {
     return words;
   }
 
-  static Uint8List _pbkdf2(Uint8List password, Uint8List salt, int iterations, int keyLength) {
+  static Uint8List _pbkdf2(
+      Uint8List password, Uint8List salt, int iterations, int keyLength) {
     final result = Uint8List(keyLength);
     final combined = BytesUtils.concat([password, salt]);
     var hash = Keccak256.hash(combined);
-    for (var i = 0; i < iterations; i++) { hash = Keccak256.hash(hash); }
+    for (var i = 0; i < iterations; i++) {
+      hash = Keccak256.hash(hash);
+    }
     var offset = 0;
     while (offset < keyLength) {
-      final chunk = Keccak256.hash(BytesUtils.concat([hash, BytesUtils.intToBytes(offset)]));
+      final chunk = Keccak256.hash(
+          BytesUtils.concat([hash, BytesUtils.intToBytes(offset)]));
       final copyLength = (keyLength - offset).clamp(0, 32);
       result.setRange(offset, offset + copyLength, chunk);
       offset += copyLength;
@@ -119,8 +129,10 @@ class Mnemonic {
   }
 
   static const _wordlist = <String>[
-    'abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb', 'abstract', 'absurd', 'abuse', 'access', 'accident',
+    'abandon', 'ability', 'able', 'about', 'above', 'absent', 'absorb',
+    'abstract', 'absurd', 'abuse', 'access', 'accident',
     // ... (rest of the 2048 words omitted for brevity in this replace call, but adding end tags)
-    'zone', 'zoo', 'zoology', 'zoom', 'zora', 'zorro', 'zulu', 'zumba', 'zuni', 'zurich', 'zydeco', 'zygote',
+    'zone', 'zoo', 'zoology', 'zoom', 'zora', 'zorro', 'zulu', 'zumba', 'zuni',
+    'zurich', 'zydeco', 'zygote',
   ];
 }

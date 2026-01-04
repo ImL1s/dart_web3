@@ -1,4 +1,3 @@
-
 import 'package:test/test.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
@@ -9,9 +8,12 @@ void main() {
 
     group('generate', () {
       test('throws on invalid strength', () {
-        expect(() => Bip39.generate(strength: 100), throwsA(isA<ArgumentError>()));
-        expect(() => Bip39.generate(strength: 64), throwsA(isA<ArgumentError>()));
-        expect(() => Bip39.generate(strength: 300), throwsA(isA<ArgumentError>()));
+        expect(
+            () => Bip39.generate(strength: 100), throwsA(isA<ArgumentError>()));
+        expect(
+            () => Bip39.generate(strength: 64), throwsA(isA<ArgumentError>()));
+        expect(
+            () => Bip39.generate(strength: 300), throwsA(isA<ArgumentError>()));
       });
 
       test('generates 12 words for 128-bit strength', () {
@@ -69,7 +71,7 @@ void main() {
         // Generate a mnemonic and use it directly (bypassing validation)
         final mnemonic = Bip39.generate();
         // Use the internal method to generate seed without validation
-          // The seed generation should work even if validation is imperfect
+        // The seed generation should work even if validation is imperfect
         expect(mnemonic.length, equals(12));
       });
     });

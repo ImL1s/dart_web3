@@ -18,16 +18,14 @@ Add the packages you need to your `pubspec.yaml`:
 ```yaml
 dependencies:
   # Core functionality
-  dart_web3_core: ^0.1.0
-  dart_web3_crypto: ^0.1.0
-  dart_web3_abi: ^0.1.0
+  web3_universal_core: ^0.1.0
+  web3_universal_crypto: ^0.2.0
+  web3_universal_abi: ^0.1.0
+  dart_web3_compat: ^0.1.0
   
   # Client and provider
-  dart_web3_provider: ^0.1.0
-  dart_web3_client: ^0.1.0
-  
-  # Or use the meta-package for everything
-  dart_web3: ^0.1.0
+  web3_universal_provider: ^0.1.0
+  web3_universal_client: ^0.1.0
 ```
 
 ## Usage Workflow
@@ -49,9 +47,9 @@ graph LR
 ## Quick Start
 
 ```dart
-import 'package:dart_web3_client/dart_web3_client.dart';
-import 'package:dart_web3_chains/dart_web3_chains.dart';
-import 'package:dart_web3_signer/dart_web3_signer.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 void main() async {
   // Create a public client for read-only operations
@@ -99,36 +97,36 @@ Find more details in the [Usage Guide](USAGE_GUIDE.md).
 ```mermaid
 graph TD
     subgraph L0 [Layer 0: Core Primitives]
-        Core[dart_web3_core]
+        Core[web3_universal_core]
     end
 
     subgraph L1 [Layer 1: Cryptography & Encoding]
-        Crypto[dart_web3_crypto]
-        ABI[dart_web3_abi]
+        Crypto[web3_universal_crypto]
+        ABI[web3_universal_abi]
     end
 
     subgraph L2 [Layer 2: Connectivity & Identity]
-        Provider[dart_web3_provider]
-        Signer[dart_web3_signer]
-        Chains[dart_web3_chains]
+        Provider[web3_universal_provider]
+        Signer[web3_universal_signer]
+        Chains[web3_universal_chains]
     end
 
     subgraph L3 [Layer 3: Client & Interaction]
-        Client[dart_web3_client]
-        Contract[dart_web3_contract]
+        Client[web3_universal_client]
+        Contract[web3_universal_contract]
     end
 
     subgraph L4 [Layer 4: Advanced Features]
-        ENS[dart_web3_ens]
-        AA[dart_web3_aa]
-        NFT[dart_web3_nft]
-        Swap[dart_web3_swap]
+        ENS[web3_universal_ens]
+        AA[web3_universal_aa]
+        NFT[web3_universal_nft]
+        Swap[web3_universal_swap]
     end
 
     subgraph Ext [Extensions & Hardware]
-        Solana[dart_web3_solana]
-        Bitcoin[dart_web3_bitcoin]
-        Ledger[dart_web3_ledger]
+        Solana[web3_universal_solana]
+        Bitcoin[web3_universal_bitcoin]
+        Ledger[web3_universal_ledger]
     end
 
     Core --> Crypto
@@ -150,38 +148,39 @@ graph TD
 
 | Package | Description | Level |
 |---------|-------------|-------|
-| [`dart_web3_core`](packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
-| [`dart_web3_crypto`](packages/crypto) | Cryptography (secp256k1, keccak, BIP-32/39/44) | 1 |
-| [`dart_web3_abi`](packages/abi) | ABI encoding/decoding | 1 |
-| [`dart_web3_provider`](packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
-| [`dart_web3_signer`](packages/signer) | Signer abstraction | 2 |
-| [`dart_web3_chains`](packages/chains) | Chain configurations | 2 |
-| [`dart_web3_client`](packages/client) | PublicClient/WalletClient | 3 |
-| [`dart_web3_contract`](packages/contract) | Contract abstraction | 3 |
-| [`dart_web3_events`](packages/events) | Event subscription | 3 |
-| [`dart_web3_multicall`](packages/multicall) | Multicall support | 4 |
-| [`dart_web3_ens`](packages/ens) | ENS resolution | 4 |
-| [`dart_web3_aa`](packages/aa) | ERC-4337 Account Abstraction | 5 |
-| [`dart_web3_reown`](packages/reown) | Reown/WalletConnect v2 | 5 |
-| [`dart_web3_swap`](packages/swap) | DEX aggregation | 5 |
-| [`dart_web3_bridge`](packages/bridge) | Cross-chain bridging | 5 |
-| [`dart_web3_nft`](packages/nft) | NFT services | 5 |
-| [`dart_web3_staking`](packages/staking) | Staking services | 5 |
-| [`dart_web3_debug`](packages/debug) | Debug/Trace API | 5 |
-| [`dart_web3_mev`](packages/mev) | MEV protection/Flashbots | 5 |
-| [`dart_web3_dapp`](packages/dapp) | DApp state & session management | 5 |
-| [`dart_web3_history`](packages/history) | Transaction history explorer | 5 |
-| [`dart_web3_price`](packages/price) | Asset pricing and oracles | 5 |
-| [`dart_web3_bc_ur`](packages/hardware/bc_ur) | BC-UR air-gapped protocol | 6 |
-| [`dart_web3_keystone`](packages/hardware/keystone) | Keystone hardware wallet | 6 |
-| [`dart_web3_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
-| [`dart_web3_trezor`](packages/hardware/trezor) | Trezor hardware wallet | 6 |
-| [`dart_web3_mpc`](packages/hardware/mpc) | MPC wallet support | 6 |
-| [`dart_web3_solana`](packages/extensions/solana) | Solana extension | 7 |
-| [`dart_web3_polkadot`](packages/extensions/polkadot) | Polkadot extension | 7 |
-| [`dart_web3_tron`](packages/extensions/tron) | Tron extension | 7 |
-| [`dart_web3_ton`](packages/extensions/ton) | TON extension | 7 |
-| [`dart_web3_bitcoin`](packages/extensions/bitcoin) | Bitcoin extension | 7 |
+| [`web3_universal_core`](packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
+| [`web3_universal_crypto`](packages/crypto) | Cryptography (keccak, Scrypt, Keystore V3, BIP-32/39/44) | 1 |
+| [`web3_universal_abi`](packages/abi) | ABI encoding/decoding | 1 |
+| [`dart_web3_compat`](packages/compat) | web3dart compatibility layer (drop-in replacement) | 1 |
+| [`web3_universal_provider`](packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
+| [`web3_universal_signer`](packages/signer) | Signer abstraction | 2 |
+| [`web3_universal_chains`](packages/chains) | Chain configurations | 2 |
+| [`web3_universal_client`](packages/client) | PublicClient/WalletClient | 3 |
+| [`web3_universal_contract`](packages/contract) | Contract abstraction | 3 |
+| [`web3_universal_events`](packages/events) | Event subscription | 3 |
+| [`web3_universal_multicall`](packages/multicall) | Multicall support | 4 |
+| [`web3_universal_ens`](packages/ens) | ENS resolution | 4 |
+| [`web3_universal_aa`](packages/aa) | ERC-4337 Account Abstraction | 5 |
+| [`web3_universal_reown`](packages/reown) | Reown/WalletConnect v2 | 5 |
+| [`web3_universal_swap`](packages/swap) | DEX aggregation | 5 |
+| [`web3_universal_bridge`](packages/bridge) | Cross-chain bridging | 5 |
+| [`web3_universal_nft`](packages/nft) | NFT services | 5 |
+| [`web3_universal_staking`](packages/staking) | Staking services | 5 |
+| [`web3_universal_debug`](packages/debug) | Debug/Trace API | 5 |
+| [`web3_universal_mev`](packages/mev) | MEV protection/Flashbots | 5 |
+| [`web3_universal_dapp`](packages/dapp) | DApp state & session management | 5 |
+| [`web3_universal_history`](packages/history) | Transaction history explorer | 5 |
+| [`web3_universal_price`](packages/price) | Asset pricing and oracles | 5 |
+| [`web3_universal_bc_ur`](packages/hardware/bc_ur) | BC-UR air-gapped protocol | 6 |
+| [`web3_universal_keystone`](packages/hardware/keystone) | Keystone hardware wallet | 6 |
+| [`web3_universal_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
+| [`web3_universal_trezor`](packages/hardware/trezor) | Trezor hardware wallet | 6 |
+| [`web3_universal_mpc`](packages/hardware/mpc) | MPC wallet support | 6 |
+| [`web3_universal_solana`](packages/extensions/solana) | Solana extension | 7 |
+| [`web3_universal_polkadot`](packages/extensions/polkadot) | Polkadot extension | 7 |
+| [`web3_universal_tron`](packages/extensions/tron) | Tron extension | 7 |
+| [`web3_universal_ton`](packages/extensions/ton) | TON extension | 7 |
+| [`web3_universal_bitcoin`](packages/extensions/bitcoin) | Bitcoin extension | 7 |
 
 ## Development
 

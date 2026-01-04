@@ -1,25 +1,30 @@
+import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 import 'dart:typed_data';
 import 'package:decimal/decimal.dart';
 import 'package:web3_universal_abi/web3_universal_abi.dart' as dw3_abi;
 import 'package:web3_universal_chains/web3_universal_chains.dart' as dw3_chains;
 import 'package:web3_universal_client/web3_universal_client.dart';
-import 'package:web3_universal_contract/web3_universal_contract.dart' as dw3_contract;
+import 'package:web3_universal_contract/web3_universal_contract.dart'
+    as dw3_contract;
 import 'package:web3_universal_core/web3_universal_core.dart' as dw3;
 import 'package:web3_universal_crypto/web3_universal_crypto.dart' as crypto;
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart' as dw3_signer;
 
 // Umbrella exports for convenience
-export 'package:web3_universal_core/web3_universal_core.dart' show EthUnit, Unit, RLP;
-export 'package:web3_universal_contract/web3_universal_contract.dart' hide Contract;
+export 'package:web3_universal_core/web3_universal_core.dart'
+    show EthUnit, Unit, RLP;
+export 'package:web3_universal_contract/web3_universal_contract.dart'
+    hide Contract;
 export 'package:web3_universal_client/web3_universal_client.dart'
     show PublicClient, WalletClient, CallRequest, Block, TransactionReceipt;
 export 'package:web3_universal_provider/web3_universal_provider.dart'
     show RpcProvider, HttpTransport;
-export 'package:web3_universal_chains/web3_universal_chains.dart' hide ChainConfig;
-export 'package:web3_universal_signer/web3_universal_signer.dart' hide TransactionType;
+export 'package:web3_universal_chains/web3_universal_chains.dart'
+    hide ChainConfig;
+export 'package:web3_universal_signer/web3_universal_signer.dart'
+    hide TransactionType;
 export 'package:web3_universal_abi/web3_universal_abi.dart'
     show
         AbiParser,
@@ -618,18 +623,44 @@ class Wallet {
   Wallet._(this._credentials);
   Credentials get privateKey => _credentials;
 
-  /// Creates a dummy wallet for compatibility (V3 Keystore TODO)
-  static Future<Wallet> createNew(
+  /// Creates a Keystore V3 wallet JSON from the credentials.
+  static Future<String> createNew(
     Credentials credentials,
     String password,
-    Random random,
-  ) async {
-    return Wallet._(credentials as Web3PrivateKey);
+    Random random, {
+    bool useScrypt = true,
+    int? n,
+    int? r,
+    int? p,
+  }) async {
+    final pk = credentials.privateKey;
+    final address = credentials.address.hex;
+    final json = crypto.KeystoreV3.encrypt(
+      pk,
+      password,
+      useScrypt: useScrypt,
+      address: address,
+      n: n,
+      r: r,
+      p: p,
+    );
+    return jsonEncode(json);
   }
 
-  static Future<Wallet> fromJson(String json, String password) async {
-    throw UnimplementedError(
-      'Wallet.fromJson is not implemented yet in dart_web3_compat. See Keystore V3 spec.',
+  /// Loads a Keystore V3 wallet from JSON.
+  static Future<Wallet> fromJson(String jsonStr, String password) async {
+    final json = jsonDecode(jsonStr) as Map<String, dynamic>;
+    final privateKey = crypto.KeystoreV3.decrypt(json, password);
+    return Wallet._(Web3PrivateKey(privateKey));
+  }
+
+  /// Converts the wallet to a Keystore V3 JSON string.
+  Future<String> toJson(String password) async {
+    final json = crypto.KeystoreV3.encrypt(
+      privateKey.privateKey,
+      password,
+      address: privateKey.address.hex,
     );
+    return jsonEncode(json);
   }
 }

@@ -9,10 +9,11 @@ Cryptographic primitives for the **Web3 Universal SDK**. This package provides s
 
 ## Features
 
-- 🔐 **Multi-Signature Support**: Native Schnorr (BIP-340) for Bitcoin Taproot.
+- 🔐 **Ethereum Keystore V3**: Full Scrypt (RFC 7914) & PBKDF2 support for encrypted JSON wallets.
+- 🛡️ **Zero Dependency**: Pure Dart implementation of Scrypt, AES-128-CTR, and Keccak-256.
+- 🧪 **Strict Verification**: Verified against official test vectors from **NIST** (AES/SHA), **RFC** (Scrypt/PBKDF2), and **Ethereum Core**.
 - 🐚 **Ed25519**: High-performance implementation for Solana and Cosmos.
 - 🔑 **HD Wallet**: Full BIP-32 and BIP-44 hierarchical deterministic derivation.
-- 🧪 **High Test Coverage**: Verified against official test vectors from RFC 8032 and Bitcoin Core.
 
 ## Installation
 
@@ -74,6 +75,9 @@ graph LR
 ### Core Classes
 | Class | Responsibility |
 |-------|----------------|
+| `Scrypt` | RFC 7914 compliant KDF (N, r, p configurable). |
+| `KeystoreV3` | Encrypts/Decrypts Ethereum JSON wallets (AES-128-CTR + MAC). |
+| `AES` | AES-128 Block Cipher and CTR Stream Mode. |
 | `Bip39` | Generates and validates mnemonic phrases and seeds. |
 | `HDWallet` | Manages node trees and path-based key derivation. |
 | `EthKeyPair` | Represents a raw private/public key pair and performs ECDSA. |
@@ -89,7 +93,7 @@ graph LR
 
 ### Secure Multi-Account Derivation
 ```dart
-import 'package:dart_web3_crypto/dart_web3_crypto.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 void main() {
   final mnemonic = "asset adjust total... (12 words)";
@@ -103,6 +107,24 @@ void main() {
 }
 ```
 
+### Keystore V3 (Encrypted Wallet)
+```dart
+import 'dart:convert';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+
+void main() {
+  final password = "strong-password";
+  final privateKey = Uint8List.fromList(List.generate(32, (i) => i));
+
+  // Encrypt (produces standard V3 JSON)
+  final keystore = KeystoreV3.encrypt(privateKey, password);
+  print(jsonEncode(keystore));
+
+  // Decrypt
+  final recoveredKey = KeystoreV3.decrypt(keystore, password);
+}
+```
+
 ### Performance Hashing
 ```dart
 final hash = Keccak.hash(Uint8List.fromList([0x01, 0x02]));
@@ -112,5 +134,5 @@ final hash = Keccak.hash(Uint8List.fromList([0x01, 0x02]));
 
 ```yaml
 dependencies:
-  dart_web3_crypto: ^0.1.0
+  web3_universal_crypto: ^0.2.0
 ```

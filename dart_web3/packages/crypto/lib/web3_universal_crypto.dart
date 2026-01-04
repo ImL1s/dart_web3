@@ -37,3 +37,9 @@ export 'src/schnorr.dart';
 // Elliptic curves
 export 'src/secp256k1.dart';
 export 'src/sha2.dart';
+// Scrypt KDF
+export 'src/scrypt.dart';
+// AES Cipher
+export 'src/aes.dart';
+// Keystore V3
+export 'src/keystore_v3.dart';

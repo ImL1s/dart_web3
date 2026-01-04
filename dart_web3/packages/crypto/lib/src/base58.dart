@@ -153,7 +153,8 @@ class Bech32 {
   /// [hrp] is the human-readable part (e.g., 'bc' for mainnet, 'tb' for testnet).
   /// [witnessVersion] is 0 for SegWit v0, 1 for Taproot.
   /// [witnessProgram] is the hash (20 bytes for P2WPKH, 32 bytes for P2WSH/P2TR).
-  static String encode(String hrp, int witnessVersion, Uint8List witnessProgram) {
+  static String encode(
+      String hrp, int witnessVersion, Uint8List witnessProgram) {
     final useBech32m = witnessVersion > 0;
     final data = _convertBits(witnessProgram, 8, 5, true);
     final combined = [witnessVersion, ...data];
@@ -172,7 +173,8 @@ class Bech32 {
   static String encodeGeneric(String hrp, Uint8List data) {
     // Cosmos uses Behc32 (original constant 1)
     final values = _convertBits(data, 8, 5, true);
-    final checksum = _createChecksum(hrp, values, false); // Always false for generic Bech32? Or param?
+    final checksum = _createChecksum(
+        hrp, values, false); // Always false for generic Bech32? Or param?
     // Usually generic libraries use constant 1 (Bech32).
 
     final result = StringBuffer(hrp);
@@ -186,7 +188,8 @@ class Bech32 {
   /// Decodes a Bech32/Bech32m address.
   ///
   /// Returns (hrp, witnessVersion, witnessProgram).
-  static ({String hrp, int witnessVersion, Uint8List witnessProgram}) decode(String address) {
+  static ({String hrp, int witnessVersion, Uint8List witnessProgram}) decode(
+      String address) {
     final lower = address.toLowerCase();
     final upper = address.toUpperCase();
 
@@ -285,19 +288,20 @@ class Bech32 {
 
     // Use constant 1 (Bech32)
     if (!_verifyChecksum(hrp, data, false)) {
-        throw FormatException('Invalid Bech32 checksum');
+      throw FormatException('Invalid Bech32 checksum');
     }
 
     final values = data.sublist(0, data.length - 6);
     if (values.isEmpty) {
-        // Empty data allowed? Maybe. But usually not.
+      // Empty data allowed? Maybe. But usually not.
     }
-    
+
     final program = _convertBits(values, 5, 8, false);
     return (hrp: hrp, data: Uint8List.fromList(program));
   }
 
-  static List<int> _convertBits(List<int> data, int fromBits, int toBits, bool pad) {
+  static List<int> _convertBits(
+      List<int> data, int fromBits, int toBits, bool pad) {
     var acc = 0;
     var bits = 0;
     final result = <int>[];
@@ -327,7 +331,13 @@ class Bech32 {
   }
 
   static int _polymod(List<int> values) {
-    const generator = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+    const generator = [
+      0x3b6a57b2,
+      0x26508e6d,
+      0x1ea119fa,
+      0x3d4233dd,
+      0x2a1462b3
+    ];
     var chk = 1;
     for (final v in values) {
       final top = chk >> 25;
