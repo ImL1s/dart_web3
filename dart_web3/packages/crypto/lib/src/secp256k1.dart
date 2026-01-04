@@ -2,19 +2,27 @@ import 'dart:math';
 import 'dart:typed_data';
 
 /// Pure Dart implementation of secp256k1 elliptic curve operations.
-/// 
+///
 /// This curve is used by Bitcoin and Ethereum for digital signatures.
 class Secp256k1 {
   // secp256k1 curve parameters
-  static final BigInt _p = BigInt.parse('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F', radix: 16);
-  static final BigInt _n = BigInt.parse('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141', radix: 16);
-  static final BigInt _gx = BigInt.parse('79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798', radix: 16);
-  static final BigInt _gy = BigInt.parse('483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8', radix: 16);
+  static final BigInt _p = BigInt.parse(
+      'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F',
+      radix: 16);
+  static final BigInt _n = BigInt.parse(
+      'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141',
+      radix: 16);
+  static final BigInt _gx = BigInt.parse(
+      '79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798',
+      radix: 16);
+  static final BigInt _gy = BigInt.parse(
+      '483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8',
+      radix: 16);
   static final BigInt _a = BigInt.zero;
   static final BigInt _b = BigInt.from(7);
 
   /// Signs a message hash with the given private key.
-  /// 
+  ///
   /// Returns the signature as a 64-byte array (32 bytes r + 32 bytes s).
   /// Uses deterministic k generation (RFC 6979).
   static Uint8List sign(Uint8List messageHash, Uint8List privateKey) {
@@ -31,28 +39,28 @@ class Secp256k1 {
     }
 
     final z = _bytesToBigInt(messageHash);
-    
+
     // Generate deterministic k using RFC 6979
     final k = _generateK(d, z);
-    
+
     // Calculate signature
     final point = _scalarMult(k, _ECPoint(_gx, _gy));
     final r = point.x % _n;
-    
+
     if (r == BigInt.zero) {
       throw StateError('Invalid signature: r is zero');
     }
-    
+
     final kInv = _modInverse(k, _n);
     final s = (kInv * (z + r * d)) % _n;
-    
+
     if (s == BigInt.zero) {
       throw StateError('Invalid signature: s is zero');
     }
-    
+
     // Ensure s is in lower half of curve order (canonical signature)
     final sFinal = s > (_n >> 1) ? _n - s : s;
-    
+
     // Determine recovery ID (v)
     // In a real implementation, we would try to recover the public key with v=0 and v=1
     // and see which one matches the original public key derived from d.
@@ -63,8 +71,10 @@ class Secp256k1 {
       try {
         final sig = Uint8List(64);
         _bigIntToBytes(r, 32).asMap().forEach((idx, byte) => sig[idx] = byte);
-        _bigIntToBytes(sFinal, 32).asMap().forEach((idx, byte) => sig[idx + 32] = byte);
-        
+        _bigIntToBytes(sFinal, 32)
+            .asMap()
+            .forEach((idx, byte) => sig[idx + 32] = byte);
+
         final recovered = recover(sig, messageHash, i);
         if (_uint8ListEquals(recovered, publicKey)) {
           v = i;
@@ -72,12 +82,14 @@ class Secp256k1 {
         }
       } catch (_) {}
     }
-    
+
     final signature = Uint8List(65);
     _bigIntToBytes(r, 32).asMap().forEach((i, byte) => signature[i] = byte);
-    _bigIntToBytes(sFinal, 32).asMap().forEach((i, byte) => signature[i + 32] = byte);
+    _bigIntToBytes(sFinal, 32)
+        .asMap()
+        .forEach((i, byte) => signature[i + 32] = byte);
     signature[64] = v;
-    
+
     return signature;
   }
 
@@ -90,7 +102,7 @@ class Secp256k1 {
   }
 
   /// Recovers the public key from a signature and message hash.
-  /// 
+  ///
   /// Returns the uncompressed public key (65 bytes: 0x04 + 32 bytes x + 32 bytes y).
   /// The recovery parameter v should be 0 or 1.
   static Uint8List recover(Uint8List signature, Uint8List messageHash, int v) {
@@ -120,7 +132,7 @@ class Secp256k1 {
 
     final alpha = (x * x * x + _a * x + _b) % _p;
     final beta = _modPow(alpha, (_p + BigInt.one) >> 2, _p);
-    
+
     final y = (v % 2 == 0) ? beta : (_p - beta);
     final R = _ECPoint(x, y);
 
@@ -130,7 +142,7 @@ class Secp256k1 {
 
     final rInv = _modInverse(r, _n);
     final e = (-z) % _n;
-    
+
     final point1 = _scalarMult(s, R);
     final point2 = _scalarMult(e, _ECPoint(_gx, _gy));
     final publicKeyPoint = _scalarMult(rInv, _pointAdd(point1, point2));
@@ -139,9 +151,10 @@ class Secp256k1 {
   }
 
   /// Derives the public key from a private key.
-  /// 
+  ///
   /// Returns the uncompressed public key (65 bytes: 0x04 + 32 bytes x + 32 bytes y).
-  static Uint8List getPublicKey(Uint8List privateKey, {bool compressed = false}) {
+  static Uint8List getPublicKey(Uint8List privateKey,
+      {bool compressed = false}) {
     if (privateKey.length != 32) {
       throw ArgumentError('Private key must be 32 bytes');
     }
@@ -156,9 +169,10 @@ class Secp256k1 {
   }
 
   /// Verifies a signature against a message hash and public key.
-  /// 
+  ///
   /// Returns true if the signature is valid.
-  static bool verify(Uint8List signature, Uint8List messageHash, Uint8List publicKey) {
+  static bool verify(
+      Uint8List signature, Uint8List messageHash, Uint8List publicKey) {
     try {
       if (signature.length != 64) return false;
       if (messageHash.length != 32) return false;
@@ -231,20 +245,22 @@ class Secp256k1 {
     final dx = (p2.x - p1.x) % _p;
     final dy = (p2.y - p1.y) % _p;
     final s = (dy * _modInverse(dx, _p)) % _p;
-    
+
     final x3 = (s * s - p1.x - p2.x) % _p;
     final y3 = (s * (p1.x - x3) - p1.y) % _p;
-    
+
     return _ECPoint(x3, y3);
   }
 
   static _ECPoint _pointDouble(_ECPoint p) {
     if (p.isInfinity) return p;
 
-    final s = ((BigInt.from(3) * p.x * p.x + _a) * _modInverse(BigInt.from(2) * p.y, _p)) % _p;
+    final s = ((BigInt.from(3) * p.x * p.x + _a) *
+            _modInverse(BigInt.from(2) * p.y, _p)) %
+        _p;
     final x3 = (s * s - BigInt.from(2) * p.x) % _p;
     final y3 = (s * (p.x - x3) - p.y) % _p;
-    
+
     return _ECPoint(x3, y3);
   }
 
@@ -281,15 +297,28 @@ class Secp256k1 {
     if (compressed) {
       final bytes = Uint8List(33);
       bytes[0] = point.y.isEven ? 0x02 : 0x03;
-      _bigIntToBytes(point.x, 32).asMap().forEach((i, byte) => bytes[i + 1] = byte);
+      _bigIntToBytes(point.x, 32)
+          .asMap()
+          .forEach((i, byte) => bytes[i + 1] = byte);
       return bytes;
     } else {
       final bytes = Uint8List(65);
       bytes[0] = 0x04;
-      _bigIntToBytes(point.x, 32).asMap().forEach((i, byte) => bytes[i + 1] = byte);
-      _bigIntToBytes(point.y, 32).asMap().forEach((i, byte) => bytes[i + 33] = byte);
+      _bigIntToBytes(point.x, 32)
+          .asMap()
+          .forEach((i, byte) => bytes[i + 1] = byte);
+      _bigIntToBytes(point.y, 32)
+          .asMap()
+          .forEach((i, byte) => bytes[i + 33] = byte);
       return bytes;
     }
+  }
+
+  /// Decompresses a compressed public key.
+  ///
+  /// Takes a 33-byte compressed public key and returns the 65-byte uncompressed public key.
+  static Uint8List decompressPublicKey(Uint8List compressedPublicKey) {
+    return _pointToBytes(_bytesToPoint(compressedPublicKey));
   }
 
   static _ECPoint _bytesToPoint(Uint8List bytes) {
@@ -303,11 +332,11 @@ class Secp256k1 {
       final x = _bytesToBigInt(bytes.sublist(1, 33));
       final alpha = (x * x * x + _a * x + _b) % _p;
       final beta = _modPow(alpha, (_p + BigInt.one) >> 2, _p);
-      
-      final y = (bytes[0] == 0x02) 
+
+      final y = (bytes[0] == 0x02)
           ? (beta.isEven ? beta : _p - beta)
           : (beta.isOdd ? beta : _p - beta);
-      
+
       return _ECPoint(x, y);
     } else {
       throw ArgumentError('Invalid public key format');
@@ -320,10 +349,11 @@ class Secp256k1 {
     // Here we XOR private key and message hash to get a deterministic seed.
     final seed = privateKey ^ messageHash;
     final random = Random(seed.hashCode);
-    
+
     BigInt k;
     do {
-      k = BigInt.from(random.nextInt(1 << 30)) * BigInt.from(1 << 30) + BigInt.from(random.nextInt(1 << 30));
+      k = BigInt.from(random.nextInt(1 << 30)) * BigInt.from(1 << 30) +
+          BigInt.from(random.nextInt(1 << 30));
       k = k % (_n - BigInt.one) + BigInt.one;
     } while (k >= _n);
     return k;
@@ -332,9 +362,11 @@ class Secp256k1 {
 
 /// Represents a point on the elliptic curve.
 class _ECPoint {
-
   _ECPoint(this.x, this.y) : isInfinity = false;
-  _ECPoint.infinity() : x = BigInt.zero, y = BigInt.zero, isInfinity = true;
+  _ECPoint.infinity()
+      : x = BigInt.zero,
+        y = BigInt.zero,
+        isInfinity = true;
   final BigInt x;
   final BigInt y;
   final bool isInfinity;

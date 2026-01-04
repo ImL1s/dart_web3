@@ -4,7 +4,6 @@ import 'package:dart_web3_core/dart_web3_core.dart';
 
 /// Block data.
 class Block {
-
   Block({
     required this.hash,
     required this.parentHash,
@@ -13,7 +12,8 @@ class Block {
     required this.miner,
     required this.gasLimit,
     required this.gasUsed,
-    required this.transactions, this.baseFeePerGas,
+    required this.transactions,
+    this.baseFeePerGas,
   });
 
   factory Block.fromJson(Map<String, dynamic> json) {
@@ -21,12 +21,16 @@ class Block {
       hash: json['hash'] as String,
       parentHash: json['parentHash'] as String,
       number: BigInt.parse((json['number'] as String).substring(2), radix: 16),
-      timestamp: BigInt.parse((json['timestamp'] as String).substring(2), radix: 16),
+      timestamp:
+          BigInt.parse((json['timestamp'] as String).substring(2), radix: 16),
       miner: json['miner'] as String,
-      gasLimit: BigInt.parse((json['gasLimit'] as String).substring(2), radix: 16),
-      gasUsed: BigInt.parse((json['gasUsed'] as String).substring(2), radix: 16),
+      gasLimit:
+          BigInt.parse((json['gasLimit'] as String).substring(2), radix: 16),
+      gasUsed:
+          BigInt.parse((json['gasUsed'] as String).substring(2), radix: 16),
       baseFeePerGas: json['baseFeePerGas'] != null
-          ? BigInt.parse((json['baseFeePerGas'] as String).substring(2), radix: 16)
+          ? BigInt.parse((json['baseFeePerGas'] as String).substring(2),
+              radix: 16)
           : null,
       transactions: (json['transactions'] as List).map((t) {
         if (t is String) return t;
@@ -47,10 +51,15 @@ class Block {
 
 /// Transaction data.
 class Transaction {
-
   Transaction({
     required this.hash,
-    required this.from, required this.value, required this.gasLimit, required this.data, required this.nonce, required this.chainId, this.blockHash,
+    required this.from,
+    required this.value,
+    required this.gasLimit,
+    required this.data,
+    required this.nonce,
+    required this.chainId,
+    this.blockHash,
     this.blockNumber,
     this.transactionIndex,
     this.to,
@@ -64,10 +73,12 @@ class Transaction {
       hash: json['hash'] as String,
       blockHash: json['blockHash'] as String?,
       blockNumber: json['blockNumber'] != null
-          ? BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16)
+          ? BigInt.parse((json['blockNumber'] as String).substring(2),
+              radix: 16)
           : null,
       transactionIndex: json['transactionIndex'] != null
-          ? int.parse((json['transactionIndex'] as String).substring(2), radix: 16)
+          ? int.parse((json['transactionIndex'] as String).substring(2),
+              radix: 16)
           : null,
       from: json['from'] as String,
       to: json['to'] as String?,
@@ -77,10 +88,12 @@ class Transaction {
           ? BigInt.parse((json['gasPrice'] as String).substring(2), radix: 16)
           : null,
       maxFeePerGas: json['maxFeePerGas'] != null
-          ? BigInt.parse((json['maxFeePerGas'] as String).substring(2), radix: 16)
+          ? BigInt.parse((json['maxFeePerGas'] as String).substring(2),
+              radix: 16)
           : null,
       maxPriorityFeePerGas: json['maxPriorityFeePerGas'] != null
-          ? BigInt.parse((json['maxPriorityFeePerGas'] as String).substring(2), radix: 16)
+          ? BigInt.parse((json['maxPriorityFeePerGas'] as String).substring(2),
+              radix: 16)
           : null,
       data: HexUtils.decode(json['input'] as String),
       nonce: BigInt.parse((json['nonce'] as String).substring(2), radix: 16),
@@ -107,14 +120,17 @@ class Transaction {
 
 /// Transaction receipt.
 class TransactionReceipt {
-
   TransactionReceipt({
     required this.transactionHash,
     required this.transactionIndex,
     required this.blockHash,
     required this.blockNumber,
     required this.from,
-    required this.cumulativeGasUsed, required this.gasUsed, required this.logs, required this.status, this.to,
+    required this.cumulativeGasUsed,
+    required this.gasUsed,
+    required this.logs,
+    required this.status,
+    this.to,
     this.contractAddress,
     this.effectiveGasPrice,
   });
@@ -122,19 +138,27 @@ class TransactionReceipt {
   factory TransactionReceipt.fromJson(Map<String, dynamic> json) {
     return TransactionReceipt(
       transactionHash: json['transactionHash'] as String,
-      transactionIndex: int.parse((json['transactionIndex'] as String).substring(2), radix: 16),
+      transactionIndex: int.parse(
+          (json['transactionIndex'] as String).substring(2),
+          radix: 16),
       blockHash: json['blockHash'] as String,
-      blockNumber: BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16),
+      blockNumber:
+          BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16),
       from: json['from'] as String,
       to: json['to'] as String?,
-      cumulativeGasUsed:
-          BigInt.parse((json['cumulativeGasUsed'] as String).substring(2), radix: 16),
-      gasUsed: BigInt.parse((json['gasUsed'] as String).substring(2), radix: 16),
+      cumulativeGasUsed: BigInt.parse(
+          (json['cumulativeGasUsed'] as String).substring(2),
+          radix: 16),
+      gasUsed:
+          BigInt.parse((json['gasUsed'] as String).substring(2), radix: 16),
       contractAddress: json['contractAddress'] as String?,
-      logs: (json['logs'] as List).map((l) => Log.fromJson(l as Map<String, dynamic>)).toList(),
+      logs: (json['logs'] as List)
+          .map((l) => Log.fromJson(l as Map<String, dynamic>))
+          .toList(),
       status: int.parse((json['status'] as String).substring(2), radix: 16),
       effectiveGasPrice: json['effectiveGasPrice'] != null
-          ? BigInt.parse((json['effectiveGasPrice'] as String).substring(2), radix: 16)
+          ? BigInt.parse((json['effectiveGasPrice'] as String).substring(2),
+              radix: 16)
           : null,
     );
   }
@@ -175,7 +199,6 @@ class TransactionReceipt {
 
 /// Event log.
 class Log {
-
   Log({
     required this.address,
     required this.topics,
@@ -194,9 +217,12 @@ class Log {
       topics: (json['topics'] as List).cast<String>(),
       data: HexUtils.decode(json['data'] as String),
       blockHash: json['blockHash'] as String,
-      blockNumber: BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16),
+      blockNumber:
+          BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16),
       transactionHash: json['transactionHash'] as String,
-      transactionIndex: int.parse((json['transactionIndex'] as String).substring(2), radix: 16),
+      transactionIndex: int.parse(
+          (json['transactionIndex'] as String).substring(2),
+          radix: 16),
       logIndex: int.parse((json['logIndex'] as String).substring(2), radix: 16),
       removed: json['removed'] as bool? ?? false,
     );
@@ -228,10 +254,9 @@ class Log {
 
 /// Log filter.
 class LogFilter {
-
   LogFilter({this.address, this.topics, this.fromBlock, this.toBlock});
   final String? address;
-  final List<String?>? topics;
+  final List<dynamic>? topics;
   final String? fromBlock;
   final String? toBlock;
 
@@ -247,7 +272,6 @@ class LogFilter {
 
 /// Call request.
 class CallRequest {
-
   CallRequest({
     this.from,
     this.to,
@@ -275,7 +299,8 @@ class CallRequest {
       if (value != null) 'value': '0x${value!.toRadixString(16)}',
       if (gasLimit != null) 'gas': '0x${gasLimit!.toRadixString(16)}',
       if (gasPrice != null) 'gasPrice': '0x${gasPrice!.toRadixString(16)}',
-      if (maxFeePerGas != null) 'maxFeePerGas': '0x${maxFeePerGas!.toRadixString(16)}',
+      if (maxFeePerGas != null)
+        'maxFeePerGas': '0x${maxFeePerGas!.toRadixString(16)}',
       if (maxPriorityFeePerGas != null)
         'maxPriorityFeePerGas': '0x${maxPriorityFeePerGas!.toRadixString(16)}',
     };
@@ -284,7 +309,6 @@ class CallRequest {
 
 /// Fee data for EIP-1559 transactions.
 class FeeData {
-
   FeeData({
     required this.gasPrice,
     required this.maxFeePerGas,
