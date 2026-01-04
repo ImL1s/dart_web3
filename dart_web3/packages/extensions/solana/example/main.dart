@@ -8,11 +8,11 @@ void main() async {
   final seeds = [
     PublicKey.fromBase58('9v88s2pJw47uL7zW2s6S6S6S6S6S6S6S6S6S6S6S').toBytes(),
   ];
-  final pda = await PublicKey.findProgramAddress(seeds, programId);
+  final pda = PublicKey.findProgramAddress(seeds, programId);
   print('Derived PDA: ${pda.address.toBase58()} with bump ${pda.bump}');
 
   // 2. Client Interaction (Mock URL example)
-  final client = SolanaClient('https://api.devnet.solana.com');
+  final _ = SolanaClient('https://api.devnet.solana.com');
   
   // Note: These would normally be awaited in a real network environment
   print('Ready to fetch account info and broadcast transactions...');

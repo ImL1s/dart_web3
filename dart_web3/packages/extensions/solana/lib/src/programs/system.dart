@@ -9,8 +9,8 @@ class SystemProgram {
     
     /// Create a Transfer instruction.
     static TransactionInstruction transfer({
-        required PublicKey from,
-        required PublicKey to,
+        required PublicKey fromPublicKey,
+        required PublicKey toPublicKey,
         required int lamports,
     }) {
         final data = ByteData(12);
@@ -20,8 +20,8 @@ class SystemProgram {
         return TransactionInstruction(
             programId: programId,
             keys: [
-                AccountMeta.writable(from, isSigner: true),
-                AccountMeta.writable(to),
+                AccountMeta.writable(fromPublicKey, isSigner: true),
+                AccountMeta.writable(toPublicKey),
             ],
             data: data.buffer.asUint8List(),
         );

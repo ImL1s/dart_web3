@@ -48,7 +48,7 @@ class AddressLookupTableProgram {
       
       return {
           'address': pda.address,
-          'bump': pda.nonce,
+          'bump': pda.bump,
       };
   }
 

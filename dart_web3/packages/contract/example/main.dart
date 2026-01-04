@@ -39,5 +39,5 @@ void main() async {
 
   print('USDT Balance: ${result.first}');
   
-  await client.dispose();
+  client.dispose();
 }

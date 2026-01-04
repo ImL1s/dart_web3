@@ -12,9 +12,6 @@ class PublicKey {
   }
 
   factory PublicKey.fromString(String address) {
-    if (address.length > 44) {
-        throw ArgumentError('Invalid public key input');
-    }
     final decoded = Base58.decode(address);
     if (decoded.length != 32) {
       throw ArgumentError('Invalid public key length');
@@ -22,9 +19,13 @@ class PublicKey {
     return PublicKey(decoded);
   }
 
+  factory PublicKey.fromBase58(String address) => PublicKey.fromString(address);
+
   static final defaultPublicKey = PublicKey(Uint8List(32));
 
   final Uint8List bytes;
+
+  Uint8List toBytes() => bytes;
 
   String toBase58() => Base58.encode(bytes);
 
@@ -100,7 +101,7 @@ class PublicKey {
 }
 
 class ProgramAddress {
-  ProgramAddress(this.address, this.nonce);
+  ProgramAddress(this.address, this.bump);
   final PublicKey address;
-  final int nonce;
+  final int bump;
 }

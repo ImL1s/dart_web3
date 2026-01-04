@@ -198,10 +198,10 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
         ];
         break;
         
@@ -214,10 +214,10 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
         ];
         break;
         
@@ -231,12 +231,12 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
           transaction.maxFeePerBlobGas ?? BigInt.zero,
-          transaction.blobVersionedHashes ?? [],
+          transaction.blobVersionedHashes ?? <String>[],
         ];
         break;
         
@@ -250,18 +250,18 @@ class MpcSignerImpl extends MpcSigner {
           transaction.to ?? '0x',
           transaction.value ?? BigInt.zero,
           transaction.data ?? Uint8List(0),
-          transaction.accessList?.map((entry) => [
+          transaction.accessList?.map((entry) => <dynamic>[
             entry.address,
             entry.storageKeys,
-          ],).toList() ?? [],
-          transaction.authorizationList?.map((auth) => [
+          ],).toList() ?? <List<dynamic>>[],
+          transaction.authorizationList?.map((auth) => <dynamic>[
             auth.chainId,
             auth.address,
             auth.nonce,
             auth.yParity,
             auth.r,
             auth.s,
-          ],).toList() ?? [],
+          ],).toList() ?? <List<dynamic>>[],
         ];
         break;
     }
