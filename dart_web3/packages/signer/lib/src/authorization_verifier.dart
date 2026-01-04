@@ -77,7 +77,7 @@ class AuthorizationVerifier {
       }
 
       return true;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -120,7 +120,7 @@ class AuthorizationVerifier {
       final recoveredAddress = EthereumAddress.fromPublicKey(recoveredPublicKey, Keccak256.hash);
       
       return recoveredAddress.toString();
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

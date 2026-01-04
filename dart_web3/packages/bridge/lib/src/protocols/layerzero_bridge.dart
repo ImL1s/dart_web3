@@ -169,7 +169,7 @@ class LayerZeroBridge extends BridgeProtocol {
         token.getAddressOnChain(destinationChainId)?.toLowerCase() == 
         destinationToken.address.toLowerCase(),
       );
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -255,7 +255,7 @@ class LayerZeroBridge extends BridgeProtocol {
         final data = json.decode(response.body) as Map<String, dynamic>;
         return BridgeFeeBreakdown.fromJson(data);
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Fall back to estimated fees if API call fails
     }
 

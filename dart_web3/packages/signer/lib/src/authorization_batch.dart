@@ -221,7 +221,7 @@ class AuthorizationBatch {
       }
 
       return true;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

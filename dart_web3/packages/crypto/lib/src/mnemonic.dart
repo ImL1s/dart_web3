@@ -71,7 +71,7 @@ class Mnemonic {
 
   /// Validates a mnemonic phrase.
   static bool validate(List<String> words) {
-    try { toEntropy(words); return true; } catch (_) { return false; }
+    try { toEntropy(words); return true; } on Exception catch (_) { return false; }
   }
 
   static List<String> _entropyToMnemonic(Uint8List entropy) {

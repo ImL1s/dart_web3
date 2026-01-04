@@ -1,0 +1,6 @@
+--- ERRORS ---
+
+--- WARNINGS ---
+[web3_universal_client]: warning - lib\src\ccip_read.dart:83:21 - Unnecessary type check; the result is always 'true'. Try correcting the type check, or removing the type check. - unnecessary_type_check
+
+--- UNNECESSARY LIBRARY NAMES ---

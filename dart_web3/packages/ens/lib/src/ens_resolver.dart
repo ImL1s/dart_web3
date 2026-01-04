@@ -47,7 +47,7 @@ class ENSResolver {
       _setCache(cacheKey, address);
       
       return address;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -96,7 +96,7 @@ class ENSResolver {
       _setCache(cacheKey, name);
       
       return name;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -134,7 +134,7 @@ class ENSResolver {
       }
       
       return address;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -152,7 +152,7 @@ class ENSResolver {
     try {
       final result = await resolverContract.read('name', [nameHash]);
       return result[0] as String?;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

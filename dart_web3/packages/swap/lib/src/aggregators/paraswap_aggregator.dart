@@ -83,7 +83,7 @@ class ParaSwapAggregator extends DexAggregator {
         if (quote != null) {
           quotes.add(quote);
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue with other slippages if one fails
         continue;
       }
@@ -102,7 +102,7 @@ class ParaSwapAggregator extends DexAggregator {
       final fromSupported = tokens.any((t) => t.address.toLowerCase() == fromToken.address.toLowerCase());
       final toSupported = tokens.any((t) => t.address.toLowerCase() == toToken.address.toLowerCase());
       return fromSupported && toSupported;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

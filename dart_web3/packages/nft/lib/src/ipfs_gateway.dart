@@ -49,7 +49,7 @@ class IpfsGateway {
           _cache[uri] = url;
           return url;
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue to next gateway
         continue;
       }
@@ -72,7 +72,7 @@ class IpfsGateway {
       if (response.statusCode == 200) {
         return json.decode(response.body) as Map<String, dynamic>;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Return null on error
     }
 
@@ -93,7 +93,7 @@ class IpfsGateway {
       if (response.statusCode == 200) {
         return response.bodyBytes;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Return null on error
     }
 

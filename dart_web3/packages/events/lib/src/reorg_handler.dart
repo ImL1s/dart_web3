@@ -154,7 +154,7 @@ class ReorgHandler {
             final removedLogs = await _handleReorganization(block, currentBlock.hash);
             events.add(ReorgEvent.reorganization(block, removedLogs, []));
           }
-        } catch (e) {
+        } on Exception catch (_) {
           // Block might not exist anymore
           final removedLogs = _logCache[cachedHash] ?? [];
           events.add(ReorgEvent.reorganization(block, removedLogs, []));

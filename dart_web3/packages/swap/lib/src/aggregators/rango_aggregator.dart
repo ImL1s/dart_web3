@@ -83,7 +83,7 @@ class RangoAggregator extends DexAggregator {
         if (quote != null) {
           quotes.add(quote);
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue with other slippages if one fails
         continue;
       }
@@ -112,7 +112,7 @@ class RangoAggregator extends DexAggregator {
         final toSupported = destTokens.any((t) => t.address.toLowerCase() == toToken.address.toLowerCase());
         return fromSupported && toSupported;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

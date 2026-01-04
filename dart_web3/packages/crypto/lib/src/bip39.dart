@@ -82,7 +82,7 @@ class Bip39 {
       final regeneratedMnemonic = _entropyToMnemonic(entropy);
       
       return _listEquals(mnemonic, regeneratedMnemonic);
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

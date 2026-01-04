@@ -101,7 +101,7 @@ class ZeroXAggregator extends DexAggregator {
         if (quote != null) {
           quotes.add(quote);
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue with other slippages if one fails
         continue;
       }
@@ -126,7 +126,7 @@ class ZeroXAggregator extends DexAggregator {
       ).timeout(config.timeout);
 
       return response.statusCode == 200;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -195,7 +195,7 @@ class ZeroXAggregator extends DexAggregator {
         final data = json.decode(response.body) as Map<String, dynamic>;
         return BigInt.parse(data['gasPrice'] as String);
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Fall back to default if gas price endpoint fails
     }
 

@@ -32,7 +32,7 @@ void main() {
             _expectValuesEqual(decoded[j], values[j], types[j],
                 reason: 'Decoded value at index $j should match original',);
           }
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail, but most should succeed
           // Skip and continue with next iteration
         }
@@ -80,7 +80,7 @@ void main() {
           final expectedSelector = AbiEncoder.getFunctionSelector(signature);
           expect(BytesUtils.equals(BytesUtils.slice(encoded, 0, 4), expectedSelector), isTrue,
               reason: 'Function selector should match',);
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail
         }
       }
@@ -136,7 +136,7 @@ void main() {
           // Verify encoding is 32-byte aligned
           expect(encoded.length % 32, equals(0),
               reason: 'Encoded data should be 32-byte aligned',);
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail
         }
       }
@@ -195,7 +195,7 @@ void main() {
           expect(decodedInner[0], equals(innerValue[0]));
           expect(decodedInner[1].toString().toLowerCase(),
               equals(innerValue[1].toString().toLowerCase()),);
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail
         }
       }
@@ -279,7 +279,7 @@ void main() {
           final differentMessageHash = differentMessageTypedData.hash();
           expect(BytesUtils.equals(hash1, differentMessageHash), isFalse,
               reason: 'Different message should produce different hash',);
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail
         }
       }

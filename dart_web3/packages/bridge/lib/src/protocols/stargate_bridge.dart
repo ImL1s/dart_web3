@@ -166,7 +166,7 @@ class StargateBridge extends BridgeProtocol {
       return supportedSymbols.contains(sourceToken.symbol.toUpperCase()) &&
              supportedSymbols.contains(destinationToken.symbol.toUpperCase()) &&
              sourceToken.symbol.toUpperCase() == destinationToken.symbol.toUpperCase();
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -246,7 +246,7 @@ class StargateBridge extends BridgeProtocol {
         final data = json.decode(response.body) as Map<String, dynamic>;
         return BridgeFeeBreakdown.fromJson(data);
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Fall back to estimated fees if API call fails
     }
 

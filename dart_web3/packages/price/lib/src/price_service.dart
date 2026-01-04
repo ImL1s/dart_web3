@@ -33,7 +33,7 @@ class PriceService {
           return price;
         }
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Return cached value if available even if expired
       if (_cache.containsKey(cacheKey)) {
         return _cache[cacheKey]['price'] as double;
@@ -74,7 +74,7 @@ class PriceService {
           }
         }
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Ignore errors if we have partial results from cache
     }
 

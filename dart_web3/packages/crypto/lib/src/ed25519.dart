@@ -144,7 +144,7 @@ class Ed25519 implements CurveInterface {
 
       // 6. Verify S * B == R + k * A
       return sB[0] == RkA[0] && sB[1] == RkA[1];
-    } catch (_) {
+    } on Exception catch (_) {
       return false;
     }
   }

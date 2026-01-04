@@ -125,7 +125,7 @@ class BridgeService {
         try {
           final tokens = await protocol.getSupportedTokens(sourceChainId, destinationChainId);
           allTokens.addAll(tokens);
-        } catch (e) {
+        } on Exception catch (_) {
           // Continue with other protocols if one fails
           continue;
         }
@@ -160,7 +160,7 @@ class BridgeService {
           destinationChainId,
         );
         if (supported) return true;
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue checking other protocols
         continue;
       }
@@ -224,7 +224,7 @@ class BridgeService {
         try {
           final time = await protocol.getEstimatedTime(sourceChainId, destinationChainId, amount);
           times.add(time);
-        } catch (e) {
+        } on Exception catch (_) {
           // Continue with other protocols
           continue;
         }
@@ -251,7 +251,7 @@ class BridgeService {
         try {
           final limits = await protocol.getBridgeLimits(token, sourceChainId, destinationChainId);
           return limits;
-        } catch (e) {
+        } on Exception catch (_) {
           // Continue with other protocols
           continue;
         }
@@ -294,7 +294,7 @@ class BridgeService {
   ) async {
     try {
       return await protocol.getQuote(params);
-    } catch (e) {
+    } on Exception catch (_) {
       // Log error but don't throw - we want to continue with other protocols
       return null;
     }

@@ -51,7 +51,7 @@ void main() {
                 recovered = true;
                 break;
               }
-            } catch (e) {
+            } on Exception catch (_) {
               // Recovery might fail for some v values, continue trying
               continue;
             }
@@ -61,7 +61,7 @@ void main() {
           expect(recovered, isTrue, 
             reason: 'Should be able to recover public key from signature',);
             
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail, but most should succeed
           // In a real implementation, this should be more robust
         }
@@ -146,7 +146,7 @@ void main() {
           expect(_uint8ListEquals(seed, seedWithPassphrase), isFalse,
             reason: 'Different passphrase should produce different seed',);
             
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail in simplified implementation
           // In production, this should be more robust
         }
@@ -207,7 +207,7 @@ void main() {
           expect(_uint8ListEquals(child0.getPrivateKey(), child1.getPrivateKey()), isFalse,
             reason: 'Different child indices should produce different keys',);
             
-        } catch (e) {
+        } on Exception catch (_) {
           // Some edge cases might fail in simplified implementation
           // In production, this should be more robust
         }

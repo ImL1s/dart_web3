@@ -67,7 +67,7 @@ class BundlerClient {
       
       if (result == null) return null;
       return UserOperationByHashResult.fromJson(result);
-    } catch (e) {
+    } on Exception catch (_) {
       // UserOperation not found
       return null;
     }
@@ -85,7 +85,7 @@ class BundlerClient {
       
       if (result == null) return null;
       return UserOperationReceipt.fromJson(result);
-    } catch (e) {
+    } on Exception catch (_) {
       // Receipt not available yet
       return null;
     }

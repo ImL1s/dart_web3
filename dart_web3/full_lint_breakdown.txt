@@ -1,0 +1,62 @@
+=== DETAILED LINT BREAKDOWN ===
+
+cascade_invocations: 159 instances
+  First 3 examples:
+    [web3_universal_aa]:    info - lib\src\smart_account.dart:304:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+    [web3_universal_aa]:    info - lib\src\smart_account.dart:305:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+    [web3_universal_contract]:    info - test\contract_test.dart:134:9 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+
+avoid_catches_without_on_clauses: 114 instances
+  First 3 examples:
+    [web3_universal_aa]:    info - lib\src\bundler_client.dart:70:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+    [web3_universal_aa]:    info - lib\src\bundler_client.dart:88:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+    [web3_universal_aa]:    info - lib\src\entry_point.dart:731:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+
+avoid_dynamic_calls: 49 instances
+  First 3 examples:
+    [web3_universal_price]:    info - lib\src\price_service.dart:21:14 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+    [web3_universal_price]:    info - lib\src\price_service.dart:31:26 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+    [web3_universal_price]:    info - lib\src\price_service.dart:39:16 - Method invocation or property access on a 'dynamic' target. Try giving the target a type. - avoid_dynamic_calls
+
+directives_ordering: 33 instances
+  First 3 examples:
+    [web3_universal_aa]:    info - example\main.dart:3:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+    [web3_universal_aa]:    info - example\main.dart:4:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+    [web3_universal_aa]:    info - test\bundler_client_test.dart:2:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+
+avoid_classes_with_only_static_members: 25 instances
+  First 3 examples:
+    [web3_universal_aa]:    info - lib\src\entry_point.dart:890:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+    [web3_universal_swap]:    info - lib\src\slippage_calculator.dart:6:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+    [web3_universal_bc_ur]:    info - lib\src\bc_ur_encoder.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+
+avoid_equals_and_hash_code_on_mutable_classes: 16 instances
+  First 3 examples:
+    [web3_universal_aa]:    info - lib\src\user_operation.dart:634:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+    [web3_universal_aa]:    info - lib\src\user_operation.dart:649:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+    [web3_universal_swap]:    info - lib\src\swap_types.dart:44:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+
+prefer_constructors_over_static_methods: 14 instances
+  First 3 examples:
+    [web3_universal_swap]:    info - lib\src\swap_quote.dart:135:26 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+    [web3_universal_bc_ur]:    info - lib\src\animated_qr.dart:89:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+    [web3_universal_bc_ur]:    info - lib\src\animated_qr.dart:94:21 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+
+parameter_assignments: 11 instances
+  First 3 examples:
+    [web3_universal_swap]:    info - lib\src\aggregators\oneinch_aggregator.dart:263:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+    [web3_universal_swap]:    info - lib\src\aggregators\paraswap_aggregator.dart:321:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+    [web3_universal_swap]:    info - lib\src\aggregators\rango_aggregator.dart:345:7 - Invalid assignment to the parameter 'hex'. Try using a local variable in place of the parameter. - parameter_assignments
+
+non_constant_identifier_names: 11 instances
+  First 3 examples:
+    [web3_universal_crypto]:    info - lib\src\ed25519.dart:33:23 - The variable name '_L' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+    [web3_universal_crypto]:    info - lib\src\ed25519.dart:43:23 - The variable name '_By' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+    [web3_universal_crypto]:    info - lib\src\ed25519.dart:46:23 - The variable name '_Bx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+
+use_setters_to_change_properties: 9 instances
+  First 3 examples:
+    [web3_universal_contract]:    info - test\mock_client.dart:42:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+    [web3_universal_contract]:    info - test\mock_client.dart:82:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+    [web3_universal_multicall]:    info - test\mock_client.dart:43:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+

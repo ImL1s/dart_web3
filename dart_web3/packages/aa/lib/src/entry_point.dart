@@ -728,7 +728,7 @@ class ValidationResult {
           unstakeDelaySec: paymasterInfoValues[1] as BigInt,
         ),
       );
-    } catch (e) {
+    } on Exception catch (_) {
       // If decoding fails, return empty result
       return ValidationResult._empty();
     }
@@ -864,7 +864,7 @@ class DepositInfo {
         unstakeDelaySec: values[3] as BigInt,
         withdrawTime: values[4] as BigInt,
       );
-    } catch (e) {
+    } on Exception catch (_) {
       // If decoding fails, return empty result
       return DepositInfo._empty();
     }

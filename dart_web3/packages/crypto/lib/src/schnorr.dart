@@ -131,7 +131,7 @@ class SchnorrSignature {
 
       // 7. Verify R'.x == r
       return R[0] == r;
-    } catch (_) {
+    } on Exception catch (_) {
       return false;
     }
   }

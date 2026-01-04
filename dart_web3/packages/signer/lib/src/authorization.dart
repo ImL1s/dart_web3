@@ -170,7 +170,7 @@ class Authorization {
       final recoveredAddress = EthereumAddress.fromPublicKey(recoveredPublicKey, Keccak256.hash);
       
       return recoveredAddress.toString().toLowerCase() == expectedSigner.toLowerCase();
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

@@ -64,7 +64,7 @@ class NftCollectionManager {
       // Cache the collection
       _collectionCache[contractAddress] = collection;
       return collection;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -140,7 +140,7 @@ class NftCollectionManager {
         balance: balance,
         owner: owner,
       );
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -170,12 +170,12 @@ class NftCollectionManager {
       if (isErc1155) return NftStandard.erc1155;
 
       return null;
-    } catch (e) {
+    } on Exception catch (_) {
       // Fallback: try calling ERC-721 methods
       try {
         await _getCollectionName(contractAddress, NftStandard.erc721);
         return NftStandard.erc721;
-      } catch (e) {
+      } on Exception catch (_) {
         return null;
       }
     }
@@ -194,7 +194,7 @@ class NftCollectionManager {
       );
 
       return await contract.read('name', []) as String?;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -212,7 +212,7 @@ class NftCollectionManager {
       );
 
       return await contract.read('symbol', []) as String?;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -230,7 +230,7 @@ class NftCollectionManager {
       );
 
       return await contract.read('totalSupply', []) as BigInt?;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -250,7 +250,7 @@ class NftCollectionManager {
 
       final methodName = standard == NftStandard.erc721 ? 'tokenURI' : 'uri';
       return await contract.read(methodName, [tokenId]) as String?;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -274,7 +274,7 @@ class NftCollectionManager {
       }
       // ERC-1155 doesn't have a single owner concept
       return null;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -293,7 +293,7 @@ class NftCollectionManager {
       );
 
       return await contract.read('balanceOf', [owner.hex, tokenId]) as BigInt;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

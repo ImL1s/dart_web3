@@ -41,7 +41,7 @@ class NftMetadataParser {
         // Try as direct JSON
         try {
           jsonData = json.decode(tokenUri) as Map<String, dynamic>;
-        } catch (e) {
+        } on Exception catch (_) {
           return null;
         }
       }
@@ -51,7 +51,7 @@ class NftMetadataParser {
         _cache[tokenUri] = metadata;
         return metadata;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Return null on error
     }
 
@@ -129,7 +129,7 @@ class NftMetadataParser {
         final decoded = Uri.decodeComponent(data);
         return json.decode(decoded) as Map<String, dynamic>;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -148,7 +148,7 @@ class NftMetadataParser {
       if (response.statusCode == 200) {
         return json.decode(response.body) as Map<String, dynamic>;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Return null on error
     }
 
@@ -181,7 +181,7 @@ class NftMetadataParser {
       if (validateMetadata(response)) {
         return NftMetadata.fromJson(response);
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Return null on error
     }
 

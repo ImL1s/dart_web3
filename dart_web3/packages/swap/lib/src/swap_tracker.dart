@@ -79,7 +79,7 @@ class SwapTracker {
           if (receiptData != null) {
             receipt = receiptData;
           }
-        } catch (e) {
+        } on Exception catch (_) {
           // Transaction not yet mined, continue polling
         }
         
@@ -105,7 +105,7 @@ class SwapTracker {
         _trackingMap[transactionHash] = failedInfo;
         _emitStatusUpdate(failedInfo);
       }
-    } catch (e) {
+    } on Exception catch (e) {
       // Handle monitoring error
       final errorInfo = trackingInfo.copyWith(
         status: SwapStatus.failed,
@@ -158,7 +158,7 @@ class SwapTracker {
 
       _trackingMap[transactionHash] = updatedInfo;
       _emitStatusUpdate(updatedInfo);
-    } catch (e) {
+    } on Exception catch (e) {
       final errorInfo = trackingInfo.copyWith(
         status: SwapStatus.failed,
         error: 'Receipt analysis error: $e',
@@ -195,7 +195,7 @@ class SwapTracker {
         gasUsed: receipt.gasUsed,
         gasCost: receipt.gasUsed * (receipt.effectiveGasPrice ?? BigInt.zero),
       );
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -205,7 +205,7 @@ class SwapTracker {
       // Try to get revert reason using debug_traceTransaction or similar
       // This is a simplified implementation
       return null;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

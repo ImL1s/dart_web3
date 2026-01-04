@@ -46,7 +46,7 @@ class ENSRecords {
       _setCache(cacheKey, textValue);
       
       return textValue;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -155,7 +155,7 @@ class ENSRecords {
       }
       
       return textValue;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -204,7 +204,7 @@ class ENSRecords {
       }
       
       return tokenUri;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

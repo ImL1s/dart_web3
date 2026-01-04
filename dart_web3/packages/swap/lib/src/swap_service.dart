@@ -153,7 +153,7 @@ class SwapService {
         gasUsed: quote.estimatedGas,
         returnData: result,
       );
-    } catch (e) {
+    } on Exception catch (e) {
       return SwapSimulationResult(
         success: false,
         error: e.toString(),
@@ -170,7 +170,7 @@ class SwapService {
         try {
           final tokens = await aggregator.getSupportedTokens(chainId);
           allTokens.addAll(tokens);
-        } catch (e) {
+        } on Exception catch (_) {
           // Continue with other aggregators if one fails
           continue;
         }
@@ -195,7 +195,7 @@ class SwapService {
       try {
         final supported = await aggregator.isTokenPairSupported(fromToken, toToken);
         if (supported) return true;
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue checking other aggregators
         continue;
       }
@@ -246,7 +246,7 @@ class SwapService {
       if (aggregator.supportedChains.contains(chainId)) {
         try {
           return await aggregator.getGasPrice(chainId);
-        } catch (_) {}
+        } on Exception catch (_) {}
       }
     }
     return BigInt.from(20000000000); // 20 gwei default
@@ -258,7 +258,7 @@ class SwapService {
   ) async {
     try {
       return await aggregator.getQuote(params);
-    } catch (e) {
+    } on Exception catch (_) {
       // Log error but don't throw - we want to continue with other aggregators
       return null;
     }
@@ -305,7 +305,7 @@ class SwapService {
         if (receipt != null) {
           return; // Transaction mined
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue waiting
       }
 

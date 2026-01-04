@@ -48,7 +48,7 @@ class TokenApprovalManager {
       final contract = await _getERC20Contract(token);
       final allowance = await contract.allowance(owner, spender);
       return allowance;
-    } catch (e) {
+    } on Exception catch (_) {
       // If we can't get allowance, assume 0
       return BigInt.zero;
     }
@@ -116,7 +116,7 @@ class TokenApprovalManager {
       );
 
       return signature;
-    } catch (e) {
+    } on Exception catch (_) {
       // If permit fails, return null to fall back to regular approval
       return null;
     }
@@ -198,7 +198,7 @@ class TokenApprovalManager {
           owner: ownerAddress,
         );
         results[token] = needsApproval;
-      } catch (e) {
+      } on Exception catch (_) {
         // If check fails, assume approval is needed
         results[token] = true;
       }
@@ -241,7 +241,7 @@ class TokenApprovalManager {
       // Try to call DOMAIN_SEPARATOR() to check if permit is supported
       await contract.read('DOMAIN_SEPARATOR', []);
       return true;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -250,7 +250,7 @@ class TokenApprovalManager {
     try {
       final result = await contract.read('nonces', [owner]);
       return result[0] as BigInt;
-    } catch (e) {
+    } on Exception catch (_) {
       return BigInt.zero;
     }
   }

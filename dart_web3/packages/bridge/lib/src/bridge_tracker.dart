@@ -76,7 +76,7 @@ class BridgeTracker {
       // Step 3: Wait for destination transaction
       await _waitForDestinationTransaction(sourceTransactionHash);
       
-    } catch (e) {
+    } on Exception catch (e) {
       // Handle monitoring error
       final errorInfo = trackingInfo.copyWith(
         status: BridgeStatus.failed,
@@ -110,7 +110,7 @@ class BridgeTracker {
         if (receiptData != null) {
           receipt = receiptData;
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Transaction not yet mined, continue polling
       }
       
@@ -218,7 +218,7 @@ class BridgeTracker {
         _emitStatusUpdate(completedInfo);
         return true;
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Error checking destination transaction
     }
 

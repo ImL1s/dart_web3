@@ -52,7 +52,7 @@ class MultichainResolver {
       _setCache(cacheKey, formattedAddress);
       
       return formattedAddress;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -131,7 +131,7 @@ class MultichainResolver {
       final addressBytes = result[0] as Uint8List?;
       
       return addressBytes;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }

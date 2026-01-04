@@ -119,7 +119,7 @@ class Contract {
         gasUsed: gasUsed,
         success: true,
       );
-    } catch (e) {
+    } on Exception catch (e) {
       // Try to decode error message
       String? revertReason;
       if (e.toString().contains('execution reverted')) {
@@ -246,7 +246,7 @@ class Contract {
             final decoded = AbiDecoder.decode(error.inputs, data.sublist(4));
             final args = decoded.map((v) => v.toString()).join(', ');
             return '${error.name}($args)';
-          } catch (_) {
+          } on Exception catch (_) {
             return error.name;
           }
         }

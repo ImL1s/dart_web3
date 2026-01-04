@@ -72,7 +72,7 @@ class EventSubscriber {
 
         // Wait for next interval
         await Future<void>.delayed(interval);
-      } catch (_) {
+      } on Exception catch (_) {
         // Continue polling on error
         await Future<void>.delayed(interval);
       }

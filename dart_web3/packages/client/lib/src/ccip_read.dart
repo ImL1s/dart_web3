@@ -79,8 +79,8 @@ class CCIPReadHandler {
           to: revertSender,
           data: callbackCallData,
         ), block);
-      } catch (e) {
-        lastError = e is Exception ? e : Exception(e.toString());
+      } on Exception catch (e) {
+        lastError = e;
         // Try next URL
         continue;
       }

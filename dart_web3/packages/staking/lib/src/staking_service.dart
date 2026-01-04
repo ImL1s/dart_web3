@@ -91,7 +91,7 @@ class StakingService {
         publicClient: _publicClient,
       );
       return await contract.read('balanceOf', [owner.hex]) as BigInt;
-    } catch (e) {
+    } on Exception catch (_) {
       return BigInt.zero;
     }
   }

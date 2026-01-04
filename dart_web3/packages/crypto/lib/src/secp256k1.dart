@@ -95,7 +95,7 @@ class Secp256k1 {
           v = i;
           break;
         }
-      } catch (_) {}
+      } on Exception catch (_) {}
     }
 
     final signature = Uint8List(65);
@@ -213,7 +213,7 @@ class Secp256k1 {
       final result = _pointAdd(point1, point2);
 
       return result.x % _n == r;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

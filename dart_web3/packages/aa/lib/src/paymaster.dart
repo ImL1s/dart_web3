@@ -137,7 +137,7 @@ class HttpPaymaster implements Paymaster {
       );
 
       return PaymasterData.fromJson(result);
-    } catch (e) {
+    } on Exception catch (_) {
       // Paymaster declined to sponsor
       return null;
     }
@@ -151,7 +151,7 @@ class HttpPaymaster implements Paymaster {
         [userOp.toJson()],
       );
       return result;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -164,7 +164,7 @@ class HttpPaymaster implements Paymaster {
         [],
       );
       return result;
-    } catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
@@ -232,7 +232,7 @@ class VerifyingPaymaster implements Paymaster {
 
       final balance = BigInt.parse(result);
       return balance > BigInt.zero;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }
@@ -325,7 +325,7 @@ class TokenPaymaster implements Paymaster { // Token units per gas unit
       final requiredAmount = _calculateTokenAmount(userOp);
       
       return balance >= requiredAmount;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

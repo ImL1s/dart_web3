@@ -85,7 +85,7 @@ void main() {
         // Batch request should consolidate all requests (even if it fails)
         try {
           await transport.batchRequest(requests);
-        } catch (e) {
+        } on Exception catch (_) {
           // Expected to fail with mock transport
         }
         
@@ -115,7 +115,7 @@ void main() {
         // Execute a request
         try {
           await provider.call<String>('eth_chainId', []);
-        } catch (e) {
+        } on Exception catch (_) {
           // Expected to fail with mock transport, but middleware should still execute
         }
         

@@ -32,7 +32,7 @@ class NftTransferManager {
         return await _needsErc1155Approval(params);
       }
       return false;
-    } catch (e) {
+    } on Exception catch (_) {
       return true; // Assume approval needed on error
     }
   }
@@ -57,7 +57,7 @@ class NftTransferManager {
         return await _isErc1155Approved(params);
       }
       return false;
-    } catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

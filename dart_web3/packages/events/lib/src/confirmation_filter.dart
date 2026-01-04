@@ -97,7 +97,7 @@ class ConfirmationFilter {
         for (final key in confirmedKeys) {
           pendingLogs.remove(key);
         }
-      } catch (e) {
+      } on Exception catch (_) {
         // Continue on error
       }
     }
@@ -199,7 +199,7 @@ class ConfirmationFilter {
       for (final key in confirmedKeys) {
         _pendingLogs.remove(key);
       }
-    } catch (e) {
+    } on Exception catch (_) {
       // Continue on error
     }
   }
