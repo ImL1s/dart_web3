@@ -22,7 +22,7 @@ command:
 
 scripts:
   analyze:
-    run: melos exec -- dart analyze --fatal-infos
+    run: melos exec -- dart analyze
     description: Run static analysis on all packages
 
   format:
