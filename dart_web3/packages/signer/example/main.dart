@@ -1,21 +1,18 @@
 import 'package:web3_universal_signer/web3_universal_signer.dart';
-import 'package:web3_universal_core/web3_universal_core.dart';
 import 'dart:typed_data';
 
 void main() async {
   // Create a random private key
-  final credentials = EthPrivateKey.createRandom();
+  final credentials = PrivateKeySigner.createRandom(1);
   print('Address: ${credentials.address}');
 
   // Sign a message
-  final message = Uint8List.fromList('Hello Web3!'.codeUnits);
-  final signature = await credentials.signPersonalMessage(message);
+  final message = 'Hello Web3!';
+  final signature = await credentials.signMessage(message);
   
   print('Signature: 0x${signature.toHex()}');
 
-  // Recover address from signature
-  final recovered = EthPrivateKey.recoverPersonalMessageAddress(message, signature);
-  print('Recovered: $recovered');
+  // Recovery is not directly exposed in PrivateKeySigner API in this version
 }
 
 extension on Uint8List {

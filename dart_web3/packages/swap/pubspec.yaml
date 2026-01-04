@@ -20,6 +20,8 @@ dependencies:
   web3_universal_contract:
     path: ../contract
   http: ^1.1.0
+  web3_universal_chains: ^0.1.0+1
+  web3_universal_signer: ^0.1.1
 
 dev_dependencies:
   lints: ^5.0.0

@@ -56,7 +56,7 @@ void main() {
       expect(signedTx.signatures.length, equals(1));
       
       // Verify signature
-      final isValid = Ed25519.verify(signedTx.signatures[0], message.serialize(), kp.publicKey);
+      final isValid = Ed25519().verify(signedTx.signatures[0], message.serialize(), kp.publicKey);
       expect(isValid, isTrue);
     });
   });

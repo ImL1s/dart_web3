@@ -4,7 +4,7 @@
 /// - [AbiType] - Type system for Solidity types
 /// - [AbiEncoder] - Encode function calls and data
 /// - [AbiDecoder] - Decode return values and events
-/// - [TypedData] - EIP-712 structured data
+/// - [EIP712TypedData] - EIP-712 structured data
 /// - [AbiParser] - Parse ABI JSON
 /// - [AbiPrettyPrinter] - Format ABI data for display
 library web3_universal_abi;

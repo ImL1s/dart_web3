@@ -5,7 +5,7 @@ import 'package:web3_universal_chains/web3_universal_chains.dart';
 void main() async {
   final client = ClientFactory.createPublicClient(
     rpcUrl: 'https://eth-mainnet.g.alchemy.com/v2/key',
-    chain: Chains.mainnet,
+    chain: Chains.ethereum,
   );
   final ens = ENSClient(client: client);
 

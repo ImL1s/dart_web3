@@ -132,7 +132,7 @@ class LedgerSigner implements HardwareWalletSigner {
   }
   
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     if (!_client.isReady) {
       throw LedgerException(
         LedgerErrorType.deviceNotFound,
@@ -297,13 +297,13 @@ class LedgerSigner implements HardwareWalletSigner {
     return Uint8List.fromList(fields.toString().codeUnits);
   }
   
-  Uint8List _hashTypedDataDomain(TypedData typedData) {
+  Uint8List _hashTypedDataDomain(EIP712TypedData typedData) {
     // Simplified domain hash - in practice, use proper EIP-712 hashing
     final domainString = typedData.domain.toString();
     return Uint8List.fromList(domainString.codeUnits);
   }
   
-  Uint8List _hashTypedDataMessage(TypedData typedData) {
+  Uint8List _hashTypedDataMessage(EIP712TypedData typedData) {
     // Simplified message hash - in practice, use proper EIP-712 hashing
     final messageString = typedData.message.toString();
     return Uint8List.fromList(messageString.codeUnits);

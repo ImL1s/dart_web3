@@ -31,7 +31,7 @@ abstract class Signer {
   Future<Uint8List> signHash(Uint8List hash);
 
   /// Signs typed data (EIP-712).
-  Future<Uint8List> signTypedData(TypedData typedData);
+  Future<Uint8List> signTypedData(EIP712TypedData typedData);
 
   /// Signs an EIP-7702 authorization.
   Future<Uint8List> signAuthorization(Authorization authorization);

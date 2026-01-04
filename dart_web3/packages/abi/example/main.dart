@@ -1,21 +1,33 @@
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'dart:typed_data';
 
 void main() {
   // Define a simple function signature
   final abi = 'transfer(address,uint256)';
+  // Define types
+  final types = [AbiUint(256), AbiString()];
   
-  // Encode parameters
-  final address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
-  final amount = BigInt.from(1000000000000000000); // 1 ETH
-  
-  final encoded = ContractAbi.encode(abi, [address, amount]);
-  print('Encoded data: 0x${encoded.toHex()}');
+  // Define values
+  final values = [BigInt.from(123), 'Hello World'];
+
+  // Encode
+  final encoded = AbiEncoder.encode(types, values);
+  print('Encoded: ${HexUtils.encode(encoded)}');
+
+  // Decode
+  final decoded = AbiDecoder.decode(types, encoded);
+  print('Decoded: $decoded');
 
   // Decode data
-  final decoded = ContractAbi.decode(abi, encoded);
-  print('Decoded Address: ${decoded[0]}');
-  print('Decoded Amount: ${decoded[1]}');
+  // Parse parameter types from signature
+  final paramsStr = abi.substring(abi.indexOf('(') + 1, abi.lastIndexOf(')'));
+  final tuple = AbiParser.parseType('($paramsStr)') as AbiTuple;
+  
+  // Skip 4-byte selector when decoding arguments
+  final decodedParams = AbiDecoder.decode(tuple.components, encoded.sublist(4));
+  print('Decoded Address: ${decodedParams[0]}');
+  print('Decoded Amount: ${decodedParams[1]}');
 }
 
 extension on Uint8List {

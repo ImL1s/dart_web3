@@ -180,7 +180,7 @@ class TrezorSigner implements HardwareWalletSigner {
   }
   
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     if (!_client.isReady) {
       throw TrezorException(
         TrezorErrorType.deviceNotFound,

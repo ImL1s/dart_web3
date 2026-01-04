@@ -132,7 +132,7 @@ class ReownSigner implements Signer {
   }
 
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     final session = sessionManager.getSession(sessionTopic);
     if (session == null) {
       throw Exception('Session not found: $sessionTopic');
@@ -196,8 +196,8 @@ class ReownSigner implements Signer {
         final signature = response['result'] as String;
         return HexUtils.decode(signature);
       } else {
-        // Fallback to typed data signing - create a simple TypedData for authorization
-        final typedData = TypedData(
+        // Fallback to typed data signing - create a simple EIP712TypedData for authorization
+        final typedData = EIP712TypedData(
           domain: {
             'name': 'EIP-7702 Authorization',
             'version': '1',

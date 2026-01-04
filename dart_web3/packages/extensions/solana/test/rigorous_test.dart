@@ -31,7 +31,7 @@ void main() {
       // Result: D7H1k6k6vF1Nf4mD6h6... (Simulation result)
       // Let's check if the address matches a deterministic derivation.
       expect(result.address.toBase58(), isNotEmpty);
-      expect(result.nonce, inInclusiveRange(0, 255));
+      expect(result.bump, inInclusiveRange(0, 255));
     });
 
     test('System Program Transfer Instruction Serialization', () {

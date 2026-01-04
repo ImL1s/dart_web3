@@ -45,7 +45,7 @@ class WalletClient extends PublicClient {
   }
 
   /// Signs typed data (EIP-712).
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     return signer.signTypedData(typedData);
   }
 

@@ -1,0 +1,115 @@
+Analyzing trezor...
+
+  error - lib\src\trezor_signer.dart:3:8 - Target of URI doesn't exist: 'package:web3_universal_abi/web3_universal_abi.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - lib\src\trezor_signer.dart:4:8 - Target of URI doesn't exist: 'package:web3_universal_core/web3_universal_core.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - lib\src\trezor_signer.dart:5:8 - Target of URI doesn't exist: 'package:web3_universal_signer/web3_universal_signer.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - lib\src\trezor_signer.dart:11:31 - Classes and mixins can only implement other classes and mixins. Try specifying a class or mixin, or remove the name from the list. - implements_non_class
+  error - lib\src\trezor_signer.dart:29:3 - Undefined class 'EthereumAddress'. Try changing the name to the name of an existing class, or creating a class with the name 'EthereumAddress'. - undefined_class
+  error - lib\src\trezor_signer.dart:36:12 - Undefined name 'EthereumAddress'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_signer.dart:59:15 - The name 'EthereumAddress' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'EthereumAddress'. - non_type_as_type_argument
+  error - lib\src\trezor_signer.dart:77:38 - Undefined name 'EthereumAddress'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_signer.dart:81:37 - Undefined class 'TransactionRequest'. Try changing the name to the name of an existing class, or creating a class with the name 'TransactionRequest'. - undefined_class
+  error - lib\src\trezor_signer.dart:107:14 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_signer.dart:138:14 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_signer.dart:168:14 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\trezor_signer.dart:199:39 - Undefined class 'Authorization'. Try changing the name to the name of an existing class, or creating a class with the name 'Authorization'. - undefined_class
+  error - test\trezor_test.dart:3:8 - Target of URI doesn't exist: 'package:web3_universal_abi/web3_universal_abi.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - test\trezor_test.dart:4:8 - Target of URI doesn't exist: 'package:web3_universal_core/web3_universal_core.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - test\trezor_test.dart:5:8 - Target of URI doesn't exist: 'package:web3_universal_signer/web3_universal_signer.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - test\trezor_test.dart:6:8 - Target of URI doesn't exist: 'package:web3_universal_trezor/web3_universal_trezor.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - test\trezor_test.dart:11:10 - Undefined class 'MockTrezorTransport'. Try changing the name to the name of an existing class, or creating a class with the name 'MockTrezorTransport'. - undefined_class
+  error - test\trezor_test.dart:14:19 - Undefined name 'TrezorTransportFactory'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:41:23 - The function 'TrezorMessage' isn't defined. Try importing the library that defines 'TrezorMessage', correcting the name to the name of an existing function, or defining a function named 'TrezorMessage'. - undefined_function
+  error - test\trezor_test.dart:42:15 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:48:36 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:54:30 - The function 'TrezorMessage' isn't defined. Try importing the library that defines 'TrezorMessage', correcting the name to the name of an existing function, or defining a function named 'TrezorMessage'. - undefined_function
+  error - test\trezor_test.dart:55:15 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:59:33 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:61:23 - The function 'TrezorMessage' isn't defined. Try importing the library that defines 'TrezorMessage', correcting the name to the name of an existing function, or defining a function named 'TrezorMessage'. - undefined_function
+  error - test\trezor_test.dart:62:15 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:68:36 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:75:23 - The function 'TrezorMessage' isn't defined. Try importing the library that defines 'TrezorMessage', correcting the name to the name of an existing function, or defining a function named 'TrezorMessage'. - undefined_function
+  error - test\trezor_test.dart:76:15 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:99:23 - Undefined name 'TrezorMessage'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:101:35 - Undefined name 'TrezorMessageType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:109:15 - Undefined name 'TrezorMessage'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:110:21 - The name 'TrezorException' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'TrezorException'. - non_type_as_type_argument
+  error - test\trezor_test.dart:117:23 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:127:23 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:142:24 - Undefined name 'ProtobufMessages'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:151:10 - Undefined class 'MockTrezorTransport'. Try changing the name to the name of an existing class, or creating a class with the name 'MockTrezorTransport'. - undefined_class
+  error - test\trezor_test.dart:152:10 - Undefined class 'TrezorClient'. Try changing the name to the name of an existing class, or creating a class with the name 'TrezorClient'. - undefined_class
+  error - test\trezor_test.dart:155:19 - Undefined name 'TrezorTransportFactory'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:156:16 - The function 'TrezorClient' isn't defined. Try importing the library that defines 'TrezorClient', correcting the name to the name of an existing function, or defining a function named 'TrezorClient'. - undefined_function
+  error - test\trezor_test.dart:164:35 - Undefined name 'TrezorConnectionState'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:168:35 - Undefined name 'TrezorConnectionState'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:210:10 - Undefined class 'MockTrezorTransport'. Try changing the name to the name of an existing class, or creating a class with the name 'MockTrezorTransport'. - undefined_class
+  error - test\trezor_test.dart:211:10 - Undefined class 'TrezorClient'. Try changing the name to the name of an existing class, or creating a class with the name 'TrezorClient'. - undefined_class
+  error - test\trezor_test.dart:212:10 - Undefined class 'TrezorSigner'. Try changing the name to the name of an existing class, or creating a class with the name 'TrezorSigner'. - undefined_class
+  error - test\trezor_test.dart:215:19 - Undefined name 'TrezorTransportFactory'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:216:16 - The function 'TrezorClient' isn't defined. Try importing the library that defines 'TrezorClient', correcting the name to the name of an existing function, or defining a function named 'TrezorClient'. - undefined_function
+  error - test\trezor_test.dart:218:22 - Undefined name 'TrezorSigner'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:248:27 - The function 'TransactionRequest' isn't defined. Try importing the library that defines 'TransactionRequest', correcting the name to the name of an existing function, or defining a function named 'TransactionRequest'. - undefined_function
+  error - test\trezor_test.dart:250:16 - Undefined name 'EthUnit'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:252:19 - Undefined name 'EthUnit'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:255:15 - Undefined name 'TransactionType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:264:28 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:276:28 - Undefined name 'HexUtils'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:295:21 - The name 'TrezorException' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'TrezorException'. - non_type_as_type_argument
+  error - test\trezor_test.dart:298:29 - The function 'Authorization' isn't defined. Try importing the library that defines 'Authorization', correcting the name to the name of an existing function, or defining a function named 'Authorization'. - undefined_function
+  error - test\trezor_test.dart:309:21 - The name 'TrezorException' isn't a type, so it can't be used as a type argument. Try correcting the name to an existing type, or defining a type named 'TrezorException'. - non_type_as_type_argument
+  error - test\trezor_test.dart:316:22 - The function 'TrezorDevice' isn't defined. Try importing the library that defines 'TrezorDevice', correcting the name to the name of an existing function, or defining a function named 'TrezorDevice'. - undefined_function
+  error - test\trezor_test.dart:329:24 - The function 'TrezorFeatures' isn't defined. Try importing the library that defines 'TrezorFeatures', correcting the name to the name of an existing function, or defining a function named 'TrezorFeatures'. - undefined_function
+  error - test\trezor_test.dart:346:25 - The function 'TrezorException' isn't defined. Try importing the library that defines 'TrezorException', correcting the name to the name of an existing function, or defining a function named 'TrezorException'. - undefined_function
+  error - test\trezor_test.dart:347:9 - Undefined name 'TrezorErrorType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\trezor_test.dart:352:37 - Undefined name 'TrezorErrorType'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+warning - lib\src\trezor_signer.dart:29:23 - The getter doesn't override an inherited getter. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:40:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:45:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:53:16 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:59:33 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:81:21 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:121:21 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:152:21 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:182:21 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+warning - lib\src\trezor_signer.dart:199:21 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member
+   info - lib\src\multi_chain_support.dart:166:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:171:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:172:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:188:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:193:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:194:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:210:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:215:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:216:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\multi_chain_support.dart:279:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\protobuf_messages.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\protobuf_messages.dart:27:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:56:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:62:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:63:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:69:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:70:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:76:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:77:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:84:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:85:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:91:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:92:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:98:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:99:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:105:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:123:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:128:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:129:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:146:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:147:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:159:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:160:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
+   info - lib\src\protobuf_messages.dart:270:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\trezor_transport.dart:272:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
+   info - lib\src\trezor_types.dart:138:24 - Static method should be a constructor. Try converting the method into a constructor. - prefer_constructors_over_static_methods
+   info - lib\web3_universal_trezor.dart:5:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+   info - test\trezor_test.dart:7:1 - Sort directive sections alphabetically. Try sorting the directives. - directives_ordering
+
+111 issues found.

@@ -89,7 +89,7 @@ void main() {
       // Simulate receiving the proposal on the wallet side
       // (Using the same sessionManager for simplicity in this unit test)
       final receivedProposal = SessionProposal.fromJson(
-        sentProposal['message']['params'],
+        sentProposal['message']['params'] as Map<String, dynamic>,
         pairingTopic,
       );
 
@@ -109,7 +109,7 @@ void main() {
 
       // 3. AppKit receives settlement
       // Simulate settlement message from relay
-      mockRelay.receiveMessage(sessionTopic, {
+      mockRelay.receiveMessage(sessionTopic as String, {
         'id': '999',
         'jsonrpc': '2.0',
         'method': 'wc_sessionSettle',

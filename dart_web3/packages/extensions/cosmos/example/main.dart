@@ -5,7 +5,7 @@ void main() async {
 
   // 1. Cosmos Address Generation
   const addressStr = 'cosmos1qypqxpqxpqxpqxpqxpqxpqxpqxpqxpqxpq';
-  final address = CosmosAddress(addressStr);
+  final address = CosmosAddress.fromString(addressStr);
   print('Parsed Address: ${address.address}');
 
   // 2. Client Interaction (Mock URL example)

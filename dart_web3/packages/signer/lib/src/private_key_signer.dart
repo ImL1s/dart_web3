@@ -39,7 +39,7 @@ class PrivateKeySigner implements Signer {
   /// Creates a random signer.
   factory PrivateKeySigner.createRandom(int chainId) {
     // Generate 32 bytes of random entropy
-    final random = HDWallet.fromMnemonic(Bip39.generate());
+    // final random = HDWallet.fromMnemonic(Bip39.generate());
     // Or just use random bytes directly if crypto exposes it?
     // Using Bip39 generate effectively gives random wallet.
     // But slightly inefficient.
@@ -112,7 +112,7 @@ class PrivateKeySigner implements Signer {
   }
 
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     final hash = typedData.hash();
     return Secp256k1.sign(hash, privateKey);
   }

@@ -51,6 +51,7 @@ class WebSocketTransport implements Transport {
       final params = data['params'] as Map<String, dynamic>;
       final subscriptionId = params['subscription'] as String;
       final controller = _subscriptions[subscriptionId];
+      // ignore: close_sinks
       if (controller != null) {
         controller.add(params['result'] as Map<String, dynamic>);
       }
@@ -127,6 +128,7 @@ class WebSocketTransport implements Transport {
     final response = await request(method, params);
     final subscriptionId = response['result'] as String;
 
+    // ignore: close_sinks
     final controller = StreamController<Map<String, dynamic>>();
     _subscriptions[subscriptionId] = controller;
 
@@ -141,7 +143,7 @@ class WebSocketTransport implements Transport {
 
   /// Unsubscribes from a subscription.
   Future<void> unsubscribe(String subscriptionId) async {
-    _subscriptions.remove(subscriptionId)?.close();
+    await _subscriptions.remove(subscriptionId)?.close();
     await request('eth_unsubscribe', [subscriptionId]);
   }
 

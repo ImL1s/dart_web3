@@ -21,8 +21,8 @@ void main() async {
     // Get balance of a specific address
     final address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'; // vitalik.eth
     final balance = await client.getBalance(address);
-    print('Balance of $address: ${balance.getValueInUnit(EthUnit.ether)} ETH');
+    print('Balance of $address: ${EthUnit.formatEther(balance)} ETH');
   } finally {
-    await client.dispose();
+    client.dispose();
   }
 }

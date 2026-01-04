@@ -40,7 +40,7 @@ class LightAccount extends BaseSmartAccount {
     final hash = HexUtils.encode(ownerBytes); // Simplified
     
     // This should be replaced with proper CREATE2 calculation
-    return '0x' + hash.replaceFirst('0x', '').substring(0, 40);
+    return '0x${hash.replaceFirst('0x', '').substring(0, 40)}';
   }
 
   @override
@@ -120,7 +120,7 @@ class LightAccount extends BaseSmartAccount {
       
       // Decode boolean result
       return result.isNotEmpty && result[31] == 1;
-    } catch (_) {
+    } on Object catch (_) {
       // Return false if contract is not deployed
       return false;
     }
@@ -142,7 +142,7 @@ class LightAccount extends BaseSmartAccount {
       // Check if result equals EIP-1271 magic value (0x1626ba7e)
       final magicValue = HexUtils.encode(result);
       return magicValue == '0x1626ba7e';
-    } catch (_) {
+    } on Object catch (_) {
       return false;
     }
   }

@@ -3,7 +3,7 @@
 /// This library provides comprehensive support for ERC-4337 Account Abstraction,
 /// including UserOperation construction, Bundler communication, Paymaster integration,
 /// and Smart Account implementations.
-library web3_universal_aa;
+
 
 export 'src/accounts/light_account.dart';
 // Smart Account implementations

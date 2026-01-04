@@ -4,12 +4,12 @@ void main() async {
   // Initialize Reown AppKit/WalletConnect
   final appKit = ReownAppKit(
     projectId: 'YOUR_PROJECT_ID',
-    metadata: PairingMetadata(
-      name: 'Web3 Universal Example',
-      description: 'Dart Web3 Universal SDK Example',
-      url: 'https://github.com/ImL1s/web3_universal',
-      icons: ['https://reown.com/favicon.ico'],
-    ),
+    metadata: {
+      'name': 'Web3 Universal Example',
+      'description': 'Dart Web3 Universal SDK Example',
+      'url': 'https://github.com/ImL1s/web3_universal',
+      'icons': ['https://reown.com/favicon.ico'],
+    },
   );
 
   await appKit.init();

@@ -4,17 +4,17 @@ import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// EIP-712 Typed Data for structured data signing.
-class TypedData {
+class EIP712TypedData {
 
-  TypedData({
+  EIP712TypedData({
     required this.domain,
     required this.types,
     required this.primaryType,
     required this.message,
   });
 
-  /// Creates TypedData from a JSON map.
-  factory TypedData.fromJson(Map<String, dynamic> json) {
+  /// Creates EIP712TypedData from a JSON map.
+  factory EIP712TypedData.fromJson(Map<String, dynamic> json) {
     final types = <String, List<TypedDataField>>{};
     final jsonTypes = json['types'] as Map<String, dynamic>;
 
@@ -28,7 +28,7 @@ class TypedData {
           .toList();
     }
 
-    return TypedData(
+    return EIP712TypedData(
       domain: json['domain'] as Map<String, dynamic>,
       types: types,
       primaryType: json['primaryType'] as String,

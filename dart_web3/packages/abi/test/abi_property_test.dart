@@ -216,7 +216,7 @@ void main() {
           final verifyingContract = _generateRandomAddress(random);
 
           // Create TypedData with domain
-          final typedData = TypedData(
+          final typedData = EIP712TypedData(
             domain: {
               'name': name,
               'version': version,
@@ -249,7 +249,7 @@ void main() {
               reason: 'EIP-712 hash should be 32 bytes',);
 
           // Different domain should produce different hash
-          final differentTypedData = TypedData(
+          final differentTypedData = EIP712TypedData(
             domain: {
               'name': '${name}Different',
               'version': version,
@@ -266,7 +266,7 @@ void main() {
               reason: 'Different domain should produce different hash',);
 
           // Different message should produce different hash
-          final differentMessageTypedData = TypedData(
+          final differentMessageTypedData = EIP712TypedData(
             domain: typedData.domain,
             types: typedData.types,
             primaryType: typedData.primaryType,

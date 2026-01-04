@@ -279,7 +279,7 @@ void main() {
     });
     
     test('should throw for unsupported operations', () async {
-      final typedData = abi.TypedData(
+      final typedData = abi.EIP712TypedData(
         domain: {'name': 'Test'},
         types: {
           'Test': [

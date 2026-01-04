@@ -224,7 +224,7 @@ class KeystoneClient {
       
     } finally {
       timeoutTimer?.cancel();
-      scanSubscription?.cancel();
+      await scanSubscription?.cancel();
       if (_qrScanner != null) {
         await _qrScanner!.stopScanning();
       }

@@ -214,7 +214,7 @@ class MockSigner implements Signer {
   }
 
   @override
-  Future<Uint8List> signTypedData(abi.TypedData typedData) async {
+  Future<Uint8List> signTypedData(abi.EIP712TypedData typedData) async {
     return Uint8List(65);
   }
 

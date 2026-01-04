@@ -102,7 +102,7 @@ class MpcSignerImpl extends MpcSigner {
   }
 
   @override
-  Future<Uint8List> signTypedData(TypedData typedData) async {
+  Future<Uint8List> signTypedData(EIP712TypedData typedData) async {
     // Get the EIP-712 hash
     final messageHash = typedData.hash();
     
