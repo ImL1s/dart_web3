@@ -33,8 +33,8 @@ scripts:
   test_all:
     run: |
       echo "Running custom test_all script"
-      melos exec --no-flutter --ignore="web3_wallet_app" -- dirExists=test -- dart test
-      melos exec --flutter -- dirExists=test -- flutter test
+      melos exec --no-flutter --ignore="web3_wallet_app" --dir-exists="test" -- dart test
+      melos exec --flutter --dir-exists="test" -- flutter test
       melos exec --scope="web3_wallet_app" -- flutter test
     description: Run tests in all packages
     # packageFilters:
