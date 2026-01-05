@@ -13,13 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          channel: 'stable'
+          flutter-version: '3.27.0'
 
       - name: Install dependencies
-        run: dart pub get
+        run: |
+          flutter pub get
+          dart pub get
 
       - name: Install Melos
         run: dart pub global activate melos

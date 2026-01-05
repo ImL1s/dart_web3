@@ -3,6 +3,7 @@ repository: https://github.com/ImL1s/dart_web3
 
 packages:
   - packages/**
+  - example_app
   # - web3_universal
 
 command:
@@ -30,10 +31,12 @@ scripts:
     description: Check formatting of all packages
 
   test:
-    run: melos exec --concurrency=1 -- dart test
+    run: |
+      melos exec --no-flutter -- dirExists=test -- dart test
+      melos exec --flutter -- dirExists=test -- flutter test
     description: Run tests in all packages
-    packageFilters:
-      dirExists: test
+    # packageFilters:
+    #   dirExists: test
     select-package: false
 
   test:coverage:

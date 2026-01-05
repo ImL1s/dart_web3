@@ -1,0 +1,73 @@
+name: web3_wallet_app
+description: A comprehensive multi-chain wallet demonstrating the dart_web3 SDK capabilities.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management - Riverpod 2.x
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  
+  # Routing
+  go_router: ^16.1.0
+  
+  # UI Components
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.17
+  qr_flutter: ^4.1.0
+  shimmer: ^3.0.0
+  
+  # Storage
+  shared_preferences: ^2.3.5
+  flutter_secure_storage: ^10.0.0
+  
+  # Utilities
+  intl: ^0.20.2
+  url_launcher: ^6.3.1
+  
+  # dart_web3 SDK (path dependencies)
+  web3_universal_core:
+    path: ../packages/core
+  web3_universal_crypto:
+    path: ../packages/crypto
+  web3_universal_abi:
+    path: ../packages/abi
+  web3_universal_signer:
+    path: ../packages/signer
+  web3_universal_chains:
+    path: ../packages/chains
+  web3_universal_client:
+    path: ../packages/client
+  web3_universal_provider:
+    path: ../packages/provider
+  web3_universal_ens:
+    path: ../packages/ens
+  web3_universal_swap:
+    path: ../packages/swap
+  web3_universal_nft:
+    path: ../packages/nft
+  web3_universal_price:
+    path: ../packages/price
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.14
+  riverpod_generator: ^2.6.4
+  custom_lint: ^0.7.1
+  riverpod_lint: ^2.6.5
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
