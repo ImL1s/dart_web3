@@ -37,8 +37,7 @@ jobs:
           cd dart_web3
           melos run analyze
 
-      - name: Run Tests (All Packages)
+      - name: Run tests
         run: |
           cd dart_web3
-          # Dynamically run tests for all packages that have a 'test' directory
-          melos exec --concurrency=1 --fail-fast --dir-exists="test" -- dart test
+          melos run test_all
