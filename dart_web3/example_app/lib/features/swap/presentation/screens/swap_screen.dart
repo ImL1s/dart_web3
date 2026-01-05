@@ -168,6 +168,7 @@ class _SwapScreenState extends ConsumerState<SwapScreen> {
                         Future.delayed(const Duration(seconds: 2), () {
                           if (mounted) {
                             setState(() => _isLoading = false);
+                            // ignore: use_build_context_synchronously
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Swap feature coming soon!'),

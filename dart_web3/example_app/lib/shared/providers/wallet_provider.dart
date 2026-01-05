@@ -69,8 +69,8 @@ class ChainAccount {
     required this.chainName,
     required this.chainId,
     required this.derivationPath,
-    this.balance = BigInt.zero,
-  });
+    BigInt? balance,
+  }) : balance = balance ?? BigInt.zero;
 
   ChainAccount copyWith({BigInt? balance}) {
     return ChainAccount(
