@@ -93,7 +93,9 @@ class RangoAggregator extends DexAggregator {
 
   @override
   Future<bool> isTokenPairSupported(
-      SwapToken fromToken, SwapToken toToken) async {
+    SwapToken fromToken,
+    SwapToken toToken,
+  ) async {
     if (!supportedChains.contains(fromToken.chainId) ||
         !supportedChains.contains(toToken.chainId)) {
       return false;
@@ -102,18 +104,21 @@ class RangoAggregator extends DexAggregator {
     try {
       final tokens = await getSupportedTokens(fromToken.chainId);
       final fromSupported = tokens.any(
-          (t) => t.address.toLowerCase() == fromToken.address.toLowerCase());
+        (t) => t.address.toLowerCase() == fromToken.address.toLowerCase(),
+      );
 
       if (fromToken.chainId == toToken.chainId) {
         // Same chain swap
         return fromSupported &&
-            tokens.any((t) =>
-                t.address.toLowerCase() == toToken.address.toLowerCase());
+            tokens.any(
+              (t) => t.address.toLowerCase() == toToken.address.toLowerCase(),
+            );
       } else {
         // Cross-chain swap - check destination chain tokens
         final destTokens = await getSupportedTokens(toToken.chainId);
         final toSupported = destTokens.any(
-            (t) => t.address.toLowerCase() == toToken.address.toLowerCase());
+          (t) => t.address.toLowerCase() == toToken.address.toLowerCase(),
+        );
         return fromSupported && toSupported;
       }
     } on Exception catch (_) {
@@ -151,8 +156,11 @@ class RangoAggregator extends DexAggregator {
       final tokens = data['tokens'] as List<dynamic>? ?? [];
 
       return tokens
-          .where((token) =>
-              (token as Map<String, dynamic>)['chainId'] == chainId.toString())
+          .where(
+            (token) =>
+                (token as Map<String, dynamic>)['chainId'] ==
+                chainId.toString(),
+          )
           .map((token) {
         final tokenData = token as Map<String, dynamic>;
         return SwapToken(
@@ -353,14 +361,15 @@ class RangoAggregator extends DexAggregator {
   }
 
   Uint8List _hexToBytes(String hex) {
-    if (hex.startsWith('0x')) {
-      hex = hex.substring(2);
+    var hexStr = hex;
+    if (hexStr.startsWith('0x')) {
+      hexStr = hexStr.substring(2);
     }
-    if (hex.isEmpty) return Uint8List(0);
+    if (hexStr.isEmpty) return Uint8List(0);
 
     final bytes = <int>[];
-    for (var i = 0; i < hex.length; i += 2) {
-      final hexByte = hex.substring(i, i + 2);
+    for (var i = 0; i < hexStr.length; i += 2) {
+      final hexByte = hexStr.substring(i, i + 2);
       bytes.add(int.parse(hexByte, radix: 16));
     }
     return Uint8List.fromList(bytes);

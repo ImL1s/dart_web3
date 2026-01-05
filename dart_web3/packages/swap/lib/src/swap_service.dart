@@ -20,11 +20,10 @@ import 'token_approval.dart';
 class SwapService {
   SwapService({
     required this.walletClient,
+    this.mevProtectionService,
     List<DexAggregator>? aggregators,
-    MevProtectionService? mevProtectionService,
   })  : aggregators = aggregators ?? _createDefaultAggregators(),
         approvalManager = TokenApprovalManager(walletClient),
-        mevProtectionService = mevProtectionService,
         swapTracker = SwapTracker(walletClient);
   final WalletClient walletClient;
   final List<DexAggregator> aggregators;
@@ -54,7 +53,8 @@ class SwapService {
 
   /// Get quotes with dynamic slippage calculation
   Future<List<SwapQuote>> getQuotesWithDynamicSlippage(
-      SwapParams params) async {
+    SwapParams params,
+  ) async {
     // First get quotes with base slippage
     final baseQuotes = await getQuotes(params);
     if (baseQuotes.isEmpty) return [];
@@ -89,7 +89,7 @@ class SwapService {
       }
 
       // Sign the transaction
-      final signedTx = await walletClient.signTransaction(
+      final signedTx = await walletClient.signTransactionRequest(
         TransactionRequest(
           to: quote.transaction.to,
           data: quote.transaction.data,
@@ -97,9 +97,7 @@ class SwapService {
           gasLimit: quote.transaction.gasLimit,
           gasPrice: quote.transaction.gasPrice,
           maxFeePerGas: quote.transaction.maxFeePerGas,
-          maxPriorityFeePerGas: quote.transaction.maxPriorityFeePerGas,
           chainId: quote.params.fromToken.chainId,
-          type: TransactionType.eip1559,
         ),
       );
 
@@ -120,11 +118,10 @@ class SwapService {
             await walletClient.sendRawTransaction(HexUtils.encode(signedTx));
       }
 
-      // Start tracking the swap
       swapTracker.trackSwap(
         transactionHash: txHash,
         quote: quote,
-        userAddress: walletClient.address.hex,
+        userAddress: walletClient.address,
       );
 
       return txHash;
@@ -141,7 +138,7 @@ class SwapService {
     try {
       final result = await walletClient.call(
         CallRequest(
-          from: walletClient.address.hex,
+          from: walletClient.address,
           to: quote.transaction.to,
           data: quote.transaction.data,
           value: quote.transaction.value,
@@ -192,7 +189,9 @@ class SwapService {
 
   /// Check if a token pair is supported
   Future<bool> isTokenPairSupported(
-      SwapToken fromToken, SwapToken toToken) async {
+    SwapToken fromToken,
+    SwapToken toToken,
+  ) async {
     for (final aggregator in aggregators) {
       try {
         final supported =
@@ -214,7 +213,8 @@ class SwapService {
 
     return allSwaps
         .where(
-            (swap) => swap.userAddress?.toLowerCase() == address.toLowerCase())
+          (swap) => swap.userAddress?.toLowerCase() == address.toLowerCase(),
+        )
         .toList();
   }
 

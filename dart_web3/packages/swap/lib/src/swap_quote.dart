@@ -41,7 +41,8 @@ class SwapQuote {
       validUntil: Duration(seconds: json['validUntilSeconds'] as int),
       crossChainInfo: json['crossChainInfo'] != null
           ? CrossChainSwapInfo.fromJson(
-              json['crossChainInfo'] as Map<String, dynamic>)
+              json['crossChainInfo'] as Map<String, dynamic>,
+            )
           : null,
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
@@ -121,6 +122,16 @@ class QuoteComparison {
     required this.gasDifference,
     required this.priceImpactDifference,
   });
+  factory QuoteComparison.compare(SwapQuote quote1, SwapQuote quote2) {
+    return QuoteComparison(
+      quote1: quote1,
+      quote2: quote2,
+      outputDifference: quote1.netOutputAmount - quote2.netOutputAmount,
+      gasDifference: quote1.gasCost - quote2.gasCost,
+      priceImpactDifference: quote1.priceImpact - quote2.priceImpact,
+    );
+  }
+
   final SwapQuote quote1;
   final SwapQuote quote2;
   final BigInt outputDifference;
@@ -132,14 +143,4 @@ class QuoteComparison {
 
   /// Returns the better quote
   SwapQuote get betterQuote => isQuote1Better ? quote1 : quote2;
-
-  static QuoteComparison compare(SwapQuote quote1, SwapQuote quote2) {
-    return QuoteComparison(
-      quote1: quote1,
-      quote2: quote2,
-      outputDifference: quote1.netOutputAmount - quote2.netOutputAmount,
-      gasDifference: quote1.gasCost - quote2.gasCost,
-      priceImpactDifference: quote1.priceImpact - quote2.priceImpact,
-    );
-  }
 }

@@ -19,7 +19,10 @@ dependencies:
     path: ../client
   web3_universal_contract:
     path: ../contract
+  web3_universal_abi:
+    path: ../abi
   http: ^1.1.0
+  meta: ^1.11.0
   web3_universal_chains:
     path: ../chains
   web3_universal_signer:

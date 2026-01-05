@@ -1,10 +1,11 @@
+// ignore_for_file: avoid_classes_with_only_static_members
 import 'dart:math' as math;
 
 import 'swap_quote.dart';
 import 'swap_types.dart';
 
 /// Dynamic slippage calculator for swap operations
-class SlippageCalculator {
+abstract final class SlippageCalculator {
   /// Calculate dynamic slippage based on market conditions
   static double calculateDynamicSlippage({
     required SwapToken fromToken,
@@ -178,9 +179,10 @@ class SlippageCalculator {
     }
   }
 
-  /// Estimate liquidity multiplier for token pair
   static double _estimateLiquidityMultiplier(
-      SwapToken fromToken, SwapToken toToken) {
+    SwapToken fromToken,
+    SwapToken toToken,
+  ) {
     // This is a simplified heuristic - in practice you'd use on-chain liquidity data
 
     final majorTokens = [
@@ -207,7 +209,9 @@ class SlippageCalculator {
 
   /// Get base slippage for a token pair
   static double _getBaseSlippageForPair(
-      SwapToken fromToken, SwapToken toToken) {
+    SwapToken fromToken,
+    SwapToken toToken,
+  ) {
     // Stablecoin pairs have lower slippage
     final stablecoins = ['USDC', 'USDT', 'DAI', 'BUSD', 'FRAX'];
     final fromStable = stablecoins.contains(fromToken.symbol.toUpperCase());

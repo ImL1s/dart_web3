@@ -111,7 +111,9 @@ class ZeroXAggregator extends DexAggregator {
 
   @override
   Future<bool> isTokenPairSupported(
-      SwapToken fromToken, SwapToken toToken) async {
+    SwapToken fromToken,
+    SwapToken toToken,
+  ) async {
     if (fromToken.chainId != toToken.chainId) return false;
     if (!supportedChains.contains(fromToken.chainId)) return false;
 
@@ -314,14 +316,15 @@ class ZeroXAggregator extends DexAggregator {
   }
 
   Uint8List _hexToBytes(String hex) {
-    if (hex.startsWith('0x')) {
-      hex = hex.substring(2);
+    var hexStr = hex;
+    if (hexStr.startsWith('0x')) {
+      hexStr = hexStr.substring(2);
     }
-    if (hex.isEmpty) return Uint8List(0);
+    if (hexStr.isEmpty) return Uint8List(0);
 
     final bytes = <int>[];
-    for (var i = 0; i < hex.length; i += 2) {
-      final hexByte = hex.substring(i, i + 2);
+    for (var i = 0; i < hexStr.length; i += 2) {
+      final hexByte = hexStr.substring(i, i + 2);
       bytes.add(int.parse(hexByte, radix: 16));
     }
     return Uint8List.fromList(bytes);

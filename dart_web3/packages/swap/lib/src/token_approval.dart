@@ -23,7 +23,7 @@ class TokenApprovalManager {
       return false; // Native tokens don't need approval
     }
 
-    final ownerAddress = owner ?? walletClient.address.hex;
+    final ownerAddress = owner ?? walletClient.address;
     final currentAllowance = await getCurrentAllowance(
       token: token,
       owner: ownerAddress,
@@ -41,7 +41,8 @@ class TokenApprovalManager {
   }) async {
     if (_isNativeToken(token)) {
       return BigInt.from(
-          double.maxFinite.toInt()); // Native tokens have unlimited allowance
+        double.maxFinite.toInt(),
+      ); // Native tokens have unlimited allowance
     }
 
     try {
@@ -102,7 +103,7 @@ class TokenApprovalManager {
       }
 
       // Get nonce for permit
-      final nonce = await _getPermitNonce(contract, walletClient.address.hex);
+      final nonce = await _getPermitNonce(contract, walletClient.address);
 
       // Create permit signature
       final signature = await _createPermitSignature(
@@ -140,7 +141,9 @@ class TokenApprovalManager {
     final approvalFunc =
         contract.functions.firstWhere((f) => f.name == 'approve');
     final data = AbiEncoder.encodeFunction(
-        approvalFunc.signature, [spender, approvalAmount]);
+      approvalFunc.signature,
+      [spender, approvalAmount],
+    );
 
     // Estimate gas
     final gasEstimate = await walletClient.estimateGas(
@@ -184,7 +187,7 @@ class TokenApprovalManager {
     }
 
     final results = <SwapToken, bool>{};
-    final ownerAddress = owner ?? walletClient.address.hex;
+    final ownerAddress = owner ?? walletClient.address;
 
     for (var i = 0; i < tokens.length; i++) {
       final token = tokens[i];
@@ -234,7 +237,8 @@ class TokenApprovalManager {
 
   BigInt _getMaxUint256() {
     return BigInt.parse(
-        '115792089237316195423570985008687907853269984665640564039457584007913129639935');
+      '115792089237316195423570985008687907853269984665640564039457584007913129639935',
+    );
   }
 
   Future<bool> _supportsPermit(ERC20Contract contract) async {

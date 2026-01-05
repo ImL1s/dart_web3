@@ -124,9 +124,10 @@ class MevProtectionService {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
 
-      if (data['error'] != null) {
+      final error = data['error'];
+      if (error is Map<String, dynamic>) {
         throw MevProtectionException(
-          'Flashbots error: ${data['error']['message']}',
+          'Flashbots error: ${error['message']}',
         );
       }
 
@@ -181,9 +182,10 @@ class MevProtectionService {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
 
-      if (data['error'] != null) {
+      final error = data['error'];
+      if (error is Map<String, dynamic>) {
         throw MevProtectionException(
-          'MEV Blocker error: ${data['error']['message']}',
+          'MEV Blocker error: ${error['message']}',
         );
       }
 
@@ -239,9 +241,10 @@ class MevProtectionService {
 
       final data = json.decode(response.body) as Map<String, dynamic>;
 
-      if (data['error'] != null) {
+      final error = data['error'];
+      if (error is Map<String, dynamic>) {
         throw MevProtectionException(
-          'Eden Network error: ${data['error']['message']}',
+          'Eden Network error: ${error['message']}',
         );
       }
 

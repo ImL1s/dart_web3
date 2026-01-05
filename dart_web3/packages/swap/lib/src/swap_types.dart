@@ -1,6 +1,8 @@
 import 'dart:typed_data';
+import 'package:meta/meta.dart';
 
 /// Token information for swaps
+@immutable
 class SwapToken {
   const SwapToken({
     required this.address,
@@ -52,6 +54,7 @@ class SwapToken {
 }
 
 /// Swap parameters
+@immutable
 class SwapParams {
   const SwapParams({
     required this.fromToken,
@@ -100,6 +103,7 @@ class SwapParams {
 }
 
 /// Swap route information
+@immutable
 class SwapRoute {
   const SwapRoute({
     required this.path,
@@ -138,6 +142,7 @@ class SwapRoute {
 }
 
 /// Swap transaction data
+@immutable
 class SwapTransaction {
   const SwapTransaction({
     required this.to,
@@ -205,6 +210,7 @@ enum MevProtectionType {
 }
 
 /// Cross-chain swap information
+@immutable
 class CrossChainSwapInfo {
   const CrossChainSwapInfo({
     required this.sourceChainId,

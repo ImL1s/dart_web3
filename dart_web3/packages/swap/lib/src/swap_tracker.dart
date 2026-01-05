@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:meta/meta.dart';
+
 import 'package:web3_universal_client/web3_universal_client.dart';
 
 import 'swap_quote.dart';
@@ -230,6 +232,7 @@ class SwapTracker {
 }
 
 /// Swap tracking information
+@immutable
 class SwapTrackingInfo {
   const SwapTrackingInfo({
     required this.transactionHash,
@@ -327,6 +330,7 @@ class SwapTrackingInfo {
 }
 
 /// Swap result analysis
+@immutable
 class SwapResult {
   const SwapResult({
     required this.actualOutputAmount,
@@ -379,6 +383,7 @@ class SwapResult {
 }
 
 /// Swap status update event
+@immutable
 class SwapStatusUpdate {
   const SwapStatusUpdate({
     required this.transactionHash,
