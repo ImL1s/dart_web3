@@ -30,8 +30,9 @@ scripts:
     run: dart format --set-exit-if-changed .
     description: Check formatting of all packages
 
-  test:
+  test_all:
     run: |
+      echo "Running custom test_all script"
       melos exec --no-flutter --ignore="web3_wallet_app" -- dirExists=test -- dart test
       melos exec --flutter -- dirExists=test -- flutter test
       melos exec --scope="web3_wallet_app" -- flutter test
