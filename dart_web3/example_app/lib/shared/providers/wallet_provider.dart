@@ -64,7 +64,7 @@ class ChainAccount {
   final String derivationPath;
   final BigInt balance;
 
-  const ChainAccount({
+  ChainAccount({
     required this.address,
     required this.chainName,
     required this.chainId,
