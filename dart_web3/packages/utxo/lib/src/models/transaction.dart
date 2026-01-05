@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+
 /// Represents a UTXO transaction input (vin).
 class TransactionInput {
   TransactionInput({
@@ -132,8 +135,11 @@ class BitcoinTransaction {
   /// Transaction ID (hash of the transaction).
   String get txId {
     // SegWit txId is hash of legacy serialization (no witness)
-    // TODO: Implement proper double SHA256 when imports available
-    return '';
+    final legacyBytes = toBytes(segwit: false);
+    final hash = Sha256.doubleHash(legacyBytes);
+
+    // Bitcoin txId is displayed in little-endian hex
+    return HexUtils.encode(Uint8List.fromList(hash.reversed.toList()));
   }
 
   /// Checks if this transaction signals RBF (Replace-By-Fee) eligibility.

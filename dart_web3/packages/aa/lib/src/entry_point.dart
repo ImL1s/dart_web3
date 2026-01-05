@@ -73,7 +73,7 @@ class EntryPointV06 implements EntryPoint {
       gasLimit: BigInt.from(1000000), // Estimate gas properly in production
     );
 
-    return _walletClient.sendTransaction(txRequest);
+    return _walletClient.sendTransactionRequest(txRequest);
   }
 
   @override
@@ -94,7 +94,7 @@ class EntryPointV06 implements EntryPoint {
       gasLimit: BigInt.from(1000000),
     );
 
-    return _walletClient.sendTransaction(txRequest);
+    return _walletClient.sendTransactionRequest(txRequest);
   }
 
   @override
@@ -390,7 +390,7 @@ class EntryPointV07 implements EntryPoint {
       gasLimit: BigInt.from(1000000),
     );
 
-    return _walletClient.sendTransaction(txRequest);
+    return _walletClient.sendTransactionRequest(txRequest);
   }
 
   @override
@@ -411,7 +411,7 @@ class EntryPointV07 implements EntryPoint {
       gasLimit: BigInt.from(1000000),
     );
 
-    return _walletClient.sendTransaction(txRequest);
+    return _walletClient.sendTransactionRequest(txRequest);
   }
 
   @override

@@ -21,6 +21,8 @@ dependencies:
     path: ../../signer
   web3_universal_provider:
     path: ../../provider
+  web3_universal_chains:
+    path: ../../chains
   http: ^1.1.0
 
 dev_dependencies:

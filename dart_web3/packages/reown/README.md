@@ -1,6 +1,6 @@
 # dart_web3_reown
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_reown.svg)](https://pub.dev/packages/dart_web3_reown)
+[![Pub](https://img.shields.io/pub/v/web3_universal_reown.svg)](https://pub.dev/packages/web3_universal_reown)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **seamless WalletConnect (Reown) v2 integration** for Dart. Connect your decentralized application (dApp) to hundreds of mobile and browser wallets with a single protocol.

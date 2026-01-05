@@ -6,7 +6,7 @@ void main() {
     setUp(() {
       // Clear any custom chains before each test
       final customChainIds = Chains.getAllChains()
-          .where((chain) => ![1, 5, 11155111, 137, 56, 42161, 10, 8453, 43114]
+          .where((chain) => ![1, 5, 11155111, 137, 56, 42161, 10, 8453, 43114, -1]
               .contains(chain.chainId))
           .map((chain) => chain.chainId)
           .toList();
@@ -196,7 +196,7 @@ void main() {
       test('should return all predefined chains', () {
         final allChains = Chains.getAllChains();
 
-        expect(allChains, hasLength(9)); // 9 predefined chains
+        expect(allChains, hasLength(11)); // 9 EVM + 2 Solana (testnet/devnet)
         expect(allChains, contains(Chains.ethereum));
         expect(allChains, contains(Chains.goerli));
         expect(allChains, contains(Chains.sepolia));
@@ -223,7 +223,7 @@ void main() {
         Chains.registerChain(customChain);
         final allChains = Chains.getAllChains();
 
-        expect(allChains, hasLength(10)); // 9 predefined + 1 custom
+        expect(allChains, hasLength(12)); // 11 predefined + 1 custom
         expect(allChains, contains(customChain));
       });
     });

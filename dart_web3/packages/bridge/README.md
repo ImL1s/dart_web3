@@ -1,6 +1,6 @@
 # dart_web3_bridge
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_bridge.svg)](https://pub.dev/packages/dart_web3_bridge)
+[![Pub](https://img.shields.io/pub/v/web3_universal_bridge.svg)](https://pub.dev/packages/web3_universal_bridge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **cross-chain interoperability wrapper** for the Dart Web3 ecosystem. Effortlessly move assets between Layer 1s, Layer 2s, and sidechains using a standardized interface.

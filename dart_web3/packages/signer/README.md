@@ -1,6 +1,6 @@
 # dart_web3_signer
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_signer.svg)](https://pub.dev/packages/dart_web3_signer)
+[![Pub](https://img.shields.io/pub/v/web3_universal_signer.svg)](https://pub.dev/packages/web3_universal_signer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **universal signing abstraction** for the Dart Web3 ecosystem. It decouples identity management from execution logic, supporting local, hardware, and remote signing workflows.

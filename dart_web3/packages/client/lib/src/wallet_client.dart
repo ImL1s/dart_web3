@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:web3_universal_abi/web3_universal_abi.dart';
+import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart';
@@ -9,7 +10,7 @@ import 'models.dart';
 import 'public_client.dart';
 
 /// Wallet client for signing and sending transactions.
-class WalletClient extends PublicClient {
+class WalletClient extends PublicClient implements WalletClientBase {
   WalletClient({
     required super.provider,
     required super.chain,
@@ -20,10 +21,18 @@ class WalletClient extends PublicClient {
   Signer signer;
 
   /// The wallet address.
-  EthereumAddress get address => signer.address;
+  @override
+  String get address => signer.address.hex;
 
-  /// Sends a transaction.
-  Future<String> sendTransaction(TransactionRequest request) async {
+  /// Sends a transaction to the network.
+  /// Standardized to [Uint8List] for raw transaction submission.
+  @override
+  Future<String> sendTransaction(Uint8List tx) async {
+    return sendRawTransaction(HexUtils.encode(tx));
+  }
+
+  /// High-level method to send a transaction request.
+  Future<String> sendTransactionRequest(TransactionRequest request) async {
     // Fill in missing fields
     final prepared = await prepareTransaction(request);
 
@@ -40,6 +49,7 @@ class WalletClient extends PublicClient {
   }
 
   /// Signs a message.
+  @override
   Future<Uint8List> signMessage(String message) async {
     return signer.signMessage(message);
   }
@@ -50,9 +60,17 @@ class WalletClient extends PublicClient {
   }
 
   /// Signs a transaction without sending.
-  Future<Uint8List> signTransaction(TransactionRequest transaction) async {
+  Future<Uint8List> signTransactionRequest(
+      TransactionRequest transaction) async {
     final prepared = await prepareTransaction(transaction);
     return signer.signTransaction(prepared);
+  }
+
+  @override
+  Future<Uint8List> signTransaction(Uint8List tx) async {
+    // Standard interface implementation. For EVM, we prefer TransactionRequest.
+    // This can be implemented to sign raw bytes if the signer supports it.
+    return signer.signHash(tx);
   }
 
   /// Signs an EIP-7702 authorization.
@@ -149,7 +167,7 @@ class WalletClient extends PublicClient {
       nonce: nonce,
     );
 
-    return sendTransaction(request);
+    return sendTransactionRequest(request);
   }
 
   /// Calls a method on a delegated contract.
@@ -168,7 +186,7 @@ class WalletClient extends PublicClient {
     final data = _encodeFunctionCall(functionSignature, args);
 
     // Create authorization for the contract
-    final currentNonce = await getTransactionCount(address.hex, 'pending');
+    final currentNonce = await getTransactionCount(address, 'pending');
     final authorization = await createAuthorization(
       contractAddress: contractAddress,
       nonce: currentNonce,
@@ -176,7 +194,7 @@ class WalletClient extends PublicClient {
 
     // Send EIP-7702 transaction
     return sendEip7702Transaction(
-      to: address.hex, // Call to self with delegated code
+      to: address, // Call to self with delegated code
       value: value,
       data: data,
       authorizationList: [authorization],
@@ -233,7 +251,7 @@ class WalletClient extends PublicClient {
     Uint8List? data,
   }) async {
     final request = CallRequest(
-      from: address.hex,
+      from: address,
       to: to,
       data: data,
       value: value,
@@ -249,7 +267,7 @@ class WalletClient extends PublicClient {
 
   /// Transfers native currency.
   Future<String> transfer(String to, BigInt amount) async {
-    return sendTransaction(
+    return sendTransactionRequest(
       TransactionRequest(
         to: to,
         value: amount,
@@ -269,7 +287,7 @@ class WalletClient extends PublicClient {
 
     // Set nonce
     if (tx.nonce == null) {
-      final nonce = await getTransactionCount(address.hex, 'pending');
+      final nonce = await getTransactionCount(address, 'pending');
       tx = tx.copyWith(nonce: nonce);
     }
 
@@ -278,7 +296,8 @@ class WalletClient extends PublicClient {
       final gasLimit = await estimateGas(_toCallRequest(tx));
       // Add 20% buffer
       tx = tx.copyWith(
-          gasLimit: gasLimit * BigInt.from(120) ~/ BigInt.from(100));
+        gasLimit: gasLimit * BigInt.from(120) ~/ BigInt.from(100),
+      );
     }
 
     // Set gas price / fee
@@ -301,13 +320,13 @@ class WalletClient extends PublicClient {
   }
 
   /// Switches the signer.
-  void switchAccount(Signer newSigner) {
+  set switchAccount(Signer newSigner) {
     signer = newSigner;
   }
 
   CallRequest _toCallRequest(TransactionRequest tx) {
     return CallRequest(
-      from: address.hex,
+      from: address,
       to: tx.to,
       data: tx.data,
       value: tx.value,

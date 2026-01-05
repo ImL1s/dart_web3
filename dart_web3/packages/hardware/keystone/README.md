@@ -1,6 +1,6 @@
 # dart_web3_keystone
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_keystone.svg)](https://pub.dev/packages/dart_web3_keystone)
+[![Pub](https://img.shields.io/pub/v/web3_universal_keystone.svg)](https://pub.dev/packages/web3_universal_keystone)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **high-security interface for Keystone hardware wallets**. Fully supports air-gapped communication via the BC-UR protocol for Ethereum and multi-chain signing workflows.

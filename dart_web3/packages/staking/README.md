@@ -1,6 +1,6 @@
 # dart_web3_staking
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_staking.svg)](https://pub.dev/packages/dart_web3_staking)
+[![Pub](https://img.shields.io/pub/v/web3_universal_staking.svg)](https://pub.dev/packages/web3_universal_staking)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **liquid and native staking integrator** for Dart. Simplify the complexity of staking assets, claiming rewards, and managing validator delegations through a unified API.

@@ -1,3 +1,6 @@
+/// Type of blockchain network architecture.
+enum ChainType { evm, svm, utxo, cosmos, polkadot, ton, tron }
+
 /// Configuration for a blockchain network.
 class ChainConfig {
   ChainConfig({
@@ -9,11 +12,15 @@ class ChainConfig {
     required this.decimals,
     required this.rpcUrls,
     required this.blockExplorerUrls,
+    this.type = ChainType.evm,
     this.iconUrl,
     this.testnet = false,
     this.multicallAddress,
     this.ensRegistryAddress,
   });
+
+  /// The blockchain architecture type.
+  final ChainType type;
 
   /// The chain ID.
   final int chainId;
@@ -61,6 +68,7 @@ class ChainConfig {
     int? decimals,
     List<String>? rpcUrls,
     List<String>? blockExplorerUrls,
+    ChainType? type,
     String? iconUrl,
     bool? testnet,
     String? multicallAddress,
@@ -75,6 +83,7 @@ class ChainConfig {
       decimals: decimals ?? this.decimals,
       rpcUrls: rpcUrls ?? this.rpcUrls,
       blockExplorerUrls: blockExplorerUrls ?? this.blockExplorerUrls,
+      type: type ?? this.type,
       iconUrl: iconUrl ?? this.iconUrl,
       testnet: testnet ?? this.testnet,
       multicallAddress: multicallAddress ?? this.multicallAddress,

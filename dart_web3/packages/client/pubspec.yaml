@@ -22,6 +22,12 @@ dependencies:
     path: ../signer
   web3_universal_chains:
     path: ../chains
+  web3_universal_solana:
+    path: ../extensions/solana
+  web3_universal_tron:
+    path: ../extensions/tron
+  web3_universal_ton:
+    path: ../extensions/ton
 
   http: ^1.2.0
   web3_universal_crypto:

@@ -1,6 +1,6 @@
 # dart_web3
 
-[![Pub](https://img.shields.io/pub/v/dart_web3.svg)](https://pub.dev/packages/dart_web3)
+[![Pub](https://img.shields.io/pub/v/web3_universal.svg)](https://pub.dev/packages/web3_universal)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **comprehensive, pure Dart Web3 SDK** for EVM-compatible blockchains and multi-chain expansion (Solana, Bitcoin, Polkadot, etc.). This package is a meta-package that re-exports all 32 modular packages for ease of use.

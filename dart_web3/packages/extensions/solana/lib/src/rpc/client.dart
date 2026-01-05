@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 
 import 'package:http/http.dart' as http;
@@ -9,19 +10,26 @@ import '../models/public_key.dart';
 import '../models/transaction.dart';
 
 /// Solana JSON-RPC Client.
-class SolanaClient {
-  SolanaClient(String url,
-      {List<Middleware> middlewares = const [], http.Client? httpClient})
-      : provider = RpcProvider(HttpTransport(url, client: httpClient),
+class SolanaClient implements PublicClientBase {
+  SolanaClient(
+    String url, {
+    required this.chain,
+    List<Middleware> middlewares = const [],
+    http.Client? httpClient,
+  }) : provider = RpcProvider(HttpTransport(url, client: httpClient),
             middlewares: middlewares);
 
   final RpcProvider provider;
 
+  @override
+  final ChainConfig chain;
+
   /// Gets the balance of an account in lamports.
-  Future<int> getBalance(PublicKey pubKey) async {
-    final response = await provider
-        .call<Map<String, dynamic>>('getBalance', [pubKey.toBase58()]);
-    return response['value'] as int;
+  @override
+  Future<BigInt> getBalance(String address) async {
+    final response =
+        await provider.call<Map<String, dynamic>>('getBalance', [address]);
+    return BigInt.from(response['value'] as int);
   }
 
   /// Gets account info.
@@ -49,14 +57,26 @@ class SolanaClient {
   }
 
   /// Sends a signed transaction.
-  Future<String> sendTransaction(SolanaTransaction transaction) async {
-    final serialized = transaction.serialize();
-    final base64Tx = base64Encode(serialized);
+  @override
+  Future<String> sendTransaction(Uint8List tx) async {
+    final base64Tx = base64Encode(tx);
 
     return provider.call<String>('sendTransaction', [
       base64Tx,
       {'encoding': 'base64'},
     ]);
+  }
+
+  /// Sends a Solana transaction object.
+  Future<String> sendSolanaTransaction(SolanaTransaction transaction) async {
+    return sendTransaction(transaction.serialize());
+  }
+
+  /// Gets the current slot number.
+  @override
+  Future<BigInt> getBlockNumber() async {
+    final slot = await provider.call<int>('getSlot', []);
+    return BigInt.from(slot);
   }
 
   /// Request airdrop (devnet/testnet only).
@@ -67,6 +87,7 @@ class SolanaClient {
     ]);
   }
 
+  @override
   void dispose() {
     provider.dispose();
   }

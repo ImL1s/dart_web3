@@ -88,7 +88,7 @@ class BridgeService {
       final transaction = firstStep.transaction!;
 
       // Sign and send the transaction
-      final txHash = await walletClient.sendTransaction(
+      final txHash = await walletClient.sendTransactionRequest(
         TransactionRequest(
           to: transaction.to,
           data: transaction.data,
@@ -105,7 +105,7 @@ class BridgeService {
       bridgeTracker.trackBridge(
         sourceTransactionHash: txHash,
         quote: quote,
-        userAddress: walletClient.address.hex,
+        userAddress: walletClient.address,
       );
 
       return txHash;

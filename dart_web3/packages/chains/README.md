@@ -1,6 +1,6 @@
 # dart_web3_chains
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_chains.svg)](https://pub.dev/packages/dart_web3_chains)
+[![Pub](https://img.shields.io/pub/v/web3_universal_chains.svg)](https://pub.dev/packages/web3_universal_chains)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **comprehensive network registry** for EVM-compatible blockchains. This package provides metadata, RPC configurations, and contract addresses for dozens of networks.

@@ -1,6 +1,6 @@
 # dart_web3_bc_ur
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_bc_ur.svg)](https://pub.dev/packages/dart_web3_bc_ur)
+[![Pub](https://img.shields.io/pub/v/web3_universal_bc_ur.svg)](https://pub.dev/packages/web3_universal_bc_ur)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **pure Dart implementation of the Blockchain Uniform Resource (BC-UR)** standard. It enables efficient, segmented, and secure data transmission via QR codes, specifically designed for air-gapped hardware wallets.

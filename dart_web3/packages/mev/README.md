@@ -1,6 +1,6 @@
 # dart_web3_mev
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_mev.svg)](https://pub.dev/packages/dart_web3_mev)
+[![Pub](https://img.shields.io/pub/v/web3_universal_mev.svg)](https://pub.dev/packages/web3_universal_mev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **protection and arbitrage suite** for Maximal Extractable Value (MEV). Safeguard your users from "sandwich" attacks and front-running by routing transactions through private relays and builders.

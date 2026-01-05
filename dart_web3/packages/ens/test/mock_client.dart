@@ -110,5 +110,10 @@ class MockPublicClient implements PublicClient {
   ChainConfig get chain => throw UnimplementedError();
 
   @override
+  Future<String> sendTransaction(Uint8List tx) async {
+    return '0x${List.generate(64, (_) => '0').join()}';
+  }
+
+  @override
   late CCIPReadHandler ccipHandler;
 }

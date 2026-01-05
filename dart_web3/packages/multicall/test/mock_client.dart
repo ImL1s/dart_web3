@@ -84,7 +84,12 @@ class MockWalletClient extends WalletClient {
   }
 
   @override
-  Future<String> sendTransaction(TransactionRequest request) async {
+  Future<String> sendTransaction(Uint8List tx) async {
+    return _mockSendTransactionResult ?? '0xmocktx';
+  }
+
+  @override
+  Future<String> sendTransactionRequest(TransactionRequest request) async {
     lastTransactionRequest = request;
     return _mockSendTransactionResult ?? '0xmocktx';
   }

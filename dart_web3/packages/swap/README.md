@@ -1,6 +1,6 @@
 # dart_web3_swap
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_swap.svg)](https://pub.dev/packages/dart_web3_swap)
+[![Pub](https://img.shields.io/pub/v/web3_universal_swap.svg)](https://pub.dev/packages/web3_universal_swap)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **unified DEX aggregation layer** for Dart. Perform asset swaps, fetch liquidity quotes, and interact with numerous decentralized exchanges (Uniswap, PancakeSwap, 1inch) through a single interface.

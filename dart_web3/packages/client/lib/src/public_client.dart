@@ -8,7 +8,7 @@ import 'ccip_read.dart';
 import 'models.dart';
 
 /// Public client for read-only blockchain operations.
-class PublicClient {
+class PublicClient implements PublicClientBase {
   PublicClient({required this.provider, required this.chain}) {
     ccipHandler = CCIPReadHandler(this);
   }
@@ -16,15 +16,22 @@ class PublicClient {
   /// The RPC provider.
   final RpcProvider provider;
 
-  /// The chain configuration.
+  @override
   final ChainConfig chain;
 
   /// CCIP-Read handler (EIP-3668).
   late CCIPReadHandler ccipHandler;
 
   /// Gets the balance of an address.
+  @override
   Future<BigInt> getBalance(String address, [String block = 'latest']) async {
     return provider.getBalance(address, block);
+  }
+
+  /// Sends a raw signed transaction to the network.
+  @override
+  Future<String> sendTransaction(Uint8List tx) async {
+    return provider.sendRawTransaction(HexUtils.encode(tx));
   }
 
   /// Gets a block by hash.
@@ -40,6 +47,7 @@ class PublicClient {
   }
 
   /// Gets the current block number.
+  @override
   Future<BigInt> getBlockNumber() async {
     return provider.getBlockNumber();
   }
@@ -57,8 +65,10 @@ class PublicClient {
   }
 
   /// Gets the transaction count (nonce) for an address.
-  Future<BigInt> getTransactionCount(String address,
-      [String block = 'latest']) async {
+  Future<BigInt> getTransactionCount(
+    String address, [
+    String block = 'latest',
+  ]) async {
     return provider.getTransactionCount(address, block);
   }
 
@@ -73,9 +83,11 @@ class PublicClient {
       if (e.data != null && e.data is String) {
         final errorData = HexUtils.decode(e.data as String);
         if (errorData.length >= 4 &&
-            BytesUtils.equals(errorData.sublist(0, 4),
-                CCIPReadHandler.offchainLookupSelector)) {
-          return await ccipHandler.handle(request.to ?? '', errorData, block);
+            BytesUtils.equals(
+              errorData.sublist(0, 4),
+              CCIPReadHandler.offchainLookupSelector,
+            )) {
+          return ccipHandler.handle(request.to ?? '', errorData, block);
         }
       }
       rethrow;
@@ -124,6 +136,7 @@ class PublicClient {
   }
 
   /// Disposes of the client.
+  @override
   void dispose() {
     provider.dispose();
   }

@@ -1,6 +1,6 @@
 # dart_web3_nft
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_nft.svg)](https://pub.dev/packages/dart_web3_nft)
+[![Pub](https://img.shields.io/pub/v/web3_universal_nft.svg)](https://pub.dev/packages/web3_universal_nft)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **comprehensive NFT management suite** for Dart. Easily interact with ERC-721 and ERC-1155 tokens, fetch metadata from decentralized storage, and integrate with marketplaces.

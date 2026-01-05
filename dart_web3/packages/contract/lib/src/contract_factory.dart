@@ -47,7 +47,7 @@ class ContractFactory {
     );
 
     // Send deployment transaction
-    final txHash = await walletClient.sendTransaction(request);
+    final txHash = await walletClient.sendTransactionRequest(request);
 
     // Wait for transaction receipt to get contract address
     TransactionReceipt? receipt;

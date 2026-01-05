@@ -44,7 +44,7 @@ class Chains {
     decimals: 18,
     rpcUrls: [
       'https://rpc.ankr.com/eth_goerli',
-      'https://goerli.infura.io/v3/'
+      'https://goerli.infura.io/v3/',
     ],
     blockExplorerUrls: ['https://goerli.etherscan.io'],
     testnet: true,
@@ -126,10 +126,36 @@ class Chains {
     decimals: 18,
     rpcUrls: [
       'https://avalanche.llamarpc.com',
-      'https://rpc.ankr.com/avalanche'
+      'https://rpc.ankr.com/avalanche',
     ],
     blockExplorerUrls: ['https://snowtrace.io'],
     multicallAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
+  );
+  
+  /// Solana Mainnet.
+  static final solana = ChainConfig(
+    chainId: -1, // Use -1 or a custom identifier for non-EVM
+    type: ChainType.svm,
+    name: 'Solana Mainnet',
+    shortName: 'sol',
+    nativeCurrency: 'Solana',
+    symbol: 'SOL',
+    decimals: 9,
+    rpcUrls: ['https://api.mainnet-beta.solana.com'],
+    blockExplorerUrls: ['https://explorer.solana.com'],
+  );
+
+  /// Bitcoin Mainnet.
+  static final bitcoin = ChainConfig(
+    chainId: -2,
+    type: ChainType.utxo,
+    name: 'Bitcoin Mainnet',
+    shortName: 'btc',
+    nativeCurrency: 'Bitcoin',
+    symbol: 'BTC',
+    decimals: 8,
+    rpcUrls: ['https://bitcoin-rpc.publicnode.com'],
+    blockExplorerUrls: ['https://blockchain.info'],
   );
 
   /// Gets a chain by ID.
@@ -157,6 +183,10 @@ class Chains {
         return base;
       case 43114:
         return avalanche;
+      case -1:
+        return solana;
+      case -2:
+        return bitcoin;
       default:
         return null;
     }
@@ -174,6 +204,8 @@ class Chains {
       optimism,
       base,
       avalanche,
+      solana,
+      bitcoin,
       ..._customChains.values,
     ];
   }
@@ -187,4 +219,40 @@ class Chains {
   static void unregisterChain(int chainId) {
     _customChains.remove(chainId);
   }
+}
+
+/// Solana network configurations.
+class Solana {
+  Solana._();
+
+  /// Solana Mainnet Beta.
+  static final mainnet = Chains.solana;
+
+  /// Solana Testnet.
+  static final testnet = Chains.solana.copyWith(
+    name: 'Solana Testnet',
+    rpcUrls: ['https://api.testnet.solana.com'],
+    testnet: true,
+  );
+
+  /// Solana Devnet.
+  static final devnet = Chains.solana.copyWith(
+    name: 'Solana Devnet',
+    rpcUrls: ['https://api.devnet.solana.com'],
+    testnet: true,
+  );
+}
+
+/// Ethereum network configurations.
+class Ethereum {
+  Ethereum._();
+
+  /// Ethereum Mainnet.
+  static final mainnet = Chains.ethereum;
+
+  /// Sepolia Testnet.
+  static final sepolia = Chains.sepolia;
+
+  /// Goerli Testnet.
+  static final goerli = Chains.goerli;
 }

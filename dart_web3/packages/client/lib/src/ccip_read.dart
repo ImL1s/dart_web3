@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:http/http.dart' as http;
 import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:http/http.dart' as http;
 
 import 'models.dart';
 import 'public_client.dart';
@@ -24,11 +24,17 @@ class CCIPReadHandler {
       Uint8List.fromList([0x55, 0x6f, 0x6e, 0x30]);
 
   /// Handles an OffchainLookup revert.
-  Future<Uint8List> handle(String sender, Uint8List errorData,
-      [String block = 'latest']) async {
+  Future<Uint8List> handle(
+    String sender,
+    Uint8List errorData, [
+    String block = 'latest',
+  ]) async {
     // 1. Verify selector
     if (errorData.length < 4 ||
-        !BytesUtils.equals(errorData.sublist(0, 4), offchainLookupSelector)) {
+        !BytesUtils.equals(
+          errorData.sublist(0, 4),
+          offchainLookupSelector,
+        )) {
       throw Exception('Invalid OffchainLookup selector');
     }
 
@@ -80,11 +86,12 @@ class CCIPReadHandler {
         ]);
 
         return await client.call(
-            CallRequest(
-              to: revertSender,
-              data: callbackCallData,
-            ),
-            block);
+          CallRequest(
+            to: revertSender,
+            data: callbackCallData,
+          ),
+          block,
+        );
       } on Exception catch (e) {
         lastError = e;
         // Try next URL

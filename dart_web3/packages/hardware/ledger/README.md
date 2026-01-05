@@ -1,6 +1,6 @@
 # dart_web3_ledger
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_ledger.svg)](https://pub.dev/packages/dart_web3_ledger)
+[![Pub](https://img.shields.io/pub/v/web3_universal_ledger.svg)](https://pub.dev/packages/web3_universal_ledger)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Professional **Ledger hardware wallet support** for Dart. Connect via USB or Bluetooth to perform secure, on-device signing for Ethereum and other supported blockchains.

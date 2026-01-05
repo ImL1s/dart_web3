@@ -13,7 +13,10 @@ void main() async {
   print('Derived PDA: ${pda.address.toBase58()} with bump ${pda.bump}');
 
   // 2. Client Interaction (Mock URL example)
-  final _ = SolanaClient('https://api.devnet.solana.com');
+  final _ = SolanaClient(
+    'https://api.devnet.solana.com',
+    chain: Solana.devnet,
+  );
 
   // Note: These would normally be awaited in a real network environment
   print('Ready to fetch account info and broadcast transactions...');

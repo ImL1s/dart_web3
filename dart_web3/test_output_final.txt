@@ -1,0 +1,976 @@
+$ melos exec
+  └> dart test
+     └> RUNNING (in 35 packages)
+
+--------------------------------------------------------------------------------
+web3_universal_aa:
+00:00 +0: loading test\bundler_client_test.dart
+00:00 +0: test\bundler_client_test.dart: BundlerClient should create BundlerClient with correct URL
+00:00 +1: test\user_operation_test.dart: UserOperation should create UserOperation with required fields
+00:00 +2: test\user_operation_test.dart: UserOperation should create UserOperation with required fields
+00:00 +3: test\user_operation_test.dart: UserOperation should create UserOperation with required fields
+00:00 +4: test\bundler_client_test.dart: BundlerClient UserOperationByHashResult should serialize to JSON correctly
+00:00 +5: test\bundler_client_test.dart: BundlerClient UserOperationByHashResult should serialize to JSON correctly
+00:00 +6: test\user_operation_test.dart: UserOperation should serialize to JSON correctly (v0.7)
+00:00 +7: test\user_operation_test.dart: UserOperation should serialize to JSON correctly (v0.7)
+00:00 +8: test\user_operation_test.dart: UserOperation should serialize to JSON correctly (v0.7)
+00:00 +9: test\bundler_client_test.dart: BundlerClient BundlerException should format toString correctly
+00:00 +10: test\user_operation_test.dart: UserOperation should deserialize from JSON correctly
+00:00 +11: test\user_operation_test.dart: UserOperation should deserialize from JSON correctly
+00:00 +12: test\bundler_client_test.dart: BundlerClient TimeoutException should format toString correctly
+00:00 +13: test\user_operation_test.dart: UserOperation should handle EntryPoint v0.6 fields
+00:00 +14: test\bundler_client_test.dart: BundlerClient BundlerErrorCode should have correct error codes
+00:00 +15: test\user_operation_test.dart: UserOperation should handle EntryPoint v0.7+ fields
+00:00 +16: test\bundler_client_test.dart: BundlerClient BundlerErrorCode should have correct names
+00:00 +17: test\user_operation_test.dart: UserOperation should create copy with updated fields
+00:00 +18: test\user_operation_test.dart: UserOperation userOpHash calculation should calculate EIP-712 userOpHash for v0.8/v0.9
+00:00 +19: test\user_operation_test.dart: UserOperation userOpHash calculation should calculate userOpHash for v0.6 and v0.7
+00:00 +20: test\user_operation_test.dart: UserOperation should handle equality correctly
+00:00 +21: test\user_operation_test.dart: UserOperationGasEstimate should create from JSON correctly
+00:00 +22: test\user_operation_test.dart: UserOperationGasEstimate should handle optional paymaster fields
+00:00 +23: test\user_operation_test.dart: UserOperationReceipt should create from JSON correctly
+00:00 +24: test\user_operation_test.dart: UserOperationReceipt should handle optional fields
+00:00 +25: test\user_operation_test.dart: EntryPointVersion should have correct version strings
+00:00 +26: All tests passed!
+web3_universal_aa: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_abi:
+00:00 +0: loading test\abi_fixes_test.dart
+00:00 +0: test\abi_fixes_test.dart: Static Size Calculation Fixes AbiTuple.getStaticSize returns correct size for static tuple
+00:00 +1: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: GithubWikiTest
+00:00 +2: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: GithubWikiTest
+00:00 +3: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: GithubWikiTest
+00:00 +4: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: GithubWikiTest
+00:00 +5: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: GithubWikiTest
+00:00 +6: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: GithubWikiTest
+00:00 +7: test\abi_fixes_test.dart: UTF-8 Encoding Fixes AbiString encodes non-ASCII characters correctly
+00:00 +8: test\abi_fixes_test.dart: UTF-8 Encoding Fixes AbiString encodes non-ASCII characters correctly
+00:00 +9: test\abi_official_vector_test.dart: Official ABI Basic Test Vectors Vector: IntegerAndAddress
+00:00 +10: test\abi_fixes_test.dart: UTF-8 Encoding Fixes AbiString encodes emoji correctly
+00:00 +11: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +12: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +13: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +14: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +15: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +16: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +17: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +18: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +19: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +20: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +21: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +22: test\abi_property_test.dart: ABI Module Property Tests Property 12: ABI Encoding Round Trip
+00:00 +23: test\decoder_test.dart: AbiDecoder Tests decodes Error(string) revert
+00:00 +24: test\decoder_test.dart: AbiDecoder Tests decodes Error(string) revert
+00:00 +25: test\encoder_test.dart: AbiEncoder Tests encodes simple function call
+00:00 +26: test\encoder_test.dart: AbiEncoder Tests encodes simple function call
+00:00 +27: test\encoder_test.dart: AbiEncoder Tests encodes simple function call
+00:00 +28: test\encoder_test.dart: AbiEncoder Tests encodes simple function call
+00:00 +29: test\encoder_test.dart: AbiEncoder Tests encodes simple function call
+00:00 +30: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +31: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +32: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +33: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +34: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +35: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +36: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +37: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +38: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +39: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +40: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +41: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +42: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +43: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +44: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +45: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +46: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +47: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +48: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +49: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +50: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +51: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +52: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +53: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +54: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +55: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +56: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +57: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +58: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +59: test\abi_property_test.dart: ABI Module Property Tests Property 13: Function Call Data Padding
+00:00 +60: test\typed_data_test.dart: EIP712TypedData Tests computes hash correctly
+00:00 +61: test\types_test.dart: AbiType Tests AbiUint encodes uint256 correctly
+00:00 +62: test\types_test.dart: AbiType Tests AbiUint encodes uint256 correctly
+00:00 +63: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +64: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +65: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +66: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +67: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +68: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +69: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +70: test\typed_data_test.dart: EIP712TypedData Tests hash is deterministic
+00:00 +71: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +72: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +73: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +74: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +75: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +76: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +77: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +78: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +79: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +80: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +81: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +82: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +83: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +84: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +85: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +86: test\abi_property_test.dart: ABI Module Property Tests Property 16: EIP-712 Domain Separator
+00:00 +87: All tests passed!
+web3_universal_abi: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_bc_ur:
+00:00 +0: loading test\bc_ur_test.dart
+00:00 +0: test\bc_ur_test.dart: BC-UR Encoding/Decoding should encode and decode single-part message
+00:00 +1: test\bc_ur_test.dart: BC-UR Encoding/Decoding should handle multi-part encoding
+00:00 +2: test\bc_ur_test.dart: BC-UR Encoding/Decoding should encode and decode Ethereum sign request
+00:00 +3: test\bc_ur_test.dart: CBOR Encoding/Decoding should encode and decode basic types
+00:00 +4: test\bc_ur_test.dart: Fountain Codes should encode and decode with fountain codes
+00:00 +5: test\bc_ur_test.dart: Animated QR should create animated QR from parts
+00:00 +6: test\bc_ur_test.dart: Animated QR should handle single-part QR
+00:00 +7: All tests passed!
+web3_universal_bc_ur: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_bitcoin:
+00:00 +0: loading test\bitcoin_test.dart
+00:00 +0: test\bitcoin_test.dart: Bitcoin Module Tests should initialize InscriptionService
+00:00 +1: All tests passed!
+web3_universal_bitcoin: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_bridge:
+00:00 +0: loading test\basic_functionality_test.dart
+00:00 +0: test\basic_functionality_test.dart: Bridge Basic Tests BridgeClient initialization
+00:00 +1: All tests passed!
+web3_universal_bridge: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_chains:
+00:00 +0: loading test\chains_test.dart
+00:00 +0: test\chains_test.dart: Chains predefined chains should have correct Ethereum mainnet config
+00:00 +1: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +2: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +3: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +4: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +5: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +6: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +7: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +8: test\chain_config_test.dart: ChainConfig should create a valid chain config
+00:00 +9: test\chains_test.dart: Chains predefined chains should have correct Avalanche mainnet config
+00:00 +10: test\chain_config_test.dart: ChainConfig should create a testnet config
+00:00 +11: test\chains_test.dart: Chains getById should return correct chain for valid chain IDs
+00:00 +12: test\chain_config_test.dart: ChainConfig should create a copy with updated fields
+00:00 +13: test\chains_test.dart: Chains getById should return null for unknown chain ID
+00:00 +14: test\chains_test.dart: Chains getById should return custom chain when registered
+00:00 +15: test\chains_test.dart: Chains getAllChains should return all predefined chains
+00:00 +16: test\chains_test.dart: Chains getAllChains should include custom chains
+00:00 +17: test\chains_test.dart: Chains registerChain should register a custom chain
+00:00 +18: test\chains_test.dart: Chains registerChain should override existing custom chain with same ID
+00:00 +19: test\chains_test.dart: Chains unregisterChain should unregister a custom chain
+00:00 +20: test\chains_test.dart: Chains unregisterChain should do nothing when unregistering non-existent chain
+00:00 +21: All tests passed!
+web3_universal_chains: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_client:
+00:00 +0: loading test\ccip_read_test.dart
+00:00 +0: test\ccip_read_test.dart: CCIP-Read should handle OffchainLookup correctly
+00:00 +1: test\client_property_test.dart: Client: TransactionRequest Composition (testing 100 inputs)
+00:00 +2: All tests passed!
+web3_universal_client: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_compat:
+00:00 +0: loading test\compat_test.dart
+00:00 +0: test\compat_test.dart: EtherAmount conversions
+00:00 +1: test\compat_test.dart: ContractEvent decodeResults
+00:00 +2: test\compat_test.dart: HexUtils encoding/decoding
+00:00 +3: test\compat_test.dart: Address Utils publicKeyToAddress with compressed key
+00:00 +4: test\compat_wallet_test.dart: Wallet Compatibility Round-trip Wallet (Scrypt)
+00:00 +5: test\compat_wallet_test.dart: Wallet Compatibility Round-trip Wallet (Scrypt)
+00:00 +6: test\compat_wallet_test.dart: Wallet Compatibility Round-trip Wallet (PBKDF2)
+00:01 +7: test\compat_wallet_test.dart: Wallet Compatibility toJson and fromJson consistency
+00:05 +8: All tests passed!
+web3_universal_compat: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_contract:
+00:00 +0: loading test\contract_factory_test.dart
+00:00 +0: test\contract_factory_test.dart: ContractFactory create should create contract instance
+00:00 +1: test\contract_test.dart: Contract read operations should call read-only function
+00:00 +2: test\contract_test.dart: Contract read operations should call read-only function
+00:00 +3: test\contract_test.dart: Contract read operations should call read-only function
+00:00 +4: test\contract_test.dart: Contract read operations should call read-only function
+00:00 +5: test\erc20_contract_test.dart: ERC20Contract read methods should get token name
+00:00 +6: test\erc20_contract_test.dart: ERC20Contract read methods should get token name
+00:00 +7: test\erc20_contract_test.dart: ERC20Contract read methods should get token name
+00:00 +8: test\erc20_contract_test.dart: ERC20Contract read methods should get token name
+00:00 +9: test\contract_test.dart: Contract gas estimation should estimate gas for function call
+00:00 +10: test\erc20_contract_test.dart: ERC20Contract read methods should get token symbol
+00:00 +11: test\contract_test.dart: Contract simulation should simulate successful function call
+00:00 +12: test\erc20_contract_test.dart: ERC20Contract read methods should get token decimals
+00:00 +13: test\contract_test.dart: Contract simulation should handle simulation failure
+00:00 +14: test\erc20_contract_test.dart: ERC20Contract read methods should get total supply
+00:00 +15: test\erc20_contract_test.dart: ERC20Contract read methods should get total supply
+00:00 +16: test\contract_test.dart: Contract event handling should decode event log
+00:00 +17: test\erc20_contract_test.dart: ERC20Contract read methods should get balance of account
+00:00 +18: test\erc20_contract_test.dart: ERC20Contract read methods should get balance of account
+00:00 +19: test\contract_test.dart: Contract error decoding should decode standard Error(string)
+00:00 +20: test\erc20_contract_test.dart: ERC20Contract read methods should get allowance
+00:00 +21: test\contract_test.dart: Contract error decoding should return null for unknown error
+00:00 +22: test\erc20_contract_test.dart: ERC20Contract write methods should transfer tokens
+00:00 +23: test\erc20_contract_test.dart: ERC20Contract write methods should approve spender
+00:00 +24: test\erc20_contract_test.dart: ERC20Contract write methods should transfer from approved account
+00:00 +25: test\erc20_contract_test.dart: ERC20Contract event filters should create transfer filter
+00:00 +26: test\erc20_contract_test.dart: ERC20Contract event filters should create approval filter
+00:00 +27: All tests passed!
+web3_universal_contract: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_core:
+00:00 +0: loading test\address_test.dart
+00:00 +0: test\address_test.dart: EthereumAddress fromHex parses lowercase address
+00:00 +1: test\bytes_test.dart: BytesUtils concat concatenates empty list
+00:00 +2: test\address_test.dart: EthereumAddress fromHex parses uppercase address
+00:00 +3: test\bytes_test.dart: BytesUtils concat concatenates single array
+00:00 +4: test\bytes_test.dart: BytesUtils concat concatenates single array
+00:00 +5: test\bytes_test.dart: BytesUtils concat concatenates single array
+00:00 +6: test\address_test.dart: EthereumAddress fromHex throws on invalid length
+00:00 +7: test\address_test.dart: EthereumAddress fromHex throws on invalid length
+00:00 +8: test\bytes_test.dart: BytesUtils slice slices from start to end
+00:00 +9: test\bytes_test.dart: BytesUtils slice slices from start to end
+00:00 +10: test\address_test.dart: EthereumAddress constructor accepts 20-byte array
+00:00 +11: test\address_test.dart: EthereumAddress constructor accepts 20-byte array
+00:00 +12: test\bytes_test.dart: BytesUtils slice throws on invalid range
+00:00 +13: test\bytes_test.dart: BytesUtils slice throws on invalid range
+00:00 +14: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +15: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +16: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +17: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +18: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +19: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +20: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +21: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +22: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +23: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +24: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +25: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +26: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +27: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +28: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +29: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +30: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +31: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +32: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +33: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +34: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +35: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +36: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +37: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +38: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +39: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +40: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any 20-byte array, creating an EthereumAddress should succeed (testing 100 inputs)
+00:00 +41: test\hex_test.dart: HexUtils encode encodes bytes with prefix
+00:00 +42: test\bytes_test.dart: BytesUtils round-trip property bigIntToBytes then bytesToBigInt returns original
+00:00 +43: test\bytes_test.dart: BytesUtils round-trip property bigIntToBytes then bytesToBigInt returns original
+00:00 +44: test\bytes_test.dart: BytesUtils round-trip property bigIntToBytes then bytesToBigInt returns original
+00:00 +45: test\bytes_test.dart: BytesUtils round-trip property bigIntToBytes then bytesToBigInt returns original
+00:00 +46: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address bytes, hex representation should be valid and parseable (testing 100 inputs)
+00:00 +47: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address bytes, hex representation should be valid and parseable (testing 100 inputs)
+00:00 +48: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address bytes, hex representation should be valid and parseable (testing 100 inputs)
+00:00 +49: test\bytes_test.dart: BytesUtils xor throws on different lengths
+00:00 +50: test\hex_test.dart: HexUtils decode decodes with 0x prefix
+00:00 +51: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address, isValid should return true for its hex representation (testing 100 inputs)
+00:00 +52: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address, isValid should return true for its hex representation (testing 100 inputs)
+00:00 +53: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address, isValid should return true for its hex representation (testing 100 inputs)
+00:00 +54: test\hex_test.dart: HexUtils decode handles odd-length hex by padding
+00:00 +55: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address, equality should be reflexive and consistent (testing 100 inputs)
+00:00 +56: test\core_property_test.dart: Core Module Property-Based Tests Property 24: Address Checksum Validation For any address, equality should be reflexive and consistent (testing 100 inputs)
+00:00 +57: test\hex_test.dart: HexUtils isValid returns true for valid hex
+00:00 +58: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +59: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +60: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +61: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +62: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +63: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +64: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +65: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +66: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +67: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +68: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +69: test\rlp_official_vector_test.dart: Official RLP Test Vectors Vector: emptystring
+00:00 +70: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +71: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +72: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +73: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +74: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +75: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +76: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +77: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +78: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +79: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +80: test\rlp_test.dart: RLP encode encodes single byte < 0x80
+00:00 +81: test\units_test.dart: EthUnit wei parses wei string
+00:00 +82: test\units_test.dart: EthUnit wei parses wei string
+00:00 +83: test\units_test.dart: EthUnit wei parses wei string
+00:00 +84: test\units_test.dart: EthUnit wei parses wei string
+00:00 +85: test\units_test.dart: EthUnit wei parses wei string
+00:00 +86: test\units_test.dart: EthUnit wei parses wei string
+00:00 +87: test\units_test.dart: EthUnit wei parses wei string
+00:00 +88: test\units_test.dart: EthUnit wei parses wei string
+00:00 +89: test\units_test.dart: EthUnit wei parses wei string
+00:00 +90: test\units_test.dart: EthUnit wei parses wei string
+00:00 +91: test\units_test.dart: EthUnit wei parses wei string
+00:00 +92: test\units_test.dart: EthUnit wei parses wei string
+00:00 +93: test\units_test.dart: EthUnit wei parses wei string
+00:00 +94: test\units_test.dart: EthUnit wei parses wei string
+00:00 +95: test\units_test.dart: EthUnit wei parses wei string
+00:00 +96: test\units_test.dart: EthUnit wei parses wei string
+00:00 +97: test\units_test.dart: EthUnit wei parses wei string
+00:00 +98: test\units_test.dart: EthUnit wei parses wei string
+00:00 +99: test\units_test.dart: EthUnit wei parses wei string
+00:00 +100: test\units_test.dart: EthUnit wei parses wei string
+00:00 +101: test\units_test.dart: EthUnit wei parses wei string
+00:00 +102: test\units_test.dart: EthUnit wei parses wei string
+00:00 +103: test\units_test.dart: EthUnit wei parses wei string
+00:00 +104: test\units_test.dart: EthUnit wei parses wei string
+00:00 +105: test\units_test.dart: EthUnit wei parses wei string
+00:00 +106: test\rlp_test.dart: RLP decode decodes single byte < 0x80
+00:00 +107: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoding without prefix then with prefix should be consistent (testing 100 inputs)
+00:00 +108: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoding without prefix then with prefix should be consistent (testing 100 inputs)
+00:00 +109: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoding without prefix then with prefix should be consistent (testing 100 inputs)
+00:00 +110: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoding without prefix then with prefix should be consistent (testing 100 inputs)
+00:00 +111: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoding without prefix then with prefix should be consistent (testing 100 inputs)
+00:00 +112: test\rlp_test.dart: RLP decode decodes short string
+00:00 +113: test\rlp_test.dart: RLP decode decodes short string
+00:00 +114: test\units_test.dart: EthUnit ether converts ether to wei
+00:00 +115: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +116: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +117: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +118: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +119: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +120: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +121: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +122: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, encoded length should be 2 * bytes.length + 2 (for 0x) (testing 100 inputs)
+00:00 +123: test\rlp_test.dart: RLP decode throws on empty data
+00:00 +124: test\units_test.dart: EthUnit formatWei formats wei
+00:00 +125: test\units_test.dart: EthUnit formatWei formats wei
+00:00 +126: test\units_test.dart: EthUnit formatWei formats wei
+00:00 +127: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, add0x and strip0x should be inverses (testing 100 inputs)
+00:00 +128: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, add0x and strip0x should be inverses (testing 100 inputs)
+00:00 +129: test\core_property_test.dart: Core Module Property-Based Tests Property 26: Hex Encoding Round Trip For any byte array, add0x and strip0x should be inverses (testing 100 inputs)
+00:00 +130: test\units_test.dart: EthUnit formatGwei formats whole gwei
+00:00 +131: test\units_test.dart: EthUnit formatGwei formats whole gwei
+00:00 +132: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any byte array, RLP encode then decode should return original bytes (testing 100 inputs)
+00:00 +133: test\units_test.dart: EthUnit formatGwei formats fractional gwei
+00:00 +134: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any non-negative integer, RLP encode then decode should preserve value (testing 100 inputs)
+00:00 +135: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any non-negative integer, RLP encode then decode should preserve value (testing 100 inputs)
+00:00 +136: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any non-negative integer, RLP encode then decode should preserve value (testing 100 inputs)
+00:00 +137: test\units_test.dart: EthUnit formatEther formats fractional ether
+00:00 +138: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any BigInt in range, RLP encode then decode should preserve value (testing 100 inputs)
+00:00 +139: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any BigInt in range, RLP encode then decode should preserve value (testing 100 inputs)
+00:00 +140: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any BigInt in range, RLP encode then decode should preserve value (testing 100 inputs)
+00:00 +141: test\units_test.dart: EthUnit convert converts gwei to wei
+00:00 +142: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any list of byte arrays, RLP encode then decode should preserve structure (testing 100 inputs)
+00:00 +143: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any list of byte arrays, RLP encode then decode should preserve structure (testing 100 inputs)
+00:00 +144: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any list of byte arrays, RLP encode then decode should preserve structure (testing 100 inputs)
+00:00 +145: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any list of byte arrays, RLP encode then decode should preserve structure (testing 100 inputs)
+00:00 +146: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any list of byte arrays, RLP encode then decode should preserve structure (testing 100 inputs)
+00:00 +147: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any list of byte arrays, RLP encode then decode should preserve structure (testing 100 inputs)
+00:00 +148: test\core_property_test.dart: Core Module Property-Based Tests Property 27: RLP Encoding Round Trip For any byte array, RLP encoding should produce valid RLP (testing 100 inputs)
+00:00 +149: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any BigInt, bigIntToBytes then bytesToBigInt should return original (testing 100 inputs)
+00:00 +150: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any non-negative int, intToBytes then bytesToInt should return original (testing 100 inputs)
+00:00 +151: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any two byte arrays, concat then slice should recover originals (testing 100 inputs)
+00:00 +152: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any byte array and padding length, pad should increase or maintain length (testing 100 inputs)
+00:00 +153: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any byte array, trimLeadingZeros should not change non-zero prefix bytes (testing 100 inputs)
+00:00 +154: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any two equal-length byte arrays, xor should be self-inverse (testing 100 inputs)
+00:00 +155: test\core_property_test.dart: Core Module Property-Based Tests Property 28: Core Encoding Round Trip For any 20-byte array, address round trip should preserve bytes (testing 100 inputs)
+00:00 +156: All tests passed!
+web3_universal_core: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_cosmos:
+00:00 +0: loading test\advanced_test.dart
+00:00 +0: test\advanced_test.dart: Cosmos Advanced MsgTransfer serialization
+00:00 +0: test\cosmos_test.dart: Cosmos Address Encode and Decode
+Cosmos Address: cosmos1qqqsyqcyq5rqwzqfpg9scrgwpugpzysnrk363e
+00:00 +1: test\cosmos_test.dart: Cosmos Address Encode and Decode
+00:00 +2: test\integration_test.dart: Cosmos Mock Integration getBalances returns correct amounts
+00:00 +3: test\integration_test.dart: Cosmos Mock Integration getBalances returns correct amounts
+00:00 +4: test\integration_test.dart: Cosmos Mock Integration getBalances returns correct amounts
+00:00 +5: test\integration_test.dart: Cosmos Mock Integration getBalances returns correct amounts
+00:00 +6: test\integration_test.dart: Cosmos Mock Integration getBalances returns correct amounts
+00:00 +7: test\integration_test.dart: Cosmos Mock Integration broadcastTx posts correct data
+00:00 +8: test\vector_test.dart: Cosmos Vector Tests Vector #0: Basic MsgSend Serialization
+00:00 +9: All tests passed!
+web3_universal_cosmos: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_crypto:
+00:00 +0: loading test\crypto_official_vector_test.dart
+00:00 +0: test\crypto_primitives_test.dart: SHA-256 (NIST FIPS 180-4) empty string
+00:00 +1: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +2: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +3: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +4: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +5: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +6: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +7: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +8: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +9: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +10: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +11: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +12: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +13: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +14: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +15: test\crypto_official_vector_test.dart: Official Crypto Test Vectors BIP39 (Mnemonic to Seed) Vector #0
+00:00 +16: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +17: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +18: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +19: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +20: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +21: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +22: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +23: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +24: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +25: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +26: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +27: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +28: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +29: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +30: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +31: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +32: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +33: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +34: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +35: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +36: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +37: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +38: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +39: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +40: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +41: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +42: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +43: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +44: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +45: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +46: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +47: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +48: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +49: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +50: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +51: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +52: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +53: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +54: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +55: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +56: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +57: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +58: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +59: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +60: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +61: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +62: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +63: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +64: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +65: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +66: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +67: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +68: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +69: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +70: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +71: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +72: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +73: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +74: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +75: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +76: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +77: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +78: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +79: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +80: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +81: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +82: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +83: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +84: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +85: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +86: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +87: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +88: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +89: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +90: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +91: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +92: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +93: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +94: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +95: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +96: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +97: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +98: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +99: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +100: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +101: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +102: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +103: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +104: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +105: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +106: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +107: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +108: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +109: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +110: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +111: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +112: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +113: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +114: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:00 +115: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:01 +116: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:01 +117: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:01 +118: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:04 +119: test\crypto_property_test.dart: Crypto Module Property Tests Property 20: Secp256k1 Sign-Recover Round Trip
+00:04 +120: test\crypto_property_test.dart: Crypto Module Property Tests Property 21: Keccak-256 Hash Consistency
+00:04 +121: test\crypto_property_test.dart: Crypto Module Property Tests Property 22: BIP-39 Mnemonic Validation
+00:05 +122: test\crypto_property_test.dart: Crypto Module Property Tests Property 23: HD Wallet Derivation Consistency
+00:08 +123: All tests passed!
+web3_universal_crypto: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_dapp:
+00:00 +0: loading test\dapp_provider_test.dart
+00:00 +0: test\dapp_provider_test.dart: DApp Provider Tests should initialize
+00:00 +1: All tests passed!
+web3_universal_dapp: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_debug:
+00:00 +0: loading test\debug_service_test.dart
+00:00 +0: test\debug_service_test.dart: Debug Service Tests should create TraceConfig with correct values
+00:00 +1: test\debug_service_test.dart: Debug Service Tests should parse TraceResult
+00:00 +2: All tests passed!
+web3_universal_debug: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_ens:
+00:00 +0: loading test\ens_client_test.dart
+00:00 +0: test\ens_client_test.dart: ENSClient basic resolution should resolve ENS name to address
+00:00 +1: test\ens_records_test.dart: ENSRecords text records should get text record for valid name
+00:00 +2: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +3: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +4: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +5: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +6: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +7: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +8: test\ens_resolver_test.dart: ENSResolver name resolution should resolve valid ENS name to address
+00:00 +9: test\ens_client_test.dart: ENSClient text records should get multiple text records
+00:00 +10: test\ens_client_test.dart: ENSClient text records should get multiple text records
+00:00 +11: test\ens_resolver_test.dart: ENSResolver name resolution should return null for non-existent name
+00:00 +12: test\ens_records_test.dart: ENSRecords profile resolution should get complete ENS profile
+00:00 +13: test\ens_records_test.dart: ENSRecords profile resolution should get complete ENS profile
+00:00 +14: test\ens_client_test.dart: ENSClient text records should get complete profile
+00:00 +15: test\ens_client_test.dart: ENSClient text records should get complete profile
+00:00 +16: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +17: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +18: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +19: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +20: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +21: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +22: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +23: test\ens_records_test.dart: ENSRecords profile resolution should handle profile with all fields
+00:00 +24: test\ens_client_test.dart: ENSClient multi-chain addresses should get Bitcoin address
+00:00 +25: test\ens_client_test.dart: ENSClient multi-chain addresses should get Bitcoin address
+00:00 +26: test\ens_records_test.dart: ENSRecords caching should cache text record results
+00:00 +27: test\ens_client_test.dart: ENSClient multi-chain addresses should get all supported addresses
+00:00 +28: test\ens_client_test.dart: ENSClient multi-chain addresses should get all supported addresses
+00:00 +29: test\ens_client_test.dart: ENSClient multi-chain addresses should get all supported addresses
+00:00 +30: test\ens_records_test.dart: ENSRecords error handling should throw for invalid ENS name
+00:00 +31: test\ens_client_test.dart: ENSClient comprehensive info should get complete ENS information
+00:00 +32: test\ens_client_test.dart: ENSClient utility methods should validate ENS names
+00:00 +33: test\ens_client_test.dart: ENSClient utility methods should clear all caches
+00:00 +34: test\ens_client_test.dart: ENSClient error handling should handle RPC errors gracefully
+00:00 +35: All tests passed!
+web3_universal_ens: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_events:
+00:00 +0: loading test\event_filter_test.dart
+00:00 +0: test\event_filter_test.dart: EventFilter should create basic filter
+00:00 +1: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +2: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +3: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +4: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +5: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +6: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +7: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +8: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +9: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +10: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +11: test\event_listener_test.dart: EventListener should listen to contract events
+00:00 +12: test\event_subscriber_test.dart: EventSubscriber should subscribe to events via WebSocket
+00:00 +13: test\event_subscriber_test.dart: EventSubscriber should subscribe to events via WebSocket
+00:00 +14: test\event_subscriber_test.dart: EventSubscriber should subscribe to events via WebSocket
+00:00 +15: test\event_subscriber_test.dart: EventSubscriber should subscribe to events via WebSocket
+00:00 +16: test\event_subscriber_test.dart: EventSubscriber should subscribe to events via WebSocket
+00:00 +17: test\event_subscriber_test.dart: EventSubscriber should subscribe to events via WebSocket
+00:00 +18: test\event_listener_test.dart: EventListener should use polling when WebSocket is not available
+00:00 +19: test\event_subscriber_test.dart: EventSubscriber should throw error when subscribing without WebSocket
+00:00 +20: test\event_subscriber_test.dart: EventSubscriber should throw error when subscribing without WebSocket
+00:00 +21: test\event_listener_test.dart: EventListener should stop all subscriptions
+00:00 +22: test\event_subscriber_test.dart: EventSubscriber should poll for events via HTTP
+00:00 +23: test\event_subscriber_test.dart: EventSubscriber should poll for events via HTTP
+00:00 +24: test\event_subscriber_test.dart: EventSubscriber should poll for events via HTTP
+00:00 +25: test\event_subscriber_test.dart: EventSubscriber should watch block numbers via WebSocket
+00:00 +26: test\event_subscriber_test.dart: EventSubscriber should watch block numbers via polling
+00:00 +27: test\event_subscriber_test.dart: EventSubscriber should watch pending transactions
+00:00 +28: test\event_subscriber_test.dart: EventSubscriber should throw error when watching pending transactions without WebSocket
+00:00 +29: test\event_subscriber_test.dart: EventSubscriber should get historical events
+00:00 +30: test\event_subscriber_test.dart: EventSubscriber should get events with limit
+00:00 +31: test\event_subscriber_test.dart: EventSubscriber should get events with pagination
+00:00 +32: test\event_subscriber_test.dart: EventSubscriber should create and manage filters
+00:00 +33: All tests passed!
+web3_universal_events: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_history:
+00:00 +0: loading test\history_service_test.dart
+00:00 +0: test\history_service_test.dart: History Service Types Tests should create HistoryItem with correct values
+00:00 +1: All tests passed!
+web3_universal_history: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_keystone:
+00:00 +0: loading test\keystone_test.dart
+00:00 +0: test\keystone_test.dart: Keystone Client should connect to device
+00:01 +1: test\keystone_test.dart: Keystone Client should get accounts from device
+00:02 +2: test\keystone_test.dart: Keystone Client should handle QR communication state
+00:03 +3: test\keystone_test.dart: Keystone Signer should have valid address
+00:04 +4: test\keystone_test.dart: Keystone Signer should get multiple addresses
+00:05 +5: test\keystone_test.dart: Keystone Signer should handle connection state
+00:07 +6: test\keystone_test.dart: Keystone Signer should create transaction signing request
+00:08 +7: test\keystone_test.dart: QR Communication should start in idle state
+00:08 +8: test\keystone_test.dart: QR Communication should display sign request
+00:08 +9: test\keystone_test.dart: QR Communication should handle cancel
+00:08 +10: test\keystone_test.dart: Keystone Types should create KeystoneDevice
+00:08 +11: test\keystone_test.dart: Keystone Types should create KeystoneAccount
+00:08 +12: test\keystone_test.dart: Keystone Types should handle KeystoneException
+00:08 +13: All tests passed!
+web3_universal_keystone: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_ledger:
+00:00 +0: loading test\ledger_test.dart
+00:00 +0: test\ledger_test.dart: Ledger Transport should connect and disconnect
+00:00 +1: test\ledger_test.dart: Ledger Transport should discover devices
+00:00 +2: test\ledger_test.dart: Ledger Transport should exchange APDU commands
+00:00 +3: test\ledger_test.dart: Ledger Transport should handle mock responses
+00:00 +4: test\ledger_test.dart: APDU Commands should create get public key command
+00:00 +5: test\ledger_test.dart: APDU Commands should create sign transaction command
+00:00 +6: test\ledger_test.dart: APDU Commands should encode derivation path correctly
+00:00 +7: test\ledger_test.dart: Ledger Client should connect to device
+00:01 +8: test\ledger_test.dart: Ledger Client should get account information
+00:01 +9: test\ledger_test.dart: Ledger Client should get multiple accounts
+00:01 +10: test\ledger_test.dart: Ledger Signer should have valid address
+00:02 +11: test\ledger_test.dart: Ledger Signer should check connection state
+00:02 +12: test\ledger_test.dart: Ledger Signer should get multiple addresses
+00:03 +13: test\ledger_test.dart: Ledger Signer should handle transaction signing
+00:03 +14: test\ledger_test.dart: Response Parsers should parse public key response
+00:03 +15: test\ledger_test.dart: Response Parsers should parse signature response
+00:03 +16: test\ledger_test.dart: Response Parsers should parse configuration response
+00:03 +17: All tests passed!
+web3_universal_ledger: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_mev:
+00:00 +0: loading test\mev_service_test.dart
+00:00 +0: test\mev_service_test.dart: MEV Service Tests should create FlashbotsBundleTransaction
+00:00 +1: test\mev_service_test.dart: MEV Service Tests should create FlashbotsBundle
+00:00 +2: All tests passed!
+web3_universal_mev: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_mpc:
+00:00 +0: loading test\mpc_test.dart
+00:00 +0: test\mpc_test.dart: MPC Module Tests MpcSigner Tests should create MpcSigner with valid parameters
+00:00 +1: test\mpc_test.dart: MPC Module Tests MpcSigner Tests should sign transaction
+00:00 +2: test\mpc_test.dart: MPC Module Tests MpcSigner Tests should sign message
+00:00 +3: test\mpc_test.dart: MPC Module Tests MpcSigner Tests should start key generation
+00:00 +4: test\mpc_test.dart: MPC Module Tests MpcSigner Tests should refresh keys
+00:00 +5: test\mpc_test.dart: MPC Module Tests ThresholdSignature Tests should create ECDSA threshold signature
+00:00 +6: test\mpc_test.dart: MPC Module Tests ThresholdSignature Tests should create EdDSA threshold signature
+00:00 +7: test\mpc_test.dart: MPC Module Tests ThresholdSignature Tests should generate key shares for ECDSA
+00:00 +8: test\mpc_test.dart: MPC Module Tests ThresholdSignature Tests should create and combine signature shares
+00:00 +9: test\mpc_test.dart: MPC Module Tests ThresholdSignature Tests should refresh key shares
+00:00 +10: test\mpc_test.dart: MPC Module Tests MpcProvider Tests should create Fireblocks provider
+00:00 +11: test\mpc_test.dart: MPC Module Tests MpcProvider Tests should create Fordefi provider
+00:00 +12: test\mpc_test.dart: MPC Module Tests MpcProvider Tests should throw error for unsupported provider
+00:00 +13: test\mpc_test.dart: MPC Module Tests MPC Types Tests should create and serialize KeyShare
+00:00 +14: test\mpc_test.dart: MPC Module Tests MPC Types Tests should create and serialize MpcSigningRequest
+00:00 +15: test\mpc_test.dart: MPC Module Tests MPC Types Tests should create and serialize MpcSigningResponse
+00:00 +16: test\mpc_test.dart: MPC Module Tests Error Handling Tests should throw MpcError for invalid threshold
+00:00 +17: test\mpc_test.dart: MPC Module Tests Error Handling Tests should throw MpcError for insufficient signature shares
+00:00 +18: All tests passed!
+web3_universal_mpc: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_multicall:
+00:00 +0: loading test\multicall_builder_test.dart
+00:00 +0: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +1: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +2: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +3: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +4: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +5: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +6: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +7: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +8: test\multicall_builder_test.dart: MulticallBuilder addCall should add contract call to builder
+00:00 +9: test\multicall_factory_test.dart: MulticallFactory create should create multicall with default address for supported chain
+00:00 +10: test\multicall_factory_test.dart: MulticallFactory create should create multicall with default address for supported chain
+00:00 +11: test\multicall_factory_test.dart: MulticallFactory create should create multicall with default address for supported chain
+00:00 +12: test\multicall_factory_test.dart: MulticallFactory create should create multicall with default address for supported chain
+00:00 +13: test\multicall_factory_test.dart: MulticallFactory create should create multicall with default address for supported chain
+00:00 +14: test\multicall_factory_test.dart: MulticallFactory create should create multicall with default address for supported chain
+00:00 +15: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +16: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +17: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +18: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +19: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +20: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +21: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +22: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +23: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +24: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +25: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +26: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +27: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +28: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +29: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +30: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +31: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +32: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +33: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +34: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +35: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +36: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +37: test\multicall_test.dart: Multicall aggregate should execute multiple calls successfully
+00:00 +38: test\multicall_builder_test.dart: MulticallBuilder estimateGas should estimate gas for calls
+00:00 +39: test\multicall_builder_test.dart: MulticallBuilder estimateGas should estimate gas for calls
+00:00 +40: test\multicall_test.dart: Multicall aggregate should handle empty calls list
+00:00 +41: test\multicall_builder_test.dart: MulticallBuilder estimateGas should return zero gas for empty builder
+00:00 +42: test\multicall_test.dart: Multicall tryAggregate should handle mixed success and failure results
+00:00 +43: test\multicall_test.dart: Multicall tryAggregate should handle mixed success and failure results
+00:00 +44: test\multicall_builder_test.dart: MulticallBuilder properties should return unmodifiable calls list
+00:00 +45: test\multicall_test.dart: Multicall tryAggregate should throw for Multicall v1
+00:00 +46: test\multicall_test.dart: Multicall tryAggregate should throw for Multicall v1
+00:00 +47: test\multicall_builder_test.dart: MulticallUtils createAllowanceBatch should create allowance batch for multiple tokens
+00:00 +48: test\multicall_test.dart: Multicall aggregateWithBlock should return block information with results
+00:00 +49: test\multicall_test.dart: Multicall aggregateWithBlock should throw for non-v3 multicall
+00:00 +50: test\multicall_test.dart: Multicall estimateGas should estimate gas for multicall
+00:00 +51: test\multicall_test.dart: Multicall encoding should encode aggregate calls correctly
+00:00 +52: All tests passed!
+web3_universal_multicall: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_nft:
+00:00 +0: loading test\nft_service_test.dart
+00:00 +0: test\nft_service_test.dart: NFT Service Tests should create NFT metadata from JSON
+00:00 +1: test\nft_service_test.dart: NFT Service Tests should create NFT token with required fields
+00:00 +2: test\nft_service_test.dart: NFT Service Tests should create NFT collection with basic info
+00:00 +3: test\nft_service_test.dart: NFT Service Tests should create NFT transfer parameters
+00:00 +4: test\nft_service_test.dart: NFT Service Tests should create NFT query parameters
+00:00 +5: test\nft_service_test.dart: NFT Service Tests should handle NFT attribute creation
+00:00 +6: test\nft_service_test.dart: NFT Service Tests should convert NFT metadata to JSON
+00:00 +7: test\nft_service_test.dart: NFT Service Tests should handle NFT query result
+00:00 +8: test\nft_service_test.dart: IPFS Gateway Tests should identify IPFS URIs correctly
+00:00 +9: test\nft_service_test.dart: IPFS Gateway Tests should handle gateway management
+00:00 +10: test\nft_service_test.dart: IPFS Gateway Tests should manage cache
+00:00 +11: All tests passed!
+web3_universal_nft: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_polkadot:
+00:00 +0: loading test\polkadot_property_test.dart
+00:00 +0: test\polkadot_property_test.dart: Polkadot Module Property Tests Property 30: SCALE Compact Encoding Round Trip
+00:00 +1: All tests passed!
+web3_universal_polkadot: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_price:
+00:00 +0: loading test\price_service_test.dart
+00:00 +0: test\price_service_test.dart: Price Service Tests should manage cache correctly
+00:00 +1: All tests passed!
+web3_universal_price: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_provider:
+00:00 +0: loading test\provider_property_test.dart
+00:00 +0: test\provider_property_test.dart: Provider Module Property Tests Property 1: HTTP RPC Connection Establishment
+00:00 +1: test\provider_property_test.dart: Provider Module Property Tests Property 2: WebSocket Persistent Connection
+00:00 +2: test\provider_property_test.dart: Provider Module Property Tests Property 3: Batch Request Consolidation
+00:00 +3: test\provider_property_test.dart: Provider Module Property Tests Property 4: Middleware Execution Order
+00:00 +4: test\provider_property_test.dart: Provider Module Property Tests Property 5: Error Response Structure
+00:00 +5: All tests passed!
+web3_universal_provider: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_reown:
+00:00 +0: loading test\connection_manager_test.dart
+00:00 +0: test\connection_manager_test.dart: ReconnectionConfig should create default config
+00:00 +1: test\namespace_config_test.dart: NamespaceConfig should create namespace config correctly
+00:00 +2: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +3: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +4: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +5: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +6: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +7: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +8: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +9: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +10: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +11: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +12: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +13: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +14: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +15: test\pairing_uri_test.dart: PairingUri should generate valid pairing URI
+00:00 +16: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +17: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +18: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +19: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +20: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +21: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +22: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +23: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +24: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +25: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +26: test\relay_verification_test.dart: Verify connection to official Relay server
+Connecting to relay.walletconnect.com...
+00:00 +27: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +28: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +29: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +30: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +31: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +32: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +33: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +34: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +35: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +36: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +37: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +38: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +39: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +40: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +41: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +42: test\relay_verification_test.dart: Verify connection to official Relay server
+00:00 +43: test\relay_verification_test.dart: Verify connection to official Relay server
+Verified: Server reachable but rejected handshake (Expected with dummy Project ID).
+00:01 +44: All tests passed!
+web3_universal_reown: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_signer:
+00:00 +0: loading test\eip7702_test.dart
+00:00 +0: test\eip7702_test.dart: EIP-7702 Authorization Tests Authorization Creation should create unsigned authorization
+00:00 +1: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +2: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +3: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +4: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +5: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +6: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +7: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +8: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +9: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +10: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +11: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +12: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +13: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +14: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +15: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +16: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +17: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +18: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +19: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +20: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +21: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +22: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +23: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +24: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:00 +25: test\signer_property_test.dart: Signer: Key Generation Consistency (testing 100 inputs)
+00:01 +26: All tests passed!
+web3_universal_signer: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_solana:
+00:00 +0: loading test\address_lookup_table_test.dart
+00:00 +0: test\address_lookup_table_test.dart: AddressLookupTableProgram Program ID is correct
+00:00 +1: test\basic_test.dart: Solana Models PublicKey from base58
+00:00 +2: test\address_lookup_table_test.dart: AddressLookupTableProgram findLookupTableAddress derivation
+00:00 +3: test\address_lookup_table_test.dart: AddressLookupTableProgram findLookupTableAddress derivation
+Derived Address: FZe1qtffLoNkWqAEJfZLoWSmgKeq4Y56JcRfM2rvQZen
+00:00 +4: test\basic_test.dart: Solana Models Transaction signing
+00:00 +5: test\basic_test.dart: Solana Models Transaction signing
+00:00 +6: test\basic_test.dart: Solana Models Transaction signing
+00:00 +7: test\basic_test.dart: Solana Models Transaction signing
+00:00 +8: test\basic_test.dart: Solana Models Transaction signing
+00:00 +9: test\basic_test.dart: Solana Models Transaction signing
+00:00 +10: test\basic_test.dart: Solana Models Transaction signing
+00:00 +11: test\basic_test.dart: Solana Models Transaction signing
+00:00 +12: test\basic_test.dart: Solana Models Transaction signing
+00:00 +13: test\basic_test.dart: Solana Models Transaction signing
+00:00 +14: All tests passed!
+web3_universal_solana: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_staking:
+00:00 +0: loading test\staking_service_test.dart
+00:00 +0: test\staking_service_test.dart: Staking Service Types Tests should create StakingOpportunity with correct values
+00:00 +1: test\staking_service_test.dart: Staking Service Types Tests should create StakingPosition with correct values
+00:00 +2: All tests passed!
+web3_universal_staking: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_swap:
+00:00 +0: loading test\basic_functionality_test.dart
+00:00 +0: test\basic_functionality_test.dart: Swap Basic Tests SwapHub initialization
+00:00 +1: All tests passed!
+web3_universal_swap: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_ton:
+00:00 +0: loading test\basic_functionality_test.dart
+00:00 +0: test\basic_functionality_test.dart: TON Extension Basic Tests TON Address parsing placeholder
+00:00 +1: All tests passed!
+web3_universal_ton: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_trezor:
+00:00 +0: loading test\trezor_test.dart
+00:00 +0: test\trezor_test.dart: Trezor Transport should connect and disconnect
+00:00 +1: test\trezor_test.dart: Trezor Transport should discover devices
+00:00 +2: test\trezor_test.dart: Trezor Transport should exchange messages
+00:00 +3: test\trezor_test.dart: Trezor Transport should handle mock responses
+00:00 +4: test\trezor_test.dart: Trezor Message should serialize to wire format
+00:00 +5: test\trezor_test.dart: Trezor Message should parse from wire format
+00:00 +6: test\trezor_test.dart: Trezor Message should handle invalid wire format
+00:00 +7: test\trezor_test.dart: Protobuf Messages should encode EthereumGetAddress
+00:00 +8: test\trezor_test.dart: Protobuf Messages should encode EthereumSignTx
+00:00 +9: test\trezor_test.dart: Protobuf Messages should decode Features
+00:00 +10: test\trezor_test.dart: Trezor Client should connect to device
+00:01 +11: test\trezor_test.dart: Trezor Client should get account information
+00:01 +12: test\trezor_test.dart: Trezor Client should get multiple accounts
+00:01 +13: test\trezor_test.dart: Trezor Client should handle button request during signing
+00:02 +14: test\trezor_test.dart: Trezor Signer should have valid address
+00:02 +15: test\trezor_test.dart: Trezor Signer should check connection state
+00:02 +16: test\trezor_test.dart: Trezor Signer should get multiple addresses
+00:03 +17: test\trezor_test.dart: Trezor Signer should sign transaction
+00:03 +18: test\trezor_test.dart: Trezor Signer should sign message
+00:03 +19: test\trezor_test.dart: Trezor Signer should throw for unsupported operations
+00:03 +20: test\trezor_test.dart: Trezor Types should create TrezorDevice
+00:03 +21: test\trezor_test.dart: Trezor Types should create TrezorFeatures
+00:03 +22: test\trezor_test.dart: Trezor Types should handle TrezorException
+00:03 +23: All tests passed!
+web3_universal_trezor: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_tron:
+00:00 +0: loading test\basic_functionality_test.dart
+00:00 +0: test\basic_functionality_test.dart: TRON Extension Basic Tests TRON Address validation placeholder
+00:00 +1: All tests passed!
+web3_universal_tron: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_utxo:
+00:00 +0: loading test\integration_test.dart
+00:00 +0: test\integration_test.dart: UTXO Mock Integration Build and Sign P2PKH Transaction
+00:00 +1: test\integration_test.dart: UTXO Mock Integration Build and Sign P2PKH Transaction
+00:00 +2: test\integration_test.dart: UTXO Mock Integration Build and Sign P2PKH Transaction
+00:00 +3: test\script_test.dart: Bitcoin Script Engine P2PKH Compilation & Parsing
+00:00 +4: test\taproot_test.dart: BIP-341 Taproot TapLeaf Tagged Hash
+00:00 +5: test\taproot_test.dart: BIP-341 Taproot TapLeaf Tagged Hash
+00:00 +6: test\taproot_test.dart: BIP-341 Taproot TapLeaf Tagged Hash
+00:00 +7: test\taproot_test.dart: BIP-341 Taproot TapLeaf Tagged Hash
+00:00 +8: test\taproot_test.dart: BIP-341 Taproot TapLeaf Tagged Hash
+00:00 +9: test\transaction_test.dart: BitcoinTransaction serialize basic legacy transaction
+00:00 +10: test\taproot_test.dart: BIP-341 Taproot Taproot Tweak (Key Path Spend)
+00:00 +11: test\taproot_test.dart: BIP-341 Taproot Taproot Tweak (Key Path Spend)
+00:00 +12: test\taproot_test.dart: BIP-341 Taproot Taproot Tweak (Key Path Spend)
+00:00 +13: test\taproot_test.dart: BIP-341 Taproot Taproot Tweak (Key Path Spend)
+00:00 +14: test\taproot_test.dart: BIP-341 Taproot Taproot Tweak (Script Path Spend)
+00:00 +15: All tests passed!
+web3_universal_utxo: SUCCESS
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart test
+     └> SUCCESS

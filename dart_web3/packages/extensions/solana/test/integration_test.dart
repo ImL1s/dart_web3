@@ -25,12 +25,15 @@ void main() {
         );
       });
 
-      final client =
-          SolanaClient('https://api.devnet.solana.com', httpClient: mockClient);
+      final client = SolanaClient(
+        'https://api.devnet.solana.com',
+        httpClient: mockClient,
+        chain: Solana.devnet,
+      );
       final pubKey = PublicKey(Uint8List(32)); // Mock key
 
-      final balance = await client.getBalance(pubKey);
-      expect(balance, 123456789);
+      final balance = await client.getBalance(pubKey.toBase58());
+      expect(balance, BigInt.from(123456789));
     });
 
     test('getAccountInfo returns account data', () async {
@@ -57,8 +60,8 @@ void main() {
         );
       });
 
-      final client =
-          SolanaClient('https://api.devnet.solana.com', httpClient: mockClient);
+      final client = SolanaClient('https://api.devnet.solana.com',
+          chain: Solana.devnet, httpClient: mockClient);
       final pubKey = PublicKey(Uint8List(32));
 
       final info = await client.getAccountInfo(pubKey);

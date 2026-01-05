@@ -1,6 +1,6 @@
 # dart_web3_client
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_client.svg)](https://pub.dev/packages/dart_web3_client)
+[![Pub](https://img.shields.io/pub/v/web3_universal_client.svg)](https://pub.dev/packages/web3_universal_client)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Platform: Multi-platform](https://img.shields.io/badge/Platform-Flutter%20%7C%20Dart-blue)
 

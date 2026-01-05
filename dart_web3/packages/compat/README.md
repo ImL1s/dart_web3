@@ -2,7 +2,7 @@
 
 ![Web3 Universal Banner](https://raw.githubusercontent.com/ImL1s/dart_web3/master/art/web3_universal_banner.png)
 
-[![Pub Version](https://img.shields.io/pub/v/dart_web3)](https://pub.dev/packages/dart_web3)
+[![Pub Version](https://img.shields.io/pub/v/web3_universal_compat)](https://pub.dev/packages/web3_universal_compat)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A drop-in compatibility layer for migrating from `web3dart` to the **Web3 Universal SDK**. This package preserves the legacy API while powering it with modern, secure, and authenticated cryptographic primitives from `web3_universal_crypto`.

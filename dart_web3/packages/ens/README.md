@@ -1,6 +1,6 @@
 # dart_web3_ens
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_ens.svg)](https://pub.dev/packages/dart_web3_ens)
+[![Pub](https://img.shields.io/pub/v/web3_universal_ens.svg)](https://pub.dev/packages/web3_universal_ens)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **human-readable identity resolver** for the Dart Web3 ecosystem. It provides fully compliant support for the Ethereum Name Service (ENS), including forward resolution, reverse resolution, and off-chain data fetching.

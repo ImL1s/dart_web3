@@ -86,7 +86,7 @@ class Contract {
       maxPriorityFeePerGas: maxPriorityFeePerGas,
     );
 
-    return walletClient!.sendTransaction(request);
+    return walletClient!.sendTransactionRequest(request);
   }
 
   /// Simulates a contract function call.

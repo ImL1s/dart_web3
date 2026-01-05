@@ -1,6 +1,6 @@
 # dart_web3_bitcoin
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_bitcoin.svg)](https://pub.dev/packages/dart_web3_bitcoin)
+[![Pub](https://img.shields.io/pub/v/web3_universal_bitcoin.svg)](https://pub.dev/packages/web3_universal_bitcoin)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **robust Bitcoin extension** for the Dart Web3 SDK. Brings Bitcoin's UTXO-based architecture and advanced scripting capabilities to the unified Dart API.

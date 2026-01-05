@@ -1,6 +1,6 @@
 # dart_web3_trezor
 
-[![Pub](https://img.shields.io/pub/v/dart_web3_trezor.svg)](https://pub.dev/packages/dart_web3_trezor)
+[![Pub](https://img.shields.io/pub/v/web3_universal_trezor.svg)](https://pub.dev/packages/web3_universal_trezor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Industry-standard **Trezor hardware wallet integration** for Dart. Communicates with Trezor One, Trezor T, and Trezor Safe devices via the Trezor Protobuf (Bridge) protocol.

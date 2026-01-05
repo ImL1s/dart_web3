@@ -29,12 +29,14 @@ class Block {
       gasUsed:
           BigInt.parse((json['gasUsed'] as String).substring(2), radix: 16),
       baseFeePerGas: json['baseFeePerGas'] != null
-          ? BigInt.parse((json['baseFeePerGas'] as String).substring(2),
-              radix: 16)
+          ? BigInt.parse(
+              (json['baseFeePerGas'] as String).substring(2),
+              radix: 16,
+            )
           : null,
       transactions: (json['transactions'] as List).map((t) {
         if (t is String) return t;
-        return t['hash'] as String;
+        return (t as Map<String, dynamic>)['hash'] as String;
       }).toList(),
     );
   }
@@ -73,12 +75,16 @@ class Transaction {
       hash: json['hash'] as String,
       blockHash: json['blockHash'] as String?,
       blockNumber: json['blockNumber'] != null
-          ? BigInt.parse((json['blockNumber'] as String).substring(2),
-              radix: 16)
+          ? BigInt.parse(
+              (json['blockNumber'] as String).substring(2),
+              radix: 16,
+            )
           : null,
       transactionIndex: json['transactionIndex'] != null
-          ? int.parse((json['transactionIndex'] as String).substring(2),
-              radix: 16)
+          ? int.parse(
+              (json['transactionIndex'] as String).substring(2),
+              radix: 16,
+            )
           : null,
       from: json['from'] as String,
       to: json['to'] as String?,
@@ -88,12 +94,16 @@ class Transaction {
           ? BigInt.parse((json['gasPrice'] as String).substring(2), radix: 16)
           : null,
       maxFeePerGas: json['maxFeePerGas'] != null
-          ? BigInt.parse((json['maxFeePerGas'] as String).substring(2),
-              radix: 16)
+          ? BigInt.parse(
+              (json['maxFeePerGas'] as String).substring(2),
+              radix: 16,
+            )
           : null,
       maxPriorityFeePerGas: json['maxPriorityFeePerGas'] != null
-          ? BigInt.parse((json['maxPriorityFeePerGas'] as String).substring(2),
-              radix: 16)
+          ? BigInt.parse(
+              (json['maxPriorityFeePerGas'] as String).substring(2),
+              radix: 16,
+            )
           : null,
       data: HexUtils.decode(json['input'] as String),
       nonce: BigInt.parse((json['nonce'] as String).substring(2), radix: 16),
@@ -139,16 +149,18 @@ class TransactionReceipt {
     return TransactionReceipt(
       transactionHash: json['transactionHash'] as String,
       transactionIndex: int.parse(
-          (json['transactionIndex'] as String).substring(2),
-          radix: 16),
+        (json['transactionIndex'] as String).substring(2),
+        radix: 16,
+      ),
       blockHash: json['blockHash'] as String,
       blockNumber:
           BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16),
       from: json['from'] as String,
       to: json['to'] as String?,
       cumulativeGasUsed: BigInt.parse(
-          (json['cumulativeGasUsed'] as String).substring(2),
-          radix: 16),
+        (json['cumulativeGasUsed'] as String).substring(2),
+        radix: 16,
+      ),
       gasUsed:
           BigInt.parse((json['gasUsed'] as String).substring(2), radix: 16),
       contractAddress: json['contractAddress'] as String?,
@@ -157,8 +169,10 @@ class TransactionReceipt {
           .toList(),
       status: int.parse((json['status'] as String).substring(2), radix: 16),
       effectiveGasPrice: json['effectiveGasPrice'] != null
-          ? BigInt.parse((json['effectiveGasPrice'] as String).substring(2),
-              radix: 16)
+          ? BigInt.parse(
+              (json['effectiveGasPrice'] as String).substring(2),
+              radix: 16,
+            )
           : null,
     );
   }
@@ -221,8 +235,9 @@ class Log {
           BigInt.parse((json['blockNumber'] as String).substring(2), radix: 16),
       transactionHash: json['transactionHash'] as String,
       transactionIndex: int.parse(
-          (json['transactionIndex'] as String).substring(2),
-          radix: 16),
+        (json['transactionIndex'] as String).substring(2),
+        radix: 16,
+      ),
       logIndex: int.parse((json['logIndex'] as String).substring(2), radix: 16),
       removed: json['removed'] as bool? ?? false,
     );

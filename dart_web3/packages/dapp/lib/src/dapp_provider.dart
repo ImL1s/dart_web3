@@ -22,7 +22,7 @@ class DAppProvider {
     switch (method) {
       case 'eth_accounts':
       case 'eth_requestAccounts':
-        return _walletClient != null ? [_walletClient.address.hex] : [];
+        return _walletClient != null ? [_walletClient.address] : [];
 
       case 'eth_chainId':
         return '0x${_publicClient.chain.chainId.toRadixString(16)}';
@@ -30,7 +30,7 @@ class DAppProvider {
       case 'eth_sendTransaction':
         if (_walletClient == null) throw Exception('Wallet not connected');
         // Handle transaction sending (would involve UI confirmation)
-        return _walletClient.sendTransaction(
+        return _walletClient.sendTransactionRequest(
             _parseTransaction(params[0] as Map<String, dynamic>));
 
       default:
