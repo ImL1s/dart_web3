@@ -10,7 +10,8 @@ final ledgerServiceProvider = Provider<LedgerService>((ref) {
 });
 
 /// Provider for the current Ledger connection status.
-final ledgerStatusProvider = ChangeNotifierProvider((ref) { // Using ChangeNotifierProvider simply to listen? No, usually we Stream/StateProvider
+final ledgerStatusProvider = ChangeNotifierProvider((ref) {
+  // Using ChangeNotifierProvider simply to listen? No, usually we Stream/StateProvider
   // Better: expose a StateProvider that updates from the service listener
   // But for now, let's just use the service provider and watch it in UI?
   // Actually, ChangeNotifierProvider on the service itself works if we used it.

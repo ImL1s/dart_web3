@@ -75,8 +75,10 @@ class TransactionHistoryState {
 }
 
 /// Transaction history notifier
-class TransactionHistoryNotifier extends StateNotifier<TransactionHistoryState> {
-  TransactionHistoryNotifier(this._ref) : super(const TransactionHistoryState());
+class TransactionHistoryNotifier
+    extends StateNotifier<TransactionHistoryState> {
+  TransactionHistoryNotifier(this._ref)
+      : super(const TransactionHistoryState());
 
   final Ref _ref;
 
@@ -161,7 +163,6 @@ class TransactionHistoryNotifier extends StateNotifier<TransactionHistoryState> 
       ),
     ];
   }
-
 }
 
 /// Transaction history provider

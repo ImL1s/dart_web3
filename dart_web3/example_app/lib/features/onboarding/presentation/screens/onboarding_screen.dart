@@ -18,7 +18,7 @@ class OnboardingScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 40),
-  
+
                 // Logo and branding
                 Container(
                   width: 120,
@@ -41,7 +41,7 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-  
+
                 Text(
                   'Web3 Wallet',
                   style: theme.textTheme.headlineLarge?.copyWith(
@@ -50,7 +50,7 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-  
+
                 Text(
                   'Your gateway to multi-chain DeFi',
                   style: theme.textTheme.bodyLarge?.copyWith(
@@ -59,7 +59,7 @@ class OnboardingScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-  
+
                 Text(
                   'Powered by dart_web3 SDK',
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -67,9 +67,9 @@ class OnboardingScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-  
+
                 const SizedBox(height: 48),
-  
+
                 // Feature highlights
                 const _FeatureRow(
                   icon: Icons.security_rounded,
@@ -88,16 +88,16 @@ class OnboardingScreen extends StatelessWidget {
                   title: 'DEX Aggregation',
                   subtitle: 'Best rates across exchanges',
                 ),
-  
+
                 const SizedBox(height: 48),
-  
+
                 // Action buttons
                 FilledButton(
                   onPressed: () => context.go('/create-wallet'),
                   child: const Text('Create New Wallet'),
                 ),
                 const SizedBox(height: 12),
-  
+
                 OutlinedButton(
                   onPressed: () => context.go('/import-wallet'),
                   style: OutlinedButton.styleFrom(
@@ -108,7 +108,7 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   child: const Text('Import Existing Wallet'),
                 ),
-  
+
                 const SizedBox(height: 24),
               ],
             ),

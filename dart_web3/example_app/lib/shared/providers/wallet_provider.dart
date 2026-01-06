@@ -8,7 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/wallet_service.dart';
 
 // Re-export for convenience
-export '../../core/wallet_service.dart' show ChainType, ChainConfig, Chains, Account;
+export '../../core/wallet_service.dart'
+    show ChainType, ChainConfig, Chains, Account;
 
 /// Wallet state.
 class WalletState {
@@ -186,7 +187,8 @@ class WalletNotifier extends StateNotifier<WalletState> {
 }
 
 /// Wallet provider.
-final walletProvider = StateNotifierProvider<WalletNotifier, WalletState>((ref) {
+final walletProvider =
+    StateNotifierProvider<WalletNotifier, WalletState>((ref) {
   return WalletNotifier();
 });
 

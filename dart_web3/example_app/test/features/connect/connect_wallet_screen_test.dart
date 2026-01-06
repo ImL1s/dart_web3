@@ -8,8 +8,7 @@ library;
 
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../lib/core/services/reown_service.dart';
-import '../../../lib/shared/providers/reown_provider.dart';
+import 'package:web3_wallet_app/shared/providers/reown_provider.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +31,7 @@ void main() {
         chainId: 1,
         sessionTopic: 'topic123',
       );
-      
+
       expect(wallet.address, contains('0x742d35'));
       expect(wallet.chainId, 1);
     });
@@ -45,7 +44,7 @@ void main() {
         walletName: 'Trust Wallet',
         walletIcon: 'https://trustwallet.com/icon.png',
       );
-      
+
       expect(wallet.walletName, 'Trust Wallet');
       expect(wallet.walletIcon, contains('trustwallet'));
     });

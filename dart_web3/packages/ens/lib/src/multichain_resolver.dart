@@ -10,10 +10,10 @@ class MultichainResolver {
     required PublicClient client,
     String? registryAddress,
     Duration cacheTtl = const Duration(minutes: 5),
-  }) : _client = client,
-       _registryAddress =
-           registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
-       _cacheTtl = cacheTtl;
+  })  : _client = client,
+        _registryAddress =
+            registryAddress ?? '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+        _cacheTtl = cacheTtl;
   final PublicClient _client;
   final String _registryAddress;
   final Map<String, dynamic> _cache = {};

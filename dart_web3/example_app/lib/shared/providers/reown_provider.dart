@@ -17,10 +17,10 @@ final reownServiceProvider = Provider<ReownService>((ref) {
 /// Reown connection status provider.
 final reownStatusProvider = StreamProvider<ReownConnectionStatus>((ref) async* {
   final service = ref.watch(reownServiceProvider);
-  
+
   // Initial value
   yield service.status;
-  
+
   // Listen to changes via ChangeNotifier
   await for (final _ in Stream.periodic(const Duration(milliseconds: 100))) {
     yield service.status;

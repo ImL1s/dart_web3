@@ -37,7 +37,7 @@ class CreateCommand {
     print('╔═══════════════════════════════════════════════════════════════╗');
     print('║                    MNEMONIC PHRASE                            ║');
     print('╠═══════════════════════════════════════════════════════════════╣');
-    
+
     final words = mnemonic.split(' ');
     for (var i = 0; i < words.length; i += 3) {
       final line = words
@@ -46,16 +46,18 @@ class CreateCommand {
           .toList()
           .asMap()
           .entries
-          .map((e) => '${(i + e.key + 1).toString().padLeft(2)}. ${e.value.padRight(10)}')
+          .map((e) =>
+              '${(i + e.key + 1).toString().padLeft(2)}. ${e.value.padRight(10)}')
           .join('  ');
       print('║  $line  ║');
     }
-    
+
     print('╚═══════════════════════════════════════════════════════════════╝');
     print('');
     print('⚠️  IMPORTANT: Write down these words and store them securely!');
     print('    Never share your mnemonic phrase with anyone.');
     print('');
-    print('To view addresses: dart run bin/wallet_cli.dart address --mnemonic "$mnemonic"');
+    print(
+        'To view addresses: dart run bin/wallet_cli.dart address --mnemonic "$mnemonic"');
   }
 }

@@ -6,7 +6,7 @@ void main() {
   group('BalanceState', () {
     test('initial state has correct defaults', () {
       const state = BalanceState();
-      
+
       expect(state.isLoading, isFalse);
       expect(state.lastUpdated, isNull);
       expect(state.error, isNull);
@@ -15,14 +15,14 @@ void main() {
 
     test('getBalance returns null for unknown chain', () {
       const state = BalanceState();
-      
+
       expect(state.getBalance(ChainType.ethereum), isNull);
     });
 
     test('copyWith preserves unchanged fields', () {
       const initial = BalanceState();
       final updated = initial.copyWith(isLoading: true);
-      
+
       expect(updated.isLoading, isTrue);
       expect(updated.error, isNull);
       expect(updated.balances, isEmpty);
@@ -31,14 +31,14 @@ void main() {
     test('copyWith can set error', () {
       const initial = BalanceState();
       final updated = initial.copyWith(error: 'Network error');
-      
+
       expect(updated.error, 'Network error');
       expect(updated.isLoading, isFalse);
     });
 
     test('totalUsdValue returns 0 for empty balances', () {
       const state = BalanceState();
-      
+
       expect(state.totalUsdValue, 0.0);
     });
   });

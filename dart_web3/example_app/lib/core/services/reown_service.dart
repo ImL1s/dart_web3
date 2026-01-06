@@ -57,7 +57,7 @@ class ReownService extends ChangeNotifier {
   bool get isConnected => _status == ReownConnectionStatus.sessionActive;
 
   /// Initializes the Reown client with project ID.
-  /// 
+  ///
   /// You must call this before using any other methods.
   /// Get your project ID from https://cloud.walletconnect.com
   Future<void> initialize({required String projectId}) async {
@@ -74,7 +74,7 @@ class ReownService extends ChangeNotifier {
   }
 
   /// Creates a pairing URI for QR code display.
-  /// 
+  ///
   /// Returns the WalletConnect URI that should be displayed as a QR code
   /// or used as a deep link.
   Future<String?> createPairing() async {
@@ -101,7 +101,7 @@ class ReownService extends ChangeNotifier {
   }
 
   /// Proposes a session with required EVM namespaces.
-  /// 
+  ///
   /// This is called after the wallet scans the QR code and connects.
   Future<void> proposeEvmSession({
     List<int> chainIds = const [1, 137], // Ethereum + Polygon
@@ -143,12 +143,12 @@ class ReownService extends ChangeNotifier {
   }
 
   /// Gets a signer for the connected session.
-  /// 
+  ///
   /// The returned signer can be used to sign transactions via the
   /// connected wallet.
   ReownSigner? getSigner() {
     if (_client == null || _connectedWallet == null) return null;
-    
+
     try {
       return _client!.createSigner(_connectedWallet!.sessionTopic);
     } catch (e) {
@@ -197,7 +197,8 @@ class ReownService extends ChangeNotifier {
               chainId: int.tryParse(parts[1]) ?? 1,
               sessionTopic: session.topic,
               walletName: session.metadata['name'] as String?,
-              walletIcon: (session.metadata['icons'] as List?)?.first as String?,
+              walletIcon:
+                  (session.metadata['icons'] as List?)?.first as String?,
             );
           }
           _pairingUri = null;

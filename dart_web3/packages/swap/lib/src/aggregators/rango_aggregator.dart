@@ -157,10 +157,9 @@ class RangoAggregator extends DexAggregator {
 
       return tokens
           .where(
-            (token) =>
-                (token as Map<String, dynamic>)['chainId'] ==
-                chainId.toString(),
-          )
+        (token) =>
+            (token as Map<String, dynamic>)['chainId'] == chainId.toString(),
+      )
           .map((token) {
         final tokenData = token as Map<String, dynamic>;
         return SwapToken(

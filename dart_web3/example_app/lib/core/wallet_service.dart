@@ -206,8 +206,8 @@ class WalletService {
   String _getEvmAddress(int chainId, int index) {
     // Check Ledger first
     final ledgerService = LedgerService.instance;
-    if (ledgerService.status == LedgerStatus.connected && 
-        ledgerService.connectedAddress != null && 
+    if (ledgerService.status == LedgerStatus.connected &&
+        ledgerService.connectedAddress != null &&
         index == 0) {
       return ledgerService.connectedAddress!;
     }
@@ -287,7 +287,8 @@ class WalletService {
     try {
       // Use RpcProvider directly to avoid ChainConfig conflicts
       final provider = RpcProvider(HttpTransport(account.chain.rpcUrl));
-      final response = await provider.call<Map<String, dynamic>>('getBalance', [account.address]);
+      final response = await provider
+          .call<Map<String, dynamic>>('getBalance', [account.address]);
       return BigInt.from(response['value'] as int);
     } catch (_) {
       return BigInt.zero;
@@ -313,8 +314,10 @@ class WalletService {
 
     // Non-EVM chains
     return switch (chain.type) {
-      ChainType.bitcoin => await _sendBitcoinTransaction(chain, to, amount, accountIndex),
-      ChainType.solana => await _sendSolanaTransaction(chain, to, amount, accountIndex),
+      ChainType.bitcoin =>
+        await _sendBitcoinTransaction(chain, to, amount, accountIndex),
+      ChainType.solana =>
+        await _sendSolanaTransaction(chain, to, amount, accountIndex),
       _ => throw ArgumentError('Unsupported chain: ${chain.name}'),
     };
   }
@@ -330,14 +333,16 @@ class WalletService {
     Uint8List signedTx;
 
     if (ledgerService.status == LedgerStatus.connected && accountIndex == 0) {
-       if (ledgerService.client == null) throw Exception("Ledger not connected properly");
-       
-       // Build and encode transaction for Ledger signing
-       final provider = RpcProvider(HttpTransport(chain.rpcUrl));
-       final nonce = await provider.getTransactionCount(ledgerService.connectedAddress!);
-       final gasPrice = await provider.getGasPrice();
-       
-       final tx = TransactionRequest(
+      if (ledgerService.client == null)
+        throw Exception("Ledger not connected properly");
+
+      // Build and encode transaction for Ledger signing
+      final provider = RpcProvider(HttpTransport(chain.rpcUrl));
+      final nonce =
+          await provider.getTransactionCount(ledgerService.connectedAddress!);
+      final gasPrice = await provider.getGasPrice();
+
+      final tx = TransactionRequest(
         to: to,
         value: amount,
         type: TransactionType.eip1559,
@@ -346,12 +351,12 @@ class WalletService {
         maxFeePerGas: gasPrice,
         maxPriorityFeePerGas: BigInt.from(1000000000), // 1 Gwei
         gasLimit: BigInt.from(21000), // Standard transfer
-       );
-       
-       // Encode transaction for Ledger (RLP encoded unsigned tx)
-       final encodedTx = _encodeTransactionForLedger(tx);
-       signedTx = await ledgerService.signTransaction(encodedTx, "m/44'/60'/0'/0/0");
+      );
 
+      // Encode transaction for Ledger (RLP encoded unsigned tx)
+      final encodedTx = _encodeTransactionForLedger(tx);
+      signedTx =
+          await ledgerService.signTransaction(encodedTx, "m/44'/60'/0'/0/0");
     } else {
       // Using library's PrivateKeySigner
       final derived = _hdWallet!.derive("m/44'/60'/0'/0/$accountIndex");
@@ -363,7 +368,7 @@ class WalletService {
         value: amount,
         type: TransactionType.eip1559,
       );
-      
+
       // PrivateKeySigner usually doesn't populate defaults either unless using a Wallet wrapper.
       // But the original code was simple:
       // signedTx = await signer.signTransaction(tx);
@@ -372,7 +377,7 @@ class WalletService {
       // If PrivateKeySigner doesn't populate, it might rely on provider.sendRawTransaction?
       // No, sendRawTransaction needs signed bytes.
       // So PrivateKeySigner or whatever signer must be smart enough or the original code was incomplete/mock.
-      // Original code was: 
+      // Original code was:
       /*
         final tx = TransactionRequest(
           to: to,
@@ -382,7 +387,7 @@ class WalletService {
         final signedTx = await signer.signTransaction(tx);
       */
       // I'll stick to modifying as little as possible but Ledger needs ChainID.
-      
+
       signedTx = await signer.signTransaction(tx);
     }
 
@@ -427,7 +432,8 @@ class WalletService {
     final utxoTxId = HexUtils.decode(
       '0000000000000000000000000000000000000000000000000000000000000000',
     );
-    final utxoAmount = amount + BigInt.from(10000); // Mock UTXO has Amount + Fee
+    final utxoAmount =
+        amount + BigInt.from(10000); // Mock UTXO has Amount + Fee
     final inputs = [
       TransactionInput(
         txId: utxoTxId,
@@ -443,7 +449,8 @@ class WalletService {
     // For simplicity in this demo, we assume 'to' is a Bech32 P2WPKH address
     try {
       final decodedTo = Bech32.decode(to);
-      final toScript = Script.p2wpkh(Uint8List.fromList(decodedTo.witnessProgram));
+      final toScript =
+          Script.p2wpkh(Uint8List.fromList(decodedTo.witnessProgram));
       outputs.add(TransactionOutput(amount: amount, scriptPubKey: toScript));
     } catch (_) {
       // Fallback for non-bech32 (just for demo safety)
@@ -491,7 +498,7 @@ class WalletService {
     // 6. Serialize & Broadcast
     final rawTx = tx.toBytes(segwit: true);
     // In production: await _broadcastBitcoin(HexUtils.encode(rawTx));
-    
+
     // Return a mock TxID based on the rawTx hash
     return HexUtils.encode(Sha256.doubleHash(rawTx));
   }
@@ -512,23 +519,24 @@ class WalletService {
     final publicKeyBytes = derived.getPublicKey();
     final signer = Ed25519KeyPair(privateKey, publicKeyBytes);
     final fromPublicKey = PublicKey(publicKeyBytes);
-    
+
     // Validate destination address
     late PublicKey toPublicKey;
     try {
       toPublicKey = PublicKey.fromBase58(to);
     } catch (_) {
-       throw ArgumentError('Invalid Solana address');
+      throw ArgumentError('Invalid Solana address');
     }
 
     // 2. Mock Recent Blockhash (In production: await _getRecentBlockhash())
     // 32-byte hash encoded in Base58 - must be valid Base58 (no 0, O, I, l)
-    const recentBlockhash = 'GkotHVEULjkXZ7nSR6wXbabcdefGHJKMNPQRSTUVWXYZ'; 
+    const recentBlockhash = 'GkotHVEULjkXZ7nSR6wXbabcdefGHJKMNPQRSTUVWXYZ';
 
     // 3. Create Instruction
     // Note: SystemProgram.transfer takes lamports as int. Ensure BigInt fits.
     if (amount > BigInt.from(9223372036854775807)) {
-       throw ArgumentError('Amount exceeds max safe integer for Solana transfer');
+      throw ArgumentError(
+          'Amount exceeds max safe integer for Solana transfer');
     }
 
     final instruction = SystemProgram.transfer(
@@ -550,14 +558,15 @@ class WalletService {
 
     // 6. Serialize & Broadcast
     final serialized = tx.serialize();
-    
+
     // Return signature (Base58 encoded transaction signature - first signature)
     // The transaction ID is the first signature.
     // SolanaTransaction stores signatures as List<Uint8List>
     if (tx.signatures.isNotEmpty) {
       return Base58.encode(tx.signatures.first);
     }
-    return Base58.encode(serialized); // Fallback if something weird, but usually it returns signature
+    return Base58.encode(
+        serialized); // Fallback if something weird, but usually it returns signature
   }
 
   /// Calculates BIP-143 Sighash for SegWit inputs
@@ -613,7 +622,8 @@ class WalletService {
       } else {
         outputs.addByte(0xfd); // Simplification, assume < 65535
         final lenBuf = Uint8List(2);
-        ByteData.view(lenBuf.buffer).setUint16(0, output.scriptPubKey.length, Endian.little);
+        ByteData.view(lenBuf.buffer)
+            .setUint16(0, output.scriptPubKey.length, Endian.little);
         outputs.add(lenBuf);
       }
       outputs.add(output.scriptPubKey);
@@ -639,8 +649,8 @@ class WalletService {
     final buffer = Uint8List(8);
     var v = value;
     for (var i = 0; i < 8; i++) {
-        buffer[i] = (v & BigInt.from(0xff)).toInt();
-        v >>= 8;
+      buffer[i] = (v & BigInt.from(0xff)).toInt();
+      v >>= 8;
     }
     return buffer;
   }
@@ -651,10 +661,10 @@ class WalletService {
     // Simplified encoding - in production use proper RLP from library
     // For EIP-1559: [chainId, nonce, maxPriorityFeePerGas, maxFeePerGas, gasLimit, to, value, data, accessList]
     final buffer = BytesBuilder();
-    
+
     // Transaction type prefix for EIP-1559
     buffer.addByte(0x02);
-    
+
     // Simplified: just concatenate key fields as placeholder
     // Real implementation should use RLP encoding from web3_universal_core
     buffer.add(_int64ToBytes(BigInt.from(tx.chainId ?? 1)));
@@ -662,21 +672,23 @@ class WalletService {
     buffer.add(_int64ToBytes(tx.maxPriorityFeePerGas ?? BigInt.zero));
     buffer.add(_int64ToBytes(tx.maxFeePerGas ?? BigInt.zero));
     buffer.add(_int64ToBytes(tx.gasLimit ?? BigInt.zero));
-    
+
     // To address (20 bytes)
     if (tx.to != null) {
-      final toBytes = HexUtils.decode(tx.to!.startsWith('0x') ? tx.to!.substring(2) : tx.to!);
+      final toBytes = HexUtils.decode(
+          tx.to!.startsWith('0x') ? tx.to!.substring(2) : tx.to!);
       buffer.add(toBytes);
     }
-    
+
     buffer.add(_int64ToBytes(tx.value ?? BigInt.zero));
-    
+
     return buffer.toBytes();
   }
 
   void _ensureInitialized() {
     if (!isInitialized) {
-      throw StateError('Wallet not initialized. Call createWallet or importWallet first.');
+      throw StateError(
+          'Wallet not initialized. Call createWallet or importWallet first.');
     }
   }
 }

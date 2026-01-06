@@ -11,7 +11,7 @@ void main() {
     setUp(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
       SharedPreferences.setMockInitialValues({});
-      
+
       const MethodChannel('plugins.it_nomads.com/flutter_secure_storage')
           .setMockMethodCallHandler((call) async {
         return null; // Mock all storage calls to return null (success)
@@ -25,7 +25,8 @@ void main() {
       );
     });
 
-    test('sendTransaction builds and signs Bitcoin P2WPKH transaction', () async {
+    test('sendTransaction builds and signs Bitcoin P2WPKH transaction',
+        () async {
       // Bitcoin Test Vector Address
       const toAddress = 'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq';
 
@@ -34,7 +35,6 @@ void main() {
         to: toAddress,
         amount: BigInt.from(50000), // 0.0005 BTC
       );
-
 
       expect(txHash, startsWith('0x'));
       expect(txHash.length, 66); // 0x + 64 hex chars
@@ -53,7 +53,7 @@ void main() {
     setUp(() async {
       TestWidgetsFlutterBinding.ensureInitialized();
       SharedPreferences.setMockInitialValues({});
-      
+
       const MethodChannel('plugins.it_nomads.com/flutter_secure_storage')
           .setMockMethodCallHandler((call) async {
         return null;
@@ -78,7 +78,8 @@ void main() {
       // Based on standard derivation for 'abandon ... about' on path m/44'/501'/0'/0'
       // Expected: 9w6s3s... or similar
       expect(account.address, isNotEmpty);
-      expect(account.address.length, greaterThan(30)); // Base58 is usually 32-44 chars
+      expect(account.address.length,
+          greaterThan(30)); // Base58 is usually 32-44 chars
     });
 
     test('sendTransaction builds and signs Solana transaction', () async {
@@ -91,11 +92,10 @@ void main() {
         amount: BigInt.from(1000000), // 0.001 SOL
       );
 
-
       expect(signature, isNotEmpty);
       // Signature is 64 bytes base58 encoded, should be around 87-88 chars
       // Base58 of 64 bytes is approx 64 * 1.37 = 87.6
-      expect(signature.length, greaterThan(80)); 
+      expect(signature.length, greaterThan(80));
     });
   });
 }

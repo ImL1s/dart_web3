@@ -6,8 +6,18 @@ void main() {
     setUp(() {
       // Clear any custom chains before each test
       final customChainIds = Chains.getAllChains()
-          .where((chain) => ![1, 5, 11155111, 137, 56, 42161, 10, 8453, 43114, -1]
-              .contains(chain.chainId))
+          .where((chain) => ![
+                1,
+                5,
+                11155111,
+                137,
+                56,
+                42161,
+                10,
+                8453,
+                43114,
+                -1
+              ].contains(chain.chainId))
           .map((chain) => chain.chainId)
           .toList();
 

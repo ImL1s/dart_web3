@@ -36,7 +36,7 @@ void main() {
     test('exchange records commands', () async {
       final command = APDUCommand(cla: 0xE0, ins: 0x02, p1: 0x00, p2: 0x00);
       await transport.exchange(command);
-      
+
       expect(transport.recordedCommands, hasLength(1));
       expect(transport.recordedCommands.first.ins, 0x02);
     });
@@ -44,7 +44,7 @@ void main() {
     test('exchange returns address for GET_ADDRESS command', () async {
       final command = APDUCommand(cla: 0xE0, ins: 0x02, p1: 0x00, p2: 0x00);
       final response = await transport.exchange(command);
-      
+
       expect(response.isSuccess, isTrue);
       expect(response.data, isNotEmpty);
     });
@@ -52,7 +52,7 @@ void main() {
     test('exchange returns signature for SIGN_TX command', () async {
       final command = APDUCommand(cla: 0xE0, ins: 0x04, p1: 0x00, p2: 0x00);
       final response = await transport.exchange(command);
-      
+
       expect(response.isSuccess, isTrue);
       expect(response.data.length, 65); // v + r + s
     });
@@ -60,16 +60,16 @@ void main() {
     test('custom responses override defaults', () async {
       final customData = Uint8List.fromList([0xAA, 0xBB, 0xCC]);
       transport.setCustomResponse(0x02, customData);
-      
+
       final command = APDUCommand(cla: 0xE0, ins: 0x02, p1: 0x00, p2: 0x00);
       final response = await transport.exchange(command);
-      
+
       expect(response.data, customData);
     });
 
     test('discoverDevices returns mock device', () async {
       final devices = await transport.discoverDevices();
-      
+
       expect(devices, hasLength(1));
       expect(devices.first.name, 'Mock Ledger Nano X');
       expect(devices.first.deviceId, 'mock-device-001');
@@ -90,7 +90,7 @@ void main() {
     test('getAccount returns address after connect', () async {
       await client.connect();
       final account = await client.getAccount("m/44'/60'/0'/0/0");
-      
+
       expect(account.address, isNotEmpty);
       expect(account.publicKey, isNotEmpty);
     });
@@ -99,15 +99,16 @@ void main() {
       await client.connect();
       final txData = Uint8List.fromList([0x01, 0x02, 0x03]);
       final result = await client.signTransaction(txData, "m/44'/60'/0'/0/0");
-      
+
       expect(result.signature, isNotEmpty);
     });
 
     test('signPersonalMessage returns signature after connect', () async {
       await client.connect();
       final message = Uint8List.fromList('Hello, Ledger!'.codeUnits);
-      final result = await client.signPersonalMessage(message, "m/44'/60'/0'/0/0");
-      
+      final result =
+          await client.signPersonalMessage(message, "m/44'/60'/0'/0/0");
+
       expect(result.signature, isNotEmpty);
     });
   });

@@ -74,8 +74,7 @@ void main() {
     test('derives different seeds from different mnemonics', () {
       const mnemonic1 =
           'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
-      const mnemonic2 =
-          'zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo wrong';
+      const mnemonic2 = 'zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo wrong';
 
       final seed1 = bip39.mnemonicToSeed(mnemonic1);
       final seed2 = bip39.mnemonicToSeed(mnemonic2);
@@ -102,7 +101,8 @@ void main() {
       final divisor = BigInt.from(10).pow(decimals);
       final whole = wei ~/ divisor;
       final fraction = wei % divisor;
-      final fractionStr = fraction.toString().padLeft(decimals, '0').substring(0, 4);
+      final fractionStr =
+          fraction.toString().padLeft(decimals, '0').substring(0, 4);
 
       expect('$whole.$fractionStr', equals('1.5000'));
     });
@@ -114,7 +114,8 @@ void main() {
       final divisor = BigInt.from(10).pow(decimals);
       final whole = wei ~/ divisor;
       final fraction = wei % divisor;
-      final fractionStr = fraction.toString().padLeft(decimals, '0').substring(0, 4);
+      final fractionStr =
+          fraction.toString().padLeft(decimals, '0').substring(0, 4);
 
       expect('$whole.$fractionStr', equals('0.0000'));
     });

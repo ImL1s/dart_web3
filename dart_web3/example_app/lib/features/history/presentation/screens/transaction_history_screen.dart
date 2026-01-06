@@ -139,8 +139,8 @@ class _TransactionCard extends StatelessWidget {
     final chainConfig = chain as ChainConfig;
     final decimals = chainConfig.decimals;
     final divisor = BigInt.from(10).pow(decimals);
-    final formattedAmount =
-        (transaction.amount / divisor).toStringAsFixed(decimals > 4 ? 4 : decimals);
+    final formattedAmount = (transaction.amount / divisor)
+        .toStringAsFixed(decimals > 4 ? 4 : decimals);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),

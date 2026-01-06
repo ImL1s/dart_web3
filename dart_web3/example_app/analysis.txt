@@ -1,0 +1,12 @@
+   info - The imported package 'integration_test' isn't a dependency of the importing package - integration_test\wallet_connect_test.dart:8:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:integration_test/integration_test.dart' - integration_test\wallet_connect_test.dart:8:8 - uri_does_not_exist
+   info - The imported package 'example_app' isn't a dependency of the importing package - integration_test\wallet_connect_test.dart:11:8 - depend_on_referenced_packages
+  error - Target of URI doesn't exist: 'package:example_app/main.dart' - integration_test\wallet_connect_test.dart:11:8 - uri_does_not_exist
+  error - Undefined name 'IntegrationTestWidgetsFlutterBinding' - integration_test\wallet_connect_test.dart:14:3 - undefined_identifier
+warning - A value for optional parameter 'totalBalance' isn't ever given - lib\features\home\presentation\screens\home_screen.dart:153:10 - unused_element
+   info - Can't use a relative path to import a library in 'lib' - test\core\services\reown_service_test.dart:16:8 - avoid_relative_lib_imports
+   info - Can't use a relative path to import a library in 'lib' - test\features\connect\connect_wallet_screen_test.dart:11:8 - avoid_relative_lib_imports
+   info - The import of '../../../lib/core/services/reown_service.dart' is unnecessary because all of the used elements are also provided by the import of '../../../lib/shared/providers/reown_provider.dart' - test\features\connect\connect_wallet_screen_test.dart:11:8 - unnecessary_import
+   info - Can't use a relative path to import a library in 'lib' - test\features\connect\connect_wallet_screen_test.dart:12:8 - avoid_relative_lib_imports
+
+10 issues found. (ran in 2.1s)

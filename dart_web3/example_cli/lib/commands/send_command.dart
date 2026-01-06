@@ -24,9 +24,7 @@ class SendCommand {
     ..addOption('to',
         abbr: 't', help: 'Recipient address (0x... or base58)', mandatory: true)
     ..addOption('amount',
-        abbr: 'a',
-        help: 'Amount to send (in ETH/SOL/BTC)',
-        mandatory: true)
+        abbr: 'a', help: 'Amount to send (in ETH/SOL/BTC)', mandatory: true)
     ..addOption('chain',
         abbr: 'c',
         help: 'Chain to use (ethereum, polygon, bsc, solana, bitcoin)',
@@ -156,10 +154,11 @@ class SendCommand {
     const solPath = "m/44'/501'/0'/0'";
     final solWallet = masterWallet.derive(solPath);
     final privateKey = solWallet.getPrivateKey();
-    final publicKey =
-        Secp256k1.getPublicKey(privateKey, compressed: true); // Secp logic used in App
-    final fromAddress = _base58Encode(publicKey); // Using simplified encoding logic for public key derived address?
-    // Wait, in App we used Secp based derivation but encoding the PubKey. 
+    final publicKey = Secp256k1.getPublicKey(privateKey,
+        compressed: true); // Secp logic used in App
+    final fromAddress = _base58Encode(
+        publicKey); // Using simplified encoding logic for public key derived address?
+    // Wait, in App we used Secp based derivation but encoding the PubKey.
     // Ideally Solana uses Ed25519 keypair from seed.
     // For consistency with App, we use same logic: derive private key via BIP32 (secp curve) and use it for Ed25519 signing.
     // Address is Base58(Ed25519 Public Key).
@@ -169,7 +168,7 @@ class SendCommand {
     // This is weird. Solana address is base58(Ed25519 pk), not Secp256k1 pk.
     // If the app does that, we should replicate or FIX.
     // Let's FIX: derive valid Ed25519 public key from the private key.
-    
+
     // Attempt: Use Ed25519.publicKey from private key
     // Issue: Creating Ed25519 public key from private key bytes.
     // web3_universal_crypto Ed25519 might support it?
@@ -187,22 +186,22 @@ class SendCommand {
     // So the App code `final solAddress = _base58Encode(solPublicKey)` where solPublicKey is Secp256k1 is DEFINITELY BROKEN if used on-chain.
     // Since this is a "Repair/Implement" task, I should fix it. But fixing derivation changes the address.
     // I will try to generate the correct Ed25519 public key here.
-    
+
     // Correct way:
     // keys = Ed25519.keyPairFromSeed(privateKey) usually.
     // Let's try to assume the private key is the seed or scalar.
     // For now, let's stick to what works for signing: the public key must match.
     // I'll leave a TODO.
-    print('  From:      (Derived from mnemonic)'); 
+    print('  From:      (Derived from mnemonic)');
 
     if (dryRun) {
-      print('🔍 DRY RUN'); 
+      print('🔍 DRY RUN');
       return;
     }
-    
+
     // Fetch Blockhash
     final blockhash = await _getSolanaBlockhash(rpcUrl);
-    
+
     // Build Transaction
     // Needs Ed25519 Public Key.
     // Since I cannot easily get Ed25519 pubkey from just private key bytes without definitions,
@@ -211,11 +210,12 @@ class SendCommand {
     // If I use `Ed25519` class from crypto?
     // It has `sign`. Does it have `publicKey`?
     // I'll guess it does or I can't proceed.
-    // `web3_universal_crypto` Ed25519. 
+    // `web3_universal_crypto` Ed25519.
     // If not, I'll fail.
-    
+
     // Placeholder logic for now to match App structure.
-    print('❌ CLI Solana sending requires Ed25519 key derivation fix in App/SDK first.');
+    print(
+        '❌ CLI Solana sending requires Ed25519 key derivation fix in App/SDK first.');
     exit(1);
   }
 
@@ -246,15 +246,16 @@ class SendCommand {
 
     try {
       final amountSats = BigInt.from(amount * 100000000);
-      
+
       // Get UTXOs
-      final utxoRes = await http.get(Uri.parse('$rpcUrl/address/$fromAddress/utxo'));
+      final utxoRes =
+          await http.get(Uri.parse('$rpcUrl/address/$fromAddress/utxo'));
       if (utxoRes.statusCode != 200) throw Exception('Failed to get UTXOs');
       final utxosJson = jsonDecode(utxoRes.body) as List;
-      
+
       // ... (Rest of Bitcoin logic similar to App) ...
       // Due to complexity and "dry run" limitation I will implement basic structure
-      
+
       print('✅ Transaction constructed (Mock for CLI)');
       print('   Broadcast not fully implemented in CLI single-file yet.');
     } catch (e) {
@@ -264,12 +265,18 @@ class SendCommand {
   }
 
   // ==================== Helpers ====================
-  
+
   static String _getRpcUrl(String chain, bool testnet) {
     return switch (chain) {
-      'ethereum' => testnet ? 'https://eth-sepolia.g.alchemy.com/v2/demo' : 'https://eth.llamarpc.com',
-      'polygon' => testnet ? 'https://rpc-mumbai.maticvigil.com' : 'https://polygon-rpc.com',
-      'bsc' => testnet ? 'https://data-seed-prebsc-1-s1.binance.org:8545' : 'https://bsc-dataseed.binance.org',
+      'ethereum' => testnet
+          ? 'https://eth-sepolia.g.alchemy.com/v2/demo'
+          : 'https://eth.llamarpc.com',
+      'polygon' => testnet
+          ? 'https://rpc-mumbai.maticvigil.com'
+          : 'https://polygon-rpc.com',
+      'bsc' => testnet
+          ? 'https://data-seed-prebsc-1-s1.binance.org:8545'
+          : 'https://bsc-dataseed.binance.org',
       _ => 'https://eth.llamarpc.com',
     };
   }
@@ -294,29 +301,36 @@ class SendCommand {
 
   static String _getExplorerUrl(String chain, bool testnet, String txHash) {
     final baseUrl = switch (chain) {
-      'ethereum' => testnet ? 'https://sepolia.etherscan.io' : 'https://etherscan.io',
-      'polygon' => testnet ? 'https://mumbai.polygonscan.com' : 'https://polygonscan.com',
+      'ethereum' =>
+        testnet ? 'https://sepolia.etherscan.io' : 'https://etherscan.io',
+      'polygon' =>
+        testnet ? 'https://mumbai.polygonscan.com' : 'https://polygonscan.com',
       'bsc' => testnet ? 'https://testnet.bscscan.com' : 'https://bscscan.com',
       _ => 'https://etherscan.io',
     };
     return '$baseUrl/tx/$txHash';
   }
-  
+
   static Future<String> _getSolanaBlockhash(String rpcUrl) async {
-      final response = await http.post(
-        Uri.parse(rpcUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'jsonrpc': '2.0', 'id': 1, 'method': 'getLatestBlockhash',
-          'params': [{'commitment': 'finalized'}],
-        }),
-      );
-      final json = jsonDecode(response.body);
-      return json['result']['value']['blockhash'];
+    final response = await http.post(
+      Uri.parse(rpcUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'jsonrpc': '2.0',
+        'id': 1,
+        'method': 'getLatestBlockhash',
+        'params': [
+          {'commitment': 'finalized'}
+        ],
+      }),
+    );
+    final json = jsonDecode(response.body);
+    return json['result']['value']['blockhash'];
   }
 
   static String _base58Encode(Uint8List data) {
-    const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    const alphabet =
+        '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     var value = BigInt.zero;
     for (final byte in data) value = (value << 8) | BigInt.from(byte);
     var result = '';
@@ -325,18 +339,20 @@ class SendCommand {
       value ~/= BigInt.from(58);
     }
     for (final byte in data) {
-      if (byte == 0) result = '1$result';
-      else break;
+      if (byte == 0)
+        result = '1$result';
+      else
+        break;
     }
     return result;
   }
-  
+
   static String _bech32Encode(String hrp, int version, Uint8List data) {
     // Simplified bech32 encoding for P2WPKH
     // This is a placeholder. Real implementation needed for proper address gen.
     // Since web3_universal_crypto might have Bech32, let's try to use it if available
     // But avoiding import errors, returning dummy if strictly needed.
     // For now:
-    return 'bc1q...'; 
+    return 'bc1q...';
   }
 }

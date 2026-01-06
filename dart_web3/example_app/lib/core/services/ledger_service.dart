@@ -20,10 +20,11 @@ enum LedgerStatus {
 
 /// Ledger Service singleton.
 class LedgerService extends ChangeNotifier {
-  LedgerService._({lf.Ledger? ledger}) 
-      : _ledger = ledger ?? lf.Ledger(
-          options: lf.LedgerOptions(),
-        );
+  LedgerService._({lf.Ledger? ledger})
+      : _ledger = ledger ??
+            lf.Ledger(
+              options: lf.LedgerOptions(),
+            );
 
   @visibleForTesting
   factory LedgerService.test({required lf.Ledger ledger}) {
@@ -31,7 +32,7 @@ class LedgerService extends ChangeNotifier {
   }
 
   static LedgerService? _mockInstance;
-  
+
   static LedgerService get instance => _mockInstance ?? _instance;
   static final LedgerService _instance = LedgerService._();
 
@@ -95,11 +96,11 @@ class LedgerService extends ChangeNotifier {
 
       await _ledger.connect(device);
       _connectedDevice = device;
-      
+
       // Create LedgerClient with our Flutter transport wrapper
       final transport = _LedgerFlutterTransport(_ledger, device);
       _client = LedgerClient(transport);
-      
+
       // Verify connection and get address
       try {
         final account = await _client!.getAccount("m/44'/60'/0'/0/0");
@@ -222,8 +223,9 @@ class _LedgerFlutterTransport implements LedgerTransport {
 
       // Parse status word from response (last 2 bytes)
       if (response.length >= 2) {
-        final statusWord = (response[response.length - 2] << 8) | response[response.length - 1];
-        final data = response.length > 2 
+        final statusWord = (response[response.length - 2] << 8) |
+            response[response.length - 1];
+        final data = response.length > 2
             ? Uint8List.fromList(response.sublist(0, response.length - 2))
             : Uint8List(0);
         return APDUResponse(data: data, statusWord: statusWord);

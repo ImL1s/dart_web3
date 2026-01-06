@@ -73,11 +73,11 @@ class TestLedgerTransport implements LedgerTransport {
     // Default responses based on INS code
     return switch (command.ins) {
       0x01 => _getConfigurationResponse(), // GET_CONFIGURATION
-      0x02 => _getAddressResponse(),    // GET_ADDRESS
+      0x02 => _getAddressResponse(), // GET_ADDRESS
       0x04 => _signTransactionResponse(), // SIGN_TX
-      0x08 => _signMessageResponse(),     // SIGN_MESSAGE
-      0x0C => _signTypedDataResponse(),   // SIGN_TYPED_DATA
-      0x06 => _getAppNameResponse(),    // GET_APP_NAME  
+      0x08 => _signMessageResponse(), // SIGN_MESSAGE
+      0x0C => _signTypedDataResponse(), // SIGN_TYPED_DATA
+      0x06 => _getAppNameResponse(), // GET_APP_NAME
       _ => APDUResponse(data: Uint8List(0), statusWord: 0x9000),
     };
   }
@@ -85,7 +85,8 @@ class TestLedgerTransport implements LedgerTransport {
   APDUResponse _getConfigurationResponse() {
     // Format: [arbitraryDataEnabled][erc20ProvisioningNecessary][major][minor][patch]
     return APDUResponse(
-      data: Uint8List.fromList([0x01, 0x00, 1, 10, 0]), // v1.10.0, arbitrary data enabled
+      data: Uint8List.fromList(
+          [0x01, 0x00, 1, 10, 0]), // v1.10.0, arbitrary data enabled
       statusWord: 0x9000,
     );
   }
@@ -145,13 +146,13 @@ class TestLedgerTransport implements LedgerTransport {
     // Format: [nameLen][name][versionLen][version]
     final name = 'Ethereum'.codeUnits;
     final version = '1.10.0'.codeUnits;
-    
+
     final response = BytesBuilder();
     response.addByte(name.length);
     response.add(Uint8List.fromList(name));
     response.addByte(version.length);
     response.add(Uint8List.fromList(version));
-    
+
     return APDUResponse(data: response.toBytes(), statusWord: 0x9000);
   }
 

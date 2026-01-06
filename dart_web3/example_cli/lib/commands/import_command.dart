@@ -38,7 +38,9 @@ class ImportCommand {
     print('✅ Mnemonic validated successfully!');
     print('   Word count: ${words.length}');
     print('');
-    print('To view addresses: dart run bin/wallet_cli.dart address --mnemonic "$mnemonic"');
-    print('To check balance: dart run bin/wallet_cli.dart balance --mnemonic "$mnemonic"');
+    print(
+        'To view addresses: dart run bin/wallet_cli.dart address --mnemonic "$mnemonic"');
+    print(
+        'To check balance: dart run bin/wallet_cli.dart balance --mnemonic "$mnemonic"');
   }
 }

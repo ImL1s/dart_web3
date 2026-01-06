@@ -131,7 +131,7 @@ class Chains {
     blockExplorerUrls: ['https://snowtrace.io'],
     multicallAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
   );
-  
+
   /// Solana Mainnet.
   static final solana = ChainConfig(
     chainId: -1, // Use -1 or a custom identifier for non-EVM

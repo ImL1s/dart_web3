@@ -54,19 +54,30 @@ class BalanceCommand {
     print('╠═══════════════════════════════════════════════════════════════╣');
 
     if (chain == 'all' || chain == 'ethereum') {
-      await _printEvmBalance('Ethereum', evmAddress, useTestnet
-          ? 'https://eth-sepolia.g.alchemy.com/v2/demo'
-          : 'https://eth.llamarpc.com');
+      await _printEvmBalance(
+          'Ethereum',
+          evmAddress,
+          useTestnet
+              ? 'https://eth-sepolia.g.alchemy.com/v2/demo'
+              : 'https://eth.llamarpc.com');
     }
 
     if (chain == 'all' || chain == 'polygon') {
-      await _printEvmBalance('Polygon', evmAddress,
-          useTestnet ? 'https://rpc-mumbai.maticvigil.com' : 'https://polygon-rpc.com');
+      await _printEvmBalance(
+          'Polygon',
+          evmAddress,
+          useTestnet
+              ? 'https://rpc-mumbai.maticvigil.com'
+              : 'https://polygon-rpc.com');
     }
 
     if (chain == 'all' || chain == 'bsc') {
-      await _printEvmBalance('BSC', evmAddress,
-          useTestnet ? 'https://data-seed-prebsc-1-s1.binance.org:8545' : 'https://bsc-dataseed.binance.org');
+      await _printEvmBalance(
+          'BSC',
+          evmAddress,
+          useTestnet
+              ? 'https://data-seed-prebsc-1-s1.binance.org:8545'
+              : 'https://bsc-dataseed.binance.org');
     }
 
     print('╚═══════════════════════════════════════════════════════════════╝');
@@ -101,9 +112,11 @@ class BalanceCommand {
         _ => 'ETH',
       };
 
-      print('║  🔷 ${chainName.padRight(12)} ${balanceEth.padLeft(15)} $symbol        ║');
+      print(
+          '║  🔷 ${chainName.padRight(12)} ${balanceEth.padLeft(15)} $symbol        ║');
     } catch (e) {
-      print('║  🔷 ${chainName.padRight(12)}        Error fetching             ║');
+      print(
+          '║  🔷 ${chainName.padRight(12)}        Error fetching             ║');
     }
   }
 
@@ -112,7 +125,8 @@ class BalanceCommand {
     final divisor = BigInt.from(10).pow(decimals);
     final whole = wei ~/ divisor;
     final fraction = wei % divisor;
-    final fractionStr = fraction.toString().padLeft(decimals, '0').substring(0, 4);
+    final fractionStr =
+        fraction.toString().padLeft(decimals, '0').substring(0, 4);
     return '$whole.$fractionStr';
   }
 }

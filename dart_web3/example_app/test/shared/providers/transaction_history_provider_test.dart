@@ -19,18 +19,21 @@ class MockWalletNotifier extends WalletNotifier {
   void selectChain(ChainType chain) {
     state = state.copyWith(selectedChain: chain);
   }
+
   @override
   ChainConfig get selectedChainConfig => Chains.ethereum; // Default
   @override
-  Future<String> sendTransaction({required String to, required String amount}) async => '';
+  Future<String> sendTransaction(
+          {required String to, required String amount}) async =>
+      '';
   @override
   Future<void> deleteWallet() async {}
-  
+
   // Helper to set state directly for testing
   void setAccounts(List<Account> accounts) {
     state = state.copyWith(accounts: accounts);
   }
-  
+
   void setChain(ChainType chain) {
     state = state.copyWith(selectedChain: chain);
   }
@@ -45,7 +48,7 @@ void main() {
       TestWidgetsFlutterBinding.ensureInitialized();
       SharedPreferences.setMockInitialValues({});
       mockWalletNotifier = MockWalletNotifier();
-      
+
       container = ProviderContainer(
         overrides: [
           walletProvider.overrideWith((ref) => mockWalletNotifier),
@@ -72,11 +75,11 @@ void main() {
       );
       mockWalletNotifier.setAccounts([account]);
       mockWalletNotifier.setChain(ChainType.ethereum);
-      
+
       await container.read(transactionHistoryProvider.notifier).refresh();
-      
+
       final state = container.read(transactionHistoryProvider);
-      
+
       expect(state.isLoading, false);
       expect(state.transactions, isNotEmpty);
       final tx = state.transactions.first;
@@ -90,11 +93,11 @@ void main() {
       );
       mockWalletNotifier.setAccounts([account]);
       mockWalletNotifier.setChain(ChainType.bitcoin);
-      
+
       await container.read(transactionHistoryProvider.notifier).refresh();
-      
+
       final state = container.read(transactionHistoryProvider);
-      
+
       expect(state.transactions, isNotEmpty);
       expect(state.transactions.first.hash, contains('btc...mock'));
     });
@@ -106,11 +109,11 @@ void main() {
       );
       mockWalletNotifier.setAccounts([account]);
       mockWalletNotifier.setChain(ChainType.solana);
-      
+
       await container.read(transactionHistoryProvider.notifier).refresh();
-      
+
       final state = container.read(transactionHistoryProvider);
-      
+
       expect(state.transactions, isNotEmpty);
       expect(state.transactions.first.hash, contains('sol...mock'));
     });

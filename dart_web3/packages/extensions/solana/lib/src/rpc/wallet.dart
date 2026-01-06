@@ -25,7 +25,7 @@ class SolanaWalletClient extends SolanaClient implements WalletClientBase {
   @override
   Future<Uint8List> signTransaction(Uint8List tx) async {
     // In Solana, signing a transaction often means signing the message part
-    // and prepending signatures. For simplicity in this base interface, 
+    // and prepending signatures. For simplicity in this base interface,
     // we return the signature of the raw bytes.
     return keyPair.sign(tx);
   }

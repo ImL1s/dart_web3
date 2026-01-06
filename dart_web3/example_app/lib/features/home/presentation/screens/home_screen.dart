@@ -58,6 +58,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   _BalanceCard(
                     address: walletState.selectedAccount?.address ?? '0x...',
                     isLoading: balanceState.isLoading,
+                    totalBalance: balanceState.totalUsdValue > 0
+                        ? '\$${balanceState.totalUsdValue.toStringAsFixed(2)}'
+                        : null,
                     onCopyAddress: () {
                       if (walletState.selectedAccount != null) {
                         Clipboard.setData(
@@ -118,16 +121,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   // Chain list
                   ...walletState.accounts.map((account) {
                     final balance = balanceState.getBalance(account.chain.type);
-                    final isSelected = walletState.selectedChain == account.chain.type;
+                    final isSelected =
+                        walletState.selectedChain == account.chain.type;
 
                     return _NetworkTile(
                       chainName: account.chain.name,
                       symbol: account.chain.symbol,
                       address: account.address,
-                      balance: balance?.formatted ?? '0 ${account.chain.symbol}',
+                      balance:
+                          balance?.formatted ?? '0 ${account.chain.symbol}',
                       isSelected: isSelected,
                       onTap: () {
-                        ref.read(walletProvider.notifier).selectChain(account.chain.type);
+                        ref
+                            .read(walletProvider.notifier)
+                            .selectChain(account.chain.type);
                       },
                     );
                   }),
@@ -191,7 +198,8 @@ class _BalanceCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
@@ -199,8 +207,8 @@ class _BalanceCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.account_balance_wallet, 
-                      color: Colors.white, size: 16),
+                    const Icon(Icons.account_balance_wallet,
+                        color: Colors.white, size: 16),
                     const SizedBox(width: 6),
                     Text(
                       'Main Wallet',
@@ -214,13 +222,14 @@ class _BalanceCard extends StatelessWidget {
               ),
               const Spacer(),
               IconButton(
-                icon: const Icon(Icons.qr_code_rounded, color: Colors.white70, size: 22),
+                icon: const Icon(Icons.qr_code_rounded,
+                    color: Colors.white70, size: 22),
                 onPressed: () {},
               ),
             ],
           ),
           const SizedBox(height: 20),
-          
+
           // Address row
           GestureDetector(
             onTap: onCopyAddress,
@@ -241,13 +250,14 @@ class _BalanceCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.copy_rounded, color: Colors.white54, size: 16),
+                  const Icon(Icons.copy_rounded,
+                      color: Colors.white54, size: 16),
                 ],
               ),
             ),
           ),
           const SizedBox(height: 24),
-          
+
           // Balance display
           if (isLoading)
             _buildShimmerBalance(theme)
@@ -280,7 +290,7 @@ class _BalanceCard extends StatelessWidget {
       ),
     );
   }
-  
+
   Widget _buildShimmerBalance(ThemeData theme) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -412,9 +422,7 @@ class _NetworkTile extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       margin: const EdgeInsets.only(bottom: 10),
       child: Material(
-        color: isSelected 
-            ? chainColor.withOpacity(0.1) 
-            : colorScheme.surface,
+        color: isSelected ? chainColor.withOpacity(0.1) : colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           onTap: onTap,
@@ -445,7 +453,7 @@ class _NetworkTile extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 14),
-                
+
                 // Chain info
                 Expanded(
                   child: Column(
@@ -463,7 +471,7 @@ class _NetworkTile extends StatelessWidget {
                             const SizedBox(width: 6),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 2),
+                                  horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
                                 color: chainColor.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(4),
@@ -490,7 +498,7 @@ class _NetworkTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 // Balance
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,

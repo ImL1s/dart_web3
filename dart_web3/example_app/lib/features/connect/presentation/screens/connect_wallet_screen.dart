@@ -17,10 +17,12 @@ class ConnectWalletScreen extends ConsumerStatefulWidget {
   const ConnectWalletScreen({super.key});
 
   @override
-  ConsumerState<ConnectWalletScreen> createState() => _ConnectWalletScreenState();
+  ConsumerState<ConnectWalletScreen> createState() =>
+      _ConnectWalletScreenState();
 }
 
-class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with SingleTickerProviderStateMixin {
+class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _isInitialized = false;
   bool _isLoading = false;
@@ -41,11 +43,11 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
 
   Future<void> _initializeReown() async {
     final service = ref.read(reownServiceProvider);
-    
+
     // TODO: Replace with your WalletConnect Cloud project ID
     // Get one at https://cloud.walletconnect.com
     await service.initialize(projectId: 'YOUR_PROJECT_ID');
-    
+
     if (mounted) {
       setState(() => _isInitialized = true);
     }
@@ -53,15 +55,15 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
 
   Future<void> _createPairing() async {
     setState(() => _isLoading = true);
-    
+
     final service = ref.read(reownServiceProvider);
     final uri = await service.createPairing();
-    
+
     if (uri != null) {
       // Also propose session after pairing
       await service.proposeEvmSession(chainIds: [1, 137]); // Eth + Polygon
     }
-    
+
     if (mounted) {
       setState(() => _isLoading = false);
     }
@@ -179,7 +181,9 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.bluetooth_searching, size: 64, color: Theme.of(context).colorScheme.outline),
+                        Icon(Icons.bluetooth_searching,
+                            size: 64,
+                            color: Theme.of(context).colorScheme.outline),
                         const SizedBox(height: 16),
                         Text(
                           'No devices found',
@@ -189,9 +193,12 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
                         Text(
                           'Make sure Bluetooth is on and your Ledger is in the Ethereum app.',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
                         ),
                       ],
                     ),
@@ -205,7 +212,8 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
                           leading: const Icon(Icons.usb),
                           title: Text(device.name),
                           subtitle: Text(device.id),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                           onTap: () => _connectLedger(device),
                         ),
                       );
@@ -217,10 +225,14 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
             width: double.infinity,
             child: FilledButton.icon(
               onPressed: _isLedgerScanning ? null : _scanLedger,
-              icon: _isLedgerScanning 
-                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
+              icon: _isLedgerScanning
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2))
                   : const Icon(Icons.refresh),
-              label: Text(_isLedgerScanning ? 'Scanning...' : 'Scan for Devices'),
+              label:
+                  Text(_isLedgerScanning ? 'Scanning...' : 'Scan for Devices'),
             ),
           ),
         ],
@@ -308,7 +320,10 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
         Text(
           'Scan QR code with your mobile wallet to connect.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurface
+                    .withValues(alpha: 0.7),
               ),
           textAlign: TextAlign.center,
         ),
@@ -359,7 +374,10 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with 
         Text(
           'Open your wallet app and scan this QR code',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurface
+                    .withValues(alpha: 0.7),
               ),
         ),
         const SizedBox(height: 24),

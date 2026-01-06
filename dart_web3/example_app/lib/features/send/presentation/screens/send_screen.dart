@@ -39,7 +39,8 @@ class _SendScreenState extends ConsumerState<SendScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Transaction sent! Hash: ${txHash.substring(0, 10)}...'),
+            content:
+                Text('Transaction sent! Hash: ${txHash.substring(0, 10)}...'),
             backgroundColor: Colors.green,
           ),
         );
@@ -117,7 +118,9 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                               ),
                             ),
                             Text(
-                              walletState.selectedAccount?.address.substring(0, 12) ?? '...',
+                              walletState.selectedAccount?.address
+                                      .substring(0, 12) ??
+                                  '...',
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: colorScheme.onSurfaceVariant,
                               ),
@@ -194,7 +197,8 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                     suffixText: symbol,
                     suffixIcon: TextButton(
                       onPressed: () {
-                        _amountController.text = '0.00'; // TODO: Max balance logic
+                        _amountController.text =
+                            '0.00'; // TODO: Max balance logic
                       },
                       child: const Text('MAX'),
                     ),

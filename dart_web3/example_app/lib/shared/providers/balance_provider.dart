@@ -119,7 +119,8 @@ class BalanceNotifier extends StateNotifier<BalanceState> {
   /// Refresh balance for a specific chain.
   Future<void> refreshChain(ChainType type) async {
     final walletState = _ref.read(walletProvider);
-    final account = walletState.accounts.where((a) => a.chain.type == type).firstOrNull;
+    final account =
+        walletState.accounts.where((a) => a.chain.type == type).firstOrNull;
     if (account == null) return;
 
     try {
@@ -159,7 +160,8 @@ class BalanceNotifier extends StateNotifier<BalanceState> {
 }
 
 /// Balance provider.
-final balanceProvider = StateNotifierProvider<BalanceNotifier, BalanceState>((ref) {
+final balanceProvider =
+    StateNotifierProvider<BalanceNotifier, BalanceState>((ref) {
   return BalanceNotifier(ref);
 });
 

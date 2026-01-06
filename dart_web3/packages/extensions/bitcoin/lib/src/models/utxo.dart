@@ -42,13 +42,13 @@ class OrdinalUtxo {
 
   /// Convert to JSON
   Map<String, dynamic> toJson() => {
-    'txid': txid,
-    'vout': vout,
-    'value': value,
-    'isSegwit': isSegwit,
-    if (address != null) 'address': address,
-    if (scriptPubKey != null) 'scriptPubKey': scriptPubKey,
-  };
+        'txid': txid,
+        'vout': vout,
+        'value': value,
+        'isSegwit': isSegwit,
+        if (address != null) 'address': address,
+        if (scriptPubKey != null) 'scriptPubKey': scriptPubKey,
+      };
 
   /// Get the outpoint string (txid:vout)
   String get outpoint => '$txid:$vout';

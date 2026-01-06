@@ -146,9 +146,8 @@ class _CreateWalletScreenState extends ConsumerState<CreateWalletScreen> {
 
                     // Continue button
                     FilledButton(
-                      onPressed: _hasBackedUp
-                          ? () => context.go('/home')
-                          : null,
+                      onPressed:
+                          _hasBackedUp ? () => context.go('/home') : null,
                       child: const Text('Continue to Wallet'),
                     ),
                   ],

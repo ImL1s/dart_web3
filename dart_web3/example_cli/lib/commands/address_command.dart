@@ -54,23 +54,34 @@ class AddressCommand {
     final solPubKey = Secp256k1.getPublicKey(solPrivKey, compressed: true);
     final solAddress = _base58Encode(solPubKey);
 
-    print('╔═══════════════════════════════════════════════════════════════════════════╗');
-    print('║                          WALLET ADDRESSES                                 ║');
-    print('╠═══════════════════════════════════════════════════════════════════════════╣');
-    print('║                                                                           ║');
-    print('║  🔷 EVM (Ethereum, Polygon, BSC, Arbitrum, etc.)                         ║');
+    print(
+        '╔═══════════════════════════════════════════════════════════════════════════╗');
+    print(
+        '║                          WALLET ADDRESSES                                 ║');
+    print(
+        '╠═══════════════════════════════════════════════════════════════════════════╣');
+    print(
+        '║                                                                           ║');
+    print(
+        '║  🔷 EVM (Ethereum, Polygon, BSC, Arbitrum, etc.)                         ║');
     print('║     Path: $evmPath                                           ║');
     print('║     ${evmAddress.hex.padRight(58)}║');
-    print('║                                                                           ║');
-    print('║  🟠 Bitcoin (Native SegWit - bc1)                                        ║');
+    print(
+        '║                                                                           ║');
+    print(
+        '║  🟠 Bitcoin (Native SegWit - bc1)                                        ║');
     print('║     Path: $btcPath                                          ║');
     print('║     ${btcAddress.padRight(58)}║');
-    print('║                                                                           ║');
-    print('║  🟣 Solana                                                               ║');
+    print(
+        '║                                                                           ║');
+    print(
+        '║  🟣 Solana                                                               ║');
     print('║     Path: $solPath                                             ║');
     print('║     ${solAddress.padRight(58)}║');
-    print('║                                                                           ║');
-    print('╚═══════════════════════════════════════════════════════════════════════════╝');
+    print(
+        '║                                                                           ║');
+    print(
+        '╚═══════════════════════════════════════════════════════════════════════════╝');
   }
 
   /// Derive Bitcoin SegWit (bech32) address from public key.
@@ -84,15 +95,16 @@ class AddressCommand {
   static String _bech32Encode(String hrp, Uint8List data) {
     final converted = _convertBits(data, 8, 5, true);
     if (converted == null) return 'Error encoding';
-    
+
     const alphabet = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
     final checksum = _createBech32Checksum(hrp, converted);
     final combined = [...converted, ...checksum];
-    
+
     return '$hrp${1}${combined.map((b) => alphabet[b]).join()}';
   }
 
-  static List<int>? _convertBits(List<int> data, int fromBits, int toBits, bool pad) {
+  static List<int>? _convertBits(
+      List<int> data, int fromBits, int toBits, bool pad) {
     int acc = 0;
     int bits = 0;
     final result = <int>[];
@@ -148,19 +160,20 @@ class AddressCommand {
   }
 
   static String _base58Encode(Uint8List data) {
-    const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    const alphabet =
+        '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     var x = BigInt.zero;
     for (final byte in data) {
       x = x * BigInt.from(256) + BigInt.from(byte);
     }
-    
+
     final result = StringBuffer();
     while (x > BigInt.zero) {
       final r = x % BigInt.from(58);
       x = x ~/ BigInt.from(58);
       result.write(alphabet[r.toInt()]);
     }
-    
+
     // Add leading zeros
     for (final byte in data) {
       if (byte == 0) {
@@ -169,7 +182,7 @@ class AddressCommand {
         break;
       }
     }
-    
+
     return result.toString().split('').reversed.join();
   }
 }

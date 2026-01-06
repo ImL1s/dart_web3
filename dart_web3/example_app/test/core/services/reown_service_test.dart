@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:web3_universal_reown/web3_universal_reown.dart';
 
-import '../../../lib/core/services/reown_service.dart';
+import 'package:web3_wallet_app/core/services/reown_service.dart';
 
 /// Mock ReownClient for testing without real network connections.
 class MockReownClient implements ReownClient {
@@ -21,21 +21,21 @@ class MockReownClient implements ReownClient {
 
   final StreamController<ReownEvent> _eventController =
       StreamController<ReownEvent>.broadcast();
-  
+
   bool _isConnected = false;
   final List<Session> _sessions = [];
-  
+
   // Mock control methods
   void simulateSessionEstablished(Session session) {
     _sessions.add(session);
     _eventController.add(ReownEvent.sessionEstablished(session));
   }
-  
+
   void simulateDisconnection(Session session, String? reason) {
     _sessions.remove(session);
     _eventController.add(ReownEvent.sessionDisconnected(session, reason));
   }
-  
+
   void simulateConnectionStateChange(ConnectionState state) {
     _isConnected = state == ConnectionState.connected;
     _eventController.add(ReownEvent.connectionStateChanged(state));
@@ -76,13 +76,15 @@ class MockReownClient implements ReownClient {
   @override
   Future<void> connect() async {
     _isConnected = true;
-    _eventController.add(ReownEvent.connectionStateChanged(ConnectionState.connected));
+    _eventController
+        .add(ReownEvent.connectionStateChanged(ConnectionState.connected));
   }
 
   @override
   Future<void> disconnect() async {
     _isConnected = false;
-    _eventController.add(ReownEvent.connectionStateChanged(ConnectionState.disconnected));
+    _eventController
+        .add(ReownEvent.connectionStateChanged(ConnectionState.disconnected));
   }
 
   @override
@@ -139,7 +141,8 @@ class MockReownClient implements ReownClient {
     required String topic,
     String? reason,
   }) async {
-    _eventController.add(ReownEvent.sessionProposalRejected(proposalId, reason));
+    _eventController
+        .add(ReownEvent.sessionProposalRejected(proposalId, reason));
   }
 
   @override
@@ -250,13 +253,15 @@ void main() {
 
   group('ReownConnectionStatus', () {
     test('has all expected values', () {
-      expect(ReownConnectionStatus.values, containsAll([
-        ReownConnectionStatus.disconnected,
-        ReownConnectionStatus.connecting,
-        ReownConnectionStatus.connected,
-        ReownConnectionStatus.sessionPending,
-        ReownConnectionStatus.sessionActive,
-      ]));
+      expect(
+          ReownConnectionStatus.values,
+          containsAll([
+            ReownConnectionStatus.disconnected,
+            ReownConnectionStatus.connecting,
+            ReownConnectionStatus.connected,
+            ReownConnectionStatus.sessionPending,
+            ReownConnectionStatus.sessionActive,
+          ]));
     });
 
     test('enum count is 5', () {
