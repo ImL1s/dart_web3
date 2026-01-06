@@ -63,6 +63,9 @@ dependencies:
     path: ../packages/extensions/solana
   web3_universal_reown:
     path: ../packages/reown
+  web3_universal_ledger:
+    path: ../packages/hardware/ledger
+  ledger_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:

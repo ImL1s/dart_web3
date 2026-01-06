@@ -1,6 +1,6 @@
 # dart_web3_multicall
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_multicall.svg)](https://pub.dev/packages/web3_universal_multicall)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 An **efficiency-focused batching library** that enables querying multiple pieces of blockchain state in a single RPC call. Ideal for complex UIs that need to display balances for numerous tokens or user data across several contracts.

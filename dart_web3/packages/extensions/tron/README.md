@@ -1,6 +1,6 @@
 # dart_web3_tron
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_tron.svg)](https://pub.dev/packages/web3_universal_tron)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **full-featured TRON extension** for the Dart Web3 ecosystem. Effortlessly interact with the TVM (Tron Virtual Machine), manage Bandwidth/Energy, and perform high-speed asset transfers.

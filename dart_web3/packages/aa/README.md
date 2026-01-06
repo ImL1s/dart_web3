@@ -1,6 +1,6 @@
 # dart_web3_aa
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_aa.svg)](https://pub.dev/packages/web3_universal_aa)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **production-ready Account Abstraction (AA) toolkit** for Dart. It enables the implementation of ERC-4337 smart accounts, gas sponsorship, and custom validation logic in mobile and web applications.

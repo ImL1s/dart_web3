@@ -1,6 +1,6 @@
 # dart_web3_dapp
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_dapp.svg)](https://pub.dev/packages/web3_universal_dapp)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **comprehensive application framework** for building decentralized applications in Dart and Flutter. It provides the glue that connects your UI to state management, session persistence, and multi-provider connectivity.

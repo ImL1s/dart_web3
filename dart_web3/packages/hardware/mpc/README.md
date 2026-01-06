@@ -1,6 +1,6 @@
 # dart_web3_mpc
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_mpc.svg)](https://pub.dev/packages/web3_universal_mpc)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **Multi-Party Computation (MPC) extension** for the Dart Web3 ecosystem. Enable "keyless" security by distributing key shares across multiple devices or stakeholders using threshold cryptography.

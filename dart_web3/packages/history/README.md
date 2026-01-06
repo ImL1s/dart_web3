@@ -1,6 +1,6 @@
 # dart_web3_history
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_history.svg)](https://pub.dev/packages/web3_universal_history)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **data-rich transaction explorer** for Web3 applications. Fetch, parse, and normalize account history from multiple sources to provide a clean activity feed for your users.

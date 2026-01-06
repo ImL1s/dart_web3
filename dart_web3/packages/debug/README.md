@@ -1,6 +1,6 @@
 # dart_web3_debug
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_debug.svg)](https://pub.dev/packages/web3_universal_debug)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **advanced diagnostic toolkit** for Ethereum developers. Gain deep visibility into contract execution, transaction traces, and node-level behavior using standard Debug and Trace API namespaces.

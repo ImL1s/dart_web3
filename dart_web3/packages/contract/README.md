@@ -1,6 +1,6 @@
 # dart_web3_contract
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_contract.svg)](https://pub.dev/packages/web3_universal_contract)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **type-safe wrapper** for smart contract interaction. It bridges the gap between raw binary ABI data and developer-friendly Dart objects.

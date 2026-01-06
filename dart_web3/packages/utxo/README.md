@@ -2,7 +2,7 @@
 
 ![Web3 Universal Banner](https://raw.githubusercontent.com/ImL1s/dart_web3/master/art/web3_universal_banner.png)
 
-[![Pub Version](https://img.shields.io/pub/v/web3_universal_utxo)](https://pub.dev/packages/web3_universal_utxo)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 UTXO chain support for the **Web3 Universal SDK**. This package provides comprehensive logic for Bitcoin, Litecoin, and Dogecoin protocols.

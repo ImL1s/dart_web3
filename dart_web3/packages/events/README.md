@@ -1,6 +1,6 @@
 # dart_web3_events
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_events.svg)](https://pub.dev/packages/web3_universal_events)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **reactive event processing engine** for Ethereum logs. It simplifies the complexity of filtering, parsing, and streaming smart contract events into your application UI.

@@ -1,6 +1,6 @@
 # dart_web3_polkadot
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_polkadot.svg)](https://pub.dev/packages/web3_universal_polkadot)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **Substrate-compatible extension** for the Dart Web3 ecosystem. Enable interaction with Polkadot, Kusama, and the entire Parachain ecosystem using a unified Dart API.

@@ -1,6 +1,6 @@
 # dart_web3_price
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_price.svg)](https://pub.dev/packages/web3_universal_price)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **real-time asset pricing engine** for the Web3 stack. Integrate market data from leading centralized and decentralized sources to provide accurate valuation of crypto assets.

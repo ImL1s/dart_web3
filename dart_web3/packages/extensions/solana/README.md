@@ -2,7 +2,7 @@
 
 ![Web3 Universal Banner](https://raw.githubusercontent.com/ImL1s/dart_web3/master/art/web3_universal_banner.png)
 
-[![Pub Version](https://img.shields.io/pub/v/web3_universal_solana)](https://pub.dev/packages/web3_universal_solana)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Solana blockchain extension for the **Web3 Universal SDK**. Interact with Solana's high-performance network using pure Dart.

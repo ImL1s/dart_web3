@@ -136,7 +136,8 @@ class _TransactionCard extends StatelessWidget {
     final color = isSend ? Colors.red : Colors.green;
 
     // Format amount with chain decimals
-    final decimals = (chain as dynamic).decimals as int;
+    final chainConfig = chain as ChainConfig;
+    final decimals = chainConfig.decimals;
     final divisor = BigInt.from(10).pow(decimals);
     final formattedAmount =
         (transaction.amount / divisor).toStringAsFixed(decimals > 4 ? 4 : decimals);

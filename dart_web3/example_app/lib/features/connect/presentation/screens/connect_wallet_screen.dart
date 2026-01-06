@@ -6,8 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:ledger_flutter/ledger_flutter.dart' as lf;
 
+import '../../../../core/services/ledger_service.dart';
 import '../../../../shared/providers/reown_provider.dart';
+import '../../../../shared/providers/ledger_provider.dart';
 
 /// Screen for connecting external wallets via WalletConnect v2.
 class ConnectWalletScreen extends ConsumerStatefulWidget {
@@ -17,14 +20,23 @@ class ConnectWalletScreen extends ConsumerStatefulWidget {
   ConsumerState<ConnectWalletScreen> createState() => _ConnectWalletScreenState();
 }
 
-class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> {
+class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
   bool _isInitialized = false;
   bool _isLoading = false;
+  bool _isLedgerScanning = false;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 2, vsync: this);
     _initializeReown();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   Future<void> _initializeReown() async {
@@ -69,27 +81,189 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> {
     }
   }
 
+  Future<void> _scanLedger() async {
+    setState(() => _isLedgerScanning = true);
+    await ref.read(ledgerServiceProvider).scanForDevices();
+    if (mounted) {
+      setState(() => _isLedgerScanning = false);
+    }
+  }
+
+  Future<void> _connectLedger(lf.LedgerDevice device) async {
+    setState(() => _isLedgerScanning = true); // reused for connecting indicator
+    await ref.read(ledgerServiceProvider).connect(device);
+    if (mounted) {
+      setState(() => _isLedgerScanning = false);
+    }
+  }
+
+  Future<void> _disconnectLedger() async {
+    await ref.read(ledgerServiceProvider).disconnect();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final service = ref.watch(reownServiceProvider);
-    final status = service.status;
-    final wallet = service.connectedWallet;
-    final pairingUri = service.pairingUri;
-    final error = service.error;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Connect Wallet'),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(text: 'WalletConnect', icon: Icon(Icons.qr_code_scanner)),
+            Tab(text: 'Hardware', icon: Icon(Icons.usb)),
+          ],
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: _buildContent(status, wallet, pairingUri, error),
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            _buildReownTab(),
+            _buildLedgerTab(),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildReownTab() {
+    final service = ref.watch(reownServiceProvider);
+    final status = service.status;
+    final wallet = service.connectedWallet;
+    final pairingUri = service.pairingUri;
+    final error = service.error;
+
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: _buildContent(status, wallet, pairingUri, error),
+    );
+  }
+
+  Widget _buildLedgerTab() {
+    final status = ref.watch(ledgerConnectionStatusProvider);
+    final devices = ref.watch(discoveredDevicesProvider);
+    final connectedDevice = ref.watch(connectedLedgerDeviceProvider);
+    final error = ref.watch(ledgerErrorProvider);
+
+    if (status == LedgerStatus.connected && connectedDevice != null) {
+      return _buildLedgerConnectedState(connectedDevice);
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          if (error != null)
+            Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.errorContainer,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                error,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onErrorContainer,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          Expanded(
+            child: devices.isEmpty && !_isLedgerScanning
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.bluetooth_searching, size: 64, color: Theme.of(context).colorScheme.outline),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No devices found',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Make sure Bluetooth is on and your Ledger is in the Ethereum app.',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: devices.length,
+                    itemBuilder: (context, index) {
+                      final device = devices[index];
+                      return Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.usb),
+                          title: Text(device.name),
+                          subtitle: Text(device.id),
+                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          onTap: () => _connectLedger(device),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: _isLedgerScanning ? null : _scanLedger,
+              icon: _isLedgerScanning 
+                  ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
+                  : const Icon(Icons.refresh),
+              label: Text(_isLedgerScanning ? 'Scanning...' : 'Scan for Devices'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLedgerConnectedState(lf.LedgerDevice device) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.usb,
+              size: 64,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Ledger Connected!',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            device.name,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 32),
+          OutlinedButton.icon(
+            onPressed: _disconnectLedger,
+            icon: const Icon(Icons.link_off),
+            label: const Text('Disconnect'),
+          ),
+        ],
       ),
     );
   }
@@ -120,19 +294,19 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          Icons.account_balance_wallet_outlined,
+          Icons.qr_code_2,
           size: 80,
           color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
         ),
         const SizedBox(height: 24),
         Text(
-          'Connect External Wallet',
+          'WalletConnect',
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 12),
         Text(
-          'Use WalletConnect to connect MetaMask, Trust Wallet, or other compatible wallets.',
+          'Scan QR code with your mobile wallet to connect.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
               ),
@@ -167,7 +341,7 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : const Icon(Icons.qr_code),
-            label: Text(_isLoading ? 'Connecting...' : 'Connect Wallet'),
+            label: Text(_isLoading ? 'Connecting...' : 'New Connection'),
           ),
         ),
       ],

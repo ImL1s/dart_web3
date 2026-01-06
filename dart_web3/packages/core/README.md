@@ -1,6 +1,6 @@
 # dart_web3_core
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_core.svg)](https://pub.dev/packages/web3_universal_core)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Platform: Multi-platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Desktop-blue)
 

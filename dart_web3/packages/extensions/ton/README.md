@@ -1,6 +1,6 @@
 # dart_web3_ton
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_ton.svg)](https://pub.dev/packages/web3_universal_ton)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **The Open Network (TON) extension** for the Dart Web3 ecosystem. Connect your applications to TON's unique asynchronous architecture and Jetton ecosystem.

@@ -1,6 +1,6 @@
 # dart_web3_provider
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_provider.svg)](https://pub.dev/packages/web3_universal_provider)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 The **connectivity gateway** for the Dart Web3 SDK. It provides a standardized interface for sending JSON-RPC requests to blockchain nodes via various transport protocols.

@@ -26,6 +26,7 @@ enum LedgerTransportType {
   usb,
   ble,
   webusb,
+  mock,
 }
 
 /// Ledger application information

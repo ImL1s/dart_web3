@@ -1,6 +1,6 @@
 # dart_web3_abi
 
-[![Pub](https://img.shields.io/pub/v/web3_universal_abi.svg)](https://pub.dev/packages/web3_universal_abi)
+<!-- Package not yet published to pub.dev -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A **type-safe ABI codec** for Ethereum contract interaction. Encodes and decodes Solidity types with precision and full compliance with the Ethereum ABI specification.

@@ -9,4 +9,5 @@ export 'src/ledger_client.dart';
 export 'src/ledger_signer.dart';
 export 'src/ledger_transport.dart';
 export 'src/ledger_types.dart';
+export 'src/mock_transport.dart';
 export 'src/multi_chain_support.dart';
