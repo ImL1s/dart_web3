@@ -1,0 +1,8 @@
+Analyzing example_app...                                        
+
+   info - Don't invoke 'print' in production code - debug_bip39.dart:6:5 - avoid_print
+   info - Don't invoke 'print' in production code - debug_bip39.dart:9:5 - avoid_print
+   info - Don't invoke 'print' in production code - debug_bip39.dart:11:5 - avoid_print
+   info - Don't invoke 'print' in production code - debug_bip39.dart:13:5 - avoid_print
+   info - Don't invoke 'print' in production code - debug_bip39.dart:15:5 - avoid_print
+

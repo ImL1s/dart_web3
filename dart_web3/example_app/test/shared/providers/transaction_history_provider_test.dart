@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web3_wallet_app/core/wallet_service.dart';
 import 'package:web3_wallet_app/shared/providers/transaction_history_provider.dart';
 import 'package:web3_wallet_app/shared/providers/wallet_provider.dart';
 
@@ -67,7 +66,7 @@ void main() {
 
     test('Refresh updates state with mock transactions (Ethereum)', () async {
       // Setup mock wallet state
-      final account = Account(
+      const account = Account(
         address: '0x123...',
         chain: Chains.ethereum,
       );
@@ -85,7 +84,7 @@ void main() {
     });
 
     test('Can fetch Bitcoin transactions', () async {
-      final account = Account(
+      const account = Account(
         address: 'bc1q...',
         chain: Chains.bitcoin,
       );
@@ -101,7 +100,7 @@ void main() {
     });
 
     test('Can fetch Solana transactions', () async {
-      final account = Account(
+      const account = Account(
         address: 'SolAddr...',
         chain: Chains.solana,
       );

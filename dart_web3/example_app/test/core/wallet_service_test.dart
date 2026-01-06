@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:web3_wallet_app/core/wallet_service.dart';
 // ignore: depend_on_referenced_packages
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +35,6 @@ void main() {
         amount: BigInt.from(50000), // 0.0005 BTC
       );
 
-      print('Generated Bitcoin Tx Hash: $txHash');
 
       expect(txHash, startsWith('0x'));
       expect(txHash.length, 66); // 0x + 64 hex chars
@@ -45,7 +43,6 @@ void main() {
     test('getAccount derives correct Bitcoin P2WPKH address', () {
       final account = service.getAccount(Chains.bitcoin);
       // Validated against BIP-84 test vector for this mnemonic
-      print('Actual Bitcoin Address: ${account.address}');
       expect(account.address, 'bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu');
     });
   });
@@ -78,7 +75,6 @@ void main() {
       // Public: ...
       // Address: ...
       // Let's print and verify first since we might need to adjust expectation
-      print('Actual Solana Address: ${account.address}');
       // Based on standard derivation for 'abandon ... about' on path m/44'/501'/0'/0'
       // Expected: 9w6s3s... or similar
       expect(account.address, isNotEmpty);
@@ -95,7 +91,6 @@ void main() {
         amount: BigInt.from(1000000), // 0.001 SOL
       );
 
-      print('Generated Solana Signature: $signature');
 
       expect(signature, isNotEmpty);
       // Signature is 64 bytes base58 encoded, should be around 87-88 chars

@@ -7,7 +7,6 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/wallet_service.dart';
 import 'wallet_provider.dart';
 
 /// Transaction model
@@ -163,10 +162,6 @@ class TransactionHistoryNotifier extends StateNotifier<TransactionHistoryState> 
     ];
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }
 
 /// Transaction history provider
