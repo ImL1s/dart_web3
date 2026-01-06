@@ -1,143 +1,97 @@
+/// Wallet provider for managing multi-chain accounts.
+///
+/// This provider wraps [WalletService] for Riverpod state management.
+library;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:web3_universal_crypto/web3_universal_crypto.dart';
-import 'package:web3_universal_signer/web3_universal_signer.dart';
 
-/// Secure storage instance
-final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
-  return const FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
-  );
-});
+import '../../core/wallet_service.dart';
 
-/// Check if wallet exists
-final hasWalletProvider = FutureProvider<bool>((ref) async {
-  final storage = ref.watch(secureStorageProvider);
-  final mnemonic = await storage.read(key: 'mnemonic');
-  return mnemonic != null && mnemonic.isNotEmpty;
-});
+// Re-export for convenience
+export '../../core/wallet_service.dart' show ChainType, ChainConfig, Chains, Account;
 
-/// Wallet state model
+/// Wallet state.
 class WalletState {
-  final List<String>? mnemonicWords;
-  final List<ChainAccount> accounts;
-  final int selectedAccountIndex;
-  final bool isLoading;
-  final String? error;
-
   const WalletState({
-    this.mnemonicWords,
+    this.mnemonic,
     this.accounts = const [],
-    this.selectedAccountIndex = 0,
+    this.selectedChain = ChainType.ethereum,
     this.isLoading = false,
     this.error,
   });
 
+  final List<String>? mnemonic;
+  final List<Account> accounts;
+  final ChainType selectedChain;
+  final bool isLoading;
+  final String? error;
+
+  bool get isInitialized => mnemonic != null;
+
+  /// Get currently selected account
+  Account? get selectedAccount {
+    try {
+      return accounts.firstWhere((a) => a.chain.type == selectedChain);
+    } catch (_) {
+      return accounts.isNotEmpty ? accounts.first : null;
+    }
+  }
+
   WalletState copyWith({
-    List<String>? mnemonicWords,
-    List<ChainAccount>? accounts,
-    int? selectedAccountIndex,
+    List<String>? mnemonic,
+    List<Account>? accounts,
+    ChainType? selectedChain,
     bool? isLoading,
     String? error,
   }) {
     return WalletState(
-      mnemonicWords: mnemonicWords ?? this.mnemonicWords,
+      mnemonic: mnemonic ?? this.mnemonic,
       accounts: accounts ?? this.accounts,
-      selectedAccountIndex: selectedAccountIndex ?? this.selectedAccountIndex,
+      selectedChain: selectedChain ?? this.selectedChain,
       isLoading: isLoading ?? this.isLoading,
       error: error,
     );
   }
-
-  ChainAccount? get selectedAccount =>
-      accounts.isNotEmpty ? accounts[selectedAccountIndex] : null;
-
-  /// Get mnemonic as a single string for display
-  String? get mnemonicPhrase => mnemonicWords?.join(' ');
 }
 
-/// Chain account model
-class ChainAccount {
-  final String address;
-  final String chainName;
-  final String chainId;
-  final String derivationPath;
-  final BigInt balance;
-
-  ChainAccount({
-    required this.address,
-    required this.chainName,
-    required this.chainId,
-    required this.derivationPath,
-    BigInt? balance,
-  }) : balance = balance ?? BigInt.zero;
-
-  ChainAccount copyWith({BigInt? balance}) {
-    return ChainAccount(
-      address: address,
-      chainName: chainName,
-      chainId: chainId,
-      derivationPath: derivationPath,
-      balance: balance ?? this.balance,
-    );
-  }
-}
-
-/// Wallet notifier for state management
+/// Wallet provider notifier using [WalletService].
 class WalletNotifier extends StateNotifier<WalletState> {
-  final FlutterSecureStorage _storage;
+  WalletNotifier() : super(const WalletState());
 
-  WalletNotifier(this._storage) : super(const WalletState());
+  final _service = WalletService.instance;
 
-  /// Create a new wallet with a fresh mnemonic
-  Future<String> createWallet() async {
+  /// Creates a new wallet with fresh mnemonic.
+  Future<List<String>> createWallet() async {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      // Generate new mnemonic using dart_web3 crypto (Bip39.generate() returns List<String>)
-      final words = Bip39.generate();
-
-      // Save to secure storage as space-separated string
-      final mnemonicString = words.join(' ');
-      await _storage.write(key: 'mnemonic', value: mnemonicString);
-
-      // Derive accounts for supported chains
-      final accounts = _deriveAccounts(words);
+      final words = await _service.createWallet();
+      final accounts = _service.getAllAccounts();
 
       state = state.copyWith(
-        mnemonicWords: words,
+        mnemonic: words,
         accounts: accounts,
         isLoading: false,
       );
 
-      return mnemonicString;
+      return words;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
       rethrow;
     }
   }
 
-  /// Import wallet from mnemonic phrase string
+  /// Imports wallet from mnemonic phrase.
   Future<void> importWallet(String mnemonicPhrase) async {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      // Parse mnemonic string to words list
       final words = mnemonicPhrase.trim().split(RegExp(r'\s+'));
-
-      // Validate mnemonic (Bip39.validate takes List<String>)
-      if (!Bip39.validate(words)) {
-        throw Exception('Invalid mnemonic phrase');
-      }
-
-      // Save to secure storage
-      await _storage.write(key: 'mnemonic', value: mnemonicPhrase.trim());
-
-      // Derive accounts for supported chains
-      final accounts = _deriveAccounts(words);
+      await _service.importWallet(words);
+      final accounts = _service.getAllAccounts();
 
       state = state.copyWith(
-        mnemonicWords: words,
+        mnemonic: words,
         accounts: accounts,
         isLoading: false,
       );
@@ -147,94 +101,97 @@ class WalletNotifier extends StateNotifier<WalletState> {
     }
   }
 
-  /// Load wallet from storage
+  /// Loads wallet from secure storage.
   Future<void> loadWallet() async {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      final mnemonicString = await _storage.read(key: 'mnemonic');
-      if (mnemonicString == null) {
+      final loaded = await _service.loadWallet();
+      if (loaded) {
+        final accounts = _service.getAllAccounts();
+        state = state.copyWith(
+          mnemonic: _service.mnemonic,
+          accounts: accounts,
+          isLoading: false,
+        );
+      } else {
         state = state.copyWith(isLoading: false);
-        return;
       }
-
-      final words = mnemonicString.split(' ');
-      final accounts = _deriveAccounts(words);
-
-      state = state.copyWith(
-        mnemonicWords: words,
-        accounts: accounts,
-        isLoading: false,
-      );
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
-  /// Derive accounts for all supported chains
-  List<ChainAccount> _deriveAccounts(List<String> words) {
-    final accounts = <ChainAccount>[];
-
-    // Use PrivateKeySigner.fromMnemonic which accepts List<String>
-    // Ethereum (chainId: 1)
-    final ethSigner = PrivateKeySigner.fromMnemonic(
-      words,
-      1,
-      path: "m/44'/60'/0'/0/0",
-    );
-    final ethAddress = ethSigner.address.hex;
-
-    accounts.add(ChainAccount(
-      address: ethAddress,
-      chainName: 'Ethereum',
-      chainId: '1',
-      derivationPath: "m/44'/60'/0'/0/0",
-    ),);
-
-    // Polygon (same address, different chainId)
-    accounts.add(ChainAccount(
-      address: ethAddress,
-      chainName: 'Polygon',
-      chainId: '137',
-      derivationPath: "m/44'/60'/0'/0/0",
-    ),);
-
-    // Arbitrum
-    accounts.add(ChainAccount(
-      address: ethAddress,
-      chainName: 'Arbitrum',
-      chainId: '42161',
-      derivationPath: "m/44'/60'/0'/0/0",
-    ),);
-
-    // BSC
-    accounts.add(ChainAccount(
-      address: ethAddress,
-      chainName: 'BNB Chain',
-      chainId: '56',
-      derivationPath: "m/44'/60'/0'/0/0",
-    ),);
-
-    return accounts;
+  /// Selects a chain type.
+  void selectChain(ChainType chain) {
+    state = state.copyWith(selectedChain: chain);
   }
 
-  /// Select an account
-  void selectAccount(int index) {
-    if (index >= 0 && index < state.accounts.length) {
-      state = state.copyWith(selectedAccountIndex: index);
+  /// Gets the chain config for the selected chain.
+  ChainConfig get selectedChainConfig {
+    return Chains.all.firstWhere(
+      (c) => c.type == state.selectedChain,
+      orElse: () => Chains.ethereum,
+    );
+  }
+
+  /// Sends a transaction on the selected chain.
+  Future<String> sendTransaction({
+    required String to,
+    required String amount,
+  }) async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final chain = selectedChainConfig;
+      final amountWei = _parseAmount(amount, chain.decimals);
+
+      final txHash = await _service.sendTransaction(
+        chain: chain,
+        to: to,
+        amount: amountWei,
+      );
+
+      state = state.copyWith(isLoading: false);
+      return txHash;
+    } catch (e) {
+      state = state.copyWith(isLoading: false, error: e.toString());
+      rethrow;
     }
   }
 
-  /// Clear wallet (for logout)
-  Future<void> clearWallet() async {
-    await _storage.delete(key: 'mnemonic');
+  /// Deletes wallet from storage.
+  Future<void> deleteWallet() async {
+    await _service.deleteWallet();
     state = const WalletState();
+  }
+
+  BigInt _parseAmount(String amount, int decimals) {
+    final parts = amount.split('.');
+    final whole = BigInt.parse(parts[0]);
+    final multiplier = BigInt.from(10).pow(decimals);
+
+    if (parts.length == 1) {
+      return whole * multiplier;
+    }
+
+    var fraction = parts[1];
+    if (fraction.length > decimals) {
+      fraction = fraction.substring(0, decimals);
+    }
+    fraction = fraction.padRight(decimals, '0');
+
+    return whole * multiplier + BigInt.parse(fraction);
   }
 }
 
-/// Wallet provider
-final walletProvider =
-    StateNotifierProvider<WalletNotifier, WalletState>((ref) {
-  final storage = ref.watch(secureStorageProvider);
-  return WalletNotifier(storage);
+/// Wallet provider.
+final walletProvider = StateNotifierProvider<WalletNotifier, WalletState>((ref) {
+  return WalletNotifier();
+});
+
+/// Check if wallet exists in storage.
+final hasWalletProvider = FutureProvider<bool>((ref) async {
+  final loaded = await WalletService.instance.loadWallet();
+  return loaded;
 });

@@ -30,19 +30,32 @@ class _SendScreenState extends ConsumerState<SendScreen> {
 
     setState(() => _isLoading = true);
 
-    // Simulate transaction
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final txHash = await ref.read(walletProvider.notifier).sendTransaction(
+            to: _addressController.text.trim(),
+            amount: _amountController.text.trim(),
+          );
 
-    setState(() => _isLoading = false);
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Transaction sent successfully!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-      context.go('/home');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Transaction sent! Hash: ${txHash.substring(0, 10)}...'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        context.go('/home');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -51,10 +64,13 @@ class _SendScreenState extends ConsumerState<SendScreen> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final walletState = ref.watch(walletProvider);
+    final notifier = ref.read(walletProvider.notifier);
+    final chain = notifier.selectedChainConfig;
+    final symbol = chain.symbol;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Send'),
+        title: Text('Send $symbol'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/home'),
@@ -95,14 +111,13 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              walletState.selectedAccount?.chainName ??
-                                  'Ethereum',
+                              chain.name,
                               style: theme.textTheme.titleSmall?.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
-                              'Balance: 0.00 ETH',
+                              walletState.selectedAccount?.address.substring(0, 12) ?? '...',
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: colorScheme.onSurfaceVariant,
                               ),
@@ -126,7 +141,7 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                 TextFormField(
                   controller: _addressController,
                   decoration: InputDecoration(
-                    hintText: '0x... or ENS name',
+                    hintText: 'Address',
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.qr_code_scanner_rounded),
                       onPressed: () {
@@ -138,9 +153,24 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter recipient address';
                     }
-                    if (!value.startsWith('0x') || value.length != 42) {
-                      return 'Invalid Ethereum address';
+
+                    // Chain-specific validation
+                    if (chain.isEvm) {
+                      if (!value.startsWith('0x') || value.length != 42) {
+                        return 'Invalid Ethereum address';
+                      }
+                    } else if (chain.type == ChainType.bitcoin) {
+                      if (!value.startsWith('bc1') &&
+                          !value.startsWith('1') &&
+                          !value.startsWith('3')) {
+                        return 'Invalid Bitcoin address';
+                      }
+                    } else if (chain.type == ChainType.solana) {
+                      if (value.length < 32 || value.length > 44) {
+                        return 'Invalid Solana address';
+                      }
                     }
+
                     return null;
                   },
                 ),
@@ -161,10 +191,10 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                   ),
                   decoration: InputDecoration(
                     hintText: '0.0',
-                    suffixText: 'ETH',
+                    suffixText: symbol,
                     suffixIcon: TextButton(
                       onPressed: () {
-                        _amountController.text = '0.00';
+                        _amountController.text = '0.00'; // TODO: Max balance logic
                       },
                       child: const Text('MAX'),
                     ),
@@ -180,46 +210,22 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
-
-                // Gas estimate
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Estimated Gas',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      Text(
-                        '~0.001 ETH',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
 
                 const Spacer(),
 
                 // Send button
-                FilledButton(
-                  onPressed: _isLoading ? null : _sendTransaction,
-                  child: _isLoading
-                      ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Send Transaction'),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    onPressed: _isLoading ? null : _sendTransaction,
+                    child: _isLoading
+                        ? const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : Text('Send $symbol'),
+                  ),
                 ),
               ],
             ),

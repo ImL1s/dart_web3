@@ -10,6 +10,7 @@ import '../../features/receive/presentation/screens/receive_screen.dart';
 import '../../features/swap/presentation/screens/swap_screen.dart';
 import '../../features/nft/presentation/screens/nft_gallery_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
+import '../../features/history/presentation/screens/transaction_history_screen.dart';
 import '../../shared/providers/wallet_provider.dart';
 
 /// App router provider using GoRouter.
@@ -57,6 +58,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/nft',
         builder: (context, state) => const NftGalleryScreen(),
+      ),
+      GoRoute(
+        path: '/history',
+        builder: (context, state) => const TransactionHistoryScreen(),
       ),
       GoRoute(
         path: '/settings',

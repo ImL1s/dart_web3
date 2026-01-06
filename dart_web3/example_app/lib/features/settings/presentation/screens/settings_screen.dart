@@ -171,7 +171,7 @@ class SettingsScreen extends ConsumerWidget {
                         onPressed: () async {
                           await ref
                               .read(walletProvider.notifier)
-                              .clearWallet();
+                              .deleteWallet();
                           if (context.mounted) {
                             context.go('/onboarding');
                           }

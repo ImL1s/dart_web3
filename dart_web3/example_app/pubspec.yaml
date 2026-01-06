@@ -31,6 +31,8 @@ dependencies:
   # Utilities
   intl: ^0.20.2
   url_launcher: ^6.3.1
+  http: ^1.2.2
+  bip39: ^1.0.6
   
   # dart_web3 SDK (path dependencies)
   web3_universal_core:
@@ -55,6 +57,10 @@ dependencies:
     path: ../packages/nft
   web3_universal_price:
     path: ../packages/price
+  web3_universal_utxo:
+    path: ../packages/utxo
+  web3_universal_solana:
+    path: ../packages/extensions/solana
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +70,7 @@ dev_dependencies:
   riverpod_generator: ^2.6.4
   custom_lint: ^0.7.1
   riverpod_lint: ^2.6.5
+  mocktail: ^1.0.4
 
 flutter:
   uses-material-design: true

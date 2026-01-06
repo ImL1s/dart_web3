@@ -14,7 +14,7 @@ class CreateWalletScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateWalletScreenState extends ConsumerState<CreateWalletScreen> {
-  String? _mnemonic;
+  List<String>? _mnemonic;
   bool _isLoading = false;
   bool _hasBackedUp = false;
 
@@ -45,7 +45,7 @@ class _CreateWalletScreenState extends ConsumerState<CreateWalletScreen> {
 
   void _copyToClipboard() {
     if (_mnemonic != null) {
-      Clipboard.setData(ClipboardData(text: _mnemonic!));
+      Clipboard.setData(ClipboardData(text: _mnemonic!.join(' ')));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Recovery phrase copied to clipboard'),
@@ -158,8 +158,7 @@ class _CreateWalletScreenState extends ConsumerState<CreateWalletScreen> {
     );
   }
 
-  Widget _buildMnemonicGrid(String mnemonic) {
-    final words = mnemonic.split(' ');
+  Widget _buildMnemonicGrid(List<String> words) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(

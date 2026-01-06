@@ -1,6 +1,6 @@
 # Web3 Wallet App
 
-A comprehensive multi-chain wallet demonstrating the **dart_web3 SDK** capabilities.
+A comprehensive multi-chain wallet demonstrating the **dart_web3 SDK** capabilities, featuring native support for **EVM**, **Bitcoin**, and **Solana** chains without external native dependencies.
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.27+-blue.svg)](https://flutter.dev)
 [![Riverpod](https://img.shields.io/badge/Riverpod-2.x-purple.svg)](https://riverpod.dev)
@@ -8,52 +8,52 @@ A comprehensive multi-chain wallet demonstrating the **dart_web3 SDK** capabilit
 
 ## Features
 
-🔑 **Wallet Management**
-- BIP-39 mnemonic generation (12/24 words)
-- BIP-32/44 HD wallet derivation
-- Secure encrypted storage
+### 🔑 Wallet Management
+- **Universal Key Derivation**:
+  - BIP-39 mnemonic generation (12/24 words).
+  - **EVM**: BIP-44 standard (`m/44'/60'/0'/0/0`).
+  - **Bitcoin**: BIP-84 Native SegWit (`m/84'/0'/0'/0/0`).
+  - **Solana**: SLIP-0010 Ed25519 (`m/44'/501'/0'/0'`).
+- Secure encrypted storage (Keychain/Keystore).
 
-⛓️ **Multi-Chain Support**
-- Ethereum Mainnet
-- Polygon
-- Arbitrum
-- BNB Chain
-- (Extensible to Solana, TRON, TON, Bitcoin)
+### ⛓️ Multi-Chain Support
+- **EVM Chains**: Ethereum, Polygon, Arbitrum, Optimism, Base.
+- **Bitcoin**: Mainnet Native SegWit (Bech32 `bc1q...`).
+- **Solana**: Mainnet System Program.
 
-💰 **Core Functionality**
-- Real-time balance display
-- Send & receive transactions
-- QR code generation
-- Address copying
+### 💰 Core Functionality
+- **Cross-Chain Usage**: Unified interface for all chains.
+- **Real-Time Data**: 
+  - Balances (RPC/API fetching).
+  - Transaction history.
+- **Transactions**: 
+  - Standard transfers (ETH, MATIC, BTC, SOL).
+  - EIP-1559 support for EVM.
+  - Native SegWit (P2WPKH) for Bitcoin.
 
-🔄 **DEX Integration**
-- Token swaps (powered by `web3_universal_swap`)
-- 1inch & Paraswap aggregation
-- Slippage configuration
-
-🖼️ **NFT Gallery**
-- ERC-721 & ERC-1155 support
-- Collection display
+### 🔄 DEX & NFT (EVM Only)
+- Token swaps (powered by `web3_universal_swap`).
+- NFT Gallery (ERC-721/1155).
 
 ## dart_web3 SDK Packages Used
 
+The app showcases the modular architecture of the SDK:
+
 | Package | Purpose |
 |---------|---------|
-| `web3_universal_core` | Core utilities and types |
-| `web3_universal_crypto` | BIP-39/44 HD wallet, cryptography |
-| `web3_universal_signer` | Transaction signing (ECDSA/EdDSA) |
+| `web3_universal_core` | Core utilities and primitives |
+| `web3_universal_crypto` | Cryptography (Secp256k1, Ed25519, SHA, BIP-39/32) |
+| `web3_universal_signer` | Transaction signing (EVM) |
+| `web3_universal_utxo` | **Bitcoin** transaction building & signing |
+| `web3_universal_solana` | **Solana** transaction building & signing |
+| `web3_universal_provider` | RPC providers (HTTP/WebSocket) |
 | `web3_universal_chains` | Chain configurations |
-| `web3_universal_client` | Blockchain RPC interaction |
-| `web3_universal_provider` | HTTP/WebSocket providers |
-| `web3_universal_ens` | ENS name resolution |
 | `web3_universal_swap` | DEX aggregation |
 | `web3_universal_nft` | NFT services |
-| `web3_universal_price` | Price feeds |
 
 ## Getting Started
 
 ### Prerequisites
-
 - Flutter SDK 3.27+
 - Dart SDK 3.6+
 
@@ -73,48 +73,63 @@ flutter run -d macos   # macOS
 flutter run            # Default device
 ```
 
-### Platforms Supported
+### Running Tests
 
-- ✅ Android
-- ✅ iOS
-- ✅ Web
-- ✅ Windows
-- ✅ macOS
-- ✅ Linux
+We have added comprehensive tests for the multi-chain functionality:
+
+```bash
+# Unit tests for Wallet Service (Derivation, Signing)
+flutter test test/core/wallet_service_test.dart
+
+# Unit tests for History Provider (Logic, State)
+flutter test test/shared/providers/transaction_history_provider_test.dart
+```
 
 ## Architecture
+
+The app follows a Clean Architecture approach with Riverpod:
 
 ```
 lib/
 ├── main.dart              # Entry point
-├── app.dart               # MaterialApp with theming
 ├── core/
-│   └── router/            # GoRouter navigation
+│   ├── wallet_service.dart # SINGLETON: Unified facade for all chains
+│   └── config/            # Chain configurations
 ├── features/
-│   ├── onboarding/        # Wallet creation/import
-│   ├── home/              # Dashboard
-│   ├── send/              # Send transactions
-│   ├── receive/           # QR code display
-│   ├── swap/              # Token swaps
-│   ├── nft/               # NFT gallery
-│   └── settings/          # App settings
+│   ├── onboarding/        # Create/Import wallet
+│   ├── home/              # Dashboard & Asset list
+│   ├── history/           # Transaction history
+│   ├── send/              # Cross-chain send screen
+│   └── ...
 └── shared/
-    └── providers/         # Riverpod providers
+    └── providers/         # State Management (NotifierProviders)
+        ├── wallet_provider.dart
+        ├── balance_provider.dart
+        └── transaction_history_provider.dart
 ```
 
-## State Management
+## Implementation Highlights
 
-Uses **Riverpod 2.x** with:
-- `StateNotifier` for wallet state
-- `FutureProvider` for async operations
-- `Provider` for dependencies
+### Unified Transaction Signing
 
-## Security
+The `WalletService` abstracts away the complexity of different signing algorithms:
 
-- Mnemonic stored in `flutter_secure_storage`
-- Android: EncryptedSharedPreferences
-- iOS: Keychain Services
-- No private keys transmitted over network
+```dart
+// EVM (Secp256k1 + Keccak256)
+final signature = privateKey.signToSignature(digest);
+
+// Bitcoin (Secp256k1 + Double SHA256 + BIP-143)
+final signature = Secp256k1.sign(sighash, privateKey);
+
+// Solana (Ed25519)
+final signature = Ed25519KeyPair.sign(message, privateKey);
+```
+
+### No Native Dependencies
+
+All cryptographic operations are implemented in pure Dart or via the `web3_universal_crypto` package, ensuring:
+- **Zero FFI**: No complex native build steps.
+- **Cross-Platform**: Works exactly the same on Web, Mobile, and Desktop.
 
 ## License
 

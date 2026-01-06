@@ -75,7 +75,7 @@ class ReceiveScreen extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  walletState.selectedAccount?.chainName ?? 'Ethereum',
+                  walletState.selectedAccount?.chain.name ?? 'Ethereum',
                   style: theme.textTheme.labelLarge?.copyWith(
                     color: colorScheme.onPrimaryContainer,
                     fontWeight: FontWeight.w600,
@@ -160,7 +160,7 @@ class ReceiveScreen extends ConsumerWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Only send ${walletState.selectedAccount?.chainName ?? "ETH"} assets to this address',
+                        'Only send ${walletState.selectedAccount?.chain.name ?? "ETH"} assets to this address',
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurface,
                         ),
