@@ -1,7 +1,5 @@
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:web3_universal_solana/web3_universal_solana.dart';
-import 'package:web3_universal_ton/web3_universal_ton.dart';
-import 'package:web3_universal_tron/web3_universal_tron.dart';
 
 import 'public_client.dart';
 
@@ -24,10 +22,7 @@ mixin UniversalClient {
         return PublicClient(provider: rpcProvider, chain: chain);
       case ChainType.svm:
         return SolanaClient(chain.rpcUrls.first, chain: chain);
-      case ChainType.tron:
-        return TronClient(chain.rpcUrls.first, chain: chain);
-      case ChainType.ton:
-        return TonClient(chain.rpcUrls.first, chain: chain);
+
       default:
         throw UnimplementedError(
           'Client for chain type ${chain.type} is not yet implemented',
