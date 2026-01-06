@@ -11,6 +11,7 @@ import '../../features/swap/presentation/screens/swap_screen.dart';
 import '../../features/nft/presentation/screens/nft_gallery_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 import '../../features/history/presentation/screens/transaction_history_screen.dart';
+import '../../features/connect/presentation/screens/connect_wallet_screen.dart';
 import '../../shared/providers/wallet_provider.dart';
 
 /// App router provider using GoRouter.
@@ -66,6 +67,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/connect-wallet',
+        builder: (context, state) => const ConnectWalletScreen(),
       ),
     ],
     redirect: (context, state) {

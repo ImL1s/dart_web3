@@ -61,6 +61,8 @@ dependencies:
     path: ../packages/utxo
   web3_universal_solana:
     path: ../packages/extensions/solana
+  web3_universal_reown:
+    path: ../packages/reown
 
 dev_dependencies:
   flutter_test:
