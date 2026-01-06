@@ -155,7 +155,9 @@ class WalletService {
   /// Loads wallet from secure storage
   Future<bool> loadWallet() async {
     final stored = await _storage.read(key: _mnemonicKey);
-    if (stored == null) return false;
+    if (stored == null) {
+      return false;
+    }
 
     final words = stored.split(' ');
     await _initFromMnemonic(words);

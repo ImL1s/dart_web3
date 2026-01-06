@@ -300,11 +300,18 @@ class MultiChainDerivationPaths {
 
   /// Get chain type from derivation path
   static ChainType? getChainType(String path) {
-    if (path.contains("44'/60'")) return ChainType.ethereum;
-    if (path.contains("44'/0'") || path.contains("84'/0'"))
+    if (path.contains("44'/60'")) {
+      return ChainType.ethereum;
+    }
+    if (path.contains("44'/0'") || path.contains("84'/0'")) {
       return ChainType.bitcoin;
-    if (path.contains("44'/501'")) return ChainType.solana;
-    if (path.contains("44'/354'")) return ChainType.polkadot;
+    }
+    if (path.contains("44'/501'")) {
+      return ChainType.solana;
+    }
+    if (path.contains("44'/354'")) {
+      return ChainType.polkadot;
+    }
     return null;
   }
 }
