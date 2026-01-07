@@ -1,0 +1,44 @@
+{
+  "@@locale": "zh",
+  
+  "appTitle": "Web3 錢包",
+  "home": "首頁",
+  "send": "發送",
+  "receive": "接收",
+  "settings": "設置",
+  "balance": "餘額",
+  "transactions": "交易",
+  "transactionHistory": "歷史記錄",
+  "scanQr": "掃描 QR",
+  "copyAddress": "複製地址",
+  "copiedToClipboard": "已複製到剪貼簿",
+  
+  "settingsAbout": "關於",
+  "settingsPreferences": "偏好設定",
+  "settingsSecurity": "安全性",
+  "settingsDangerZone": "危險區域",
+  "settingsDarkMode": "深色模式",
+  "settingsCurrency": "貨幣",
+  "settingsBiometric": "生物辨識鎖",
+  "settingsRecoveryPhrase": "恢復助記詞",
+  "settingsClearData": "清除所有數據",
+  
+  "commonConfirm": "確認",
+  "commonCancel": "取消",
+  "commonError": "錯誤",
+  "commonSuccess": "成功",
+  "commonRetry": "重試",
+  "commonBack": "返回",
+  "commonNext": "下一步",
+  "language": "語言",
+  
+  "smartWallet": "智能錢包",
+  "deployAccount": "部署帳戶",
+  "sendUserOp": "發送 UserOp",
+  "gasSponsored": "Gas 贊助",
+  "accountNotDeployed": "尚未部署",
+  
+  "nftGallery": "NFT 畫廊",
+  "noNftsFound": "未找到 NFT",
+  "nftLoadError": "載入 NFT 失敗"
+}

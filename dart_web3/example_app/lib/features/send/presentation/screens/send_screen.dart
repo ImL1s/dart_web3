@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../shared/providers/wallet_provider.dart';
 
@@ -29,12 +30,13 @@ class _SendScreenState extends ConsumerState<SendScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     // Show confirmation dialog
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         final chain = ref.read(walletProvider.notifier).selectedChainConfig;
         return AlertDialog(
-          title: const Text('Confirm Transaction'),
+          title: Text(l10n.commonConfirm),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,11 +56,11 @@ class _SendScreenState extends ConsumerState<SendScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text('Cancel'),
+              child: Text(l10n.commonCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('Confirm'),
+              child: Text(l10n.commonConfirm),
             ),
           ],
         );
@@ -112,12 +114,13 @@ class _SendScreenState extends ConsumerState<SendScreen> {
     final colorScheme = theme.colorScheme;
     final walletState = ref.watch(walletProvider);
     final notifier = ref.read(walletProvider.notifier);
+    final l10n = AppLocalizations.of(context)!;
     final chain = notifier.selectedChainConfig;
     final symbol = chain.symbol;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Send $symbol'),
+        title: Text('${l10n.send} $symbol'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/home'),
@@ -181,7 +184,7 @@ class _SendScreenState extends ConsumerState<SendScreen> {
 
                 // Recipient address
                 Text(
-                  'Recipient',
+                  'Recipient', // TODO: Localize 'Recipient'
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -190,7 +193,7 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                 TextFormField(
                   controller: _addressController,
                   decoration: InputDecoration(
-                    hintText: 'Address',
+                    hintText: 'Address', // TODO: Localize
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.qr_code_scanner_rounded),
                       onPressed: () {
@@ -227,7 +230,7 @@ class _SendScreenState extends ConsumerState<SendScreen> {
 
                 // Amount
                 Text(
-                  'Amount',
+                  'Amount', // TODO: Localize
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -274,7 +277,7 @@ class _SendScreenState extends ConsumerState<SendScreen> {
                             height: 24,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                        : Text('Send $symbol'),
+                        : Text('${l10n.send} $symbol'),
                   ),
                 ),
               ],

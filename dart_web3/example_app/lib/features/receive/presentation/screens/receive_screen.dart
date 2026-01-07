@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../shared/providers/wallet_provider.dart';
 
@@ -16,10 +17,11 @@ class ReceiveScreen extends ConsumerWidget {
     final colorScheme = theme.colorScheme;
     final walletState = ref.watch(walletProvider);
     final address = walletState.selectedAccount?.address ?? '0x...';
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Receive'),
+        title: Text(l10n.receive),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/home'),
@@ -87,7 +89,7 @@ class ReceiveScreen extends ConsumerWidget {
 
               // Address
               Text(
-                'Your Address',
+                'Your Address', 
                 style: theme.textTheme.titleSmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
@@ -118,11 +120,11 @@ class ReceiveScreen extends ConsumerWidget {
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: address));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Address copied!')),
+                          SnackBar(content: Text(l10n.copiedToClipboard)),
                         );
                       },
                       icon: const Icon(Icons.copy_rounded),
-                      label: const Text('Copy'),
+                      label: Text(l10n.copyAddress),
                       style: OutlinedButton.styleFrom(
                         minimumSize: const Size.fromHeight(56),
                       ),
@@ -135,7 +137,7 @@ class ReceiveScreen extends ConsumerWidget {
                         // TODO: Share functionality
                       },
                       icon: const Icon(Icons.share_rounded),
-                      label: const Text('Share'),
+                      label: const Text('Share'), // TODO: Localize
                     ),
                   ),
                 ],
