@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 import 'core/router/app_router.dart';
 import 'shared/providers/locale_provider.dart';

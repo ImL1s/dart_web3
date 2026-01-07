@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 import '../../../../shared/providers/transaction_history_provider.dart';
 import '../../../../shared/providers/wallet_provider.dart';

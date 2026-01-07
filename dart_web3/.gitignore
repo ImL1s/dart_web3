@@ -37,3 +37,6 @@ GoogleService-Info.plist
 
 # Windows
 Thumbs.db
+
+# Generated L10n
+example_app/lib/l10n/generated/
