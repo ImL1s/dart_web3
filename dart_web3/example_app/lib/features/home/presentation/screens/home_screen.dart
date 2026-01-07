@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 import '../../../../shared/providers/balance_provider.dart';
 import '../../../../shared/providers/wallet_provider.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final colorScheme = theme.colorScheme;
     final walletState = ref.watch(walletProvider);
     final balanceState = ref.watch(balanceProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: RefreshIndicator(
@@ -40,7 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           slivers: [
             // App bar
             SliverAppBar.large(
-              title: const Text('Web3 Wallet'),
+              title: Text(l10n.appTitle),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.settings_outlined),
@@ -69,10 +71,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Address copied!')),
+                          SnackBar(content: Text(l10n.copiedToClipboard)),
                         );
                       }
                     },
+                    label: l10n.balance,
                   ),
                   const SizedBox(height: 24),
 
@@ -82,7 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       Expanded(
                         child: _ActionButton(
                           icon: Icons.arrow_upward_rounded,
-                          label: 'Send',
+                          label: l10n.send,
                           onTap: () => context.go('/send'),
                           color: colorScheme.primary,
                         ),
@@ -91,7 +94,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       Expanded(
                         child: _ActionButton(
                           icon: Icons.arrow_downward_rounded,
-                          label: 'Receive',
+                          label: l10n.receive,
                           onTap: () => context.go('/receive'),
                           color: colorScheme.secondary,
                         ),
@@ -100,12 +103,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       Expanded(
                         child: _ActionButton(
                           icon: Icons.history_rounded,
-                          label: 'History',
+                          label: l10n.transactionHistory,
                           onTap: () => context.go('/history'),
                           color: colorScheme.outline,
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Smart Wallet Button
+                  _ActionButton(
+                    icon: Icons.account_balance_wallet_rounded,
+                    label: l10n.smartWallet,
+                    onTap: () => context.go('/smart-wallet'),
+                    color: colorScheme.tertiary,
                   ),
                   const SizedBox(height: 32),
 
@@ -157,12 +169,14 @@ class _BalanceCard extends StatelessWidget {
     required this.address,
     required this.isLoading,
     required this.onCopyAddress,
+    required this.label,
     this.totalBalance,
   });
 
   final String address;
   final bool isLoading;
   final VoidCallback onCopyAddress;
+  final String label;
   final String? totalBalance;
 
   @override
@@ -266,7 +280,7 @@ class _BalanceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Total Balance',
+                  label,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: Colors.white60,
                   ),

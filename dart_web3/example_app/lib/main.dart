@@ -12,3 +12,14 @@ void main() {
     ),
   );
 }
+
+// Assuming Web3WalletApp is defined in 'app.dart' and looks something like this:
+// class Web3WalletApp extends ConsumerWidget {
+//   const Web3WalletApp({super.key});
+
+//   @override
+//       ],
+//       routerConfig: router,
+//     );
+//   }
+// }

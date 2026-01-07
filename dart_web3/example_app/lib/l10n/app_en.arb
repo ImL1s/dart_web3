@@ -1,0 +1,57 @@
+{
+  "@@locale": "en",
+  
+  "appTitle": "Web3 Wallet",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+
+  "home": "Home",
+  "send": "Send",
+  "receive": "Receive",
+  "settings": "Settings",
+  "balance": "Balance",
+  "transactions": "Transactions",
+  "transactionHistory": "History",
+  "scanQr": "Scan QR",
+  "copyAddress": "Copy Address",
+  "copiedToClipboard": "Copied to clipboard",
+  
+  "settingsAbout": "About",
+  "settingsPreferences": "Preferences",
+  "settingsSecurity": "Security",
+  "settingsDangerZone": "Danger Zone",
+  "settingsDarkMode": "Dark Mode",
+  "settingsCurrency": "Currency",
+  "settingsBiometric": "Biometric Lock",
+  "settingsRecoveryPhrase": "Recovery Phrase",
+  "settingsClearData": "Clear All Data",
+  
+  "commonConfirm": "Confirm",
+  "commonCancel": "Cancel",
+  "commonError": "Error",
+  "commonSuccess": "Success",
+  "commonRetry": "Retry",
+  "commonBack": "Back",
+  "commonNext": "Next",
+  "language": "Language",
+  
+  "smartWallet": "Smart Wallet",
+  "deployAccount": "Deploy Account",
+  "sendUserOp": "Send UserOp",
+  "gasSponsored": "Gas Sponsored",
+  "accountNotDeployed": "Not Deployed",
+  
+  "nftGallery": "NFT Gallery",
+  "noNftsFound": "No NFTs found",
+  "nftLoadError": "Failed to load NFTs",
+  
+  "settingsApiConfiguration": "API Configuration",
+  "settingsAlchemyApiKey": "Alchemy API Key",
+  "settingsApiConfigured": "Configured ✓",
+  "settingsApiNotConfigured": "Not configured",
+  "settingsViewBackup": "View or backup",
+  "settingsWebWallet": "Web3 Wallet",
+  "settingsVersion": "v1.0.0 (Beta)",
+  "settingsDeleteWallet": "Delete Wallet"
+}

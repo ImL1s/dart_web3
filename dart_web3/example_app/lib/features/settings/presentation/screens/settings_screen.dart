@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
+
 import '../../../../shared/providers/wallet_provider.dart';
+import '../../../../shared/providers/locale_provider.dart';
+import '../../../../shared/providers/nft_provider.dart';
 
 /// Settings screen
 class SettingsScreen extends ConsumerWidget {
@@ -12,10 +16,12 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+    final currentLocale = ref.watch(localeProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(l10n.settings),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/home'),
@@ -25,13 +31,23 @@ class SettingsScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         children: [
           // Preferences Section
-          const _SectionHeader(title: 'Preferences'),
+          _SectionHeader(title: l10n.settings), // Or 'Preferences' if localized
           Card(
             clipBehavior: Clip.antiAlias,
             elevation: 2,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Column(
               children: [
+                ListTile(
+                  leading: Icon(Icons.language, color: colorScheme.primary),
+                  title: Text(l10n.language),
+                  subtitle: Text(currentLocale.languageCode == 'zh' ? '繁體中文' : 'English'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    _showLanguageDialog(context, ref);
+                  },
+                ),
+                const Divider(height: 1, indent: 56),
                 ListTile(
                   leading: Icon(Icons.dark_mode, color: colorScheme.primary),
                   title: const Text('Dark Mode'),
@@ -61,8 +77,34 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
 
+          // API Configuration Section
+          _SectionHeader(title: l10n.settingsApiConfiguration),
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.key_rounded, color: colorScheme.primary),
+                  title: Text(l10n.settingsAlchemyApiKey),
+                  subtitle: Text(
+                    ref.watch(nftProvider).isConfigured 
+                        ? l10n.settingsApiConfigured
+                        : l10n.settingsApiNotConfigured,
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    _showApiKeyDialog(context, ref);
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
           // Security Section
-          const _SectionHeader(title: 'Security'),
+          _SectionHeader(title: l10n.settingsSecurity),
           Card(
             clipBehavior: Clip.antiAlias,
             elevation: 2,
@@ -71,8 +113,8 @@ class SettingsScreen extends ConsumerWidget {
               children: [
                 ListTile(
                   leading: Icon(Icons.security, color: colorScheme.primary),
-                  title: const Text('Recovery Phrase'),
-                  subtitle: const Text('View or backup'),
+                  title: Text(l10n.settingsRecoveryPhrase),
+                  subtitle: Text(l10n.settingsViewBackup),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
                     // TODO: Show recovery phrase
@@ -81,7 +123,7 @@ class SettingsScreen extends ConsumerWidget {
                 const Divider(height: 1, indent: 56),
                 ListTile(
                   leading: Icon(Icons.fingerprint, color: colorScheme.primary),
-                  title: const Text('Biometric Lock'),
+                  title: Text(l10n.settingsBiometric),
                   trailing: Switch(
                     value: false,
                     onChanged: (value) {
@@ -95,7 +137,7 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 24),
 
           // About Section
-          const _SectionHeader(title: 'About'),
+          _SectionHeader(title: l10n.settingsAbout),
           Card(
             clipBehavior: Clip.antiAlias,
             elevation: 2,
@@ -111,8 +153,8 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     child: Icon(Icons.account_balance_wallet, color: colorScheme.onPrimaryContainer),
                   ),
-                  title: const Text('Web3 Wallet'),
-                  subtitle: const Text('v1.0.0 (Beta)'),
+                  title: Text(l10n.settingsWebWallet),
+                  subtitle: Text(l10n.settingsVersion),
                 ),
                 const Divider(height: 1, indent: 56),
                 const ListTile(
@@ -168,7 +210,7 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 24),
 
           // Danger Zone
-          const _SectionHeader(title: 'Danger Zone'),
+          _SectionHeader(title: l10n.settingsDangerZone),
           Card(
             clipBehavior: Clip.antiAlias,
             color: colorScheme.errorContainer.withOpacity(0.5),
@@ -180,7 +222,7 @@ class SettingsScreen extends ConsumerWidget {
             child: ListTile(
               leading: Icon(Icons.delete_forever, color: colorScheme.error),
               title: Text(
-                'Delete Wallet',
+                l10n.settingsDeleteWallet,
                 style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
@@ -229,6 +271,93 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 32),
         ],
       ),
+    );
+  }
+
+  void _showLanguageDialog(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Select Language'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: const Text('English'),
+                onTap: () {
+                  ref.read(localeProvider.notifier).setLocale(const Locale('en'));
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('繁體中文'),
+                onTap: () {
+                  ref.read(localeProvider.notifier).setLocale(const Locale('zh'));
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showApiKeyDialog(BuildContext context, WidgetRef ref) {
+    final controller = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Alchemy API Key'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Enter your Alchemy API key to fetch NFT data.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Get a free key at alchemy.com',
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: controller,
+                decoration: const InputDecoration(
+                  labelText: 'API Key',
+                  hintText: 'paste your key here',
+                  border: OutlineInputBorder(),
+                ),
+                obscureText: true,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () {
+                final key = controller.text.trim();
+                if (key.isNotEmpty) {
+                  ref.read(nftProvider.notifier).setApiKey(key);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('API key saved!')),
+                  );
+                }
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 import '../../../../shared/providers/transaction_history_provider.dart';
 import '../../../../shared/providers/wallet_provider.dart';
@@ -31,10 +32,11 @@ class _TransactionHistoryScreenState
     final walletState = ref.watch(walletProvider);
     final historyState = ref.watch(transactionHistoryProvider);
     final chain = ref.read(walletProvider.notifier).selectedChainConfig;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${chain.symbol} History'),
+        title: Text('${chain.symbol} ${l10n.transactionHistory}'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/home'),
@@ -54,14 +56,16 @@ class _TransactionHistoryScreenState
           ),
         ],
       ),
-      body: _buildBody(walletState, historyState, chain),
+      body: _buildBody(walletState, historyState, chain, l10n),
     );
   }
+
 
   Widget _buildBody(
     WalletState walletState,
     TransactionHistoryState historyState,
     dynamic chain,
+    AppLocalizations l10n,
   ) {
     if (walletState.selectedAccount == null) {
       return const Center(child: Text('No wallet loaded'));
@@ -74,12 +78,12 @@ class _TransactionHistoryScreenState
           children: [
             const Icon(Icons.error_outline, size: 48, color: Colors.red),
             const SizedBox(height: 16),
-            Text('Error: ${historyState.error}'),
+            Text('${l10n.commonError}: ${historyState.error}'),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () =>
                   ref.read(transactionHistoryProvider.notifier).refresh(),
-              child: const Text('Retry'),
+              child: Text(l10n.commonRetry),
             ),
           ],
         ),
@@ -98,7 +102,7 @@ class _TransactionHistoryScreenState
             Icon(Icons.receipt_long, size: 64, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'No transactions yet',
+              'No transactions yet', // Localize if needed, user didn't request specific key
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),

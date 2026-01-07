@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   
   # State Management - Riverpod 2.x
   flutter_riverpod: ^2.6.1
@@ -29,7 +31,7 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   
   # Utilities
-  intl: ^0.20.2
+  intl: ">=0.19.0 <0.21.0"
   url_launcher: ^6.3.1
   http: ^1.2.2
   bip39: ^1.0.6
@@ -65,10 +67,14 @@ dependencies:
     path: ../packages/reown
   web3_universal_ledger:
     path: ../packages/hardware/ledger
+  web3_universal_aa:
+    path: ../packages/aa
   ledger_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
   flutter_lints: ^5.0.0
   build_runner: ^2.4.14
@@ -79,6 +85,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/

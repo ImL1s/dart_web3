@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
-/// NFT Gallery screen - display user's NFTs
+import '../../../../core/models/nft_item.dart';
+import '../../../../shared/providers/nft_provider.dart';
+
+/// NFT Gallery Screen - Display user's NFTs from Alchemy API.
 class NftGalleryScreen extends ConsumerStatefulWidget {
   const NftGalleryScreen({super.key});
 
@@ -12,63 +16,43 @@ class NftGalleryScreen extends ConsumerStatefulWidget {
 }
 
 class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
-  bool _isLoading = true;
-  List<_NftItem> _nfts = [];
-
   @override
   void initState() {
     super.initState();
-    _loadNfts();
-  }
-
-  Future<void> _loadNfts() async {
-    // Simulate loading delay
-    await Future.delayed(const Duration(seconds: 1));
-    if (mounted) {
-      setState(() {
-        _nfts = [
-          const _NftItem(
-            id: '1',
-            name: 'Cool Cat #1234',
-            collection: 'Cool Cats',
-            imageColor: Colors.blue,
-          ),
-          const _NftItem(
-            id: '2',
-            name: 'Bored Ape #5678',
-            collection: 'BAYC',
-            imageColor: Colors.green,
-          ),
-          const _NftItem(
-            id: '3',
-            name: 'Doodle #9012',
-            collection: 'Doodles',
-            imageColor: Colors.orange,
-          ),
-          const _NftItem(
-            id: '4',
-            name: 'Azuki #3456',
-            collection: 'Azuki',
-            imageColor: Colors.red,
-          ),
-        ];
-        _isLoading = false;
-      });
-    }
+    // Fetch NFTs on screen load
+    Future.microtask(() {
+      ref.read(nftProvider.notifier).fetchNfts();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+    final nftState = ref.watch(nftProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NFT Gallery'),
+        title: Text(l10n.nftGallery),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/home'),
         ),
+        actions: [
+          IconButton(
+            icon: nftState.isLoading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.refresh),
+            onPressed: nftState.isLoading
+                ? null
+                : () => ref.read(nftProvider.notifier).refresh(),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -94,7 +78,7 @@ class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Powered by web3_universal_nft\nSupports ERC-721 & ERC-1155',
+                    'Powered by Alchemy NFT API\nSupports ERC-721 & ERC-1155',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.onPrimaryContainer,
                     ),
@@ -104,11 +88,164 @@ class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
             ),
           ),
 
-          // NFT grid
+          // Content
           Expanded(
-            child: _isLoading ? _buildShimmerGrid() : _buildNftGrid(),
+            child: _buildContent(nftState, theme, colorScheme, l10n),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildContent(
+    NftState nftState,
+    ThemeData theme,
+    ColorScheme colorScheme,
+    AppLocalizations l10n,
+  ) {
+    // Not configured
+    if (!nftState.isConfigured) {
+      return _buildNotConfiguredState(theme, colorScheme);
+    }
+
+    // Loading
+    if (nftState.isLoading && nftState.nfts.isEmpty) {
+      return _buildShimmerGrid();
+    }
+
+    // Error
+    if (nftState.error != null && nftState.nfts.isEmpty) {
+      return _buildErrorState(nftState.error!, theme, colorScheme, l10n);
+    }
+
+    // Empty
+    if (nftState.nfts.isEmpty) {
+      return _buildEmptyState(theme, colorScheme, l10n);
+    }
+
+    // NFT Grid
+    return RefreshIndicator(
+      onRefresh: () => ref.read(nftProvider.notifier).refresh(),
+      child: _buildNftGrid(nftState.nfts),
+    );
+  }
+
+  Widget _buildNotConfiguredState(ThemeData theme, ColorScheme colorScheme) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.key_rounded,
+              size: 64,
+              color: colorScheme.primary,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'API Key Required',
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Configure your Alchemy API key in Settings to view NFTs.',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 24),
+            FilledButton.icon(
+              onPressed: () => context.go('/settings'),
+              icon: const Icon(Icons.settings),
+              label: const Text('Go to Settings'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorState(
+    String error,
+    ThemeData theme,
+    ColorScheme colorScheme,
+    AppLocalizations l10n,
+  ) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 64,
+              color: colorScheme.error,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.nftLoadError,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              error,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 24),
+            FilledButton.icon(
+              onPressed: () => ref.read(nftProvider.notifier).refresh(),
+              icon: const Icon(Icons.refresh),
+              label: Text(l10n.commonRetry),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyState(
+    ThemeData theme,
+    ColorScheme colorScheme,
+    AppLocalizations l10n,
+  ) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.collections_rounded,
+              size: 64,
+              color: colorScheme.outline,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.noNftsFound,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Your NFTs will appear here once you own some.',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -141,7 +278,7 @@ class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
     );
   }
 
-  Widget _buildNftGrid() {
+  Widget _buildNftGrid(List<NftItem> nfts) {
     return GridView.builder(
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -150,11 +287,11 @@ class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
         mainAxisSpacing: 12,
         childAspectRatio: 0.8,
       ),
-      itemCount: _nfts.length,
+      itemCount: nfts.length,
       itemBuilder: (context, index) {
-        final nft = _nfts[index];
+        final nft = nfts[index];
         return Hero(
-          tag: 'nft-${nft.id}',
+          tag: 'nft-${nft.contractAddress}-${nft.tokenId}',
           child: _NftCard(nft: nft),
         );
       },
@@ -162,22 +299,8 @@ class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
   }
 }
 
-class _NftItem {
-  final String id;
-  final String name;
-  final String collection;
-  final Color imageColor;
-
-  const _NftItem({
-    required this.id,
-    required this.name,
-    required this.collection,
-    required this.imageColor,
-  });
-}
-
 class _NftCard extends StatelessWidget {
-  final _NftItem nft;
+  final NftItem nft;
 
   const _NftCard({required this.nft});
 
@@ -191,27 +314,44 @@ class _NftCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // NFT image placeholder
+          // NFT image
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    nft.imageColor.withOpacity(0.3),
-                    nft.imageColor.withOpacity(0.7),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.image_rounded,
-                  size: 48,
-                  color: nft.imageColor,
-                ),
-              ),
+              color: colorScheme.surfaceContainerHighest,
+              child: nft.imageUrl != null
+                  ? Image.network(
+                      nft.imageUrl!,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                            strokeWidth: 2,
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Center(
+                          child: Icon(
+                            Icons.broken_image_rounded,
+                            size: 48,
+                            color: colorScheme.outline,
+                          ),
+                        );
+                      },
+                    )
+                  : Center(
+                      child: Icon(
+                        Icons.image_rounded,
+                        size: 48,
+                        color: colorScheme.outline,
+                      ),
+                    ),
             ),
           ),
           // NFT info
@@ -230,10 +370,12 @@ class _NftCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  nft.collection,
+                  nft.collectionName ?? 'Unknown Collection',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

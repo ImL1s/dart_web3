@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
+
 import 'core/router/app_router.dart';
+import 'shared/providers/locale_provider.dart';
 
 /// The main application widget with Material 3 theming.
 class Web3WalletApp extends ConsumerWidget {
@@ -11,6 +14,7 @@ class Web3WalletApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
+    final locale = ref.watch(localeProvider);
 
     return MaterialApp.router(
       title: 'Web3 Wallet',
@@ -19,6 +23,9 @@ class Web3WalletApp extends ConsumerWidget {
       darkTheme: _buildDarkTheme(),
       themeMode: ThemeMode.system,
       routerConfig: router,
+      locale: locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 
