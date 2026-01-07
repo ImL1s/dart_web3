@@ -31,7 +31,7 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   
   # Utilities
-  intl: 0.19.0
+  intl: ">=0.19.0 <0.21.0"
   url_launcher: ^6.3.1
   http: ^1.2.2
   bip39: ^1.0.6
