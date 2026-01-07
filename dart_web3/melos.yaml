@@ -23,7 +23,9 @@ command:
 
 scripts:
   analyze:
-    run: melos exec -- dart analyze
+    run: |
+      melos exec --no-flutter -- dart analyze .
+      melos exec --flutter -- flutter analyze .
     description: Run static analysis on all packages
 
   format:
