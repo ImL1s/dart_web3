@@ -28,6 +28,45 @@ class _SendScreenState extends ConsumerState<SendScreen> {
   Future<void> _sendTransaction() async {
     if (!_formKey.currentState!.validate()) return;
 
+    // Show confirmation dialog
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        final chain = ref.read(walletProvider.notifier).selectedChainConfig;
+        return AlertDialog(
+          title: const Text('Confirm Transaction'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _ConfirmRow(label: 'To', value: _shortenAddress(_addressController.text.trim())),
+              const SizedBox(height: 8),
+              _ConfirmRow(label: 'Amount', value: '${_amountController.text.trim()} ${chain.symbol}'),
+              const SizedBox(height: 8),
+              _ConfirmRow(label: 'Network', value: chain.name),
+              const Divider(height: 24),
+              Text(
+                'Please verify the details before confirming.',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed != true) return;
+
     setState(() => _isLoading = true);
 
     try {
@@ -56,8 +95,15 @@ class _SendScreenState extends ConsumerState<SendScreen> {
         );
       }
     } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
+  }
+
+  String _shortenAddress(String address) {
+    if (address.length < 12) return address;
+    return '${address.substring(0, 8)}...${address.substring(address.length - 6)}';
   }
 
   @override
@@ -236,6 +282,28 @@ class _SendScreenState extends ConsumerState<SendScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ConfirmRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _ConfirmRow({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        )),
+        Text(value, style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+        )),
+      ],
     );
   }
 }

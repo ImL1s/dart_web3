@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../shared/providers/transaction_history_provider.dart';
 import '../../../../shared/providers/wallet_provider.dart';
@@ -86,7 +87,7 @@ class _TransactionHistoryScreenState
     }
 
     if (historyState.isLoading && historyState.transactions.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return _buildShimmerList();
     }
 
     if (historyState.transactions.isEmpty) {
@@ -94,7 +95,7 @@ class _TransactionHistoryScreenState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.receipt_long, size: 64, color: Colors.grey),
+            Icon(Icons.receipt_long, size: 64, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
               'No transactions yet',
@@ -110,14 +111,98 @@ class _TransactionHistoryScreenState
       );
     }
 
+    // Group transactions by date
+    final grouped = _groupByDate(historyState.transactions);
+
     return RefreshIndicator(
       onRefresh: () => ref.read(transactionHistoryProvider.notifier).refresh(),
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: historyState.transactions.length,
+        itemCount: grouped.length,
         itemBuilder: (context, index) {
-          final tx = historyState.transactions[index];
-          return _TransactionCard(transaction: tx, chain: chain);
+          final entry = grouped.entries.toList()[index];
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  entry.key,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+              ),
+              ...entry.value.asMap().entries.map((e) {
+                return TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  duration: Duration(milliseconds: 200 + (e.key * 50)),
+                  curve: Curves.easeOut,
+                  builder: (context, value, child) {
+                    return Opacity(
+                      opacity: value,
+                      child: Transform.translate(
+                        offset: Offset(0, 20 * (1 - value)),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: _TransactionCard(transaction: e.value, chain: chain),
+                );
+              }),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Map<String, List<Transaction>> _groupByDate(List<Transaction> transactions) {
+    final Map<String, List<Transaction>> grouped = {};
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+
+    for (final tx in transactions) {
+      final txDate = DateTime(tx.timestamp.year, tx.timestamp.month, tx.timestamp.day);
+      String label;
+      if (txDate == today) {
+        label = 'Today';
+      } else if (txDate == yesterday) {
+        label = 'Yesterday';
+      } else {
+        label = '${tx.timestamp.month}/${tx.timestamp.day}/${tx.timestamp.year}';
+      }
+      grouped.putIfAbsent(label, () => []).add(tx);
+    }
+    return grouped;
+  }
+
+  Widget _buildShimmerList() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: const EdgeInsets.only(bottom: 12),
+            child: ListTile(
+              leading: const CircleAvatar(backgroundColor: Colors.white),
+              title: Container(height: 12, width: 80, color: Colors.white),
+              subtitle: Container(height: 10, width: 120, color: Colors.white),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(height: 12, width: 60, color: Colors.white),
+                  const SizedBox(height: 4),
+                  Container(height: 10, width: 40, color: Colors.white),
+                ],
+              ),
+            ),
+          );
         },
       ),
     );

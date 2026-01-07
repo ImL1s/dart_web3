@@ -1,39 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 /// NFT Gallery screen - display user's NFTs
-class NftGalleryScreen extends ConsumerWidget {
+class NftGalleryScreen extends ConsumerStatefulWidget {
   const NftGalleryScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<NftGalleryScreen> createState() => _NftGalleryScreenState();
+}
+
+class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
+  bool _isLoading = true;
+  List<_NftItem> _nfts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadNfts();
+  }
+
+  Future<void> _loadNfts() async {
+    // Simulate loading delay
+    await Future.delayed(const Duration(seconds: 1));
+    if (mounted) {
+      setState(() {
+        _nfts = [
+          const _NftItem(
+            id: '1',
+            name: 'Cool Cat #1234',
+            collection: 'Cool Cats',
+            imageColor: Colors.blue,
+          ),
+          const _NftItem(
+            id: '2',
+            name: 'Bored Ape #5678',
+            collection: 'BAYC',
+            imageColor: Colors.green,
+          ),
+          const _NftItem(
+            id: '3',
+            name: 'Doodle #9012',
+            collection: 'Doodles',
+            imageColor: Colors.orange,
+          ),
+          const _NftItem(
+            id: '4',
+            name: 'Azuki #3456',
+            collection: 'Azuki',
+            imageColor: Colors.red,
+          ),
+        ];
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-
-    // Mock NFT data for demonstration
-    final mockNfts = [
-      const _NftItem(
-        name: 'Cool Cat #1234',
-        collection: 'Cool Cats',
-        imageColor: Colors.blue,
-      ),
-      const _NftItem(
-        name: 'Bored Ape #5678',
-        collection: 'BAYC',
-        imageColor: Colors.green,
-      ),
-      const _NftItem(
-        name: 'Doodle #9012',
-        collection: 'Doodles',
-        imageColor: Colors.orange,
-      ),
-      const _NftItem(
-        name: 'Azuki #3456',
-        collection: 'Azuki',
-        imageColor: Colors.red,
-      ),
-    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -79,33 +106,70 @@ class NftGalleryScreen extends ConsumerWidget {
 
           // NFT grid
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.8,
-              ),
-              itemCount: mockNfts.length,
-              itemBuilder: (context, index) {
-                final nft = mockNfts[index];
-                return _NftCard(nft: nft);
-              },
-            ),
+            child: _isLoading ? _buildShimmerGrid() : _buildNftGrid(),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildShimmerGrid() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.8,
+        ),
+        itemCount: 4,
+        itemBuilder: (context, index) {
+          return Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                Expanded(child: Container(color: Colors.white)),
+                Container(height: 60, color: Colors.white),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildNftGrid() {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 0.8,
+      ),
+      itemCount: _nfts.length,
+      itemBuilder: (context, index) {
+        final nft = _nfts[index];
+        return Hero(
+          tag: 'nft-${nft.id}',
+          child: _NftCard(nft: nft),
+        );
+      },
+    );
+  }
 }
 
 class _NftItem {
+  final String id;
   final String name;
   final String collection;
   final Color imageColor;
 
   const _NftItem({
+    required this.id,
     required this.name,
     required this.collection,
     required this.imageColor,
