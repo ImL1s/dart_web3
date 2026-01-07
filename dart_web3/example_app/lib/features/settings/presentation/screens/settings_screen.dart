@@ -24,34 +24,97 @@ class SettingsScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // About section
+          // Preferences Section
+          const _SectionHeader(title: 'Preferences'),
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.dark_mode, color: colorScheme.primary),
+                  title: const Text('Dark Mode'),
+                  subtitle: const Text('Use system theme'),
+                  trailing: Switch(
+                    value: true, // Placeholder
+                    onChanged: (value) {
+                      // TODO: Implement theme switching
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Theme switching coming soon!')),
+                      );
+                    },
+                  ),
+                ),
+                const Divider(height: 1, indent: 56),
+                ListTile(
+                  leading: Icon(Icons.currency_exchange, color: colorScheme.primary),
+                  title: const Text('Currency'),
+                  subtitle: const Text('USD'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    // TODO: Implement currency selection
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // Security Section
+          const _SectionHeader(title: 'Security'),
+          Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.security, color: colorScheme.primary),
+                  title: const Text('Recovery Phrase'),
+                  subtitle: const Text('View or backup'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    // TODO: Show recovery phrase
+                  },
+                ),
+                const Divider(height: 1, indent: 56),
+                ListTile(
+                  leading: Icon(Icons.fingerprint, color: colorScheme.primary),
+                  title: const Text('Biometric Lock'),
+                  trailing: Switch(
+                    value: false,
+                    onChanged: (value) {
+                      // TODO: Implement biometrics
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // About Section
           const _SectionHeader(title: 'About'),
           Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Column(
               children: [
                 ListTile(
                   leading: Container(
-                    width: 40,
-                    height: 40,
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colorScheme.primary,
-                          colorScheme.tertiary,
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
+                      color: colorScheme.primaryContainer,
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.account_balance_wallet,
-                      color: colorScheme.onPrimary,
-                      size: 20,
-                    ),
+                    child: Icon(Icons.account_balance_wallet, color: colorScheme.onPrimaryContainer),
                   ),
                   title: const Text('Web3 Wallet'),
-                  subtitle: const Text('Version 1.0.0'),
+                  subtitle: const Text('v1.0.0 (Beta)'),
                 ),
-                const Divider(),
+                const Divider(height: 1, indent: 56),
                 const ListTile(
                   leading: Icon(Icons.code),
                   title: Text('Powered by'),
@@ -65,33 +128,36 @@ class SettingsScreen extends ConsumerWidget {
           // SDK Packages section
           const _SectionHeader(title: 'SDK Packages Used'),
           const Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
             child: Column(
               children: [
                 _PackageTile(
                   name: 'web3_universal_core',
                   description: 'Core utilities',
                 ),
-                Divider(),
+                Divider(height: 1, indent: 56),
                 _PackageTile(
                   name: 'web3_universal_crypto',
                   description: 'BIP-39/44 HD Wallet',
                 ),
-                Divider(),
+                Divider(height: 1, indent: 56),
                 _PackageTile(
                   name: 'web3_universal_signer',
                   description: 'Transaction signing',
                 ),
-                Divider(),
+                Divider(height: 1, indent: 56),
                 _PackageTile(
                   name: 'web3_universal_client',
                   description: 'Blockchain interaction',
                 ),
-                Divider(),
+                Divider(height: 1, indent: 56),
                 _PackageTile(
                   name: 'web3_universal_swap',
                   description: 'DEX aggregation',
                 ),
-                Divider(),
+                Divider(height: 1, indent: 56),
                 _PackageTile(
                   name: 'web3_universal_nft',
                   description: 'NFT services',
@@ -101,63 +167,33 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
 
-          // Security section
-          const _SectionHeader(title: 'Security'),
-          Card(
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Icon(
-                    Icons.security,
-                    color: colorScheme.primary,
-                  ),
-                  title: const Text('Recovery Phrase'),
-                  subtitle: const Text('View or backup'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () {
-                    // TODO: Show recovery phrase with auth
-                  },
-                ),
-                const Divider(),
-                ListTile(
-                  leading: Icon(
-                    Icons.fingerprint,
-                    color: colorScheme.primary,
-                  ),
-                  title: const Text('Biometric Lock'),
-                  trailing: Switch(
-                    value: false,
-                    onChanged: (value) {
-                      // TODO: Enable biometric
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-
-          // Danger zone
+          // Danger Zone
           const _SectionHeader(title: 'Danger Zone'),
           Card(
-            color: colorScheme.errorContainer.withOpacity(0.3),
+            clipBehavior: Clip.antiAlias,
+            color: colorScheme.errorContainer.withOpacity(0.5),
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(color: colorScheme.error.withOpacity(0.2)),
+            ),
             child: ListTile(
-              leading: Icon(
-                Icons.delete_forever,
-                color: colorScheme.error,
-              ),
+              leading: Icon(Icons.delete_forever, color: colorScheme.error),
               title: Text(
                 'Delete Wallet',
-                style: TextStyle(color: colorScheme.error),
+                style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold),
               ),
-              subtitle: const Text('Remove wallet from this device'),
+              subtitle: Text(
+                'Remove wallet from this device',
+                style: TextStyle(color: colorScheme.error.withOpacity(0.8)),
+              ),
               onTap: () {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
                     title: const Text('Delete Wallet?'),
                     content: const Text(
-                      'This will remove your wallet from this device. Make sure you have backed up your recovery phrase.',
+                      'This will permanently remove the wallet from this device. ensure you have backed up your recovery phrase.',
                     ),
                     actions: [
                       TextButton(
@@ -165,13 +201,9 @@ class SettingsScreen extends ConsumerWidget {
                         child: const Text('Cancel'),
                       ),
                       FilledButton(
-                        style: FilledButton.styleFrom(
-                          backgroundColor: colorScheme.error,
-                        ),
+                        style: FilledButton.styleFrom(backgroundColor: colorScheme.error),
                         onPressed: () async {
-                          await ref
-                              .read(walletProvider.notifier)
-                              .deleteWallet();
+                          await ref.read(walletProvider.notifier).deleteWallet();
                           if (context.mounted) {
                             context.go('/onboarding');
                           }
@@ -184,6 +216,17 @@ class SettingsScreen extends ConsumerWidget {
               },
             ),
           ),
+          const SizedBox(height: 32),
+          
+          Center(
+            child: Text(
+              'Made with ❤️ by dart_web3 Team',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.outline,
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
         ],
       ),
     );

@@ -335,8 +335,9 @@ class WalletService {
     Uint8List signedTx;
 
     if (ledgerService.status == LedgerStatus.connected && accountIndex == 0) {
-      if (ledgerService.client == null)
+      if (ledgerService.client == null) {
         throw Exception("Ledger not connected properly");
+      }
 
       // Build and encode transaction for Ledger signing
       final provider = RpcProvider(HttpTransport(chain.rpcUrl));

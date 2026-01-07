@@ -1,0 +1,14 @@
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:134:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:136:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:140:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:141:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:145:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:146:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:150:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:151:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:155:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:156:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:160:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\features\settings\presentation\screens\settings_screen.dart:161:17 - prefer_const_constructors
+
+12 issues found. (ran in 1.5s)
