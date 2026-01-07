@@ -44,5 +44,14 @@
   
   "nftGallery": "NFT Gallery",
   "noNftsFound": "No NFTs found",
-  "nftLoadError": "Failed to load NFTs"
+  "nftLoadError": "Failed to load NFTs",
+  
+  "settingsApiConfiguration": "API Configuration",
+  "settingsAlchemyApiKey": "Alchemy API Key",
+  "settingsApiConfigured": "Configured ✓",
+  "settingsApiNotConfigured": "Not configured",
+  "settingsViewBackup": "View or backup",
+  "settingsWebWallet": "Web3 Wallet",
+  "settingsVersion": "v1.0.0 (Beta)",
+  "settingsDeleteWallet": "Delete Wallet"
 }

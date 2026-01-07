@@ -40,5 +40,14 @@
   
   "nftGallery": "NFT 畫廊",
   "noNftsFound": "未找到 NFT",
-  "nftLoadError": "載入 NFT 失敗"
+  "nftLoadError": "載入 NFT 失敗",
+  
+  "settingsApiConfiguration": "API 配置",
+  "settingsAlchemyApiKey": "Alchemy API 金鑰",
+  "settingsApiConfigured": "已配置 ✓",
+  "settingsApiNotConfigured": "尚未配置",
+  "settingsViewBackup": "查看或備份",
+  "settingsWebWallet": "Web3 錢包",
+  "settingsVersion": "v1.0.0 (測試版)",
+  "settingsDeleteWallet": "刪除錢包"
 }
