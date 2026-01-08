@@ -146,41 +146,41 @@ graph TD
 
 ## Package Structure
 
-| Package | Description | Level |
-|---------|-------------|-------|
-| [`web3_universal_core`](packages/core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
-| [`web3_universal_crypto`](packages/crypto) | Cryptography (keccak, Scrypt, Keystore V3, BIP-32/39/44) | 1 |
-| [`web3_universal_abi`](packages/abi) | ABI encoding/decoding | 1 |
-| [`dart_web3_compat`](packages/compat) | web3dart compatibility layer (drop-in replacement) | 1 |
-| [`web3_universal_provider`](packages/provider) | RPC Provider (HTTP/WebSocket) | 2 |
-| [`web3_universal_signer`](packages/signer) | Signer abstraction | 2 |
-| [`web3_universal_chains`](packages/chains) | Chain configurations | 2 |
-| [`web3_universal_client`](packages/client) | PublicClient/WalletClient | 3 |
-| [`web3_universal_contract`](packages/contract) | Contract abstraction | 3 |
-| [`web3_universal_events`](packages/events) | Event subscription | 3 |
-| [`web3_universal_multicall`](packages/multicall) | Multicall support | 4 |
-| [`web3_universal_ens`](packages/ens) | ENS resolution | 4 |
-| [`web3_universal_aa`](packages/aa) | ERC-4337 Account Abstraction | 5 |
-| [`web3_universal_reown`](packages/reown) | Reown/WalletConnect v2 | 5 |
-| [`web3_universal_swap`](packages/swap) | DEX aggregation | 5 |
-| [`web3_universal_bridge`](packages/bridge) | Cross-chain bridging | 5 |
-| [`web3_universal_nft`](packages/nft) | NFT services | 5 |
-| [`web3_universal_staking`](packages/staking) | Staking services | 5 |
-| [`web3_universal_debug`](packages/debug) | Debug/Trace API | 5 |
-| [`web3_universal_mev`](packages/mev) | MEV protection/Flashbots | 5 |
-| [`web3_universal_dapp`](packages/dapp) | DApp state & session management | 5 |
-| [`web3_universal_history`](packages/history) | Transaction history explorer | 5 |
-| [`web3_universal_price`](packages/price) | Asset pricing and oracles | 5 |
-| [`web3_universal_bc_ur`](packages/hardware/bc_ur) | BC-UR air-gapped protocol | 6 |
-| [`web3_universal_keystone`](packages/hardware/keystone) | Keystone hardware wallet | 6 |
-| [`web3_universal_ledger`](packages/hardware/ledger) | Ledger hardware wallet | 6 |
-| [`web3_universal_trezor`](packages/hardware/trezor) | Trezor hardware wallet | 6 |
-| [`web3_universal_mpc`](packages/hardware/mpc) | MPC wallet support | 6 |
-| [`web3_universal_solana`](packages/extensions/solana) | Solana extension | 7 |
-| [`web3_universal_polkadot`](packages/extensions/polkadot) | Polkadot extension | 7 |
-| [`web3_universal_tron`](packages/extensions/tron) | Tron extension | 7 |
-| [`web3_universal_ton`](packages/extensions/ton) | TON extension | 7 |
-| [`web3_universal_bitcoin`](packages/extensions/bitcoin) | Bitcoin extension | 7 |
+| Package | Status | Description | Level |
+|---------|--------|-------------|-------|
+| [`web3_universal_core`](packages/core) | [![pub package](https://img.shields.io/pub/v/web3_universal_core.svg)](https://pub.dev/packages/web3_universal_core) | Core utilities (address, BigInt, encoding, RLP) | 0 |
+| [`web3_universal_crypto`](packages/crypto) | [![pub package](https://img.shields.io/pub/v/web3_universal_crypto.svg)](https://pub.dev/packages/web3_universal_crypto) | Cryptography (keccak, Scrypt, Keystore V3, BIP-32/39/44) | 1 |
+| [`web3_universal_abi`](packages/abi) | [![pub package](https://img.shields.io/pub/v/web3_universal_abi.svg)](https://pub.dev/packages/web3_universal_abi) | ABI encoding/decoding | 1 |
+| [`dart_web3_compat`](packages/compat) | | web3dart compatibility layer (drop-in replacement) | 1 |
+| [`web3_universal_provider`](packages/provider) | [![pub package](https://img.shields.io/pub/v/web3_universal_provider.svg)](https://pub.dev/packages/web3_universal_provider) | RPC Provider (HTTP/WebSocket) | 2 |
+| [`web3_universal_signer`](packages/signer) | [![pub package](https://img.shields.io/pub/v/web3_universal_signer.svg)](https://pub.dev/packages/web3_universal_signer) | Signer abstraction | 2 |
+| [`web3_universal_chains`](packages/chains) | [![pub package](https://img.shields.io/pub/v/web3_universal_chains.svg)](https://pub.dev/packages/web3_universal_chains) | Chain configurations | 2 |
+| [`web3_universal_client`](packages/client) | | PublicClient/WalletClient | 3 |
+| [`web3_universal_contract`](packages/contract) | | Contract abstraction | 3 |
+| [`web3_universal_events`](packages/events) | | Event subscription | 3 |
+| [`web3_universal_multicall`](packages/multicall) | | Multicall support | 4 |
+| [`web3_universal_ens`](packages/ens) | | ENS resolution | 4 |
+| [`web3_universal_aa`](packages/aa) | | ERC-4337 Account Abstraction | 5 |
+| [`web3_universal_reown`](packages/reown) | [![pub package](https://img.shields.io/pub/v/web3_universal_reown.svg)](https://pub.dev/packages/web3_universal_reown) | Reown/WalletConnect v2 | 5 |
+| [`web3_universal_swap`](packages/swap) | | DEX aggregation | 5 |
+| [`web3_universal_bridge`](packages/bridge) | | Cross-chain bridging | 5 |
+| [`web3_universal_nft`](packages/nft) | | NFT services | 5 |
+| [`web3_universal_staking`](packages/staking) | | Staking services | 5 |
+| [`web3_universal_debug`](packages/debug) | [![pub package](https://img.shields.io/pub/v/web3_universal_debug.svg)](https://pub.dev/packages/web3_universal_debug) | Debug/Trace API | 5 |
+| [`web3_universal_mev`](packages/mev) | [![pub package](https://img.shields.io/pub/v/web3_universal_mev.svg)](https://pub.dev/packages/web3_universal_mev) | MEV protection/Flashbots | 5 |
+| [`web3_universal_dapp`](packages/dapp) | | DApp state & session management | 5 |
+| [`web3_universal_history`](packages/history) | | Transaction history explorer | 5 |
+| [`web3_universal_price`](packages/price) | [![pub package](https://img.shields.io/pub/v/web3_universal_price.svg)](https://pub.dev/packages/web3_universal_price) | Asset pricing and oracles | 5 |
+| [`web3_universal_bc_ur`](packages/hardware/bc_ur) | [![pub package](https://img.shields.io/pub/v/web3_universal_bc_ur.svg)](https://pub.dev/packages/web3_universal_bc_ur) | BC-UR air-gapped protocol | 6 |
+| [`web3_universal_keystone`](packages/hardware/keystone) | [![pub package](https://img.shields.io/pub/v/web3_universal_keystone.svg)](https://pub.dev/packages/web3_universal_keystone) | Keystone hardware wallet | 6 |
+| [`web3_universal_ledger`](packages/hardware/ledger) | [![pub package](https://img.shields.io/pub/v/web3_universal_ledger.svg)](https://pub.dev/packages/web3_universal_ledger) | Ledger hardware wallet | 6 |
+| [`web3_universal_trezor`](packages/hardware/trezor) | [![pub package](https://img.shields.io/pub/v/web3_universal_trezor.svg)](https://pub.dev/packages/web3_universal_trezor) | Trezor hardware wallet | 6 |
+| [`web3_universal_mpc`](packages/hardware/mpc) | [![pub package](https://img.shields.io/pub/v/web3_universal_mpc.svg)](https://pub.dev/packages/web3_universal_mpc) | MPC wallet support | 6 |
+| [`web3_universal_solana`](packages/extensions/solana) | [![pub package](https://img.shields.io/pub/v/web3_universal_solana.svg)](https://pub.dev/packages/web3_universal_solana) | Solana extension | 7 |
+| [`web3_universal_polkadot`](packages/extensions/polkadot) | [![pub package](https://img.shields.io/pub/v/web3_universal_polkadot.svg)](https://pub.dev/packages/web3_universal_polkadot) | Polkadot extension | 7 |
+| [`web3_universal_tron`](packages/extensions/tron) | [![pub package](https://img.shields.io/pub/v/web3_universal_tron.svg)](https://pub.dev/packages/web3_universal_tron) | Tron extension | 7 |
+| [`web3_universal_ton`](packages/extensions/ton) | [![pub package](https://img.shields.io/pub/v/web3_universal_ton.svg)](https://pub.dev/packages/web3_universal_ton) | TON extension | 7 |
+| [`web3_universal_bitcoin`](packages/extensions/bitcoin) | [![pub package](https://img.shields.io/pub/v/web3_universal_bitcoin.svg)](https://pub.dev/packages/web3_universal_bitcoin) | Bitcoin extension | 7 |
 
 ## Development
 

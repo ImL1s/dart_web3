@@ -8,8 +8,6 @@ topics:
   - cryptography
   - ed25519
   - schnorr
-  - bitcoin
-  - solana
 
 environment:
   sdk: ^3.6.0
