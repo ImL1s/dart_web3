@@ -266,8 +266,11 @@ class ResilientWebSocketTransport implements Transport {
         final subscriptionId = params['subscription'] as String?;
         if (subscriptionId != null) {
           final info = _subscriptions[subscriptionId];
-          if (info != null && params['result'] is Map<String, dynamic>) {
-            info.controller.add(params['result'] as Map<String, dynamic>);
+          if (info != null && params.containsKey('result')) {
+            // Forward any result type (Map, String, bool, etc.)
+            // e.g., newPendingTransactions returns tx hash string
+            // syncing can return boolean
+            info.controller.add(params['result']);
           }
         }
       }
@@ -409,7 +412,11 @@ class ResilientWebSocketTransport implements Transport {
   /// Subscribes to a topic and returns a stream of notifications.
   ///
   /// The subscription will be automatically restored after reconnection.
-  Stream<Map<String, dynamic>> subscribe(String method, List<dynamic> params) async* {
+  /// Returns dynamic results to support various subscription types:
+  /// - newHeads: returns block header as Map
+  /// - newPendingTransactions: returns tx hash as String
+  /// - syncing: returns sync status as bool or Map
+  Stream<dynamic> subscribe(String method, List<dynamic> params) async* {
     final response = await request(method, params);
     final subscriptionId = response['result'] as String;
 
@@ -422,7 +429,7 @@ class ResilientWebSocketTransport implements Transport {
       await unsubscribe(subscriptionId);
     }
 
-    final controller = StreamController<Map<String, dynamic>>(
+    final controller = StreamController<dynamic>(
       onCancel: cleanup,
     );
 
@@ -465,6 +472,8 @@ class ResilientWebSocketTransport implements Transport {
   /// Gracefully close the connection.
   Future<void> close() async {
     _intentionalClose = true;
+    _keepAliveTimer?.cancel();
+    _reconnectTimer?.cancel();
     await _channel?.sink.close();
     _setState(WebSocketConnectionState.disconnected);
   }
@@ -496,7 +505,7 @@ class ResilientWebSocketTransport implements Transport {
 class _SubscriptionInfo {
   final String method;
   final List<dynamic> params;
-  final StreamController<Map<String, dynamic>> controller;
+  final StreamController<dynamic> controller;
 
   _SubscriptionInfo({
     required this.method,
