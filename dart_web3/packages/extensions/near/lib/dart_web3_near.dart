@@ -8,3 +8,4 @@ export 'src/near_types.dart';
 export 'src/near_transaction.dart';
 export 'src/near_client.dart';
 export 'src/near_chains.dart';
+export 'src/borsh.dart';

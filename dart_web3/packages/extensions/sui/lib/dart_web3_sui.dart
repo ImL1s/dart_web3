@@ -8,3 +8,4 @@ export 'src/sui_types.dart';
 export 'src/sui_transaction.dart';
 export 'src/sui_client.dart';
 export 'src/sui_chains.dart';
+export 'src/bcs.dart';

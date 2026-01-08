@@ -8,3 +8,4 @@ export 'src/aptos_types.dart';
 export 'src/aptos_transaction.dart';
 export 'src/aptos_client.dart';
 export 'src/aptos_chains.dart';
+export 'src/bcs.dart';
