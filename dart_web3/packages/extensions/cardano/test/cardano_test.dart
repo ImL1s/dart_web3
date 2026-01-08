@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_web3_cardano/dart_web3_cardano.dart';
+import 'package:web3_universal_cardano/web3_universal_cardano.dart';
 
 void main() {
   group('CardanoChains', () {

@@ -6,7 +6,7 @@ library;
 
 import 'dart:typed_data';
 
-import 'package:dart_web3_aptos/dart_web3_aptos.dart';
+import 'package:web3_universal_aptos/web3_universal_aptos.dart';
 import 'package:test/test.dart';
 
 void main() {

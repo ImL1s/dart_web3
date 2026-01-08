@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_web3_near/dart_web3_near.dart';
+import 'package:web3_universal_near/web3_universal_near.dart';
 
 void main() {
   group('NearChains', () {

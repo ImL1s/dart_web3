@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:dart_web3_near/dart_web3_near.dart';
+import 'package:web3_universal_near/web3_universal_near.dart';
 import 'package:test/test.dart';
 
 /// Strict edge case and authoritative tests for NEAR extension package.

@@ -1,4 +1,4 @@
-name: dart_web3_near
+name: web3_universal_near
 description: NEAR Protocol blockchain extension for dart_web3 - Sharded blockchain with WebAssembly
 version: 0.1.0
 publish_to: none
@@ -9,11 +9,11 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  dart_web3_core:
+  web3_universal_core:
     path: ../../core
-  dart_web3_crypto:
+  web3_universal_crypto:
     path: ../../crypto
-  dart_web3_signer:
+  web3_universal_signer:
     path: ../../signer
   http: ^1.1.0
 

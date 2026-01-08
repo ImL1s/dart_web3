@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:dart_web3_cardano/dart_web3_cardano.dart';
+import 'package:web3_universal_cardano/web3_universal_cardano.dart';
 import 'package:test/test.dart';
 
 /// Strict edge case and authoritative tests for Cardano extension package.
