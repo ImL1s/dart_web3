@@ -1,0 +1,22 @@
+name: web3_universal_aptos
+description: Aptos blockchain extension for dart_web3 - Move-based L1 with parallel execution
+version: 0.1.0
+publish_to: none
+repository: https://github.com/anthropics/dart_web3
+homepage: https://github.com/anthropics/dart_web3/tree/main/packages/extensions/aptos
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  web3_universal_core:
+    path: ../../core
+  web3_universal_crypto:
+    path: ../../crypto
+  web3_universal_signer:
+    path: ../../signer
+  http: ^1.1.0
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0
