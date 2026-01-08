@@ -1,15 +1,15 @@
-# melos_managed_dependency_overrides: web3_universal_abi,web3_universal_chains,web3_universal_client,web3_universal_core,web3_universal_crypto,web3_universal_signer,web3_universal_solana
+# melos_managed_dependency_overrides: web3_universal_abi,web3_universal_chains,web3_universal_core,web3_universal_crypto,web3_universal_provider,web3_universal_signer,web3_universal_solana
 dependency_overrides:
   web3_universal_abi:
     path: ..\\abi
   web3_universal_chains:
     path: ..\\chains
-  web3_universal_client:
-    path: ..\\client
   web3_universal_core:
     path: ..\\core
   web3_universal_crypto:
     path: ..\\crypto
+  web3_universal_provider:
+    path: ..\\provider
   web3_universal_signer:
     path: ..\\signer
   web3_universal_solana:

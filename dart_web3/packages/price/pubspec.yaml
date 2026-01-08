@@ -13,8 +13,7 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_core:
-    path: ../core
+  web3_universal_core: ^0.1.1
   http: ^1.1.0
 
 dev_dependencies:

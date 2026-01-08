@@ -13,23 +13,14 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_core:
-    path: ../core
-  web3_universal_client:
-    path: ../client
-  web3_universal_signer:
-    path: ../signer
-  web3_universal_contract:
-    path: ../contract
-  web3_universal_crypto:
-    path: ../crypto
-  web3_universal_abi:
-    path: ../abi
-
-  web3_universal_provider:
-    path: ../provider
+  web3_universal_core: ^0.1.1
+  web3_universal_client: ^0.1.1+1
+  web3_universal_signer: ^0.1.1
+  web3_universal_contract: ^0.1.0+1
+  web3_universal_crypto: ^0.2.0
+  web3_universal_abi: ^0.1.1
+  web3_universal_provider: ^0.1.0+1
 dev_dependencies:
   lints: ^5.1.1
   test: ^1.24.0
-  web3_universal_chains:
-    path: ../chains
+  web3_universal_chains: ^0.1.0+1

@@ -1,4 +1,4 @@
 # melos_managed_dependency_overrides: web3_universal_core
 dependency_overrides:
   web3_universal_core:
-    path: ../core
+    path: ..\\core

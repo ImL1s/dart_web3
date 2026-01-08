@@ -13,13 +13,9 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_core:
-    path: ../core
-  web3_universal_client:
-    path: ../client
-  web3_universal_signer:
-    path: ../signer
-
+  web3_universal_core: ^0.1.1
+  web3_universal_client: ^0.1.1+1
+  web3_universal_signer: ^0.1.1
 dev_dependencies:
   test: ^1.25.0
   lints: ^5.0.0

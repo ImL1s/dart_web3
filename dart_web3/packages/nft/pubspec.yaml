@@ -14,14 +14,10 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_client:
-    path: ../client
-  web3_universal_contract:
-    path: ../contract
-  web3_universal_core:
-    path: ../core
-  web3_universal_chains:
-    path: ../chains
+  web3_universal_client: ^0.1.1+1
+  web3_universal_contract: ^0.1.0+1
+  web3_universal_core: ^0.1.1
+  web3_universal_chains: ^0.1.0+1
   http: ^1.1.0
 
 dev_dependencies:

@@ -8,20 +8,13 @@ environment:
 
 dependencies:
   args: ^2.4.2
-  web3_universal_crypto:
-    path: ../packages/crypto
-  web3_universal_chains:
-    path: ../packages/chains
-  web3_universal_client:
-    path: ../packages/client
-  web3_universal_provider:
-    path: ../packages/provider
-  web3_universal_signer:
-    path: ../packages/signer
-  web3_universal_core:
-    path: ../packages/core
-  web3_universal_utxo:
-    path: ../packages/utxo
+  web3_universal_crypto: ^0.2.0
+  web3_universal_chains: ^0.1.0+1
+  web3_universal_client: ^0.1.1+1
+  web3_universal_provider: ^0.1.0+1
+  web3_universal_signer: ^0.1.1
+  web3_universal_core: ^0.1.1
+  web3_universal_utxo: ^0.1.1
   http: ^1.2.0
   bip39: ^1.0.6
 

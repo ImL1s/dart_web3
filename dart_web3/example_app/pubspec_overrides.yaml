@@ -1,0 +1,36 @@
+# melos_managed_dependency_overrides: web3_universal_aa,web3_universal_abi,web3_universal_chains,web3_universal_client,web3_universal_contract,web3_universal_core,web3_universal_crypto,web3_universal_ens,web3_universal_ledger,web3_universal_nft,web3_universal_price,web3_universal_provider,web3_universal_reown,web3_universal_signer,web3_universal_solana,web3_universal_swap,web3_universal_utxo
+dependency_overrides:
+  web3_universal_aa:
+    path: ..\\packages\\aa
+  web3_universal_abi:
+    path: ..\\packages\\abi
+  web3_universal_chains:
+    path: ..\\packages\\chains
+  web3_universal_client:
+    path: ..\\packages\\client
+  web3_universal_contract:
+    path: ..\\packages\\contract
+  web3_universal_core:
+    path: ..\\packages\\core
+  web3_universal_crypto:
+    path: ..\\packages\\crypto
+  web3_universal_ens:
+    path: ..\\packages\\ens
+  web3_universal_ledger:
+    path: ..\\packages\\hardware\\ledger
+  web3_universal_nft:
+    path: ..\\packages\\nft
+  web3_universal_price:
+    path: ..\\packages\\price
+  web3_universal_provider:
+    path: ..\\packages\\provider
+  web3_universal_reown:
+    path: ..\\packages\\reown
+  web3_universal_signer:
+    path: ..\\packages\\signer
+  web3_universal_solana:
+    path: ..\\packages\\extensions\\solana
+  web3_universal_swap:
+    path: ..\\packages\\swap
+  web3_universal_utxo:
+    path: ..\\packages\\utxo

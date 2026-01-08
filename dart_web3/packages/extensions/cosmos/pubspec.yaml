@@ -13,10 +13,8 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_core:
-    path: ../../core
-  web3_universal_crypto:
-    path: ../../crypto
+  web3_universal_core: ^0.1.1
+  web3_universal_crypto: ^0.2.0
   fixnum: ^1.1.0
   protobuf: ^3.1.0
   http: ^1.1.0

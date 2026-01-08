@@ -13,11 +13,8 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_core:
-    path: ../core
-  web3_universal_provider:
-    path: ../provider
-
+  web3_universal_core: ^0.1.1
+  web3_universal_provider: ^0.1.0+1
 dev_dependencies:
   test: ^1.25.0
   lints: ^5.1.1
