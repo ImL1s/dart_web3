@@ -1,0 +1,22 @@
+name: dart_web3_sui
+description: Sui blockchain extension for dart_web3 - Move-based L1 with object-centric model
+version: 0.1.0
+publish_to: none
+repository: https://github.com/anthropics/dart_web3
+homepage: https://github.com/anthropics/dart_web3/tree/main/packages/extensions/sui
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  dart_web3_core:
+    path: ../../core
+  dart_web3_crypto:
+    path: ../../crypto
+  dart_web3_signer:
+    path: ../../signer
+  http: ^1.1.0
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0
