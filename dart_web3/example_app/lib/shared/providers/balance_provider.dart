@@ -87,6 +87,7 @@ class BalanceNotifier extends StateNotifier<BalanceState> {
     }
 
     state = state.copyWith(isLoading: true, error: null);
+    if (!mounted) return;
 
     try {
       final newBalances = <ChainType, BalanceResult>{};
@@ -94,6 +95,7 @@ class BalanceNotifier extends StateNotifier<BalanceState> {
       for (final account in walletState.accounts) {
         try {
           final balance = await _service.getBalance(account);
+          if (!mounted) return;
           newBalances[account.chain.type] = BalanceResult(
             chain: account.chain,
             balance: balance,
@@ -125,6 +127,7 @@ class BalanceNotifier extends StateNotifier<BalanceState> {
 
     try {
       final balance = await _service.getBalance(account);
+      if (!mounted) return;
       final newBalances = Map<ChainType, BalanceResult>.from(state.balances);
       newBalances[type] = BalanceResult(
         chain: account.chain,

@@ -1,0 +1,84 @@
+Publish any unpublished packages or package versions in your repository to
+pub.dev. Dry run is on by default.
+
+Usage: melos publish [arguments]
+-h, --help                                       Print this usage information.
+    --[no-]private                               Whether to include or exclude
+                                                 packages with `publish_to:
+                                                 "none"`. By default, the filter
+                                                 has no effect.
+    --[no-]published                             Filter packages where the
+                                                 current local package version
+                                                 exists on pub.dev. Or
+                                                 "-no-published" to filter
+                                                 packages that have not had
+                                                 their current version published
+                                                 yet.
+    --[no-]nullsafety                            Filter packages where the
+                                                 current local version uses a
+                                                 "nullsafety" prerelease preid.
+                                                 Or "-no-nullsafety" to filter
+                                                 packages where their current
+                                                 version does not have a
+                                                 "nullsafety" preid.
+    --[no-]flutter                               Filter packages where the
+                                                 package depends on the Flutter
+                                                 SDK. Or "-no-flutter" to filter
+                                                 packages that do not depend on
+                                                 the Flutter SDK.
+    --scope=<glob>                               Include only packages with
+                                                 names matching the given glob.
+                                                 This option can be repeated.
+    --category=<glob>                            Include only packages with
+                                                 categories matching the given
+                                                 glob. This option can be
+                                                 repeated.
+    --ignore=<glob>                              Exclude packages with names
+                                                 matching the given glob. This
+                                                 option can be repeated.
+    --diff=<ref>                                 Filter packages based on
+                                                 whether there were changes
+                                                 between a commit and the
+                                                 current HEAD or within a range
+                                                 of commits. A range of commits
+                                                 can be specified using the git
+                                                 short hand syntax
+                                                 `<start-commit>..<end-commit>`
+                                                 and
+                                                 `<start-commit>...<end-commit>`
+    --dir-exists=<dirRelativeToPackageRoot>      Include only packages where a
+                                                 specific directory exists
+                                                 inside the package.
+    --file-exists=<fileRelativeToPackageRoot>    Include only packages where a
+                                                 specific file exists in the
+                                                 package.
+    --depends-on=<dependentPackageName>          Include only packages that
+                                                 depend on a specific package.
+                                                 This option can be repeated, to
+                                                 further filter the list of
+                                                 packages.
+    --no-depends-on=<noDependantPackageName>     Include only packages that
+                                                 *don't* depend on a specific
+                                                 package. This option can be
+                                                 repeated.
+    --include-dependents                         Include all transitive
+                                                 dependents for each package
+                                                 that matches the other filters.
+                                                 The included packages skip
+                                                 --ignore and --diff checks.
+    --include-dependencies                       Include all transitive
+                                                 dependencies for each package
+                                                 that matches the other filters.
+                                                 The included packages skip
+                                                 --ignore and --diff checks.
+-n, --[no-]dry-run                               Validate but do not publish the
+                                                 package.
+                                                 (defaults to on)
+-t, --[no-]git-tag-version                       Add any missing git tags for
+                                                 release. Note tags are only
+                                                 created if --no-dry-run is also
+                                                 set.
+-y, --yes                                        Skip the Y/n confirmation
+                                                 prompt when using --no-dry-run.
+
+Run "melos help" to see global options.

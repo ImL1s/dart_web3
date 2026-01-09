@@ -21,7 +21,7 @@ class _CreateWalletScreenState extends ConsumerState<CreateWalletScreen> {
   @override
   void initState() {
     super.initState();
-    _generateWallet();
+    Future.microtask(() => _generateWallet());
   }
 
   Future<void> _generateWallet() async {
@@ -29,12 +29,14 @@ class _CreateWalletScreenState extends ConsumerState<CreateWalletScreen> {
 
     try {
       final mnemonic = await ref.read(walletProvider.notifier).createWallet();
-      setState(() {
-        _mnemonic = mnemonic;
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _mnemonic = mnemonic;
+          _isLoading = false;
+        });
+      }
     } catch (e) {
-      setState(() => _isLoading = false);
+      if (mounted) setState(() => _isLoading = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: $e')),

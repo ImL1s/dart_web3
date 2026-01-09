@@ -32,7 +32,7 @@ class SettingsScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         children: [
           // Preferences Section
-          _SectionHeader(title: l10n.settings), // Or 'Preferences' if localized
+          _SectionHeader(title: l10n.settingsPreferences), // Preferences
           Card(
             clipBehavior: Clip.antiAlias,
             elevation: 2,

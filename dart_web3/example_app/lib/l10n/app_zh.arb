@@ -49,5 +49,7 @@
   "settingsViewBackup": "查看或備份",
   "settingsWebWallet": "Web3 錢包",
   "settingsVersion": "v1.0.0 (測試版)",
-  "settingsDeleteWallet": "刪除錢包"
+  "settingsDeleteWallet": "刪除錢包",
+  "onboardingCreateWallet": "創建新錢包",
+  "onboardingImportWallet": "導入現有錢包"
 }

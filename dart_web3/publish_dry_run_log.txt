@@ -1,0 +1,85 @@
+melos publish --dry-run
+  └> D:\OtherProject\mine\dart_web3\dart_web3
+
+Reading pub registry for package information...
+
+The following packages will be validated only (dry run):
+
+Package Name             Registry    Local
+web3_universal_client                0.1.1+1
+Publishing 1 packages to registry:...
+$ melos exec
+  └> dart pub publish --dry-run
+     └> RUNNING (in 1 packages)
+
+--------------------------------------------------------------------------------
+web3_universal_client:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_client 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (3 KB)
+├── analysis_options.yaml (<1 KB)
+├── client_test_output.txt (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── ccip_read.dart (4 KB)
+│   │   ├── client_factory.dart (1 KB)
+│   │   ├── models.dart (10 KB)
+│   │   ├── public_client.dart (4 KB)
+│   │   ├── universal_hub.dart (1 KB)
+│   │   └── wallet_client.dart (10 KB)
+│   └── web3_universal_client.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── ccip_read_test.dart (3 KB)
+    └── client_property_test.dart (<1 KB)
+
+Total compressed archive size: 12 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+
+The server may enforce additional checks.
+ERROR:   
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Package has 0 warnings and 1 hint.
+
+web3_universal_client: SUCCESS
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart pub publish --dry-run
+     └> SUCCESS
+
+All packages were validated successfully.

@@ -1,0 +1,287 @@
+$ melos exec
+  └> dart analyze .
+     └> RUNNING (in 36 packages)
+
+--------------------------------------------------------------------------------
+[web3_universal]: Analyzing ....
+[web3_universal_events]: Analyzing ....
+[web3_universal_history]: Analyzing ....
+[web3_universal_compat]: Analyzing ....
+[web3_universal_mev]: Analyzing ....
+[web3_universal_bc_ur]: Analyzing ....
+[web3_universal_swap]: Analyzing ....
+[web3_universal_chains]: Analyzing ....
+[web3_universal_keystone]: Analyzing ....
+[web3_universal_price]: Analyzing ....
+[web3_universal_staking]: Analyzing ....
+[web3_universal_debug]: Analyzing ....
+[web3_universal_ledger]: Analyzing ....
+[web3_universal_mpc]: Analyzing ....
+[web3_universal_multicall]: Analyzing ....
+[web3_universal_solana]: Analyzing ....
+[web3_universal_price]: No issues found!
+[web3_universal_history]: No issues found!
+[web3_universal_mev]: No issues found!
+[web3_universal_contract]: Analyzing ....
+[web3_universal_chains]: No issues found!
+[web3_universal_bc_ur]: No issues found!
+[web3_universal_swap]: No issues found!
+[web3_universal_compat]: 
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:19:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:23:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:32:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:38:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:95:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:107:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:137:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:372:5 - The parameter 'httpClient' is not used in the constructor. Try using the parameter or removing it. - avoid_unused_constructor_parameters
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:409:31 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:410:31 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:411:28 - Required named parameters should be before optional named parameters. Try moving the required named parameter to be before any optional named parameters. - always_put_required_named_parameters_first
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:484:12 - Unnecessary 'await'. Try removing the 'await'. - unnecessary_await_in_return
+[web3_universal_compat]:    info - lib\dart_web3_compat.dart:490:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_compat]: 
+[web3_universal_compat]: 13 issues found.
+[web3_universal_debug]: No issues found!
+[web3_universal_ens]: Analyzing ....
+[web3_universal_events]: 
+[web3_universal_events]:    info - lib\src\event_filter.dart:102:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_events]:    info - lib\src\event_filter.dart:113:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_events]:    info - lib\src\event_listener.dart:61:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_listener.dart:96:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_listener.dart:153:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]:    info - lib\src\event_listener.dart:181:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+[web3_universal_events]: 
+[web3_universal_events]: 6 issues found.
+[web3_universal_keystone]: 
+[web3_universal_keystone]:    info - lib\src\qr_communication.dart:68:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_keystone]:    info - lib\src\qr_communication.dart:118:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_keystone]: 
+[web3_universal_keystone]: 2 issues found.
+[web3_universal_client]: Analyzing ....
+[web3_universal_crypto]: Analyzing ....
+[web3_universal_staking]: No issues found!
+[web3_universal_polkadot]: Analyzing ....
+[web3_universal_mpc]: 
+[web3_universal_mpc]:    info - lib\src\threshold_signature.dart:246:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_mpc]:    info - lib\src\threshold_signature.dart:569:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_mpc]: 
+[web3_universal_mpc]: 2 issues found.
+[web3_universal_trezor]: Analyzing ....
+[web3_universal_bitcoin]: Analyzing ....
+[web3_universal_aa]: Analyzing ....
+[web3_universal_ton]: Analyzing ....
+[web3_universal_contract]: 
+[web3_universal_contract]:    info - lib\src\erc1155_contract.dart:158:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_contract]:    info - lib\src\erc721_contract.dart:201:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_contract]:    info - test\mock_client.dart:41:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_contract]:    info - test\mock_client.dart:80:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_contract]: 
+[web3_universal_contract]: 4 issues found.
+[web3_universal_abi]: Analyzing ....
+[web3_universal_multicall]: 
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:29:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:46:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:52:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - lib\src\multicall_builder.dart:58:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_multicall]:    info - test\mock_client.dart:42:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_client.dart:82:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:120:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:124:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:128:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]:    info - test\mock_contract.dart:132:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+[web3_universal_multicall]: 
+[web3_universal_multicall]: 10 issues found.
+[web3_universal_nft]: Analyzing ....
+[web3_universal_polkadot]: No issues found!
+[web3_universal_cosmos]: Analyzing ....
+[web3_universal_client]: 
+[web3_universal_client]:    info - lib\src\wallet_client.dart:323:7 - Setter has no corresponding getter. Try adding a corresponding getter or removing the setter. - avoid_setters_without_getters
+[web3_universal_client]: 
+[web3_universal_client]: 1 issue found.
+[web3_universal_ledger]: No issues found!
+[web3_universal_core]: Analyzing ....
+[web3_universal_tron]: Analyzing ....
+[web3_universal_trezor]: 
+[web3_universal_trezor]:    info - lib\src\multi_chain_support.dart:310:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_trezor]: 
+[web3_universal_trezor]: 1 issue found.
+[web3_universal_signer]: Analyzing ....
+[web3_universal_ton]: No issues found!
+[web3_universal_provider]: Analyzing ....
+[web3_universal_bridge]: Analyzing ....
+[web3_universal_ens]: No issues found!
+[web3_universal_reown]: Analyzing ....
+[web3_universal_solana]: 
+[web3_universal_solana]:   error - test\vector_test.dart:10:25 - The function 'File' isn't defined. Try importing the library that defines 'File', correcting the name to the name of an existing function, or defining a function named 'File'. - undefined_function
+[web3_universal_solana]:    info - lib\src\models\message.dart:183:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:36:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:43:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:83:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_solana]:    info - lib\src\models\public_key.dart:100:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal_solana]:    info - lib\src\rpc\wallet.dart:8:3 - Parameter 'url' could be a super parameter. Trying converting 'url' to a super parameter. - use_super_parameters
+[web3_universal_solana]: 
+[web3_universal_solana]: 7 issues found.
+[web3_universal_dapp]: Analyzing ....
+[web3_universal_utxo]: Analyzing ....
+[web3_universal_aa]: 
+[web3_universal_aa]:    info - lib\src\accounts\simple_account.dart:45:12 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_aa]:    info - lib\src\user_operation.dart:208:7 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_aa]:    info - lib\src\user_operation.dart:459:11 - Unnecessary 'this.' qualifier. Try removing 'this.'. - unnecessary_this
+[web3_universal_aa]:    info - lib\src\user_operation.dart:460:29 - Unnecessary 'this.' qualifier. Try removing 'this.'. - unnecessary_this
+[web3_universal_aa]:    info - lib\src\user_operation.dart:481:12 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings
+[web3_universal_aa]:    info - lib\src\user_operation.dart:664:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_aa]:    info - lib\src\user_operation.dart:679:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_aa]:    info - lib\web3_universal_aa.dart:1:1 - Dangling library doc comment. Add a 'library' directive after the library comment. - dangling_library_doc_comments
+[web3_universal_aa]:    info - test\user_operation_test.dart:71:34 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_aa]: 
+[web3_universal_aa]: 9 issues found.
+[web3_universal_abi]: 
+[web3_universal_abi]:    info - lib\src\encoder.dart:188:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_abi]: 
+[web3_universal_abi]: 1 issue found.
+[web3_universal_nft]: 
+[web3_universal_crypto]: 
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:122:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\aes.dart:316:5 - Local variables should be final. Try making the variable final. - prefer_final_locals
+[web3_universal_nft]:    info - lib\src\ipfs_gateway.dart:132:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\aes.dart:404:16 - Unnecessary use of parentheses. Try removing the parentheses. - unnecessary_parenthesis
+[web3_universal_nft]:    info - lib\src\nft_types.dart:63:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:33:23 - The variable name '_L' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_nft]:    info - lib\src\nft_types.dart:72:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:42:23 - The variable name '_By' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_nft]: 
+[web3_universal_nft]: 4 issues found.
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:46:23 - The variable name '_Bx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:90:11 - The variable name 'RBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:94:11 - The variable name 'ABytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:103:11 - The variable name 'SBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:124:13 - The variable name 'RBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:125:13 - The variable name 'SBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:147:13 - The variable name 'RkA' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\ed25519.dart:289:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\hd_wallet.dart:262:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\keccak.dart:78:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_crypto]:    info - lib\src\keccak.dart:96:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+[web3_universal_crypto]:    info - lib\src\keystore_v3.dart:143:71 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_crypto]:    info - lib\src\ripemd160.dart:109:9 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:27:23 - The variable name '_Gx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:31:23 - The variable name '_Gy' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:196:7 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_crypto]:    info - lib\src\schnorr.dart:302:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:151:16 - Use 'isEven' rather than '% 2'. Try using 'isEven'. - use_is_even_rather_than_modulo
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:235:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:294:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:390:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_crypto]:    info - lib\src\secp256k1.dart:398:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_crypto]:    info - test\keystore_test.dart:44:11 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:45:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:45:23 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:46:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:46:30 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:46:36 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:47:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:48:17 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:49:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:49:20 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:50:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:51:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:52:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:53:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:53:22 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:54:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:55:19 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:57:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:58:17 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:60:11 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:60:17 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:61:11 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:64:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:72:11 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:73:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:73:23 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:74:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:74:30 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:74:36 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:75:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:76:17 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:77:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:77:20 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:78:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:79:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:80:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:81:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:82:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:83:15 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:84:19 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:86:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:87:17 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:89:11 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:89:17 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:90:11 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:93:13 - Unnecessary use of double quotes. Try using single quotes unless the string contains single quotes. - prefer_single_quotes
+[web3_universal_crypto]:    info - test\keystore_test.dart:103:69 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_crypto]: 
+[web3_universal_crypto]: 73 issues found.
+[web3_universal_tron]: No issues found!
+[web3_universal_core]: 
+[web3_universal_core]:    info - lib\src\address.dart:141:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_core]:    info - lib\src\address.dart:148:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_core]: 
+[web3_universal_core]: 2 issues found.
+[web3_universal_cosmos]: No issues found!
+[web3_universal_provider]: 
+[web3_universal_provider]:    info - lib\src\provider.dart:77:8 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_provider]:    info - lib\src\provider.dart:83:8 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+[web3_universal_provider]:    info - lib\src\websocket_transport.dart:53:13 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+[web3_universal_provider]: 
+[web3_universal_provider]: 3 issues found.
+[web3_universal_signer]: 
+[web3_universal_signer]:    info - example\main.dart:19:74 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_signer]:    info - lib\src\authorization_revocation.dart:139:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_signer]:    info - lib\src\authorization_revocation.dart:141:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_signer]:    info - lib\src\authorization_verifier.dart:69:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_signer]:    info - lib\src\authorization_verifier.dart:73:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_signer]:    info - lib\src\authorization_verifier.dart:81:48 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_signer]: 
+[web3_universal_signer]: 6 issues found.
+[web3_universal_dapp]: No issues found!
+[web3_universal_bridge]: 
+[web3_universal_bridge]:    info - lib\src\bridge_quote.dart:255:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_bridge]:    info - lib\src\bridge_types.dart:57:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_bridge]:    info - lib\src\bridge_types.dart:65:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+[web3_universal_bridge]: 
+[web3_universal_bridge]: 3 issues found.
+[web3_universal_reown]: 
+[web3_universal_reown]:    info - test\relay_verification_test.dart:28:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_reown]: 
+[web3_universal_reown]: 1 issue found.
+[web3_universal_utxo]: 
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:48:22 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+[web3_universal_utxo]:    info - lib\src\script\taproot.dart:82:7 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+[web3_universal_utxo]:    info - lib\src\selection\coin_selector.dart:20:16 - Unnecessary use of an abstract class. Try making 'select' a top-level function and removing the class. - one_member_abstracts
+[web3_universal_utxo]: 
+[web3_universal_utxo]: 3 issues found.
+[web3_universal_bitcoin]: 
+[web3_universal_bitcoin]:    info - lib\src\inscriptions\psbt_builder.dart:42:11 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_bitcoin]:    info - lib\src\inscriptions\psbt_builder.dart:43:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_bitcoin]:    info - lib\src\inscriptions\psbt_builder.dart:73:11 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_bitcoin]:    info - lib\src\inscriptions\psbt_builder.dart:178:18 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+[web3_universal_bitcoin]:    info - lib\src\inscriptions\psbt_builder.dart:247:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_bitcoin]:    info - lib\src\inscriptions\psbt_builder.dart:280:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+[web3_universal_bitcoin]: 
+[web3_universal_bitcoin]: 6 issues found.
+[web3_universal]: 
+[web3_universal]:   error - example\main.dart:60:22 - Undefined name 'SolanaAddress'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+[web3_universal]: warning - lib\web3_universal.dart:39:21 - The library 'package:web3_universal_trezor/web3_universal_trezor.dart' doesn't export a member with the hidden name 'MultiChainDerivationPaths'. Try removing the name from the list of hidden members. - undefined_hidden_name
+[web3_universal]:    info - example\main.dart:32:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal]:    info - example\main.dart:43:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+[web3_universal]: 
+[web3_universal]: 4 issues found.
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart analyze .
+     └> FAILED (in 2 packages)
+        └> web3_universal_solana (with exit code 3)
+        └> web3_universal (with exit code 3)

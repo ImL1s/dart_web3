@@ -1,0 +1,126 @@
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/app_test.dart
+Running Gradle task 'assembleDebug'...                          
+D:\OtherProject\mine\dart_web3\dart_web3\example_app\l10n.yaml: The argument "synthetic-package" no longer has any effect and should be removed. See http://flutter.dev/to/flutter-gen-deprecation
+Running Gradle task 'assembleDebug'...                             22.0s
+√ Built build\app\outputs\flutter-apk\app-debug.apk
+Installing build\app\outputs\flutter-apk\app-debug.apk...          18.0s
+00:00 +0: Web3 Wallet App E2E Tests Onboarding E2E Tests App launches to onboarding screen
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+Null check operator used on a null value
+
+When the exception was thrown, this was the stack:
+#0      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/onboarding_e2e_test.dart:22:48)
+<asynchronous suspension>
+#1      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#2      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  App launches to onboarding screen
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -1: Web3 Wallet App E2E Tests Onboarding E2E Tests App launches to onboarding screen [E]
+  Test failed. See exception logs above.
+  The test description was: App launches to onboarding screen
+  
+00:01 +0 -1: Web3 Wallet App E2E Tests Onboarding E2E Tests Create wallet flow navigates correctly
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+Null check operator used on a null value
+
+When the exception was thrown, this was the stack:
+#0      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/onboarding_e2e_test.dart:41:48)
+<asynchronous suspension>
+#1      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#2      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Create wallet flow navigates correctly
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -2: Web3 Wallet App E2E Tests Onboarding E2E Tests Create wallet flow navigates correctly [E]
+  Test failed. See exception logs above.
+  The test description was: Create wallet flow navigates correctly
+  
+00:02 +0 -2: Web3 Wallet App E2E Tests Onboarding E2E Tests Import wallet shows input field
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+Null check operator used on a null value
+
+When the exception was thrown, this was the stack:
+#0      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/onboarding_e2e_test.dart:63:48)
+<asynchronous suspension>
+#1      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#2      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Import wallet shows input field
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +0 -3: Web3 Wallet App E2E Tests Onboarding E2E Tests Import wallet shows input field [E]
+  Test failed. See exception logs above.
+  The test description was: Import wallet shows input field
+  
+00:03 +0 -3: Web3 Wallet App E2E Tests Home Screen E2E Tests Home screen displays when wallet exists
+00:04 +1 -3: Web3 Wallet App E2E Tests Home Screen E2E Tests App shows onboarding when no wallet
+00:05 +2 -3: Web3 Wallet App E2E Tests Send Flow E2E Tests Send screen displays form fields
+00:06 +3 -3: Web3 Wallet App E2E Tests Send Flow E2E Tests Address field accepts input
+00:07 +4 -3: Web3 Wallet App E2E Tests Send Flow E2E Tests Amount field accepts numeric input
+00:08 +5 -3: Web3 Wallet App E2E Tests Send Flow E2E Tests Form has send button
+00:08 +6 -3: Web3 Wallet App E2E Tests Receive Flow E2E Tests Receive screen displays correctly
+00:08 +7 -3: Web3 Wallet App E2E Tests Receive Flow E2E Tests Receive screen displays address label
+00:08 +8 -3: Web3 Wallet App E2E Tests Receive Flow E2E Tests Copy button is present
+00:08 +9 -3: Web3 Wallet App E2E Tests Receive Flow E2E Tests Share button is present
+00:08 +10 -3: Web3 Wallet App E2E Tests Receive Flow E2E Tests Back button is present
+00:09 +11 -3: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery screen displays
+00:09 +12 -3: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery has refresh button
+00:09 +13 -3: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery has info banner
+00:09 +14 -3: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery shows API key message when not configured
+00:10 +15 -3: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet screen displays
+00:13 +16 -3: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has cards
+00:15 +17 -3: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has UserOp form
+00:17 +18 -3: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has send button
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: true
+  Actual: <false>
+FilledButton should eventually appear
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/smart_wallet_e2e_test.dart:55:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/smart_wallet_e2e_test.dart line 55
+The test description was:
+  Smart Wallet has send button
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:23 +18 -4: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has send button [E]
+  Test failed. See exception logs above.
+  The test description was: Smart Wallet has send button
+  
+00:23 +18 -4: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has ERC-4337 info
+00:25 +19 -4: Web3 Wallet App E2E Tests Settings E2E Tests Settings screen displays all sections
+00:25 +20 -4: Web3 Wallet App E2E Tests Settings E2E Tests Settings has language option
+00:25 +21 -4: Web3 Wallet App E2E Tests Settings E2E Tests Settings has API configuration section
+00:26 +22 -4: Web3 Wallet App E2E Tests Settings E2E Tests Settings has security section
+00:27 +23 -4: Web3 Wallet App E2E Tests Settings E2E Tests Settings has about section
+00:27 +24 -4: Web3 Wallet App E2E Tests Settings E2E Tests API key dialog opens when tapped
+00:28 +25 -4: Web3 Wallet App E2E Tests Settings E2E Tests Language dialog opens when tapped
+00:29 +26 -4: (tearDownAll)
+00:30 +26 -4: Some tests failed.

@@ -1,0 +1,1653 @@
+melos publish
+  └> D:\OtherProject\mine\dart_web3\dart_web3
+
+Reading pub registry for package information...
+
+The following packages WILL be published to the registry:
+
+Package Name                Registry    Local
+web3_universal_utxo                     0.1.1
+web3_universal_contract                 0.1.0+1
+web3_universal_swap                     0.1.0+2
+web3_universal_staking                  0.1.1+1
+web3_universal_polkadot                 0.1.1
+web3_universal_nft                      0.1.1+1
+web3_universal_reown                    0.1.1
+web3_universal_price                    0.1.1
+web3_universal_multicall                0.1.0+2
+web3_universal_mpc                      0.1.0+1
+web3_universal_mev                      0.1.1
+web3_universal_events                   0.1.0+2
+web3_universal_ens                      0.1.1+1
+web3_universal_dapp                     0.1.1+1
+web3_universal_keystone                 0.1.0+1
+web3_universal_history                  0.1.1+1
+web3_universal_debug                    0.1.1
+web3_universal_cosmos                   0.1.1
+web3_universal_aa                       0.1.1+1
+web3_universal_bridge                   0.1.0+2
+web3_universal_bitcoin                  0.1.1
+web3_universal                          0.1.0
+web3_universal_compat                   0.1.0
+Publishing 23 packages to registry:...
+$ melos exec
+  └> dart pub publish --force
+     └> RUNNING (in 23 packages)
+
+--------------------------------------------------------------------------------
+web3_universal_utxo:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_utxo 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (1 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (1 KB)
+├── lib
+│   ├── src
+│   │   ├── models
+│   │   │   ├── address.dart (1 KB)
+│   │   │   ├── networks.dart (2 KB)
+│   │   │   ├── psbt.dart (4 KB)
+│   │   │   ├── transaction.dart (9 KB)
+│   │   │   └── utxo.dart (1 KB)
+│   │   ├── script
+│   │   │   ├── script.dart (7 KB)
+│   │   │   └── taproot.dart (3 KB)
+│   │   └── selection
+│   │       └── coin_selector.dart (2 KB)
+│   └── web3_universal_utxo.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── integration_test.dart (1 KB)
+    ├── rbf_test.dart (1 KB)
+    ├── script_test.dart (3 KB)
+    ├── taproot_test.dart (2 KB)
+    ├── transaction_test.dart (1 KB)
+    ├── vector_test.dart (2 KB)
+    └── vectors
+        └── bitcoin_tx.json (1 KB)
+
+Total compressed archive size: 14 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+Message from server: Successfully uploaded https://pub.dev/packages/web3_universal_utxo version 0.1.1, it may take up-to 10 minutes before the new version is available.
+web3_universal_utxo: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_contract:
+Resolving dependencies...
+Downloading packages...
++ _fe_analyzer_shared 85.0.0 (93.0.0 available)
++ analyzer 7.7.1 (10.0.0 available)
++ args 2.7.0
++ async 2.13.0
++ boolean_selector 2.1.2
++ cli_config 0.2.0
++ collection 1.19.1
++ convert 3.1.2
++ coverage 1.15.0
++ crypto 3.0.7
++ file 7.0.1
++ frontend_server_client 4.0.0
++ glob 2.1.3
++ http 1.6.0
++ http_multi_server 3.2.2
++ http_parser 4.1.2
++ io 1.0.5
++ js 0.7.1 (0.7.2 available)
++ lints 5.1.1 (6.0.0 available)
++ logging 1.3.0
++ matcher 0.12.17 (0.12.18 available)
++ meta 1.17.0
++ mime 2.0.0
++ node_preamble 2.0.2
++ package_config 2.2.0
++ path 1.9.1
++ pointycastle 3.9.1 (4.0.0 available)
++ pool 1.5.2
++ pub_semver 2.2.0
++ shelf 1.4.2
++ shelf_packages_handler 3.0.2
++ shelf_static 1.1.3
++ shelf_web_socket 3.0.0
++ source_map_stack_trace 2.1.2
++ source_maps 0.10.13
++ source_span 1.10.1
++ stack_trace 1.12.1
++ stream_channel 2.1.4
++ string_scanner 1.4.1
++ term_glyph 1.2.2
++ test 1.26.3 (1.29.0 available)
++ test_api 0.7.7 (0.7.9 available)
++ test_core 0.6.12 (0.6.15 available)
++ typed_data 1.4.0
++ vm_service 15.0.2
++ watcher 1.2.1
++ web 1.1.1
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
++ web_socket 1.0.1
++ web_socket_channel 3.0.3
++ webkit_inspection_protocol 1.2.1
++ yaml 3.1.3
+Changed 51 dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_contract 0.1.0+1 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (1 KB)
+├── lib
+│   ├── src
+│   │   ├── contract.dart (8 KB)
+│   │   ├── contract_factory.dart (3 KB)
+│   │   ├── erc1155_contract.dart (6 KB)
+│   │   ├── erc20_contract.dart (5 KB)
+│   │   ├── erc721_contract.dart (7 KB)
+│   │   ├── event_filter.dart (<1 KB)
+│   │   ├── simulate_result.dart (<1 KB)
+│   │   └── typed_contract.dart (<1 KB)
+│   └── web3_universal_contract.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── contract_factory_test.dart (3 KB)
+    ├── contract_test.dart (8 KB)
+    ├── erc20_contract_test.dart (5 KB)
+    └── mock_client.dart (5 KB)
+
+Total compressed archive size: 12 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+Message from server: Successfully uploaded https://pub.dev/packages/web3_universal_contract version 0.1.0+1, it may take up-to 10 minutes before the new version is available.
+web3_universal_contract: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_swap:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_swap 0.1.0+2 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── aggregators
+│   │   │   ├── aggregator_interface.dart (2 KB)
+│   │   │   ├── oneinch_aggregator.dart (8 KB)
+│   │   │   ├── paraswap_aggregator.dart (10 KB)
+│   │   │   ├── rango_aggregator.dart (11 KB)
+│   │   │   └── zerox_aggregator.dart (9 KB)
+│   │   ├── mev_protection.dart (10 KB)
+│   │   ├── slippage_calculator.dart (8 KB)
+│   │   ├── swap_quote.dart (5 KB)
+│   │   ├── swap_service.dart (11 KB)
+│   │   ├── swap_tracker.dart (11 KB)
+│   │   ├── swap_types.dart (6 KB)
+│   │   └── token_approval.dart (8 KB)
+│   └── web3_universal_swap.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── basic_functionality_test.dart (<1 KB)
+
+Total compressed archive size: 22 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+Message from server: Successfully uploaded https://pub.dev/packages/web3_universal_swap version 0.1.0+2, it may take up-to 10 minutes before the new version is available.
+web3_universal_swap: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_staking:
+Resolving dependencies...
+Downloading packages...
++ _fe_analyzer_shared 85.0.0 (93.0.0 available)
++ analyzer 7.7.1 (10.0.0 available)
++ args 2.7.0
++ async 2.13.0
++ boolean_selector 2.1.2
++ cli_config 0.2.0
++ collection 1.19.1
++ convert 3.1.2
++ coverage 1.15.0
++ crypto 3.0.7
++ file 7.0.1
++ frontend_server_client 4.0.0
++ glob 2.1.3
++ http 1.6.0
++ http_multi_server 3.2.2
++ http_parser 4.1.2
++ io 1.0.5
++ js 0.7.1 (0.7.2 available)
++ lints 5.1.1 (6.0.0 available)
++ logging 1.3.0
++ matcher 0.12.17 (0.12.18 available)
++ meta 1.17.0
++ mime 2.0.0
++ node_preamble 2.0.2
++ package_config 2.2.0
++ path 1.9.1
++ pointycastle 3.9.1 (4.0.0 available)
++ pool 1.5.2
++ pub_semver 2.2.0
++ shelf 1.4.2
++ shelf_packages_handler 3.0.2
++ shelf_static 1.1.3
++ shelf_web_socket 3.0.0
++ source_map_stack_trace 2.1.2
++ source_maps 0.10.13
++ source_span 1.10.1
++ stack_trace 1.12.1
++ stream_channel 2.1.4
++ string_scanner 1.4.1
++ term_glyph 1.2.2
++ test 1.26.3 (1.29.0 available)
++ test_api 0.7.7 (0.7.9 available)
++ test_core 0.6.12 (0.6.15 available)
++ typed_data 1.4.0
++ vm_service 15.0.2
++ watcher 1.2.1
++ web 1.1.1
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
++ web_socket 1.0.1
++ web_socket_channel 3.0.3
++ webkit_inspection_protocol 1.2.1
++ yaml 3.1.3
+Changed 51 dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_staking 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── staking_service.dart (4 KB)
+│   │   └── staking_types.dart (1 KB)
+│   └── web3_universal_staking.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── staking_service_test.dart (1 KB)
+
+Total compressed archive size: 5 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+Message from server: Successfully uploaded https://pub.dev/packages/web3_universal_staking version 0.1.1+1, it may take up-to 10 minutes before the new version is available.
+web3_universal_staking: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_polkadot:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\..\signer (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_polkadot 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   └── scale_codec.dart (<1 KB)
+│   └── web3_universal_polkadot.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── polkadot_property_test.dart (<1 KB)
+
+Total compressed archive size: 3 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+
+ERROR:   
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (4 in the last few minutes). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart pub publish --force
+     └> FAILED (in 1 packages)
+        └> web3_universal_polkadot (with exit code 1)
+--------------------------------------------------------------------------------
+web3_universal_nft:
+     └> CANCELED (in 18 packages)
+        └> web3_universal_nft (due to failFast)
+        └> web3_universal_reown (due to failFast)
+        └> web3_universal_price (due to failFast)
+        └> web3_universal_multicall (due to failFast)
+        └> web3_universal_mpc (due to failFast)
+        └> web3_universal_mev (due to failFast)
+        └> web3_universal_events (due to failFast)
+        └> web3_universal_ens (due to failFast)
+        └> web3_universal_dapp (due to failFast)
+        └> web3_universal_keystone (due to failFast)
+        └> web3_universal_history (due to failFast)
+        └> web3_universal_debug (due to failFast)
+        └> web3_universal_cosmos (due to failFast)
+        └> web3_universal_aa (due to failFast)
+        └> web3_universal_bridge (due to failFast)
+        └> web3_universal_bitcoin (due to failFast)
+        └> web3_universal (due to failFast)
+        └> web3_universal_compat (due to failFast)
+Resolving dependencies...
+Downloading packages...
++ _fe_analyzer_shared 85.0.0 (93.0.0 available)
++ analyzer 7.7.1 (10.0.0 available)
++ args 2.7.0
++ async 2.13.0
++ boolean_selector 2.1.2
++ cli_config 0.2.0
++ collection 1.19.1
++ convert 3.1.2
++ coverage 1.15.0
++ crypto 3.0.7
++ file 7.0.1
++ frontend_server_client 4.0.0
++ glob 2.1.3
++ http 1.6.0
++ http_multi_server 3.2.2
++ http_parser 4.1.2
++ io 1.0.5
++ js 0.7.1 (0.7.2 available)
++ lints 5.1.1 (6.0.0 available)
++ logging 1.3.0
++ matcher 0.12.17 (0.12.18 available)
++ meta 1.17.0
++ mime 2.0.0
++ node_preamble 2.0.2
++ package_config 2.2.0
++ path 1.9.1
++ pointycastle 3.9.1 (4.0.0 available)
++ pool 1.5.2
++ pub_semver 2.2.0
++ shelf 1.4.2
++ shelf_packages_handler 3.0.2
++ shelf_static 1.1.3
++ shelf_web_socket 3.0.0
++ source_map_stack_trace 2.1.2
++ source_maps 0.10.13
++ source_span 1.10.1
++ stack_trace 1.12.1
++ stream_channel 2.1.4
++ string_scanner 1.4.1
++ term_glyph 1.2.2
++ test 1.26.3 (1.29.0 available)
++ test_api 0.7.7 (0.7.9 available)
++ test_core 0.6.12 (0.6.15 available)
++ typed_data 1.4.0
++ vm_service 15.0.2
++ watcher 1.2.1
++ web 1.1.1
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
++ web_socket 1.0.1
++ web_socket_channel 3.0.3
++ webkit_inspection_protocol 1.2.1
++ yaml 3.1.3
+Changed 51 dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_nft 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── ipfs_gateway.dart (3 KB)
+│   │   ├── nft_collection.dart (12 KB)
+│   │   ├── nft_metadata.dart (5 KB)
+│   │   ├── nft_service.dart (8 KB)
+│   │   ├── nft_transfer.dart (9 KB)
+│   │   └── nft_types.dart (8 KB)
+│   └── web3_universal_nft.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── nft_service_test.dart (6 KB)
+
+Total compressed archive size: 12 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (4 in the last few minutes). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_reown:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_reown 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── connection_manager.dart (12 KB)
+│   │   ├── namespace_config.dart (13 KB)
+│   │   ├── pairing_uri.dart (4 KB)
+│   │   ├── relay_client.dart (9 KB)
+│   │   ├── reown_app_kit.dart (3 KB)
+│   │   ├── reown_client.dart (11 KB)
+│   │   ├── reown_signer.dart (14 KB)
+│   │   ├── reown_wallet_kit.dart (2 KB)
+│   │   ├── session_manager.dart (18 KB)
+│   │   └── siwe_auth.dart (15 KB)
+│   └── web3_universal_reown.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+├── test
+│   ├── connection_manager_test.dart (4 KB)
+│   ├── namespace_config_test.dart (5 KB)
+│   ├── pairing_uri_test.dart (2 KB)
+│   ├── relay_verification_test.dart (2 KB)
+│   ├── reown_kits_test.dart (4 KB)
+│   └── siwe_auth_test.dart (7 KB)
+├── test_output_2.txt (1 KB)
+├── test_output_3.txt (<1 KB)
+├── test_output_4.txt (<1 KB)
+└── test_output_5.txt (<1 KB)
+
+Total compressed archive size: 29 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: Version 0.1.1 of package web3_universal_reown already exists.
+
+--------------------------------------------------------------------------------
+web3_universal_price:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_price 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   └── price_service.dart (3 KB)
+│   └── web3_universal_price.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── price_service_test.dart (<1 KB)
+
+Total compressed archive size: 4 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: Version 0.1.1 of package web3_universal_price already exists.
+
+--------------------------------------------------------------------------------
+web3_universal_multicall:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_multicall 0.1.0+2 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── multicall.dart (10 KB)
+│   │   ├── multicall_builder.dart (5 KB)
+│   │   ├── multicall_error.dart (2 KB)
+│   │   └── multicall_factory.dart (4 KB)
+│   └── web3_universal_multicall.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── mock_client.dart (6 KB)
+    ├── mock_contract.dart (4 KB)
+    ├── multicall_builder_test.dart (12 KB)
+    ├── multicall_error_test.dart (5 KB)
+    ├── multicall_factory_test.dart (4 KB)
+    └── multicall_test.dart (7 KB)
+
+Total compressed archive size: 13 KB.
+Validating package...
+ERROR: Package validation found the following potential issue:
+
+ERROR: * Your dependency on "meta" should have a version constraint. For example:
+  
+  dependencies:
+    meta: ^1.17.0
+  
+  Without a constraint, you're promising to support all future versions of "meta".
+Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: Version 0.1.0+2 of package web3_universal_multicall already exists.
+
+--------------------------------------------------------------------------------
+web3_universal_mpc:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\..\signer (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_mpc 0.1.0+1 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── key_generation.dart (16 KB)
+│   │   ├── key_refresh.dart (16 KB)
+│   │   ├── mpc_provider.dart (8 KB)
+│   │   ├── mpc_signer.dart (13 KB)
+│   │   ├── mpc_types.dart (8 KB)
+│   │   ├── signing_coordinator.dart (13 KB)
+│   │   └── threshold_signature.dart (21 KB)
+│   └── web3_universal_mpc.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── mpc_test.dart (16 KB)
+
+Total compressed archive size: 22 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (4 in the last few minutes). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_mev:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_mev 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── flashbots_types.dart (1 KB)
+│   │   └── mev_service.dart (1 KB)
+│   └── web3_universal_mev.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── mev_service_test.dart (1 KB)
+
+Total compressed archive size: 4 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (4 in the last few minutes). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_events:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_events 0.1.0+2 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── confirmation_filter.dart (8 KB)
+│   │   ├── event_filter.dart (3 KB)
+│   │   ├── event_listener.dart (7 KB)
+│   │   ├── event_subscriber.dart (5 KB)
+│   │   └── reorg_handler.dart (8 KB)
+│   └── web3_universal_events.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── event_filter_test.dart (5 KB)
+    ├── event_listener_test.dart (9 KB)
+    ├── event_subscriber_test.dart (9 KB)
+    └── mock_client.dart (7 KB)
+
+Total compressed archive size: 15 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (4 in the last few minutes). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_ens:
+Resolving dependencies...
+Downloading packages...
++ _fe_analyzer_shared 85.0.0 (93.0.0 available)
++ analyzer 7.7.1 (10.0.0 available)
++ args 2.7.0
++ async 2.13.0
++ boolean_selector 2.1.2
++ cli_config 0.2.0
++ collection 1.19.1
++ convert 3.1.2
++ coverage 1.15.0
++ crypto 3.0.7
++ file 7.0.1
++ frontend_server_client 4.0.0
++ glob 2.1.3
++ http 1.6.0
++ http_multi_server 3.2.2
++ http_parser 4.1.2
++ io 1.0.5
++ js 0.7.1 (0.7.2 available)
++ lints 5.1.1 (6.0.0 available)
++ logging 1.3.0
++ matcher 0.12.17 (0.12.18 available)
++ meta 1.17.0
++ mime 2.0.0
++ node_preamble 2.0.2
++ package_config 2.2.0
++ path 1.9.1
++ pointycastle 3.9.1 (4.0.0 available)
++ pool 1.5.2
++ pub_semver 2.2.0
++ shelf 1.4.2
++ shelf_packages_handler 3.0.2
++ shelf_static 1.1.3
++ shelf_web_socket 3.0.0
++ source_map_stack_trace 2.1.2
++ source_maps 0.10.13
++ source_span 1.10.1
++ stack_trace 1.12.1
++ stream_channel 2.1.4
++ string_scanner 1.4.1
++ term_glyph 1.2.2
++ test 1.26.3 (1.29.0 available)
++ test_api 0.7.7 (0.7.9 available)
++ test_core 0.6.12 (0.6.15 available)
++ typed_data 1.4.0
++ vm_service 15.0.2
++ watcher 1.2.1
++ web 1.1.1
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
++ web_socket 1.0.1
++ web_socket_channel 3.0.3
++ webkit_inspection_protocol 1.2.1
++ yaml 3.1.3
+Changed 51 dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_ens 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── ens_client.dart (4 KB)
+│   │   ├── ens_records.dart (10 KB)
+│   │   ├── ens_resolver.dart (7 KB)
+│   │   └── multichain_resolver.dart (18 KB)
+│   └── web3_universal_ens.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+├── test
+│   ├── ens_client_test.dart (11 KB)
+│   ├── ens_records_test.dart (5 KB)
+│   ├── ens_resolver_test.dart (4 KB)
+│   └── mock_client.dart (2 KB)
+├── test_fail.txt (12 KB)
+├── test_out.txt (12 KB)
+├── test_out_2.txt (4 KB)
+└── test_out_3.txt (2 KB)
+
+Total compressed archive size: 16 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+Message from server: Successfully uploaded https://pub.dev/packages/web3_universal_ens version 0.1.1+1, it may take up-to 10 minutes before the new version is available.
+web3_universal_ens: SUCCESS
+--------------------------------------------------------------------------------
+web3_universal_dapp:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_dapp 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   └── dapp_provider.dart (1 KB)
+│   └── web3_universal_dapp.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── dapp_provider_test.dart (<1 KB)
+
+Total compressed archive size: 3 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (12 in the last day). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_keystone:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bc_ur 0.1.0+1 from path ..\bc_ur (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\..\signer (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_keystone 0.1.0+1 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── keystone_client.dart (7 KB)
+│   │   ├── keystone_signer.dart (7 KB)
+│   │   ├── keystone_types.dart (2 KB)
+│   │   ├── multi_chain_support.dart (4 KB)
+│   │   └── qr_communication.dart (5 KB)
+│   └── web3_universal_keystone.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── keystone_test.dart (5 KB)
+
+Total compressed archive size: 10 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: Version 0.1.0+1 of package web3_universal_keystone already exists.
+
+--------------------------------------------------------------------------------
+web3_universal_history:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_history 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── history_service.dart (1 KB)
+│   │   └── history_types.dart (1 KB)
+│   └── web3_universal_history.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── history_service_test.dart (<1 KB)
+
+Total compressed archive size: 4 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (12 in the last day). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_debug:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_debug 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── debug_service.dart (<1 KB)
+│   │   └── debug_types.dart (2 KB)
+│   └── web3_universal_debug.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── debug_service_test.dart (<1 KB)
+
+Total compressed archive size: 4 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+
+ERROR:   
+  This might be necessary for packages with cyclic dependencies.
+
+ERROR:   
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (12 in the last day). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_cosmos:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  protobuf 3.1.0 (6.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_core 0.1.1 from path ..\..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\..\crypto (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+11 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_cosmos 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (1 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── encoding
+│   │   │   └── protobuf.dart (1 KB)
+│   │   ├── models
+│   │   │   ├── address.dart (<1 KB)
+│   │   │   ├── ibc.dart (1 KB)
+│   │   │   ├── staking.dart (1 KB)
+│   │   │   └── transaction.dart (4 KB)
+│   │   └── rpc
+│   │       └── client.dart (2 KB)
+│   └── web3_universal_cosmos.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── advanced_test.dart (1 KB)
+    ├── cosmos_test.dart (<1 KB)
+    ├── integration_test.dart (2 KB)
+    ├── transaction_test.dart (1 KB)
+    ├── vector_test.dart (1 KB)
+    └── vectors
+        └── cosmos_tx.json (<1 KB)
+
+Total compressed archive size: 7 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+
+ERROR:   
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (12 in the last day). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_aa:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_aa 0.1.1+1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (3 KB)
+├── analysis_options.yaml (<1 KB)
+├── example
+│   └── main.dart (1 KB)
+├── lib
+│   ├── src
+│   │   ├── accounts
+│   │   │   ├── light_account.dart (8 KB)
+│   │   │   └── simple_account.dart (5 KB)
+│   │   ├── bundler_client.dart (9 KB)
+│   │   ├── entry_point.dart (29 KB)
+│   │   ├── paymaster.dart (12 KB)
+│   │   ├── smart_account.dart (9 KB)
+│   │   └── user_operation.dart (27 KB)
+│   └── web3_universal_aa.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── bundler_client_test.dart (7 KB)
+    └── user_operation_test.dart (16 KB)
+
+Total compressed archive size: 24 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+
+ERROR:   Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (12 in the last day). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+web3_universal_bridge:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_bridge 0.1.0+2 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── bridge_final.txt (6 KB)
+├── bridge_verify.txt (6 KB)
+├── example
+│   └── main.dart (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── bridge_quote.dart (9 KB)
+│   │   ├── bridge_service.dart (11 KB)
+│   │   ├── bridge_tracker.dart (13 KB)
+│   │   ├── bridge_types.dart (11 KB)
+│   │   └── protocols
+│   │       ├── bridge_protocol.dart (4 KB)
+│   │       ├── layerzero_bridge.dart (12 KB)
+│   │       ├── native_bridge.dart (11 KB)
+│   │       ├── stargate_bridge.dart (12 KB)
+│   │       └── wormhole_bridge.dart (12 KB)
+│   └── web3_universal_bridge.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── basic_functionality_test.dart (<1 KB)
+
+Total compressed archive size: 21 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+
+ERROR: * Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+
+ERROR:   Please be extra careful when publishing.
+
+Uploading...
+ERROR: Invalid server response:
+
+ERROR: <!doctype html><meta charset="utf-8"><meta name=viewport content="width=device-width, initial-scale=1"><title>429</title>429 Too Many Requests
+
+--------------------------------------------------------------------------------
+web3_universal_bitcoin:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  bitcoin_base 6.9.0 (7.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_abi 0.1.1 from path ..\..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\..\signer (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+11 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_bitcoin 0.1.1 to https://pub.dev:
+├── CHANGELOG.md (1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── analysis_options.yaml (<1 KB)
+├── lib
+│   ├── src
+│   │   ├── inscriptions
+│   │   │   ├── inscription_service.dart (<1 KB)
+│   │   │   └── psbt_builder.dart (9 KB)
+│   │   └── models
+│   │       └── utxo.dart (1 KB)
+│   └── web3_universal_bitcoin.dart (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    └── bitcoin_test.dart (<1 KB)
+
+Total compressed archive size: 6 KB.
+Validating package...
+ERROR: Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+
+ERROR:   
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Invalid server response:
+
+ERROR: <!doctype html><meta charset="utf-8"><meta name=viewport content="width=device-width, initial-scale=1"><title>429</title>429 Too Many Requests
+
+--------------------------------------------------------------------------------
+web3_universal:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  bitcoin_base 6.9.0 (7.0.0 available)
+  characters 1.3.0 (1.4.1 available)
+  collection 1.19.0 (1.19.1 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  meta 1.15.0 (1.17.0 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  protobuf 2.1.0 (6.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  vector_math 2.1.4 (2.2.0 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_aa 0.1.1+1 from path ..\packages\aa (overridden in .\pubspec_overrides.yaml)
+! web3_universal_abi 0.1.1 from path ..\packages\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bc_ur 0.1.0+1 from path ..\packages\hardware\bc_ur (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bitcoin 0.1.1 from path ..\packages\extensions\bitcoin (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bridge 0.1.0+2 from path ..\packages\bridge (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\packages\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\packages\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\packages\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\packages\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\packages\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_dapp 0.1.1+1 from path ..\packages\dapp (overridden in .\pubspec_overrides.yaml)
+! web3_universal_debug 0.1.1 from path ..\packages\debug (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ens 0.1.1+1 from path ..\packages\ens (overridden in .\pubspec_overrides.yaml)
+! web3_universal_events 0.1.0+2 from path ..\packages\events (overridden in .\pubspec_overrides.yaml)
+! web3_universal_history 0.1.1+1 from path ..\packages\history (overridden in .\pubspec_overrides.yaml)
+! web3_universal_keystone 0.1.0+1 from path ..\packages\hardware\keystone (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ledger 0.1.0+1 from path ..\packages\hardware\ledger (overridden in .\pubspec_overrides.yaml)
+! web3_universal_mev 0.1.1 from path ..\packages\mev (overridden in .\pubspec_overrides.yaml)
+! web3_universal_mpc 0.1.0+1 from path ..\packages\hardware\mpc (overridden in .\pubspec_overrides.yaml)
+! web3_universal_multicall 0.1.0+2 from path ..\packages\multicall (overridden in .\pubspec_overrides.yaml)
+! web3_universal_nft 0.1.1+1 from path ..\packages\nft (overridden in .\pubspec_overrides.yaml)
+! web3_universal_polkadot 0.1.1 from path ..\packages\extensions\polkadot (overridden in .\pubspec_overrides.yaml)
+! web3_universal_price 0.1.1 from path ..\packages\price (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\packages\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_reown 0.1.1 from path ..\packages\reown (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\packages\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\packages\extensions\solana (overridden in .\pubspec_overrides.yaml)
+! web3_universal_staking 0.1.1+1 from path ..\packages\staking (overridden in .\pubspec_overrides.yaml)
+! web3_universal_swap 0.1.0+2 from path ..\packages\swap (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ton 0.1.1 from path ..\packages\extensions\ton (overridden in .\pubspec_overrides.yaml)
+! web3_universal_trezor 0.1.0+1 from path ..\packages\hardware\trezor (overridden in .\pubspec_overrides.yaml)
+! web3_universal_tron 0.1.1 from path ..\packages\extensions\tron (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+17 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal 0.1.0 to https://pub.dev:
+├── README.md (2 KB)
+├── example
+│   └── main.dart (2 KB)
+├── lib
+│   └── web3_universal.dart (2 KB)
+└── pubspec.yaml (1 KB)
+
+Total compressed archive size: 2 KB.
+Validating package...
+ERROR: Package validation found the following error:
+
+ERROR: * You must have a LICENSE file in the root directory.
+  An open-source license helps ensure people can legally use your code.
+Package validation found the following potential issues:
+
+ERROR: * 2 checked-in files are modified in git.
+  
+  Usually you want to publish from a clean git state.
+  
+  Consider committing these files or reverting the changes.
+  
+  Modified files:
+  
+  example\main.dart
+  lib\web3_universal.dart
+  
+  Run `git status` for more information.
+  
+* Please add a `CHANGELOG.md` to your package. See https://dart.dev/tools/pub/publishing#important-files.
+Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+
+ERROR:   This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+
+ERROR:   
+  Please be extra careful when publishing.
+
+ERROR: Sorry, your package is missing a requirement and can't be published yet.
+
+ERROR: For more information, see: https://dart.dev/tools/pub/cmd/pub-lish.
+
+--------------------------------------------------------------------------------
+web3_universal_compat:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  decimal 2.3.3 (3.2.4 available)
+  js 0.7.1 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+! web3_universal_abi 0.1.1 from path ..\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\extensions\solana (overridden in .\pubspec_overrides.yaml)
+Got dependencies!
+10 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal_compat 0.1.0 to https://pub.dev:
+├── README.md (2 KB)
+├── lib
+│   └── dart_web3_compat.dart (22 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── compat_test.dart (3 KB)
+    └── compat_wallet_test.dart (1 KB)
+
+Total compressed archive size: 8 KB.
+Validating package...
+ERROR: Package validation found the following error:
+
+ERROR: * You must have a LICENSE file in the root directory.
+  An open-source license helps ensure people can legally use your code.
+
+ERROR: Package validation found the following potential issues:
+* The name of "lib\dart_web3_compat.dart", "dart_web3_compat", should match the name of the package, "web3_universal_compat".
+  This helps users know what library to import.
+* Please add a `CHANGELOG.md` to your package. See https://dart.dev/tools/pub/publishing#important-files.
+Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+ERROR: Sorry, your package is missing a requirement and can't be published yet.
+
+ERROR: For more information, see: https://dart.dev/tools/pub/cmd/pub-lish.
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 /// Onboarding screen - entry point for new users
 class OnboardingScreen extends StatelessWidget {
@@ -9,6 +10,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: SafeArea(
@@ -94,7 +96,7 @@ class OnboardingScreen extends StatelessWidget {
                 // Action buttons
                 FilledButton(
                   onPressed: () => context.go('/create-wallet'),
-                  child: const Text('Create New Wallet'),
+                  child: Text(l10n.onboardingCreateWallet),
                 ),
                 const SizedBox(height: 12),
 
@@ -106,7 +108,7 @@ class OnboardingScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text('Import Existing Wallet'),
+                  child: Text(l10n.onboardingImportWallet),
                 ),
 
                 const SizedBox(height: 24),

@@ -4,19 +4,14 @@ import 'package:integration_test/integration_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:web3_wallet_app/features/receive/presentation/screens/receive_screen.dart';
+import 'test_utils.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Receive Flow E2E Tests', () {
     testWidgets('Receive screen displays correctly', (tester) async {
-      await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: ReceiveScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(child: const ReceiveScreen()));
       await tester.pumpAndSettle();
 
       // Should see scaffold
@@ -24,13 +19,7 @@ void main() {
     });
 
     testWidgets('Receive screen displays address label', (tester) async {
-      await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: ReceiveScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(child: const ReceiveScreen()));
       await tester.pumpAndSettle();
 
       // Should see "Your Address" text
@@ -38,13 +27,7 @@ void main() {
     });
 
     testWidgets('Copy button is present', (tester) async {
-      await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: ReceiveScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(child: const ReceiveScreen()));
       await tester.pumpAndSettle();
 
       // Should see copy icon
@@ -52,13 +35,7 @@ void main() {
     });
 
     testWidgets('Share button is present', (tester) async {
-      await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: ReceiveScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(child: const ReceiveScreen()));
       await tester.pumpAndSettle();
 
       // Should see share icon
@@ -66,13 +43,7 @@ void main() {
     });
 
     testWidgets('Back button is present', (tester) async {
-      await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: ReceiveScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(child: const ReceiveScreen()));
       await tester.pumpAndSettle();
 
       // Should see back button

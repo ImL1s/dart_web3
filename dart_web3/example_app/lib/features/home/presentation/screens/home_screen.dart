@@ -257,7 +257,9 @@ class _BalanceCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${address.substring(0, 6)}...${address.substring(address.length - 4)}',
+                    address.length >= 10
+                        ? '${address.substring(0, 6)}...${address.substring(address.length - 4)}'
+                        : address,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: Colors.white70,
                       fontFamily: 'monospace',

@@ -53,5 +53,7 @@
   "settingsViewBackup": "View or backup",
   "settingsWebWallet": "Web3 Wallet",
   "settingsVersion": "v1.0.0 (Beta)",
-  "settingsDeleteWallet": "Delete Wallet"
+  "settingsDeleteWallet": "Delete Wallet",
+  "onboardingCreateWallet": "Create New Wallet",
+  "onboardingImportWallet": "Import Existing Wallet"
 }

@@ -1,0 +1,38 @@
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/app_test.dart
+Running Gradle task 'assembleDebug'...                          
+D:\OtherProject\mine\dart_web3\dart_web3\example_app\l10n.yaml: The argument "synthetic-package" no longer has any effect and should be removed. See http://flutter.dev/to/flutter-gen-deprecation
+Running Gradle task 'assembleDebug'...                             20.0s
+√ Built build\app\outputs\flutter-apk\app-debug.apk
+Installing build\app\outputs\flutter-apk\app-debug.apk...          14.3s
+00:00 +0: Web3 Wallet App E2E Tests Onboarding E2E Tests App launches to onboarding screen
+00:01 +1: Web3 Wallet App E2E Tests Onboarding E2E Tests Create wallet flow navigates correctly
+00:03 +2: Web3 Wallet App E2E Tests Onboarding E2E Tests Import wallet shows input field
+00:05 +3: Web3 Wallet App E2E Tests Home Screen E2E Tests Home screen displays when wallet exists
+00:06 +4: Web3 Wallet App E2E Tests Home Screen E2E Tests App shows onboarding when no wallet
+00:07 +5: Web3 Wallet App E2E Tests Send Flow E2E Tests Send screen displays form fields
+00:07 +6: Web3 Wallet App E2E Tests Send Flow E2E Tests Address field accepts input
+00:08 +7: Web3 Wallet App E2E Tests Send Flow E2E Tests Amount field accepts numeric input
+00:09 +8: Web3 Wallet App E2E Tests Send Flow E2E Tests Form has send button
+00:09 +9: Web3 Wallet App E2E Tests Receive Flow E2E Tests Receive screen displays correctly
+00:09 +10: Web3 Wallet App E2E Tests Receive Flow E2E Tests Receive screen displays address label
+00:10 +11: Web3 Wallet App E2E Tests Receive Flow E2E Tests Copy button is present
+00:10 +12: Web3 Wallet App E2E Tests Receive Flow E2E Tests Share button is present
+00:10 +13: Web3 Wallet App E2E Tests Receive Flow E2E Tests Back button is present
+00:10 +14: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery screen displays
+00:10 +15: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery has refresh button
+00:10 +16: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery has info banner
+00:11 +17: Web3 Wallet App E2E Tests NFT Gallery E2E Tests NFT Gallery shows API key message when not configured
+00:12 +18: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet screen displays
+00:14 +19: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has cards
+00:17 +20: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has UserOp form
+00:19 +21: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has send button
+00:20 +22: Web3 Wallet App E2E Tests Smart Wallet E2E Tests Smart Wallet has ERC-4337 info
+00:23 +23: Web3 Wallet App E2E Tests Settings E2E Tests Settings screen displays all sections
+00:23 +24: Web3 Wallet App E2E Tests Settings E2E Tests Settings has language option
+00:23 +25: Web3 Wallet App E2E Tests Settings E2E Tests Settings has API configuration section
+00:24 +26: Web3 Wallet App E2E Tests Settings E2E Tests Settings has security section
+00:24 +27: Web3 Wallet App E2E Tests Settings E2E Tests Settings has about section
+00:25 +28: Web3 Wallet App E2E Tests Settings E2E Tests API key dialog opens when tapped
+00:26 +29: Web3 Wallet App E2E Tests Settings E2E Tests Language dialog opens when tapped
+00:27 +30: (tearDownAll)
+00:27 +30: All tests passed!
