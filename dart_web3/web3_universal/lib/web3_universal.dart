@@ -36,5 +36,5 @@ export 'package:web3_universal_solana/web3_universal_solana.dart';
 export 'package:web3_universal_staking/web3_universal_staking.dart';
 export 'package:web3_universal_ton/web3_universal_ton.dart';
 export 'package:web3_universal_trezor/web3_universal_trezor.dart'
-    hide ChainType, MultiChainDerivationPaths;
+    hide ChainType;
 export 'package:web3_universal_tron/web3_universal_tron.dart';

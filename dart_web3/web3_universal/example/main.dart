@@ -1,4 +1,5 @@
 import 'package:web3_universal/web3_universal.dart';
+import 'package:web3_universal_solana/web3_universal_solana.dart';
 
 void main() async {
   print('--- Dart Web3 SDK Comprehensive Example ---');
@@ -57,7 +58,7 @@ void main() async {
   print('Smart Account Address: ${await smartAccount.getAddress()}');
 
   // 6. Multi-chain (Solana)
-  final solAddress = SolanaAddress.fromBase58(
+  final solAddress = PublicKey.fromBase58(
     'vines1vzrYbzLMRdu58GRt1zx9S6SBBZLRCCmWW9ZSP',
   );
   print('Solana Address: $solAddress');

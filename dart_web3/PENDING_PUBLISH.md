@@ -1,32 +1,41 @@
 # Pending Packages for Publication
 
-**Status**: ⚠️ PAUSED due to Pub.dev Rate Limit (HTTP 429).
-**Resumption Date**: 2026-01-09 14:00+ (Approximate)
+**Status**: ⏸️ PAUSED - Daily Rate Limit Reached
+**Current Progress**: 35/39 packages published (89.7%)
 
-## Publication Queue
-The following packages MUST be published in the listed order to ensure dependency resolution:
+## Rate Limit Information
+pub.dev enforces a **12 packages per day** limit for new package creation. We have reached this limit for today (2026-01-09).
 
-### 1. Client Layer (The current blocker)
-- [ ] `web3_universal_client` (Publish this FIRST)
+### Published Today (11 packages):
+1. `web3_universal_client`
+2. `web3_universal_utxo`
+3. `web3_universal_contract`
+4. `web3_universal_swap`
+5. `web3_universal_staking`
+6. `web3_universal_polkadot`
+7. `web3_universal_reown`
+8. `web3_universal_price`
+9. `web3_universal_multicall`
+10. `web3_universal_keystone` (already existed)
+11. `web3_universal_mev` (already existed)
 
-### 2. High-Level Modules (Depend on Client)
-- [ ] `web3_universal_contract`
+### Remaining (4 packages) - To be published tomorrow:
+- [ ] `web3_universal_nft`
+- [ ] `web3_universal_mpc`
 - [ ] `web3_universal_events`
-- [ ] `web3_universal_multicall`
 - [ ] `web3_universal_ens`
 - [ ] `web3_universal_aa`
-- [ ] `web3_universal_nft`
-- [ ] `web3_universal_swap`
-- [ ] `web3_universal_staking`
 - [ ] `web3_universal_history`
 - [ ] `web3_universal_bridge`
 - [ ] `web3_universal_dapp`
+- [ ] `web3_universal_cosmos`
+- [ ] `web3_universal_debug`
+- [ ] `web3_universal_bitcoin`
 - [ ] `web3_universal_compat`
+- [ ] `web3_universal` (meta-package)
 
-### 3. Meta-Package (Final Step)
-- [ ] `web3_universal`
-
-## Instructions
-1. Wait for the rate limit to expire (check after the resumption date).
-2. Run `melos publish` and select the remaining packages.
-3. If `client` fails again, wait another 2-3 hours and try publishing JUST `client` first.
+## Next Steps
+Resume publication on **2026-01-10** by running:
+```bash
+melos publish --no-dry-run --yes
+```
