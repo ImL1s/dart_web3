@@ -16,6 +16,7 @@ dependencies:
   web3_universal_crypto: ^0.2.0
   web3_universal_signer: ^0.1.1
   bitcoin_base: ^6.0.0
+  blockchain_utils: ^5.0.0  # For BIP39/BIP44 utilities re-export
 
 dev_dependencies:
   test: ^1.25.0

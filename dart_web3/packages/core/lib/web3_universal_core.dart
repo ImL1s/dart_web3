@@ -10,6 +10,7 @@ library;
 
 export 'src/address.dart';
 export 'src/bytes.dart';
+export 'src/ether_amount.dart';
 export 'src/exceptions.dart';
 export 'src/hex.dart';
 export 'src/rlp.dart';
