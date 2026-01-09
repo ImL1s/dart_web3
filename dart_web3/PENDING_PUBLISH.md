@@ -19,7 +19,8 @@ pub.dev enforces a **12 packages per day** limit for new package creation. We ha
 10. `web3_universal_keystone` (already existed)
 11. `web3_universal_mev` (already existed)
 
-### Remaining (4 packages) - To be published tomorrow:
+### Remaining (13 packages) - To be published tomorrow:
+- [ ] `web3_universal_aptos`
 - [ ] `web3_universal_nft`
 - [ ] `web3_universal_mpc`
 - [ ] `web3_universal_events`

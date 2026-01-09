@@ -101,7 +101,7 @@ class AptosClient {
         if (tx['type'] == 'user_transaction') {
           return tx;
         }
-      } catch (_) {
+      } on Exception catch (_) {
         // Transaction not found yet
       }
       await Future.delayed(pollInterval);
