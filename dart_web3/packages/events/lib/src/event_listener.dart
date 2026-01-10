@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_client/web3_universal_client.dart'
+    hide EventFilter;
 
 import 'event_filter.dart';
 import 'event_subscriber.dart';
