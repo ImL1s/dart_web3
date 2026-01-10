@@ -7,6 +7,7 @@ import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 import '../../../../shared/providers/wallet_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/providers/nft_provider.dart';
+import '../../../../shared/providers/swap_provider.dart';
 
 /// Settings screen
 class SettingsScreen extends ConsumerWidget {
@@ -96,6 +97,20 @@ class SettingsScreen extends ConsumerWidget {
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
                     _showApiKeyDialog(context, ref);
+                  },
+                ),
+                const Divider(height: 1, indent: 56),
+                ListTile(
+                  leading: const Icon(Icons.swap_horiz, color: Colors.blue),
+                  title: const Text('1inch API Key'),
+                  subtitle: Text(
+                    ref.watch(swapProvider).isConfigured
+                        ? l10n.settingsApiConfigured
+                        : l10n.settingsApiNotConfigured,
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    _showSwapApiKeyDialog(context, ref);
                   },
                 ),
               ],

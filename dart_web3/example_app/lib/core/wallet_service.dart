@@ -5,6 +5,8 @@
 library;
 
 import 'dart:typed_data';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
@@ -13,6 +15,7 @@ import 'package:web3_universal_signer/web3_universal_signer.dart';
 import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:web3_universal_utxo/web3_universal_utxo.dart';
 import 'package:web3_universal_solana/web3_universal_solana.dart';
+import 'package:web3_universal_aptos/web3_universal_aptos.dart';
 
 import 'services/ledger_service.dart';
 
@@ -25,6 +28,7 @@ enum ChainType {
   base,
   bitcoin,
   solana,
+  aptos,
 }
 
 /// Chain configuration
@@ -95,7 +99,16 @@ class Chains {
     explorerUrl: 'https://explorer.solana.com',
   );
 
-  static List<ChainConfig> get all => [ethereum, polygon, bitcoin, solana];
+  static const aptos = ChainConfig(
+    type: ChainType.aptos,
+    name: 'Aptos',
+    symbol: 'APT',
+    decimals: 8,
+    rpcUrl: 'https://fullnode.mainnet.aptoslabs.com',
+    explorerUrl: 'https://explorer.aptoslabs.com',
+  );
+
+  static List<ChainConfig> get all => [ethereum, polygon, bitcoin, solana, aptos];
 
   static List<ChainConfig> get evm => [ethereum, polygon];
 }
@@ -200,6 +213,7 @@ class WalletService {
         _getEvmAddress(chain.chainId ?? 1, index),
       ChainType.bitcoin => _getBitcoinAddress(index),
       ChainType.solana => _getSolanaAddress(index),
+      ChainType.aptos => _getAptosAddress(index),
     };
 
     return Account(address: address, chain: chain);
@@ -235,6 +249,13 @@ class WalletService {
     return Base58.encode(derived.getPublicKey());
   }
 
+  String _getAptosAddress(int index) {
+    // m/44'/637'/{index}'/0'/0'
+    final derived = _ed25519Wallet!.derive("m/44'/637'/$index'/0'/0'");
+    final account = AptosAccount.fromSeed(derived.getPrivateKey());
+    return account.address.toHex();
+  }
+
   /// Gets all accounts for supported chains
   List<Account> getAllAccounts({int index = 0}) {
     return Chains.all.map((chain) => getAccount(chain, index: index)).toList();
@@ -255,6 +276,7 @@ class WalletService {
         _getEvmBalance(account),
       ChainType.bitcoin => _getBitcoinBalance(account),
       ChainType.solana => _getSolanaBalance(account),
+      ChainType.aptos => _getAptosBalance(account),
     };
   }
 
@@ -270,16 +292,20 @@ class WalletService {
   Future<BigInt> _getBitcoinBalance(Account account) async {
     // Using Blockstream API for Bitcoin balance
     // https://blockstream.info/api/address/{address}
-    // For demo purposes, return mock balance to avoid HTTP dependency
-    // In production: use http package to fetch from Blockstream API
     try {
-      // Mock balance for demo - in production:
-      // final uri = Uri.parse('${account.chain.rpcUrl}/address/${account.address}');
-      // final response = await http.get(uri);
-      // final data = jsonDecode(response.body);
-      // final stats = data['chain_stats'];
-      // return BigInt.from(stats['funded_txo_sum'] - stats['spent_txo_sum']);
-      return BigInt.zero; // Mock: no balance
+      final uri = Uri.parse('${account.chain.rpcUrl}/address/${account.address}');
+      final response = await http.get(uri);
+      
+      if (response.statusCode != 200) return BigInt.zero;
+      
+      final data = json.decode(response.body) as Map<String, dynamic>;
+      final chainStats = data['chain_stats'] as Map<String, dynamic>;
+      final mempoolStats = data['mempool_stats'] as Map<String, dynamic>;
+      
+      final funded = (chainStats['funded_txo_sum'] as int) + (mempoolStats['funded_txo_sum'] as int);
+      final spent = (chainStats['spent_txo_sum'] as int) + (mempoolStats['spent_txo_sum'] as int);
+      
+      return BigInt.from(funded - spent);
     } catch (_) {
       return BigInt.zero;
     }
@@ -292,6 +318,15 @@ class WalletService {
       final response = await provider
           .call<Map<String, dynamic>>('getBalance', [account.address]);
       return BigInt.from(response['value'] as int);
+    } catch (_) {
+      return BigInt.zero;
+    }
+  }
+
+  Future<BigInt> _getAptosBalance(Account account) async {
+    try {
+      final client = AptosClient(account.chain.rpcUrl);
+      return await client.getBalance(AptosAddress.fromHex(account.address));
     } catch (_) {
       return BigInt.zero;
     }
@@ -320,6 +355,8 @@ class WalletService {
         await _sendBitcoinTransaction(chain, to, amount, accountIndex),
       ChainType.solana =>
         await _sendSolanaTransaction(chain, to, amount, accountIndex),
+      ChainType.aptos =>
+        await _sendAptosTransaction(chain, to, amount, accountIndex),
       _ => throw ArgumentError('Unsupported chain: ${chain.name}'),
     };
   }
@@ -417,50 +454,67 @@ class WalletService {
   // Bitcoin Implementation (P2WPKH)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  Future<String> _sendBitcoinTransaction(
-    ChainConfig chain,
-    String to,
-    BigInt amount,
-    int accountIndex,
-  ) async {
-    // 1. Get Keys
-    final derived = _hdWallet!.derive("m/84'/0'/0'/0/$accountIndex");
-    final privateKey = derived.getPrivateKey();
-    final publicKey = derived.getPublicKey();
-    final pubKeyHash = Ripemd160.hash(Sha256.hash(publicKey));
+    // 2. Fetch UTXOs (Real)
+    final senderAddress = _getBitcoinAddress(accountIndex);
+    final utxos = await _fetchUtxos(chain, senderAddress);
 
-    // 2. Mock UTXO Fetching (In production: await _fetchUtxos(address))
-    // We assume we have one UTXO with enough balance
-    // Mock TxId: 64 zeros
-    final utxoTxId = HexUtils.decode(
-      '0000000000000000000000000000000000000000000000000000000000000000',
-    );
-    final utxoAmount =
-        amount + BigInt.from(10000); // Mock UTXO has Amount + Fee
-    final inputs = [
-      TransactionInput(
-        txId: utxoTxId,
-        vout: 0,
-        scriptSig: Uint8List(0), // Empty for Witness
-      ),
-    ];
-
-    // 3. Create Outputs
+    // 3. Coin Selection (Naive)
+    // Estimate fee (simple): 2 inputs (approx) -> ~400 bytes. Rate 10 sat/vbyte -> 4000 sats.
+    // We iterate adding inputs until we cover amount + buffer.
+    BigInt inputSum = BigInt.zero;
+    final selectedUtxos = <Map<String, dynamic>>[];
+    final feeRate = 20; // sats/vbyte
+    
+    // Inputs
+    final inputs = <TransactionInput>[];
+    
+    for (final utxo in utxos) {
+       final val = BigInt.from(utxo['value'] as int);
+       inputSum += val;
+       selectedUtxos.add(utxo);
+       
+       inputs.add(TransactionInput(
+         txId: HexUtils.decode(utxo['txid'] as String),
+         vout: utxo['vout'] as int,
+         scriptSig: Uint8List(0),
+         sequence: 0xFFFFFFFF, // Sequence check
+       ));
+       
+       // Check if enough
+       // Approx size
+       final size = inputs.length * 148 + 2 * 34 + 10;
+       if (inputSum >= amount + BigInt.from(size * feeRate)) break;
+    }
+    
+    // 4. Outputs & Change
     final outputs = <TransactionOutput>[];
-
-    // a. Destination Output
-    // For simplicity in this demo, we assume 'to' is a Bech32 P2WPKH address
+    
+    // Destination
     try {
       final decodedTo = Bech32.decode(to);
       final toScript =
           Script.p2wpkh(Uint8List.fromList(decodedTo.witnessProgram));
       outputs.add(TransactionOutput(amount: amount, scriptPubKey: toScript));
     } catch (_) {
-      // Fallback for non-bech32 (just for demo safety)
       throw ArgumentError('Only Bech32 addresses supported in demo');
     }
+    
+    // Fee calc
+    final size = inputs.length * 148 + outputs.length * 34 + 10 + 34; // +34 for potential change
+    final fee = BigInt.from(size * feeRate);
+    
+    if (inputSum < amount + fee) {
+       throw Exception("Insufficient balance. Have $inputSum sats, need ${amount + fee}");
+    }
+    
+    final change = inputSum - amount - fee;
+    if (change > BigInt.from(546)) {
+       // Change back to sender (P2WPKH)
+       final changeScript = Script.p2wpkh(pubKeyHash);
+       outputs.add(TransactionOutput(amount: change, scriptPubKey: changeScript));
+    }
 
-    // 4. Construct Transaction
+    // 5. Construct Transaction
     final tx = BitcoinTransaction(
       version: 2,
       inputs: inputs,
@@ -468,42 +522,57 @@ class WalletService {
       lockTime: 0,
     );
 
-    // 5. Sign Input (BIP-143)
-    final sighash = _calculateBip143Sighash(
-      tx: tx,
-      inputIndex: 0,
-      utxoScriptCode: Script([
-        OpCode.opDup,
-        OpCode.opHash160,
-        pubKeyHash,
-        OpCode.opEqualVerify,
-        OpCode.opCheckSig,
-      ]).compile(), // P2PKH script code required for P2WPKH witness signing
-      utxoAmount: utxoAmount,
-      sighashType: 0x01, // SIGHASH_ALL
-    );
+    // 6. Sign Inputs
+    for (var i = 0; i < inputs.length; i++) {
+        final utxo = selectedUtxos[i];
+        final val = BigInt.from(utxo['value'] as int);
+        
+        final sighash = _calculateBip143Sighash(
+          tx: tx,
+          inputIndex: i,
+          utxoScriptCode: Script([
+            OpCode.opDup,
+            OpCode.opHash160,
+            pubKeyHash,
+            OpCode.opEqualVerify,
+            OpCode.opCheckSig,
+          ]).compile(),
+          utxoAmount: val,
+          sighashType: 0x01,
+        );
 
-    // Sign with Secp256k1
-    final signature = Secp256k1.sign(sighash, privateKey);
-    // Append Sighash type byte
-    final scriptSig = Uint8List.fromList([...signature, 0x01]);
+        final signature = Secp256k1.sign(sighash, privateKey);
+        final scriptSig = Uint8List.fromList([...signature, 0x01]);
 
-    // Attach Witness: [Signature, PublicKey]
-    // Note: We need to reconstruct Input because witness is final
-    tx.inputs[0] = TransactionInput(
-      txId: tx.inputs[0].txId,
-      vout: tx.inputs[0].vout,
-      scriptSig: tx.inputs[0].scriptSig,
-      sequence: tx.inputs[0].sequence,
-      witness: [scriptSig, publicKey],
-    );
+        tx.inputs[i] = TransactionInput(
+          txId: tx.inputs[i].txId,
+          vout: tx.inputs[i].vout,
+          scriptSig: tx.inputs[i].scriptSig,
+          sequence: tx.inputs[i].sequence,
+          witness: [scriptSig, publicKey],
+        );
+    }
 
-    // 6. Serialize & Broadcast
+    // 7. Broadcast
     final rawTx = tx.toBytes(segwit: true);
-    // In production: await _broadcastBitcoin(HexUtils.encode(rawTx));
-
-    // Return a mock TxID based on the rawTx hash
-    return HexUtils.encode(Sha256.doubleHash(rawTx));
+    final rawHex = HexUtils.encode(rawTx);
+    
+    // Broadcast via Blockstream API
+    final pushUri = Uri.parse('${chain.rpcUrl}/tx');
+    final response = await http.post(pushUri, body: rawHex);
+    
+    if (response.statusCode != 200) {
+       throw Exception('Broadcast failed: ${response.body}');
+    }
+    
+    return response.body; // Usually returns txid
+  }
+  
+  Future<List<Map<String, dynamic>>> _fetchUtxos(ChainConfig chain, String address) async {
+    final uri = Uri.parse('${chain.rpcUrl}/address/$address/utxo');
+    final response = await http.get(uri);
+    if (response.statusCode != 200) throw Exception('Failed to fetch UTXOs');
+    return List<Map<String, dynamic>>.from(json.decode(response.body) as List);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -531,9 +600,13 @@ class WalletService {
       throw ArgumentError('Invalid Solana address');
     }
 
-    // 2. Mock Recent Blockhash (In production: await _getRecentBlockhash())
-    // 32-byte hash encoded in Base58 - must be valid Base58 (no 0, O, I, l)
-    const recentBlockhash = 'GkotHVEULjkXZ7nSR6wXbabcdefGHJKMNPQRSTUVWXYZ';
+    // 2. Fetch Recent Blockhash (Real)
+    final provider = RpcProvider(HttpTransport(chain.rpcUrl));
+    final blockhashResponse = await provider
+        .call<Map<String, dynamic>>('getLatestBlockhash', [
+      {'commitment': 'finalized'}
+    ]);
+    final recentBlockhash = blockhashResponse['value']['blockhash'] as String;
 
     // 3. Create Instruction
     // Note: SystemProgram.transfer takes lamports as int. Ensure BigInt fits.
@@ -570,6 +643,15 @@ class WalletService {
     }
     return Base58.encode(
         serialized); // Fallback if something weird, but usually it returns signature
+  }
+
+  Future<String> _sendAptosTransaction(
+    ChainConfig chain,
+    String to,
+    BigInt amount,
+    int accountIndex,
+  ) async {
+    throw UnimplementedError('Aptos signing requires BCS serialization which is pending in SDK.');
   }
 
   /// Calculates BIP-143 Sighash for SegWit inputs

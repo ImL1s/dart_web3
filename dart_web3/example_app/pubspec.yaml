@@ -51,8 +51,9 @@ dependencies:
   web3_universal_utxo: ^0.1.1
   web3_universal_solana: ^0.1.1
   web3_universal_reown: ^0.1.1
-  web3_universal_ledger: ^0.1.0+1
+  # web3_universal_ledger: ^0.1.0+1
   web3_universal_aa: ^0.1.1+1
+  web3_universal_aptos: ^0.1.0
   ledger_flutter: ^1.0.0
 
 dev_dependencies:

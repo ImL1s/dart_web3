@@ -27,8 +27,8 @@ dependency_overrides:
     path: ../packages/extensions/solana
   web3_universal_reown:
     path: ../packages/reown
-  web3_universal_ledger:
-    path: ../packages/hardware/ledger
+  # web3_universal_ledger:
+  #   path: ../packages/hardware/ledger
   web3_universal_aa:
     path: ../packages/aa
   web3_universal_bc_ur:
@@ -63,3 +63,5 @@ dependency_overrides:
     path: ../packages/contract
   web3_universal_events:
     path: ../packages/events
+  web3_universal_aptos:
+    path: ../packages/extensions/aptos
