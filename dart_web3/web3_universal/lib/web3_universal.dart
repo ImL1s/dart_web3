@@ -2,6 +2,8 @@ library;
 
 export 'package:web3_universal_aa/web3_universal_aa.dart';
 export 'package:web3_universal_abi/web3_universal_abi.dart';
+export 'package:web3_universal_aptos/web3_universal_aptos.dart'
+    hide ChainType;
 export 'package:web3_universal_bc_ur/web3_universal_bc_ur.dart';
 export 'package:web3_universal_bitcoin/web3_universal_bitcoin.dart';
 export 'package:web3_universal_chains/web3_universal_chains.dart';
