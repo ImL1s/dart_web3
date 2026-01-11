@@ -1,0 +1,21 @@
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/ledger_e2e_test.dart
+Building Windows application...                                 
+Building Windows application...                                    19.7s
+00:00 +0 -1: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/ledger_e2e_test.dart [E]
+  Failed to load "D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/ledger_e2e_test.dart": Build process failed.
+  package:flutter_tools/src/base/common.dart 34:3                    throwToolExit
+  package:flutter_tools/src/windows/build_windows.dart 262:5         _runBuild
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/windows/build_windows.dart 118:5         buildWindows
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/windows/windows_device.dart 65:5         WindowsDevice.buildForDevice
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/desktop_device.dart 108:7                DesktopDevice.startApp
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/test/integration_test_device.dart 57:39  IntegrationTestTestDevice.start
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/test/flutter_platform.dart 680:51        FlutterPlatform._startTest.<fn>
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/base/async_guard.dart 108:24             asyncGuard.<fn>
+  
+00:00 +0 -1: Some tests failed.

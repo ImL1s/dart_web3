@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:ledger_flutter/ledger_flutter.dart' as lf;
+import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
 
 import '../../../../core/services/ledger_service.dart';
 import '../../../../shared/providers/reown_provider.dart';

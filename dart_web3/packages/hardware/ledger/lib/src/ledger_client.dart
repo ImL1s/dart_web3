@@ -224,7 +224,7 @@ class LedgerClient {
     if (_state != LedgerConnectionState.connected) {
       throw LedgerException(
         LedgerErrorType.connectionFailed,
-        'Device not connected',
+        'Device not connected (State: $_state)',
       );
     }
 
@@ -237,6 +237,17 @@ class LedgerClient {
   }
 
   void _setState(LedgerConnectionState newState) {
+    // ignore: avoid_print
+    print('LedgerClient State Change: $_state -> $newState');
+    // Force stderr for test visibility
+    try {
+      // ignore: avoid_print
+      // stderr.writeln('LedgerClient Stderr: $_state -> $newState'); 
+      // Cannot import dart:io easily in library package? 
+      // It depends on flutter?
+      // print usually shows up in `flutter test` if verbose.
+    } catch (_) {}
+    
     if (_state != newState) {
       _state = newState;
       _stateController.add(_state);

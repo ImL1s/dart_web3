@@ -21,13 +21,62 @@ class FlutterLedgerDevice extends LedgerDevice {
   );
 }
 
+/// Interface for Ledger Connection to allow mocking
+abstract class LedgerConnectionInterface {
+  bool get isDisconnected;
+  Future<void> disconnect();
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation);
+}
+
+/// Adapter for real LedgerConnection
+class LedgerConnectionAdapter implements LedgerConnectionInterface {
+  final lf.LedgerConnection _impl;
+
+  LedgerConnectionAdapter(this._impl);
+
+  @override
+  bool get isDisconnected => _impl.isDisconnected;
+
+  @override
+  Future<void> disconnect() => _impl.disconnect();
+
+  @override
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) {
+    return _impl.sendOperation(operation);
+  }
+}
+
+/// Wrapper to allow mocking of the sealed LedgerInterface
+class LedgerInterfaceWrapper {
+  final lf.LedgerInterface _impl;
+
+  LedgerInterfaceWrapper(this._impl);
+
+  factory LedgerInterfaceWrapper.ble() {
+    return LedgerInterfaceWrapper(
+      lf.LedgerInterface.ble(onPermissionRequest: (_) async => true),
+    );
+  }
+
+  Stream<lf.LedgerDevice> scan() => _impl.scan();
+  
+  // Returns interface instead of concrete type
+  Future<LedgerConnectionInterface> connect(lf.LedgerDevice device) async {
+    final connection = await _impl.connect(device);
+    return LedgerConnectionAdapter(connection);
+  }
+}
+
 /// Main entry point for Flutter-based Ledger operations
 class FlutterLedger {
-  static lf.LedgerInterface? _interface;
+  static LedgerInterfaceWrapper? _interface;
 
-  static lf.LedgerInterface get _ledger => _interface ??= lf.LedgerInterface.ble(
-    onPermissionRequest: (_) async => true,
-  );
+  static LedgerInterfaceWrapper get _ledger => _interface ??= LedgerInterfaceWrapper.ble();
+
+  @visibleForTesting
+  static void setMockLedger(LedgerInterfaceWrapper mock) {
+    _interface = mock;
+  }
 
   /// Scan for devices
   static Stream<LedgerDevice> scan() {
@@ -45,6 +94,7 @@ class FlutterLedger {
 
     try {
       final connection = await _ledger.connect(device.internalDevice);
+      // Connection is already an interface
       return FlutterLedgerTransport(connection);
     } catch (e) {
       throw LedgerException(
@@ -66,7 +116,7 @@ class FlutterLedger {
 class FlutterLedgerTransport implements LedgerTransport {
   FlutterLedgerTransport(this._connection);
 
-  final lf.LedgerConnection _connection;
+  final LedgerConnectionInterface _connection;
 
   @override
   LedgerTransportType get type => LedgerTransportType.ble;

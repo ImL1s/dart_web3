@@ -95,6 +95,8 @@ class LedgerService extends ChangeNotifier {
       // Create LedgerClient with the SDK transport
       _client = LedgerClient(transport);
 
+      await _client!.connect();
+
       // Verify connection and get address
       try {
         final account = await _client!.getAccount("m/44'/60'/0'/0/0");
