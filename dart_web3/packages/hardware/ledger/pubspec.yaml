@@ -19,6 +19,8 @@ dependencies:
   web3_universal_signer: ^0.1.1
   web3_universal_abi: ^0.1.1
   ledger_flutter_plus: ^1.5.3
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   test: ^1.24.0

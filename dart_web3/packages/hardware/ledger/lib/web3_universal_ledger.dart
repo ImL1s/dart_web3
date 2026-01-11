@@ -11,3 +11,4 @@ export 'src/ledger_transport.dart';
 export 'src/ledger_types.dart';
 export 'src/mock_transport.dart';
 export 'src/multi_chain_support.dart';
+export 'src/flutter_ledger_transport.dart';

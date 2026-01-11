@@ -1,13 +1,13 @@
 /// Ledger Service for hardware wallet integration.
 ///
 /// Handles discovery, connection, and signing with Ledger devices
-/// using the ledger_flutter_plus package with web3_universal_ledger.
+/// using the web3_universal SDK.
 library;
 
 import 'dart:async';
 
+
 import 'package:flutter/foundation.dart';
-import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
 import 'package:web3_universal/web3_universal.dart';
 
 /// Connection status for Ledger service.
@@ -20,16 +20,7 @@ enum LedgerStatus {
 
 /// Ledger Service singleton.
 class LedgerService extends ChangeNotifier {
-  LedgerService._({lf.LedgerInterface? ledger})
-      : _ledger = ledger ??
-            lf.LedgerInterface.ble(
-              onPermissionRequest: (_) async => true,
-            );
-
-  @visibleForTesting
-  factory LedgerService.test({required lf.LedgerInterface ledger}) {
-    return LedgerService._(ledger: ledger);
-  }
+  LedgerService._();
 
   static LedgerService? _mockInstance;
 
@@ -46,19 +37,19 @@ class LedgerService extends ChangeNotifier {
     _mockInstance = null;
   }
 
-  final lf.LedgerInterface _ledger;
-
   LedgerClient? _client;
   LedgerStatus _status = LedgerStatus.disconnected;
-  List<lf.LedgerDevice> _discoveredDevices = [];
-  lf.LedgerDevice? _connectedDevice;
-  lf.LedgerConnection? _connection;
+  List<LedgerDevice> _discoveredDevices = [];
+  LedgerDevice? _connectedDevice;
   String? _error;
   String? _connectedAddress;
+  
+  // Keep track of transport to disconnect
+  LedgerTransport? _transport;
 
   LedgerStatus get status => _status;
-  List<lf.LedgerDevice> get discoveredDevices => _discoveredDevices;
-  lf.LedgerDevice? get connectedDevice => _connectedDevice;
+  List<LedgerDevice> get discoveredDevices => _discoveredDevices;
+  LedgerDevice? get connectedDevice => _connectedDevice;
   String? get error => _error;
   LedgerClient? get client => _client;
   String? get connectedAddress => _connectedAddress;
@@ -70,9 +61,10 @@ class LedgerService extends ChangeNotifier {
     _error = null;
 
     try {
-      final stream = _ledger.scan();
+      // Use SDK's FlutterLedger for scanning
+      final stream = FlutterLedger.scan();
       final subscription = stream.listen((device) {
-        if (!_discoveredDevices.any((d) => d.id == device.id)) {
+        if (!_discoveredDevices.any((d) => d.deviceId == device.deviceId)) {
           _discoveredDevices.add(device);
           notifyListeners();
         }
@@ -89,19 +81,18 @@ class LedgerService extends ChangeNotifier {
   }
 
   /// Connect to a specific Ledger device.
-  Future<void> connect(lf.LedgerDevice device) async {
+  Future<void> connect(LedgerDevice device) async {
     try {
       if (_connectedDevice != null) {
         await disconnect();
       }
 
-      // Connect returns a connection object in new API
-      final connection = await _ledger.connect(device);
-      _connection = connection;
+      // connect via SDK
+      final transport = await FlutterLedger.connect(device);
+      _transport = transport; // Store to dispose later
       _connectedDevice = device;
 
-      // Create LedgerClient with our Flutter transport wrapper
-      final transport = _LedgerFlutterTransport(connection);
+      // Create LedgerClient with the SDK transport
       _client = LedgerClient(transport);
 
       // Verify connection and get address
@@ -110,7 +101,6 @@ class LedgerService extends ChangeNotifier {
         _connectedAddress = account.address;
       } catch (e) {
         debugPrint('Failed to fetch Ledger address: $e');
-        // Don't fail connection, but address won't be available
       }
 
       _updateStatus(LedgerStatus.connected);
@@ -120,17 +110,16 @@ class LedgerService extends ChangeNotifier {
       _connectedDevice = null;
       _connectedAddress = null;
       _client = null;
-      _connection = null;
+      _transport = null;
     }
   }
 
   /// Disconnect from the current device.
   Future<void> disconnect() async {
-    if (_connection != null) {
-      await _connection!.disconnect();
-      _connection = null;
+    if (_transport != null) {
+      await _transport!.disconnect();
+      _transport = null;
     }
-    // Also instruct interface to cleanup if needed (though disconnect() might be enough)
     
     _connectedDevice = null;
     _client = null;
@@ -192,102 +181,5 @@ class LedgerService extends ChangeNotifier {
   void _updateStatus(LedgerStatus status) {
     _status = status;
     notifyListeners();
-  }
-}
-
-/// Adapts `ledger_flutter_plus` to `LedgerTransport` interface.
-class _LedgerFlutterTransport implements LedgerTransport {
-  _LedgerFlutterTransport(this._connection);
-
-  final lf.LedgerConnection _connection;
-
-  @override
-  LedgerTransportType get type => LedgerTransportType.ble;
-
-  @override
-  bool get isSupported => true;
-
-  @override
-  bool get isConnected => !_connection.isDisconnected;
-
-  @override
-  Future<void> connect() async {
-    // Connection managed by LedgerService
-  }
-
-  @override
-  Future<void> disconnect() async {
-    // Disconnection managed by LedgerService
-  }
-
-  @override
-  Future<APDUResponse> exchange(APDUCommand command) async {
-    try {
-      final response = await _connection.sendOperation(
-        _EthereumOperation(command),
-      );
-
-      // Parse status word from response (last 2 bytes)
-      if (response.length >= 2) {
-        final statusWord = (response[response.length - 2] << 8) |
-            response[response.length - 1];
-        final data = response.length > 2
-            ? Uint8List.fromList(response.sublist(0, response.length - 2))
-            : Uint8List(0);
-        return APDUResponse(data: data, statusWord: statusWord);
-      }
-
-      return APDUResponse(
-        data: Uint8List.fromList(response),
-        statusWord: 0x9000,
-      );
-    } catch (e) {
-      throw LedgerException(
-        LedgerErrorType.communicationError,
-        'APDU Exchange failed: $e',
-        originalError: e,
-      );
-    }
-  }
-
-  @override
-  Future<List<LedgerDevice>> discoverDevices() async {
-    return [];
-  }
-
-  @override
-  void dispose() {}
-}
-
-/// Custom LedgerOperation for Ethereum APDU commands.
-class _EthereumOperation extends lf.LedgerOperation<Uint8List> {
-  final APDUCommand _command;
-
-  _EthereumOperation(this._command);
-
-  @override
-  Future<List<Uint8List>> write(lf.ByteDataWriter writer) async {
-    writer.writeUint8(_command.cla);
-    writer.writeUint8(_command.ins);
-    writer.writeUint8(_command.p1);
-    writer.writeUint8(_command.p2);
-    final data = _command.data;
-    if (data != null && data.isNotEmpty) {
-      writer.writeUint8(data.length);
-      writer.write(data);
-    } else {
-      writer.writeUint8(0);
-    }
-    return [];
-  }
-
-  @override
-  Future<Uint8List> read(lf.ByteDataReader reader) async {
-    final length = reader.remainingLength;
-    if (length > 0) {
-      final data = reader.read(length);
-      return Uint8List.fromList(data);
-    }
-    return Uint8List(0);
   }
 }

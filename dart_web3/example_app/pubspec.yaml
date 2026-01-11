@@ -43,7 +43,7 @@ dependencies:
     # version: ^0.1.0 (Unlock when publishing app)
 
   # Hardware Wallets
-  ledger_flutter_plus: ^1.5.3
+  # ledger_flutter_plus: ^1.5.3 (Provided by web3_universal)
 
 dev_dependencies:
   flutter_test:
