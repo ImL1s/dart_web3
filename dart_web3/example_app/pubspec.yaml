@@ -42,8 +42,8 @@ dependencies:
     path: ../web3_universal
     # version: ^0.1.0 (Unlock when publishing app)
 
-  # Hardware Wallets (Optional explicit dependecies if needed, but included in meta)
-  # ledger_flutter: ^1.0.0
+  # Hardware Wallets
+  ledger_flutter_plus: ^1.5.3
 
 dev_dependencies:
   flutter_test:

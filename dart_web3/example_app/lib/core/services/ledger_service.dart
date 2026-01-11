@@ -1,13 +1,13 @@
 /// Ledger Service for hardware wallet integration.
 ///
 /// Handles discovery, connection, and signing with Ledger devices
-/// using the ledger_flutter package with web3_universal_ledger.
+/// using the ledger_flutter_plus package with web3_universal_ledger.
 library;
 
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:ledger_flutter/ledger_flutter.dart' as lf;
+import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
 import 'package:web3_universal/web3_universal.dart';
 
 /// Connection status for Ledger service.
@@ -20,14 +20,14 @@ enum LedgerStatus {
 
 /// Ledger Service singleton.
 class LedgerService extends ChangeNotifier {
-  LedgerService._({lf.Ledger? ledger})
+  LedgerService._({lf.LedgerInterface? ledger})
       : _ledger = ledger ??
-            lf.Ledger(
-              options: lf.LedgerOptions(),
+            lf.LedgerInterface.ble(
+              onPermissionRequest: (_) async => true,
             );
 
   @visibleForTesting
-  factory LedgerService.test({required lf.Ledger ledger}) {
+  factory LedgerService.test({required lf.LedgerInterface ledger}) {
     return LedgerService._(ledger: ledger);
   }
 
@@ -46,12 +46,13 @@ class LedgerService extends ChangeNotifier {
     _mockInstance = null;
   }
 
-  final lf.Ledger _ledger;
+  final lf.LedgerInterface _ledger;
 
   LedgerClient? _client;
   LedgerStatus _status = LedgerStatus.disconnected;
   List<lf.LedgerDevice> _discoveredDevices = [];
   lf.LedgerDevice? _connectedDevice;
+  lf.LedgerConnection? _connection;
   String? _error;
   String? _connectedAddress;
 
@@ -94,11 +95,13 @@ class LedgerService extends ChangeNotifier {
         await disconnect();
       }
 
-      await _ledger.connect(device);
+      // Connect returns a connection object in new API
+      final connection = await _ledger.connect(device);
+      _connection = connection;
       _connectedDevice = device;
 
       // Create LedgerClient with our Flutter transport wrapper
-      final transport = _LedgerFlutterTransport(_ledger, device);
+      final transport = _LedgerFlutterTransport(connection);
       _client = LedgerClient(transport);
 
       // Verify connection and get address
@@ -117,17 +120,22 @@ class LedgerService extends ChangeNotifier {
       _connectedDevice = null;
       _connectedAddress = null;
       _client = null;
+      _connection = null;
     }
   }
 
   /// Disconnect from the current device.
   Future<void> disconnect() async {
-    if (_connectedDevice != null) {
-      await _ledger.disconnect(_connectedDevice!);
-      _connectedDevice = null;
-      _client = null;
-      _connectedAddress = null;
+    if (_connection != null) {
+      await _connection!.disconnect();
+      _connection = null;
     }
+    // Also instruct interface to cleanup if needed (though disconnect() might be enough)
+    
+    _connectedDevice = null;
+    _client = null;
+    _connectedAddress = null;
+    
     _updateStatus(LedgerStatus.disconnected);
   }
 
@@ -187,12 +195,11 @@ class LedgerService extends ChangeNotifier {
   }
 }
 
-/// Adapts `ledger_flutter` to `LedgerTransport` interface.
+/// Adapts `ledger_flutter_plus` to `LedgerTransport` interface.
 class _LedgerFlutterTransport implements LedgerTransport {
-  _LedgerFlutterTransport(this._ledger, this._device);
+  _LedgerFlutterTransport(this._connection);
 
-  final lf.Ledger _ledger;
-  final lf.LedgerDevice _device;
+  final lf.LedgerConnection _connection;
 
   @override
   LedgerTransportType get type => LedgerTransportType.ble;
@@ -201,7 +208,7 @@ class _LedgerFlutterTransport implements LedgerTransport {
   bool get isSupported => true;
 
   @override
-  bool get isConnected => true; // Managed by service
+  bool get isConnected => !_connection.isDisconnected;
 
   @override
   Future<void> connect() async {
@@ -216,8 +223,7 @@ class _LedgerFlutterTransport implements LedgerTransport {
   @override
   Future<APDUResponse> exchange(APDUCommand command) async {
     try {
-      final response = await _ledger.sendOperation(
-        _device,
+      final response = await _connection.sendOperation(
         _EthereumOperation(command),
       );
 
