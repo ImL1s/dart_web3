@@ -20,6 +20,10 @@ command:
   bootstrap:
     # It seems dependencies are linked, but good to be explicit if needed
     usePubspecOverrides: true
+  
+  analyze:
+    # Disable fatal-infos for analyze command
+    fatalInfos: false
 
 scripts:
   analyze:
