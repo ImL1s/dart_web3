@@ -5,13 +5,16 @@ export 'package:web3_universal_abi/web3_universal_abi.dart';
 export 'package:web3_universal_aptos/web3_universal_aptos.dart'
     hide ChainType;
 export 'package:web3_universal_bc_ur/web3_universal_bc_ur.dart';
-export 'package:web3_universal_bitcoin/web3_universal_bitcoin.dart';
+export 'package:web3_universal_bitcoin/web3_universal_bitcoin.dart'
+    hide ChainType, BytesUtils;
 export 'package:web3_universal_chains/web3_universal_chains.dart';
-export 'package:web3_universal_client/web3_universal_client.dart';
+export 'package:web3_universal_client/web3_universal_client.dart'
+    hide EventFilter;
 export 'package:web3_universal_contract/web3_universal_contract.dart'
     hide EventFilter;
 export 'package:web3_universal_core/web3_universal_core.dart';
-export 'package:web3_universal_crypto/web3_universal_crypto.dart';
+export 'package:web3_universal_crypto/web3_universal_crypto.dart'
+    hide AES, Scrypt;
 export 'package:web3_universal_dapp/web3_universal_dapp.dart';
 export 'package:web3_universal_debug/web3_universal_debug.dart';
 export 'package:web3_universal_ens/web3_universal_ens.dart';
@@ -34,7 +37,8 @@ export 'package:web3_universal_price/web3_universal_price.dart';
 export 'package:web3_universal_provider/web3_universal_provider.dart';
 export 'package:web3_universal_reown/web3_universal_reown.dart';
 export 'package:web3_universal_signer/web3_universal_signer.dart';
-export 'package:web3_universal_solana/web3_universal_solana.dart';
+export 'package:web3_universal_solana/web3_universal_solana.dart'
+    hide ChainType;
 export 'package:web3_universal_staking/web3_universal_staking.dart';
 export 'package:web3_universal_ton/web3_universal_ton.dart';
 export 'package:web3_universal_trezor/web3_universal_trezor.dart'

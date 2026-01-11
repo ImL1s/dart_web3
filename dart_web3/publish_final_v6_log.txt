@@ -1,0 +1,130 @@
+melos publish
+  └> D:\OtherProject\mine\dart_web3\dart_web3
+
+Reading pub registry for package information...
+
+The following packages WILL be published to the registry:
+
+Package Name      Registry    Local
+web3_universal                0.1.0
+Publishing 1 packages to registry:...
+$ melos exec
+  └> dart pub publish --force
+     └> RUNNING (in 1 packages)
+
+--------------------------------------------------------------------------------
+web3_universal:
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.7.1 (10.0.0 available)
+  bitcoin_base 6.9.0 (7.0.0 available)
+  characters 1.3.0 (1.4.1 available)
+  collection 1.19.0 (1.19.1 available)
+  ffi 2.1.3 (2.1.5 available)
+  js 0.7.1 (0.7.2 available)
+  ledger_flutter_plus 1.5.3 (1.5.5 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  meta 1.15.0 (1.17.0 available)
+  petitparser 6.0.2 (7.0.1 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  test 1.26.3 (1.29.0 available)
+  test_api 0.7.7 (0.7.9 available)
+  test_core 0.6.12 (0.6.15 available)
+  universal_ble 0.17.0 (1.1.0 available)
+  vector_math 2.1.4 (2.2.0 available)
+  watcher 1.2.0 (1.2.1 available)
+! web3_universal_aa 0.1.1+1 from path ..\packages\aa (overridden in .\pubspec_overrides.yaml)
+! web3_universal_abi 0.1.1 from path ..\packages\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bc_ur 0.1.0+1 from path ..\packages\hardware\bc_ur (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bitcoin 0.1.1 from path ..\packages\extensions\bitcoin (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bridge 0.1.0+2 from path ..\packages\bridge (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\packages\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\packages\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\packages\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\packages\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\packages\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_dapp 0.1.1+1 from path ..\packages\dapp (overridden in .\pubspec_overrides.yaml)
+! web3_universal_debug 0.1.1 from path ..\packages\debug (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ens 0.1.1+1 from path ..\packages\ens (overridden in .\pubspec_overrides.yaml)
+! web3_universal_events 0.1.0+2 from path ..\packages\events (overridden in .\pubspec_overrides.yaml)
+! web3_universal_history 0.1.1+1 from path ..\packages\history (overridden in .\pubspec_overrides.yaml)
+! web3_universal_keystone 0.1.0+1 from path ..\packages\hardware\keystone (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ledger 0.1.0+1 from path ..\packages\hardware\ledger (overridden in .\pubspec_overrides.yaml)
+! web3_universal_mev 0.1.1 from path ..\packages\mev (overridden in .\pubspec_overrides.yaml)
+! web3_universal_mpc 0.1.0+1 from path ..\packages\hardware\mpc (overridden in .\pubspec_overrides.yaml)
+! web3_universal_multicall 0.1.0+2 from path ..\packages\multicall (overridden in .\pubspec_overrides.yaml)
+! web3_universal_nft 0.1.1+1 from path ..\packages\nft (overridden in .\pubspec_overrides.yaml)
+! web3_universal_polkadot 0.1.1 from path ..\packages\extensions\polkadot (overridden in .\pubspec_overrides.yaml)
+! web3_universal_price 0.1.1 from path ..\packages\price (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\packages\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_reown 0.1.1 from path ..\packages\reown (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\packages\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\packages\extensions\solana (overridden in .\pubspec_overrides.yaml)
+! web3_universal_staking 0.1.1+1 from path ..\packages\staking (overridden in .\pubspec_overrides.yaml)
+! web3_universal_swap 0.1.0+2 from path ..\packages\swap (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ton 0.1.1 from path ..\packages\extensions\ton (overridden in .\pubspec_overrides.yaml)
+! web3_universal_trezor 0.1.0+1 from path ..\packages\hardware\trezor (overridden in .\pubspec_overrides.yaml)
+! web3_universal_tron 0.1.1 from path ..\packages\extensions\tron (overridden in .\pubspec_overrides.yaml)
+  xml 6.5.0 (6.6.1 available)
+Got dependencies!
+21 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing web3_universal 0.1.0 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (2 KB)
+├── example
+│   └── main.dart (2 KB)
+├── lib
+│   └── web3_universal.dart (2 KB)
+└── pubspec.yaml (1 KB)
+
+Total compressed archive size: 3 KB.
+Validating package...
+ERROR: Package validation found the following potential issues:
+
+ERROR: * `dart analyze` found the following issue(s):
+  Analyzing lib, pubspec.yaml...
+  
+    error - lib\web3_universal.dart:16:8 - The name 'Scrypt' is defined in the libraries 'package:blockchain_utils/crypto/crypto/scrypt/scrypt.dart' and 'package:web3_universal_crypto/src/scrypt.dart'. Try removing the export of one of the libraries, or explicitly hiding the name in one of the export directives. - ambiguous_export
+  warning - lib\web3_universal.dart:17:10 - The library 'package:web3_universal_crypto/web3_universal_crypto.dart' doesn't export a member with the hidden name 'BytesUtils'. Try removing the name from the list of hidden members. - undefined_hidden_name
+     info - lib\web3_universal.dart:9:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+     info - lib\web3_universal.dart:17:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+
+ERROR:   
+  4 issues found.
+  
+* 1 checked-in file is modified in git.
+  
+  Usually you want to publish from a clean git state.
+  
+  Consider committing these files or reverting the changes.
+  
+  Modified files:
+  
+  lib\web3_universal.dart
+  
+  Run `git status` for more information.
+  
+Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec_overrides.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+
+Uploading...
+ERROR: Message from server: The "package-created" operation is blocked, as its rate limit has been reached (12 in the last day). Please try again later. Please report the issue on https://github.com/dart-lang/pub-dev/issues/new if you think the limit should be increased to accommodate your use case.
+
+--------------------------------------------------------------------------------
+
+$ melos exec
+  └> dart pub publish --force
+     └> FAILED (in 1 packages)
+        └> web3_universal (with exit code 1)

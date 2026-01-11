@@ -164,11 +164,11 @@ graph TD
 | [`web3_universal_reown`](packages/reown) | [![pub package](https://img.shields.io/pub/v/web3_universal_reown.svg)](https://pub.dev/packages/web3_universal_reown) | Reown/WalletConnect v2 | 5 |
 | [`web3_universal_swap`](packages/swap) | | DEX aggregation | 5 |
 | [`web3_universal_bridge`](packages/bridge) | | Cross-chain bridging | 5 |
-| [`web3_universal_nft`](packages/nft) | | NFT services | 5 |
+| [`web3_universal_nft`](packages/nft) | [![pub package](https://img.shields.io/pub/v/web3_universal_nft.svg)](https://pub.dev/packages/web3_universal_nft) | NFT services | 5 |
 | [`web3_universal_staking`](packages/staking) | | Staking services | 5 |
 | [`web3_universal_debug`](packages/debug) | [![pub package](https://img.shields.io/pub/v/web3_universal_debug.svg)](https://pub.dev/packages/web3_universal_debug) | Debug/Trace API | 5 |
 | [`web3_universal_mev`](packages/mev) | [![pub package](https://img.shields.io/pub/v/web3_universal_mev.svg)](https://pub.dev/packages/web3_universal_mev) | MEV protection/Flashbots | 5 |
-| [`web3_universal_dapp`](packages/dapp) | | DApp state & session management | 5 |
+| [`web3_universal_dapp`](packages/dapp) | [![pub package](https://img.shields.io/pub/v/web3_universal_dapp.svg)](https://pub.dev/packages/web3_universal_dapp) | DApp state & session management | 5 |
 | [`web3_universal_history`](packages/history) | | Transaction history explorer | 5 |
 | [`web3_universal_price`](packages/price) | [![pub package](https://img.shields.io/pub/v/web3_universal_price.svg)](https://pub.dev/packages/web3_universal_price) | Asset pricing and oracles | 5 |
 | [`web3_universal_bc_ur`](packages/hardware/bc_ur) | [![pub package](https://img.shields.io/pub/v/web3_universal_bc_ur.svg)](https://pub.dev/packages/web3_universal_bc_ur) | BC-UR air-gapped protocol | 6 |

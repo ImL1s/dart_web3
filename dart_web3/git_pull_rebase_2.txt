@@ -1,0 +1,16 @@
+From https://github.com/ImL1s/dart_web3
+ * branch            master     -> FETCH_HEAD
+warning: skipped previously applied commit ea9c2f5
+Auto-merging dart_web3/example_app/.flutter-plugins-dependencies
+CONFLICT (content): Merge conflict in dart_web3/example_app/.flutter-plugins-dependencies
+Auto-merging dart_web3/example_app/lib/features/settings/presentation/screens/settings_screen.dart
+hint: use --reapply-cherry-picks to include skipped commits
+hint: Disable this message with "git config set advice.skippedCherryPicks false"
+Rebasing (1/1)
+error: could not apply a05e420... chore: integrate EtherAmount and Aptos extension from remote, add to meta-package
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
+Could not apply a05e420... chore: integrate EtherAmount and Aptos extension from remote, add to meta-package

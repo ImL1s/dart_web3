@@ -12,12 +12,9 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  web3_universal_core:
-    path: ../../core
-  web3_universal_crypto:
-    path: ../../crypto
-  web3_universal_signer:
-    path: ../../signer
+  web3_universal_core: ^0.1.1
+  web3_universal_crypto: ^0.2.0
+  web3_universal_signer: ^0.1.1
   bitcoin_base: ^6.0.0
   blockchain_utils: ^5.0.0  # For BIP39/BIP44 utilities re-export
 
