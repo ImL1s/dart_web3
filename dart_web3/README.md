@@ -155,21 +155,21 @@ graph TD
 | [`web3_universal_provider`](packages/provider) | [![pub package](https://img.shields.io/pub/v/web3_universal_provider.svg)](https://pub.dev/packages/web3_universal_provider) | RPC Provider (HTTP/WebSocket) | 2 |
 | [`web3_universal_signer`](packages/signer) | [![pub package](https://img.shields.io/pub/v/web3_universal_signer.svg)](https://pub.dev/packages/web3_universal_signer) | Signer abstraction | 2 |
 | [`web3_universal_chains`](packages/chains) | [![pub package](https://img.shields.io/pub/v/web3_universal_chains.svg)](https://pub.dev/packages/web3_universal_chains) | Chain configurations | 2 |
-| [`web3_universal_client`](packages/client) | | PublicClient/WalletClient | 3 |
-| [`web3_universal_contract`](packages/contract) | | Contract abstraction | 3 |
-| [`web3_universal_events`](packages/events) | | Event subscription | 3 |
-| [`web3_universal_multicall`](packages/multicall) | | Multicall support | 4 |
-| [`web3_universal_ens`](packages/ens) | | ENS resolution | 4 |
-| [`web3_universal_aa`](packages/aa) | | ERC-4337 Account Abstraction | 5 |
+| [`web3_universal_client`](packages/client) | [![pub package](https://img.shields.io/pub/v/web3_universal_client.svg)](https://pub.dev/packages/web3_universal_client) | PublicClient/WalletClient | 3 |
+| [`web3_universal_contract`](packages/contract) | [![pub package](https://img.shields.io/pub/v/web3_universal_contract.svg)](https://pub.dev/packages/web3_universal_contract) | Contract abstraction | 3 |
+| [`web3_universal_events`](packages/events) | [![pub package](https://img.shields.io/pub/v/web3_universal_events.svg)](https://pub.dev/packages/web3_universal_events) | Event subscription | 3 |
+| [`web3_universal_multicall`](packages/multicall) | [![pub package](https://img.shields.io/pub/v/web3_universal_multicall.svg)](https://pub.dev/packages/web3_universal_multicall) | Multicall support | 4 |
+| [`web3_universal_ens`](packages/ens) | [![pub package](https://img.shields.io/pub/v/web3_universal_ens.svg)](https://pub.dev/packages/web3_universal_ens) | ENS resolution | 4 |
+| [`web3_universal_aa`](packages/aa) | [![pub package](https://img.shields.io/pub/v/web3_universal_aa.svg)](https://pub.dev/packages/web3_universal_aa) | ERC-4337 Account Abstraction | 5 |
 | [`web3_universal_reown`](packages/reown) | [![pub package](https://img.shields.io/pub/v/web3_universal_reown.svg)](https://pub.dev/packages/web3_universal_reown) | Reown/WalletConnect v2 | 5 |
-| [`web3_universal_swap`](packages/swap) | | DEX aggregation | 5 |
-| [`web3_universal_bridge`](packages/bridge) | | Cross-chain bridging | 5 |
+| [`web3_universal_swap`](packages/swap) | [![pub package](https://img.shields.io/pub/v/web3_universal_swap.svg)](https://pub.dev/packages/web3_universal_swap) | DEX aggregation | 5 |
+| [`web3_universal_bridge`](packages/bridge) | [![pub package](https://img.shields.io/pub/v/web3_universal_bridge.svg)](https://pub.dev/packages/web3_universal_bridge) | Cross-chain bridging | 5 |
 | [`web3_universal_nft`](packages/nft) | [![pub package](https://img.shields.io/pub/v/web3_universal_nft.svg)](https://pub.dev/packages/web3_universal_nft) | NFT services | 5 |
-| [`web3_universal_staking`](packages/staking) | | Staking services | 5 |
+| [`web3_universal_staking`](packages/staking) | [![pub package](https://img.shields.io/pub/v/web3_universal_staking.svg)](https://pub.dev/packages/web3_universal_staking) | Staking services | 5 |
 | [`web3_universal_debug`](packages/debug) | [![pub package](https://img.shields.io/pub/v/web3_universal_debug.svg)](https://pub.dev/packages/web3_universal_debug) | Debug/Trace API | 5 |
 | [`web3_universal_mev`](packages/mev) | [![pub package](https://img.shields.io/pub/v/web3_universal_mev.svg)](https://pub.dev/packages/web3_universal_mev) | MEV protection/Flashbots | 5 |
 | [`web3_universal_dapp`](packages/dapp) | [![pub package](https://img.shields.io/pub/v/web3_universal_dapp.svg)](https://pub.dev/packages/web3_universal_dapp) | DApp state & session management | 5 |
-| [`web3_universal_history`](packages/history) | | Transaction history explorer | 5 |
+| [`web3_universal_history`](packages/history) | [![pub package](https://img.shields.io/pub/v/web3_universal_history.svg)](https://pub.dev/packages/web3_universal_history) | Transaction history explorer | 5 |
 | [`web3_universal_price`](packages/price) | [![pub package](https://img.shields.io/pub/v/web3_universal_price.svg)](https://pub.dev/packages/web3_universal_price) | Asset pricing and oracles | 5 |
 | [`web3_universal_bc_ur`](packages/hardware/bc_ur) | [![pub package](https://img.shields.io/pub/v/web3_universal_bc_ur.svg)](https://pub.dev/packages/web3_universal_bc_ur) | BC-UR air-gapped protocol | 6 |
 | [`web3_universal_keystone`](packages/hardware/keystone) | [![pub package](https://img.shields.io/pub/v/web3_universal_keystone.svg)](https://pub.dev/packages/web3_universal_keystone) | Keystone hardware wallet | 6 |
