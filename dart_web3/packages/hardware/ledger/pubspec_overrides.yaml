@@ -1,5 +1,7 @@
+# melos_managed_dependency_overrides: protobuf
 # melos_managed_dependency_overrides: web3_universal_abi,web3_universal_core,web3_universal_crypto,web3_universal_signer
 dependency_overrides:
+  protobuf: ^3.1.0
   web3_universal_abi:
     path: ..\\..\\abi
   web3_universal_core:

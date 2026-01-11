@@ -1,3 +1,4 @@
+# melos_managed_dependency_overrides: web3_universal,web3_universal_dapp,web3_universal_ledger
 dependency_overrides:
   web3_universal_core:
     path: ../packages/core
@@ -65,3 +66,9 @@ dependency_overrides:
     path: ../packages/events
   web3_universal_aptos:
     path: ../packages/extensions/aptos
+  web3_universal:
+    path: ..\\web3_universal
+  web3_universal_dapp:
+    path: ..\\packages\\dapp
+  web3_universal_ledger:
+    path: ..\\packages\\hardware\\ledger
