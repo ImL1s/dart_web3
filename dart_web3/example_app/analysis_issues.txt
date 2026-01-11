@@ -1,0 +1,116 @@
+Analyzing example_app...                                        
+
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\nft_gallery_e2e_test.dart:4:8 - unused_import
+  error - The getter 'onboardingCreateWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:28:29 - undefined_getter
+  error - The getter 'onboardingImportWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:29:29 - undefined_getter
+  error - The getter 'onboardingCreateWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:46:39 - undefined_getter
+  error - The getter 'onboardingImportWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:68:39 - undefined_getter
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\receive_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\send_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\settings_e2e_test.dart:4:8 - unused_import
+warning - The value of the local variable 'l10n' isn't used - integration_test\settings_e2e_test.dart:114:13 - unused_local_variable
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\smart_wallet_e2e_test.dart:4:8 - unused_import
+   info - The imported package 'ledger_flutter' isn't a dependency of the importing package - lib\core\services\ledger_service.dart:10:8 - depend_on_referenced_packages
+  error - Undefined class 'OneInchAggregator' - lib\core\services\swap_service.dart:8:3 - undefined_class
+  error - The method 'OneInchAggregator' isn't defined for the type 'SwapService' - lib\core\services\swap_service.dart:17:21 - undefined_method
+  error - The method 'AggregatorConfig' isn't defined for the type 'SwapService' - lib\core\services\swap_service.dart:17:47 - undefined_method
+  error - The method 'OneInchAggregator' isn't defined for the type 'SwapService' - lib\core\services\swap_service.dart:25:19 - undefined_method
+  error - The method 'AggregatorConfig' isn't defined for the type 'SwapService' - lib\core\services\swap_service.dart:25:45 - undefined_method
+  error - The name 'SwapToken' isn't a type, so it can't be used as a type argument - lib\core\services\swap_service.dart:29:15 - non_type_as_type_argument
+  error - The name 'SwapQuote' isn't a type, so it can't be used as a type argument - lib\core\services\swap_service.dart:40:10 - non_type_as_type_argument
+  error - Undefined class 'SwapToken' - lib\core\services\swap_service.dart:41:14 - undefined_class
+  error - Undefined class 'SwapToken' - lib\core\services\swap_service.dart:42:14 - undefined_class
+  error - The method 'SwapParams' isn't defined for the type 'SwapService' - lib\core\services\swap_service.dart:49:20 - undefined_method
+  error - The method '_sendBitcoinTransaction' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:349:15 - undefined_method
+  error - The instance member '_getBitcoinAddress' can't be accessed in an initializer - lib\core\wallet_service.dart:452:27 - implicit_this_reference_in_initializer
+  error - Undefined name 'accountIndex' - lib\core\wallet_service.dart:452:46 - undefined_identifier
+  error - The await expression can only be used in an async function - lib\core\wallet_service.dart:453:19 - await_in_wrong_context
+  error - Undefined name 'chain' - lib\core\wallet_service.dart:453:37 - undefined_identifier
+  error - The instance member 'senderAddress' can't be accessed in an initializer - lib\core\wallet_service.dart:453:44 - implicit_this_reference_in_initializer
+  error - The name 'TransactionInput' isn't a type, so it can't be used as a type argument - lib\core\wallet_service.dart:463:21 - non_type_as_type_argument
+  error - Expected a class member - lib\core\wallet_service.dart:465:5 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:465:9 - missing_identifier
+  error - Expected to find ')' - lib\core\wallet_service.dart:465:21 - expected_token
+  error - The method 'TransactionInput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:470:19 - undefined_method
+  error - Undefined name 'amount' - lib\core\wallet_service.dart:480:24 - undefined_identifier
+  error - A break statement can't be used outside of a loop or switch statement - lib\core\wallet_service.dart:480:62 - break_outside_of_loop
+  error - The name 'TransactionOutput' isn't a type, so it can't be used as a type argument - lib\core\wallet_service.dart:484:22 - non_type_as_type_argument
+  error - Expected a class member - lib\core\wallet_service.dart:487:5 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:487:9 - missing_identifier
+  error - Methods must have an explicit list of parameters - lib\core\wallet_service.dart:487:9 - missing_method_parameters
+  error - Undefined name 'to' - lib\core\wallet_service.dart:488:39 - undefined_identifier
+  error - The method 'p2wpkh' isn't defined for the type 'Script' - lib\core\wallet_service.dart:490:18 - undefined_method
+  error - The method 'TransactionOutput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:491:19 - undefined_method
+  error - Undefined name 'amount' - lib\core\wallet_service.dart:491:45 - undefined_identifier
+  error - Expected a class member - lib\core\wallet_service.dart:492:7 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:492:13 - missing_identifier
+  error - The instance member 'inputs' can't be accessed in an initializer - lib\core\wallet_service.dart:497:18 - implicit_this_reference_in_initializer
+  error - The instance member 'outputs' can't be accessed in an initializer - lib\core\wallet_service.dart:497:40 - implicit_this_reference_in_initializer
+  error - The instance member 'size' can't be accessed in an initializer - lib\core\wallet_service.dart:498:29 - implicit_this_reference_in_initializer
+  error - The instance member 'feeRate' can't be accessed in an initializer - lib\core\wallet_service.dart:498:36 - implicit_this_reference_in_initializer
+  error - Expected a class member - lib\core\wallet_service.dart:500:5 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:500:8 - missing_identifier
+  error - Expected to find ')' - lib\core\wallet_service.dart:500:18 - expected_token
+  error - Undefined name 'amount' - lib\core\wallet_service.dart:501:75 - undefined_identifier
+  error - The instance member 'inputSum' can't be accessed in an initializer - lib\core\wallet_service.dart:504:20 - implicit_this_reference_in_initializer
+  error - Undefined name 'amount' - lib\core\wallet_service.dart:504:31 - undefined_identifier
+  error - The instance member 'fee' can't be accessed in an initializer - lib\core\wallet_service.dart:504:40 - implicit_this_reference_in_initializer
+  error - Expected a class member - lib\core\wallet_service.dart:505:5 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:505:8 - missing_identifier
+  error - Expected to find ')' - lib\core\wallet_service.dart:505:16 - expected_token
+  error - The method 'p2wpkh' isn't defined for the type 'Script' - lib\core\wallet_service.dart:507:36 - undefined_method
+  error - Undefined name 'pubKeyHash' - lib\core\wallet_service.dart:507:43 - undefined_identifier
+  error - The method 'TransactionOutput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:508:20 - undefined_method
+  error - The method 'BitcoinTransaction' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:512:16 - undefined_method
+  error - The instance member 'inputs' can't be accessed in an initializer - lib\core\wallet_service.dart:514:15 - implicit_this_reference_in_initializer
+  error - The instance member 'outputs' can't be accessed in an initializer - lib\core\wallet_service.dart:515:16 - implicit_this_reference_in_initializer
+  error - Expected a class member - lib\core\wallet_service.dart:520:5 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:520:9 - missing_identifier
+  error - Named parameters must be enclosed in curly braces ('{' and '}') - lib\core\wallet_service.dart:520:16 - named_parameter_outside_group
+  error - Expected to find ')' - lib\core\wallet_service.dart:520:19 - expected_token
+  error - Too many positional arguments: 0 expected, but 1 found - lib\core\wallet_service.dart:527:34 - extra_positional_arguments_could_be_named
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:528:13 - undefined_identifier
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:529:13 - undefined_identifier
+  error - Undefined name 'pubKeyHash' - lib\core\wallet_service.dart:530:13 - undefined_identifier
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:531:13 - undefined_identifier
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:532:13 - undefined_identifier
+  error - The method 'compile' isn't defined for the type 'Script' - lib\core\wallet_service.dart:533:14 - undefined_method
+  error - Undefined name 'privateKey' - lib\core\wallet_service.dart:538:51 - undefined_identifier
+  error - The method 'TransactionInput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:541:24 - undefined_method
+  error - Undefined name 'publicKey' - lib\core\wallet_service.dart:546:32 - undefined_identifier
+  error - The instance member 'tx' can't be accessed in an initializer - lib\core\wallet_service.dart:551:19 - implicit_this_reference_in_initializer
+  error - The instance member 'rawTx' can't be accessed in an initializer - lib\core\wallet_service.dart:552:36 - implicit_this_reference_in_initializer
+  error - Undefined name 'chain' - lib\core\wallet_service.dart:555:34 - undefined_identifier
+  error - The await expression can only be used in an async function - lib\core\wallet_service.dart:556:22 - await_in_wrong_context
+  error - The instance member 'pushUri' can't be accessed in an initializer - lib\core\wallet_service.dart:556:38 - implicit_this_reference_in_initializer
+  error - The instance member 'rawHex' can't be accessed in an initializer - lib\core\wallet_service.dart:556:53 - implicit_this_reference_in_initializer
+  error - Expected a class member - lib\core\wallet_service.dart:558:5 - expected_class_member
+  error - Expected an identifier - lib\core\wallet_service.dart:558:8 - missing_identifier
+  error - The prefix 'response' can't be used here because it's shadowed by a local declaration - lib\core\wallet_service.dart:558:9 - prefix_shadowed_by_local_declaration
+  error - Expected an identifier - lib\core\wallet_service.dart:558:29 - missing_identifier
+  error - Expected to find ')' - lib\core\wallet_service.dart:558:32 - expected_token
+  error - Expected a class member - lib\core\wallet_service.dart:562:5 - expected_class_member
+  error - Methods must have an explicit list of parameters - lib\core\wallet_service.dart:562:12 - missing_method_parameters
+  error - The name of a constructor must match the name of the enclosing class - lib\core\wallet_service.dart:562:12 - invalid_constructor_name
+  error - Undefined name '_ed25519Wallet' - lib\core\wallet_service.dart:583:21 - undefined_identifier
+  error - Undefined class 'BitcoinTransaction' - lib\core\wallet_service.dart:653:14 - undefined_class
+  error - Undefined name 'isInitialized' - lib\core\wallet_service.dart:768:10 - undefined_identifier
+  error - Expected a method, getter, setter or operator declaration - lib\core\wallet_service.dart:773:1 - expected_executable
+   info - The imported package 'ledger_flutter' isn't a dependency of the importing package - lib\features\connect\presentation\screens\connect_wallet_screen.dart:9:8 - depend_on_referenced_packages
+  error - The getter 'onboardingCreateWallet' isn't defined for the type 'AppLocalizations' - lib\features\onboarding\presentation\screens\onboarding_screen.dart:99:36 - undefined_getter
+  error - The getter 'onboardingImportWallet' isn't defined for the type 'AppLocalizations' - lib\features\onboarding\presentation\screens\onboarding_screen.dart:111:36 - undefined_getter
+  error - The method '_showSwapApiKeyDialog' isn't defined for the type 'SettingsScreen' - lib\features\settings\presentation\screens\settings_screen.dart:113:21 - undefined_method
+  error - The name '_fromToken' is already defined - lib\features\swap\presentation\screens\swap_screen.dart:19:10 - duplicate_definition
+  error - Undefined name 'swapState' - lib\features\swap\presentation\screens\swap_screen.dart:168:28 - undefined_identifier
+warning - The value of the local variable 'notifier' isn't used - lib\features\swap\presentation\screens\swap_screen.dart:174:32 - unused_local_variable
+  error - Undefined name 'swapState' - lib\features\swap\presentation\screens\swap_screen.dart:189:31 - undefined_identifier
+  error - Undefined name 'swapState' - lib\features\swap\presentation\screens\swap_screen.dart:201:24 - undefined_identifier
+   info - The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' - lib\shared\providers\currency_provider.dart:1:8 - unnecessary_import
+  error - Undefined class 'SwapQuote' - lib\shared\providers\swap_provider.dart:20:9 - undefined_class
+  error - The name 'SwapToken' isn't a type, so it can't be used as a type argument - lib\shared\providers\swap_provider.dart:21:14 - non_type_as_type_argument
+  error - Undefined class 'SwapQuote' - lib\shared\providers\swap_provider.dart:27:5 - undefined_class
+  error - The name 'SwapToken' isn't a type, so it can't be used as a type argument - lib\shared\providers\swap_provider.dart:28:10 - non_type_as_type_argument
+  error - Undefined class 'SwapToken' - lib\shared\providers\swap_provider.dart:62:16 - undefined_class
+  error - Undefined class 'SwapToken' - lib\shared\providers\swap_provider.dart:63:16 - undefined_class
+   info - The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' - lib\shared\providers\theme_provider.dart:2:8 - unnecessary_import
+

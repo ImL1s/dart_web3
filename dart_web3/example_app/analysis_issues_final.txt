@@ -1,0 +1,17 @@
+Analyzing example_app...                                        
+
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\nft_gallery_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\receive_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\send_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\settings_e2e_test.dart:4:8 - unused_import
+warning - The value of the local variable 'l10n' isn't used - integration_test\settings_e2e_test.dart:114:13 - unused_local_variable
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\smart_wallet_e2e_test.dart:4:8 - unused_import
+   info - The imported package 'ledger_flutter' isn't a dependency of the importing package - lib\core\services\ledger_service.dart:10:8 - depend_on_referenced_packages
+   info - Use 'const' for final variables initialized to a constant value - lib\core\wallet_service.dart:467:5 - prefer_const_declarations
+  error - The getter 'segwit' isn't defined for the type 'BitcoinAddressType' - lib\core\wallet_service.dart:478:41 - undefined_getter
+   info - The imported package 'ledger_flutter' isn't a dependency of the importing package - lib\features\connect\presentation\screens\connect_wallet_screen.dart:9:8 - depend_on_referenced_packages
+warning - Unused import: 'package:web3_universal/web3_universal.dart' - lib\features\swap\presentation\screens\swap_screen.dart:4:8 - unused_import
+warning - The value of the local variable 'notifier' isn't used - lib\features\swap\presentation\screens\swap_screen.dart:175:32 - unused_local_variable
+   info - The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' - lib\shared\providers\currency_provider.dart:1:8 - unnecessary_import
+   info - The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' - lib\shared\providers\theme_provider.dart:2:8 - unnecessary_import
+

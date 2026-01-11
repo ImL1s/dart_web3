@@ -8,7 +8,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:ledger_flutter/ledger_flutter.dart' as lf;
-import 'package:web3_universal_ledger/web3_universal_ledger.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 /// Connection status for Ledger service.
 enum LedgerStatus {

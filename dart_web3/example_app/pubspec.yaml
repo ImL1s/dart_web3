@@ -35,26 +35,15 @@ dependencies:
   url_launcher: ^6.3.1
   http: ^1.2.2
   bip39: ^1.0.6
+  bitcoin_base: ^6.0.0
   
-  # dart_web3 SDK (path dependencies)
-  web3_universal_core: ^0.1.1
-  web3_universal_crypto: ^0.2.0
-  web3_universal_abi: ^0.1.1
-  web3_universal_signer: ^0.1.1
-  web3_universal_chains: ^0.1.0+1
-  web3_universal_client: ^0.1.1+1
-  web3_universal_provider: ^0.1.0+1
-  web3_universal_ens: ^0.1.1+1
-  web3_universal_swap: ^0.1.0+2
-  web3_universal_nft: ^0.1.1+1
-  web3_universal_price: ^0.1.1
-  web3_universal_utxo: ^0.1.1
-  web3_universal_solana: ^0.1.1
-  web3_universal_reown: ^0.1.1
-  # web3_universal_ledger: ^0.1.0+1
-  web3_universal_aa: ^0.1.1+1
-  web3_universal_aptos: ^0.1.0
-  ledger_flutter: ^1.0.0
+  # dart_web3 SDK (One Line Import)
+  web3_universal:
+    path: ../web3_universal
+    # version: ^0.1.0 (Unlock when publishing app)
+
+  # Hardware Wallets (Optional explicit dependecies if needed, but included in meta)
+  # ledger_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:

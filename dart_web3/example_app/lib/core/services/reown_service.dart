@@ -7,7 +7,7 @@ library;
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:web3_universal_reown/web3_universal_reown.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 /// Reown connection state for UI binding.
 enum ReownConnectionStatus {

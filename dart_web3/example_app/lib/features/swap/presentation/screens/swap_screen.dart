@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:web3_universal_swap/web3_universal_swap.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 import '../../../../shared/providers/swap_provider.dart';
 
@@ -15,7 +15,6 @@ class SwapScreen extends ConsumerStatefulWidget {
 
 class _SwapScreenState extends ConsumerState<SwapScreen> {
   final _fromAmountController = TextEditingController();
-  String _fromToken = 'ETH';
   String _fromToken = 'ETH';
   String _toToken = 'USDC';
   // bool _isLoading = false; // Managed by provider
@@ -37,9 +36,11 @@ class _SwapScreenState extends ConsumerState<SwapScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final swapState = ref.watch(swapProvider);
 
     return Scaffold(
       appBar: AppBar(

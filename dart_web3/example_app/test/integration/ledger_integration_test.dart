@@ -3,7 +3,7 @@
 // These tests verify the complete flow without requiring a physical device.
 // The main unit tests are in packages/hardware/ledger/test/mock_transport_test.dart
 import 'package:flutter_test/flutter_test.dart';
-import 'package:web3_universal_ledger/web3_universal_ledger.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 void main() {
   group('TestLedgerTransport Direct Tests', () {

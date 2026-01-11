@@ -8,6 +8,8 @@ import '../../../../shared/providers/wallet_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/providers/nft_provider.dart';
 import '../../../../shared/providers/swap_provider.dart';
+import '../../../../shared/providers/theme_provider.dart';
+import '../../../../shared/providers/currency_provider.dart';
 
 /// Settings screen
 class SettingsScreen extends ConsumerWidget {
@@ -19,6 +21,10 @@ class SettingsScreen extends ConsumerWidget {
     final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context)!;
     final currentLocale = ref.watch(localeProvider);
+    final themeMode = ref.watch(themeNotifierProvider);
+    final currentCurrency = ref.watch(currencyNotifierProvider);
+
+    final isDark = themeMode == ThemeMode.dark || (themeMode == ThemeMode.system && MediaQuery.platformBrightnessOf(context) == Brightness.dark);
 
     return Scaffold(
       appBar: AppBar(
@@ -52,14 +58,12 @@ class SettingsScreen extends ConsumerWidget {
                 ListTile(
                   leading: Icon(Icons.dark_mode, color: colorScheme.primary),
                   title: const Text('Dark Mode'),
-                  subtitle: const Text('Use system theme'),
+                  subtitle: Text(themeMode == ThemeMode.system ? 'System Default' : (themeMode == ThemeMode.dark ? 'On' : 'Off')),
                   trailing: Switch(
-                    value: true, // Placeholder
+                    value: isDark, 
                     onChanged: (value) {
-                      // TODO: Implement theme switching
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Theme switching coming soon!')),
-                      );
+                      final newMode = value ? ThemeMode.dark : ThemeMode.light;
+                      ref.read(themeNotifierProvider.notifier).setThemeMode(newMode);
                     },
                   ),
                 ),
@@ -67,10 +71,10 @@ class SettingsScreen extends ConsumerWidget {
                 ListTile(
                   leading: Icon(Icons.currency_exchange, color: colorScheme.primary),
                   title: const Text('Currency'),
-                  subtitle: const Text('USD'),
+                  subtitle: Text(currentCurrency.code),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    // TODO: Implement currency selection
+                    _showCurrencyDialog(context, ref);
                   },
                 ),
               ],
@@ -132,7 +136,7 @@ class SettingsScreen extends ConsumerWidget {
                   subtitle: Text(l10n.settingsViewBackup),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    // TODO: Show recovery phrase
+                    _showRecoveryPhraseDialog(context, ref);
                   },
                 ),
                 const Divider(height: 1, indent: 56),
@@ -373,6 +377,178 @@ class SettingsScreen extends ConsumerWidget {
           ],
         );
       },
+    );
+  }
+
+  void _showCurrencyDialog(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Select Currency'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: Currency.values.map((currency) {
+              return ListTile(
+                title: Text('${currency.code} (${currency.symbol})'),
+                onTap: () {
+                  ref.read(currencyNotifierProvider.notifier).setCurrency(currency);
+                  Navigator.pop(context);
+                },
+              );
+            }).toList(),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showRecoveryPhraseDialog(BuildContext context, WidgetRef ref) {
+    // Mock Authentication
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Security Check'),
+        content: const Text('Please authenticate to view protection phrase.\n(Mock: Click Authenticate)'),
+        actions: [
+          TextButton(
+             onPressed: () => Navigator.pop(context),
+             child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () async {
+              Navigator.pop(context); // Close auth dialog
+              
+              final mnemonic = ref.read(walletProvider).mnemonic;
+              
+              if (mnemonic == null || mnemonic.isEmpty) {
+                 if (context.mounted) {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('No wallet loaded')),
+                   );
+                 }
+                 return;
+              }
+              
+              if (context.mounted) {
+                _showMnemonicDisplay(context, mnemonic);
+              }
+            },
+            child: const Text('Authenticate'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showSwapApiKeyDialog(BuildContext context, WidgetRef ref) {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('1inch API Key'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Enter your 1inch API key for swaps.'),
+              TextField(
+                controller: controller,
+                decoration: const InputDecoration(labelText: 'API Key'),
+                obscureText: true,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () {
+                if (controller.text.isNotEmpty) {
+                  ref.read(swapProvider.notifier).setApiKey(controller.text.trim());
+                  Navigator.pop(context);
+                }
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showMnemonicDisplay(BuildContext context, List<String> mnemonic) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.4,
+        maxChildSize: 0.9,
+        builder: (_, controller) => Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          padding: const EdgeInsets.all(24),
+          child: ListView(
+            controller: controller,
+            children: [
+               Text(
+                 'Recovery Phrase',
+                 style: Theme.of(context).textTheme.headlineSmall,
+                 textAlign: TextAlign.center,
+               ),
+               const SizedBox(height: 8),
+               const Text(
+                 'Write down these 12/24 words inside a safe place. Do not share them with anyone.',
+                 textAlign: TextAlign.center,
+                 style: TextStyle(color: Colors.red),
+               ),
+               const SizedBox(height: 24),
+               Wrap(
+                 spacing: 12,
+                 runSpacing: 12,
+                 children: List.generate(mnemonic.length, (index) {
+                   return Container(
+                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                     decoration: BoxDecoration(
+                       color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                       borderRadius: BorderRadius.circular(8),
+                     ),
+                     child: Row(
+                       mainAxisSize: MainAxisSize.min,
+                       children: [
+                         Text(
+                           '${index + 1}.',
+                           style: TextStyle(
+                             color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.5),
+                             fontSize: 12,
+                           ),
+                         ),
+                         const SizedBox(width: 4),
+                         Text(
+                           mnemonic[index],
+                           style: const TextStyle(fontWeight: FontWeight.bold),
+                         ),
+                       ],
+                     ),
+                   );
+                 }),
+               ),
+               const SizedBox(height: 32),
+               FilledButton.icon(
+                 onPressed: () => Navigator.pop(context),
+                 icon: const Icon(Icons.check),
+                 label: const Text('I have backed it up'),
+               ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

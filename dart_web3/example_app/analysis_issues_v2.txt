@@ -1,0 +1,59 @@
+Analyzing example_app...                                        
+
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\nft_gallery_e2e_test.dart:4:8 - unused_import
+  error - The getter 'onboardingCreateWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:28:29 - undefined_getter
+  error - The getter 'onboardingImportWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:29:29 - undefined_getter
+  error - The getter 'onboardingCreateWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:46:39 - undefined_getter
+  error - The getter 'onboardingImportWallet' isn't defined for the type 'AppLocalizations' - integration_test\onboarding_e2e_test.dart:68:39 - undefined_getter
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\receive_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\send_e2e_test.dart:4:8 - unused_import
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\settings_e2e_test.dart:4:8 - unused_import
+warning - The value of the local variable 'l10n' isn't used - integration_test\settings_e2e_test.dart:114:13 - unused_local_variable
+warning - Unused import: 'package:flutter_riverpod/flutter_riverpod.dart' - integration_test\smart_wallet_e2e_test.dart:4:8 - unused_import
+   info - The imported package 'ledger_flutter' isn't a dependency of the importing package - lib\core\services\ledger_service.dart:10:8 - depend_on_referenced_packages
+   info - Use 'const' for final variables initialized to a constant value - lib\core\wallet_service.dart:467:5 - prefer_const_declarations
+  error - The name 'TransactionInput' isn't a type, so it can't be used as a type argument - lib\core\wallet_service.dart:470:21 - non_type_as_type_argument
+  error - The method 'TransactionInput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:477:19 - undefined_method
+  error - The name 'TransactionOutput' isn't a type, so it can't be used as a type argument - lib\core\wallet_service.dart:491:22 - non_type_as_type_argument
+  error - The method 'p2wpkh' isn't defined for the type 'Script' - lib\core\wallet_service.dart:497:18 - undefined_method
+  error - The method 'TransactionOutput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:498:19 - undefined_method
+  error - The method 'p2wpkh' isn't defined for the type 'Script' - lib\core\wallet_service.dart:514:36 - undefined_method
+  error - Undefined name 'pubKeyHash' - lib\core\wallet_service.dart:514:43 - undefined_identifier
+  error - The method 'TransactionOutput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:515:20 - undefined_method
+  error - The method 'BitcoinTransaction' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:519:16 - undefined_method
+  error - Too many positional arguments: 0 expected, but 1 found - lib\core\wallet_service.dart:534:34 - extra_positional_arguments_could_be_named
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:535:13 - undefined_identifier
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:536:13 - undefined_identifier
+  error - Undefined name 'pubKeyHash' - lib\core\wallet_service.dart:537:13 - undefined_identifier
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:538:13 - undefined_identifier
+  error - Undefined name 'OpCode' - lib\core\wallet_service.dart:539:13 - undefined_identifier
+  error - The method 'compile' isn't defined for the type 'Script' - lib\core\wallet_service.dart:540:14 - undefined_method
+  error - Undefined name 'privateKey' - lib\core\wallet_service.dart:545:51 - undefined_identifier
+  error - The method 'TransactionInput' isn't defined for the type 'WalletService' - lib\core\wallet_service.dart:548:24 - undefined_method
+  error - Undefined name 'publicKey' - lib\core\wallet_service.dart:553:32 - undefined_identifier
+  error - Undefined class 'BitcoinTransaction' - lib\core\wallet_service.dart:660:14 - undefined_class
+   info - The imported package 'ledger_flutter' isn't a dependency of the importing package - lib\features\connect\presentation\screens\connect_wallet_screen.dart:9:8 - depend_on_referenced_packages
+  error - The getter 'onboardingCreateWallet' isn't defined for the type 'AppLocalizations' - lib\features\onboarding\presentation\screens\onboarding_screen.dart:99:36 - undefined_getter
+  error - The getter 'onboardingImportWallet' isn't defined for the type 'AppLocalizations' - lib\features\onboarding\presentation\screens\onboarding_screen.dart:111:36 - undefined_getter
+  error - The method '_showCurrencyDialog' isn't defined for the type 'SettingsScreen' - lib\features\settings\presentation\screens\settings_screen.dart:77:21 - undefined_method
+  error - The method '_showSwapApiKeyDialog' isn't defined for the type 'SettingsScreen' - lib\features\settings\presentation\screens\settings_screen.dart:117:21 - undefined_method
+  error - The method '_showRecoveryPhraseDialog' isn't defined for the type 'SettingsScreen' - lib\features\settings\presentation\screens\settings_screen.dart:139:21 - undefined_method
+   info - The local variable '_showCurrencyDialog' starts with an underscore - lib\features\settings\presentation\screens\settings_screen.dart:381:10 - no_leading_underscores_for_local_identifiers
+warning - The declaration '_showCurrencyDialog' isn't referenced - lib\features\settings\presentation\screens\settings_screen.dart:381:10 - unused_element
+   info - The local variable '_showRecoveryPhraseDialog' starts with an underscore - lib\features\settings\presentation\screens\settings_screen.dart:404:8 - no_leading_underscores_for_local_identifiers
+warning - The declaration '_showRecoveryPhraseDialog' isn't referenced - lib\features\settings\presentation\screens\settings_screen.dart:404:8 - unused_element
+  error - The getter 'mnemonic' isn't defined for the type 'WalletNotifier' - lib\features\settings\presentation\screens\settings_screen.dart:420:66 - undefined_getter
+  error - Local variable '_showMnemonicDisplay' can't be referenced before it is declared - lib\features\settings\presentation\screens\settings_screen.dart:431:17 - referenced_before_declaration
+   info - The local variable '_showMnemonicDisplay' starts with an underscore - lib\features\settings\presentation\screens\settings_screen.dart:441:8 - no_leading_underscores_for_local_identifiers
+   info - The private field _fromToken could be 'final' - lib\features\swap\presentation\screens\swap_screen.dart:19:10 - prefer_final_fields
+warning - The value of the field '_fromToken' isn't used - lib\features\swap\presentation\screens\swap_screen.dart:19:10 - unused_field
+  error - The name '_fromToken' is already defined - lib\features\swap\presentation\screens\swap_screen.dart:19:10 - duplicate_definition
+  error - Undefined name 'swapState' - lib\features\swap\presentation\screens\swap_screen.dart:168:28 - undefined_identifier
+warning - The value of the local variable 'notifier' isn't used - lib\features\swap\presentation\screens\swap_screen.dart:174:32 - unused_local_variable
+  error - Undefined name 'swapState' - lib\features\swap\presentation\screens\swap_screen.dart:189:31 - undefined_identifier
+  error - Undefined name 'swapState' - lib\features\swap\presentation\screens\swap_screen.dart:201:24 - undefined_identifier
+   info - The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' - lib\shared\providers\currency_provider.dart:1:8 - unnecessary_import
+  error - 'SwapService' isn't a function - lib\shared\providers\swap_provider.dart:47:20 - invocation_of_non_function
+  error - The name 'SwapService' is defined in the libraries 'package:web3_universal_swap/src/swap_service.dart (via package:web3_universal/web3_universal.dart)' and 'package:web3_wallet_app/core/services/swap_service.dart' - lib\shared\providers\swap_provider.dart:47:20 - ambiguous_import
+   info - The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' - lib\shared\providers\theme_provider.dart:2:8 - unnecessary_import
+

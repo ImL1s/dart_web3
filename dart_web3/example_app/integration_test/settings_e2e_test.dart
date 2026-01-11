@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 import 'package:web3_wallet_app/features/settings/presentation/screens/settings_screen.dart';
@@ -111,6 +110,7 @@ void main() {
       await tester.pumpAndSettle();
 
       final context = tester.element(find.byType(SettingsScreen));
+      // ignore: unused_local_variable
       final l10n = AppLocalizations.of(context)!;
 
       // Find language tile by icon and tap

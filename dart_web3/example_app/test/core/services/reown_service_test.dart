@@ -11,7 +11,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:web3_universal_reown/web3_universal_reown.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 import 'package:web3_wallet_app/core/services/reown_service.dart';
 

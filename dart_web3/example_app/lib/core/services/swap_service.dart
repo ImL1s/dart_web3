@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:web3_universal_swap/web3_universal_swap.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 /// Service to handle Token Swapping logic via 1inch
 class SwapService {

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:web3_universal_swap/web3_universal_swap.dart';
+import 'package:web3_universal/web3_universal.dart';
 
-import '../../core/services/swap_service.dart';
+import '../../core/services/swap_service.dart' as local;
 import 'wallet_provider.dart';
 
 /// Swap state
@@ -44,7 +44,7 @@ class SwapNotifier extends StateNotifier<SwapState> {
   }
 
   final Ref _ref;
-  final _service = SwapService();
+  final _service = local.SwapService();
 
   Future<void> _init() async {
     await _service.loadApiKey();

@@ -7,15 +7,10 @@ library;
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:bitcoin_base/bitcoin_base.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:web3_universal_crypto/web3_universal_crypto.dart';
-import 'package:web3_universal_signer/web3_universal_signer.dart';
-import 'package:web3_universal_provider/web3_universal_provider.dart';
-import 'package:web3_universal_utxo/web3_universal_utxo.dart';
-import 'package:web3_universal_solana/web3_universal_solana.dart';
-import 'package:web3_universal_aptos/web3_universal_aptos.dart';
+import 'package:web3_universal/web3_universal.dart';
 
 import 'services/ledger_service.dart';
 
@@ -454,53 +449,57 @@ class WalletService {
   // Bitcoin Implementation (P2WPKH)
   // ═══════════════════════════════════════════════════════════════════════════
 
+  Future<String> _sendBitcoinTransaction(
+    ChainConfig chain,
+    String to,
+    BigInt amount,
+    int accountIndex,
+  ) async {
+
     // 2. Fetch UTXOs (Real)
     final senderAddress = _getBitcoinAddress(accountIndex);
-    final utxos = await _fetchUtxos(chain, senderAddress);
+    final jsonUtxos = await _fetchUtxos(chain, senderAddress);
 
     // 3. Coin Selection (Naive)
     // Estimate fee (simple): 2 inputs (approx) -> ~400 bytes. Rate 10 sat/vbyte -> 4000 sats.
     // We iterate adding inputs until we cover amount + buffer.
     BigInt inputSum = BigInt.zero;
-    final selectedUtxos = <Map<String, dynamic>>[];
+    final selectedUtxos = <BitcoinUtxo>[];
     final feeRate = 20; // sats/vbyte
     
-    // Inputs
-    final inputs = <TransactionInput>[];
-    
-    for (final utxo in utxos) {
-       final val = BigInt.from(utxo['value'] as int);
+    // Convert to BitcoinUtxo
+    for (final u in jsonUtxos) {
+       final val = BigInt.from(u['value'] as int);
        inputSum += val;
-       selectedUtxos.add(utxo);
        
-       inputs.add(TransactionInput(
-         txId: HexUtils.decode(utxo['txid'] as String),
-         vout: utxo['vout'] as int,
-         scriptSig: Uint8List(0),
-         sequence: 0xFFFFFFFF, // Sequence check
+       selectedUtxos.add(BitcoinUtxo(
+         txHash: u['txid'] as String,
+         vout: u['vout'] as int,
+         value: val,
+         scriptType: SegwitAddressType.p2wpkh, // P2WPKH maps to segwit
        ));
        
-       // Check if enough
-       // Approx size
-       final size = inputs.length * 148 + 2 * 34 + 10;
+       // Check if enough (Approx size calculation)
+       final size = selectedUtxos.length * 148 + 2 * 34 + 10;
        if (inputSum >= amount + BigInt.from(size * feeRate)) break;
     }
     
-    // 4. Outputs & Change
-    final outputs = <TransactionOutput>[];
+    // 4. Outputs
+    final outputs = <BitcoinOutput>[];
     
     // Destination
     try {
-      final decodedTo = Bech32.decode(to);
-      final toScript =
-          Script.p2wpkh(Uint8List.fromList(decodedTo.witnessProgram));
-      outputs.add(TransactionOutput(amount: amount, scriptPubKey: toScript));
+      final destAddress = P2wpkhAddress.fromAddress(address: to, network: BitcoinNetwork.mainnet);
+      outputs.add(BitcoinOutput(address: destAddress, value: amount));
     } catch (_) {
-      throw ArgumentError('Only Bech32 addresses supported in demo');
+      throw ArgumentError('Invalid Bitcoin address');
     }
     
-    // Fee calc
-    final size = inputs.length * 148 + outputs.length * 34 + 10 + 34; // +34 for potential change
+    // Calculate Change
+    // Builder calculates fee automatically if we let it, or we calculate manually.
+    // BitcoinTransactionBuilder requires explicit outputs (including change).
+    
+    final size = selectedUtxos.length * 148 + outputs.length * 34 + 10 + 34; // +34 for potential change
     final fee = BigInt.from(size * feeRate);
     
     if (inputSum < amount + fee) {
@@ -509,53 +508,46 @@ class WalletService {
     
     final change = inputSum - amount - fee;
     if (change > BigInt.from(546)) {
-       // Change back to sender (P2WPKH)
-       final changeScript = Script.p2wpkh(pubKeyHash);
-       outputs.add(TransactionOutput(amount: change, scriptPubKey: changeScript));
+       // Change back to sender
+       final changeAddress = P2wpkhAddress.fromAddress(address: senderAddress, network: BitcoinNetwork.mainnet);
+       outputs.add(BitcoinOutput(address: changeAddress, value: change));
     }
 
-    // 5. Construct Transaction
-    final tx = BitcoinTransaction(
-      version: 2,
-      inputs: inputs,
-      outputs: outputs,
-      lockTime: 0,
+    // 5. Construct Transaction using Builder
+    // Create UTXO with owner details for signing
+    final utxosWithDetails = <UtxoWithAddress>[];
+    
+    // Get Keys
+    final derived = _hdWallet!.derive("m/84'/0'/0'/0/$accountIndex");
+    final privateKeyBytes = derived.getPrivateKey();
+    final privateKey = ECPrivate.fromBytes(privateKeyBytes);
+    final publicKey = privateKey.getPublic();
+    final senderAddrObj = P2wpkhAddress.fromAddress(address: senderAddress, network: BitcoinNetwork.mainnet);
+
+    for (final utxo in selectedUtxos) {
+      utxosWithDetails.add(UtxoWithAddress(
+        utxo: utxo,
+        ownerDetails: UtxoAddressDetails(
+          publicKey: publicKey.toHex(),
+          address: senderAddrObj,
+        ),
+      ));
+    }
+
+    final builder = BitcoinTransactionBuilder(
+      outPuts: outputs,
+      fee: fee,
+      network: BitcoinNetwork.mainnet,
+      utxos: utxosWithDetails,
     );
 
-    // 6. Sign Inputs
-    for (var i = 0; i < inputs.length; i++) {
-        final utxo = selectedUtxos[i];
-        final val = BigInt.from(utxo['value'] as int);
-        
-        final sighash = _calculateBip143Sighash(
-          tx: tx,
-          inputIndex: i,
-          utxoScriptCode: Script([
-            OpCode.opDup,
-            OpCode.opHash160,
-            pubKeyHash,
-            OpCode.opEqualVerify,
-            OpCode.opCheckSig,
-          ]).compile(),
-          utxoAmount: val,
-          sighashType: 0x01,
-        );
-
-        final signature = Secp256k1.sign(sighash, privateKey);
-        final scriptSig = Uint8List.fromList([...signature, 0x01]);
-
-        tx.inputs[i] = TransactionInput(
-          txId: tx.inputs[i].txId,
-          vout: tx.inputs[i].vout,
-          scriptSig: tx.inputs[i].scriptSig,
-          sequence: tx.inputs[i].sequence,
-          witness: [scriptSig, publicKey],
-        );
-    }
+    // 6. Sign
+    final tx = builder.buildTransaction((digest, utxo, pubKey, sighash) {
+      return privateKey.signECDSA(digest);
+    });
 
     // 7. Broadcast
-    final rawTx = tx.toBytes(segwit: true);
-    final rawHex = HexUtils.encode(rawTx);
+    final rawHex = tx.serialize();
     
     // Broadcast via Blockstream API
     final pushUri = Uri.parse('${chain.rpcUrl}/tx');
@@ -652,82 +644,6 @@ class WalletService {
     int accountIndex,
   ) async {
     throw UnimplementedError('Aptos signing requires BCS serialization which is pending in SDK.');
-  }
-
-  /// Calculates BIP-143 Sighash for SegWit inputs
-  Uint8List _calculateBip143Sighash({
-    required BitcoinTransaction tx,
-    required int inputIndex,
-    required Uint8List utxoScriptCode,
-    required BigInt utxoAmount,
-    required int sighashType,
-  }) {
-    final buffer = BytesBuilder();
-
-    // 1. Version
-    buffer.add(_int32ToBytes(tx.version));
-
-    // 2. HashPrevouts
-    final prevouts = BytesBuilder();
-    for (final input in tx.inputs) {
-      prevouts.add(input.txId);
-      prevouts.add(_int32ToBytes(input.vout));
-    }
-    buffer.add(Sha256.doubleHash(prevouts.toBytes()));
-
-    // 3. HashSequence
-    final sequences = BytesBuilder();
-    for (final input in tx.inputs) {
-      sequences.add(_int32ToBytes(input.sequence));
-    }
-    buffer.add(Sha256.doubleHash(sequences.toBytes()));
-
-    // 4. Outpoint
-    final input = tx.inputs[inputIndex];
-    buffer.add(input.txId);
-    buffer.add(_int32ToBytes(input.vout));
-
-    // 5. ScriptCode
-    buffer.addByte(utxoScriptCode.length); // Assuming small script < 0xfd
-    buffer.add(utxoScriptCode);
-
-    // 6. Amount
-    buffer.add(_int64ToBytes(utxoAmount));
-
-    // 7. Sequence
-    buffer.add(_int32ToBytes(input.sequence));
-
-    // 8. HashOutputs
-    final outputs = BytesBuilder();
-    for (final output in tx.outputs) {
-      outputs.add(_int64ToBytes(output.amount));
-      // Length check simplified
-      if (output.scriptPubKey.length < 0xfd) {
-        outputs.addByte(output.scriptPubKey.length);
-      } else {
-        outputs.addByte(0xfd); // Simplification, assume < 65535
-        final lenBuf = Uint8List(2);
-        ByteData.view(lenBuf.buffer)
-            .setUint16(0, output.scriptPubKey.length, Endian.little);
-        outputs.add(lenBuf);
-      }
-      outputs.add(output.scriptPubKey);
-    }
-    buffer.add(Sha256.doubleHash(outputs.toBytes()));
-
-    // 9. LockTime
-    buffer.add(_int32ToBytes(tx.lockTime));
-
-    // 10. Sighash Type
-    buffer.add(_int32ToBytes(sighashType));
-
-    return Sha256.doubleHash(buffer.toBytes());
-  }
-
-  Uint8List _int32ToBytes(int value) {
-    final buffer = Uint8List(4);
-    ByteData.view(buffer.buffer).setInt32(0, value, Endian.little);
-    return buffer;
   }
 
   Uint8List _int64ToBytes(BigInt value) {
