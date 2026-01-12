@@ -1,6 +1,6 @@
 # melos_managed_dependency_overrides: web3_universal_core,web3_universal_crypto
 dependency_overrides:
   web3_universal_core:
-    path: ..\\core
+    path: ../core
   web3_universal_crypto:
-    path: ..\\crypto
+    path: ../crypto

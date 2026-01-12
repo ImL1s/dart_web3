@@ -1,12 +1,12 @@
 # melos_managed_dependency_overrides: web3_universal_abi,web3_universal_bc_ur,web3_universal_core,web3_universal_crypto,web3_universal_signer
 dependency_overrides:
   web3_universal_abi:
-    path: ..\\..\\abi
+    path: ../../abi
   web3_universal_bc_ur:
-    path: ..\\bc_ur
+    path: ../bc_ur
   web3_universal_core:
-    path: ..\\..\\core
+    path: ../../core
   web3_universal_crypto:
-    path: ..\\..\\crypto
+    path: ../../crypto
   web3_universal_signer:
-    path: ..\\..\\signer
+    path: ../../signer

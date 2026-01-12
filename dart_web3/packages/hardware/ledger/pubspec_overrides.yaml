@@ -3,10 +3,10 @@
 dependency_overrides:
   protobuf: ^3.1.0
   web3_universal_abi:
-    path: ..\\..\\abi
+    path: ../../abi
   web3_universal_core:
-    path: ..\\..\\core
+    path: ../../core
   web3_universal_crypto:
-    path: ..\\..\\crypto
+    path: ../../crypto
   web3_universal_signer:
-    path: ..\\..\\signer
+    path: ../../signer
