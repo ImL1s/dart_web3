@@ -1,0 +1,10 @@
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart
+00:00 +0 -1: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart [E]
+  Failed to load "D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart":
+  Compilation failed for testPath=D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart: lib/features/connect/presentation/screens/connect_wallet_screen.dart:214:49: Error: The getter 'id' isn't defined for the type 'LedgerDevice'.
+   - 'LedgerDevice' is from 'package:web3_universal_ledger/src/ledger_types.dart' ('../packages/hardware/ledger/lib/src/ledger_types.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'id'.
+                            subtitle: Text(device.id),
+                                                  ^^
+  .
+00:00 +0 -1: Some tests failed.

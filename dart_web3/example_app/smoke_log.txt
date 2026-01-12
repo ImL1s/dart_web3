@@ -1,0 +1,5 @@
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart
+00:00 +0: Smoke Test: Full App Navigation & Sanity Check
+STEP 1: App Launching
+STEP 1: App Launched
+STEP 2: Resetting Wallet

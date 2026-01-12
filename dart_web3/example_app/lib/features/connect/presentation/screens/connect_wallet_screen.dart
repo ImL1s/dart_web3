@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
+import 'package:web3_universal/web3_universal.dart';
 
 import '../../../../core/services/ledger_service.dart';
 import '../../../../shared/providers/reown_provider.dart';
@@ -91,7 +91,7 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen>
     }
   }
 
-  Future<void> _connectLedger(lf.LedgerDevice device) async {
+  Future<void> _connectLedger(LedgerDevice device) async {
     setState(() => _isLedgerScanning = true); // reused for connecting indicator
     await ref.read(ledgerServiceProvider).connect(device);
     if (mounted) {
@@ -211,7 +211,7 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen>
                         child: ListTile(
                           leading: const Icon(Icons.usb),
                           title: Text(device.name),
-                          subtitle: Text(device.id),
+                          subtitle: Text(device.deviceId),
                           trailing:
                               const Icon(Icons.arrow_forward_ios, size: 16),
                           onTap: () => _connectLedger(device),
@@ -240,7 +240,7 @@ class _ConnectWalletScreenState extends ConsumerState<ConnectWalletScreen>
     );
   }
 
-  Widget _buildLedgerConnectedState(lf.LedgerDevice device) {
+  Widget _buildLedgerConnectedState(LedgerDevice device) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

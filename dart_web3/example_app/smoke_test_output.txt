@@ -1,0 +1,122 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (93.0.0 available)
+  analyzer 7.6.0 (10.0.0 available)
+  analyzer_plugin 0.13.4 (0.14.0 available)
+  async 2.11.0 (2.13.0 available)
+  bitcoin_base 6.9.0 (7.0.0 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+  build 2.4.2 (4.0.3 available)
+  build_config 1.1.2 (1.2.0 available)
+  build_daemon 4.0.4 (4.1.1 available)
+  build_resolvers 2.4.4 (3.0.4 available)
+  build_runner 2.4.15 (2.10.4 available)
+  build_runner_core 8.0.0 (9.3.2 available)
+  characters 1.4.0 (1.4.1 available)
+  checked_yaml 2.0.3 (2.0.4 available)
+  code_builder 4.10.1 (4.11.1 available)
+  custom_lint 0.7.6 (0.8.1 available)
+  custom_lint_builder 0.7.6 (0.8.1 available)
+  custom_lint_core 0.7.5 (0.8.2 available)
+  custom_lint_visitor 1.0.0+7.7.0 (1.0.0+9.0.0 available)
+  dart_style 3.0.1 (3.1.3 available)
+  ffi 2.1.3 (2.1.5 available)
+  file 7.0.0 (7.0.1 available)
+  flutter_lints 5.0.0 (6.0.0 available)
+  flutter_riverpod 2.6.1 (3.1.0 available)
+  flutter_svg 2.2.0 (2.2.3 available)
+  go_router 16.1.0 (17.0.1 available)
+  google_fonts 6.3.0 (7.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  ledger_flutter_plus 1.5.3 (1.5.5 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  path_provider_android 2.2.17 (2.2.22 available)
+  path_provider_foundation 2.4.1 (2.5.1 available)
+  petitparser 6.0.2 (7.0.1 available)
+  platform 3.1.5 (3.1.6 available)
+  pointycastle 3.9.1 (4.0.0 available)
+  process 5.0.2 (5.0.5 available)
+  riverpod 2.6.1 (3.1.0 available)
+  riverpod_annotation 2.6.1 (4.0.0 available)
+  riverpod_generator 2.6.5 (4.0.0+1 available)
+  riverpod_lint 2.6.5 (3.1.0 available)
+  shared_preferences 2.5.3 (2.5.4 available)
+  shared_preferences_android 2.4.11 (2.4.18 available)
+  shared_preferences_foundation 2.5.4 (2.5.6 available)
+  source_gen 2.0.0 (4.1.1 available)
+  source_span 1.10.0 (1.10.1 available)
+  string_scanner 1.3.0 (1.4.1 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  test_api 0.7.7 (0.7.9 available)
+  universal_ble 0.17.0 (1.1.0 available)
+  url_launcher_android 6.3.17 (6.3.28 available)
+  url_launcher_ios 6.3.3 (6.3.6 available)
+  url_launcher_linux 3.2.1 (3.2.2 available)
+  url_launcher_macos 3.2.2 (3.2.5 available)
+  url_launcher_windows 3.1.4 (3.1.5 available)
+  vector_graphics_compiler 1.1.18 (1.1.19 available)
+  vm_service 14.3.0 (15.0.2 available)
+! web3_universal 0.1.0 from path ..\web3_universal (overridden in .\pubspec_overrides.yaml)
+! web3_universal_aa 0.1.1+1 from path ..\packages\aa (overridden in .\pubspec_overrides.yaml)
+! web3_universal_abi 0.1.1 from path ..\packages\abi (overridden in .\pubspec_overrides.yaml)
+! web3_universal_aptos 0.1.0 from path ..\packages\extensions\aptos (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bc_ur 0.1.0+1 from path ..\packages\hardware\bc_ur (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bitcoin 0.1.1 from path ..\packages\extensions\bitcoin (overridden in .\pubspec_overrides.yaml)
+! web3_universal_bridge 0.1.0+2 from path ..\packages\bridge (overridden in .\pubspec_overrides.yaml)
+! web3_universal_chains 0.1.0+1 from path ..\packages\chains (overridden in .\pubspec_overrides.yaml)
+! web3_universal_client 0.1.1+1 from path ..\packages\client (overridden in .\pubspec_overrides.yaml)
+! web3_universal_contract 0.1.0+1 from path ..\packages\contract (overridden in .\pubspec_overrides.yaml)
+! web3_universal_core 0.1.1 from path ..\packages\core (overridden in .\pubspec_overrides.yaml)
+! web3_universal_crypto 0.2.0 from path ..\packages\crypto (overridden in .\pubspec_overrides.yaml)
+! web3_universal_dapp 0.1.1+1 from path ..\packages\dapp (overridden in .\pubspec_overrides.yaml)
+! web3_universal_debug 0.1.1 from path ..\packages\debug (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ens 0.1.1+1 from path ..\packages\ens (overridden in .\pubspec_overrides.yaml)
+! web3_universal_events 0.1.0+2 from path ..\packages\events (overridden in .\pubspec_overrides.yaml)
+! web3_universal_history 0.1.1+1 from path ..\packages\history (overridden in .\pubspec_overrides.yaml)
+! web3_universal_keystone 0.1.0+1 from path ..\packages\hardware\keystone (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ledger 0.1.0+1 from path ..\packages\hardware\ledger (overridden in .\pubspec_overrides.yaml)
+! web3_universal_mev 0.1.1 from path ..\packages\mev (overridden in .\pubspec_overrides.yaml)
+! web3_universal_mpc 0.1.0+1 from path ..\packages\hardware\mpc (overridden in .\pubspec_overrides.yaml)
+! web3_universal_multicall 0.1.0+2 from path ..\packages\multicall (overridden in .\pubspec_overrides.yaml)
+! web3_universal_nft 0.1.1+1 from path ..\packages\nft (overridden in .\pubspec_overrides.yaml)
+! web3_universal_polkadot 0.1.1 from path ..\packages\extensions\polkadot (overridden in .\pubspec_overrides.yaml)
+! web3_universal_price 0.1.1 from path ..\packages\price (overridden in .\pubspec_overrides.yaml)
+! web3_universal_provider 0.1.0+1 from path ..\packages\provider (overridden in .\pubspec_overrides.yaml)
+! web3_universal_reown 0.1.1 from path ..\packages\reown (overridden in .\pubspec_overrides.yaml)
+! web3_universal_signer 0.1.1 from path ..\packages\signer (overridden in .\pubspec_overrides.yaml)
+! web3_universal_solana 0.1.1 from path ..\packages\extensions\solana (overridden in .\pubspec_overrides.yaml)
+! web3_universal_staking 0.1.1+1 from path ..\packages\staking (overridden in .\pubspec_overrides.yaml)
+! web3_universal_swap 0.1.0+2 from path ..\packages\swap (overridden in .\pubspec_overrides.yaml)
+! web3_universal_ton 0.1.1 from path ..\packages\extensions\ton (overridden in .\pubspec_overrides.yaml)
+! web3_universal_trezor 0.1.0+1 from path ..\packages\hardware\trezor (overridden in .\pubspec_overrides.yaml)
+! web3_universal_tron 0.1.1 from path ..\packages\extensions\tron (overridden in .\pubspec_overrides.yaml)
+! web3_universal_utxo 0.1.1 from path ..\packages\utxo (overridden in .\pubspec_overrides.yaml)
+  webdriver 3.0.4 (3.1.0 available)
+  win32 5.10.1 (5.15.0 available)
+  xml 6.5.0 (6.6.1 available)
+Got dependencies!
+61 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/smoke_test.dart
+Building Windows application...                                 
+Building Windows application...                                    18.4s
+00:00 +0 -1: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/smoke_test.dart [E]
+  Failed to load "D:/OtherProject/mine/dart_web3/dart_web3/example_app/integration_test/smoke_test.dart": Build process failed.
+  package:flutter_tools/src/base/common.dart 34:3                    throwToolExit
+  package:flutter_tools/src/windows/build_windows.dart 262:5         _runBuild
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/windows/build_windows.dart 118:5         buildWindows
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/windows/windows_device.dart 65:5         WindowsDevice.buildForDevice
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/desktop_device.dart 108:7                DesktopDevice.startApp
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/test/integration_test_device.dart 57:39  IntegrationTestTestDevice.start
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/test/flutter_platform.dart 680:51        FlutterPlatform._startTest.<fn>
+  ===== asynchronous gap ===========================
+  package:flutter_tools/src/base/async_guard.dart 108:24             asyncGuard.<fn>
+  
+00:00 +0 -1: Some tests failed.

@@ -1,0 +1,60 @@
+00:00 +0: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart
+00:00 +0 -1: loading D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart [E]
+  Failed to load "D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart":
+  Compilation failed for testPath=D:/OtherProject/mine/dart_web3/dart_web3/example_app/test/smoke_flow_test.dart: test/smoke_flow_test.dart:59:31: Error: The getter 'navSettings' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'navSettings'.
+          expect(find.text(l10n.navSettings), findsOneWidget); // Or similar
+                                ^^^^^^^^^^^
+  test/smoke_flow_test.dart:79:24: Error: The getter 'homeReceive' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'homeReceive'.
+      if (find.text(l10n.homeReceive).evaluate().isNotEmpty) {
+                         ^^^^^^^^^^^
+  test/smoke_flow_test.dart:80:40: Error: The getter 'homeReceive' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'homeReceive'.
+         await tester.tap(find.text(l10n.homeReceive));
+                                         ^^^^^^^^^^^
+  test/smoke_flow_test.dart:83:30: Error: The getter 'receiveTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'receiveTitle'.
+         expect(find.text(l10n.receiveTitle), findsOneWidget);
+                               ^^^^^^^^^^^^
+  test/smoke_flow_test.dart:91:24: Error: The getter 'homeSend' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'homeSend'.
+      if (find.text(l10n.homeSend).evaluate().isNotEmpty) {
+                         ^^^^^^^^
+  test/smoke_flow_test.dart:92:40: Error: The getter 'homeSend' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'homeSend'.
+         await tester.tap(find.text(l10n.homeSend));
+                                         ^^^^^^^^
+  test/smoke_flow_test.dart:95:30: Error: The getter 'sendTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:web3_wallet_app/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'sendTitle'.
+         expect(find.text(l10n.sendTitle), findsOneWidget);
+                               ^^^^^^^^^
+  lib/features/connect/presentation/screens/connect_wallet_screen.dart:96:51: Error: The argument type 'LedgerDevice/*1*/' can't be assigned to the parameter type 'LedgerDevice/*2*/'.
+   - 'LedgerDevice/*1*/' is from 'package:ledger_flutter_plus/src/models/ledger_device.dart' ('/C:/Users/aa223/AppData/Local/Pub/Cache/hosted/pub.dev/ledger_flutter_plus-1.5.3/lib/src/models/ledger_device.dart').
+   - 'LedgerDevice/*2*/' is from 'package:web3_universal_ledger/src/ledger_types.dart' ('../packages/hardware/ledger/lib/src/ledger_types.dart').
+      await ref.read(ledgerServiceProvider).connect(device);
+                                                    ^
+  lib/features/connect/presentation/screens/connect_wallet_screen.dart:155:41: Error: The argument type 'LedgerDevice/*1*/' can't be assigned to the parameter type 'LedgerDevice/*2*/'.
+   - 'LedgerDevice/*1*/' is from 'package:web3_universal_ledger/src/ledger_types.dart' ('../packages/hardware/ledger/lib/src/ledger_types.dart').
+   - 'LedgerDevice/*2*/' is from 'package:ledger_flutter_plus/src/models/ledger_device.dart' ('/C:/Users/aa223/AppData/Local/Pub/Cache/hosted/pub.dev/ledger_flutter_plus-1.5.3/lib/src/models/ledger_device.dart').
+        return _buildLedgerConnectedState(connectedDevice);
+                                          ^
+  lib/features/connect/presentation/screens/connect_wallet_screen.dart:214:49: Error: The getter 'id' isn't defined for the type 'LedgerDevice'.
+   - 'LedgerDevice' is from 'package:web3_universal_ledger/src/ledger_types.dart' ('../packages/hardware/ledger/lib/src/ledger_types.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'id'.
+                            subtitle: Text(device.id),
+                                                  ^^
+  lib/features/connect/presentation/screens/connect_wallet_screen.dart:217:55: Error: The argument type 'LedgerDevice/*1*/' can't be assigned to the parameter type 'LedgerDevice/*2*/'.
+   - 'LedgerDevice/*1*/' is from 'package:web3_universal_ledger/src/ledger_types.dart' ('../packages/hardware/ledger/lib/src/ledger_types.dart').
+   - 'LedgerDevice/*2*/' is from 'package:ledger_flutter_plus/src/models/ledger_device.dart' ('/C:/Users/aa223/AppData/Local/Pub/Cache/hosted/pub.dev/ledger_flutter_plus-1.5.3/lib/src/models/ledger_device.dart').
+                            onTap: () => _connectLedger(device),
+                                                        ^
+  .
+00:00 +0 -1: Some tests failed.

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:animations/animations.dart';
 
 import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
@@ -38,7 +39,13 @@ class Web3WalletApp extends ConsumerWidget {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      textTheme: GoogleFonts.interTextTheme(),
+      textTheme: GoogleFonts.outfitTextTheme(),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeThroughPageTransitionsBuilder(),
+          TargetPlatform.iOS: FadeThroughPageTransitionsBuilder(),
+        },
+      ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: colorScheme.surface,
@@ -85,7 +92,13 @@ class Web3WalletApp extends ConsumerWidget {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+      textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeThroughPageTransitionsBuilder(),
+          TargetPlatform.iOS: FadeThroughPageTransitionsBuilder(),
+        },
+      ),
       scaffoldBackgroundColor: colorScheme.surface,
       appBarTheme: AppBarTheme(
         centerTitle: true,

@@ -86,7 +86,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: _ActionButton(
                           icon: Icons.arrow_upward_rounded,
                           label: l10n.send,
-                          onTap: () => context.go('/send'),
+                          onTap: () => context.push('/send'),
                           color: colorScheme.primary,
                         ),
                       ),
@@ -95,7 +95,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: _ActionButton(
                           icon: Icons.arrow_downward_rounded,
                           label: l10n.receive,
-                          onTap: () => context.go('/receive'),
+                          onTap: () => context.push('/receive'),
                           color: colorScheme.secondary,
                         ),
                       ),
@@ -104,7 +104,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: _ActionButton(
                           icon: Icons.history_rounded,
                           label: l10n.transactionHistory,
-                          onTap: () => context.go('/history'),
+                          onTap: () => context.push('/history'),
                           color: colorScheme.outline,
                         ),
                       ),
@@ -112,12 +112,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   const SizedBox(height: 12),
 
-                  // Smart Wallet Button
-                  _ActionButton(
-                    icon: Icons.account_balance_wallet_rounded,
-                    label: l10n.smartWallet,
-                    onTap: () => context.go('/smart-wallet'),
-                    color: colorScheme.tertiary,
+                  // Smart Wallet & NFT Gallery Row
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ActionButton(
+                          icon: Icons.account_balance_wallet_rounded,
+                          label: l10n.smartWallet,
+                          onTap: () => context.push('/smart-wallet'),
+                          color: colorScheme.tertiary,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _ActionButton(
+                          icon: Icons.grid_view_rounded,
+                          label: l10n.nftGallery,
+                          onTap: () => context.push('/nft'),
+                          color: colorScheme.secondary,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 32),
 

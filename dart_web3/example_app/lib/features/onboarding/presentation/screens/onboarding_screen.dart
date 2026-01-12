@@ -23,23 +23,24 @@ class OnboardingScreen extends StatelessWidget {
 
                 // Logo and branding
                 Container(
-                  width: 120,
-                  height: 120,
+                  width: 240,
+                  height: 240,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.primary,
-                        colorScheme.tertiary,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
                     borderRadius: BorderRadius.circular(32),
+                    boxShadow: [
+                      BoxShadow(
+                        color: colorScheme.primary.withOpacity(0.2),
+                        blurRadius: 30,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
                   ),
-                  child: Icon(
-                    Icons.account_balance_wallet_rounded,
-                    size: 64,
-                    color: colorScheme.onPrimary,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(32),
+                    child: Image.asset(
+                      'assets/images/wallet_onboarding.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 32),

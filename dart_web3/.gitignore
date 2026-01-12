@@ -40,3 +40,21 @@ Thumbs.db
 
 # Generated L10n
 example_app/lib/l10n/generated/
+
+# Logs
+*.log
+analysis_*.txt
+analyze_*.txt
+ci_*.log
+failed_log*.txt
+full_ci.log
+job_*.txt
+test_output*.txt
+verify_*.txt
+publish_*.txt
+
+# Brain/Artifacts (if accidentally copied)
+brain/
+walkthrough.md
+implementation_plan.md
+task.md
