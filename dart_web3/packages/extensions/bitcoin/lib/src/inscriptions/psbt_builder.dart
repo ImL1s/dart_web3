@@ -32,14 +32,14 @@ class OrdinalPsbtBuilder {
     final publicKey = privateKey.getPublic();
 
     // Create Taproot address
-    final taprootAddress = _createTaprootAddress(
+    _createTaprootAddress(
       publicKey,
       inscriptionScript,
       network,
     );
 
     // Prepare UTXOs
-    final List<UtxoWithAddress> bitcoinUtxos = [];
+    final bitcoinUtxos = <UtxoWithAddress>[];
     int totalInput = 0;
 
     for (final utxo in utxos) {
@@ -70,12 +70,7 @@ class OrdinalPsbtBuilder {
     final changeAddr = _parseAddress(changeAddress, network);
     final changeAmount = totalInput - outputAmount - fee;
 
-    final List<bb.BitcoinOutput> outputs = [
-      bb.BitcoinOutput(
-        address: taprootAddress,
-        value: BigInt.from(outputAmount),
-      ),
-    ];
+    final outputs = <bb.BitcoinOutput>[];
 
     if (changeAmount > dustAmount) {
       outputs.add(
@@ -175,7 +170,7 @@ class OrdinalPsbtBuilder {
       fee: BigInt.from(fee),
       network: network,
       utxos: utxos,
-      enableRBF: false, // Disable RBF for inscriptions
+      enableRBF: false,
     );
 
     final transaction = builder.buildTransaction((
@@ -244,7 +239,7 @@ class OrdinalPsbtBuilder {
   }
 
   static int _estimateTransactionSize(int inputCount, int outputCount) {
-    int size = 4 + 1 + 1 + 4; // version + counts + locktime
+    var size = 4 + 1 + 1 + 4; // version + counts + locktime
     size += inputCount * (32 + 4 + 1 + 107 + 4); // inputs
     size += outputCount * (8 + 1 + 25); // outputs
     size += inputCount * 68; // witness data estimate
@@ -277,7 +272,7 @@ class OrdinalPsbtBuilder {
 
   static void _addPushData(List<int> script, Uint8List data) {
     const maxChunkSize = 520;
-    int offset = 0;
+    var offset = 0;
 
     while (offset < data.length) {
       final remaining = data.length - offset;

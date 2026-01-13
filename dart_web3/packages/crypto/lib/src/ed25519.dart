@@ -30,7 +30,7 @@ class Ed25519 implements CurveInterface {
   static final BigInt _p = BigInt.two.pow(255) - BigInt.from(19);
 
   // Group order L = 2^252 + 27742317777372353535851937790883648493
-  static final BigInt _L = BigInt.two.pow(252) +
+  static final BigInt _l = BigInt.two.pow(252) +
       BigInt.parse('27742317777372353535851937790883648493');
 
   // d = -121665/121666 mod p
@@ -39,11 +39,11 @@ class Ed25519 implements CurveInterface {
 
   // Base point B
   // y = 4/5 mod p
-  static final BigInt _By =
+  static final BigInt _by =
       (BigInt.from(4) * _modInverse(BigInt.from(5), _p)) % _p;
 
   // x = recover_x(y)
-  static final BigInt _Bx = _recoverX(_By);
+  static final BigInt _bx = _recoverX(_by);
 
   static BigInt _recoverX(BigInt y) {
     final y2 = (y * y) % _p;
@@ -83,27 +83,27 @@ class Ed25519 implements CurveInterface {
 
     // 2. Compute r = SHA512(prefix || message) mod L
     final rHash = _sha512(Uint8List.fromList([...prefix, ...message]));
-    final r = _bytesToBigInt(rHash) % _L;
+    final r = _bytesToBigInt(rHash) % _l;
 
     // 3. Compute R = r * B
-    final R = _scalarMult(r, [_Bx, _By]);
-    final RBytes = _pointToBytes(R);
+    final R = _scalarMult(r, [_bx, _by]);
+    final rBytes = _pointToBytes(R);
 
     // 4. Compute public key A = a * B
-    final A = _scalarMult(a, [_Bx, _By]);
-    final ABytes = _pointToBytes(A);
+    final A = _scalarMult(a, [_bx, _by]);
+    final aBytes = _pointToBytes(A);
 
     // 5. Compute k = SHA512(R || A || message) mod L
     final kHash =
-        _sha512(Uint8List.fromList([...RBytes, ...ABytes, ...message]));
-    final k = _bytesToBigInt(kHash) % _L;
+        _sha512(Uint8List.fromList([...rBytes, ...aBytes, ...message]));
+    final k = _bytesToBigInt(kHash) % _l;
 
     // 6. Compute S = (r + k * a) mod L
-    final S = (r + k * a) % _L;
-    final SBytes = _bigIntToBytes(S, 32);
+    final S = (r + k * a) % _l;
+    final sBytes = _bigIntToBytes(S, 32);
 
     // 7. Return signature (R || S)
-    return Uint8List.fromList([...RBytes, ...SBytes]);
+    return Uint8List.fromList([...rBytes, ...sBytes]);
   }
 
   @override
@@ -121,14 +121,14 @@ class Ed25519 implements CurveInterface {
 
     try {
       // 1. Parse signature
-      final RBytes = signature.sublist(0, 32);
-      final SBytes = signature.sublist(32, 64);
+      final rBytes = signature.sublist(0, 32);
+      final sBytes = signature.sublist(32, 64);
 
-      final R = _bytesToPoint(RBytes);
+      final R = _bytesToPoint(rBytes);
       if (R == null) return false;
 
-      final S = _bytesToBigInt(SBytes);
-      if (S >= _L) return false;
+      final S = _bytesToBigInt(sBytes);
+      if (S >= _l) return false;
 
       // 2. Parse public key
       final A = _bytesToPoint(publicKey);
@@ -136,18 +136,18 @@ class Ed25519 implements CurveInterface {
 
       // 3. Compute k = SHA512(R || A || message) mod L
       final kHash =
-          _sha512(Uint8List.fromList([...RBytes, ...publicKey, ...message]));
-      final k = _bytesToBigInt(kHash) % _L;
+          _sha512(Uint8List.fromList([...rBytes, ...publicKey, ...message]));
+      final k = _bytesToBigInt(kHash) % _l;
 
       // 4. Compute S * B
-      final sB = _scalarMult(S, [_Bx, _By]);
+      final sB = _scalarMult(S, [_bx, _by]);
 
       // 5. Compute R + k * A
       final kA = _scalarMult(k, A);
-      final RkA = _pointAdd(R, kA);
+      final rkA = _pointAdd(R, kA);
 
       // 6. Verify S * B == R + k * A
-      return sB[0] == RkA[0] && sB[1] == RkA[1];
+      return sB[0] == rkA[0] && sB[1] == rkA[1];
     } on Exception catch (_) {
       return false;
     }
@@ -176,7 +176,7 @@ class Ed25519 implements CurveInterface {
     final a = _clampScalar(h.sublist(0, 32));
 
     // Compute A = a * B
-    final A = _scalarMult(a, [_Bx, _By]);
+    final A = _scalarMult(a, [_bx, _by]);
     return _pointToBytes(A);
   }
 
@@ -281,12 +281,13 @@ class Ed25519 implements CurveInterface {
     var result = [BigInt.zero, BigInt.one]; // Identity point (0, 1)
     var addend = [point[0], point[1]];
 
-    while (k > BigInt.zero) {
-      if (k & BigInt.one == BigInt.one) {
+    var tempK = k;
+    while (tempK > BigInt.zero) {
+      if (tempK & BigInt.one == BigInt.one) {
         result = _pointAdd(result, addend);
       }
       addend = _pointAdd(addend, addend);
-      k >>= 1;
+      tempK >>= 1;
     }
 
     return result;

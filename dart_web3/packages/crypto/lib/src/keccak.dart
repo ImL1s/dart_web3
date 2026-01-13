@@ -69,17 +69,16 @@ class _Keccak {
   late final int blockSize;
 
   /// Resets the hash computation to its initial state.
-  _Keccak reset() {
+  void reset() {
     _zero(_sh);
     _zero(_sl);
     _zero(_state);
     _pos = 0;
     _finished = false;
-    return this;
   }
 
   /// Updates the hash computation with the given data.
-  _Keccak update(List<int> data) {
+  void update(List<int> data) {
     if (_finished) {
       throw StateError("Keccak: can't update because hash was finished");
     }
@@ -92,8 +91,6 @@ class _Keccak {
         _pos = 0;
       }
     }
-
-    return this;
   }
 
   void _padAndPermute(int paddingByte) {

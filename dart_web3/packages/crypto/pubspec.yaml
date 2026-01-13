@@ -17,6 +17,7 @@ dependencies:
   convert: ^3.1.1
   pointycastle: ^3.9.1
   crypto: any
+  meta: ^1.11.0
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.24.0

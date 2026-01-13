@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
@@ -22,7 +23,7 @@ class FlutterLedgerDevice extends LedgerDevice {
 abstract class LedgerConnectionInterface {
   bool get isDisconnected;
   Future<void> disconnect();
-  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation);
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation);
 }
 
 /// Adapter for real LedgerConnection
@@ -38,7 +39,7 @@ class LedgerConnectionAdapter implements LedgerConnectionInterface {
   Future<void> disconnect() => _impl.disconnect();
 
   @override
-  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation) {
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) {
     return _impl.sendOperation(operation);
   }
 }
@@ -137,22 +138,23 @@ class FlutterLedgerTransport implements LedgerTransport {
   @override
   Future<APDUResponse> exchange(APDUCommand command) async {
     try {
-      final response = await _connection.sendOperation(
+      final response = await _connection.sendOperation<List<int>>(
         _EthereumOperation(command),
       );
 
+      final respList = response;
       // Parse status word from response (last 2 bytes)
-      if (response.length >= 2) {
-        final statusWord = (response[response.length - 2] << 8) |
-            response[response.length - 1];
-        final data = response.length > 2
-            ? Uint8List.fromList(response.sublist(0, response.length - 2))
+      if (respList.length >= 2) {
+        final statusWord = (respList[respList.length - 2] << 8) |
+            respList[respList.length - 1];
+        final data = respList.length > 2
+            ? Uint8List.fromList(respList.sublist(0, respList.length - 2))
             : Uint8List(0);
         return APDUResponse(data: data, statusWord: statusWord);
       }
 
       return APDUResponse(
-        data: Uint8List.fromList(response),
+        data: Uint8List.fromList(respList),
         statusWord: 0x9000,
       );
     } catch (e) {
@@ -167,13 +169,11 @@ class FlutterLedgerTransport implements LedgerTransport {
   @override
   Future<List<LedgerDevice>> discoverDevices() async {
      // Helper to allow discovery via Transport interface if needed
-     final completer = Completer<List<LedgerDevice>>();
      final devices = <LedgerDevice>[];
      final sub = FlutterLedger.scan().listen((d) => devices.add(d));
      await Future.delayed(const Duration(seconds: 2));
      await sub.cancel();
-     completer.complete(devices);
-     return completer.future;
+     return devices;
   }
 
   @override
@@ -183,7 +183,7 @@ class FlutterLedgerTransport implements LedgerTransport {
 }
 
 /// Custom LedgerOperation for Ethereum APDU commands.
-class _EthereumOperation extends lf.LedgerComplexOperation<Uint8List> {
+class _EthereumOperation extends lf.LedgerOperation<List<int>> {
   final APDUCommand _command;
 
   _EthereumOperation(this._command);
@@ -205,12 +205,7 @@ class _EthereumOperation extends lf.LedgerComplexOperation<Uint8List> {
   }
 
   @override
-  Future<Uint8List> read(lf.ByteDataReader reader) async {
-    final length = reader.remainingLength;
-    if (length > 0) {
-      final data = reader.read(length);
-      return Uint8List.fromList(data);
-    }
-    return Uint8List(0);
+  Future<List<int>> read(lf.ByteDataReader reader) async {
+    return reader.read(reader.remainingLength);
   }
 }

@@ -24,11 +24,11 @@ class SchnorrSignature {
     'fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141',
     radix: 16,
   );
-  static final BigInt _Gx = BigInt.parse(
+  static final BigInt _gx = BigInt.parse(
     '79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798',
     radix: 16,
   );
-  static final BigInt _Gy = BigInt.parse(
+  static final BigInt _gy = BigInt.parse(
     '483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8',
     radix: 16,
   );
@@ -50,7 +50,7 @@ class SchnorrSignature {
     }
 
     // 1. Compute public key P = d * G
-    final P = _scalarMult(d, [_Gx, _Gy]);
+    final P = _scalarMult(d, [_gx, _gy]);
     final pk = P[0]; // x-only public key
 
     // 2. Negate d if P.y is odd (BIP-340 requires even y)
@@ -77,7 +77,7 @@ class SchnorrSignature {
     }
 
     // 4. Compute R = k * G
-    final R = _scalarMult(k, [_Gx, _Gy]);
+    final R = _scalarMult(k, [_gx, _gy]);
 
     // 5. Negate k if R.y is odd
     if (_hasOddY(R)) {
@@ -131,7 +131,7 @@ class SchnorrSignature {
       final e = _bytesToBigInt(eHash) % _n;
 
       // 4. Compute R' = s * G - e * P
-      final sG = _scalarMult(s, [_Gx, _Gy]);
+      final sG = _scalarMult(s, [_gx, _gy]);
       final eP = _scalarMult(e, P);
       final ePNeg = [eP[0], _p - eP[1]]; // Negate y
       final R = _pointAdd(sG, ePNeg);
@@ -162,7 +162,7 @@ class SchnorrSignature {
       throw ArgumentError('Invalid private key');
     }
 
-    final P = _scalarMult(d, [_Gx, _Gy]);
+    final P = _scalarMult(d, [_gx, _gy]);
     return _bigIntToBytes(P[0], 32);
   }
 
@@ -187,13 +187,14 @@ class SchnorrSignature {
     if (t >= _n) return null; // Invalid tweak
 
     // T = t * G
-    final T = _scalarMult(t, [_Gx, _Gy]);
+    final T = _scalarMult(t, [_gx, _gy]);
 
     // Q = P + T
     final Q = _pointAdd(P, T);
 
-    if (Q[0] == BigInt.zero && Q[1] == BigInt.zero)
+    if (Q[0] == BigInt.zero && Q[1] == BigInt.zero) {
       return null; // Point at infinity
+    }
 
     final parity = _hasOddY(Q) ? 1 : 0;
 
@@ -294,12 +295,13 @@ class SchnorrSignature {
     var result = [BigInt.zero, BigInt.zero]; // Point at infinity
     var addend = [point[0], point[1]];
 
-    while (k > BigInt.zero) {
-      if (k & BigInt.one == BigInt.one) {
+    var tempK = k;
+    while (tempK > BigInt.zero) {
+      if (tempK & BigInt.one == BigInt.one) {
         result = _pointAdd(result, addend);
       }
       addend = _pointAdd(addend, addend);
-      k >>= 1;
+      tempK >>= 1;
     }
 
     return result;

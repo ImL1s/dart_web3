@@ -26,7 +26,9 @@ class BridgeService {
   /// Get the best bridge quote from all protocols
   Future<BridgeQuote?> getBestQuote(BridgeParams params) async {
     final quotes = await getQuotes(params);
-    if (quotes.isEmpty) return null;
+    if (quotes.isEmpty) {
+      return null;
+    }
 
     // Sort by net output amount (considering fees and confidence)
     quotes.sort((a, b) {
@@ -162,7 +164,9 @@ class BridgeService {
           sourceChainId,
           destinationChainId,
         );
-        if (supported) return true;
+        if (supported) {
+          return true;
+        }
       } on Exception catch (_) {
         // Continue checking other protocols
         continue;

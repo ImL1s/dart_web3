@@ -1,3 +1,5 @@
+library web3_universal_aa;
+
 /// ERC-4337 Account Abstraction support for Dart Web3 SDK.
 ///
 /// This library provides comprehensive support for ERC-4337 Account Abstraction,

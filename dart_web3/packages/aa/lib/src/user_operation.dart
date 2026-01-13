@@ -204,9 +204,12 @@ class UserOperation {
       json['paymasterAndData'] = packedPmData;
     }
 
-    if (paymasterSignature != null)
+    if (paymasterSignature != null) {
       json['paymasterSignature'] = paymasterSignature;
-    if (authorization != null) json['authorization'] = authorization!.toJson();
+    }
+    if (authorization != null) {
+      json['authorization'] = authorization!.toJson();
+    }
 
     return json;
   }
@@ -456,8 +459,8 @@ class UserOperation {
                 paymasterVerificationGasLimit!, paymasterPostOpGasLimit!)
             .replaceFirst('0x', '');
       }
-      if (this.paymasterData != null) {
-        paymasterAndData += this.paymasterData!.replaceFirst('0x', '');
+      if (paymasterData != null) {
+        paymasterAndData += paymasterData!.replaceFirst('0x', '');
       }
     }
 
@@ -478,9 +481,7 @@ class UserOperation {
   String _packGasLimits(BigInt value1, BigInt value2) {
     final bytes1 = _bigIntToBytes16(value1);
     final bytes2 = _bigIntToBytes16(value2);
-    return '0x' +
-        HexUtils.encode(Uint8List.fromList([...bytes1, ...bytes2]))
-            .replaceFirst('0x', '');
+    return '0x${HexUtils.encode(Uint8List.fromList([...bytes1, ...bytes2])).replaceFirst('0x', '')}';
   }
 
   /// Convert BigInt to 16-byte array

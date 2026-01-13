@@ -13,7 +13,8 @@ environment:
   sdk: ^3.6.0
 
 # Level 0 - No external dependencies (pure Dart only)
-dependencies: {}
+dependencies:
+  meta: ^1.11.0
 
 dev_dependencies:
   lints: ^5.1.1

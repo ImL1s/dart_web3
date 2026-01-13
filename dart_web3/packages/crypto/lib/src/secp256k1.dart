@@ -1,5 +1,5 @@
-import 'dart:math';
 import 'dart:typed_data';
+import 'package:meta/meta.dart';
 
 /// Pure Dart implementation of secp256k1 elliptic curve operations.
 ///
@@ -148,7 +148,7 @@ class Secp256k1 {
     final alpha = (x * x * x + _a * x + _b) % _p;
     final beta = _modPow(alpha, (_p + BigInt.one) >> 2, _p);
 
-    final y = (v % 2 == 0) ? beta : (_p - beta);
+    final y = v.isEven ? beta : (_p - beta);
     final R = _ECPoint(x, y);
 
     if (!_isOnCurve(R)) {
@@ -230,9 +230,10 @@ class Secp256k1 {
 
   static Uint8List _bigIntToBytes(BigInt value, int length) {
     final bytes = Uint8List(length);
+    var tempValue = value;
     for (var i = length - 1; i >= 0; i--) {
-      bytes[i] = (value & BigInt.from(0xFF)).toInt();
-      value >>= 8;
+      bytes[i] = (tempValue & BigInt.from(0xFF)).toInt();
+      tempValue >>= 8;
     }
     return bytes;
   }
@@ -286,12 +287,13 @@ class Secp256k1 {
     var result = _ECPoint.infinity();
     var addend = point;
 
-    while (k > BigInt.zero) {
-      if (k.isOdd) {
+    var tempK = k;
+    while (tempK > BigInt.zero) {
+      if (tempK.isOdd) {
         result = _pointAdd(result, addend);
       }
       addend = _pointDouble(addend);
-      k >>= 1;
+      tempK >>= 1;
     }
 
     return result;
@@ -376,6 +378,7 @@ class Secp256k1 {
 }
 
 /// Represents a point on the elliptic curve.
+@immutable
 class _ECPoint {
   _ECPoint(this.x, this.y) : isInfinity = false;
   _ECPoint.infinity()

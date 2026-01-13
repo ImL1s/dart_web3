@@ -41,7 +41,7 @@ class BcsSerializer {
     _buffer.add(value);
   }
   
-  void serializeBool(bool value) {
+  void serializeBool({required bool value}) {
     _buffer.addByte(value ? 1 : 0);
   }
 

@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:meta/meta.dart';
 
 import 'bytes.dart';
 import 'exceptions.dart';
@@ -7,6 +8,7 @@ import 'hex.dart';
 /// Represents an Ethereum address with validation and checksum support.
 ///
 /// Supports EIP-55 checksum encoding for mixed-case addresses.
+@immutable
 class EthereumAddress {
   /// Creates an EthereumAddress from raw bytes.
   ///

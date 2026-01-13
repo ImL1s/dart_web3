@@ -10,46 +10,45 @@ import 'package:web3_universal_contract/web3_universal_contract.dart'
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_core/web3_universal_core.dart' as dw3_core;
 import 'package:web3_universal_crypto/web3_universal_crypto.dart' as crypto;
-import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart' as dw3_signer;
 
 // Umbrella exports for convenience
 export 'package:web3_universal_crypto/web3_universal_crypto.dart';
 export 'package:web3_universal_core/web3_universal_core.dart'
-    show EthereumAddress, EthUnit, Unit, RLP;
+    show EthUnit, EthereumAddress, RLP, Unit;
 export 'package:web3_universal_contract/web3_universal_contract.dart'
     hide Contract;
 export 'package:web3_universal_client/web3_universal_client.dart'
     show
-        PublicClient,
-        WalletClient,
-        CallRequest,
         Block,
-        TransactionReceipt,
+        CallRequest,
         Log,
-        LogFilter;
+        LogFilter,
+        PublicClient,
+        TransactionReceipt,
+        WalletClient;
 export 'package:web3_universal_provider/web3_universal_provider.dart'
-    show RpcProvider, HttpTransport;
+    show HttpTransport, RpcProvider;
 export 'package:web3_universal_chains/web3_universal_chains.dart'
     hide ChainConfig;
 export 'package:web3_universal_signer/web3_universal_signer.dart'
     hide TransactionType;
 export 'package:web3_universal_abi/web3_universal_abi.dart'
     show
-        AbiParser,
-        AbiEncoder,
-        AbiDecoder,
-        AbiFunction,
-        AbiEvent,
-        AbiError,
-        AbiType,
-        AbiString,
-        AbiUint,
         AbiAddress,
-        AbiTuple,
         AbiArray,
         AbiBytes,
-        AbiFixedBytes;
+        AbiDecoder,
+        AbiEncoder,
+        AbiError,
+        AbiEvent,
+        AbiFixedBytes,
+        AbiFunction,
+        AbiParser,
+        AbiString,
+        AbiTuple,
+        AbiType,
+        AbiUint;
 
 typedef AddressType = dw3_abi.AbiAddress;
 typedef UintType = dw3_abi.AbiUint;
@@ -92,7 +91,7 @@ class HexUtils {
   }
 
   static String intToHex(int value, {int? padding}) {
-    String hex = value.toRadixString(16);
+    final hex = value.toRadixString(16);
     if (padding != null) {
       hex = hex.padLeft(padding, '0');
     }
@@ -104,7 +103,7 @@ class HexUtils {
   }
 
   static String bigIntToHex(BigInt value, {int? padding}) {
-    String hex = value.toRadixString(16);
+    final hex = value.toRadixString(16);
     if (padding != null) {
       hex = hex.padLeft(padding, '0');
     }
@@ -134,7 +133,7 @@ class AddressUtils {
       final addrA = EthereumAddress.fromHex(a);
       final addrB = EthereumAddress.fromHex(b);
       return addrA == addrB;
-    } catch (_) {
+    } on Object catch (_) {
       return false;
     }
   }
@@ -369,7 +368,7 @@ class Web3Client {
 
   Web3Client(
     this.rpcUrl,
-    dynamic httpClient, {
+    dynamic _, {
     dw3_chains.ChainConfig? chain,
   }) : _client = PublicClient(
           provider: RpcProvider(HttpTransport(rpcUrl)),
@@ -405,10 +404,10 @@ class Web3Client {
   Future<int> getChainId() async => _client.getChainId();
 
   Future<List<dynamic>> call({
-    EthereumAddress? sender,
     required DeployedContract contract,
     required ContractFunction function,
     required List<dynamic> params,
+    EthereumAddress? sender,
     BlockNum? atBlock,
   }) async {
     final data = function.encodeCall(params);
@@ -481,13 +480,13 @@ class Web3Client {
 
   Future<String> sendRawTransaction(Uint8List signedTransaction) async {
     final hexTx = dw3_core.HexUtils.encode(signedTransaction);
-    return await _client.provider.sendRawTransaction(hexTx);
+    return _client.provider.sendRawTransaction(hexTx);
   }
 
   Future<TransactionReceipt?> getTransactionReceipt(String hash) async {
     try {
       return await _client.getTransactionReceipt(hash);
-    } catch (_) {
+    } on Object catch (_) {
       return null;
     }
   }

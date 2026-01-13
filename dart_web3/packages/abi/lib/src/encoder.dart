@@ -143,10 +143,18 @@ class AbiEncoder {
   static AbiType _parseType(String typeStr) {
     final type = typeStr.trim();
 
-    if (type == 'address') return AbiAddress();
-    if (type == 'bool') return AbiBool();
-    if (type == 'string') return AbiString();
-    if (type == 'bytes') return AbiBytes();
+    if (type == 'address') {
+      return AbiAddress();
+    }
+    if (type == 'bool') {
+      return AbiBool();
+    }
+    if (type == 'string') {
+      return AbiString();
+    }
+    if (type == 'bytes') {
+      return AbiBytes();
+    }
 
     if (type.startsWith('uint')) {
       final bits = int.parse(type.substring(4));
@@ -184,8 +192,9 @@ class AbiEncoder {
         final char = type[i];
         if (char == ')') {
           depth++;
-        } else if (char == '(')
+        } else if (char == '(') {
           depth--;
+        }
         else if (char == '[' && depth == 0) {
           bracketStart = i;
           break;

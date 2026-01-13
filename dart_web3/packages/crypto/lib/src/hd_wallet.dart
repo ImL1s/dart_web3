@@ -257,9 +257,10 @@ class HDWallet {
 
   static Uint8List _bigIntToBytes(BigInt value, int length) {
     final bytes = Uint8List(length);
+    var tempValue = value;
     for (var i = length - 1; i >= 0; i--) {
-      bytes[i] = (value & BigInt.from(0xFF)).toInt();
-      value >>= 8;
+      bytes[i] = (tempValue & BigInt.from(0xFF)).toInt();
+      tempValue >>= 8;
     }
     return bytes;
   }

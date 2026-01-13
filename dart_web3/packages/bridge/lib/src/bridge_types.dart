@@ -1,6 +1,8 @@
 import 'dart:typed_data';
+import 'package:meta/meta.dart';
 
 /// Bridge token information
+@immutable
 class BridgeToken {
   // Token addresses on different chains
 

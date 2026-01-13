@@ -313,7 +313,7 @@ class AES {
   }
 
   void _encryptBlock(Uint8List input, Uint8List output) {
-    var state = Uint8List.fromList(input);
+    final state = Uint8List.fromList(input);
 
     _addRoundKey(state, 0);
 
@@ -401,7 +401,7 @@ class AES {
             (_sBox[(tmp >> 8) & 0xFF] << 8) |
             _sBox[tmp & 0xFF];
         // XOR Rcon
-        tmp ^= (_rCon[i ~/ 4] << 24);
+        tmp ^= _rCon[i ~/ 4] << 24;
       }
       w[i] = w[i - 4] ^ tmp;
     }

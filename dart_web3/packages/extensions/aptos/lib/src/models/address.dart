@@ -1,9 +1,12 @@
 import 'dart:typed_data';
 import 'package:pointycastle/digests/sha3.dart';
 
+import 'package:meta/meta.dart';
+
 /// Represents an Aptos address.
 ///
 /// Aptos addresses are 32-byte values derived from public keys using SHA3-256.
+@immutable
 class AptosAddress {
   AptosAddress._(this._bytes);
 

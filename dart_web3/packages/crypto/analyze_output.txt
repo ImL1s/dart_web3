@@ -1,58 +1,26 @@
-Analyzing lib...
+Analyzing ....
 
-  error - dart_web3_crypto.dart:24:8 - The name 'Ed25519' is defined in the libraries 'package:dart_web3_crypto/src/curves.dart' and 'package:dart_web3_crypto/src/ed25519.dart'. Try removing the export of one of the libraries, or explicitly hiding the name in one of the export directives. - ambiguous_export
-warning - src\base58.dart:3:8 - Unused import: 'keccak.dart'. Try removing the import directive. - unused_import
-warning - src\ed25519.dart:3:8 - Unused import: 'keccak.dart'. Try removing the import directive. - unused_import
-warning - src\schnorr.dart:4:8 - Unused import: 'secp256k1.dart'. Try removing the import directive. - unused_import
-   info - src\base58.dart:164:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\bip39.dart:7:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
-   info - src\bip39.dart:85:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
-   info - src\bip39.dart:101:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\bip39.dart:102:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\curves.dart:255:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
-   info - src\ed25519.dart:26:86 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\ed25519.dart:30:86 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\ed25519.dart:32:86 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\ed25519.dart:106:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
-   info - src\ed25519.dart:192:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
-   info - src\ed25519.dart:193:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
-   info - src\ed25519.dart:219:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
-   info - src\hd_wallet.dart:117:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\hd_wallet.dart:218:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\hd_wallet.dart:221:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\hd_wallet.dart:224:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\hd_wallet.dart:229:7 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\hd_wallet.dart:256:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
-   info - src\keccak.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
-   info - src\keccak.dart:45:3 - Constructor declarations should be before non-constructor declarations. Try moving the constructor declaration before all other members. - sort_constructors_first
-   info - src\keccak.dart:78:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
-   info - src\keccak.dart:96:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
-   info - src\mnemonic.dart:74:44 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
-   info - src\pbkdf2.dart:66:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\ripemd160.dart:19:5 - Unnecessary duplication of receiver. Try using a cascade to avoid the duplication. - cascade_invocations
-   info - src\ripemd160.dart:108:25 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
-   info - src\schnorr.dart:21:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:24:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:27:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:30:16 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:50:5 - Local variables should be final. Try making the variable final. - prefer_final_locals
-   info - src\schnorr.dart:65:63 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:73:5 - Local variables should be final. Try making the variable final. - prefer_final_locals
-   info - src\schnorr.dart:83:68 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:117:90 - Missing a required trailing comma. Try adding a trailing comma. - require_trailing_commas
-   info - src\schnorr.dart:134:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
-   info - src\schnorr.dart:217:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
-   info - src\schnorr.dart:218:23 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
-   info - src\schnorr.dart:234:13 - Use an 'if' element to conditionally add elements. Try using an 'if' element rather than a conditional expression. - prefer_if_elements_to_conditional_expressions
-   info - src\schnorr.dart:234:46 - Use an 'if' element to conditionally add elements. Try using an 'if' element rather than a conditional expression. - prefer_if_elements_to_conditional_expressions
-   info - src\schnorr.dart:246:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
-   info - src\secp256k1.dart:4:1 - Classes should define instance members. Try adding instance behavior or moving the members out of the class. - avoid_classes_with_only_static_members
-   info - src\secp256k1.dart:73:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
-   info - src\secp256k1.dart:124:16 - Use 'isEven' rather than '% 2'. Try using 'isEven'. - use_is_even_rather_than_modulo
-   info - src\secp256k1.dart:187:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
-   info - src\secp256k1.dart:206:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
-   info - src\secp256k1.dart:263:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
-   info - src\secp256k1.dart:343:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
-   info - src\secp256k1.dart:351:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\ed25519.dart:33:23 - The variable name '_L' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:42:23 - The variable name '_By' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:46:23 - The variable name '_Bx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:90:11 - The variable name 'RBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:94:11 - The variable name 'ABytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:103:11 - The variable name 'SBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:124:13 - The variable name 'RBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:125:13 - The variable name 'SBytes' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:147:13 - The variable name 'RkA' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\ed25519.dart:289:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\hd_wallet.dart:262:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\keccak.dart:78:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\keccak.dart:96:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+   info - lib\src\ripemd160.dart:109:9 - Multiple variables declared on a single line. Try splitting the variable declarations into multiple lines. - avoid_multiple_declarations_per_line
+   info - lib\src\schnorr.dart:27:23 - The variable name '_Gx' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\schnorr.dart:31:23 - The variable name '_Gy' isn't a lowerCamelCase identifier. Try changing the name to follow the lowerCamelCase style. - non_constant_identifier_names
+   info - lib\src\schnorr.dart:303:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:151:16 - Use 'isEven' rather than '% 2'. Try using 'isEven'. - use_is_even_rather_than_modulo
+   info - lib\src\secp256k1.dart:235:7 - Invalid assignment to the parameter 'value'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:294:7 - Invalid assignment to the parameter 'k'. Try using a local variable in place of the parameter. - parameter_assignments
+   info - lib\src\secp256k1.dart:390:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+   info - lib\src\secp256k1.dart:398:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
 
-54 issues found.
+22 issues found.

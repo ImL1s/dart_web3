@@ -42,7 +42,7 @@ class SimpleAccount extends BaseSmartAccount {
     final hash = HexUtils.encode(ownerBytes); // Simplified
 
     // This should be replaced with proper CREATE2 calculation
-    return '0x' + hash.replaceFirst('0x', '').substring(0, 40);
+    return '0x${hash.replaceFirst('0x', '').substring(0, 40)}';
   }
 
   @override

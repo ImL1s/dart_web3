@@ -80,7 +80,9 @@ class AbiDecoder {
 
   /// Decodes an error message from revert data.
   static String? decodeError(Uint8List data) {
-    if (data.length < 4) return null;
+    if (data.length < 4) {
+      return null;
+    }
 
     // Check for Error(string) selector: 0x08c379a0
     if (data[0] == 0x08 &&

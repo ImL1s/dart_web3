@@ -45,7 +45,8 @@ class TapBranch {
 
   Uint8List get hash {
     // Lexicographical sort
-    Uint8List first, second;
+    Uint8List first;
+    Uint8List second;
     if (_compare(left, right) < 0) {
       first = left;
       second = right;
@@ -78,8 +79,9 @@ class TaprootKey {
   /// - 'scriptConfig': The data that was hashed to create the tweak (needed for control block)
   static Map<String, dynamic> tweak(Uint8List internalKey,
       [Uint8List? merkleRoot]) {
-    if (internalKey.length != 32)
+    if (internalKey.length != 32) {
       throw ArgumentError('Internal key must be 32 bytes');
+    }
 
     // t = hash_TapTweak(P || merkleRoot)
     final buffer = BytesBuilder();

@@ -80,8 +80,12 @@ class SimpleCoinSelector implements CoinSelector {
     // Ideally Utxo should contain type or we infer it.
     // Assuming P2WPKH for now if untyped, or based on script length.
     final scriptLen = utxo.scriptPubKey.length;
-    if (scriptLen == 22 && utxo.scriptPubKey[0] == 0x00) return inputSizeP2WPKH;
-    if (scriptLen == 34 && utxo.scriptPubKey[0] == 0x51) return inputSizeP2TR;
+    if (scriptLen == 22 && utxo.scriptPubKey[0] == 0x00) {
+      return inputSizeP2WPKH;
+    }
+    if (scriptLen == 34 && utxo.scriptPubKey[0] == 0x51) {
+      return inputSizeP2TR;
+    }
     return inputSizeP2PKH; // Fallback to largest
   }
 

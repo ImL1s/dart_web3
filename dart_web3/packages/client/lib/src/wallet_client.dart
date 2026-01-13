@@ -319,11 +319,6 @@ class WalletClient extends PublicClient implements WalletClientBase {
     return tx;
   }
 
-  /// Switches the signer.
-  set switchAccount(Signer newSigner) {
-    signer = newSigner;
-  }
-
   CallRequest _toCallRequest(TransactionRequest tx) {
     return CallRequest(
       from: address,

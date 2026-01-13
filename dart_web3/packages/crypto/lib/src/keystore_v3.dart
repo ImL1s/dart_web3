@@ -140,7 +140,7 @@ class KeystoreV3 {
   }
 
   static String _toHex(Uint8List bytes) {
-    return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join('');
+    return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
   }
 
   static Uint8List _fromHex(String input) {

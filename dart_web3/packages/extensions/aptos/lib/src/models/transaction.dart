@@ -4,6 +4,9 @@ import 'address.dart';
 /// Represents an Aptos transaction payload.
 abstract class TransactionPayload {
   Map<String, dynamic> toJson();
+
+  /// Type of the payload.
+  String get type;
 }
 
 /// Entry function payload for calling Move modules.
@@ -24,8 +27,11 @@ class EntryFunctionPayload implements TransactionPayload {
   final List<dynamic> arguments;
 
   @override
+  String get type => 'entry_function_payload';
+
+  @override
   Map<String, dynamic> toJson() => {
-    'type': 'entry_function_payload',
+    'type': type,
     'function': function,
     'type_arguments': typeArguments,
     'arguments': arguments,
@@ -45,8 +51,11 @@ class ScriptPayload implements TransactionPayload {
   final List<dynamic> arguments;
 
   @override
+  String get type => 'script_payload';
+
+  @override
   Map<String, dynamic> toJson() => {
-    'type': 'script_payload',
+    'type': type,
     'code': {'bytecode': '0x${_hexEncode(code)}'},
     'type_arguments': typeArguments,
     'arguments': arguments,

@@ -3,7 +3,6 @@ import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:web3_universal_provider/web3_universal_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

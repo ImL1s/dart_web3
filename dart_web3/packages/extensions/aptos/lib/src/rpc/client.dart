@@ -32,7 +32,7 @@ class AptosClient {
       );
       final coin = response['data']['coin']['value'] as String;
       return BigInt.parse(coin);
-    } catch (e) {
+    } on Exception catch (_) {
       return BigInt.zero;
     }
   }
@@ -83,8 +83,8 @@ class AptosClient {
   }
 
   /// Get transaction by hash.
-  Future<Map<String, dynamic>> getTransaction(String txHash) async {
-    return await _get('/v1/transactions/by_hash/$txHash');
+  Future<Map<String, dynamic>> getTransaction(String txHash) {
+    return _get('/v1/transactions/by_hash/$txHash');
   }
 
   /// Wait for transaction completion.
@@ -104,7 +104,7 @@ class AptosClient {
       } on Exception catch (_) {
         // Transaction not found yet
       }
-      await Future.delayed(pollInterval);
+      await Future<void>.delayed(pollInterval);
     }
 
     throw Exception('Transaction $txHash not found within timeout');

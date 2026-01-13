@@ -150,7 +150,9 @@ class BitcoinTransaction {
 
   /// Parses a transaction from raw bytes.
   static BitcoinTransaction fromBytes(Uint8List bytes) {
-    if (bytes.length < 10) throw FormatException('Transaction too short');
+    if (bytes.length < 10) {
+      throw FormatException('Transaction too short');
+    }
 
     var offset = 0;
     final buffer = ByteData.sublistView(bytes);
@@ -326,8 +328,14 @@ Uint8List _encodeVarInt(int value) {
 }
 
 int _varIntSize(int value) {
-  if (value < 0xfd) return 1;
-  if (value <= 0xffff) return 3;
-  if (value <= 0xffffffff) return 5;
+  if (value < 0xfd) {
+    return 1;
+  }
+  if (value <= 0xffff) {
+    return 3;
+  }
+  if (value <= 0xffffffff) {
+    return 5;
+  }
   return 9;
 }

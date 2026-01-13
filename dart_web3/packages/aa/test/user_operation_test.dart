@@ -68,7 +68,7 @@ void main() {
         signature: '0x1234',
       );
 
-      final json = userOp.toJson(EntryPointVersion.v07);
+      final json = userOp.toJson();
 
       expect(
           json['sender'], equals('0x1234567890123456789012345678901234567890'));

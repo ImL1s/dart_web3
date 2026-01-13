@@ -132,10 +132,14 @@ class EthUnit {
   }
 
   static bool _isDigits(String s) {
-    if (s.isEmpty) return true;
+    if (s.isEmpty) {
+      return true;
+    }
     for (var i = 0; i < s.length; i++) {
       final c = s.codeUnitAt(i);
-      if (c < 48 || c > 57) return false; // '0' = 48, '9' = 57
+      if (c < 48 || c > 57) {
+        return false;
+      } // '0' = 48, '9' = 57
     }
     return true;
   }
