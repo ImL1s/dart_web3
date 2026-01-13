@@ -1,4 +1,5 @@
 import 'package:web3_universal_core/web3_universal_core.dart';
+import 'package:meta/meta.dart';
 
 /// NFT token standard types
 enum NftStandard {
@@ -8,6 +9,7 @@ enum NftStandard {
 }
 
 /// NFT token information
+@immutable
 class NftToken {
   const NftToken({
     required this.contractAddress,

@@ -1,0 +1,904 @@
+build	UNKNOWN STEP	﻿2026-01-13T09:29:39.3322778Z Current runner version: '2.330.0'
+build	UNKNOWN STEP	2026-01-13T09:29:39.3355677Z ##[group]Runner Image Provisioner
+build	UNKNOWN STEP	2026-01-13T09:29:39.3356973Z Hosted Compute Agent
+build	UNKNOWN STEP	2026-01-13T09:29:39.3357895Z Version: 20251211.462
+build	UNKNOWN STEP	2026-01-13T09:29:39.3359018Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+build	UNKNOWN STEP	2026-01-13T09:29:39.3360179Z Build Date: 2025-12-11T16:28:49Z
+build	UNKNOWN STEP	2026-01-13T09:29:39.3361538Z Worker ID: {0b28e5b4-b751-469e-a241-c00dc92c8054}
+build	UNKNOWN STEP	2026-01-13T09:29:39.3362898Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:39.3363965Z ##[group]Operating System
+build	UNKNOWN STEP	2026-01-13T09:29:39.3364926Z Ubuntu
+build	UNKNOWN STEP	2026-01-13T09:29:39.3365718Z 24.04.3
+build	UNKNOWN STEP	2026-01-13T09:29:39.3366486Z LTS
+build	UNKNOWN STEP	2026-01-13T09:29:39.3367156Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:39.3368127Z ##[group]Runner Image
+build	UNKNOWN STEP	2026-01-13T09:29:39.3369000Z Image: ubuntu-24.04
+build	UNKNOWN STEP	2026-01-13T09:29:39.3369853Z Version: 20260105.202.1
+build	UNKNOWN STEP	2026-01-13T09:29:39.3371912Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260105.202/images/ubuntu/Ubuntu2404-Readme.md
+build	UNKNOWN STEP	2026-01-13T09:29:39.3374673Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260105.202
+build	UNKNOWN STEP	2026-01-13T09:29:39.3376611Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:39.3378434Z ##[group]GITHUB_TOKEN Permissions
+build	UNKNOWN STEP	2026-01-13T09:29:39.3381612Z Contents: read
+build	UNKNOWN STEP	2026-01-13T09:29:39.3382470Z Metadata: read
+build	UNKNOWN STEP	2026-01-13T09:29:39.3383212Z Packages: read
+build	UNKNOWN STEP	2026-01-13T09:29:39.3384147Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:39.3387368Z Secret source: Actions
+build	UNKNOWN STEP	2026-01-13T09:29:39.3389134Z Prepare workflow directory
+build	UNKNOWN STEP	2026-01-13T09:29:39.3855139Z Prepare all required actions
+build	UNKNOWN STEP	2026-01-13T09:29:39.3911708Z Getting action download info
+build	UNKNOWN STEP	2026-01-13T09:29:39.6338905Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+build	UNKNOWN STEP	2026-01-13T09:29:39.7312955Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build	UNKNOWN STEP	2026-01-13T09:29:40.1112094Z Getting action download info
+build	UNKNOWN STEP	2026-01-13T09:29:40.2356372Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+build	UNKNOWN STEP	2026-01-13T09:29:40.4049424Z Complete job name: build
+build	UNKNOWN STEP	2026-01-13T09:29:40.4856615Z ##[group]Run actions/checkout@v4
+build	UNKNOWN STEP	2026-01-13T09:29:40.4857933Z with:
+build	UNKNOWN STEP	2026-01-13T09:29:40.4858696Z   repository: ImL1s/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:29:40.4859895Z   token: ***
+build	UNKNOWN STEP	2026-01-13T09:29:40.4860638Z   ssh-strict: true
+build	UNKNOWN STEP	2026-01-13T09:29:40.4861660Z   ssh-user: git
+build	UNKNOWN STEP	2026-01-13T09:29:40.4862442Z   persist-credentials: true
+build	UNKNOWN STEP	2026-01-13T09:29:40.4863314Z   clean: true
+build	UNKNOWN STEP	2026-01-13T09:29:40.4864094Z   sparse-checkout-cone-mode: true
+build	UNKNOWN STEP	2026-01-13T09:29:40.4865036Z   fetch-depth: 1
+build	UNKNOWN STEP	2026-01-13T09:29:40.4865776Z   fetch-tags: false
+build	UNKNOWN STEP	2026-01-13T09:29:40.4866561Z   show-progress: true
+build	UNKNOWN STEP	2026-01-13T09:29:40.4867339Z   lfs: false
+build	UNKNOWN STEP	2026-01-13T09:29:40.4868071Z   submodules: false
+build	UNKNOWN STEP	2026-01-13T09:29:40.4868875Z   set-safe-directory: true
+build	UNKNOWN STEP	2026-01-13T09:29:40.4870026Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:40.5944949Z Syncing repository: ImL1s/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:29:40.5947421Z ##[group]Getting Git version info
+build	UNKNOWN STEP	2026-01-13T09:29:40.5948745Z Working directory is '/home/runner/work/dart_web3/dart_web3'
+build	UNKNOWN STEP	2026-01-13T09:29:40.5951245Z [command]/usr/bin/git version
+build	UNKNOWN STEP	2026-01-13T09:29:40.6010769Z git version 2.52.0
+build	UNKNOWN STEP	2026-01-13T09:29:40.6037694Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:40.6054098Z Temporarily overriding HOME='/home/runner/work/_temp/db03bfe5-88a0-431f-a274-07a8aadb70b8' before making global git config changes
+build	UNKNOWN STEP	2026-01-13T09:29:40.6058998Z Adding repository directory to the temporary git global config as a safe directory
+build	UNKNOWN STEP	2026-01-13T09:29:40.6067449Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dart_web3/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:29:40.6104067Z Deleting the contents of '/home/runner/work/dart_web3/dart_web3'
+build	UNKNOWN STEP	2026-01-13T09:29:40.6107688Z ##[group]Initializing the repository
+build	UNKNOWN STEP	2026-01-13T09:29:40.6113094Z [command]/usr/bin/git init /home/runner/work/dart_web3/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:29:40.6208714Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	UNKNOWN STEP	2026-01-13T09:29:40.6211434Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	UNKNOWN STEP	2026-01-13T09:29:40.6214521Z hint: to use in all of your new repositories, which will suppress this warning,
+build	UNKNOWN STEP	2026-01-13T09:29:40.6217137Z hint: call:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6218443Z hint:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6220018Z hint: 	git config --global init.defaultBranch <name>
+build	UNKNOWN STEP	2026-01-13T09:29:40.6222278Z hint:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6224228Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	UNKNOWN STEP	2026-01-13T09:29:40.6227457Z hint: 'development'. The just-created branch can be renamed via this command:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6229885Z hint:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6231248Z hint: 	git branch -m <name>
+build	UNKNOWN STEP	2026-01-13T09:29:40.6232160Z hint:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6233344Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	UNKNOWN STEP	2026-01-13T09:29:40.6235336Z Initialized empty Git repository in /home/runner/work/dart_web3/dart_web3/.git/
+build	UNKNOWN STEP	2026-01-13T09:29:40.6240477Z [command]/usr/bin/git remote add origin https://github.com/ImL1s/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:29:40.6260046Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:40.6262800Z ##[group]Disabling automatic garbage collection
+build	UNKNOWN STEP	2026-01-13T09:29:40.6265131Z [command]/usr/bin/git config --local gc.auto 0
+build	UNKNOWN STEP	2026-01-13T09:29:40.6293630Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:40.6295924Z ##[group]Setting up auth
+build	UNKNOWN STEP	2026-01-13T09:29:40.6301090Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-01-13T09:29:40.6333108Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-01-13T09:29:40.6646081Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	UNKNOWN STEP	2026-01-13T09:29:40.6675723Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	UNKNOWN STEP	2026-01-13T09:29:40.6890313Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	UNKNOWN STEP	2026-01-13T09:29:40.6921969Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	UNKNOWN STEP	2026-01-13T09:29:40.7145570Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	UNKNOWN STEP	2026-01-13T09:29:40.7179110Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:40.7182812Z ##[group]Fetching the repository
+build	UNKNOWN STEP	2026-01-13T09:29:40.7191439Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1d5e8c1dabdd7978dc1ccfb95f4b232f3aa44b71:refs/remotes/origin/master
+build	UNKNOWN STEP	2026-01-13T09:29:41.3579381Z From https://github.com/ImL1s/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:29:41.3583453Z  * [new ref]         1d5e8c1dabdd7978dc1ccfb95f4b232f3aa44b71 -> origin/master
+build	UNKNOWN STEP	2026-01-13T09:29:41.3614456Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.3615566Z ##[group]Determining the checkout info
+build	UNKNOWN STEP	2026-01-13T09:29:41.3616934Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.3624413Z [command]/usr/bin/git sparse-checkout disable
+build	UNKNOWN STEP	2026-01-13T09:29:41.3669057Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	UNKNOWN STEP	2026-01-13T09:29:41.3696379Z ##[group]Checking out the ref
+build	UNKNOWN STEP	2026-01-13T09:29:41.3702311Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+build	UNKNOWN STEP	2026-01-13T09:29:41.4643479Z Reset branch 'master'
+build	UNKNOWN STEP	2026-01-13T09:29:41.4645143Z branch 'master' set up to track 'origin/master'.
+build	UNKNOWN STEP	2026-01-13T09:29:41.4659138Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.4696423Z [command]/usr/bin/git log -1 --format=%H
+build	UNKNOWN STEP	2026-01-13T09:29:41.4718216Z 1d5e8c1dabdd7978dc1ccfb95f4b232f3aa44b71
+build	UNKNOWN STEP	2026-01-13T09:29:41.5098423Z ##[group]Run subosito/flutter-action@v2
+build	UNKNOWN STEP	2026-01-13T09:29:41.5098758Z with:
+build	UNKNOWN STEP	2026-01-13T09:29:41.5098971Z   channel: stable
+build	UNKNOWN STEP	2026-01-13T09:29:41.5099199Z   architecture: X64
+build	UNKNOWN STEP	2026-01-13T09:29:41.5099426Z   cache: false
+build	UNKNOWN STEP	2026-01-13T09:29:41.5099653Z   pub-cache-path: default
+build	UNKNOWN STEP	2026-01-13T09:29:41.5099907Z   dry-run: false
+build	UNKNOWN STEP	2026-01-13T09:29:41.5100199Z   git-source: https://github.com/flutter/flutter.git
+build	UNKNOWN STEP	2026-01-13T09:29:41.5100744Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.5199888Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+build	UNKNOWN STEP	2026-01-13T09:29:41.5200332Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5237065Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	UNKNOWN STEP	2026-01-13T09:29:41.5237459Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.5434537Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+build	UNKNOWN STEP	2026-01-13T09:29:41.5434969Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5435284Z [36;1m  -n '' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5435509Z [36;1m  -f '' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5435767Z [36;1m  -a 'X64' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5435987Z [36;1m  -k '' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5436199Z [36;1m  -c '' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5436406Z [36;1m  -l '' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5436627Z [36;1m  -d 'default' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5436955Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5437299Z [36;1m  stable[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.5467529Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	UNKNOWN STEP	2026-01-13T09:29:41.5467912Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.6999997Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+build	UNKNOWN STEP	2026-01-13T09:29:41.7000359Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.7000654Z [36;1m  -n '3.38.6' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.7001147Z [36;1m  -a 'x64' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.7001482Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.38.6-x64' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.7001882Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.7002173Z [36;1m  stable[0m
+build	UNKNOWN STEP	2026-01-13T09:29:41.7033931Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	UNKNOWN STEP	2026-01-13T09:29:41.7034323Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:29:41.8475119Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+build	UNKNOWN STEP	2026-01-13T09:29:41.8477069Z                                  Dload  Upload   Total   Spent    Left  Speed
+build	UNKNOWN STEP	2026-01-13T09:29:41.8477552Z 
+build	UNKNOWN STEP	2026-01-13T09:29:42.4727561Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build	UNKNOWN STEP	2026-01-13T09:29:43.4729785Z   6 1397M    6 93.6M    0     0   149M      0  0:00:09 --:--:--  0:00:09  149M
+build	UNKNOWN STEP	2026-01-13T09:29:44.4734321Z  20 1397M   20  288M    0     0   177M      0  0:00:07  0:00:01  0:00:06  177M
+build	UNKNOWN STEP	2026-01-13T09:29:45.4732580Z  34 1397M   34  482M    0     0   183M      0  0:00:07  0:00:02  0:00:05  183M
+build	UNKNOWN STEP	2026-01-13T09:29:46.4731582Z  48 1397M   48  675M    0     0   186M      0  0:00:07  0:00:03  0:00:04  186M
+build	UNKNOWN STEP	2026-01-13T09:29:47.4733631Z  62 1397M   62  868M    0     0   187M      0  0:00:07  0:00:04  0:00:03  187M
+build	UNKNOWN STEP	2026-01-13T09:29:48.4759077Z  75 1397M   75 1058M    0     0   188M      0  0:00:07  0:00:05  0:00:02  192M
+build	UNKNOWN STEP	2026-01-13T09:29:49.3287788Z  88 1397M   88 1235M    0     0   186M      0  0:00:07  0:00:06  0:00:01  189M
+build	UNKNOWN STEP	2026-01-13T09:29:49.3288733Z 100 1397M  100 1397M    0     0   186M      0  0:00:07  0:00:07 --:--:--  188M
+build	UNKNOWN STEP	2026-01-13T09:30:38.3024785Z ##[group]Run dart pub global activate melos
+build	UNKNOWN STEP	2026-01-13T09:30:38.3025130Z [36;1mdart pub global activate melos[0m
+build	UNKNOWN STEP	2026-01-13T09:30:38.3059193Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-01-13T09:30:38.3059442Z env:
+build	UNKNOWN STEP	2026-01-13T09:30:38.3059703Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.6-x64
+build	UNKNOWN STEP	2026-01-13T09:30:38.3060052Z   PUB_CACHE: /home/runner/.pub-cache
+build	UNKNOWN STEP	2026-01-13T09:30:38.3060314Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:30:38.3261128Z Resolving dependencies...
+build	UNKNOWN STEP	2026-01-13T09:30:38.5035866Z Downloading packages...
+build	UNKNOWN STEP	2026-01-13T09:30:39.1624793Z + ansi_styles 0.3.2+1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1625206Z + args 2.7.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1625631Z + async 2.13.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1625919Z + charcode 1.4.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1626109Z + checked_yaml 2.0.4
+build	UNKNOWN STEP	2026-01-13T09:30:39.1626301Z + cli_launcher 0.3.2+1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1626506Z + cli_util 0.4.2
+build	UNKNOWN STEP	2026-01-13T09:30:39.1626681Z + collection 1.19.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1626894Z + conventional_commit 0.6.1+1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1627106Z + file 7.0.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1627327Z + glob 2.1.3
+build	UNKNOWN STEP	2026-01-13T09:30:39.1627517Z + graphs 2.3.2
+build	UNKNOWN STEP	2026-01-13T09:30:39.1627713Z + http 1.6.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1628153Z + http_parser 4.1.2
+build	UNKNOWN STEP	2026-01-13T09:30:39.1628328Z + io 1.0.5
+build	UNKNOWN STEP	2026-01-13T09:30:39.1628488Z + json_annotation 4.9.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1628680Z + melos 7.3.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1628837Z + meta 1.17.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1629023Z + mustache_template 2.0.3
+build	UNKNOWN STEP	2026-01-13T09:30:39.1629247Z + path 1.9.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1629414Z + petitparser 7.0.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1629598Z + platform 3.1.6
+build	UNKNOWN STEP	2026-01-13T09:30:39.1629763Z + pool 1.5.2
+build	UNKNOWN STEP	2026-01-13T09:30:39.1629925Z + process 5.0.5
+build	UNKNOWN STEP	2026-01-13T09:30:39.1630090Z + prompts 2.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1630261Z + pub_semver 2.2.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1630432Z + pub_updater 0.5.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1630613Z + pubspec_parse 1.5.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1630985Z + source_span 1.10.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1631279Z + stack_trace 1.12.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1631459Z + string_scanner 1.4.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1631659Z + term_glyph 1.2.2
+build	UNKNOWN STEP	2026-01-13T09:30:39.1631830Z + typed_data 1.4.0
+build	UNKNOWN STEP	2026-01-13T09:30:39.1631999Z + web 1.1.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1632153Z + xml 6.6.1
+build	UNKNOWN STEP	2026-01-13T09:30:39.1632308Z + yaml 3.1.3
+build	UNKNOWN STEP	2026-01-13T09:30:39.1632469Z + yaml_edit 2.2.3
+build	UNKNOWN STEP	2026-01-13T09:30:39.1662341Z Building package executables...
+build	UNKNOWN STEP	2026-01-13T09:30:40.0771590Z Built melos:melos.
+build	UNKNOWN STEP	2026-01-13T09:30:40.0831320Z Installed executable melos.
+build	UNKNOWN STEP	2026-01-13T09:30:40.0870158Z Activated melos 7.3.0.
+build	UNKNOWN STEP	2026-01-13T09:30:40.1040424Z ##[group]Run git config --global --add safe.directory '*'
+build	UNKNOWN STEP	2026-01-13T09:30:40.1041418Z [36;1mgit config --global --add safe.directory '*'[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1041914Z [36;1mcd dart_web3[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1042228Z [36;1mpwd[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1042502Z [36;1mls -la[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1042791Z [36;1mmelos list[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1043096Z [36;1mmelos clean[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1043504Z [36;1mgit config --global --add safe.directory '*'[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1043996Z [36;1mmelos clean[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1044347Z [36;1mmelos bootstrap --verbose[0m
+build	UNKNOWN STEP	2026-01-13T09:30:40.1092806Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-01-13T09:30:40.1093207Z env:
+build	UNKNOWN STEP	2026-01-13T09:30:40.1093682Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.6-x64
+build	UNKNOWN STEP	2026-01-13T09:30:40.1094303Z   PUB_CACHE: /home/runner/.pub-cache
+build	UNKNOWN STEP	2026-01-13T09:30:40.1094722Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:30:40.1172603Z /home/runner/work/dart_web3/dart_web3/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:30:40.1192191Z total 10652
+build	UNKNOWN STEP	2026-01-13T09:30:40.1192553Z drwxr-xr-x 11 runner runner   4096 Jan 13 09:29 .
+build	UNKNOWN STEP	2026-01-13T09:30:40.1193087Z drwxr-xr-x  9 runner runner   4096 Jan 13 09:29 ..
+build	UNKNOWN STEP	2026-01-13T09:30:40.1193642Z -rw-r--r--  1 runner runner    641 Jan 13 09:29 .gitignore
+build	UNKNOWN STEP	2026-01-13T09:30:40.1194251Z -rw-r--r--  1 runner runner   1706 Jan 13 09:29 .metadata
+build	UNKNOWN STEP	2026-01-13T09:30:40.1194851Z -rw-r--r--  1 runner runner  41074 Jan 13 09:29 CHANGELOG.md
+build	UNKNOWN STEP	2026-01-13T09:30:40.1195449Z -rw-r--r--  1 runner runner   1066 Jan 13 09:29 LICENSE
+build	UNKNOWN STEP	2026-01-13T09:30:40.1196046Z -rw-r--r--  1 runner runner    314 Jan 13 09:29 PENDING_PUBLISH.md
+build	UNKNOWN STEP	2026-01-13T09:30:40.1196656Z -rw-r--r--  1 runner runner  11581 Jan 13 09:29 README.md
+build	UNKNOWN STEP	2026-01-13T09:30:40.1197234Z -rw-r--r--  1 runner runner   2996 Jan 13 09:29 USAGE_GUIDE.md
+build	UNKNOWN STEP	2026-01-13T09:30:40.1197838Z -rw-r--r--  1 runner runner   6975 Jan 13 09:29 analysis_nft.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1198430Z -rw-r--r--  1 runner runner   3522 Jan 13 09:29 analysis_options.yaml
+build	UNKNOWN STEP	2026-01-13T09:30:40.1198890Z -rw-r--r--  1 runner runner 178737 Jan 13 09:29 analysis_output_v2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1199309Z -rw-r--r--  1 runner runner 139536 Jan 13 09:29 analysis_output_v3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1199688Z -rw-r--r--  1 runner runner  11249 Jan 13 09:29 analysis_reown.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1200074Z -rw-r--r--  1 runner runner  73123 Jan 13 09:29 analysis_result_final.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1200483Z -rw-r--r--  1 runner runner 155792 Jan 13 09:29 analysis_results_full.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1201142Z -rw-r--r--  1 runner runner 147064 Jan 13 09:29 analysis_results_full_2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1201568Z -rw-r--r--  1 runner runner 145879 Jan 13 09:29 analysis_results_full_3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1201976Z -rw-r--r--  1 runner runner 137994 Jan 13 09:29 analysis_results_full_4.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1202569Z -rw-r--r--  1 runner runner 137636 Jan 13 09:29 analysis_results_full_5.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1202974Z -rw-r--r--  1 runner runner 136210 Jan 13 09:29 analysis_results_full_6.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1203380Z -rw-r--r--  1 runner runner 135562 Jan 13 09:29 analysis_results_full_7.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1203782Z -rw-r--r--  1 runner runner 570264 Jan 13 09:29 analysis_results_local.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1204187Z -rw-r--r--  1 runner runner 570264 Jan 13 09:29 analysis_results_local_2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1204619Z -rw-r--r--  1 runner runner 748729 Jan 13 09:29 analysis_results_local_3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1205022Z -rw-r--r--  1 runner runner 133021 Jan 13 09:29 analysis_results_v2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1205404Z -rw-r--r--  1 runner runner 128408 Jan 13 09:29 analysis_results_v3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1205785Z -rw-r--r--  1 runner runner 127171 Jan 13 09:29 analysis_results_v4.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1206157Z -rw-r--r--  1 runner runner 125591 Jan 13 09:29 analysis_results_v5.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1206538Z -rw-r--r--  1 runner runner  97934 Jan 13 09:29 analysis_results_v6.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1206911Z -rw-r--r--  1 runner runner  85215 Jan 13 09:29 analysis_results_v8.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1207440Z -rw-r--r--  1 runner runner  88748 Jan 13 09:29 analysis_results_v9.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1207830Z -rw-r--r--  1 runner runner  37352 Jan 13 09:29 analyze_dart_res.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1208208Z -rw-r--r--  1 runner runner  37111 Jan 13 09:29 analyze_dart_res_2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1208583Z -rw-r--r--  1 runner runner  36821 Jan 13 09:29 analyze_dart_res_3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1208948Z -rw-r--r--  1 runner runner 694296 Jan 13 09:29 analyze_errors.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1209308Z -rw-r--r--  1 runner runner 195494 Jan 13 09:29 analyze_output.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1209680Z -rw-r--r--  1 runner runner 202373 Jan 13 09:29 analyze_output_final.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1210067Z -rw-r--r--  1 runner runner 198241 Jan 13 09:29 analyze_output_v2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1210443Z -rw-r--r--  1 runner runner 190562 Jan 13 09:29 analyze_output_v3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1211042Z -rw-r--r--  1 runner runner 187143 Jan 13 09:29 analyze_output_v4.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1211422Z -rw-r--r--  1 runner runner 190042 Jan 13 09:29 analyze_output_v5.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1211782Z -rw-r--r--  1 runner runner 189389 Jan 13 09:29 analyze_output_v6.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1212136Z -rw-r--r--  1 runner runner    883 Jan 13 09:29 analyze_res.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1212485Z -rw-r--r--  1 runner runner 194607 Jan 13 09:29 analyze_results.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1212910Z -rw-r--r--  1 runner runner 167193 Jan 13 09:29 bash_failure_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1213276Z drwxr-xr-x  2 runner runner   4096 Jan 13 09:29 bin
+build	UNKNOWN STEP	2026-01-13T09:30:40.1213602Z -rw-r--r--  1 runner runner  19424 Jan 13 09:29 catch_fix_errors.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1213957Z -rw-r--r--  1 runner runner  26001 Jan 13 09:29 catch_list.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1214310Z -rw-r--r--  1 runner runner   1304 Jan 13 09:29 check_names.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1214657Z -rw-r--r--  1 runner runner 302978 Jan 13 09:29 ci_error_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1215010Z -rw-r--r--  1 runner runner  19853 Jan 13 09:29 debug_failure_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1215401Z -rw-r--r--  1 runner runner    985 Jan 13 09:29 detailed_lint_analysis.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1215767Z drwxr-xr-x  2 runner runner   4096 Jan 13 09:29 docs
+build	UNKNOWN STEP	2026-01-13T09:30:40.1216071Z drwxr-xr-x  2 runner runner   4096 Jan 13 09:29 example
+build	UNKNOWN STEP	2026-01-13T09:30:40.1216395Z drwxr-xr-x  8 runner runner   4096 Jan 13 09:29 example_app
+build	UNKNOWN STEP	2026-01-13T09:30:40.1216724Z drwxr-xr-x  5 runner runner   4096 Jan 13 09:29 example_cli
+build	UNKNOWN STEP	2026-01-13T09:30:40.1217062Z -rw-r--r--  1 runner runner 182034 Jan 13 09:29 exec_failure_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1217431Z -rw-r--r--  1 runner runner    531 Jan 13 09:29 extract_catches.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1217778Z -rw-r--r--  1 runner runner 247954 Jan 13 09:29 failed_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1218151Z -rw-r--r--  1 runner runner 241194 Jan 13 09:29 failed_log_20687112850.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1218701Z -rw-r--r--  1 runner runner 139238 Jan 13 09:29 final_analysis_output.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1219129Z -rw-r--r--  1 runner runner  72776 Jan 13 09:29 final_analysis_report.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1219534Z -rw-r--r--  1 runner runner  71059 Jan 13 09:29 final_analysis_v2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1219918Z -rw-r--r--  1 runner runner  69662 Jan 13 09:29 final_analysis_v3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1220305Z -rw-r--r--  1 runner runner  69013 Jan 13 09:29 final_analysis_v4.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1220675Z -rw-r--r--  1 runner runner  68843 Jan 13 09:29 final_analysis_v5.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1221226Z -rw-r--r--  1 runner runner  68675 Jan 13 09:29 final_analysis_v6.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1221590Z -rw-r--r--  1 runner runner    271 Jan 13 09:29 final_errors.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1221949Z -rw-r--r--  1 runner runner   8750 Jan 13 09:29 final_failure_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1222323Z -rw-r--r--  1 runner runner  88017 Jan 13 09:29 final_health_check.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1222714Z -rw-r--r--  1 runner runner  10640 Jan 13 09:29 final_integrity_errors.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1223126Z -rw-r--r--  1 runner runner    713 Jan 13 09:29 final_integrity_results.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1223649Z -rw-r--r--  1 runner runner  74678 Jan 13 09:29 final_verify.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1224023Z -rw-r--r--  1 runner runner   3903 Jan 13 09:29 final_verify_errors.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1224394Z -rw-r--r--  1 runner runner  88542 Jan 13 09:29 final_verify_v2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1224764Z -rw-r--r--  1 runner runner   2389 Jan 13 09:29 fix_catch_clauses.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1225132Z -rw-r--r--  1 runner runner   3257 Jan 13 09:29 fix_directives.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1225491Z -rw-r--r--  1 runner runner   3512 Jan 13 09:29 fix_pubspecs_v2.py
+build	UNKNOWN STEP	2026-01-13T09:30:40.1225866Z -rw-r--r--  1 runner runner   2182 Jan 13 09:29 fix_unused_catches.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1226247Z -rw-r--r--  1 runner runner 259884 Jan 13 09:29 flutter_failure_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1226618Z -rw-r--r--  1 runner runner  24492 Jan 13 09:29 forced_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1226978Z -rw-r--r--  1 runner runner 588768 Jan 13 09:29 full_analysis_report.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1227371Z -rw-r--r--  1 runner runner   6823 Jan 13 09:29 full_lint_breakdown.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1227743Z -rw-r--r--  1 runner runner    106 Jan 13 09:29 git_pull_error.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1228101Z -rw-r--r--  1 runner runner   1139 Jan 13 09:29 git_pull_rebase_2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1228474Z -rw-r--r--  1 runner runner    427 Jan 13 09:29 git_pull_rebase_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1228825Z -rw-r--r--  1 runner runner   4779 Jan 13 09:29 git_runs.json
+build	UNKNOWN STEP	2026-01-13T09:30:40.1229169Z -rw-r--r--  1 runner runner   2339 Jan 13 09:29 git_runs_v2.json
+build	UNKNOWN STEP	2026-01-13T09:30:40.1229517Z -rw-r--r--  1 runner runner  43774 Jan 13 09:29 global_analysis.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1229871Z -rw-r--r--  1 runner runner 211019 Jan 13 09:29 job_full_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1230202Z -rw-r--r--  1 runner runner    708 Jan 13 09:29 job_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1230511Z drwxr-xr-x  2 runner runner   4096 Jan 13 09:29 lib
+build	UNKNOWN STEP	2026-01-13T09:30:40.1231004Z -rw-r--r--  1 runner runner 100910 Jan 13 09:29 manual_verify.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1231349Z -rw-r--r--  1 runner runner   2201 Jan 13 09:29 melos.yaml
+build	UNKNOWN STEP	2026-01-13T09:30:40.1231699Z -rw-r--r--  1 runner runner   6002 Jan 13 09:29 melos_publish_help.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1232057Z drwxr-xr-x 28 runner runner   4096 Jan 13 09:29 packages
+build	UNKNOWN STEP	2026-01-13T09:30:40.1232399Z -rw-r--r--  1 runner runner    853 Jan 13 09:29 parse_log.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1232747Z -rw-r--r--  1 runner runner    392 Jan 13 09:29 parse_log_ctx.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1233104Z -rw-r--r--  1 runner runner  69722 Jan 13 09:29 publish_all_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1233471Z -rw-r--r--  1 runner runner  55250 Jan 13 09:29 publish_all_log_2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1233838Z -rw-r--r--  1 runner runner  44712 Jan 13 09:29 publish_all_log_3.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1234203Z -rw-r--r--  1 runner runner  35696 Jan 13 09:29 publish_all_log_4.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1234691Z -rw-r--r--  1 runner runner   3212 Jan 13 09:29 publish_dry_run_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1235062Z -rw-r--r--  1 runner runner  36964 Jan 13 09:29 publish_final.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1235427Z -rw-r--r--  1 runner runner  20082 Jan 13 09:29 publish_final_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1235802Z -rw-r--r--  1 runner runner  12250 Jan 13 09:29 publish_final_v2_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1236191Z -rw-r--r--  1 runner runner  13880 Jan 13 09:29 publish_final_v3_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1236570Z -rw-r--r--  1 runner runner   7169 Jan 13 09:29 publish_final_v4_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1236947Z -rw-r--r--  1 runner runner   7353 Jan 13 09:29 publish_final_v5_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1237319Z -rw-r--r--  1 runner runner   7285 Jan 13 09:29 publish_final_v6_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1237694Z -rw-r--r--  1 runner runner   6286 Jan 13 09:29 publish_final_v7_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1238055Z -rw-r--r--  1 runner runner   3304 Jan 13 09:29 publish_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1238394Z -rw-r--r--  1 runner runner    223 Jan 13 09:29 pubspec.yaml
+build	UNKNOWN STEP	2026-01-13T09:30:40.1238729Z -rw-r--r--  1 runner runner  24492 Jan 13 09:29 safe_dir_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1239175Z -rw-r--r--  1 runner runner  26013 Jan 13 09:29 seq_failure_log.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1239546Z -rw-r--r--  1 runner runner   1143 Jan 13 09:29 serial_audit_final.dart
+build	UNKNOWN STEP	2026-01-13T09:30:40.1239888Z drwxr-xr-x  2 runner runner   4096 Jan 13 09:29 test
+build	UNKNOWN STEP	2026-01-13T09:30:40.1240210Z -rw-r--r--  1 runner runner   3688 Jan 13 09:29 test_output.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1240570Z -rw-r--r--  1 runner runner  91496 Jan 13 09:29 test_output_final.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1241093Z -rw-r--r--  1 runner runner 144212 Jan 13 09:29 test_output_full.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1241473Z -rw-r--r--  1 runner runner  17196 Jan 13 09:29 trezor_analysis_v2.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1241845Z -rw-r--r--  1 runner runner  94849 Jan 13 09:29 verify_catch_fixes.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1242216Z -rw-r--r--  1 runner runner  91906 Jan 13 09:29 verify_compat_fix.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1242577Z -rw-r--r--  1 runner runner     68 Jan 13 09:29 verify_warnings.txt
+build	UNKNOWN STEP	2026-01-13T09:30:40.1242936Z drwxr-xr-x  4 runner runner   4096 Jan 13 09:29 web3_universal
+build	UNKNOWN STEP	2026-01-13T09:30:40.2499883Z Resolving dependencies...
+build	UNKNOWN STEP	2026-01-13T09:30:40.5324240Z Downloading packages...
+build	UNKNOWN STEP	2026-01-13T09:30:41.6484043Z + _fe_analyzer_shared 93.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6484485Z + analyzer 10.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6484790Z + ansi_styles 0.3.2+1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6485108Z + args 2.7.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6485420Z + async 2.13.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6485715Z + boolean_selector 2.1.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6486050Z + charcode 1.4.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6486349Z + checked_yaml 2.0.4
+build	UNKNOWN STEP	2026-01-13T09:30:41.6486652Z + cli_config 0.2.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6486945Z + cli_launcher 0.3.2+1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6487241Z + cli_util 0.4.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6487523Z + collection 1.19.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6487824Z + conventional_commit 0.6.1+1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6488224Z + convert 3.1.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6488501Z + coverage 1.15.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6488790Z + crypto 3.0.7
+build	UNKNOWN STEP	2026-01-13T09:30:41.6489056Z + file 7.0.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6489358Z + frontend_server_client 4.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6489737Z + glob 2.1.3
+build	UNKNOWN STEP	2026-01-13T09:30:41.6490003Z + graphs 2.3.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6490300Z + http 1.6.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6490584Z + http_multi_server 3.2.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6491146Z + http_parser 4.1.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6491442Z + io 1.0.5
+build	UNKNOWN STEP	2026-01-13T09:30:41.6491722Z + json_annotation 4.9.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6492056Z + lints 5.1.1 (6.0.0 available)
+build	UNKNOWN STEP	2026-01-13T09:30:41.6492415Z + logging 1.3.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6492697Z + matcher 0.12.18
+build	UNKNOWN STEP	2026-01-13T09:30:41.6492999Z + melos 6.3.3 (7.3.0 available)
+build	UNKNOWN STEP	2026-01-13T09:30:41.6493340Z + meta 1.17.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6493615Z + mime 2.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6493905Z + mustache_template 2.0.3
+build	UNKNOWN STEP	2026-01-13T09:30:41.6494249Z + node_preamble 2.0.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6494577Z + package_config 2.2.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6495162Z + path 1.9.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6495497Z + platform 3.1.6
+build	UNKNOWN STEP	2026-01-13T09:30:41.6495779Z + pool 1.5.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6496053Z + process 5.0.5
+build	UNKNOWN STEP	2026-01-13T09:30:41.6496333Z + prompts 2.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6496625Z + pub_semver 2.2.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6496930Z + pub_updater 0.5.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6497243Z + pubspec_parse 1.5.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6497517Z + shelf 1.4.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6497799Z + shelf_packages_handler 3.0.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6498156Z + shelf_static 1.1.3
+build	UNKNOWN STEP	2026-01-13T09:30:41.6498458Z + shelf_web_socket 3.0.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6498790Z + source_map_stack_trace 2.1.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6499124Z + source_maps 0.10.13
+build	UNKNOWN STEP	2026-01-13T09:30:41.6499424Z + source_span 1.10.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6499725Z + stack_trace 1.12.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6500052Z + stream_channel 2.1.4
+build	UNKNOWN STEP	2026-01-13T09:30:41.6500366Z + string_scanner 1.4.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6500693Z + term_glyph 1.2.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6501183Z + test 1.29.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6501459Z + test_api 0.7.9
+build	UNKNOWN STEP	2026-01-13T09:30:41.6501766Z + test_core 0.6.15
+build	UNKNOWN STEP	2026-01-13T09:30:41.6502056Z + typed_data 1.4.0
+build	UNKNOWN STEP	2026-01-13T09:30:41.6502359Z + vm_service 15.0.2
+build	UNKNOWN STEP	2026-01-13T09:30:41.6502647Z + watcher 1.2.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6502926Z + web 1.1.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6503188Z + web_socket 1.0.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6503714Z + web_socket_channel 3.0.3
+build	UNKNOWN STEP	2026-01-13T09:30:41.6504099Z + webkit_inspection_protocol 1.2.1
+build	UNKNOWN STEP	2026-01-13T09:30:41.6504505Z + yaml 3.1.3
+build	UNKNOWN STEP	2026-01-13T09:30:41.6504776Z + yaml_edit 2.2.3
+build	UNKNOWN STEP	2026-01-13T09:30:41.6505097Z Changed 65 dependencies!
+build	UNKNOWN STEP	2026-01-13T09:30:41.6505656Z 2 packages have newer versions incompatible with dependency constraints.
+build	UNKNOWN STEP	2026-01-13T09:30:41.6506351Z Try `dart pub outdated` for more information.
+build	UNKNOWN STEP	2026-01-13T09:30:42.7802127Z web3_universal
+build	UNKNOWN STEP	2026-01-13T09:30:42.7802471Z web3_universal_aa
+build	UNKNOWN STEP	2026-01-13T09:30:42.7802777Z web3_universal_abi
+build	UNKNOWN STEP	2026-01-13T09:30:42.7803078Z web3_universal_aptos
+build	UNKNOWN STEP	2026-01-13T09:30:42.7803439Z web3_universal_bc_ur
+build	UNKNOWN STEP	2026-01-13T09:30:42.7809772Z web3_universal_bitcoin
+build	UNKNOWN STEP	2026-01-13T09:30:42.7810174Z web3_universal_bridge
+build	UNKNOWN STEP	2026-01-13T09:30:42.7810565Z web3_universal_chains
+build	UNKNOWN STEP	2026-01-13T09:30:42.7811114Z web3_universal_client
+build	UNKNOWN STEP	2026-01-13T09:30:42.7811442Z web3_universal_compat
+build	UNKNOWN STEP	2026-01-13T09:30:42.7811756Z web3_universal_contract
+build	UNKNOWN STEP	2026-01-13T09:30:42.7812086Z web3_universal_core
+build	UNKNOWN STEP	2026-01-13T09:30:42.7812412Z web3_universal_cosmos
+build	UNKNOWN STEP	2026-01-13T09:30:42.7812743Z web3_universal_crypto
+build	UNKNOWN STEP	2026-01-13T09:30:42.7813070Z web3_universal_dapp
+build	UNKNOWN STEP	2026-01-13T09:30:42.7813390Z web3_universal_debug
+build	UNKNOWN STEP	2026-01-13T09:30:42.7813711Z web3_universal_ens
+build	UNKNOWN STEP	2026-01-13T09:30:42.7814017Z web3_universal_events
+build	UNKNOWN STEP	2026-01-13T09:30:42.7814346Z web3_universal_history
+build	UNKNOWN STEP	2026-01-13T09:30:42.7814665Z web3_universal_keystone
+build	UNKNOWN STEP	2026-01-13T09:30:42.7814985Z web3_universal_ledger
+build	UNKNOWN STEP	2026-01-13T09:30:42.7815304Z web3_universal_mev
+build	UNKNOWN STEP	2026-01-13T09:30:42.7815620Z web3_universal_mpc
+build	UNKNOWN STEP	2026-01-13T09:30:42.7815938Z web3_universal_multicall
+build	UNKNOWN STEP	2026-01-13T09:30:42.7816289Z web3_universal_nft
+build	UNKNOWN STEP	2026-01-13T09:30:42.7816605Z web3_universal_polkadot
+build	UNKNOWN STEP	2026-01-13T09:30:42.7816951Z web3_universal_price
+build	UNKNOWN STEP	2026-01-13T09:30:42.7817284Z web3_universal_provider
+build	UNKNOWN STEP	2026-01-13T09:30:42.7817625Z web3_universal_reown
+build	UNKNOWN STEP	2026-01-13T09:30:42.7817945Z web3_universal_signer
+build	UNKNOWN STEP	2026-01-13T09:30:42.7818265Z web3_universal_solana
+build	UNKNOWN STEP	2026-01-13T09:30:42.7818595Z web3_universal_staking
+build	UNKNOWN STEP	2026-01-13T09:30:42.7818924Z web3_universal_swap
+build	UNKNOWN STEP	2026-01-13T09:30:42.7819236Z web3_universal_ton
+build	UNKNOWN STEP	2026-01-13T09:30:42.7819544Z web3_universal_trezor
+build	UNKNOWN STEP	2026-01-13T09:30:42.7819879Z web3_universal_tron
+build	UNKNOWN STEP	2026-01-13T09:30:42.7820186Z web3_universal_utxo
+build	UNKNOWN STEP	2026-01-13T09:30:42.7820505Z web3_wallet_app
+build	UNKNOWN STEP	2026-01-13T09:30:43.3475386Z Cleaning workspace...
+build	UNKNOWN STEP	2026-01-13T09:30:43.4711127Z 
+build	UNKNOWN STEP	2026-01-13T09:30:43.4711818Z Workspace cleaned. You will need to run the bootstrap command again to use this workspace.
+build	UNKNOWN STEP	2026-01-13T09:30:44.0478858Z Cleaning workspace...
+build	UNKNOWN STEP	2026-01-13T09:30:44.0811411Z 
+build	UNKNOWN STEP	2026-01-13T09:30:44.0812031Z Workspace cleaned. You will need to run the bootstrap command again to use this workspace.
+build	UNKNOWN STEP	2026-01-13T09:30:44.6673832Z [     0.175s] melos bootstrap
+build	UNKNOWN STEP	2026-01-13T09:30:44.6693771Z [     0.179s]   └> /home/runner/work/dart_web3/dart_web3/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:30:44.6694507Z [     0.179s] 
+build	UNKNOWN STEP	2026-01-13T09:30:44.6697435Z [     0.179s] Running "flutter pub get" in workspace packages...
+build	UNKNOWN STEP	2026-01-13T09:30:45.6615486Z [     1.171s]   ✓ web3_universal_aptos
+build	UNKNOWN STEP	2026-01-13T09:30:45.6647640Z [     1.173s]     └> packages/extensions/aptos
+build	UNKNOWN STEP	2026-01-13T09:30:45.6863647Z [     1.196s]   ✓ web3_universal_abi
+build	UNKNOWN STEP	2026-01-13T09:30:45.6871345Z [     1.197s]     └> packages/abi
+build	UNKNOWN STEP	2026-01-13T09:30:45.7146585Z [     1.224s]   ✓ web3_universal_aa
+build	UNKNOWN STEP	2026-01-13T09:30:45.7152493Z [     1.224s]     └> packages/aa
+build	UNKNOWN STEP	2026-01-13T09:30:46.1479299Z [     1.657s]   ✓ web3_universal_bc_ur
+build	UNKNOWN STEP	2026-01-13T09:30:46.1484897Z [     1.658s]     └> packages/hardware/bc_ur
+build	UNKNOWN STEP	2026-01-13T09:30:46.2600016Z [     1.769s]   ✓ web3_universal_bridge
+build	UNKNOWN STEP	2026-01-13T09:30:46.2602664Z [     1.770s]     └> packages/bridge
+build	UNKNOWN STEP	2026-01-13T09:30:46.6407995Z [     2.150s]   ✓ web3_universal_chains
+build	UNKNOWN STEP	2026-01-13T09:30:46.6409328Z [     2.150s]     └> packages/chains
+build	UNKNOWN STEP	2026-01-13T09:30:46.9068408Z [     2.416s]   ✓ web3_universal_client
+build	UNKNOWN STEP	2026-01-13T09:30:46.9069034Z [     2.416s]     └> packages/client
+build	UNKNOWN STEP	2026-01-13T09:30:47.1807579Z [     2.690s]   ✓ web3_universal_compat
+build	UNKNOWN STEP	2026-01-13T09:30:47.1808205Z [     2.690s]     └> packages/compat
+build	UNKNOWN STEP	2026-01-13T09:30:47.4151991Z [     2.922s]   ✓ web3_universal_contract
+build	UNKNOWN STEP	2026-01-13T09:30:47.4152605Z [     2.923s]     └> packages/contract
+build	UNKNOWN STEP	2026-01-13T09:30:47.6555158Z [     3.165s]   ✓ web3_universal_core
+build	UNKNOWN STEP	2026-01-13T09:30:47.6559503Z [     3.165s]     └> packages/core
+build	UNKNOWN STEP	2026-01-13T09:30:47.9452421Z [     3.454s]   ✓ web3_universal_cosmos
+build	UNKNOWN STEP	2026-01-13T09:30:47.9455336Z [     3.455s]     └> packages/extensions/cosmos
+build	UNKNOWN STEP	2026-01-13T09:30:48.1242391Z [     3.633s]   ✓ web3_universal_crypto
+build	UNKNOWN STEP	2026-01-13T09:30:48.1246655Z [     3.634s]     └> packages/crypto
+build	UNKNOWN STEP	2026-01-13T09:30:48.4472162Z [     3.954s]   ✓ web3_universal_dapp
+build	UNKNOWN STEP	2026-01-13T09:30:48.4473122Z [     3.954s]     └> packages/dapp
+build	UNKNOWN STEP	2026-01-13T09:30:48.5909438Z [     4.100s]   ✓ web3_universal_debug
+build	UNKNOWN STEP	2026-01-13T09:30:48.5916730Z [     4.101s]     └> packages/debug
+build	UNKNOWN STEP	2026-01-13T09:30:48.9258943Z [     4.435s]   ✓ web3_universal_ens
+build	UNKNOWN STEP	2026-01-13T09:30:48.9262100Z [     4.435s]     └> packages/ens
+build	UNKNOWN STEP	2026-01-13T09:30:49.0778227Z [     4.587s]   ✓ web3_universal_events
+build	UNKNOWN STEP	2026-01-13T09:30:49.0783316Z [     4.587s]     └> packages/events
+build	UNKNOWN STEP	2026-01-13T09:30:49.4462705Z [     4.955s]   ✓ web3_universal_history
+build	UNKNOWN STEP	2026-01-13T09:30:49.4463609Z [     4.955s]     └> packages/history
+build	UNKNOWN STEP	2026-01-13T09:30:49.6040622Z [     5.113s]   ✓ web3_universal_keystone
+build	UNKNOWN STEP	2026-01-13T09:30:49.6047842Z [     5.114s]     └> packages/hardware/keystone
+build	UNKNOWN STEP	2026-01-13T09:30:50.0878121Z [     5.594s]   ✓ web3_universal_mev
+build	UNKNOWN STEP	2026-01-13T09:30:50.0879006Z [     5.595s]     └> packages/mev
+build	UNKNOWN STEP	2026-01-13T09:30:50.5364257Z [     6.046s]   ✓ web3_universal_mpc
+build	UNKNOWN STEP	2026-01-13T09:30:50.5368957Z [     6.046s]     └> packages/hardware/mpc
+build	UNKNOWN STEP	2026-01-13T09:30:50.8058132Z [     6.314s]   ✓ web3_universal_bitcoin
+build	UNKNOWN STEP	2026-01-13T09:30:50.8059160Z [     6.314s]     └> packages/extensions/bitcoin
+build	UNKNOWN STEP	2026-01-13T09:30:51.0551830Z [     6.563s]   ✓ web3_universal_multicall
+build	UNKNOWN STEP	2026-01-13T09:30:51.0563347Z [     6.563s]     └> packages/multicall
+build	UNKNOWN STEP	2026-01-13T09:30:51.3838421Z [     6.893s]   ✓ web3_universal_nft
+build	UNKNOWN STEP	2026-01-13T09:30:51.3845945Z [     6.894s]     └> packages/nft
+build	UNKNOWN STEP	2026-01-13T09:30:51.5713060Z [     7.079s]   ✓ web3_universal_polkadot
+build	UNKNOWN STEP	2026-01-13T09:30:51.5715229Z [     7.079s]     └> packages/extensions/polkadot
+build	UNKNOWN STEP	2026-01-13T09:30:51.6622075Z [     7.171s]   ✓ web3_universal
+build	UNKNOWN STEP	2026-01-13T09:30:51.6622688Z [     7.171s]     └> web3_universal
+build	UNKNOWN STEP	2026-01-13T09:30:51.8762184Z [     7.382s]   ✓ web3_universal_price
+build	UNKNOWN STEP	2026-01-13T09:30:51.8772038Z [     7.382s]     └> packages/price
+build	UNKNOWN STEP	2026-01-13T09:30:52.1144017Z [     7.624s]   ✓ web3_universal_provider
+build	UNKNOWN STEP	2026-01-13T09:30:52.1145734Z [     7.624s]     └> packages/provider
+build	UNKNOWN STEP	2026-01-13T09:30:52.1896241Z [     7.699s]   ✓ web3_universal_reown
+build	UNKNOWN STEP	2026-01-13T09:30:52.1906327Z [     7.700s]     └> packages/reown
+build	UNKNOWN STEP	2026-01-13T09:30:52.4042568Z [     7.911s]   ✓ web3_universal_signer
+build	UNKNOWN STEP	2026-01-13T09:30:52.4101280Z [     7.912s]     └> packages/signer
+build	UNKNOWN STEP	2026-01-13T09:30:52.6493635Z [     8.159s]   ✓ web3_universal_solana
+build	UNKNOWN STEP	2026-01-13T09:30:52.6500211Z [     8.159s]     └> packages/extensions/solana
+build	UNKNOWN STEP	2026-01-13T09:30:52.7223400Z [     8.231s]   ✓ web3_universal_staking
+build	UNKNOWN STEP	2026-01-13T09:30:52.7224396Z [     8.231s]     └> packages/staking
+build	UNKNOWN STEP	2026-01-13T09:30:52.9655170Z [     8.475s]   ✓ web3_universal_swap
+build	UNKNOWN STEP	2026-01-13T09:30:52.9660349Z [     8.475s]     └> packages/swap
+build	UNKNOWN STEP	2026-01-13T09:30:53.2255873Z [     8.735s]   ✓ web3_universal_ton
+build	UNKNOWN STEP	2026-01-13T09:30:53.2263847Z [     8.736s]     └> packages/extensions/ton
+build	UNKNOWN STEP	2026-01-13T09:30:53.2593400Z [     8.768s]   ✓ web3_universal_trezor
+build	UNKNOWN STEP	2026-01-13T09:30:53.2610203Z [     8.769s]     └> packages/hardware/trezor
+build	UNKNOWN STEP	2026-01-13T09:30:53.5008482Z [     9.010s]   ✓ web3_universal_tron
+build	UNKNOWN STEP	2026-01-13T09:30:53.5014001Z [     9.010s]     └> packages/extensions/tron
+build	UNKNOWN STEP	2026-01-13T09:30:53.6824783Z [     9.192s]   ✓ web3_universal_utxo
+build	UNKNOWN STEP	2026-01-13T09:30:53.6825420Z [     9.192s]     └> packages/utxo
+build	UNKNOWN STEP	2026-01-13T09:30:54.5982680Z [    10.108s]   ✓ web3_universal_ledger
+build	UNKNOWN STEP	2026-01-13T09:30:54.5983309Z [    10.108s]     └> packages/hardware/ledger
+build	UNKNOWN STEP	2026-01-13T09:31:00.0564840Z [    15.566s]   ✓ web3_wallet_app
+build	UNKNOWN STEP	2026-01-13T09:31:00.0565301Z [    15.566s]     └> example_app
+build	UNKNOWN STEP	2026-01-13T09:31:00.0586741Z [    15.568s]   > SUCCESS
+build	UNKNOWN STEP	2026-01-13T09:31:00.0587079Z [    15.568s] 
+build	UNKNOWN STEP	2026-01-13T09:31:00.0588894Z [    15.568s] Generating IntelliJ IDE files...
+build	UNKNOWN STEP	2026-01-13T09:31:00.1029760Z [    15.612s]   > SUCCESS
+build	UNKNOWN STEP	2026-01-13T09:31:00.1030131Z [    15.612s] 
+build	UNKNOWN STEP	2026-01-13T09:31:00.1030556Z [    15.613s]  -> 38 packages bootstrapped
+build	UNKNOWN STEP	2026-01-13T09:31:00.1593144Z ##[group]Run cd dart_web3
+build	UNKNOWN STEP	2026-01-13T09:31:00.1593426Z [36;1mcd dart_web3[0m
+build	UNKNOWN STEP	2026-01-13T09:31:00.1593627Z [36;1mmelos run analyze[0m
+build	UNKNOWN STEP	2026-01-13T09:31:00.1625549Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-01-13T09:31:00.1625772Z env:
+build	UNKNOWN STEP	2026-01-13T09:31:00.1626019Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.6-x64
+build	UNKNOWN STEP	2026-01-13T09:31:00.1626356Z   PUB_CACHE: /home/runner/.pub-cache
+build	UNKNOWN STEP	2026-01-13T09:31:00.1626603Z ##[endgroup]
+build	UNKNOWN STEP	2026-01-13T09:31:00.5148326Z melos run analyze
+build	UNKNOWN STEP	2026-01-13T09:31:00.5168518Z   └> melos exec --scope="web3_wallet_app" -- flutter gen-l10n
+build	UNKNOWN STEP	2026-01-13T09:31:00.5169549Z      melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
+build	UNKNOWN STEP	2026-01-13T09:31:00.5170507Z      melos exec --no-flutter -- dart analyze .
+build	UNKNOWN STEP	2026-01-13T09:31:00.5171247Z      melos exec --flutter -- flutter analyze .
+build	UNKNOWN STEP	2026-01-13T09:31:00.5172044Z      └> RUNNING
+build	UNKNOWN STEP	2026-01-13T09:31:00.5172246Z 
+build	UNKNOWN STEP	2026-01-13T09:31:01.2407846Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:01.2408535Z   └> flutter gen-l10n
+build	UNKNOWN STEP	2026-01-13T09:31:01.2408951Z      └> RUNNING (in 1 packages)
+build	UNKNOWN STEP	2026-01-13T09:31:01.2409215Z 
+build	UNKNOWN STEP	2026-01-13T09:31:01.2410644Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:01.2411430Z web3_wallet_app:
+build	UNKNOWN STEP	2026-01-13T09:31:01.4056661Z Because l10n.yaml exists, the options defined there will be used instead.
+build	UNKNOWN STEP	2026-01-13T09:31:01.4057769Z To use the command line arguments, delete the l10n.yaml file in the Flutter project.
+build	UNKNOWN STEP	2026-01-13T09:31:01.4058324Z 
+build	UNKNOWN STEP	2026-01-13T09:31:01.4058330Z 
+build	UNKNOWN STEP	2026-01-13T09:31:01.5477279Z web3_wallet_app: SUCCESS
+build	UNKNOWN STEP	2026-01-13T09:31:01.5482870Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:01.5484088Z 
+build	UNKNOWN STEP	2026-01-13T09:31:01.5484391Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:01.5484863Z   └> flutter gen-l10n
+build	UNKNOWN STEP	2026-01-13T09:31:01.5485099Z      └> SUCCESS
+build	UNKNOWN STEP	2026-01-13T09:31:02.1141647Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:02.1163351Z   └> flutter pub run build_runner build --delete-conflicting-outputs
+build	UNKNOWN STEP	2026-01-13T09:31:02.1164837Z      └> RUNNING (in 1 packages)
+build	UNKNOWN STEP	2026-01-13T09:31:02.1165265Z 
+build	UNKNOWN STEP	2026-01-13T09:31:02.1207153Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:02.1207725Z web3_wallet_app:
+build	UNKNOWN STEP	2026-01-13T09:31:06.9058718Z   Generating the build script.
+build	UNKNOWN STEP	2026-01-13T09:31:07.2681734Z   Compiling the build script.
+build	UNKNOWN STEP	2026-01-13T09:31:12.5616258Z   Reading the asset graph.
+build	UNKNOWN STEP	2026-01-13T09:31:13.0723699Z   Creating the asset graph.
+build	UNKNOWN STEP	2026-01-13T09:31:13.5325835Z   Doing initial build cleanup.
+build	UNKNOWN STEP	2026-01-13T09:31:13.5402883Z   Updating the asset graph.
+build	UNKNOWN STEP	2026-01-13T09:31:13.5406233Z   Building, full build because builders changed.
+build	UNKNOWN STEP	2026-01-13T09:31:13.5456493Z   0s riverpod_generator on 63 inputs; integration_test/app_test.dart
+build	UNKNOWN STEP	2026-01-13T09:31:13.5524191Z W SDK language version 3.10.0 is newer than `analyzer` language version 3.9.0. Run `flutter packages upgrade`.
+build	UNKNOWN STEP	2026-01-13T09:31:18.9365160Z   5s riverpod_generator on 63 inputs: 1 no-op; spent 5s sdk; integration_test/comprehensive_premium_flow_test.dart
+build	UNKNOWN STEP	2026-01-13T09:31:30.0095567Z   16s riverpod_generator on 63 inputs: 1 output, 39 no-op; spent 9s analyzing, 5s sdk, 2s resolving; lib/shared/providers/ledger_provider.dart
+build	UNKNOWN STEP	2026-01-13T09:31:30.1199464Z   17s riverpod_generator on 63 inputs: 2 output, 61 no-op; spent 9s analyzing, 5s sdk, 2s resolving
+build	UNKNOWN STEP	2026-01-13T09:31:30.1200543Z   0s source_gen:combining_builder on 63 inputs; integration_test/app_test.dart
+build	UNKNOWN STEP	2026-01-13T09:31:30.2256786Z   0s source_gen:combining_builder on 63 inputs: 2 output, 61 no-op
+build	UNKNOWN STEP	2026-01-13T09:31:30.2257447Z   Running the post build.
+build	UNKNOWN STEP	2026-01-13T09:31:30.2289474Z   Writing the asset graph.
+build	UNKNOWN STEP	2026-01-13T09:31:30.3946635Z   Built with build_runner in 18s; wrote 4 outputs.
+build	UNKNOWN STEP	2026-01-13T09:31:30.5385508Z web3_wallet_app: SUCCESS
+build	UNKNOWN STEP	2026-01-13T09:31:30.5392702Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:30.5393162Z 
+build	UNKNOWN STEP	2026-01-13T09:31:30.5393272Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:30.5395139Z   └> flutter pub run build_runner build --delete-conflicting-outputs
+build	UNKNOWN STEP	2026-01-13T09:31:30.5395764Z      └> SUCCESS
+build	UNKNOWN STEP	2026-01-13T09:31:31.1156898Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:31.1173968Z   └> dart analyze .
+build	UNKNOWN STEP	2026-01-13T09:31:31.1176129Z      └> RUNNING (in 36 packages)
+build	UNKNOWN STEP	2026-01-13T09:31:31.1176444Z 
+build	UNKNOWN STEP	2026-01-13T09:31:31.1178795Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:31.1726103Z [web3_universal]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:31.1731011Z [web3_universal_aa]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:31.1763087Z [web3_universal_aptos]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:31.1763588Z [web3_universal_abi]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:33.0812370Z [web3_universal_aa]: 
+build	UNKNOWN STEP	2026-01-13T09:31:33.0836126Z [web3_universal_aa]:    info - lib/src/user_operation.dart:665:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:33.0839204Z [web3_universal_aa]:    info - lib/src/user_operation.dart:680:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:33.0841986Z [web3_universal_aa]:    info - lib/web3_universal_aa.dart:1:9 - Library names are not necessary. Remove the library name. - unnecessary_library_name
+build	UNKNOWN STEP	2026-01-13T09:31:33.0843036Z [web3_universal_aa]: 
+build	UNKNOWN STEP	2026-01-13T09:31:33.0843391Z [web3_universal_aa]: 3 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:33.1158076Z [web3_universal_aptos]: 
+build	UNKNOWN STEP	2026-01-13T09:31:33.1159701Z [web3_universal_aptos]:    info - lib/src/rpc/client.dart:2:8 - The imported package 'http' isn't a dependency of the importing package. Try adding a dependency for 'http' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+build	UNKNOWN STEP	2026-01-13T09:31:33.1161505Z [web3_universal_aptos]: 
+build	UNKNOWN STEP	2026-01-13T09:31:33.1161887Z [web3_universal_aptos]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:33.1456694Z [web3_universal_bc_ur]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:33.1715025Z [web3_universal_bitcoin]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:33.3099554Z [web3_universal_abi]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:33.3612589Z [web3_universal_bridge]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:34.3732562Z [web3_universal_bc_ur]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:34.4284605Z [web3_universal_chains]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:34.4909682Z [web3_universal_bridge]: 
+build	UNKNOWN STEP	2026-01-13T09:31:34.4914439Z [web3_universal_bridge]:    info - lib/src/bridge_quote.dart:255:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:34.4916850Z [web3_universal_bridge]: 
+build	UNKNOWN STEP	2026-01-13T09:31:34.4920588Z [web3_universal_bridge]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:34.5459559Z [web3_universal_client]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:35.1958679Z [web3_universal_chains]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:35.2418870Z [web3_universal_compat]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:35.6380354Z [web3_universal_client]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:35.6855060Z [web3_universal_contract]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:36.0650332Z [web3_universal_bitcoin]: 
+build	UNKNOWN STEP	2026-01-13T09:31:36.0652561Z [web3_universal_bitcoin]:    info - lib/src/inscriptions/psbt_builder.dart:43:5 - Unnecessary type annotation on a local variable. Try removing the type annotation. - omit_local_variable_types
+build	UNKNOWN STEP	2026-01-13T09:31:36.0670713Z [web3_universal_bitcoin]:    info - lib/src/inscriptions/psbt_builder.dart:173:18 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+build	UNKNOWN STEP	2026-01-13T09:31:36.0672685Z [web3_universal_bitcoin]: 
+build	UNKNOWN STEP	2026-01-13T09:31:36.0673581Z [web3_universal_bitcoin]: 2 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:36.1211418Z [web3_universal_core]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:36.1332911Z [web3_universal_compat]: 
+build	UNKNOWN STEP	2026-01-13T09:31:36.1338201Z [web3_universal_compat]:   error - lib/dart_web3_compat.dart:96:7 - The final variable 'hex' can only be set once. Try making 'hex' non-final. - assignment_to_final_local
+build	UNKNOWN STEP	2026-01-13T09:31:36.1344287Z [web3_universal_compat]:   error - lib/dart_web3_compat.dart:108:7 - The final variable 'hex' can only be set once. Try making 'hex' non-final. - assignment_to_final_local
+build	UNKNOWN STEP	2026-01-13T09:31:36.1349263Z [web3_universal_compat]: 
+build	UNKNOWN STEP	2026-01-13T09:31:36.1354189Z [web3_universal_compat]: 2 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:36.1849986Z [web3_universal_cosmos]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:36.5728841Z [web3_universal_contract]: 
+build	UNKNOWN STEP	2026-01-13T09:31:36.5733700Z [web3_universal_contract]:    info - example/main.dart:5:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:36.5737341Z [web3_universal_contract]:    info - lib/src/contract.dart:9:8 - The import of 'event_filter.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:36.5795774Z [web3_universal_contract]:    info - lib/src/contract.dart:10:8 - The import of 'simulate_result.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:36.5848511Z [web3_universal_contract]:    info - lib/src/contract_factory.dart:5:8 - The import of 'contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:36.5851756Z [web3_universal_contract]:    info - lib/src/erc1155_contract.dart:158:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+build	UNKNOWN STEP	2026-01-13T09:31:36.5854224Z [web3_universal_contract]:    info - lib/src/erc721_contract.dart:201:53 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+build	UNKNOWN STEP	2026-01-13T09:31:36.5857485Z [web3_universal_contract]:    info - test/contract_test.dart:6:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:36.5862120Z [web3_universal_contract]:    info - test/mock_client.dart:7:8 - The import of 'package:web3_universal_provider/web3_universal_provider.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:36.5865151Z [web3_universal_contract]:    info - test/mock_client.dart:41:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:36.5867179Z [web3_universal_contract]:    info - test/mock_client.dart:80:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:36.5868390Z [web3_universal_contract]: 
+build	UNKNOWN STEP	2026-01-13T09:31:36.5868796Z [web3_universal_contract]: 10 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:36.6504761Z [web3_universal_crypto]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:37.2407695Z [web3_universal_cosmos]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:37.2751175Z [web3_universal_core]: 
+build	UNKNOWN STEP	2026-01-13T09:31:37.2753172Z [web3_universal_core]:    info - lib/src/ether_amount.dart:88:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:37.2756145Z [web3_universal_core]:    info - lib/src/ether_amount.dart:92:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:37.2757840Z [web3_universal_core]: 
+build	UNKNOWN STEP	2026-01-13T09:31:37.2758199Z [web3_universal_core]: 2 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:37.2936864Z [web3_universal_dapp]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:37.3538995Z [web3_universal_debug]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:37.4864802Z [web3_universal_crypto]: 
+build	UNKNOWN STEP	2026-01-13T09:31:37.4875002Z [web3_universal_crypto]:   error - lib/src/keccak.dart:16:20 - This expression has a type of 'void' so its value can't be used. Try checking to see if you're using the correct API; there might be a function or call that returns void you didn't expect. Also check type parameters and variables which might also be void. - use_of_void_result
+build	UNKNOWN STEP	2026-01-13T09:31:37.4878512Z [web3_universal_crypto]:   error - lib/src/secp256k1.dart:26:20 - Undefined name 'Random'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+build	UNKNOWN STEP	2026-01-13T09:31:37.4882237Z [web3_universal_crypto]:   error - lib/src/secp256k1.dart:368:20 - The method 'Random' isn't defined for the type 'Secp256k1'. Try correcting the name to the name of an existing method, or defining a method named 'Random'. - undefined_method
+build	UNKNOWN STEP	2026-01-13T09:31:37.4883720Z [web3_universal_crypto]: 
+build	UNKNOWN STEP	2026-01-13T09:31:37.4884082Z [web3_universal_crypto]: 3 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:37.5329368Z [web3_universal_ens]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:37.7108993Z [web3_universal_debug]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:37.7186917Z [web3_universal_dapp]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:37.7582860Z [web3_universal_events]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:37.7630706Z [web3_universal_history]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:37.9531207Z [web3_universal_ens]: 
+build	UNKNOWN STEP	2026-01-13T09:31:37.9565625Z [web3_universal_ens]:    info - lib/src/ens_records.dart:4:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:37.9570111Z [web3_universal_ens]:    info - lib/src/ens_resolver.dart:4:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:37.9575780Z [web3_universal_ens]:    info - lib/src/multichain_resolver.dart:4:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:37.9579895Z [web3_universal_ens]:    info - test/mock_client.dart:5:8 - The import of 'package:web3_universal_provider/web3_universal_provider.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:37.9582235Z [web3_universal_ens]: 
+build	UNKNOWN STEP	2026-01-13T09:31:37.9582598Z [web3_universal_ens]: 4 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:38.0007805Z [web3_universal_keystone]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.0607605Z [web3_universal_history]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:38.1085433Z [web3_universal_mev]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.2102605Z [web3_universal_events]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.2105163Z [web3_universal_events]:    info - lib/src/event_filter.dart:102:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:38.2108583Z [web3_universal_events]:    info - lib/src/event_filter.dart:113:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:38.2111726Z [web3_universal_events]:    info - lib/src/event_listener.dart:62:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+build	UNKNOWN STEP	2026-01-13T09:31:38.2114112Z [web3_universal_events]:    info - lib/src/event_listener.dart:97:29 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+build	UNKNOWN STEP	2026-01-13T09:31:38.2116452Z [web3_universal_events]:    info - lib/src/event_listener.dart:154:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+build	UNKNOWN STEP	2026-01-13T09:31:38.2118793Z [web3_universal_events]:    info - lib/src/event_listener.dart:182:11 - Uncancelled instance of 'StreamSubscription'. Try invoking 'cancel' in the function in which the 'StreamSubscription' was created. - cancel_subscriptions
+build	UNKNOWN STEP	2026-01-13T09:31:38.2121992Z [web3_universal_events]:    info - lib/src/event_subscriber.dart:5:8 - The import of 'package:web3_universal_provider/web3_universal_provider.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.2138503Z [web3_universal_events]:    info - test/mock_client.dart:5:8 - The import of 'package:web3_universal_provider/web3_universal_provider.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.2141220Z [web3_universal_events]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.2141646Z [web3_universal_events]: 8 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:38.2579106Z [web3_universal_mpc]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.3713559Z [web3_universal_keystone]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.3715295Z [web3_universal_keystone]:    info - lib/src/qr_communication.dart:68:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:38.3717562Z [web3_universal_keystone]:    info - lib/src/qr_communication.dart:118:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:38.3718884Z [web3_universal_keystone]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.3719239Z [web3_universal_keystone]: 2 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:38.4171926Z [web3_universal_multicall]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.4549236Z [web3_universal_mev]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:38.5002291Z [web3_universal_nft]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.7118406Z [web3_universal_mpc]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.7120260Z [web3_universal_mpc]:    info - lib/src/threshold_signature.dart:246:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:38.7123325Z [web3_universal_mpc]:    info - lib/src/threshold_signature.dart:569:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:38.7127974Z [web3_universal_mpc]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.7131675Z [web3_universal_mpc]: 2 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:38.7850414Z [web3_universal_polkadot]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.8491732Z [web3_universal_multicall]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.8493705Z [web3_universal_multicall]:    info - lib/src/multicall_builder.dart:29:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+build	UNKNOWN STEP	2026-01-13T09:31:38.8496040Z [web3_universal_multicall]:    info - lib/src/multicall_builder.dart:46:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+build	UNKNOWN STEP	2026-01-13T09:31:38.8498596Z [web3_universal_multicall]:    info - lib/src/multicall_builder.dart:52:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+build	UNKNOWN STEP	2026-01-13T09:31:38.8509151Z [web3_universal_multicall]:    info - lib/src/multicall_builder.dart:58:12 - Don't return 'this' from a method. Try changing the return type to 'void' and removing the return. - avoid_returning_this
+build	UNKNOWN STEP	2026-01-13T09:31:38.8512456Z [web3_universal_multicall]:    info - test/mock_client.dart:7:8 - The import of 'package:web3_universal_provider/web3_universal_provider.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.8515579Z [web3_universal_multicall]:    info - test/mock_client.dart:42:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:38.8517468Z [web3_universal_multicall]:    info - test/mock_client.dart:82:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:38.8520278Z [web3_universal_multicall]:    info - test/mock_contract.dart:5:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.8524679Z [web3_universal_multicall]:    info - test/mock_contract.dart:7:8 - The import of 'package:web3_universal_provider/web3_universal_provider.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.8528125Z [web3_universal_multicall]:    info - test/mock_contract.dart:120:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:38.8530203Z [web3_universal_multicall]:    info - test/mock_contract.dart:124:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:38.8532369Z [web3_universal_multicall]:    info - test/mock_contract.dart:128:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:38.8534377Z [web3_universal_multicall]:    info - test/mock_contract.dart:132:8 - The method is used to change a property. Try converting the method to a setter. - use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:38.8535619Z [web3_universal_multicall]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.8536014Z [web3_universal_multicall]: 13 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:38.8961663Z [web3_universal_price]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:38.9712977Z [web3_universal_nft]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.9714520Z [web3_universal_nft]:    info - lib/src/ipfs_gateway.dart:122:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+build	UNKNOWN STEP	2026-01-13T09:31:38.9716746Z [web3_universal_nft]:    info - lib/src/ipfs_gateway.dart:132:7 - Invalid assignment to the parameter 'gateway'. Try using a local variable in place of the parameter. - parameter_assignments
+build	UNKNOWN STEP	2026-01-13T09:31:38.9720103Z [web3_universal_nft]:    info - lib/src/nft_collection.dart:4:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.9724393Z [web3_universal_nft]:    info - lib/src/nft_transfer.dart:3:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:38.9762961Z [web3_universal_nft]:    info - lib/src/nft_types.dart:63:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:38.9765993Z [web3_universal_nft]:    info - lib/src/nft_types.dart:72:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:38.9767769Z [web3_universal_nft]: 
+build	UNKNOWN STEP	2026-01-13T09:31:38.9768116Z [web3_universal_nft]: 6 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:39.0293955Z [web3_universal_provider]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:39.0837224Z [web3_universal_polkadot]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:39.1266931Z [web3_universal_reown]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:39.2177369Z [web3_universal_price]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:39.2627606Z [web3_universal_signer]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:39.3984635Z [web3_universal_provider]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.3985930Z [web3_universal_provider]:    info - lib/src/provider.dart:77:8 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+build	UNKNOWN STEP	2026-01-13T09:31:39.3988104Z [web3_universal_provider]:    info - lib/src/provider.dart:83:8 - 'bool' parameters should be named parameters. Try converting the parameter to a named parameter. - avoid_positional_boolean_parameters
+build	UNKNOWN STEP	2026-01-13T09:31:39.3990191Z [web3_universal_provider]:    info - lib/src/websocket_transport.dart:53:13 - Unclosed instance of 'Sink'. Try invoking 'close' in the function in which the 'Sink' was created. - close_sinks
+build	UNKNOWN STEP	2026-01-13T09:31:39.3991924Z [web3_universal_provider]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.3992288Z [web3_universal_provider]: 3 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:39.4438909Z [web3_universal_solana]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:39.6750451Z [web3_universal_reown]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.6752235Z [web3_universal_reown]:    info - test/relay_verification_test.dart:28:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.6753828Z [web3_universal_reown]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.6755466Z [web3_universal_reown]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:39.7224436Z [web3_universal_staking]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:39.7315660Z [web3_universal_signer]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.7317009Z [web3_universal_signer]:    info - example/main.dart:19:74 - The value of the argument is redundant because it matches the default value. Try removing the argument. - avoid_redundant_argument_values
+build	UNKNOWN STEP	2026-01-13T09:31:39.7319299Z [web3_universal_signer]:    info - lib/src/authorization_revocation.dart:139:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.7321882Z [web3_universal_signer]:    info - lib/src/authorization_revocation.dart:141:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.7324492Z [web3_universal_signer]:    info - lib/src/authorization_verifier.dart:69:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.7326831Z [web3_universal_signer]:    info - lib/src/authorization_verifier.dart:73:11 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.7329136Z [web3_universal_signer]:    info - lib/src/authorization_verifier.dart:81:48 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.7330522Z [web3_universal_signer]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.7331056Z [web3_universal_signer]: 6 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:39.7923956Z [web3_universal_swap]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:39.9733694Z [web3_universal_solana]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.9738883Z [web3_universal_solana]:    info - lib/src/models/message.dart:183:9 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:39.9745383Z [web3_universal_solana]:    info - lib/src/models/public_key.dart:36:3 - The method '==' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:39.9758323Z [web3_universal_solana]:    info - lib/src/models/public_key.dart:43:3 - The method 'hashCode' should not be overridden in classes not annotated with '@immutable'. Try removing the override or annotating the class with '@immutable'. - avoid_equals_and_hash_code_on_mutable_classes
+build	UNKNOWN STEP	2026-01-13T09:31:39.9795318Z [web3_universal_solana]:    info - lib/src/models/public_key.dart:83:7 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:39.9798382Z [web3_universal_solana]:    info - lib/src/models/public_key.dart:100:9 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:39.9801088Z [web3_universal_solana]:    info - lib/src/rpc/wallet.dart:8:3 - Parameter 'url' could be a super parameter. Trying converting 'url' to a super parameter. - use_super_parameters
+build	UNKNOWN STEP	2026-01-13T09:31:39.9802571Z [web3_universal_solana]: 
+build	UNKNOWN STEP	2026-01-13T09:31:39.9803205Z [web3_universal_solana]: 6 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:40.0190028Z [web3_universal_ton]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:40.0704346Z [web3_universal_staking]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.0710161Z [web3_universal_staking]:    info - lib/src/staking_service.dart:3:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:40.0713033Z [web3_universal_staking]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.0713676Z [web3_universal_staking]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:40.1136537Z [web3_universal_trezor]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:40.2893745Z [web3_universal_swap]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.2895989Z [web3_universal_swap]:    info - lib/src/token_approval.dart:5:8 - The import of 'package:web3_universal_contract/web3_universal_contract.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal_client/web3_universal_client.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:40.2898413Z [web3_universal_swap]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.2898875Z [web3_universal_swap]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:40.3599382Z [web3_universal_tron]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:40.3677176Z [web3_universal_ton]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:40.4242560Z [web3_universal_utxo]: Analyzing ....
+build	UNKNOWN STEP	2026-01-13T09:31:40.5623618Z [web3_universal_trezor]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.5629344Z [web3_universal_trezor]:    info - lib/src/multi_chain_support.dart:310:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures
+build	UNKNOWN STEP	2026-01-13T09:31:40.5635312Z [web3_universal_trezor]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.5639901Z [web3_universal_trezor]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:40.6529217Z [web3_universal_tron]: No issues found!
+build	UNKNOWN STEP	2026-01-13T09:31:40.7947115Z [web3_universal_utxo]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.7948529Z [web3_universal_utxo]:    info - lib/src/selection/coin_selector.dart:20:16 - Unnecessary use of an abstract class. Try making 'select' a top-level function and removing the class. - one_member_abstracts
+build	UNKNOWN STEP	2026-01-13T09:31:40.7949976Z [web3_universal_utxo]: 
+build	UNKNOWN STEP	2026-01-13T09:31:40.7950351Z [web3_universal_utxo]: 1 issue found.
+build	UNKNOWN STEP	2026-01-13T09:31:44.0954535Z [web3_universal]: 
+build	UNKNOWN STEP	2026-01-13T09:31:44.0955812Z [web3_universal]: warning - lib/web3_universal.dart:32:68 - The library 'package:web3_universal_swap/web3_universal_swap.dart' doesn't export a member with the hidden name 'TransactionReceipt'. Try removing the name from the list of hidden members. - undefined_hidden_name
+build	UNKNOWN STEP	2026-01-13T09:31:44.0957511Z [web3_universal]: warning - lib/web3_universal.dart:32:88 - The library 'package:web3_universal_swap/web3_universal_swap.dart' doesn't export a member with the hidden name 'Log'. Try removing the name from the list of hidden members. - undefined_hidden_name
+build	UNKNOWN STEP	2026-01-13T09:31:44.0959292Z [web3_universal]:    info - example/main.dart:2:8 - The import of 'package:web3_universal_solana/web3_universal_solana.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal/web3_universal.dart'. Try removing the import directive. - unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:44.0961108Z [web3_universal]:    info - example/main.dart:33:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:44.0962343Z [web3_universal]:    info - example/main.dart:44:5 - Catch clause should use 'on' to specify the type of exception being caught. Try adding an 'on' clause before the 'catch'. - avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:44.0963497Z [web3_universal]:    info - lib/web3_universal.dart:9:5 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+build	UNKNOWN STEP	2026-01-13T09:31:44.0964538Z [web3_universal]:    info - lib/web3_universal.dart:32:63 - Sort combinator names alphabetically. Try sorting the combinator names alphabetically. - combinators_ordering
+build	UNKNOWN STEP	2026-01-13T09:31:44.0966744Z [web3_universal]: 
+build	UNKNOWN STEP	2026-01-13T09:31:44.0966943Z [web3_universal]: 7 issues found.
+build	UNKNOWN STEP	2026-01-13T09:31:44.1510256Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:44.1510746Z 
+build	UNKNOWN STEP	2026-01-13T09:31:44.1511083Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:44.1511651Z   └> dart analyze .
+build	UNKNOWN STEP	2026-01-13T09:31:44.1512445Z      └> FAILED (in 3 packages)
+build	UNKNOWN STEP	2026-01-13T09:31:44.1514597Z         └> web3_universal_compat (with exit code 3)
+build	UNKNOWN STEP	2026-01-13T09:31:44.1515287Z         └> web3_universal_crypto (with exit code 3)
+build	UNKNOWN STEP	2026-01-13T09:31:44.1515890Z         └> web3_universal (with exit code 2)
+build	UNKNOWN STEP	2026-01-13T09:31:44.7239239Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:31:44.7255973Z   └> flutter analyze .
+build	UNKNOWN STEP	2026-01-13T09:31:44.7257985Z      └> RUNNING (in 2 packages)
+build	UNKNOWN STEP	2026-01-13T09:31:44.7260305Z 
+build	UNKNOWN STEP	2026-01-13T09:31:44.7260683Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:31:44.8735326Z ERROR: ERROR: [web3_wallet_app]: Waiting for another flutter command to release the startup lock...
+build	UNKNOWN STEP	2026-01-13T09:31:44.8735826Z 
+build	UNKNOWN STEP	2026-01-13T09:31:44.8736086Z 
+build	UNKNOWN STEP	2026-01-13T09:31:45.5307813Z [web3_universal_ledger]: Analyzing ledger...                                             
+build	UNKNOWN STEP	2026-01-13T09:31:45.7865985Z [web3_wallet_app]: Analyzing example_app...                                        
+build	UNKNOWN STEP	2026-01-13T09:31:58.6811871Z [web3_universal_ledger]: 
+build	UNKNOWN STEP	2026-01-13T09:31:58.6817263Z [web3_universal_ledger]: 
+build	UNKNOWN STEP	2026-01-13T09:31:58.6926611Z [web3_universal_ledger]:    info • The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart' • lib/src/flutter_ledger_transport.dart:2:8 • unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:31:58.6942943Z [web3_universal_ledger]: warning • 'LedgerOperation' is deprecated and shouldn't be used. Use [LedgerSimpleOperation] or [LedgerComplexOperation] instead • lib/src/flutter_ledger_transport.dart:26:33 • deprecated_member_use
+build	UNKNOWN STEP	2026-01-13T09:31:58.6945955Z [web3_universal_ledger]: warning • 'LedgerOperation' is deprecated and shouldn't be used. Use [LedgerSimpleOperation] or [LedgerComplexOperation] instead • lib/src/flutter_ledger_transport.dart:42:33 • deprecated_member_use
+build	UNKNOWN STEP	2026-01-13T09:31:58.6948466Z [web3_universal_ledger]:    info • The method is used to change a property • lib/src/flutter_ledger_transport.dart:75:15 • use_setters_to_change_properties
+build	UNKNOWN STEP	2026-01-13T09:31:58.6951134Z [web3_universal_ledger]: warning • The type argument(s) of the constructor 'Future.delayed' can't be inferred • lib/src/flutter_ledger_transport.dart:174:12 • inference_failure_on_instance_creation
+build	UNKNOWN STEP	2026-01-13T09:31:58.6953979Z [web3_universal_ledger]: warning • 'LedgerOperation' is deprecated and shouldn't be used. Use [LedgerSimpleOperation] or [LedgerComplexOperation] instead • lib/src/flutter_ledger_transport.dart:186:37 • deprecated_member_use
+build	UNKNOWN STEP	2026-01-13T09:31:58.6956513Z [web3_universal_ledger]:    info • Catch clause should use 'on' to specify the type of exception being caught • lib/src/ledger_client.dart:249:7 • avoid_catches_without_on_clauses
+build	UNKNOWN STEP	2026-01-13T09:31:58.6957703Z [web3_universal_ledger]: 
+build	UNKNOWN STEP	2026-01-13T09:31:58.7005826Z ERROR: ERROR: [web3_universal_ledger]: 7 issues found. (ran in 13.2s)
+build	UNKNOWN STEP	2026-01-13T09:31:58.7007307Z 
+build	UNKNOWN STEP	2026-01-13T09:31:58.7008303Z 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2694387Z [web3_wallet_app]: 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2697507Z [web3_wallet_app]: 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2733713Z [web3_wallet_app]:    info • Function literals shouldn't be passed to 'forEach' • integration_test/comprehensive_premium_flow_test.dart:39:23 • avoid_function_literals_in_foreach_calls
+build	UNKNOWN STEP	2026-01-13T09:32:05.2737608Z [web3_wallet_app]:    info • Function literals shouldn't be passed to 'forEach' • integration_test/comprehensive_premium_flow_test.dart:111:23 • avoid_function_literals_in_foreach_calls
+build	UNKNOWN STEP	2026-01-13T09:32:05.2795190Z [web3_wallet_app]:    info • Function literals shouldn't be passed to 'forEach' • integration_test/comprehensive_premium_flow_test.dart:144:23 • avoid_function_literals_in_foreach_calls
+build	UNKNOWN STEP	2026-01-13T09:32:05.2800630Z [web3_wallet_app]:    info • The import of 'package:bitcoin_base/bitcoin_base.dart' is unnecessary because all of the used elements are also provided by the import of 'package:web3_universal/web3_universal.dart' • lib/core/wallet_service.dart:10:8 • unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2806013Z [web3_wallet_app]:    info • Use 'const' for final variables initialized to a constant value • lib/core/wallet_service.dart:468:5 • prefer_const_declarations
+build	UNKNOWN STEP	2026-01-13T09:32:05.2809191Z [web3_wallet_app]:    info • The import of '../../../../core/wallet_service.dart' is unnecessary because all of the used elements are also provided by the import of '../../../../shared/providers/wallet_provider.dart' • lib/features/history/presentation/screens/transaction_history_screen.dart:10:8 • unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2816323Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • lib/features/nft/presentation/screens/nft_gallery_screen.dart:106:28 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2819447Z [web3_wallet_app]:    info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/features/onboarding/presentation/screens/create_wallet_screen.dart:1:8 • unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2822339Z [web3_wallet_app]: warning • Unused import: 'package:web3_universal/web3_universal.dart' • lib/features/swap/presentation/screens/swap_screen.dart:4:8 • unused_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2824855Z [web3_wallet_app]: warning • The value of the local variable 'notifier' isn't used • lib/features/swap/presentation/screens/swap_screen.dart:175:32 • unused_local_variable
+build	UNKNOWN STEP	2026-01-13T09:32:05.2828163Z [web3_wallet_app]:    info • The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' • lib/shared/providers/currency_provider.dart:1:8 • unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2832433Z [web3_wallet_app]:    info • The import of 'package:flutter_riverpod/flutter_riverpod.dart' is unnecessary because all of the used elements are also provided by the import of 'package:riverpod_annotation/riverpod_annotation.dart' • lib/shared/providers/theme_provider.dart:2:8 • unnecessary_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2835357Z [web3_wallet_app]: warning • Unused import: 'package:ledger_flutter_plus/ledger_flutter_plus.dart' • scripts/check_ledger.dart:2:8 • unused_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2837088Z [web3_wallet_app]:    info • Don't invoke 'print' in production code • scripts/check_ledger.dart:5:3 • avoid_print
+build	UNKNOWN STEP	2026-01-13T09:32:05.2838170Z [web3_wallet_app]: warning • The value of the local variable 'future' isn't used • test/core/services/ledger_service_test.dart:115:13 • unused_local_variable
+build	UNKNOWN STEP	2026-01-13T09:32:05.2839306Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/core/services/ledger_service_test.dart:117:29 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2840467Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/core/services/ledger_service_test.dart:133:9 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2841862Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/core/services/ledger_service_test.dart:151:9 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2843020Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/core/services/ledger_service_test.dart:167:9 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2844134Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/core/services/ledger_service_test.dart:185:9 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2845193Z [web3_wallet_app]: warning • Unused import: 'package:integration_test/integration_test.dart' • test/ledger_flow_test.dart:7:8 • unused_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2846386Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/ledger_flow_test.dart:115:27 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2847396Z [web3_wallet_app]:    info • Use 'const' with the constructor to improve performance • test/minimal_ledger_test.dart:22:30 • prefer_const_constructors
+build	UNKNOWN STEP	2026-01-13T09:32:05.2848395Z [web3_wallet_app]: warning • Unused import: 'package:integration_test/integration_test.dart' • test/smoke_flow_test.dart:5:8 • unused_import
+build	UNKNOWN STEP	2026-01-13T09:32:05.2848988Z [web3_wallet_app]: 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2897880Z ERROR: ERROR: [web3_wallet_app]: 24 issues found. (ran in 19.5s)
+build	UNKNOWN STEP	2026-01-13T09:32:05.2898357Z 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2898613Z 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2981667Z --------------------------------------------------------------------------------
+build	UNKNOWN STEP	2026-01-13T09:32:05.2987405Z 
+build	UNKNOWN STEP	2026-01-13T09:32:05.2987562Z $ melos exec
+build	UNKNOWN STEP	2026-01-13T09:32:05.2988018Z   └> flutter analyze .
+build	UNKNOWN STEP	2026-01-13T09:32:05.2989890Z      └> FAILED (in 2 packages)
+build	UNKNOWN STEP	2026-01-13T09:32:05.2994161Z         └> web3_universal_ledger (with exit code 1)
+build	UNKNOWN STEP	2026-01-13T09:32:05.2995495Z         └> web3_wallet_app (with exit code 1)
+build	UNKNOWN STEP	2026-01-13T09:32:05.3629124Z 
+build	UNKNOWN STEP	2026-01-13T09:32:05.3629519Z melos run analyze
+build	UNKNOWN STEP	2026-01-13T09:32:05.3630263Z   └> melos exec --scope="web3_wallet_app" -- flutter gen-l10n
+build	UNKNOWN STEP	2026-01-13T09:32:05.3632018Z      melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
+build	UNKNOWN STEP	2026-01-13T09:32:05.3632558Z      melos exec --no-flutter -- dart analyze .
+build	UNKNOWN STEP	2026-01-13T09:32:05.3633220Z      melos exec --flutter -- flutter analyze .
+build	UNKNOWN STEP	2026-01-13T09:32:05.3633531Z      └> FAILED
+build	UNKNOWN STEP	2026-01-13T09:32:05.3644463Z ScriptException: The script analyze failed to execute.
+build	UNKNOWN STEP	2026-01-13T09:32:05.4215764Z ##[error]Process completed with exit code 1.
+build	UNKNOWN STEP	2026-01-13T09:32:05.4361335Z Post job cleanup.
+build	UNKNOWN STEP	2026-01-13T09:32:05.4416317Z Post job cleanup.
+build	UNKNOWN STEP	2026-01-13T09:32:05.5352081Z [command]/usr/bin/git version
+build	UNKNOWN STEP	2026-01-13T09:32:05.5388912Z git version 2.52.0
+build	UNKNOWN STEP	2026-01-13T09:32:05.5427571Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/59f1bcc6-22cc-43ff-bf51-3e0d117b6811/.gitconfig'
+build	UNKNOWN STEP	2026-01-13T09:32:05.5438345Z Temporarily overriding HOME='/home/runner/work/_temp/59f1bcc6-22cc-43ff-bf51-3e0d117b6811' before making global git config changes
+build	UNKNOWN STEP	2026-01-13T09:32:05.5439676Z Adding repository directory to the temporary git global config as a safe directory
+build	UNKNOWN STEP	2026-01-13T09:32:05.5452227Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dart_web3/dart_web3
+build	UNKNOWN STEP	2026-01-13T09:32:05.5486292Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-01-13T09:32:05.5517655Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-01-13T09:32:05.5730216Z fatal: No url found for submodule path 'references/dart/bitcoin_base' in .gitmodules
+build	UNKNOWN STEP	2026-01-13T09:32:05.5771304Z ##[warning]The process '/usr/bin/git' failed with exit code 128
+build	UNKNOWN STEP	2026-01-13T09:32:05.5867869Z Cleaning up orphan processes

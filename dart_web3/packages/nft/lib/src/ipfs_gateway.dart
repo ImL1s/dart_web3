@@ -118,20 +118,22 @@ class IpfsGateway {
 
   /// Add custom gateway
   void addGateway(String gateway) {
-    if (!gateway.endsWith('/')) {
-      gateway = '$gateway/';
+    var normalizedGateway = gateway;
+    if (!normalizedGateway.endsWith('/')) {
+      normalizedGateway = '$normalizedGateway/';
     }
-    if (!_gateways.contains(gateway)) {
-      _gateways.add(gateway);
+    if (!_gateways.contains(normalizedGateway)) {
+      _gateways.add(normalizedGateway);
     }
   }
 
   /// Remove gateway
   void removeGateway(String gateway) {
-    if (!gateway.endsWith('/')) {
-      gateway = '$gateway/';
+    var normalizedGateway = gateway;
+    if (!normalizedGateway.endsWith('/')) {
+      normalizedGateway = '$normalizedGateway/';
     }
-    _gateways.remove(gateway);
+    _gateways.remove(normalizedGateway);
   }
 
   /// Clear cache
