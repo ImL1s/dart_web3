@@ -14,3 +14,5 @@ dependency_overrides:
     path: ../signer
   web3_universal_solana:
     path: ../extensions/solana
+  web3_universal_contract:
+    path: ../contract

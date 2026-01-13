@@ -11,7 +11,7 @@ class MockLedgerConnection implements LedgerConnection {
   Future<void> disconnect() async {}
 
   @override
-  Future<T> sendOperation<T>(LedgerOperation<T> operation, {LedgerTransformer? transformer}) async {
+  Future<T> sendOperation<T>(operation, {transformer}) async {
     return Uint8List(0) as T;
   }
   

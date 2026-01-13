@@ -1,3 +1,4 @@
+# melos_managed_dependency_overrides: web3_universal_contract
 # melos_managed_dependency_overrides: web3_universal_abi,web3_universal_chains,web3_universal_client,web3_universal_core,web3_universal_crypto,web3_universal_provider,web3_universal_signer,web3_universal_solana
 dependency_overrides:
   web3_universal_abi:
@@ -6,6 +7,8 @@ dependency_overrides:
     path: ../chains
   web3_universal_client:
     path: ../client
+  web3_universal_contract:
+    path: ..\\contract
   web3_universal_core:
     path: ../core
   web3_universal_crypto:

@@ -29,6 +29,7 @@ scripts:
   analyze:
     run: |
       melos exec --scope="web3_wallet_app" -- flutter gen-l10n
+      melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
       melos exec --no-flutter -- dart analyze .
       melos exec --flutter -- flutter analyze .
     description: Run static analysis on all packages
