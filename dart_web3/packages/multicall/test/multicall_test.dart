@@ -181,7 +181,7 @@ void main() {
 
     group('estimateGas', () {
       test('should estimate gas for multicall', () async {
-        publicClient.mockEstimateGas(BigInt.from(150000));
+        publicClient.mockEstimateGasResult = BigInt.from(150000);
 
         final calls = [
           Call(

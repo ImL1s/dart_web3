@@ -47,15 +47,7 @@ void main() {
         expect(builder.calls[0].allowFailure, isTrue);
       });
 
-      test('should return builder for chaining', () {
-        final result = builder.addCall(
-          contract: contract,
-          functionName: 'balanceOf',
-          args: ['0x1234567890123456789012345678901234567890'],
-        );
 
-        expect(result, same(builder));
-      });
     });
 
     group('addRawCall', () {
@@ -254,7 +246,7 @@ void main() {
         );
 
         final publicClient = multicall.publicClient as MockPublicClient;
-        publicClient.mockEstimateGas(BigInt.from(150000));
+        publicClient.mockEstimateGasResult = BigInt.from(150000);
 
         final gasEstimate = await builder.estimateGas(multicall);
 

@@ -24,8 +24,9 @@ void main() {
       if (event.type == RelayEventType.connected) {
         if (!completer.isCompleted) completer.complete();
       } else if (event.type == RelayEventType.error) {
-        if (!completer.isCompleted)
+        if (!completer.isCompleted) {
           completer.completeError((event.error ?? 'Unknown error') as Object);
+        }
       }
     });
 

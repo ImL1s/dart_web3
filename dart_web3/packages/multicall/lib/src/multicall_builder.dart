@@ -10,7 +10,7 @@ class MulticallBuilder {
   final List<Call> _calls = [];
 
   /// Adds a contract function call to the batch.
-  MulticallBuilder addCall({
+  void addCall({
     required Contract contract,
     required String functionName,
     required List<dynamic> args,
@@ -26,11 +26,10 @@ class MulticallBuilder {
       ),
     );
 
-    return this;
   }
 
   /// Adds a raw call to the batch.
-  MulticallBuilder addRawCall({
+  void addRawCall({
     required String target,
     required Uint8List callData,
     bool allowFailure = false,
@@ -43,19 +42,16 @@ class MulticallBuilder {
       ),
     );
 
-    return this;
   }
 
   /// Adds multiple calls from another builder.
-  MulticallBuilder addAll(MulticallBuilder other) {
+  void addAll(MulticallBuilder other) {
     _calls.addAll(other._calls);
-    return this;
   }
 
   /// Clears all calls from the builder.
-  MulticallBuilder clear() {
+  void clear() {
     _calls.clear();
-    return this;
   }
 
   /// Gets the current list of calls.
@@ -132,12 +128,13 @@ extension ContractMulticallExtension on Contract {
     required List<dynamic> args,
     bool allowFailure = false,
   }) {
-    return MulticallBuilder().addCall(
-      contract: this,
-      functionName: functionName,
-      args: args,
-      allowFailure: allowFailure,
-    );
+    return MulticallBuilder()
+      ..addCall(
+        contract: this,
+        functionName: functionName,
+        args: args,
+        allowFailure: allowFailure,
+      );
   }
 }
 

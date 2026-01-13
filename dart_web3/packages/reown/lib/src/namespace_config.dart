@@ -103,12 +103,14 @@ class NamespaceConfig {
 
   /// Adds an account to this namespace.
   NamespaceConfig addAccount(String account) {
+    // ignore: avoid_returning_this
     if (accounts.contains(account)) return this;
     return copyWith(accounts: [...accounts, account]);
   }
 
   /// Removes an account from this namespace.
   NamespaceConfig removeAccount(String account) {
+    // ignore: avoid_returning_this
     if (!accounts.contains(account)) return this;
     return copyWith(accounts: accounts.where((a) => a != account).toList());
   }

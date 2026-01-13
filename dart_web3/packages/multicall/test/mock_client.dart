@@ -4,7 +4,8 @@ import 'package:web3_universal_abi/web3_universal_abi.dart' as abi;
 import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
-import 'package:web3_universal_provider/web3_universal_provider.dart';
+
+
 import 'package:web3_universal_signer/web3_universal_signer.dart';
 
 /// Mock PublicClient for testing multicall functionality.
@@ -26,7 +27,7 @@ class MockPublicClient extends PublicClient {
         );
   CallRequest? lastCallRequest;
   Uint8List? _mockCallResult;
-  BigInt? _mockEstimateGasResult;
+  BigInt? mockEstimateGasResult;
   String? _mockCallError;
 
   void mockCall(Uint8List result) {
@@ -39,9 +40,7 @@ class MockPublicClient extends PublicClient {
     _mockCallResult = null;
   }
 
-  void mockEstimateGas(BigInt gas) {
-    _mockEstimateGasResult = gas;
-  }
+
 
   @override
   Future<Uint8List> call(CallRequest request, [String block = 'latest']) async {
@@ -54,7 +53,7 @@ class MockPublicClient extends PublicClient {
 
   @override
   Future<BigInt> estimateGas(CallRequest request) async {
-    return _mockEstimateGasResult ?? BigInt.from(21000);
+    return mockEstimateGasResult ?? BigInt.from(21000);
   }
 }
 
@@ -77,21 +76,19 @@ class MockWalletClient extends WalletClient {
           signer: MockSigner(),
         );
   TransactionRequest? lastTransactionRequest;
-  String? _mockSendTransactionResult;
+  String? mockSendTransactionResult;
 
-  void mockSendTransaction(String txHash) {
-    _mockSendTransactionResult = txHash;
-  }
+
 
   @override
   Future<String> sendTransaction(Uint8List tx) async {
-    return _mockSendTransactionResult ?? '0xmocktx';
+    return mockSendTransactionResult ?? '0xmocktx';
   }
 
   @override
   Future<String> sendTransactionRequest(TransactionRequest request) async {
     lastTransactionRequest = request;
-    return _mockSendTransactionResult ?? '0xmocktx';
+    return mockSendTransactionResult ?? '0xmocktx';
   }
 
   @override

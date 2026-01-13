@@ -2,9 +2,8 @@ import 'dart:typed_data';
 
 import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
-import 'package:web3_universal_contract/web3_universal_contract.dart';
 import 'package:web3_universal_multicall/web3_universal_multicall.dart';
-import 'package:web3_universal_provider/web3_universal_provider.dart';
+
 
 /// Mock Contract for testing multicall functionality.
 class MockContract extends Contract {
@@ -112,30 +111,16 @@ class MockMulticall {
   List<Call>? lastEstimateGasCalls;
   bool? lastRequireSuccess;
 
-  List<CallResult>? _mockAggregateResult;
-  List<CallResult>? _mockTryAggregateResult;
-  MulticallBlockResult? _mockAggregateWithBlockResult;
-  BigInt? _mockEstimateGasResult;
+  List<CallResult>? mockAggregateResult;
+  List<CallResult>? mockTryAggregateResult;
+  MulticallBlockResult? mockAggregateWithBlockResult;
+  BigInt? mockEstimateGasResult;
 
-  void mockAggregate(List<CallResult> result) {
-    _mockAggregateResult = result;
-  }
 
-  void mockTryAggregate(List<CallResult> result) {
-    _mockTryAggregateResult = result;
-  }
-
-  void mockAggregateWithBlock(MulticallBlockResult result) {
-    _mockAggregateWithBlockResult = result;
-  }
-
-  void mockEstimateGas(BigInt gas) {
-    _mockEstimateGasResult = gas;
-  }
 
   Future<List<CallResult>> aggregate(List<Call> calls) async {
     lastAggregateCalls = calls;
-    return _mockAggregateResult ?? [];
+    return mockAggregateResult ?? [];
   }
 
   Future<List<CallResult>> tryAggregate(
@@ -144,12 +129,12 @@ class MockMulticall {
   }) async {
     lastTryAggregateCalls = calls;
     lastRequireSuccess = requireSuccess;
-    return _mockTryAggregateResult ?? [];
+    return mockTryAggregateResult ?? [];
   }
 
   Future<MulticallBlockResult> aggregateWithBlock(List<Call> calls) async {
     lastAggregateWithBlockCalls = calls;
-    return _mockAggregateWithBlockResult ??
+    return mockAggregateWithBlockResult ??
         MulticallBlockResult(
           blockNumber: BigInt.zero,
           blockHash: '0x',
@@ -159,6 +144,6 @@ class MockMulticall {
 
   Future<BigInt> estimateGas(List<Call> calls) async {
     lastEstimateGasCalls = calls;
-    return _mockEstimateGasResult ?? BigInt.zero;
+    return mockEstimateGasResult ?? BigInt.zero;
   }
 }
