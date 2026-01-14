@@ -36,14 +36,14 @@ void main() {
     
     // Check for Onboarding Image
     bool foundOnboardingImage = false;
-    tester.allWidgets.forEach((widget) {
+    for (final widget in tester.allWidgets) {
       if (widget is Image && widget.image is AssetImage) {
         final asset = widget.image as AssetImage;
         if (asset.assetName == 'assets/images/wallet_onboarding.png') {
           foundOnboardingImage = true;
         }
       }
-    });
+    }
     expect(foundOnboardingImage, isTrue, reason: "Onboarding image assets/images/wallet_onboarding.png not found");
 
     // --- STEP 2: Create Wallet Flow (Premium UI) ---
@@ -108,14 +108,14 @@ void main() {
     
     // Verify AA Illustration
     bool foundAaIllustration = false;
-    tester.allWidgets.forEach((widget) {
+    for (final widget in tester.allWidgets) {
       if (widget is Image && widget.image is AssetImage) {
         final asset = widget.image as AssetImage;
         if (asset.assetName == 'assets/images/aa_illustration.png') {
           foundAaIllustration = true;
         }
       }
-    });
+    }
     expect(foundAaIllustration, isTrue, reason: "AA illustration assets/images/aa_illustration.png not found");
 
     // Test Paymaster Toggle
@@ -141,14 +141,14 @@ void main() {
       
     // Check Empty State Image
     bool foundEmptyNftImage = false;
-    tester.allWidgets.forEach((widget) {
+    for (final widget in tester.allWidgets) {
       if (widget is Image && widget.image is AssetImage) {
         final asset = widget.image as AssetImage;
         if (asset.assetName == 'assets/images/empty_nft.png') {
           foundEmptyNftImage = true;
         }
       }
-    });
+    }
     expect(foundEmptyNftImage, isTrue, reason: "Empty NFT image assets/images/empty_nft.png not found");
       
     // Test search bar

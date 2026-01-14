@@ -103,11 +103,11 @@ class _NftGalleryScreenState extends ConsumerState<NftGalleryScreen> {
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const Icon(Icons.auto_awesome, color: Colors.orangeAccent),
-                        const SizedBox(width: 12),
-                        const Expanded(
+                        Icon(Icons.auto_awesome, color: Colors.orangeAccent),
+                        SizedBox(width: 12),
+                        Expanded(
                           child: Text(
                             'Powered by Alchemy NFT API\nMultichain Assets Visualized',
                             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),

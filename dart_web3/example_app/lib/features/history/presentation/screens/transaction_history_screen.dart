@@ -7,7 +7,7 @@ import 'package:web3_wallet_app/l10n/generated/app_localizations.dart';
 
 import '../../../../shared/providers/transaction_history_provider.dart';
 import '../../../../shared/providers/wallet_provider.dart';
-import '../../../../core/wallet_service.dart';
+// import '../../../../core/wallet_service.dart';
 
 /// Transaction History Screen
 class TransactionHistoryScreen extends ConsumerStatefulWidget {

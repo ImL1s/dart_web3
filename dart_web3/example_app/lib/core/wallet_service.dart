@@ -7,7 +7,7 @@ library;
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:bitcoin_base/bitcoin_base.dart';
+// import 'package:bitcoin_base/bitcoin_base.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:web3_universal/web3_universal.dart';
@@ -465,7 +465,7 @@ class WalletService {
     // We iterate adding inputs until we cover amount + buffer.
     BigInt inputSum = BigInt.zero;
     final selectedUtxos = <BitcoinUtxo>[];
-    final feeRate = 20; // sats/vbyte
+    const feeRate = 20; // sats/vbyte
     
     // Convert to BitcoinUtxo
     for (final u in jsonUtxos) {

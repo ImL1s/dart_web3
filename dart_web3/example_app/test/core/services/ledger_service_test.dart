@@ -113,7 +113,7 @@ void main() {
     });
 
     test('scanForDevices finds devices', () async {
-      final future = service.scanForDevices();
+      service.scanForDevices();
       
       mockLedger.emitDevice(lf.LedgerDevice(
         id: 'test_id',
