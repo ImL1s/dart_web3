@@ -62,8 +62,11 @@ class MockLedgerConnection implements LedgerConnectionInterface {
     // GetPublicKey (0x02)
     if (ins == 0x02) {
       final pubKey = List.filled(65, 0xAA);
-      final address = List.filled(20, 0xBB);
-      return Uint8List.fromList([65, ...pubKey, 20, ...address, ...status]) as T;
+      // Valid Ethereum address as ASCII bytes (40 hex chars)
+      // e.g. "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf" -> without 0x prefix
+      final addressStr = "7E5F4552091A69125d5DfCb7b8C2659029395Bdf";
+      final address = addressStr.codeUnits;
+      return Uint8List.fromList([65, ...pubKey, address.length, ...address, ...status]) as T;
     }
 
     // GetAppName (0x06)
@@ -86,6 +89,8 @@ void main() {
     // ignore: invalid_use_of_visible_for_testing_member
     FlutterLedger.setMockLedger(mockLedger);
     LedgerService.resetMockInstance();
+    // Fast scan for testing
+    LedgerService.instance.scanDuration = const Duration(milliseconds: 100);
 
     // Pump Widget
     await tester.pumpWidget(
@@ -119,7 +124,10 @@ void main() {
       connectionType: lf.ConnectionType.ble,
       deviceInfo: lf.LedgerDeviceType.nanoX,
     ));
-    await tester.pumpAndSettle(); 
+    // Wait for scan duration (100ms) to complete and spinner to disappear
+    await tester.pump(const Duration(seconds: 1));
+    // Validating directly after pump, assuming state settled by time
+    // await tester.pumpAndSettle(); // Removed to avoid timeout risk 
 
     // 5. Verify Device List Item appears
     final deviceItem = find.text('Nano X Mock');
@@ -144,5 +152,5 @@ void main() {
     // 9. Verify disconnected state (Back to Scan button)
     expect(find.text('Scan for Devices'), findsOneWidget);
     expect(find.text('Ledger Connected!'), findsNothing);
-  }, skip: true);
+  });
 }

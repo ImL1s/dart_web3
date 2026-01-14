@@ -7,6 +7,7 @@ library;
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 // import 'package:bitcoin_base/bitcoin_base.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -129,6 +130,16 @@ class WalletService {
 
   final _storage = const FlutterSecureStorage();
   static const _mnemonicKey = 'wallet_mnemonic';
+
+  // Dependency Injection for Testing
+  http.Client _httpClient = http.Client();
+  @visibleForTesting
+  set httpClient(http.Client client) => _httpClient = client;
+
+  RpcProvider Function(String, http.Client)? _rpcProviderFactory;
+  @visibleForTesting
+  set rpcProviderFactory(RpcProvider Function(String, http.Client) factory) =>
+      _rpcProviderFactory = factory;
 
   HDWallet? _hdWallet;
   Ed25519HdWallet? _ed25519Wallet;
@@ -277,7 +288,7 @@ class WalletService {
 
   Future<BigInt> _getEvmBalance(Account account) async {
     try {
-      final provider = RpcProvider(HttpTransport(account.chain.rpcUrl));
+      final provider = _createRpcProvider(account.chain.rpcUrl);
       return await provider.getBalance(account.address);
     } catch (_) {
       return BigInt.zero;
@@ -289,7 +300,7 @@ class WalletService {
     // https://blockstream.info/api/address/{address}
     try {
       final uri = Uri.parse('${account.chain.rpcUrl}/address/${account.address}');
-      final response = await http.get(uri);
+      final response = await _httpClient.get(uri);
       
       if (response.statusCode != 200) return BigInt.zero;
       
@@ -309,7 +320,7 @@ class WalletService {
   Future<BigInt> _getSolanaBalance(Account account) async {
     try {
       // Use RpcProvider directly to avoid ChainConfig conflicts
-      final provider = RpcProvider(HttpTransport(account.chain.rpcUrl));
+      final provider = _createRpcProvider(account.chain.rpcUrl);
       final response = await provider
           .call<Map<String, dynamic>>('getBalance', [account.address]);
       return BigInt.from(response['value'] as int);
@@ -372,7 +383,7 @@ class WalletService {
       }
 
       // Build and encode transaction for Ledger signing
-      final provider = RpcProvider(HttpTransport(chain.rpcUrl));
+      final provider = _createRpcProvider(chain.rpcUrl);
       final nonce =
           await provider.getTransactionCount(ledgerService.connectedAddress!);
       final gasPrice = await provider.getGasPrice();
@@ -427,7 +438,7 @@ class WalletService {
     }
 
     // Broadcast using provider (convert bytes to hex string)
-    final provider = RpcProvider(HttpTransport(chain.rpcUrl));
+    final provider = _createRpcProvider(chain.rpcUrl);
     return await provider.sendRawTransaction(HexUtils.encode(signedTx));
   }
 
@@ -551,7 +562,7 @@ class WalletService {
     
     // Broadcast via Blockstream API
     final pushUri = Uri.parse('${chain.rpcUrl}/tx');
-    final response = await http.post(pushUri, body: rawHex);
+    final response = await _httpClient.post(pushUri, body: rawHex);
     
     if (response.statusCode != 200) {
        throw Exception('Broadcast failed: ${response.body}');
@@ -562,7 +573,7 @@ class WalletService {
   
   Future<List<Map<String, dynamic>>> _fetchUtxos(ChainConfig chain, String address) async {
     final uri = Uri.parse('${chain.rpcUrl}/address/$address/utxo');
-    final response = await http.get(uri);
+    final response = await _httpClient.get(uri);
     if (response.statusCode != 200) throw Exception('Failed to fetch UTXOs');
     return List<Map<String, dynamic>>.from(json.decode(response.body) as List);
   }
@@ -593,7 +604,7 @@ class WalletService {
     }
 
     // 2. Fetch Recent Blockhash (Real)
-    final provider = RpcProvider(HttpTransport(chain.rpcUrl));
+    final provider = _createRpcProvider(chain.rpcUrl);
     final blockhashResponse = await provider
         .call<Map<String, dynamic>>('getLatestBlockhash', [
       {'commitment': 'finalized'}
@@ -691,5 +702,12 @@ class WalletService {
       throw StateError(
           'Wallet not initialized. Call createWallet or importWallet first.');
     }
+  }
+
+  RpcProvider _createRpcProvider(String url) {
+    if (_rpcProviderFactory != null) {
+      return _rpcProviderFactory!(url, _httpClient);
+    }
+    return RpcProvider(HttpTransport(url, client: _httpClient));
   }
 }

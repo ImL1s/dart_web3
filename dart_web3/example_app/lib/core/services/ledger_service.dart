@@ -37,6 +37,9 @@ class LedgerService extends ChangeNotifier {
     _mockInstance = null;
   }
 
+  @visibleForTesting
+  Duration scanDuration = const Duration(seconds: 10);
+
   LedgerClient? _client;
   LedgerStatus _status = LedgerStatus.disconnected;
   List<LedgerDevice> _discoveredDevices = [];
@@ -65,13 +68,13 @@ class LedgerService extends ChangeNotifier {
       final stream = FlutterLedger.scan();
       final subscription = stream.listen((device) {
         if (!_discoveredDevices.any((d) => d.deviceId == device.deviceId)) {
-          _discoveredDevices.add(device);
+          _discoveredDevices = [..._discoveredDevices, device];
           notifyListeners();
         }
       });
 
-      // Stop scanning after 10 seconds
-      await Future.delayed(const Duration(seconds: 10));
+      // Stop scanning after configured duration
+      await Future.delayed(scanDuration);
       await subscription.cancel();
       _updateStatus(LedgerStatus.disconnected);
     } catch (e) {
@@ -183,5 +186,10 @@ class LedgerService extends ChangeNotifier {
   void _updateStatus(LedgerStatus status) {
     _status = status;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    // Do not dispose the singleton instance
   }
 }

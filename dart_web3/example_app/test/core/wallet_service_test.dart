@@ -1,8 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
-import 'package:web3_wallet_app/core/wallet_service.dart';
+import '../../lib/core/wallet_service.dart';
+import 'package:http/testing.dart';
+import 'package:http/http.dart' as http;
+import 'package:web3_universal/web3_universal.dart' hide Chains, ChainConfig;
 // ignore: depend_on_referenced_packages
 import 'package:shared_preferences/shared_preferences.dart';
+
+class MockRpcProvider extends RpcProvider {
+  MockRpcProvider(super.transport);
+
+  @override
+  Future<T> call<T>(String method, List<dynamic> params) async {
+    if (method == 'getLatestBlockhash') {
+      return {'value': {'blockhash': '5U3bKWcxvbsGnVswBGnH2HEkPS8sY7rF'}} as T;
+    }
+    return super.call<T>(method, params);
+  }
+}
 
 void main() {
   group('WalletService Bitcoin Tests', () {
@@ -18,6 +33,28 @@ void main() {
       });
 
       service = WalletService.instance;
+      
+      // Inject Mock Client for Bitcoin
+      service.httpClient = MockClient((request) async {
+        if (request.url.path.endsWith('/utxo')) {
+          return http.Response('[{"txid":"1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef","vout":0,"value":100000}]', 200);
+        }
+        if (request.url.path.endsWith('/tx')) {
+          return http.Response('txid_mock', 200);
+        }
+        return http.Response('Not Found', 404);
+      });
+
+      // Inject Mock RPC Factory
+      service.rpcProviderFactory = (url, client) {
+         if (url.contains('solana')) {
+           return MockRpcProvider(HttpTransport(url, client: client));
+         }
+         // Default for others
+         return RpcProvider(HttpTransport(url, client: client));
+      };
+
+
       // Initialize with test vector mnemonic
       await service.importWallet(
         'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about'
@@ -36,9 +73,10 @@ void main() {
         amount: BigInt.from(50000), // 0.0005 BTC
       );
 
-      expect(txHash, startsWith('0x'));
-      expect(txHash.length, 66); // 0x + 64 hex chars
-    }, skip: 'Requires real network (cannot fetch UTXOs in test environment)');
+      expect(txHash.length, greaterThan(0)); 
+      // Note: Length might vary depending on signature size in mock, but strictly speaking it returns the response body 'txid_mock'
+      expect(txHash, 'txid_mock'); 
+    });
 
     test('getAccount derives correct Bitcoin P2WPKH address', () {
       final account = service.getAccount(Chains.bitcoin);
@@ -60,6 +98,15 @@ void main() {
       });
 
       service = WalletService.instance;
+      
+      // Inject Mock RPC Factory for Solana
+      service.rpcProviderFactory = (url, client) {
+         if (url.contains('solana')) {
+           return MockRpcProvider(HttpTransport(url, client: client));
+         }
+         return RpcProvider(HttpTransport(url, client: client));
+      };
+
       // Initialize with test vector mnemonic
       await service.importWallet(
         'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about'
@@ -97,6 +144,6 @@ void main() {
       // Signature is 64 bytes base58 encoded, should be around 87-88 chars
       // Base58 of 64 bytes is approx 64 * 1.37 = 87.6
       expect(signature.length, greaterThan(80));
-    }, skip: 'Requires real network (cannot get blockhash in test environment)');
+    });
   });
 }
