@@ -170,7 +170,6 @@ class OrdinalPsbtBuilder {
       fee: BigInt.from(fee),
       network: network,
       utxos: utxos,
-      enableRBF: false,
     );
 
     final transaction = builder.buildTransaction((

@@ -29,7 +29,7 @@ export 'package:web3_universal_mev/web3_universal_mev.dart';
 export 'package:web3_universal_mpc/web3_universal_mpc.dart';
 export 'package:web3_universal_multicall/web3_universal_multicall.dart'
     hide Call;
-export 'package:web3_universal_swap/web3_universal_swap.dart' hide TransactionReceipt, Log;
+export 'package:web3_universal_swap/web3_universal_swap.dart';
 // export 'package:web3_universal_bridge/web3_universal_bridge.dart' hide TransactionReceipt, Log;
 export 'package:web3_universal_nft/web3_universal_nft.dart';
 export 'package:web3_universal_polkadot/web3_universal_polkadot.dart';

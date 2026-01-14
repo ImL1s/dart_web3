@@ -17,7 +17,7 @@ class SelectionResult {
   final BigInt change;
 }
 
-abstract class CoinSelector {
+abstract interface class CoinSelector {
   SelectionResult select(
     List<Utxo> utxos,
     BigInt targetAmount, {

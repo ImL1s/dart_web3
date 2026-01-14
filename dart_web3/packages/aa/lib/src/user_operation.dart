@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-
+import 'package:meta/meta.dart';
 import 'package:web3_universal_abi/web3_universal_abi.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
@@ -20,6 +20,7 @@ enum EntryPointVersion {
 ///
 /// Supports multiple EntryPoint versions (0.6, 0.7, 0.8, 0.9) with
 /// version-specific fields and validation.
+@immutable
 class UserOperation {
   UserOperation({
     required this.sender,

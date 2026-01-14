@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'units.dart';
 
 /// Represents an amount of Ether with wei-precision.
@@ -11,6 +12,7 @@ import 'units.dart';
 /// print(amount.inWei); // 1500000000000000000
 /// print(amount.formatEther()); // '1.5'
 /// ```
+@immutable
 class EtherAmount implements Comparable<EtherAmount> {
   /// The amount in wei.
   final BigInt inWei;

@@ -80,7 +80,7 @@ class PublicKey {
       // The rule is: "Program Derived Addresses ... do not lie on the ed25519 curve".
       // So we need `Ed25519.isOnCurve(bytes)`.
       return Ed25519.isOnCurve(bytes);
-    } catch (_) {
+    } on Object catch (_) {
       return false;
     }
   }
@@ -97,7 +97,7 @@ class PublicKey {
         ];
         final address = createProgramAddress(seedsWithNonce, programId);
         return ProgramAddress(address, nonce);
-      } catch (e) {
+      } on Object catch (e) {
         nonce--;
       }
     }

@@ -2,7 +2,8 @@ import 'dart:typed_data';
 
 import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_contract/web3_universal_contract.dart';
-import 'package:web3_universal_crypto/web3_universal_crypto.dart';
+import 'package:web3_universal_abi/web3_universal_abi.dart' as abi;
+import 'package:web3_universal_chains/web3_universal_chains.dart';
 
 /// Multi-chain address resolver implementing ENSIP-9
 class MultichainResolver {

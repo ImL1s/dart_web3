@@ -155,7 +155,7 @@ class ERC1155Contract extends Contract {
   }
 
   /// Sets approval for all tokens.
-  Future<String> setApprovalForAll(String operator, bool approved) async {
+  Future<String> setApprovalForAll(String operator, {required bool approved}) async {
     return write('setApprovalForAll', [operator, approved]);
   }
 

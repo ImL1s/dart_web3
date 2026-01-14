@@ -251,8 +251,9 @@ class BridgeQuoteAggregation {
     return quotes.where((quote) {
       if (maxTime != null && quote.estimatedTime > maxTime) return false;
       if (maxFee != null && quote.feeBreakdown.totalFee > maxFee) return false;
-      if (minConfidence != null && quote.confidence < minConfidence)
+      if (minConfidence != null && quote.confidence < minConfidence) {
         return false;
+      }
       return true;
     }).toList();
   }

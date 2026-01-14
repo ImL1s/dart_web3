@@ -243,7 +243,7 @@ class EcdsaThresholdSignature implements ThresholdSignature {
   }) async {
     try {
       return Secp256k1.verify(signature, messageHash, publicKey);
-    } catch (e) {
+    } on Object catch (_) {
       return false;
     }
   }
@@ -566,7 +566,7 @@ class EddsaThresholdSignature implements ThresholdSignature {
       return signature.length == 64 &&
           messageHash.length == 32 &&
           publicKey.length == 32;
-    } catch (e) {
+    } on Object catch (_) {
       return false;
     }
   }

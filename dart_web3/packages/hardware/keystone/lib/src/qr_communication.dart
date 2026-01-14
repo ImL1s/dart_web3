@@ -65,7 +65,7 @@ class QRCommunication {
       );
 
       _setState(QRCommunicationState.waitingForResponse);
-    } catch (e) {
+    } on Object catch (e) {
       _handleError(
           KeystoneErrorType.qrCodeError, 'Failed to display sign request: $e');
     }
@@ -115,7 +115,7 @@ class QRCommunication {
       }
 
       return null; // Still waiting for more parts
-    } catch (e) {
+    } on Object catch (e) {
       _handleError(
           KeystoneErrorType.qrCodeError, 'Failed to process QR response: $e');
       return null;

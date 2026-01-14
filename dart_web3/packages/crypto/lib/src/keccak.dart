@@ -13,7 +13,9 @@ class Keccak256 {
   ///
   /// Returns a 32-byte hash as Uint8List.
   static Uint8List hash(Uint8List data) {
-    final result = _Keccak().update(data.toList()).digest();
+    final keccak = _Keccak();
+    keccak.update(data.toList());
+    final result = keccak.digest();
     return Uint8List.fromList(result);
   }
 

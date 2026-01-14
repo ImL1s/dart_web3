@@ -91,7 +91,7 @@ class HexUtils {
   }
 
   static String intToHex(int value, {int? padding}) {
-    final hex = value.toRadixString(16);
+    var hex = value.toRadixString(16);
     if (padding != null) {
       hex = hex.padLeft(padding, '0');
     }
@@ -103,7 +103,7 @@ class HexUtils {
   }
 
   static String bigIntToHex(BigInt value, {int? padding}) {
-    final hex = value.toRadixString(16);
+    var hex = value.toRadixString(16);
     if (padding != null) {
       hex = hex.padLeft(padding, '0');
     }
