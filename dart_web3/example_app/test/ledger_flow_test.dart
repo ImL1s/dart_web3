@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
 import 'package:web3_universal/web3_universal.dart';
@@ -43,7 +42,7 @@ class MockLedgerConnection implements LedgerConnectionInterface {
   }
 
   @override
-  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) async {
+  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation) async {
     if (_isDisconnected) throw Exception('Disconnected');
     
     // Inspect command (ByteDataWriter logic is internal to sdk, just return MOCK data)

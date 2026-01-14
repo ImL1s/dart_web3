@@ -42,7 +42,7 @@ class MockLedgerConnection implements LedgerConnectionInterface {
   }
 
   @override
-  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) async {
+  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation) async {
     if (_isDisconnected) {
       throw Exception('Disconnected');
     }

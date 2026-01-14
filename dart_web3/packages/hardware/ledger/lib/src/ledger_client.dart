@@ -51,7 +51,7 @@ class LedgerClient {
       await _loadAppConfiguration();
 
       _setState(LedgerConnectionState.connected);
-    } on Object catch (e) {
+    } on Object {
       _setState(LedgerConnectionState.error);
       rethrow;
     }
@@ -246,7 +246,7 @@ class LedgerClient {
       // Cannot import dart:io easily in library package? 
       // It depends on flutter?
       // print usually shows up in `flutter test` if verbose.
-    } catch (_) {}
+    } on Object catch (_) {}
     
     if (_state != newState) {
       _state = newState;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:web3_universal/web3_universal.dart';
 
 import '../../../../shared/providers/swap_provider.dart';
 
@@ -172,6 +171,7 @@ class _SwapScreenState extends ConsumerState<SwapScreen> {
                          // Simple Quote Fetch (Mocking token addresses)
                          // Real implementation would look up token address from a map or token list
                          // For demo, we just fetch usage of provider if configured
+                         // ignore: unused_local_variable
                          final notifier = ref.read(swapProvider.notifier);
                          
                          // Note: We need SwapToken objects. 

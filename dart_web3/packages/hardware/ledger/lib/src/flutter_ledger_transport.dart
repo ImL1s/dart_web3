@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:ledger_flutter_plus/ledger_flutter_plus.dart' as lf;
@@ -23,7 +22,7 @@ class FlutterLedgerDevice extends LedgerDevice {
 abstract class LedgerConnectionInterface {
   bool get isDisconnected;
   Future<void> disconnect();
-  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation);
+  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation);
 }
 
 /// Adapter for real LedgerConnection
@@ -39,7 +38,7 @@ class LedgerConnectionAdapter implements LedgerConnectionInterface {
   Future<void> disconnect() => _impl.disconnect();
 
   @override
-  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) {
+  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation) {
     return _impl.sendOperation(operation);
   }
 }
@@ -171,7 +170,7 @@ class FlutterLedgerTransport implements LedgerTransport {
      // Helper to allow discovery via Transport interface if needed
      final devices = <LedgerDevice>[];
      final sub = FlutterLedger.scan().listen((d) => devices.add(d));
-     await Future.delayed(const Duration(seconds: 2));
+     await Future<void>.delayed(const Duration(seconds: 2));
      await sub.cancel();
      return devices;
   }
@@ -183,7 +182,7 @@ class FlutterLedgerTransport implements LedgerTransport {
 }
 
 /// Custom LedgerOperation for Ethereum APDU commands.
-class _EthereumOperation extends lf.LedgerOperation<List<int>> {
+class _EthereumOperation extends lf.LedgerComplexOperation<List<int>> {
   final APDUCommand _command;
 
   _EthereumOperation(this._command);
