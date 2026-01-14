@@ -38,6 +38,7 @@ class LedgerConnectionAdapter implements LedgerConnectionInterface {
   @override
   Future<void> disconnect() => _impl.disconnect();
 
+  @override
   // ignore: deprecated_member_use
   Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) {
     return _impl.sendOperation(operation);
@@ -72,6 +73,7 @@ class FlutterLedger {
   static LedgerInterfaceWrapper get _ledger => _interface ??= LedgerInterfaceWrapper.ble();
 
   @visibleForTesting
+  // ignore: use_setters_to_change_properties
   static void setMockLedger(LedgerInterfaceWrapper mock) {
     _interface = mock;
   }
