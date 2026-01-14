@@ -2,7 +2,7 @@ import 'package:web3_universal_client/web3_universal_client.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart';
 
-import 'contract.dart';
+// import 'contract.dart';
 
 /// Factory for creating and deploying contracts.
 class ContractFactory {

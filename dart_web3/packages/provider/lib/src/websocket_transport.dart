@@ -50,6 +50,7 @@ class WebSocketTransport implements Transport {
     if (data.containsKey('method') && data['method'] == 'eth_subscription') {
       final params = data['params'] as Map<String, dynamic>;
       final subscriptionId = params['subscription'] as String;
+      // ignore: close_sinks
       final controller = _subscriptions[subscriptionId];
       // ignore: close_sinks
       if (controller != null) {

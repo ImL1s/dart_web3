@@ -54,7 +54,9 @@ class AuthorizationVerifier {
   static bool isValidAuthorizationFormat(Authorization authorization) {
     try {
       // Check chain ID
-      if (authorization.chainId <= 0) return false;
+      if (authorization.chainId <= 0) {
+        return false;
+      }
 
       // Check address format
       if (!_isValidEthereumAddress(authorization.address)) return false;
@@ -65,12 +67,14 @@ class AuthorizationVerifier {
       // If signed, check signature components
       if (authorization.isSigned) {
         // Check y-parity is 0 or 1
-        if (authorization.yParity != 0 && authorization.yParity != 1)
+        if (authorization.yParity != 0 && authorization.yParity != 1) {
           return false;
+        }
 
         // Check r and s are not zero (both zero means unsigned)
-        if (authorization.r == BigInt.zero && authorization.s == BigInt.zero)
+        if (authorization.r == BigInt.zero && authorization.s == BigInt.zero) {
           return false;
+        }
 
         // Check r and s are in valid range (less than secp256k1 order)
         final secp256k1Order = BigInt.parse(
@@ -78,7 +82,9 @@ class AuthorizationVerifier {
           radix: 16,
         );
         if (authorization.r >= secp256k1Order ||
-            authorization.s >= secp256k1Order) return false;
+            authorization.s >= secp256k1Order) {
+          return false;
+        }
       }
 
       return true;

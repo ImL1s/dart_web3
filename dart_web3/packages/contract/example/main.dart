@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:web3_universal_chains/web3_universal_chains.dart';
 import 'package:web3_universal_client/web3_universal_client.dart';
-import 'package:web3_universal_contract/web3_universal_contract.dart';
+// import 'package:web3_universal_contract/web3_universal_contract.dart';
 
 void main() async {
   // ERC20 ABI snippet for balancing

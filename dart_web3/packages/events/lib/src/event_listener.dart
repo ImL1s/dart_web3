@@ -59,6 +59,7 @@ class EventListener {
     final key =
         '${contractAddress}_${eventSignature}_${DateTime.now().millisecondsSinceEpoch}';
 
+    // ignore: cancel_subscriptions
     StreamSubscription<Log> subscription;
     if (useWebSocket && subscriber.wsTransport != null) {
       subscription = subscriber.subscribe(filter).listen(
@@ -94,6 +95,7 @@ class EventListener {
   }) {
     final key = 'filter_${DateTime.now().millisecondsSinceEpoch}';
 
+    // ignore: cancel_subscriptions
     StreamSubscription<Log> subscription;
     if (useWebSocket && subscriber.wsTransport != null) {
       subscription = subscriber.subscribe(filter).listen(
@@ -151,6 +153,7 @@ class EventListener {
   }) {
     final key = 'blocks_${DateTime.now().millisecondsSinceEpoch}';
 
+    // ignore: cancel_subscriptions
     final subscription =
         subscriber.watchBlockNumber(interval: pollingInterval).listen(
               onBlock,
@@ -179,6 +182,7 @@ class EventListener {
 
     final key = 'pending_${DateTime.now().millisecondsSinceEpoch}';
 
+    // ignore: cancel_subscriptions
     final subscription = subscriber.watchPendingTransactions().listen(
           onTransaction,
           onError: onError,

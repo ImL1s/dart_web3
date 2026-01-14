@@ -135,10 +135,12 @@ class AuthorizationRevocation {
 
     // If signed, signature must be valid format
     if (authorization.isSigned) {
-      if (authorization.yParity != 0 && authorization.yParity != 1)
+      if (authorization.yParity != 0 && authorization.yParity != 1) {
         return false;
-      if (authorization.r == BigInt.zero && authorization.s == BigInt.zero)
+      }
+      if (authorization.r == BigInt.zero && authorization.s == BigInt.zero) {
         return false;
+      }
     }
 
     return true;

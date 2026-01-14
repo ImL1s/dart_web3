@@ -27,6 +27,7 @@ class MockPublicClient extends PublicClient {
   BigInt? mockEstimateGasResult;
   String? _mockCallError;
 
+  // ignore: use_setters_to_change_properties
   void mockCall(Uint8List result) {
     _mockCallResult = result;
     _mockCallError = null;
@@ -37,6 +38,7 @@ class MockPublicClient extends PublicClient {
     _mockCallResult = null;
   }
 
+  // ignore: use_setters_to_change_properties
   void mockEstimateGas(BigInt result) {
     mockEstimateGasResult = result;
   }
@@ -78,6 +80,7 @@ class MockWalletClient extends WalletClient {
   TransactionRequest? lastTransactionRequest;
   String? mockSendTransactionResult;
 
+  // ignore: use_setters_to_change_properties
   void mockSendTransaction(String txHash) {
     mockSendTransactionResult = txHash;
   }

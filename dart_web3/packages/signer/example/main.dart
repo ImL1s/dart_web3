@@ -16,5 +16,5 @@ void main() async {
 }
 
 extension on Uint8List {
-  String toHex() => map((e) => e.toRadixString(16).padLeft(2, '0')).join('');
+  String toHex() => map((e) => e.toRadixString(16).padLeft(2, '0')).join();
 }

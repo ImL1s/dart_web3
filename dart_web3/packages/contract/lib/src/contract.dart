@@ -6,8 +6,8 @@ import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 import 'package:web3_universal_signer/web3_universal_signer.dart';
 
-import 'event_filter.dart';
-import 'simulate_result.dart';
+// import 'event_filter.dart';
+// import 'simulate_result.dart';
 
 /// Smart contract abstraction for type-safe contract interactions.
 class Contract {

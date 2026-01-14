@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:web3_universal_client/web3_universal_client.dart';
-import 'package:web3_universal_contract/web3_universal_contract.dart';
+// import 'package:web3_universal_contract/web3_universal_contract.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'staking_types.dart';
 

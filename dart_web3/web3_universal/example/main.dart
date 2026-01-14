@@ -1,5 +1,5 @@
 import 'package:web3_universal/web3_universal.dart';
-import 'package:web3_universal_solana/web3_universal_solana.dart';
+// import 'package:web3_universal_solana/web3_universal_solana.dart';
 
 void main() async {
   print('--- Dart Web3 SDK Comprehensive Example ---');

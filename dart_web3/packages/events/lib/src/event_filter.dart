@@ -1,4 +1,7 @@
+import 'package:meta/meta.dart';
+
 /// Event filter for subscribing to blockchain events.
+@immutable
 class EventFilter {
   EventFilter({
     this.address,
