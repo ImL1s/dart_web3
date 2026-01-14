@@ -36,13 +36,13 @@ class PublicClient implements PublicClientBase {
 
   /// Gets a block by hash.
   Future<Block?> getBlock(String blockHash) async {
-    final data = await provider.getBlockByHash(blockHash, true);
+    final data = await provider.getBlockByHash(blockHash, fullTx: true);
     return data != null ? Block.fromJson(data) : null;
   }
 
   /// Gets a block by number.
   Future<Block?> getBlockByNumber(String block) async {
-    final data = await provider.getBlockByNumber(block, true);
+    final data = await provider.getBlockByNumber(block, fullTx: true);
     return data != null ? Block.fromJson(data) : null;
   }
 

@@ -17,9 +17,9 @@ dependencies:
   web3_universal_crypto: ^0.2.0
   web3_universal_client: ^0.1.1+1
   web3_universal_contract: ^0.1.0+1
+  web3_universal_abi: ^0.1.1
+  web3_universal_chains: ^0.1.0+1
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.25.0
-  web3_universal_abi: ^0.1.1
-  web3_universal_chains: ^0.1.0+1
   web3_universal_provider: ^0.1.0+1

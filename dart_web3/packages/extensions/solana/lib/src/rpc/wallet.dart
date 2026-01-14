@@ -6,11 +6,11 @@ import 'client.dart';
 /// Wallet client for Solana.
 class SolanaWalletClient extends SolanaClient implements WalletClientBase {
   SolanaWalletClient(
-    String url, {
+    super.url, {
     required super.chain,
     required this.keyPair,
     super.httpClient,
-  }) : super(url);
+  });
 
   final KeyPair keyPair;
 

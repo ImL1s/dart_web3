@@ -37,6 +37,10 @@ class MockPublicClient extends PublicClient {
     _mockCallResult = null;
   }
 
+  void mockEstimateGas(BigInt result) {
+    mockEstimateGasResult = result;
+  }
+
 
 
   @override
@@ -111,13 +115,13 @@ class MockRpcProvider extends RpcProvider {
 
   @override
   Future<Map<String, dynamic>?> getBlockByHash(String blockHash,
-      [bool fullTx = false]) async {
+      {bool fullTx = false}) async {
     return null;
   }
 
   @override
   Future<Map<String, dynamic>?> getBlockByNumber(String block,
-      [bool fullTx = false]) async {
+      {bool fullTx = false}) async {
     return null;
   }
 

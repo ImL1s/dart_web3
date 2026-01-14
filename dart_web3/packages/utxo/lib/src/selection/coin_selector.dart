@@ -17,6 +17,7 @@ class SelectionResult {
   final BigInt change;
 }
 
+// ignore: one_member_abstracts
 abstract interface class CoinSelector {
   SelectionResult select(
     List<Utxo> utxos,

@@ -40,7 +40,7 @@ class OrdinalPsbtBuilder {
 
     // Prepare UTXOs
     final bitcoinUtxos = <UtxoWithAddress>[];
-    int totalInput = 0;
+    var totalInput = 0;
 
     for (final utxo in utxos) {
       totalInput += utxo.value;

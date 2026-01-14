@@ -51,7 +51,7 @@ class LedgerClient {
       await _loadAppConfiguration();
 
       _setState(LedgerConnectionState.connected);
-    } catch (e) {
+    } on Object catch (e) {
       _setState(LedgerConnectionState.error);
       rethrow;
     }
@@ -85,7 +85,7 @@ class LedgerClient {
         publicKey: result['publicKey'] as Uint8List,
         index: _extractAccountIndex(derivationPath),
       );
-    } catch (e) {
+    } on Object catch (e) {
       throw LedgerException(
         LedgerErrorType.communicationError,
         'Failed to get account: $e',
@@ -126,7 +126,7 @@ class LedgerClient {
       final response = await _transport.exchange(command);
 
       return EthereumResponseParser.parseSignature(response);
-    } catch (e) {
+    } on Object catch (e) {
       if (e is LedgerException) {
         rethrow;
       }
@@ -151,7 +151,7 @@ class LedgerClient {
       final response = await _transport.exchange(command);
 
       return EthereumResponseParser.parseSignature(response);
-    } catch (e) {
+    } on Object catch (e) {
       if (e is LedgerException) {
         rethrow;
       }
@@ -177,7 +177,7 @@ class LedgerClient {
       final response = await _transport.exchange(command);
 
       return EthereumResponseParser.parseSignature(response);
-    } catch (e) {
+    } on Object catch (e) {
       if (e is LedgerException) {
         rethrow;
       }
@@ -208,7 +208,7 @@ class LedgerClient {
           'Ethereum app not open. Current app: ${app.name}',
         );
       }
-    } catch (e) {
+    } on Object catch (e) {
       if (e is LedgerException) {
         rethrow;
       }

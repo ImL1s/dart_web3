@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:web3_universal_abi/web3_universal_abi.dart' as abi;
-import 'package:web3_universal_chains/web3_universal_chains.dart';
+import 'package:web3_universal_client/web3_universal_client.dart';
+import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// ENS resolver for name and address resolution

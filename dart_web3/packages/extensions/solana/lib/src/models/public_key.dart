@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:meta/meta.dart';
 import 'package:web3_universal_core/web3_universal_core.dart';
 import 'package:web3_universal_crypto/web3_universal_crypto.dart';
 
 /// Represents a Solana Public Key.
+@immutable
 class PublicKey {
   PublicKey(this.bytes) {
     if (bytes.length != 32) {
@@ -97,7 +99,7 @@ class PublicKey {
         ];
         final address = createProgramAddress(seedsWithNonce, programId);
         return ProgramAddress(address, nonce);
-      } on Object catch (e) {
+      } on Object catch (_) {
         nonce--;
       }
     }

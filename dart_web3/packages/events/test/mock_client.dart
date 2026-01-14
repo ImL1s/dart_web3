@@ -48,13 +48,13 @@ class MockRpcProvider implements RpcProvider {
 
   @override
   Future<Map<String, dynamic>?> getBlockByHash(String hash,
-      [bool fullTx = false]) async {
+      {bool fullTx = false}) async {
     return call<Map<String, dynamic>?>('eth_getBlockByHash', [hash, fullTx]);
   }
 
   @override
   Future<Map<String, dynamic>?> getBlockByNumber(String block,
-      [bool fullTx = false]) async {
+      {bool fullTx = false}) async {
     return call<Map<String, dynamic>?>('eth_getBlockByNumber', [block, fullTx]);
   }
 

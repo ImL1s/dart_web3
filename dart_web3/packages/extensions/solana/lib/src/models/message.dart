@@ -179,8 +179,9 @@ class Message {
       final programIdIndex = accountKeys.indexOf(
           ix.programId); // use indexWhere if == not working on object identity
       // But PublicKey has properly implemented ==
-      if (programIdIndex == -1)
+      if (programIdIndex == -1) {
         throw Exception('Program ID not found in account keys');
+      }
 
       final accountIndices = ix.keys.map((acc) {
         final idx = accountKeys.indexOf(acc.publicKey);

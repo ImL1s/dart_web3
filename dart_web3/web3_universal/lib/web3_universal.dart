@@ -6,7 +6,7 @@ export 'package:web3_universal_aptos/web3_universal_aptos.dart'
     hide ChainType;
 export 'package:web3_universal_bc_ur/web3_universal_bc_ur.dart';
 export 'package:web3_universal_bitcoin/web3_universal_bitcoin.dart'
-    hide ChainType, BytesUtils;
+    hide BytesUtils, ChainType;
 export 'package:web3_universal_chains/web3_universal_chains.dart';
 export 'package:web3_universal_client/web3_universal_client.dart'
     hide EventFilter;

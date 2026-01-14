@@ -30,7 +30,7 @@ void main() async {
   try {
     final blockNumber = await publicClient.getBlockNumber();
     print('Current Block: $blockNumber');
-  } catch (e) {
+  } on Object catch (e) {
     print('RPC Error: $e');
   }
 
@@ -41,7 +41,7 @@ void main() async {
   );
   try {
     print('USDC Symbol: ${await usdc.symbol()}');
-  } catch (e) {
+  } on Object catch (e) {
     print('Contract Error: $e');
   }
 
