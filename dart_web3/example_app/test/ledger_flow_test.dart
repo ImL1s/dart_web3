@@ -42,7 +42,8 @@ class MockLedgerConnection implements LedgerConnectionInterface {
   }
 
   @override
-  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation) async {
+  // ignore: deprecated_member_use
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) async {
     if (_isDisconnected) throw Exception('Disconnected');
     
     // Inspect command (ByteDataWriter logic is internal to sdk, just return MOCK data)

@@ -22,7 +22,8 @@ class FlutterLedgerDevice extends LedgerDevice {
 abstract class LedgerConnectionInterface {
   bool get isDisconnected;
   Future<void> disconnect();
-  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation);
+  // ignore: deprecated_member_use
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation);
 }
 
 /// Adapter for real LedgerConnection
@@ -37,8 +38,8 @@ class LedgerConnectionAdapter implements LedgerConnectionInterface {
   @override
   Future<void> disconnect() => _impl.disconnect();
 
-  @override
-  Future<T> sendOperation<T>(lf.LedgerComplexOperation<T> operation) {
+  // ignore: deprecated_member_use
+  Future<T> sendOperation<T>(lf.LedgerOperation<T> operation) {
     return _impl.sendOperation(operation);
   }
 }
@@ -182,7 +183,8 @@ class FlutterLedgerTransport implements LedgerTransport {
 }
 
 /// Custom LedgerOperation for Ethereum APDU commands.
-class _EthereumOperation extends lf.LedgerComplexOperation<List<int>> {
+// ignore: deprecated_member_use
+class _EthereumOperation extends lf.LedgerOperation<List<int>> {
   final APDUCommand _command;
 
   _EthereumOperation(this._command);
