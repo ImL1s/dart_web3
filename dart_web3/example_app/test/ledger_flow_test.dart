@@ -112,6 +112,7 @@ void main() {
     await tester.pump(); // Trigger scan
 
     // 4. Emit Device from Mock
+    // ignore: prefer_const_constructors
     mockLedger.emitDevice(lf.LedgerDevice(
       id: 'mock_nano_x',
       name: 'Nano X Mock',

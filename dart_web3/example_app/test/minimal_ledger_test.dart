@@ -19,6 +19,7 @@ class MockLedgerConnection implements LedgerConnection {
   ConnectionType get connectionType => ConnectionType.ble;
 
   @override
+  // ignore: prefer_const_constructors
   LedgerDevice get device => LedgerDevice(
     id: 'mock', 
     name: 'mock', 

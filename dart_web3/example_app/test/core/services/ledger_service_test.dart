@@ -115,6 +115,7 @@ void main() {
     test('scanForDevices finds devices', () async {
       service.scanForDevices();
       
+      // ignore: prefer_const_constructors
       mockLedger.emitDevice(lf.LedgerDevice(
         id: 'test_id',
         name: 'Nano X',
@@ -131,6 +132,7 @@ void main() {
 
     test('connect updates state', () async {
       final flutterDevice = FlutterLedgerDevice(
+        // ignore: prefer_const_constructors
         lf.LedgerDevice(
           id: 'id', 
           name: 'Nano', 
@@ -149,6 +151,7 @@ void main() {
        mockLedger.nextConnectError = Exception('BLE Error');
        
        final flutterDevice = FlutterLedgerDevice(
+        // ignore: prefer_const_constructors
         lf.LedgerDevice(
           id: 'id', 
           name: 'Nano', 
@@ -165,6 +168,7 @@ void main() {
     
     test('disconnect clears state', () async {
       final flutterDevice = FlutterLedgerDevice(
+        // ignore: prefer_const_constructors
         lf.LedgerDevice(
           id: 'id', 
           name: 'Nano', 
@@ -183,6 +187,7 @@ void main() {
     test('signTransaction calls sendOperation', () async {
       // Connect
       final flutterDevice = FlutterLedgerDevice(
+        // ignore: prefer_const_constructors
         lf.LedgerDevice(
           id: 'id', 
           name: 'Nano', 
