@@ -261,6 +261,12 @@ melos test
 melos analyze
 ```
 
+---
+
+## Support
+
+If this project saved you some time, you can [buy me a coffee](https://buymeacoffee.com/iml1s).
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
